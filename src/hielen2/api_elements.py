@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+# coding=utf-8
+import hug
+import falcon
+from hielen2 import db
+from himada.api import ResponseFormatter
+
+
+@hug.post('/')
+def create_elements(code,prototype,request=None,response=None):
+    return "Not Yet Implemented"
+
+
+def elinfo(el):
+
+    if el is None:
+       return None
+     
+    info={ k:w for k,w in el.items() if k not in ('code',) }
+
+    info['parameters']=[ {'name':e[0], 'unit': db['series'].get(e[1])['mu']} for e in el['parameters'].items() if e[1] is not None ]
+     
+    return info  
+
+
+@hug.get('/',examples='')
+def elements_info( elist=None, request=None, response=None ):
+
+    return {  k:elinfo(w) for k,w in db['elements'].get(elist).items() }
+
+
+@hug.get('/{code}', examples='')
+def element_info( code, request=None, response=None ):
+
+    el = db['elements'].get(code)
+
+    if code is None:
+        out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
+        out.message=code
+        response = out.format(response=response,request=request)
+        return
+
+    return  elinfo(el)
+
