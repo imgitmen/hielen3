@@ -1,2 +1,0 @@
-Ristrutturazione Completa
-coalescenza con datamap

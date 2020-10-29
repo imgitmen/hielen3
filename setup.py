@@ -7,7 +7,7 @@ import re
 
 from setuptools import setup, find_packages
 
-NAME = "datamaps2"
+NAME = "hiele2"
 PACKAGES = find_packages(where="src")
 META_PATH = os.path.join("src", NAME, "__init__.py")
 KEYWORDS = ["class", "attribute", "boilerplate"]
