@@ -17,16 +17,16 @@ def not_found():
 #api = hug.get(on_invalid=hug.redirect.not_found)
 
 @hug.extend_api('/prototypes')
-def dta_api():
+def proto():
     ''' Prototypes manager '''
     return [api_prototypes]
 
 @hug.extend_api('/elements')
-def dta_api():
+def elem():
     ''' Elements manager '''
     return [api_elements]
 
 @hug.extend_api('/series')
-def dta_api():
+def series():
     ''' Series manager '''
     return [api_series]
