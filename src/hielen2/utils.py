@@ -84,6 +84,11 @@ def loadjsonfile(filename):
     with open(filename) as jf:
         return json.load(jf)
 
+
+def savejsonfile(filename,struct):
+    with open(filename,'w') as jf:
+        json.dump(struct,jf)
+
 def eprint(*args, fname='error', **kwargs):
     with open(fname,'a') as f:
         print (*args,file=f,**kwargs)

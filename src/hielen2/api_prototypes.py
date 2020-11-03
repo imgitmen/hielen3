@@ -7,46 +7,46 @@ from himada.api import ResponseFormatter
 
 
 @hug.post('/')
-def prots(code,request=None, response=None):
+def new_protptype(prototype,request=None, response=None):
     return "not yet implemented"
 
 @hug.get('/', examples='/')
-def prots( request=None, response=None ):
+def prototypes(request=None, response=None ):
     out=ResponseFormatter()
     try:
-        out.data=db['prototypes'].db
+        out.data=db['prototypes'][None]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
     response = out.format(response=response,request=request)
 
 
-@hug.get('/{eltype}', examples='')
-def eltypes(eltype, request=None, response=None):
+@hug.get('/{prototype}', examples='')
+def protptype(prototype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['prototypes'].get(eltype)
+        out.data=db['prototypes'][prototype]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
     response = out.format(response=response,request=request)
 
-@hug.get('/{eltype}/forms', examples='')
-def eltypes(eltype, request=None, response=None):
+@hug.get('/{prototype}/forms', examples='')
+def prototype_forms(eltype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['prototypes'].get(eltype)['forms']
+        out.data=db['prototypes'][protoypes]['forms']
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
     response = out.format(response=response,request=request)
 
 
-@hug.get('/{eltype}/forms/{form}', examples='')
-def eltypes(eltype, form, request=None, response=None):
+@hug.get('/{prototype}/forms/{form}', examples='')
+def prototype_form(prototype, form, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['prototypes'].get(eltype)['forms'][form]
+        out.data=db['prototypes'][prototype]['forms'][form]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)

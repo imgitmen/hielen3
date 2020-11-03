@@ -16,8 +16,7 @@ class GWO():
     def getDataSeries(self,resource=None,column=None,timefrom=None,timeto=None):
 
         out=read_csv(f"{self.path}/{self.restype}/{resource}/{self.filename}",header=None,index_col=[0])[column]
-#        out.index=to_datetime(out.index)
+        #out.index=to_datetime(out.index)
         out=out.loc[timefrom:timeto]
-
         return out
 

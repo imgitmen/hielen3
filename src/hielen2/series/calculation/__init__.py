@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-__name__ = 'hielen2.series2.calculation'
+__name__ = 'hielen2.series.calculation'
 __version__ = '0.0.1'
 __author__ = 'Alessandro Modesti'
 __email__ = 'it@img-srl.com'

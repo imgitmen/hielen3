@@ -18,7 +18,7 @@ def elinfo(el):
      
     info={ k:w for k,w in el.items() if k not in ('code',) }
 
-    info['parameters']=[ {'name':e[0], 'unit': db['series'].get(e[1])['mu']} for e in el['parameters'].items() if e[1] is not None ]
+    info['parameters']=[ {'name':e[0], 'unit': db['series'][e[1]]['mu']} for e in el['parameters'].items() if e[1] is not None ]
      
     return info  
 
@@ -26,13 +26,13 @@ def elinfo(el):
 @hug.get('/',examples='')
 def elements_info( elist=None, request=None, response=None ):
 
-    return {  k:elinfo(w) for k,w in db['elements'].get(elist).items() }
+    return {  k:elinfo(w) for k,w in db['elements'][elist].items() }
 
 
 @hug.get('/{code}', examples='')
 def element_info( code, request=None, response=None ):
 
-    el = db['elements'].get(code)
+    el = db['elements'][code]
 
     if code is None:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)

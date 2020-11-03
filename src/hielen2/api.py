@@ -12,9 +12,9 @@ def not_found():
                 'status': falcon.status.HTTP_NOT_FOUND,
                 'description': 'URL is invalid.',
             }}
-'''
 
-#api = hug.get(on_invalid=hug.redirect.not_found)
+api = hug.get(on_invalid=hug.redirect.not_found)
+'''
 
 @hug.extend_api('/prototypes')
 def proto():

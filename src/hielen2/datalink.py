@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # coding=utf-8
-from pandas import DataFrame
+from pandas import DataFrame, read_json
 from abc import ABC,abstractmethod 
-from hielen2.utils import loadjsonfile, newinstanceof
+from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof
+
 
 def dbinit(conf):
     conf['substs']
@@ -15,15 +16,20 @@ class DB(ABC):
         pass
 
     @abstractmethod
-    def get(self,key):
+    def __getitem__(self,key):
         pass
+
+    def save(self):
+        pass
+
 
 class JsonDB(DB):
 
     def __init__(self,connection):
-        self.db=loadjsonfile(connection)
+        self.db=read_json(connection)
+        self.filename=connection
 
-    def get(self, key=None):
+    def __getitem__(self, key=None):
 
         if isinstance(key,list):
             try:
@@ -32,24 +38,23 @@ class JsonDB(DB):
                 pass
 
         if key is None:
-            return self.db
+            return self.db.to_dict()
 
-        if not isinstance(key,list):
-            try:
-                return self.db[key]
-            except KeyError:
-                return None
-
-        return { k:w for k,w in self.db.items() if k in key }
-
+        return self.db[key].to_dict() 
+    
+    def save(self):
+        self.db.reset_index().to_json(self.filename)
 
 class JsonCache(DB):
 
     def __init__(self,connection):
-        self.cache=loadjsonfile(connection)
+        self.cache=read_json(connection,convert_dates=False).set_index(['code','timestamp'])['value'].sort_index()
+        self.filename=connection
 
-    def get(self,key,timefrom=None,timeto=None):
-        out = DataFrame(columns=[0])
+    def __getitem__(self,key):
+
+        return self.cache[key]
+    '''
         try:
             out = DataFrame(self.cache[key]).set_index(['timestamp']).sort_index()
             if timefrom is not None and out.index.max() < timefrom:
@@ -58,6 +63,8 @@ class JsonCache(DB):
                 out = out.loc[timefrom:timeto]
         except Exception:
             pass
- 
         return out
+    '''
+    def save(self):
+        self.cache.reset_index().to_json(self.filename,orient='records')
 

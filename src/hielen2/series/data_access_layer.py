@@ -20,7 +20,7 @@ def _threadpool(f):
 class Series():
 
     def __init__(self,code):
-        series_info=db['series'].get(code)
+        series_info=db['series'][code]
 
         self.__dict__.update(series_info)
         geninfo=dict((k,w) for k,w in series_info.items() if k in ( "modules","operator","operands" ) )
@@ -46,8 +46,14 @@ class Series():
         else:
             timeto = self.last
 
-
-        out = db['cache'].get(self.code,timefrom,timeto)
+        try:
+            out = db['datacache'][self.code].to_frame()
+            if timefrom is not None and out.index.max() < timefrom:
+                out = out.tail(1)
+            else:
+                out = out[timefrom:timeto]
+        except KeyError:
+            out = DataFrame()
 
         timefrom2=out.index.max()
         
@@ -72,7 +78,7 @@ class Series():
         idx= unique( out.index.values, return_index = True )[1]
         out = out.iloc[ idx ]
         out.index.name='timestamp'
-
+        
         return out
 
 class Generator:
@@ -88,23 +94,37 @@ class Generator:
                 self.modules[k]=import_module(m)
 
         self.operands = {}
-        if not operands is None:
+        if operands is not None:
             self.operands = dict( Generator._parse_operand(*op) for op in operands.items() )
 
 
     def _parse_operand(key,value):
 
+        '''
+            trying to extract a series
+        '''
         try:
-            obj=value.split('.')
-            el=db['elements'].get(obj[0])
+            return (key,Series(value))
+        except KeyError:
+            pass
 
-            if el is None:
-                return (key,Series(obj[0]))
-            else:
-                return (key,el[obj[1]])
+        '''
+            trying to extract element attribute
+        '''
 
-        except Exception as e:
-            return (key, value)
+        try:
+            v=value.split('.')
+            assert (v.__len__()==2)
+            return (key,db['elements'][v[0]][v[1]])
+        except Exception:
+            pass
+
+        '''
+            giving up. It should be a scalar.
+            return it
+        '''
+
+        return (key, value)
 
 
     def _generate(self,timefrom, timeto):
@@ -115,6 +135,8 @@ class Generator:
         runners = { k:w.thdata(timefrom,timeto) for k,w in self.operands.items() if isinstance(w,Series) }
         operands.update( { k:w.result() for k,w in runners.items() } )
         #operands.update( { k:w.data(timefrom,timeto) for k,w in self.operands.items() if isinstance(w,Series) } )
-        #print(operands)
+
+        #print('OPERANDI',operands)
+        #print('OPERATORE', self.operator)
         return eval(self.operator)
 

@@ -20,14 +20,14 @@ def chkparam(param):
 
     el,par = param.split(":")
 
-    element=db['elements'].get(el)
-
-    if element is None:
+    try:
+        element=db['elements'][el]
+    except KeyError:
         raise KeyError(el)
 
-    parameter = element['parameters'].get(par)
-
-    if parameter is None:
+    try:
+        parameter = element['parameters'][par]
+    except KeyError:
         raise KeyError(f"{el}:{par}")
 
     return parameter
@@ -105,10 +105,10 @@ def tabular_data( datamap, request=None, response=None ):
 
 @hug.get('/{el}/', output=data_out_handler)
 def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, response=None ):
-    
-    element=db['elements'].get(el)
-
-    if element is None:
+   
+    try:
+        element=db['elements'][el]
+    except KeyError:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)                       
         out.message=str(el) + " not found"                                           
         response = out.format(response=response,request=request)                    
