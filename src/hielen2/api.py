@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import api_elements, api_prototypes, api_series
+from . import api_elements, api_prototypes, api_data
 import falcon
 
 '''
@@ -26,7 +26,7 @@ def elem():
     ''' Elements manager '''
     return [api_elements]
 
-@hug.extend_api('/series')
-def series():
+@hug.extend_api('/data')
+def data():
     ''' Series manager '''
-    return [api_series]
+    return [api_data]

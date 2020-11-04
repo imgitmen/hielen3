@@ -8,6 +8,8 @@ from himada.api import ResponseFormatter
 
 @hug.post('/')
 def create_elements(code,prototype,request=None,response=None):
+
+
     return "Not Yet Implemented"
 
 
@@ -18,7 +20,7 @@ def elinfo(el):
      
     info={ k:w for k,w in el.items() if k not in ('code',) }
 
-    info['parameters']=[ {'name':e[0], 'unit': db['series'][e[1]]['mu']} for e in el['parameters'].items() if e[1] is not None ]
+    info['parameters']=[ {'series':e[1],'name':e[0], 'unit': db['series'][e[1]]['mu']} for e in el['parameters'].items() if e[1] is not None ]
      
     return info  
 

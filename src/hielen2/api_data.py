@@ -7,7 +7,7 @@ from .utils import hug_output_format_conten_type
 from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen2 import db
-from hielen2.series.data_access_layer import Series
+from hielen2.data.data_access_layer import Series
 from himada.api import ResponseFormatter
 import asyncio
 
@@ -15,22 +15,6 @@ import asyncio
 data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.output_format.json])
 CSV="text/plain; charset=utf-8"
 JSON="application/json; charset=utf-8"
-
-def chkparam(param):
-
-    el,par = param.split(":")
-
-    try:
-        element=db['elements'][el]
-    except KeyError:
-        raise KeyError(el)
-
-    try:
-        parameter = element['parameters'][par]
-    except KeyError:
-        raise KeyError(f"{el}:{par}")
-
-    return parameter
 
 
 ####### API DATATABLE #######
@@ -48,7 +32,7 @@ def tabular_data( datamap, request=None, response=None ):
         response = out.format(response=response,request=request)
         return
 
-    parameters={}
+    series={}
 
     for s in loaded:
         try:
@@ -60,27 +44,25 @@ def tabular_data( datamap, request=None, response=None ):
         except KeyError:
             timeto=None
 
-        for p in s['parameters']:
+        for p in s['series']:
 
-            if p not in parameters.keys():
-                parameters[p]=[]
+            if p not in series.keys():
+                series[p]=[]
 
             try:
-                seriescode=chkparam(p)
+                series[p].append( Series(p).thdata(timefrom=timefrom,timeto=timeto) )
             except KeyError as e:
                 out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
                 out.message=str(e) + " not found"
                 response = out.format(response=response,request=request)
                 return
-            parameters[p].append( Series(seriescode).thdata(timefrom=timefrom,timeto=timeto) )
-
 
     out=DataFrame()
 
-    for param,serieses in parameters.items():
+    for param,sers in series.items():
 
         ser=None
-        for r in serieses:
+        for r in sers:
             s=r.result()
             if ser is None:
                 ser = s
@@ -105,7 +87,7 @@ def tabular_data( datamap, request=None, response=None ):
 
 @hug.get('/{el}/', output=data_out_handler)
 def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, response=None ):
-   
+  
     try:
         element=db['elements'][el]
     except KeyError:
@@ -114,6 +96,8 @@ def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, res
         response = out.format(response=response,request=request)                    
         return 
 
+    
+    
     try:
     
         if par is None:
