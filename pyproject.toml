@@ -1,32 +1,3 @@
-[project]
-name = "hielen2"
-version = "2.0.1"
-description = "Hierarchical Elaboaration Engine"
-authors = [
-    "Alessandro Modesti <modesti@img-srl.com>"
-]
-license = "MIT"
-readme = "README.md"
-python = "^3.6"
-homepage = "https://github.com/fantamodeman/hielen2"
-repository = "https://github.com/fantamodeman/hielen2" 
-documentation = "https://github.com/fantamodeman/hielen2"
-
-keywords = ["Hierarchical","Elaboration","Engine","Hielen"]
-
-classifiers = [
-    "Development Status :: 1 - Planning",
-    "Intended Audience :: Developers",
-    "Natural Language :: English",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.3",
-    "Programming Language :: Python :: 3.4",
-    "Programming Language :: Python :: 3.5",
-    "Programming Language :: Python :: 3.6",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-]
-
 [tool.portray.mkdocs.theme]
 favicon = "art/hielen2.svg"
 logo = "art/hielen2.svg"
