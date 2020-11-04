@@ -71,7 +71,6 @@ if __name__ == "__main__":
         maintainer=find_meta("author"),
         maintainer_email=find_meta("email"),
         keywords=KEYWORDS,
-        long_description=long_description,
         long_description=read("README.md"),
         long_description_content_type="text/markdown",
         packages=PACKAGES,
