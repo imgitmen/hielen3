@@ -7,7 +7,15 @@ from himada.api import ResponseFormatter
 
 
 @hug.post('/')
-def create_elements(code,prototype,request=None,response=None):
+def create_elements(code,prototype,geom=None,request=None,response=None):
+
+    out = ResponseFormatter(status=falcon.HTTP_CREATED)
+    try:
+        proto= db['prototypes'][prototype]
+    except KeyError e:
+        out.message=e
+        response=out.format(response=response,request=request)
+        return
 
 
     return "Not Yet Implemented"

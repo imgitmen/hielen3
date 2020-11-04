@@ -32,10 +32,10 @@ def protptype(prototype, request=None, response=None):
     response = out.format(response=response,request=request)
 
 @hug.get('/{prototype}/forms', examples='')
-def prototype_forms(eltype, request=None, response=None):
+def prototype_forms(prototype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['prototypes'][protoypes]['forms']
+        out.data=db['prototypes'][prototype]['forms']
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -52,6 +52,16 @@ def prototype_form(prototype, form, request=None, response=None):
         out.message = str(e)
     response = out.format(response=response,request=request)
 
+
+@hug.get('/{prototype}/struct', examples='')
+def prototype_struct(prototype, request=None, response=None):
+    out=ResponseFormatter()
+    try:
+        out.data=db['prototypes'][prototype]['struct']
+    except KeyError as e:
+        out.status=out.status=falcon.HTTP_NOT_FOUND
+        out.message = str(e)
+    response = out.format(response=response,request=request)
 
 
 

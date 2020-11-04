@@ -40,7 +40,14 @@ class JsonDB(DB):
         if key is None:
             return self.db.to_dict()
 
-        return self.db[key].to_dict() 
+        return self.db[key].to_dict()
+
+    def __setitem__(self, key=None, value=None):
+        value['code']=key
+        value=DataFrame([value]).T
+        value.columns=[key]
+        self.db=self.db.join(value)
+
     
     def save(self):
         self.db.reset_index().to_json(self.filename)
