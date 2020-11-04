@@ -11,4 +11,4 @@ Home = "README.md"
 Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
-"API Reference" = "api.md"
+"API Reference" = "APIREFERENCE.md"
