@@ -209,7 +209,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../api/" title="API Reference" class="md-nav__link">
+    <a href="../../../APIREFERENCE/" title="API Reference" class="md-nav__link">
       API Reference
     </a>
   </li>
@@ -306,6 +306,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#elem" class="md-nav__link">
     elem
   </a>
@@ -319,13 +326,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#series" class="md-nav__link">
-    series
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -335,6 +335,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api_data/" title="Api Data" class="md-nav__link">
+      Api Data
+    </a>
   </li>
 
         
@@ -358,18 +370,6 @@
   <li class="md-nav__item">
     <a href="../api_prototypes/" title="Api Prototypes" class="md-nav__link">
       Api Prototypes
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../api_series/" title="Api Series" class="md-nav__link">
-      Api Series
     </a>
   </li>
 
@@ -420,13 +420,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8" type="checkbox" id="nav-4-1-8">
     
     <label class="md-nav__link" for="nav-4-1-8">
-      Series
+      Data
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Series" data-md-level="3">
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
       <label class="md-nav__title" for="nav-4-1-8">
         <span class="md-nav__icon md-icon"></span>
-        Series
+        Data
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -437,7 +437,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/calculation/" title="Calculation" class="md-nav__link">
+    <a href="../data/calculation/" title="Calculation" class="md-nav__link">
       Calculation
     </a>
   </li>
@@ -449,7 +449,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+    <a href="../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
       Data Access Layer
     </a>
   </li>
@@ -461,7 +461,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/" title="Index" class="md-nav__link">
+    <a href="../data/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -494,7 +494,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/csv/" title="Csv" class="md-nav__link">
+    <a href="../data/sources/csv/" title="Csv" class="md-nav__link">
       Csv
     </a>
   </li>
@@ -506,7 +506,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/" title="Index" class="md-nav__link">
+    <a href="../data/sources/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -518,7 +518,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/smori/" title="Smori" class="md-nav__link">
+    <a href="../data/sources/smori/" title="Smori" class="md-nav__link">
       Smori
     </a>
   </li>
@@ -530,7 +530,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/winecap/" title="Winecap" class="md-nav__link">
+    <a href="../data/sources/winecap/" title="Winecap" class="md-nav__link">
       Winecap
     </a>
   </li>
@@ -588,6 +588,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#data" class="md-nav__link">
+    data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#elem" class="md-nav__link">
     elem
   </a>
@@ -597,13 +604,6 @@
           <li class="md-nav__item">
   <a href="#proto" class="md-nav__link">
     proto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#series" class="md-nav__link">
-    series
   </a>
   
 </li>
@@ -690,7 +690,7 @@
 
 <span class="kn">import</span> <span class="nn">hug</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">api_elements</span><span class="p">,</span> <span class="n">api_prototypes</span><span class="p">,</span> <span class="n">api_series</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">api_elements</span><span class="p">,</span> <span class="n">api_prototypes</span><span class="p">,</span> <span class="n">api_data</span>
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
@@ -728,17 +728,34 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">api_elements</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/series&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">series</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">data</span><span class="p">():</span>
 
     <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">api_series</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">api_data</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 </details>
 <h2 id="functions">Functions</h2>
+<h3 id="data">data</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Series manager </p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="s1">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">api_data</span><span class="o">]</span><span class="w"></span>
+</code></pre></div>
+
+</details>
 <h3 id="elem">elem</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">elem</span><span class="p">(</span>
 
@@ -773,23 +790,6 @@
 </code></pre></div>
 
 </details>
-<h3 id="series">series</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">series</span><span class="p">(</span>
-
-<span class="p">)</span>
-</code></pre></div>
-
-<p>Series manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/series&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">series</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="s1">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">api_series</span><span class="o">]</span><span class="w"></span>
-</code></pre></div>
-
-</details>
                 
               
               
@@ -808,7 +808,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../../api/" title="API Reference" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../../APIREFERENCE/" title="API Reference" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -823,13 +823,13 @@
           </a>
         
         
-          <a href="../api_elements/" title="Api Elements" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../api_data/" title="Api Data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Api Elements
+                Api Data
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

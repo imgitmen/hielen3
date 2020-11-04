@@ -209,7 +209,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../api/" title="API Reference" class="md-nav__link">
+    <a href="../../../APIREFERENCE/" title="API Reference" class="md-nav__link">
       API Reference
     </a>
   </li>
@@ -269,6 +269,18 @@
   <li class="md-nav__item">
     <a href="../api/" title="API" class="md-nav__link">
       API
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api_data/" title="Api Data" class="md-nav__link">
+      Api Data
     </a>
   </li>
 
@@ -382,18 +394,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../api_series/" title="Api Series" class="md-nav__link">
-      Api Series
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../datalink/" title="Datalink" class="md-nav__link">
       Datalink
     </a>
@@ -434,13 +434,13 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8" type="checkbox" id="nav-4-1-8">
     
     <label class="md-nav__link" for="nav-4-1-8">
-      Series
+      Data
       <span class="md-nav__icon md-icon"></span>
     </label>
-    <nav class="md-nav" aria-label="Series" data-md-level="3">
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
       <label class="md-nav__title" for="nav-4-1-8">
         <span class="md-nav__icon md-icon"></span>
-        Series
+        Data
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -451,7 +451,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/calculation/" title="Calculation" class="md-nav__link">
+    <a href="../data/calculation/" title="Calculation" class="md-nav__link">
       Calculation
     </a>
   </li>
@@ -463,7 +463,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+    <a href="../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
       Data Access Layer
     </a>
   </li>
@@ -475,7 +475,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/" title="Index" class="md-nav__link">
+    <a href="../data/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -508,7 +508,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/csv/" title="Csv" class="md-nav__link">
+    <a href="../data/sources/csv/" title="Csv" class="md-nav__link">
       Csv
     </a>
   </li>
@@ -520,7 +520,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/" title="Index" class="md-nav__link">
+    <a href="../data/sources/" title="Index" class="md-nav__link">
       Index
     </a>
   </li>
@@ -532,7 +532,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/smori/" title="Smori" class="md-nav__link">
+    <a href="../data/sources/smori/" title="Smori" class="md-nav__link">
       Smori
     </a>
   </li>
@@ -544,7 +544,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../series/sources/winecap/" title="Winecap" class="md-nav__link">
+    <a href="../data/sources/winecap/" title="Winecap" class="md-nav__link">
       Winecap
     </a>
   </li>
@@ -740,7 +740,7 @@
 
     <span class="n">info</span><span class="o">=</span><span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">el</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">,)</span> <span class="p">}</span>
 
-    <span class="n">info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;mu&#39;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">]</span>
+    <span class="n">info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span> <span class="p">{</span><span class="s1">&#39;series&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;mu&#39;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">]</span>
 
     <span class="k">return</span> <span class="n">info</span>
 
@@ -850,7 +850,7 @@
 
     <span class="n">info</span><span class="o">=</span><span class="err">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="k">in</span> <span class="n">el</span><span class="p">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="k">not</span> <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;code&#39;</span><span class="p">,)</span> <span class="err">}</span>
 
-    <span class="n">info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span> <span class="err">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span><span class="err">}</span> <span class="k">for</span> <span class="n">e</span> <span class="k">in</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">].</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span> <span class="p">]</span>
+    <span class="n">info</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span> <span class="err">{</span><span class="s1">&#39;series&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span><span class="err">}</span> <span class="k">for</span> <span class="n">e</span> <span class="k">in</span> <span class="n">el</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">].</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span> <span class="p">]</span>
 
     <span class="k">return</span> <span class="n">info</span>
 </code></pre></div>
@@ -874,7 +874,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../api/" title="API" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../api_data/" title="Api Data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -883,7 +883,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                API
+                Api Data
               </span>
             </div>
           </a>
