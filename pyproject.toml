@@ -11,4 +11,12 @@ Home = "README.md"
 Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
-"API Reference" = "APIREFERENCE.md"
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "API Prototypes" = "docs/API Reference/prototypes.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "API Elements" = "docs/API Reference/elements.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "API Data" = "docs/API Reference/data.md"
+
