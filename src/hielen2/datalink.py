@@ -4,7 +4,6 @@ from pandas import DataFrame, read_json
 from abc import ABC,abstractmethod 
 from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof
 
-
 def dbinit(conf):
     conf['substs']
     return { k:newinstanceof(w['klass'],w['connection'].format(**conf['substs']))  for k,w in conf['db'].items() }
@@ -19,6 +18,15 @@ class DB(ABC):
     def __getitem__(self,key):
         pass
 
+    @abstractmethod
+    def __setitem__(self,key,value):
+        pass
+
+    @abstractmethod
+    def pop(self,key):
+        pass
+
+    @abstractmethod
     def save(self):
         pass
 
@@ -42,15 +50,25 @@ class JsonDB(DB):
 
         return self.db[key].to_dict()
 
+    def pop(self,key):
+        item=self[key]
+        self.db=self.db.drop(key,axis=1)
+        return item
+
     def __setitem__(self, key=None, value=None):
         value['code']=key
         value=DataFrame([value]).T
         value.columns=[key]
-        self.db=self.db.join(value)
+        try:
+            self.db=self.db.join(value,how='left')
+        except ValueError:
+            raise ValueError( f'key {key} exists' )
+
+            #self.db[key]=value
 
     
     def save(self):
-        self.db.reset_index().to_json(self.filename)
+        self.db.to_json(self.filename)
 
 class JsonCache(DB):
 
@@ -59,19 +77,14 @@ class JsonCache(DB):
         self.filename=connection
 
     def __getitem__(self,key):
-
         return self.cache[key]
-    '''
-        try:
-            out = DataFrame(self.cache[key]).set_index(['timestamp']).sort_index()
-            if timefrom is not None and out.index.max() < timefrom:
-                out = out.tail(1)
-            else:
-                out = out.loc[timefrom:timeto]
-        except Exception:
-            pass
-        return out
-    '''
+
+    def __setitem__(self,key,value):
+        pass
+
+    def pop(self,key):
+        pass
+
     def save(self):
         self.cache.reset_index().to_json(self.filename,orient='records')
 

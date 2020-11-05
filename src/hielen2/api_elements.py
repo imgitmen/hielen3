@@ -8,17 +8,33 @@ from himada.api import ResponseFormatter
 
 @hug.post('/')
 def create_elements(code,prototype,geom=None,request=None,response=None):
+    '''Api di creazione degli elementi.
+
+    codice: rappresenta il codice elemento che deve essere univoco. in caso contrario viene
+    sollevato un errore (HTTP_NOT_MODIFIED)
+
+    prototype: rappresenta il tipo dell'elemento e deve essere presente nel sistema. Anche in
+    questo caso verrebbe sollevato un errore (HTTP_NOT_FOUND). In base a prototype l'elemento
+    viene inizializzato
+    '''
 
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
     try:
-        proto= db['prototypes'][prototype]
+        proto= db['elements_proto'][prototype]['struct']
+        proto['parameters']={ k:None for k in proto['parameters'].keys()}
+        db['elements'][code]=proto
+        db['elements'].save()
+        out.message=proto
     except KeyError as e:
-        out.message=e
-        response=out.format(response=response,request=request)
-        return
+        out.message=f"prototype '{prototype}' not found."
+        out.status=falcon.HTTP_NOT_FOUND
+    except ValueError as e:
+        out.message=f"element '{code}' exists"
+        out.status=falcon.HTTP_CONFLICT
 
+    response=out.format(response=response,request=request)
+    return
 
-    return "Not Yet Implemented"
 
 
 def elinfo(el):
@@ -36,19 +52,41 @@ def elinfo(el):
 @hug.get('/',examples='')
 def elements_info( elist=None, request=None, response=None ):
 
-    return {  k:elinfo(w) for k,w in db['elements'][elist].items() }
+    out = ResponseFormatter()
+    out.data={ k:elinfo(w) for k,w in db['elements'][elist].items() }
+    response = out.format(response=response,request=request)
+
+    return
 
 
-@hug.get('/{code}', examples='')
+@hug.get('/{code}')
 def element_info( code, request=None, response=None ):
 
-    el = db['elements'][code]
+    out = ResponseFormatter()
 
-    if code is None:
+    try: 
+        out.data= db['elements'][code]
+    except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-        out.message=code
-        response = out.format(response=response,request=request)
-        return
+        out.message=f"element '{code}' not found"
 
-    return  elinfo(el)
+    response = out.format(response=response,request=request)
+    return
+
+@hug.delete('/{code}')
+def element_delete(code, request=None, response=None):
+    
+    out = ResponseFormatter()
+
+    try:
+        out.data = db['elements'].pop(code)
+        db['elements'].save()
+    except KeyError as e:
+        out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
+        out.message=f"element '{code}' not found"
+        
+    response = out.format(response=response,request=request)
+    return
+
+
 
