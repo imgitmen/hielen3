@@ -228,8 +228,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#202-november-3-2020" class="md-nav__link">
-    2.0.2 November 3 2020
+  <a href="#202-november-5-2020" class="md-nav__link">
+    2.0.2 November 5 2020
   </a>
   
 </li>
@@ -549,8 +549,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#202-november-3-2020" class="md-nav__link">
-    2.0.2 November 3 2020
+  <a href="#202-november-5-2020" class="md-nav__link">
+    2.0.2 November 5 2020
   </a>
   
 </li>
@@ -576,11 +576,29 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
-<h2 id="202-november-3-2020">2.0.2 November 3 2020</h2>
+<h2 id="202-november-5-2020">2.0.2 November 5 2020</h2>
 <ul>
-<li>L'api <code>../series</code> diventa <code>../data</code> e cambia il suo comportamento: la variabile di tipo json  <em>datamap</em> si aspetta il campo "series" invece di "parameters". In questo campo devono essere inseriti i codici delle serie e non più il costrutto "codiceelemento:parametroelemento". I codici delle serie si possono recuperarare dall'api <code>../elements</code> (vedi Nota successiva)</li>
-<li>L'api <code>../elements</code> cambia la sua risposta e per ogni parametro nella lista "parmeters" degli elementi viene agiunto il codice della serie di riferimento che può essere fornito senza modifiche a <code>data</code>:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;series&quot;:&lt;sereiscode&gt;,</span>
+<li>Implementate le api <strong>POST</strong> <code>../elements</code> e <strong>DELETE</strong> <code>../elements</code></li>
+<li>
+<p>L'uscita per tutte le api element (e per tutte le api con risposta json in generale), seguirà questo schema:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    &quot;meta&quot;: {</span>
+<span class="err">        &quot;data_type&quot;: &quot;DELETE /elements/ciao&quot;,</span>
+<span class="err">        &quot;response&quot;: &quot;ok&quot;</span>
+<span class="err">        &quot;message&quot;: &quot;&quot;,</span>
+<span class="err">    },</span>
+<span class="err">    &quot;data&quot;:{</span>
+<span class="err">        ...</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>L'api <code>../series</code> diventa <code>../data</code> e cambia il suo comportamento: la variabile di tipo json  <em>datamap</em> si aspetta il campo <em>series</em> invece di <em>parameters</em>. In questo campo devono essere inseriti i codici delle serie e non più il costrutto "codice_elemento:parametro_elemento". I codici delle serie si possono recuperarare dall'api <code>../elements</code> (vedi Nota successiva)</p>
+</li>
+<li>L'api <code>../elements</code> cambia la sua risposta e per ogni parametro nella lista <em>parameters</em> degli elementi viene agiunto il codice della serie di riferimento che può essere fornito senza modifiche a <code>data</code>:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    &quot;series&quot;:&lt;seriescode&gt;,</span>
 <span class="err">    &quot;name&quot;:&lt;seriesname&gt;,</span>
 <span class="err">    &quot;um&quot;:&lt;seriesunit&gt;</span>
 <span class="err">}</span>

@@ -278,6 +278,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get_4" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -299,15 +306,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_4" class="md-nav__link">
+  <a href="#get_5" class="md-nav__link">
     GET
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_5" class="md-nav__link">
+  <a href="#get_6" class="md-nav__link">
     GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
   </a>
   
 </li>
@@ -326,13 +340,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_6" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_7" class="md-nav__link">
     GET
   </a>
@@ -341,6 +348,13 @@
         
           <li class="md-nav__item">
   <a href="#get_8" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_9" class="md-nav__link">
     GET
   </a>
   
@@ -694,6 +708,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get_4" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -715,15 +736,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_4" class="md-nav__link">
+  <a href="#get_5" class="md-nav__link">
     GET
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get_5" class="md-nav__link">
+  <a href="#get_6" class="md-nav__link">
     GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete" class="md-nav__link">
+    DELETE
   </a>
   
 </li>
@@ -742,13 +770,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_6" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#get_7" class="md-nav__link">
     GET
   </a>
@@ -757,6 +778,13 @@
         
           <li class="md-nav__item">
   <a href="#get_8" class="md-nav__link">
+    GET
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_9" class="md-nav__link">
     GET
   </a>
   
@@ -806,40 +834,47 @@
 </code></pre></div>
 
 <h5 id="get_2">GET</h5>
-<p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'eltype': {'type': 'Basic text / string value'}}}</em></p>
+<p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'prototype': {'type': 'Basic text / string value'}}}</em></p>
 <div class="codehilite"><pre><span></span><code><span class="err">    /prototypes/{prototype}/forms/{form}</span>
 </code></pre></div>
 
 <h5 id="get_3">GET</h5>
 <p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'prototype': {'type': 'Basic text / string value'}, 'form': {'type': 'Basic text / string value'}}}</em></p>
+<div class="codehilite"><pre><span></span><code><span class="err">    /prototypes/{prototype}/struct</span>
+</code></pre></div>
+
+<h5 id="get_4">GET</h5>
+<p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'prototype': {'type': 'Basic text / string value'}}}</em></p>
 <h2 id="elements">elements</h2>
 <div class="codehilite"><pre><span></span><code><span class="err">    /elements/</span>
 </code></pre></div>
 
 <h5 id="post_1">POST</h5>
-<p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'code': {'type': 'Basic text / string value'}, 'prototype': {'type': 'Basic text / string value'}}}</em></p>
-<h5 id="get_4">GET</h5>
+<p><em>{'usage': "Api di creazione degli elementi.\n\n    codice: rappresenta il codice elemento che deve essere univoco. in caso contrario viene\n    sollevato un errore (HTTP_NOT_MODIFIED)\n\n    prototype: rappresenta il tipo dell'elemento e deve essere presente nel sistema. Anche in\n    questo caso verrebbe sollevato un errore (HTTP_NOT_FOUND). In base a prototype l'elemento\n    viene inizializzato\n    ", 'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'code': {'type': 'Basic text / string value'}, 'prototype': {'type': 'Basic text / string value'}, 'geom': {'type': 'Basic text / string value'}}}</em></p>
+<h5 id="get_5">GET</h5>
 <p><em>{'examples': ['http://localhost/elements/'], 'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'elist': {'type': 'Basic text / string value'}}}</em></p>
 <div class="codehilite"><pre><span></span><code><span class="err">    /elements/{code}</span>
 </code></pre></div>
 
-<h5 id="get_5">GET</h5>
+<h5 id="get_6">GET</h5>
+<p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'code': {'type': 'Basic text / string value'}}}</em></p>
+<h5 id="delete">DELETE</h5>
 <p><em>{'outputs': {'format': 'JSON (Javascript Serialized Object Notation)', 'content_type': 'application/json; charset=utf-8'}, 'inputs': {'code': {'type': 'Basic text / string value'}}}</em></p>
 <h2 id="data">data</h2>
 <div class="codehilite"><pre><span></span><code><span class="err">    /data/</span>
 </code></pre></div>
 
-<h5 id="get_6">GET</h5>
+<h5 id="get_7">GET</h5>
 <p><em>{'outputs': {'format': 'Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)', 'content_type': 'text/plain; charset=utf-8, application/json; charset=utf-8'}, 'inputs': {'datamap': {'type': 'Basic text / string value'}}}</em></p>
 <div class="codehilite"><pre><span></span><code><span class="err">    /data/{el}/</span>
 </code></pre></div>
 
-<h5 id="get_7">GET</h5>
+<h5 id="get_8">GET</h5>
 <p><em>{'outputs': {'format': 'Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)', 'content_type': 'text/plain; charset=utf-8, application/json; charset=utf-8'}, 'inputs': {'el': {'type': 'Basic text / string value'}, 'par': {'type': 'Basic text / string value'}, 'timefrom': {'type': 'Basic text / string value'}, 'timeto': {'type': 'Basic text / string value'}}}</em></p>
 <div class="codehilite"><pre><span></span><code><span class="err">    /data/{el}/{par}</span>
 </code></pre></div>
 
-<h5 id="get_8">GET</h5>
+<h5 id="get_9">GET</h5>
 <p><em>{'examples': ['http://localhost/data/{el}/{par}'], 'outputs': {'format': 'Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)', 'content_type': 'text/plain; charset=utf-8, application/json; charset=utf-8'}, 'inputs': {'el': {'type': 'Basic text / string value'}, 'par': {'type': 'Basic text / string value'}, 'timefrom': {'type': 'Basic text / string value'}, 'timeto': {'type': 'Basic text / string value'}}}</em></p>
                 
               

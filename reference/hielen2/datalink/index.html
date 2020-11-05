@@ -404,6 +404,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pop" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save" class="md-nav__link">
     save
   </a>
@@ -444,6 +451,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pop_1" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_1" class="md-nav__link">
     save
   </a>
@@ -482,6 +496,13 @@
   
     <nav class="md-nav" aria-label="Methods">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pop_2" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#save_2" class="md-nav__link">
@@ -764,6 +785,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pop" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save" class="md-nav__link">
     save
   </a>
@@ -804,6 +832,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pop_1" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_1" class="md-nav__link">
     save
   </a>
@@ -842,6 +877,13 @@
   
     <nav class="md-nav" aria-label="Methods">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pop_2" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#save_2" class="md-nav__link">
@@ -986,7 +1028,33 @@
  98
  99
 100
-101</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1015,6 +1083,20 @@
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
 
         <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
+
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+
+        <span class="k">pass</span>
+
+    <span class="nd">@abstractmethod</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -1046,9 +1128,35 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+
+        <span class="n">item</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="n">value</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+
+        <span class="n">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> exists&#39;</span> <span class="p">)</span>
+
+            <span class="c1">#self.db[key]=value</span>
+
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">JsonCache</span><span class="p">(</span><span class="n">DB</span><span class="p">):</span>
 
@@ -1062,27 +1170,13 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 
-<span class="sd">        try:</span>
+        <span class="k">pass</span>
 
-<span class="sd">            out = DataFrame(self.cache[key]).set_index([&#39;timestamp&#39;]).sort_index()</span>
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
 
-<span class="sd">            if timefrom is not None and out.index.max() &lt; timefrom:</span>
-
-<span class="sd">                out = out.tail(1)</span>
-
-<span class="sd">            else:</span>
-
-<span class="sd">                out = out.loc[timefrom:timeto]</span>
-
-<span class="sd">        except Exception:</span>
-
-<span class="sd">            pass</span>
-
-<span class="sd">        return out</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
+        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -1128,6 +1222,20 @@ inheritance.</p>
 
 <span class="w">        </span><span class="n">pass</span><span class="w"></span>
 
+<span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">pass</span><span class="w"></span>
@@ -1145,15 +1253,32 @@ inheritance.</p>
 <li>hielen2.datalink.JsonCache</li>
 </ul>
 <h4 id="methods">Methods</h4>
+<h5 id="pop">pop</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">key</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
+</code></pre></div>
+
+</details>
 <h5 id="save">save</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">save</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
-        <span class="n">pass</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1177,27 +1302,13 @@ inheritance.</p>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        try:</span>
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 
-<span class="s1">            out = DataFrame(self.cache[key]).set_index([&#39;</span><span class="nc">timestamp</span><span class="s1">&#39;]).sort_index()</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">            if timefrom is not None and out.index.max() &lt; timefrom:</span>
-
-<span class="s1">                out = out.tail(1)</span>
-
-<span class="s1">            else:</span>
-
-<span class="s1">                out = out.loc[timefrom:timeto]</span>
-
-<span class="s1">        except Exception:</span>
-
-<span class="s1">            pass</span>
-
-<span class="s1">        return out</span>
-
-<span class="s1">    &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -1212,6 +1323,19 @@ inheritance.</p>
 <li>abc.ABC</li>
 </ul>
 <h4 id="methods_1">Methods</h4>
+<h5 id="pop_1">pop</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">key</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">pop</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="k">key</span><span class="p">):</span>
+
+        <span class="n">pass</span>
+</code></pre></div>
+
+</details>
 <h5 id="save_1">save</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
     <span class="bp">self</span>
@@ -1258,9 +1382,35 @@ inheritance.</p>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span><span class="w"></span>
 
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;code&#39;</span><span class="o">]=</span><span class="k">key</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="p">).</span><span class="n">T</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">ValueError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="s1">&#39;key {key} exists&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">#self</span><span class="p">.</span><span class="n">db</span><span class="o">[</span><span class="n">key</span><span class="o">]=</span><span class="k">value</span><span class="w"></span>
+
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">reset_index</span><span class="p">().</span><span class="n">to_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1271,6 +1421,23 @@ inheritance.</p>
 <li>abc.ABC</li>
 </ul>
 <h4 id="methods_2">Methods</h4>
+<h5 id="pop_2">pop</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">key</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"></span>
+</code></pre></div>
+
+</details>
 <h5 id="save_2">save</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
     <span class="bp">self</span>
@@ -1279,7 +1446,7 @@ inheritance.</p>
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">save</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
 
-        <span class="k">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">reset_index</span><span class="p">().</span><span class="n">to_json</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
