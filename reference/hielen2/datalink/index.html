@@ -230,8 +230,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/prototypes/" title="API Prototypes" class="md-nav__link">
-      API Prototypes
+    <a href="../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
     </a>
   </li>
 
@@ -242,8 +242,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/elements/" title="API Elements" class="md-nav__link">
-      API Elements
+    <a href="../../../docs/API%20Reference/elements/" title="Elements" class="md-nav__link">
+      Elements
     </a>
   </li>
 
@@ -254,8 +254,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/data/" title="API Data" class="md-nav__link">
-      API Data
+    <a href="../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
     </a>
   </li>
 
@@ -460,13 +460,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#save" class="md-nav__link">
-    save
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -508,7 +501,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#save_1" class="md-nav__link">
+  <a href="#save" class="md-nav__link">
     save
   </a>
   
@@ -550,13 +543,6 @@
           <li class="md-nav__item">
   <a href="#pop_2" class="md-nav__link">
     pop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#save_2" class="md-nav__link">
-    save
   </a>
   
 </li>
@@ -841,13 +827,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#save" class="md-nav__link">
-    save
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -889,7 +868,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#save_1" class="md-nav__link">
+  <a href="#save" class="md-nav__link">
     save
   </a>
   
@@ -931,13 +910,6 @@
           <li class="md-nav__item">
   <a href="#pop_2" class="md-nav__link">
     pop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#save_2" class="md-nav__link">
-    save
   </a>
   
 </li>
@@ -1104,7 +1076,103 @@
 124
 125
 126
-127</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1112,7 +1180,9 @@
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span><span class="n">abstractmethod</span>
 
-<span class="kn">from</span> <span class="nn">hielen2.utils</span> <span class="kn">import</span> <span class="n">loadjsonfile</span><span class="p">,</span> <span class="n">savejsonfile</span><span class="p">,</span> <span class="n">newinstanceof</span>
+<span class="kn">from</span> <span class="nn">hielen2.utils</span> <span class="kn">import</span> <span class="n">loadjsonfile</span><span class="p">,</span> <span class="n">savejsonfile</span><span class="p">,</span> <span class="n">newinstanceof</span><span class="p">,</span> <span class="n">hashfile</span>
+
+<span class="kn">from</span> <span class="nn">filelock</span> <span class="kn">import</span> <span class="n">Timeout</span><span class="p">,</span> <span class="n">FileLock</span>
 
 <span class="k">def</span> <span class="nf">dbinit</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
 
@@ -1146,21 +1216,137 @@
 
         <span class="k">pass</span>
 
-    <span class="nd">@abstractmethod</span>
-
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="k">pass</span>
-
 <span class="k">class</span> <span class="nc">JsonDB</span><span class="p">(</span><span class="n">DB</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="o">=</span><span class="n">connection</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">connection</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">=</span><span class="n">FileLock</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">connection</span><span class="si">}</span><span class="s2">.lock&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md5file</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">connection</span><span class="si">}</span><span class="s2">.md5&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__chk_and_reload_jsondb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+        <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">        Needs to check for json-database file changes in a thread safe way!!</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">md5</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="n">error</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">force</span> <span class="ow">and</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">md5file</span><span class="p">)</span> <span class="k">as</span> <span class="n">o</span><span class="p">:</span> <span class="n">md5</span><span class="o">=</span><span class="n">o</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">md5</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="o">=</span><span class="n">md5</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="c1">## refershing hash</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="o">=</span><span class="n">hashfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">md5file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">o</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">)</span>
+
+            <span class="k">finally</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="n">Timeout</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__write_jsondb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+
+        <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">        Needs to lock for writing json-database</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">item</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="n">error</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+                    <span class="c1">#Request to remove key, raises KeyError</span>
+
+                    <span class="n">item</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="c1">#Request to insert key, raises ValueError</span>
+
+                    <span class="n">value</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+
+                    <span class="n">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+                    <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+                    <span class="n">item</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="o">=</span><span class="n">hashfile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">)</span>
+
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">md5file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">o</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">md5</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+                <span class="n">error</span> <span class="o">=</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> to remove does not exist&#39;</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+
+                <span class="n">error</span> <span class="o">=</span> <span class="ne">KeyError</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> to insert exists&#39;</span> <span class="p">)</span>
+
+            <span class="k">finally</span><span class="p">:</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="n">Timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">error</span> <span class="o">=</span> <span class="n">e</span>
+
+        <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="n">error</span>
+
+        <span class="k">return</span> <span class="n">item</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
 
@@ -1180,33 +1366,11 @@
 
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
 
-        <span class="n">item</span><span class="o">=</span><span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__write_jsondb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-        <span class="n">value</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
-
-        <span class="n">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-
-        <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-
-        <span class="k">try</span><span class="p">:</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
-
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s1">&#39;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> exists&#39;</span> <span class="p">)</span>
-
-            <span class="c1">#self.db[key]=value</span>
-
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__write_jsondb</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">JsonCache</span><span class="p">(</span><span class="n">DB</span><span class="p">):</span>
 
@@ -1283,12 +1447,6 @@ inheritance.</p>
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">pass</span><span class="w"></span>
-
-<span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1313,20 +1471,6 @@ inheritance.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">pass</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h5 id="save">save</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
-    <span class="bp">self</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">pass</span><span class="w"></span>
 </code></pre></div>
@@ -1386,7 +1530,7 @@ inheritance.</p>
 </code></pre></div>
 
 </details>
-<h5 id="save_1">save</h5>
+<h5 id="save">save</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
     <span class="bp">self</span>
 <span class="p">)</span>
@@ -1400,7 +1544,8 @@ inheritance.</p>
 </details>
 <h3 id="jsondb">JsonDB</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonDB</span><span class="p">(</span>
-    <span class="n">connection</span>
+    <span class="n">connection</span><span class="p">,</span>
+    <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -1408,13 +1553,135 @@ inheritance.</p>
 inheritance.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">JsonDB</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="k">connection</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="o">=</span><span class="k">connection</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="o">=</span><span class="k">connection</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">lock</span><span class="o">=</span><span class="n">FileLock</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{connection}.lock&quot;</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">md5file</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{connection}.md5&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__chk_and_reload_jsondb</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">force</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">        Needs to check for json-database file changes in a thread safe way!!</span>
+
+<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">md5</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">error</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">lock</span><span class="p">.</span><span class="n">acquire</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">with</span><span class="w"> </span><span class="k">open</span><span class="p">(</span><span class="n">force</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">md5file</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">o</span><span class="p">:</span><span class="w"> </span><span class="n">md5</span><span class="o">=</span><span class="n">o</span><span class="p">.</span><span class="k">read</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">md5</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">md5</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="o">=</span><span class="n">md5</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="err">##</span><span class="w"> </span><span class="n">refershing</span><span class="w"> </span><span class="n">hash</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="o">=</span><span class="n">hashfile</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">with</span><span class="w"> </span><span class="k">open</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">md5file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">o</span><span class="p">:</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="k">write</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="nl">finally</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">lock</span><span class="p">.</span><span class="k">release</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">Timeout</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__write_jsondb</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">        Needs to lock for writing json-database</span>
+
+<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">item</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">error</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">lock</span><span class="p">.</span><span class="n">acquire</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">#Request</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">remove</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">raises</span><span class="w"> </span><span class="n">KeyError</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">#Request</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">raises</span><span class="w"> </span><span class="n">ValueError</span><span class="w"></span>
+
+<span class="w">                    </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;code&#39;</span><span class="o">]=</span><span class="k">key</span><span class="w"></span>
+
+<span class="w">                    </span><span class="k">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="p">).</span><span class="n">T</span><span class="w"></span>
+
+<span class="w">                    </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="o">=</span><span class="n">hashfile</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">with</span><span class="w"> </span><span class="k">open</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">md5file</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">o</span><span class="p">:</span><span class="w"> </span><span class="n">o</span><span class="p">.</span><span class="k">write</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">md5</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;key {key} to remove does not exist&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="nl">ValueError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="s1">&#39;key {key} to insert exists&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="nl">finally</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">lock</span><span class="p">.</span><span class="k">release</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">Timeout</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">error</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__chk_and_reload_jsondb</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -1434,33 +1701,11 @@ inheritance.</p>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__write_jsondb</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;code&#39;</span><span class="o">]=</span><span class="k">key</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="p">).</span><span class="n">T</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">ValueError</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="s1">&#39;key {key} exists&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">#self</span><span class="p">.</span><span class="n">db</span><span class="o">[</span><span class="n">key</span><span class="o">]=</span><span class="k">value</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">save</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__write_jsondb</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1478,25 +1723,9 @@ inheritance.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">pop</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="k">key</span><span class="p">):</span>
 
-<span class="w">        </span><span class="n">item</span><span class="o">=</span><span class="n">self</span><span class="o">[</span><span class="n">key</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">item</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h5 id="save_2">save</h5>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
-    <span class="bp">self</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">save</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
-
-        <span class="k">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">self</span><span class="p">.</span><span class="n">__write_jsondb</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 </code></pre></div>
 
 </details>

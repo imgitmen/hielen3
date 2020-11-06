@@ -230,8 +230,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/prototypes/" title="API Prototypes" class="md-nav__link">
-      API Prototypes
+    <a href="../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
     </a>
   </li>
 
@@ -242,8 +242,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/elements/" title="API Elements" class="md-nav__link">
-      API Elements
+    <a href="../../../docs/API%20Reference/elements/" title="Elements" class="md-nav__link">
+      Elements
     </a>
   </li>
 
@@ -254,8 +254,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/data/" title="API Data" class="md-nav__link">
-      API Data
+    <a href="../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
     </a>
   </li>
 
@@ -846,11 +846,7 @@
 118
 119
 120
-121
-122
-123
-124
-125</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+121</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -889,8 +885,6 @@
         <span class="n">proto</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">proto</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
 
         <span class="n">db</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">][</span><span class="n">code</span><span class="p">]</span><span class="o">=</span><span class="n">proto</span>
-
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="n">proto</span>
 
@@ -964,8 +958,6 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
@@ -1027,8 +1019,6 @@ viene inizializzato</p>
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;elements&#39;</span><span class="o">][</span><span class="n">code</span><span class="o">]=</span><span class="n">proto</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;elements&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">save</span><span class="p">()</span><span class="w"></span>
-
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="n">proto</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
@@ -1066,8 +1056,6 @@ viene inizializzato</p>
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;elements&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">code</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;elements&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">save</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 

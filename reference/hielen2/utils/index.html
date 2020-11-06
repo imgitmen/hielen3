@@ -230,8 +230,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/prototypes/" title="API Prototypes" class="md-nav__link">
-      API Prototypes
+    <a href="../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
     </a>
   </li>
 
@@ -242,8 +242,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/elements/" title="API Elements" class="md-nav__link">
-      API Elements
+    <a href="../../../docs/API%20Reference/elements/" title="Elements" class="md-nav__link">
+      Elements
     </a>
   </li>
 
@@ -254,8 +254,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../docs/API%20Reference/data/" title="API Data" class="md-nav__link">
-      API Data
+    <a href="../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
     </a>
   </li>
 
@@ -430,6 +430,13 @@
           <li class="md-nav__item">
   <a href="#eprint" class="md-nav__link">
     eprint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hashfile" class="md-nav__link">
+    hashfile
   </a>
   
 </li>
@@ -673,6 +680,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hashfile" class="md-nav__link">
+    hashfile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hug_output_format_conten_type" class="md-nav__link">
     hug_output_format_conten_type
   </a>
@@ -860,7 +874,27 @@
 118
 119
 120
-121</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -875,6 +909,8 @@
 <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
 
 <span class="kn">from</span> <span class="nn">falcon</span> <span class="kn">import</span> <span class="n">HTTPNotAcceptable</span>
+
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">md5</span>
 
 <span class="k">def</span> <span class="nf">hug_output_format_conten_type</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[],</span> <span class="n">error</span><span class="o">=</span><span class="s1">&#39;The requested format does not match any of those allowed&#39;</span><span class="p">,</span> <span class="n">ctpar</span><span class="o">=</span><span class="s1">&#39;content_type&#39;</span><span class="p">):</span>
 
@@ -981,6 +1017,24 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
         <span class="nb">print</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">hashfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+    <span class="n">BLOCKSIZE</span> <span class="o">=</span> <span class="mi">65536</span>
+
+    <span class="n">hasher</span> <span class="o">=</span> <span class="n">md5</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
+
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+
+            <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -998,6 +1052,32 @@
     <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
         <span class="n">print</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="hashfile">hashfile</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hashfile</span><span class="p">(</span>
+    <span class="n">filename</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">hashfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+    <span class="n">BLOCKSIZE</span> <span class="o">=</span> <span class="mi">65536</span>
+
+    <span class="n">hasher</span> <span class="o">=</span> <span class="n">md5</span><span class="p">()</span>
+
+    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
+
+        <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="p">.</span><span class="k">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
+
+        <span class="n">while</span> <span class="n">len</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">hasher</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span>
+
+            <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="p">.</span><span class="k">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">hasher</span><span class="p">.</span><span class="n">hexdigest</span><span class="p">()</span>
 </code></pre></div>
 
 </details>
