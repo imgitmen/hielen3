@@ -19,7 +19,7 @@ JSON="application/json; charset=utf-8"
 
 ####### API DATATABLE #######
 @hug.get('/', examples='', output=data_out_handler)
-def tabular_data( datamap, request=None, response=None ):
+def tabular_data( datamap, content_type=None, request=None, response=None ):
 
     if isinstance (datamap,list):
         datamap=','.join(datamap)
@@ -86,7 +86,7 @@ def tabular_data( datamap, request=None, response=None ):
 
 
 @hug.get('/{el}/', output=data_out_handler)
-def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, response=None ):
+def tabular_data_el( el, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
   
     try:
         element=db['elements'][el]
@@ -95,9 +95,6 @@ def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, res
         out.message=str(el) + " not found"                                           
         response = out.format(response=response,request=request)                    
         return 
-
-    
-    
     try:
     
         if par is None:
@@ -125,7 +122,7 @@ def tabular_data_el( el, par=None, timefrom=None, timeto=None, request=None, res
 
 
 @hug.get('/{el}/{par}', output=data_out_handler)
-def tabular_data_par( el=None, par=None, timefrom=None, timeto=None, request=None, response=None ):
+def tabular_data_par( el=None, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
 
     return tabular_data_el( el=el,par=par,timefrom=timefrom,timeto=timeto,request=request, response=response )
 

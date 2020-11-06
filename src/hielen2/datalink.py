@@ -2,7 +2,8 @@
 # coding=utf-8
 from pandas import DataFrame, read_json
 from abc import ABC,abstractmethod 
-from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof
+from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
+from filelock import Timeout, FileLock
 
 def dbinit(conf):
     conf['substs']
@@ -26,49 +27,103 @@ class DB(ABC):
     def pop(self,key):
         pass
 
-    @abstractmethod
-    def save(self):
-        pass
-
-
 class JsonDB(DB):
 
-    def __init__(self,connection):
-        self.db=read_json(connection)
-        self.filename=connection
+    def __init__(self,connection,timeout=10):
+        self.jsonfile=connection
+        self.lock=FileLock(f"{connection}.lock",timeout=10)
+        self.md5file=f"{connection}.md5"
+        self.md5=None
+        self.__chk_and_reload_jsondb(force=True)
+
+
+    def __chk_and_reload_jsondb(self,force=False):
+        '''
+        Needs to check for json-database file changes in a thread safe way!!
+        '''
+
+        md5=None
+        error=None
+        try:
+            self.lock.acquire()
+            try:
+                with open(force and '' or self.md5file) as o: md5=o.read()
+                if not md5 == self.md5:
+                    self.md5=md5
+                    self.db=read_json(self.jsonfile)
+            except FileNotFoundError as e:
+                ## refershing hash
+                self.md5=hashfile(self.jsonfile)
+                with open(self.md5file,'w') as o: o.write(self.md5)
+                self.db=read_json(self.jsonfile)
+
+            finally:
+                self.lock.release()
+        except Timeout:
+            pass
+
+
+    def __write_jsondb(self,key,value):
+        '''
+        Needs to lock for writing json-database
+        '''
+        item=None
+        error=None
+        try:
+            self.lock.acquire()
+            try:
+                self.__chk_and_reload_jsondb()
+
+                if value is None:
+                    #Request to remove key, raises KeyError
+                    item=self.db[key].to_dict()
+                    self.db=self.db.drop(key,axis=1)
+                else:
+                    #Request to insert key, raises ValueError
+                    value['code']=key
+                    value=DataFrame([value]).T
+                    value.columns=[key]
+
+                    self.db=self.db.join(value,how='left')
+                    item=self.db[key].to_dict()
+
+                self.db.to_json(self.jsonfile)
+                self.md5=hashfile(self.jsonfile)
+                with open(self.md5file,'w') as o: o.write(self.md5)
+            except KeyError:
+                error = KeyError(f'key {key} to remove does not exist')
+            except ValueError:
+                error = KeyError( f'key {key} to insert exists' )
+            finally:
+                self.lock.release()
+        except Timeout as e:
+            error = e
+
+        if error is not None:
+            raise error
+
+        return item
+
 
     def __getitem__(self, key=None):
 
+        self.__chk_and_reload_jsondb()
         if isinstance(key,list):
             try:
                 key=list(filter(None, key))
             except TypeError:
                 pass
-
         if key is None:
             return self.db.to_dict()
-
         return self.db[key].to_dict()
 
+
     def pop(self,key):
-        item=self[key]
-        self.db=self.db.drop(key,axis=1)
-        return item
+        return self.__write_jsondb(key,None)
 
     def __setitem__(self, key=None, value=None):
-        value['code']=key
-        value=DataFrame([value]).T
-        value.columns=[key]
-        try:
-            self.db=self.db.join(value,how='left')
-        except ValueError:
-            raise ValueError( f'key {key} exists' )
+        self.__write_jsondb(key,value)
 
-            #self.db[key]=value
-
-    
-    def save(self):
-        self.db.to_json(self.filename)
 
 class JsonCache(DB):
 

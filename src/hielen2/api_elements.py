@@ -23,7 +23,6 @@ def create_elements(code,prototype,geom=None,request=None,response=None):
         proto= db['elements_proto'][prototype]['struct']
         proto['parameters']={ k:None for k in proto['parameters'].keys()}
         db['elements'][code]=proto
-        db['elements'].save()
         out.message=proto
     except KeyError as e:
         out.message=f"prototype '{prototype}' not found."
@@ -80,7 +79,6 @@ def element_delete(code, request=None, response=None):
 
     try:
         out.data = db['elements'].pop(code)
-        db['elements'].save()
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
         out.message=f"element '{code}' not found"

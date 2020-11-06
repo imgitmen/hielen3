@@ -12,11 +12,11 @@ Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "API Prototypes" = "docs/API Reference/prototypes.md"
+    "Prototypes" = "docs/API Reference/prototypes.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "API Elements" = "docs/API Reference/elements.md"
+    "Elements" = "docs/API Reference/elements.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "API Data" = "docs/API Reference/data.md"
+    "Data" = "docs/API Reference/data.md"
 

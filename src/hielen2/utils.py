@@ -7,6 +7,7 @@ from time import mktime
 import json
 from importlib import import_module
 from falcon import HTTPNotAcceptable
+from hashlib import md5
 
 def hug_output_format_conten_type(handlers=[], error='The requested format does not match any of those allowed', ctpar='content_type'):
 
@@ -92,4 +93,14 @@ def savejsonfile(filename,struct):
 def eprint(*args, fname='error', **kwargs):
     with open(fname,'a') as f:
         print (*args,file=f,**kwargs)
+
+def hashfile(filename):
+    BLOCKSIZE = 65536
+    hasher = md5()
+    with open(filename, 'rb') as afile:
+        buf = afile.read(BLOCKSIZE)
+        while len(buf) > 0:
+            hasher.update(buf)
+            buf = afile.read(BLOCKSIZE)
+    return hasher.hexdigest()
 

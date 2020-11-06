@@ -1,6 +1,7 @@
 CHANGELOG
 =========
-## 2.0.2 November 5 2020
+## 2.0.2 November 6 2020
+- L'interfaccia DB è ora thread safe!!! (almeno per il dummy json db)
 - Implementata la documentazione automatica delle api
 - Implementate le api **POST** `../elements` e **DELETE** `../elements`
 - L'uscita per tutte le api element (e per tutte le api con risposta json in generale), seguirà questo schema:
