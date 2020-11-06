@@ -4,6 +4,7 @@
 _params_:
 
 - **datamap**: Basic text / string value
+- **content_type**: Basic text / string value
 
 _result_:
 
@@ -19,6 +20,7 @@ _params_:
 - **par**: Basic text / string value
 - **timefrom**: Basic text / string value
 - **timeto**: Basic text / string value
+- **content_type**: Basic text / string value
 
 _result_:
 
@@ -34,6 +36,7 @@ _params_:
 - **par**: Basic text / string value
 - **timefrom**: Basic text / string value
 - **timeto**: Basic text / string value
+- **content_type**: Basic text / string value
 
 _result_:
 
