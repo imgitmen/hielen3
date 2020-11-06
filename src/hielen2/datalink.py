@@ -93,7 +93,7 @@ class JsonDB(DB):
             except KeyError:
                 error = KeyError(f'key {key} to remove does not exist')
             except ValueError:
-                error = KeyError( f'key {key} to insert exists' )
+                error = ValueError( f'key {key} to insert exists' )
             finally:
                 self.lock.release()
         except Timeout as e:
