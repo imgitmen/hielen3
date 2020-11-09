@@ -17,7 +17,7 @@ _description_:
 
 **Api di creazione degli elementi.**
 
-Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`. Il prototipodell'elemento forisce informazioni per l'inizializazione della struttura.
+Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`. Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura.
 
 Possibili risposte:
 
