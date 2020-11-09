@@ -412,42 +412,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../reference/hielen2/api_data/" title="Api Data" class="md-nav__link">
-      Api Data
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../reference/hielen2/api_elements/" title="Api Elements" class="md-nav__link">
-      Api Elements
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../../reference/hielen2/api_prototypes/" title="Api Prototypes" class="md-nav__link">
-      Api Prototypes
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../../../reference/hielen2/datalink/" title="Datalink" class="md-nav__link">
       Datalink
     </a>
@@ -485,14 +449,88 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8" type="checkbox" id="nav-4-1-8">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-5" type="checkbox" id="nav-4-1-5">
     
-    <label class="md-nav__link" for="nav-4-1-8">
+    <label class="md-nav__link" for="nav-4-1-5">
+      Apimods
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Apimods" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-5">
+        <span class="md-nav__icon md-icon"></span>
+        Apimods
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/hielen2/apimods/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/hielen2/apimods/elements/" title="Elements" class="md-nav__link">
+      Elements
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/hielen2/apimods/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../reference/hielen2/apimods/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-6" type="checkbox" id="nav-4-1-6">
+    
+    <label class="md-nav__link" for="nav-4-1-6">
       Data
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Data" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-1-8">
+      <label class="md-nav__title" for="nav-4-1-6">
         <span class="md-nav__icon md-icon"></span>
         Data
       </label>
@@ -542,14 +580,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8-4" type="checkbox" id="nav-4-1-8-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-6-4" type="checkbox" id="nav-4-1-6-4">
     
-    <label class="md-nav__link" for="nav-4-1-8-4">
+    <label class="md-nav__link" for="nav-4-1-6-4">
       Sources
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Sources" data-md-level="4">
-      <label class="md-nav__title" for="nav-4-1-8-4">
+      <label class="md-nav__title" for="nav-4-1-6-4">
         <span class="md-nav__icon md-icon"></span>
         Sources
       </label>
@@ -735,7 +773,15 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
-<p>Api di creazione degli elementi. codice: rappresenta il codice elemento che deve essere univoco. in caso contrario viene sollevato un errore (HTTP_NOT_MODIFIED) prototype: rappresenta il tipo dell'elemento e deve essere presente nel sistema. Anche in questo caso verrebbe sollevato un errore (HTTP_NOT_FOUND). In base a prototype l'elemento viene inizializzato </p>
+<p><em>description</em>:</p>
+<p><strong>Api di creazione degli elementi.</strong></p>
+<p>Ogni elemento deve avere il suo codice univoco <code>code</code> e il suo prototipo <code>prototype</code>. Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura.</p>
+<p>Possibili risposte:</p>
+<ul>
+<li><em>409 Conflict</em>: Nel caso in cui il codice fornito esista già.</li>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>201 Created</em>: Nel caso in cui l'elemento venga creato correttamente.</li>
+</ul>
 <h4 id="get">GET</h4>
 <p><em>params</em>:</p>
 <ul>
