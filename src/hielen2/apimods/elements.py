@@ -9,11 +9,11 @@ from himada.api import ResponseFormatter
 @hug.post('/')
 def create_elements(code,prototype,geom=None,request=None,response=None):
 
-    '''\
+    '''
 **Api di creazione degli elementi.**
 
-Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`.
-Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura
+Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`. Il prototipo\
+dell'elemento forisce informazioni per l'inizializazione della struttura.
 
 Possibili risposte:
 
