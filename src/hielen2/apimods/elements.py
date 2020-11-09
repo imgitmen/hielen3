@@ -8,14 +8,15 @@ from himada.api import ResponseFormatter
 
 @hug.post('/')
 def create_elements(code,prototype,geom=None,request=None,response=None):
+
     '''Api di creazione degli elementi.
+    Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`.
+    ####Possibili risposte:
+    - **409 Conflict** in caso il codice fornito esistesse già
+    - **404 Not Found** in caso il prototipo richiesto non venisse trovato
+    - **201 Created** in caso di creazione dell'elemento
 
-    codice: rappresenta il codice elemento che deve essere univoco. in caso contrario viene
-    sollevato un errore (HTTP_NOT_MODIFIED)
-
-    prototype: rappresenta il tipo dell'elemento e deve essere presente nel sistema. Anche in
-    questo caso verrebbe sollevato un errore (HTTP_NOT_FOUND). In base a prototype l'elemento
-    viene inizializzato
+    Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura
     '''
 
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
@@ -43,7 +44,12 @@ def elinfo(el):
      
     info={ k:w for k,w in el.items() if k not in ('code',) }
 
-    info['parameters']=[ {'series':e[1],'name':e[0], 'unit': db['series'][e[1]]['mu']} for e in el['parameters'].items() if e[1] is not None ]
+    info['parameters']=[ 
+            {
+                'series':e[1],
+                'name':e[0], 
+                'unit': db['series'][e[1]]['mu']
+            } for e in el['parameters'].items() if e[1] is not None ]
      
     return info  
 

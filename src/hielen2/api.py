@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import api_elements, api_prototypes, api_data
+from .apimods import elements, prototypes, data
 import falcon
 
 '''
@@ -17,16 +17,16 @@ api = hug.get(on_invalid=hug.redirect.not_found)
 '''
 
 @hug.extend_api('/prototypes')
-def proto():
+def protoman():
     ''' Prototypes manager '''
-    return [api_prototypes]
+    return [prototypes]
 
 @hug.extend_api('/elements')
-def elem():
+def elemman():
     ''' Elements manager '''
-    return [api_elements]
+    return [elements]
 
 @hug.extend_api('/data')
-def data():
+def dataman():
     ''' Series manager '''
-    return [api_data]
+    return [data]

@@ -3,11 +3,11 @@
 import hug
 import falcon
 import json
-from .utils import hug_output_format_conten_type
 from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen2 import db
 from hielen2.data.data_access_layer import Series
+from hielen2.utils import hug_output_format_conten_type
 from himada.api import ResponseFormatter
 import asyncio
 

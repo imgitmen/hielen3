@@ -52,9 +52,9 @@ Per questo motivo la struttura della richiesta prevede di specificare prima l'az
 
 ###series
 
-    GET {uri}/series
-    GET {uri}/series/{el}
-    GET {uri}/series/{el}/{param}
+    GET {uri}/data
+    GET {uri}/data/{el}
+    GET {uri}/data/{el}/{param}
 
 ###bases
 
