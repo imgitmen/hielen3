@@ -34,8 +34,8 @@ def get_prot_md(info):
         pass  
 
     try:
-        output=output+re.sub(r"\s+",r" ",re.sub(r"\n|\t"," ",info['usage']))
-        output=output+"\n\n"
+        #output=output+re.sub(r"\s+",r" ",re.sub(r"\n|\t"," ",info['usage']))
+        output=output+info['usage']+"\n\n"
     except KeyError:
         pass
 
