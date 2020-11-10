@@ -128,7 +128,7 @@ class JsonValidable():
  
     def __schema_doc__(self):
         flds=[]
-        for n,f in self.schema.fields.items()
+        for n,f in self.schema.fields.items():
             types,required=self.__field_doc__(f)
             flds.append( f"**{n}**{required}: {types}")
         fields=", ".join( flds )
