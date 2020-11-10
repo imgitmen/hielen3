@@ -21,9 +21,9 @@ Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `protot
 
 Possibili risposte:
 
-- _409 Conflict_ in caso il codice fornito esistesse già
-- _404 Not Found_ in caso il prototipo richiesto non venisse trovato
-- _201 Created_ in caso di creazione dell'elemento
+- _409 Conflict_: Nel caso in cui il codice fornito esista già.
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _201 Created_: Nel caso in cui l'elemento venga creato correttamente.
 
 
 ####GET

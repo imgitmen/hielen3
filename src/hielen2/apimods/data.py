@@ -3,6 +3,7 @@
 import hug
 import falcon
 import json
+from marshmallow import Schema, fields
 from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen2 import db
@@ -16,14 +17,21 @@ data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.outpu
 CSV="text/plain; charset=utf-8"
 JSON="application/json; charset=utf-8"
 
+class DReqSchema(Schema):                                          
+    timefrom = fields.Str(required=True)
+
+
 
 ####### API DATATABLE #######
 @hug.get('/', examples='', output=data_out_handler)
-def tabular_data( datamap, content_type=None, request=None, response=None ):
+def tabular_data( datamap:DReqSchema(), content_type=None, request=None, response=None ):
 
+    print (datamap)
+
+    return
+    """
     if isinstance (datamap,list):
         datamap=','.join(datamap)
-    
     try:
         loaded=json.loads(datamap)
     except json.JSONDecodeError as e:
@@ -31,10 +39,11 @@ def tabular_data( datamap, content_type=None, request=None, response=None ):
         out.message=str(e)
         response = out.format(response=response,request=request)
         return
+    """
 
     series={}
 
-    for s in loaded:
+    for s in datamap:
         try:
             timefrom=s['timefrom']
         except KeyError:
