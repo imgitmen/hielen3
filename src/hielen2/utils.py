@@ -117,11 +117,13 @@ class JsonValidable():
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
         except KeyError:
-
             if field.__class__ is  fields.List:
-                types="["+ self.__field_doc__(field.inner) + "]"
+                f,required=self.__field_doc__(field.inner)
+                types=f"[{f}]"
             elif isinstance(field.__class__, fields.Dict):
-                types="{"+ self.__field_doc__(field.key_field) +  "," + self.__field_doc__(field.value_field) + "}"
+                kf,required=self.__field_doc__(field.key_field)
+                vf,required=self.__field_doc__(field.value_field)
+                types=f"{{{kf},{vf}}}"
 
         return (types,required)
 
