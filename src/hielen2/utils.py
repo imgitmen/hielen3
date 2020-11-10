@@ -115,27 +115,20 @@ class JsonValidable():
         types=""
         required=field.required and ", required" or ""
         try:
-            types=", ".join(self.TYPE_MAPPING[field.__class__])
+            types="|".join(self.TYPE_MAPPING[field.__class__])
         except KeyError:
 
             if field.__class__ is  fields.List:
-                types="list of "+ self.__field_doc__(field.inner)
-        """
+                types="["+ self.__field_doc__(field.inner) + "]"
             elif isinstance(field.__class__, fields.Dict):
-                out["types"]=dict(
-                    key_field=self.__field_doc__(field.key_field),
-                    value_field=self.__field_doc__(field.value_field)
-                    )
-        """ 
+                types="{"+ self.__field_doc__(field.key_field) +  "," + self.__field_doc__(field.value_field) + "}"
+
         return f"{types}{required}"
 
  
     def __schema_doc__(self):
-        out="schema:\n{\n"
-        for n,f in self.schema.fields.items():
-            out=out+f"    {n}: "+self.__field_doc__(f)+"\n"
-        out=out+"\n}"
-        return out
+        fields=[  f"{n}: {self.__field_doc__(f)}" for n,f in self.schema.fields.items() ]
+        return f"JSON Schema {{{fields}}}"
 
     
     def __init__(self,schema):
