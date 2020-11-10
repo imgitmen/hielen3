@@ -3,7 +3,7 @@
 ####GET
 _params_:
 
-- **datamap**: None
+- **datamap**: Pippo
 - **content_type**: Basic text / string value
 
 _result_:

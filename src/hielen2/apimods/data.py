@@ -17,15 +17,32 @@ data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.outpu
 CSV="text/plain; charset=utf-8"
 JSON="application/json; charset=utf-8"
 
-class DReqSchema(Schema):
-    '''Pippo'''
-    timefrom = fields.Str(required=True)
+class DataSchema(Schema):
+    timefrom=fields.Str()
+    timeto=fields.Str()
+    series=fields.List(fields.Str)
+
+class JasonValidableRequest():
+    
+    def __init__(self,schema):
+        self.schema = schema
+        self.__doc__ = str(schema.__dict__)
+
+
+    def __call__(self,value):
+        if type(value) is list:
+            # If Falcon is set to comma-separate entries, this segment joins them again.
+            fixed_value = ",".join(value)
+        else:
+            fixed_value = value
+        return self.schema.loads(fixed_value)
+
 
 
 
 ####### API DATATABLE #######
 @hug.get('/', examples='', output=data_out_handler)
-def tabular_data( datamap:DReqSchema(), content_type=None, request=None, response=None ):
+def tabular_data( datamap:JasonValidableRequest(DataSchema()), content_type=None, request=None, response=None ):
 
     print (datamap)
 
