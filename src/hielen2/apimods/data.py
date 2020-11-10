@@ -20,7 +20,7 @@ JSON="application/json; charset=utf-8"
 class DataMapSchema(Schema):
     """
 """
-    timefrom=fields.Dict(default=None,required=True)
+    timefrom=fields.Dict(required=True)
     timeto=fields.Str(default=None,reuired=False)
     series=fields.List(fields.Str,default=[])
 
