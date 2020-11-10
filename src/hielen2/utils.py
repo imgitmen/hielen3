@@ -120,7 +120,7 @@ class JsonValidable():
             if field.__class__ is  fields.List:
                 f,required=self.__field_doc__(field.inner)
                 types=f"[{f}]"
-            elif field.__class__ id fields.Dict:
+            elif field.__class__ is fields.Dict:
                 kf,required=self.__field_doc__(field.key_field)
                 vf,required=self.__field_doc__(field.value_field)
                 types=f"{{{kf},{vf}}}"
