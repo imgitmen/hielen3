@@ -2,14 +2,16 @@
 # coding=utf-8
 
 from datetime import datetime
-from re import split, sub
+from re import split, sub, findall
 from time import mktime
 import json
 from importlib import import_module
 from falcon import HTTPNotAcceptable
 from hashlib import md5
+from marshmallow import Schema, fields
 
-def hug_output_format_conten_type(handlers=[], error='The requested format does not match any of those allowed', ctpar='content_type'):
+def hug_output_format_conten_type(handlers=[], 
+        error='The requested format does not match any of those allowed', ctpar='content_type'):
 
     """Returns a different handler depending on the input param ctpar
     If none match and no default is given falcon.HTTPNotAcceptable(error)
@@ -43,17 +45,12 @@ def hug_output_format_conten_type(handlers=[], error='The requested format does 
         return handler
 
     def output_type(data, request, response):
-
         handler=requested_output_type(request)
-
         response.content_type = handler.content_type
-
         return handler(data, request=request, response=response)
 
     output_type.__doc__ = "Supports any of the following formats: {0}".format(", ".join(function.__doc__ for function in handlers.values()))
-
     output_type.content_type = ", ".join(handlers.keys())
-
     output_type.requested = requested_output_type
 
     return output_type
@@ -103,4 +100,64 @@ def hashfile(filename):
             hasher.update(buf)
             buf = afile.read(BLOCKSIZE)
     return hasher.hexdigest()
+
+
+class JsonValidable():
+    """
+    JSON Validator class.
+    It is initailzed with a marshmallow.Schema instance. When __call__ function is invoked, \
+    uses marshmallow facilities to validate the json and raise errors.
+
+    Once initalized, changes __doc__ in order to descibe the json accepted.
+    """
+
+    def __field_doc__(self,field):
+        types=""
+        required=field.required and ", required" or ""
+        try:
+            types=", ".join(self.TYPE_MAPPING[field.__class__])
+        except KeyError:
+
+            if field.__class__ is  fields.List:
+                types="list of "+ self.__field_doc__(field.inner)
+        """
+            elif isinstance(field.__class__, fields.Dict):
+                out["types"]=dict(
+                    key_field=self.__field_doc__(field.key_field),
+                    value_field=self.__field_doc__(field.value_field)
+                    )
+        """ 
+        return f"{types}{required}"
+
+ 
+    def __schema_doc__(self):
+        out="schema:\n{\n"
+        for n,f in self.schema.fields.items():
+            out=out+f"    {n}: "+self.__field_doc__(f)+"\n"
+        out=out+"\n}"
+        return out
+
+    
+    def __init__(self,schema):
+        self.schema = schema
+        self.TYPE_MAPPING={}
+        for k,w in self.schema.TYPE_MAPPING.items():
+            try:
+                self.TYPE_MAPPING[w].append(findall(r"'(.*)'",str(k))[0])
+            except KeyError:
+                self.TYPE_MAPPING[w]=[findall(r"'(.*)'",str(k))[0]]
+        self.__doc__ = str(self.__schema_doc__())
+
+
+    def __call__(self,value):
+    
+        if type(value) is list:
+            # If Falcon is set to comma-separate entries, this segment joins them again.
+            fixed_value = ",".join(value)
+        else:
+            fixed_value = value
+
+        return self.schema.loads(fixed_value)
+
+
 

@@ -8,7 +8,7 @@ from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen2 import db
 from hielen2.data.data_access_layer import Series
-from hielen2.utils import hug_output_format_conten_type
+from hielen2.utils import hug_output_format_conten_type, JsonValidable
 from himada.api import ResponseFormatter
 import asyncio
 
@@ -17,32 +17,16 @@ data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.outpu
 CSV="text/plain; charset=utf-8"
 JSON="application/json; charset=utf-8"
 
-class DataSchema(Schema):
-    timefrom=fields.Str()
-    timeto=fields.Str()
+class DataMapSchema(Schema):
+    """
+"""
+    timefrom=fields.Str(required=True)
+    timeto=fields.DateTime()
     series=fields.List(fields.Str)
-
-class JasonValidableRequest():
-    
-    def __init__(self,schema):
-        self.schema = schema
-        self.__doc__ = str(schema.__dict__)
-
-
-    def __call__(self,value):
-        if type(value) is list:
-            # If Falcon is set to comma-separate entries, this segment joins them again.
-            fixed_value = ",".join(value)
-        else:
-            fixed_value = value
-        return self.schema.loads(fixed_value)
-
-
-
 
 ####### API DATATABLE #######
 @hug.get('/', examples='', output=data_out_handler)
-def tabular_data( datamap:JasonValidableRequest(DataSchema()), content_type=None, request=None, response=None ):
+def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=None, request=None, response=None ):
 
     print (datamap)
 
