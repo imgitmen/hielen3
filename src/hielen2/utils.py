@@ -113,7 +113,12 @@ class JsonValidable():
 
     def __field_doc__(self,field):
         types=""
-        required=field.required and "*" or ""
+        required=""
+        try:
+            required=field.required and "*"
+        except AttributeError
+            pass
+
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
         except KeyError:
