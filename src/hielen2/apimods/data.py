@@ -17,7 +17,8 @@ data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.outpu
 CSV="text/plain; charset=utf-8"
 JSON="application/json; charset=utf-8"
 
-class DReqSchema(Schema):                                          
+class DReqSchema(Schema):
+    '''Pippo'''
     timefrom = fields.Str(required=True)
 
 

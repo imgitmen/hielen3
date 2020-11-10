@@ -3,7 +3,7 @@
 ####GET
 _params_:
 
-- **datamap**: Basic text / string value
+- **datamap**: None
 - **content_type**: Basic text / string value
 
 _result_:
