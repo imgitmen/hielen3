@@ -113,7 +113,7 @@ class JsonValidable():
 
     def __field_doc__(self,field):
         types=""
-        required=field.required and ", required" or ""
+        required=field.required and "*" or ""
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
         except KeyError:
@@ -127,7 +127,7 @@ class JsonValidable():
 
  
     def __schema_doc__(self):
-        fields=[  f"{n}: {self.__field_doc__(f)}" for n,f in self.schema.fields.items() ]
+        fields=",".join( f"{n}: {self.__field_doc__(f)}" for n,f in self.schema.fields.items() )
         return f"JSON Schema {{{fields}}}"
 
     
