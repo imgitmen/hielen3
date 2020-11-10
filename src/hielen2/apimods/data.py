@@ -20,17 +20,14 @@ JSON="application/json; charset=utf-8"
 class DataMapSchema(Schema):
     """
 """
-    timefrom=fields.Str(required=True)
-    timeto=fields.DateTime()
-    series=fields.List(fields.Str)
+    timefrom=fields.Str(default=None,required=False)
+    timeto=fields.Str(default=None,reuired=False)
+    series=fields.List(fields.Str,default=[])
 
 ####### API DATATABLE #######
 @hug.get('/', examples='', output=data_out_handler)
 def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=None, request=None, response=None ):
 
-    print (datamap)
-
-    return
     """
     if isinstance (datamap,list):
         datamap=','.join(datamap)

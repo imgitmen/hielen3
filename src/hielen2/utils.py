@@ -127,8 +127,11 @@ class JsonValidable():
 
  
     def __schema_doc__(self):
-        fields=",".join( f"{n}: {self.__field_doc__(f)}" for n,f in self.schema.fields.items() )
-        return f"JSON Schema {{{fields}}}"
+        fields=",".join( f"**{n}**: _{self.__field_doc__(f)}_" for n,f in self.schema.fields.items() )
+        fields=f"{{{fields}}}"
+        if self.schema.many:
+            fields=f"[{fields}]"
+        return f"JSON Schema {fields}"
 
     
     def __init__(self,schema):

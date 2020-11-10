@@ -3,7 +3,7 @@
 ####GET
 _params_:
 
-- **datamap**: JSON Schema {['series: [str|bytes]', 'timefrom: str|bytes, required', 'timeto: datetime.datetime']}
+- **datamap**: JSON Schema {timeto: datetime.datetime,timefrom: str|bytes*,series: [str|bytes]}
 - **content_type**: Basic text / string value
 
 _result_:
