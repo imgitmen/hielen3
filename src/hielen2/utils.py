@@ -123,11 +123,15 @@ class JsonValidable():
             elif isinstance(field.__class__, fields.Dict):
                 types="{"+ self.__field_doc__(field.key_field) +  "," + self.__field_doc__(field.value_field) + "}"
 
-        return f"{types}{required}"
+        return (types,required)
 
  
     def __schema_doc__(self):
-        fields=",".join( f"**{n}**: _{self.__field_doc__(f)}_" for n,f in self.schema.fields.items() )
+        flds=[]
+        for n,f in self.schema.fields.items()
+            types,required=self.__field_doc__(f)
+            flds.append( f"**{n}**{required}: {types}")
+        fields=", ".join( flds )
         fields=f"{{{fields}}}"
         if self.schema.many:
             fields=f"[{fields}]"
