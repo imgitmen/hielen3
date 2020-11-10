@@ -115,7 +115,7 @@ class JsonValidable():
         types=""
         required=""
         try:
-            required=field.required and "*"
+            required=field.required and "*" or ""
         except AttributeError:
             pass
 
