@@ -788,7 +788,7 @@
 <h4 id="get">GET</h4>
 <p><em>params</em>:</p>
 <ul>
-<li><strong>datamap</strong>: JSON Schema [{<strong>timeto</strong>: str|bytes, <strong>series</strong>: [str|bytes], <strong>timefrom</strong>: str|bytes}]</li>
+<li><strong>datamap</strong>: JSON Schema [{<strong>series</strong>: [str|bytes], <strong>timefrom</strong>: str|bytes, <strong>timeto</strong>: str|bytes}]</li>
 <li><strong>content_type</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -796,18 +796,6 @@
 <li><strong>format</strong>: Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: text/plain; charset=utf-8, application/json; charset=utf-8</li>
 </ul>
-<p><em>description</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">if isinstance (datamap,list):</span>
-<span class="err">    datamap=&#39;,&#39;.join(datamap)</span>
-<span class="c">try:</span>
-<span class="c">    loaded=json.loads(datamap)</span>
-<span class="err">except json.JSONDecodeError as e:</span>
-<span class="err">    out = ResponseFormatter(status=falcon.HTTP_BAD_REQUEST)</span>
-<span class="err">    out.message=str(e)</span>
-<span class="err">    response = out.format(response=response,request=request)</span>
-<span class="err">    return</span>
-</code></pre></div>
-
 <h2 id="datael">/data/{el}/</h2>
 <h4 id="get_1">GET</h4>
 <p><em>params</em>:</p>
