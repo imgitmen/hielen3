@@ -62,6 +62,18 @@ class JsonDB(DB):
         except Timeout:
             pass
 
+    def save(self):
+        try:
+            self.lock.acquire()
+            try:
+                self.db.to_json(self.jsonfile)
+                self.md5=hashfile(self.jsonfile)
+                with open(self.md5file,'w') as o: o.write(self.md5)
+            finally:
+                self.lock.release()
+        except Timeout as e:
+            #Just to remind Timout error here
+            raise e
 
     def __write_jsondb(self,key,value):
         '''
@@ -80,16 +92,14 @@ class JsonDB(DB):
                     self.db=self.db.drop(key,axis=1)
                 else:
                     #Request to insert key, raises ValueError
-                    value['code']=key
+                    value['uuid']=key
                     value=DataFrame([value]).T
                     value.columns=[key]
 
                     self.db=self.db.join(value,how='left')
                     item=self.db[key].to_dict()
 
-                self.db.to_json(self.jsonfile)
-                self.md5=hashfile(self.jsonfile)
-                with open(self.md5file,'w') as o: o.write(self.md5)
+                self.save()
             except KeyError:
                 error = KeyError(f'key {key} to remove does not exist')
             except ValueError:
@@ -128,7 +138,7 @@ class JsonDB(DB):
 class JsonCache(DB):
 
     def __init__(self,connection):
-        self.cache=read_json(connection,convert_dates=False).set_index(['code','timestamp'])['value'].sort_index()
+        self.cache=read_json(connection,convert_dates=False).set_index(['uuid','timestamp'])['value'].sort_index()
         self.filename=connection
 
     def __getitem__(self,key):

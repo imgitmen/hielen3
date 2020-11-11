@@ -106,9 +106,9 @@ def tabular_data_el( el, par=None, timefrom=None, timeto=None, content_type=None
     try:
     
         if par is None:
-            parameters=[ f"{element['code']}:{e}" for e in element['parameters'].keys() ]
+            parameters=[ f"{element['uuid']}:{e}" for e in element['parameters'].keys() ]
         else:
-            parameters=[ f"{element['code']}:{par}" ]
+            parameters=[ f"{element['uuid']}:{par}" ]
 
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)

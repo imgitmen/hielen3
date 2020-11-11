@@ -3,16 +3,31 @@
 import hug
 import falcon
 from hielen2 import db
+from hielen2.utils import JsonValidable
+from marshmallow import Schema, fields
 from himada.api import ResponseFormatter
 
 
+
+class ElementSchema(Schema):
+    uuid=fields.UUID(requested=True,allow_none=False)
+    prototype=fields.Str(requested=True,allow_none=False)
+    context=fields.Str(requested=False)
+    label=fields.Str(requested=False)
+    description=fields.Str(requested=False)
+    style=fields.Str(requested=False)
+    status=fields.Str(requested=False)
+    geom=fields.Str(requested=None)
+
+
 @hug.post('/')
-def create_elements(code,prototype,geom=None,request=None,response=None):
+#def create_elements(uuid,prototype,label=None,descritpion=None,context=None,geom=None,request=None,response=None)
+def create_elements(el:JsonValidable(ElementSchema()),request=None,response=None):
 
     '''
 **Api di creazione degli elementi.**
 
-Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`. Il prototipo \
+Ogni elemento deve avere il suo codice univoco `uuid` e il suo prototipo `prototype`. Il prototipo \
 dell'elemento forisce informazioni per l'inizializazione della struttura.
 
 Possibili risposte:
@@ -22,17 +37,20 @@ Possibili risposte:
 - _201 Created_: Nel caso in cui l'elemento venga creato correttamente.
 '''
 
+    
+
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
     try:
-        proto= db['elements_proto'][prototype]['struct']
-        proto['parameters']={ k:None for k in proto['parameters'].keys()}
-        db['elements'][code]=proto
-        out.message=proto
+        prototype=el.pop('prototype')
+        el.update( db['elements_proto'][prototype]['struct'] )
+        el['parameters']={ k:None for k in proto['parameters'].keys()}
+        db['elements'][uuid]=el
+        out.message=el
     except KeyError as e:
         out.message=f"prototype '{prototype}' not found."
         out.status=falcon.HTTP_NOT_FOUND
     except ValueError as e:
-        out.message=f"element '{code}' exists"
+        out.message=f"element '{uuid}' exists"
         out.status=falcon.HTTP_CONFLICT
 
     response=out.format(response=response,request=request)
@@ -45,7 +63,7 @@ def elinfo(el):
     if el is None:
        return None
      
-    info={ k:w for k,w in el.items() if k not in ('code',) }
+    info={ k:w for k,w in el.items() if k not in ('uuid',) }
 
     info['parameters']=[ 
             {
@@ -58,39 +76,39 @@ def elinfo(el):
 
 
 @hug.get('/',examples='')
-def elements_info( elist=None, request=None, response=None ):
+def elements_info( elist=None, context=None, request=None, response=None ):
 
     out = ResponseFormatter()
-    out.data={ k:elinfo(w) for k,w in db['elements'][elist].items() }
+    out.data={ k:elinfo(w) for k,w in db['elements'][elist].items() if context is None or w['context']==context }
     response = out.format(response=response,request=request)
 
     return
 
 
-@hug.get('/{code}')
-def element_info( code, request=None, response=None ):
+@hug.get('/{uuid}')
+def element_info( uuid, request=None, response=None ):
 
     out = ResponseFormatter()
 
     try: 
-        out.data= db['elements'][code]
+        out.data= db['elements'][uuid]
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-        out.message=f"element '{code}' not found"
+        out.message=f"element '{uuid}' not found"
 
     response = out.format(response=response,request=request)
     return
 
-@hug.delete('/{code}')
-def element_delete(code, request=None, response=None):
+@hug.delete('/{uuid}')
+def element_delete(uuid, request=None, response=None):
     
     out = ResponseFormatter()
 
     try:
-        out.data = db['elements'].pop(code)
+        out.data = db['elements'].pop(uuid)
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-        out.message=f"element '{code}' not found"
+        out.message=f"element '{uuid}' not found"
         
     response = out.format(response=response,request=request)
     return
