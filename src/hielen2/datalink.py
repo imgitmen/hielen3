@@ -4,6 +4,7 @@ from pandas import DataFrame, read_json
 from abc import ABC,abstractmethod 
 from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
 from filelock import Timeout, FileLock
+from numpy import nan
 
 def dbinit(conf):
     conf['substs']
@@ -95,8 +96,8 @@ class JsonDB(DB):
                     value['uuid']=key
                     value=DataFrame([value]).T
                     value.columns=[key]
-
                     self.db=self.db.join(value,how='left')
+                    self.db[key].replace({nan: None},inplace=True)
                     item=self.db[key].to_dict()
 
                 self.save()

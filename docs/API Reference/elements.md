@@ -3,9 +3,7 @@
 ####POST
 _params_:
 
-- **code**: Basic text / string value
-- **prototype**: Basic text / string value
-- **geom**: Basic text / string value
+- **el**: JSON Schema {**label**: str|bytes, **description**: str|bytes, **prototype**: str|bytes, **status**: str|bytes, **context**: str|bytes, **uuid**: uuid.UUID, **geom**: str|bytes, **style**: str|bytes}
 
 _result_:
 
@@ -17,7 +15,7 @@ _description_:
 
 **Api di creazione degli elementi.**
 
-Ogni elemento deve avere il suo codice univoco `code` e il suo prototipo `prototype`. Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura.
+Ogni elemento deve avere il suo codice univoco `uuid` e il suo prototipo `prototype`. Il prototipo dell'elemento forisce informazioni per l'inizializazione della struttura.
 
 Possibili risposte:
 
@@ -30,6 +28,7 @@ Possibili risposte:
 _params_:
 
 - **elist**: Basic text / string value
+- **context**: Basic text / string value
 
 _result_:
 
@@ -37,11 +36,11 @@ _result_:
 - **content_type**: application/json; charset=utf-8
 
 
-##/elements/{code}
+##/elements/{uuid}
 ####GET
 _params_:
 
-- **code**: Basic text / string value
+- **uuid**: Basic text / string value
 
 _result_:
 
@@ -51,7 +50,7 @@ _result_:
 ####DELETE
 _params_:
 
-- **code**: Basic text / string value
+- **uuid**: Basic text / string value
 
 _result_:
 

@@ -10,14 +10,14 @@ from himada.api import ResponseFormatter
 
 
 class ElementSchema(Schema):
-    uuid=fields.UUID(requested=True,allow_none=False)
-    prototype=fields.Str(requested=True,allow_none=False)
-    context=fields.Str(requested=False)
-    label=fields.Str(requested=False)
-    description=fields.Str(requested=False)
-    style=fields.Str(requested=False)
-    status=fields.Str(requested=False)
-    geom=fields.Str(requested=None)
+    uuid=fields.Str(required=True,allow_none=False)
+    prototype=fields.Str(required=True,allow_none=False)
+    context=fields.Str(default=None)
+    label=fields.Str(default=None)
+    description=fields.Str(default=None)
+    style=fields.Str(default=None)
+    status=fields.Str(default=None)
+    geom=fields.Str(default=None)
 
 
 @hug.post('/')
@@ -43,14 +43,14 @@ Possibili risposte:
     try:
         prototype=el.pop('prototype')
         el.update( db['elements_proto'][prototype]['struct'] )
-        el['parameters']={ k:None for k in proto['parameters'].keys()}
-        db['elements'][uuid]=el
+        el['parameters']={ k:None for k in el['parameters'].keys()}
+        db['elements'][el['uuid']]=el
         out.message=el
     except KeyError as e:
         out.message=f"prototype '{prototype}' not found."
         out.status=falcon.HTTP_NOT_FOUND
     except ValueError as e:
-        out.message=f"element '{uuid}' exists"
+        out.message=f"element '{el['uuid']}' exists"
         out.status=falcon.HTTP_CONFLICT
 
     response=out.format(response=response,request=request)
@@ -65,13 +65,21 @@ def elinfo(el):
      
     info={ k:w for k,w in el.items() if k not in ('uuid',) }
 
-    info['parameters']=[ 
-            {
-                'series':e[1],
-                'name':e[0], 
-                'unit': db['series'][e[1]]['mu']
-            } for e in el['parameters'].items() if e[1] is not None ]
-     
+    info['parameters'] = []
+
+    try:
+        for e in el['parameters'].items():
+            if e[1] is not None:
+                info['parameters'].append(
+                        {
+                            'series':e[1],
+                            'name':e[0],
+                            'unit': db['series'][e[1]]['mu']
+                        }
+                )
+    except AttributeError:
+        pass
+
     return info  
 
 
@@ -87,7 +95,7 @@ def elements_info( elist=None, context=None, request=None, response=None ):
 
 @hug.get('/{uuid}')
 def element_info( uuid, request=None, response=None ):
-
+    """
     out = ResponseFormatter()
 
     try: 
@@ -97,7 +105,9 @@ def element_info( uuid, request=None, response=None ):
         out.message=f"element '{uuid}' not found"
 
     response = out.format(response=response,request=request)
-    return
+    """
+    return db['elements'][uuid]
+
 
 @hug.delete('/{uuid}')
 def element_delete(uuid, request=None, response=None):
