@@ -114,7 +114,7 @@ class JsonValidable():
     def __field_doc__(self,field):
 
         required=field.required and "!" or ""
-        allow_none= (field.allow_none is None and "") or (not field.allow_none and "!" or "")
+        allow_none= not field.allow_none and "!" or ""
 
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
@@ -137,7 +137,9 @@ class JsonValidable():
         flds=[]
         for n,f in self.schema.fields.items():
             types,required,allow_none=self.__field_doc__(f)
-            flds.append( f"**{n}**{required}{allow_none}: {types}")
+            #TODO formattare required e allow_none
+            #flds.append( f"**{n}**{required}{allow_none}: {types}")
+            flds.append( f"**{n}**: {types}")
         fields=", ".join( flds )
         fields=f"{{{fields}}}"
         if self.schema.many:
