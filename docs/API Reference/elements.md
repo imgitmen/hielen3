@@ -3,7 +3,7 @@
 ####POST
 _params_:
 
-- **el**: JSON Schema {**label**: str|bytes, **geom**: str|bytes, **description**: str|bytes, **context**: str|bytes, **prototype***: str|bytes, **status**: str|bytes, **uuid***: str|bytes, **style**: str|bytes}
+- **el**: JSON Schema {**status**: str|bytes, **context**: str|bytes, **uuid***: str|bytes, **label**: str|bytes, **prototype***: str|bytes, **description**: str|bytes, **geom**: str|bytes, **style**: str|bytes}
 
 _result_:
 
@@ -46,20 +46,6 @@ _result_:
 
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
-
-_description_:
-
-
-    out = ResponseFormatter()
-
-    try: 
-        out.data= db['elements'][uuid]
-    except KeyError as e:
-        out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-        out.message=f"element '{uuid}' not found"
-
-    response = out.format(response=response,request=request)
-    
 
 ####DELETE
 _params_:

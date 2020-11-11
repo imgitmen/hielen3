@@ -22,7 +22,7 @@ class ElementSchema(Schema):
 
 @hug.post('/')
 #def create_elements(uuid,prototype,label=None,descritpion=None,context=None,geom=None,request=None,response=None)
-def create_elements(el:JsonValidable(ElementSchema()),request=None,response=None):
+def create_elements(element:JsonValidable(ElementSchema()),request=None,response=None):
 
     '''
 **Api di creazione degli elementi.**
@@ -41,16 +41,16 @@ Possibili risposte:
 
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
     try:
-        prototype=el.pop('prototype')
-        el.update( db['elements_proto'][prototype]['struct'] )
-        el['parameters']={ k:None for k in el['parameters'].keys()}
-        db['elements'][el['uuid']]=el
-        out.message=el
+        prototype=element.pop('prototype')
+        element.update( db['elements_proto'][prototype]['struct'] )
+        element['parameters']={ k:None for k in element['parameters'].keys()}
+        db['elements'][element['uuid']]=element
+        out.message=element
     except KeyError as e:
         out.message=f"prototype '{prototype}' not found."
         out.status=falcon.HTTP_NOT_FOUND
     except ValueError as e:
-        out.message=f"element '{el['uuid']}' exists"
+        out.message=f"element '{element['uuid']}' exists"
         out.status=falcon.HTTP_CONFLICT
 
     response=out.format(response=response,request=request)

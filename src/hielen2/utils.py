@@ -112,32 +112,32 @@ class JsonValidable():
     """
 
     def __field_doc__(self,field):
-        types=""
-        required=""
-        try:
-            required=field.required and "*" or ""
-        except AttributeError:
-            pass
+
+        required=field.required and "!" or ""
+        allow_none=field.allows_none and "!" or ""
 
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
         except KeyError:
             if field.__class__ is  fields.List:
-                f,required=self.__field_doc__(field.inner)
+                f,required,allow_none=self.__field_doc__(field.inner)
                 types=f"[{f}]"
             elif field.__class__ is fields.Dict:
-                kf,required=self.__field_doc__(field.key_field)
-                vf,required=self.__field_doc__(field.value_field)
+                kf,required,allow_none=self.__field_doc__(field.key_field)
+                vf,required,allow_none=self.__field_doc__(field.value_field)
                 types=f"{{{kf},{vf}}}"
+            else:
+                types=""
 
-        return (types,required)
+
+        return (types,required,allow_none)
 
  
     def __schema_doc__(self):
         flds=[]
         for n,f in self.schema.fields.items():
-            types,required=self.__field_doc__(f)
-            flds.append( f"**{n}**{required}: {types}")
+            types,required,allow_none=self.__field_doc__(f)
+            flds.append( f"**{n}**{required}{allow_none}: {types}")
         fields=", ".join( flds )
         fields=f"{{{fields}}}"
         if self.schema.many:
