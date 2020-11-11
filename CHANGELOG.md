@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## 2.0.3 November 11 2020
+- Modificata api POST `/elements/`: la variabile `element` è descritta dalla Classe hielen2.api.data.ElementSchema e validata. In paricolare è stato introdotto l'attibuto `context`
+- Modifcata api GET `/data/`: la variabile `datamap` è descritta dalla Classe hielen2.api.data.DataMapSchema e validata.
+- Introdotta la classe hielen2.utils.JsonValidable, per la validazione e documentazione automatica dei parametri delle api (JSON Schema descrition) 
+- corretti bug minori in hielen2.datalink
+
 ## 2.0.2 November 6 2020
 - L'interfaccia DB è ora thread safe!!! (almeno per il dummy json db)
 - Implementata la documentazione automatica delle api

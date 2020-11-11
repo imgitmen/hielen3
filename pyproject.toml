@@ -8,6 +8,9 @@ palette = {primary = "blue grey", accent = "pink"}
 Home = "README.md"
 
 [[tool.portray.mkdocs.nav]]
+TODO = "TODO.md"
+
+[[tool.portray.mkdocs.nav]]
 Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
