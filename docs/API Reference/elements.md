@@ -3,7 +3,7 @@
 ####POST
 _params_:
 
-- **el**: JSON Schema {**status**: str|bytes, **context**: str|bytes, **uuid***: str|bytes, **label**: str|bytes, **prototype***: str|bytes, **description**: str|bytes, **geom**: str|bytes, **style**: str|bytes}
+- **element**: JSON Schema {**geom**: str|bytes, **prototype**!: str|bytes, **label**: str|bytes, **style**: str|bytes, **context**: str|bytes, **uuid**!: str|bytes, **description**: str|bytes, **status**: str|bytes}
 
 _result_:
 
