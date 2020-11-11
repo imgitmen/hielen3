@@ -28,18 +28,6 @@ class DataMapSchema(Schema):
 @hug.get('/', examples='', output=data_out_handler)
 def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=None, request=None, response=None ):
 
-    """
-    if isinstance (datamap,list):
-        datamap=','.join(datamap)
-    try:
-        loaded=json.loads(datamap)
-    except json.JSONDecodeError as e:
-        out = ResponseFormatter(status=falcon.HTTP_BAD_REQUEST)
-        out.message=str(e)
-        response = out.format(response=response,request=request)
-        return
-    """
-
     series={}
 
     for s in datamap:
