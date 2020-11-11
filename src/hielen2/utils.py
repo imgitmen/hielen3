@@ -114,7 +114,7 @@ class JsonValidable():
     def __field_doc__(self,field):
 
         required=field.required and "!" or ""
-        allow_none=not field.allow_none and "!" or ""
+        allow_none= (field.allow_none is None and "") or (not field.allow_none and "!" or "")
 
         try:
             types="|".join(self.TYPE_MAPPING[field.__class__])
