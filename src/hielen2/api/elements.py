@@ -95,7 +95,6 @@ def elements_info( elist=None, context=None, request=None, response=None ):
 
 @hug.get('/{uuid}')
 def element_info( uuid, request=None, response=None ):
-    """
     out = ResponseFormatter()
 
     try: 
@@ -105,8 +104,7 @@ def element_info( uuid, request=None, response=None ):
         out.message=f"element '{uuid}' not found"
 
     response = out.format(response=response,request=request)
-    """
-    return db['elements'][uuid]
+    return 
 
 
 @hug.delete('/{uuid}')
