@@ -3,7 +3,7 @@
 ####GET
 _params_:
 
-- **datamap**: JSON Schema [{**series**False: [str|bytes], **timefrom**False: {str|bytes,str|bytes}, **timeto**False: str|bytes}]
+- **datamap**: JSON Schema [{**timeto**: str|bytes, **series**: [str|bytes], **timefrom**: {str|bytes,str|bytes}}]
 - **content_type**: Basic text / string value
 
 _result_:

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from .apimods import elements, prototypes, data
+from . import elements, prototypes, data
 import falcon
 
 '''
