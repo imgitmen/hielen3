@@ -240,16 +240,56 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#203-november-11-2020" class="md-nav__link">
-    2.0.3 November 11 2020
+  <a href="#203" class="md-nav__link">
+    2.0.3
   </a>
+  
+    <nav class="md-nav" aria-label="2.0.3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-novembre-2020" class="md-nav__link">
+    11 Novembre 2020
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-novembre-2020" class="md-nav__link">
+    9 Novembre 2020
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-novembre-2020" class="md-nav__link">
+    6 Novembre 2020
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#202-november-6-2020" class="md-nav__link">
-    2.0.2 November 6 2020
+  <a href="#202" class="md-nav__link">
+    2.0.2
   </a>
+  
+    <nav class="md-nav" aria-label="2.0.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-novembre-2020" class="md-nav__link">
+    4 Novembre 2020
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -656,16 +696,56 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#203-november-11-2020" class="md-nav__link">
-    2.0.3 November 11 2020
+  <a href="#203" class="md-nav__link">
+    2.0.3
   </a>
+  
+    <nav class="md-nav" aria-label="2.0.3">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-novembre-2020" class="md-nav__link">
+    11 Novembre 2020
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-novembre-2020" class="md-nav__link">
+    9 Novembre 2020
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-novembre-2020" class="md-nav__link">
+    6 Novembre 2020
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#202-november-6-2020" class="md-nav__link">
-    2.0.2 November 6 2020
+  <a href="#202" class="md-nav__link">
+    2.0.2
   </a>
+  
+    <nav class="md-nav" aria-label="2.0.2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-novembre-2020" class="md-nav__link">
+    4 Novembre 2020
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -690,16 +770,24 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
-<h2 id="203-november-11-2020">2.0.3 November 11 2020</h2>
+<h2 id="203">2.0.3</h2>
+<h3 id="11-novembre-2020"><strong>11 Novembre 2020</strong></h3>
 <ul>
-<li>Modificata api POST <code>/elements/</code>: la variabile <code>element</code> è descritta dalla Classe hielen2.api.data.ElementSchema e validata. In paricolare è stato introdotto l'attibuto <code>context</code></li>
-<li>Modifcata api GET <code>/data/</code>: la variabile <code>datamap</code> è descritta dalla Classe hielen2.api.data.DataMapSchema e validata.</li>
+<li>Modificata api POST <code>/elements</code>: la variabile <code>element</code> è descritta dalla Classe hielen2.api.data.ElementSchema e validata. In paricolare è stato introdotto l'attibuto <code>context</code></li>
+<li>Modifcata api GET <code>/data</code>: la variabile <code>datamap</code> è descritta dalla Classe hielen2.api.data.DataMapSchema e validata.</li>
+</ul>
+<h3 id="9-novembre-2020"><strong>9 Novembre 2020</strong></h3>
+<ul>
 <li>Introdotta la classe hielen2.utils.JsonValidable, per la validazione e documentazione automatica dei parametri delle api (JSON Schema descrition) </li>
 <li>corretti bug minori in hielen2.datalink</li>
 </ul>
-<h2 id="202-november-6-2020">2.0.2 November 6 2020</h2>
+<h3 id="6-novembre-2020"><strong>6 Novembre 2020</strong></h3>
 <ul>
 <li>L'interfaccia DB è ora thread safe!!! (almeno per il dummy json db)</li>
+</ul>
+<h2 id="202">2.0.2</h2>
+<h3 id="4-novembre-2020">4 Novembre 2020</h3>
+<ul>
 <li>Implementata la documentazione automatica delle api</li>
 <li>Implementate le api <strong>POST</strong> <code>../elements</code> e <strong>DELETE</strong> <code>../elements</code></li>
 <li>
@@ -718,9 +806,11 @@
 
 </li>
 <li>
-<p>L'api <code>../series</code> diventa <code>../data</code> e cambia il suo comportamento: la variabile di tipo json  <em>datamap</em> si aspetta il campo <em>series</em> invece di <em>parameters</em>. In questo campo devono essere inseriti i codici delle serie e non più il costrutto "codice_elemento:parametro_elemento". I codici delle serie si possono recuperarare dall'api <code>../elements</code> (vedi Nota successiva)</p>
+<p>L'api <code>/series</code> diventa <code>/data</code> e cambia il suo comportamento: la variabile di tipo json  <em>datamap</em> si aspetta il campo <em>series</em> invece di <em>parameters</em>. In questo campo devono essere inseriti i codici delle serie e non più il costrutto "codice_elemento:parametro_elemento". I codici delle serie si possono recuperarare dall'api <code>/elements</code> (vedi Nota successiva)</p>
 </li>
-<li>L'api <code>../elements</code> cambia la sua risposta e per ogni parametro nella lista <em>parameters</em> degli elementi viene agiunto il codice della serie di riferimento che può essere fornito senza modifiche a <code>data</code>:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<li>
+<p>L'api <code>/elements</code> cambia la sua risposta e per ogni parametro nella lista <em>parameters</em> degli elementi viene agiunto il codice della serie di riferimento che può essere fornito senza modifiche a <code>/data</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
 <span class="err">    &quot;series&quot;:&lt;seriescode&gt;,</span>
 <span class="err">    &quot;name&quot;:&lt;seriesname&gt;,</span>
 <span class="err">    &quot;um&quot;:&lt;seriesunit&gt;</span>
@@ -728,6 +818,20 @@
 </code></pre></div>
 
 </li>
+<li>
+<p><strong>GET</strong> <code>/series</code></p>
+</li>
+<li><strong>GET</strong> <code>/series/{el}</code></li>
+<li><strong>GET</strong> <code>/series/{el}/{param}</code></li>
+<li><strong>GET</strong> <code>/prototypes</code></li>
+<li><strong>GET</strong> <code>/prototypes/{type}</code></li>
+<li><strong>GET</strong> <code>/prototypes/{type}/forms</code></li>
+<li><strong>GET</strong> <code>/prototypes/{type}/forms/{form}</code></li>
+<li><strong>POST</strong> <code>/elements</code></li>
+<li><strong>GET</strong> <code>/elements</code></li>
+<li><strong>GET</strong> <code>/elements/{el}</code></li>
+<li><strong>DELETE</strong> <code>/elements/{el}</code></li>
+<li><strong>PUT</strong> <code>/elements/{el}</code></li>
 </ul>
                 
               
