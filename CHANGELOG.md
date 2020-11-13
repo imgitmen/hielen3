@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### **13 Novembre 2020**
+- rinominazione DELETE `/elements` -> DELETE `/features`.
+- eliminazione degli alias GET `/features/{context}` e `/features/{context}/{uid}` a causa del conflitto l'entry point DELETE `/features`. Il passaggio del context sarà esclusivmante attraverso il parametro cntxt (__nota__: questo nome è dovuto alla collisione del nome con il campo 'context' dell'oggetto request). In caso lo possiamo cambiare.
+- introduzione dell'alias `/features/{uid}` per il recupero delle info della specifica Feature.
+
 ### **12 Novembre 2020**
 - ovunque nel mondo il parmetro 'uuid' (universal unique id) diventa 'uid'.
 - rinominazione POST `/elements` -> POST `/features`.
@@ -112,7 +117,7 @@ CHANGELOG
 - L'interfaccia DB è ora thread safe!!! (almeno per il dummy json db)
 
 ## 2.0.2 
-### 4 Novembre 2020
+### **4 Novembre 2020**
 - Implementata la documentazione automatica delle api
 - Implementate le api **POST** `../elements` e **DELETE** `../elements`
 - L'uscita per tutte le api element (e per tutte le api con risposta json in generale), seguirà questo schema:

@@ -18,7 +18,10 @@ Changelog = "CHANGELOG.md"
     "Prototypes" = "docs/API Reference/prototypes.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "Elements" = "docs/API Reference/elements.md"
+    "Features" = "docs/API Reference/features.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Parameters" = "docs/API Reference/parameters.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
     "Data" = "docs/API Reference/data.md"

@@ -3,7 +3,7 @@
 ####GET
 _params_:
 
-- **datamap**: JSON Schema [{**series**: [str|bytes], **timefrom**: str|bytes, **timeto**: str|bytes}]
+- **datamap**: JSON Schema [{**timeto**: str|bytes, **series**: [str|bytes], **timefrom**: str|bytes}]
 - **content_type**: Basic text / string value
 
 _result_:
@@ -12,11 +12,11 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
-##/data/{el}/
+##/data/{feature}/
 ####GET
 _params_:
 
-- **el**: Basic text / string value
+- **feature**: Basic text / string value
 - **par**: Basic text / string value
 - **timefrom**: Basic text / string value
 - **timeto**: Basic text / string value
@@ -28,7 +28,7 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
-##/data/{el}/{par}
+##/data/{feature}/{par}
 ####GET
 _params_:
 

@@ -8,7 +8,6 @@ from marshmallow import Schema, fields
 from himada.api import ResponseFormatter
 
 
-
 class FeatureSchema(Schema):
     uid=fields.Str(required=True,allow_none=False)
     prototype=fields.Str(required=True,allow_none=False)
@@ -65,11 +64,11 @@ Possibili risposte:
     return
 
 @hug.get('/')
-def features_info( cntxt=None, uids=None, request=None, response=None ):
+def features_info( uids=None, cntxt=None, request=None, response=None ):
     '''
-**Ricerca delle features.**
+**Recupero delle informazioni delle features.**
 
-__nota__: uid accetta valori multipli separati da virgola 
+__nota__: uids accetta valori multipli separati da virgola 
 
 viene restituito una struttura di questo tipo:
 
@@ -89,7 +88,7 @@ viene restituito una struttura di questo tipo:
 ___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \
 "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora \
 per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' \
-interno delle properties delle singole features
+interno delle properties delle singole features.
 
 
 Possibili risposte:
@@ -118,53 +117,52 @@ Possibili risposte:
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
         out.message=(str(e))
-        raise e
 
     response = out.format(response=response,request=request)
     return
 
-@hug.delete('/{cntxt}/{uid}')
-def del_feature( cntxt,uid, request=None, response=None ):
+
+
+@hug.get('/{uid}')
+def feature_info( uid, cntxt=None, request=None, response=None ):
+    """
+**Alias di recupero informazioni della specifica feature**
+
+"""
+    return features_info(uid,cntxt,request,response)
+
+
+
+##@hug.delete('/{cntxt}/{uid}')
+##def del_feature( cntxt,uid, request=None, response=None ):
+@hug.delete('/{uid}')
+def del_feature( uid, request=None, response=None ):
 
     """
-**Cancellazione delle Features** NON FUNGE
+**Cancellazione delle Features**
 
-__nota__: uid accetta valori multipli separati da virgola. Cancella esclusivamente ciò che trova \
-senza andare in caso alcini degli uid passati no fossero presenti.
+Se la feature viene cancellata correttamente ne restituisce la struttura
 
-__nota__: cntxt è pleonastico ma imposto per come è costruito il routing dell'api.
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 OK_: Nel caso in cui la feature venga creata correttamente.
 
 """
 
     out = ResponseFormatter()
-
-    if not isinstance(uids,(list,set)) and uids:
-        uids=[uids]
     
-    uids=filter(None, uids)
+    if uid is None:
+        out.status=falcon.HTTP_BAD_REQUEST
+        out.message="None value not allowed"
 
-    for u in uids:
-        try:
-            db['features'][u]=None
-        except KeyError as e:
-            pass
+    try:
+        out.data=db['features'][uid]
+        db['features'][uid]=None
+    except KeyError as e:
+        out.status=falcon.HTTP_NOT_FOUND
+        out.message=f"feature '{uid}' not foud."
 
     response = out.format(response=response,request=request)
     return
-
-@hug.get('/{cntxt}')
-def context_features_info( cntxt=None, uids=None, request=None, response=None ):
-    """
-**Alias di ricerca delle Features nello lo specifico contesto**
-"""
-    return features_info(cntxt,uids,request,response)
-
-
-@hug.get('/{cntxt}/{uid}')
-def context_feature_info( cntxt=None, uid=None, request=None, response=None ):
-    """
-**Alias di ricerca della specifica Feature nello lo specifico contesto**
-"""
-
-    return features_info(cntxt,uid,request,response)
 
