@@ -314,19 +314,12 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#featurescntxtuid" class="md-nav__link">
-    /features/{cntxt}/{uid}
+  <a href="#featuresuid" class="md-nav__link">
+    /features/{uid}
   </a>
   
-    <nav class="md-nav" aria-label="/features/{cntxt}/{uid}">
+    <nav class="md-nav" aria-label="/features/{uid}">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delete" class="md-nav__link">
-    DELETE
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#get_1" class="md-nav__link">
@@ -335,22 +328,9 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#featurescntxt" class="md-nav__link">
-    /features/{cntxt}
-  </a>
-  
-    <nav class="md-nav" aria-label="/features/{cntxt}">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#get_2" class="md-nav__link">
-    GET
+  <a href="#delete" class="md-nav__link">
+    DELETE
   </a>
   
 </li>
@@ -769,19 +749,12 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#featurescntxtuid" class="md-nav__link">
-    /features/{cntxt}/{uid}
+  <a href="#featuresuid" class="md-nav__link">
+    /features/{uid}
   </a>
   
-    <nav class="md-nav" aria-label="/features/{cntxt}/{uid}">
+    <nav class="md-nav" aria-label="/features/{uid}">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delete" class="md-nav__link">
-    DELETE
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#get_1" class="md-nav__link">
@@ -790,22 +763,9 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#featurescntxt" class="md-nav__link">
-    /features/{cntxt}
-  </a>
-  
-    <nav class="md-nav" aria-label="/features/{cntxt}">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#get_2" class="md-nav__link">
-    GET
+  <a href="#delete" class="md-nav__link">
+    DELETE
   </a>
   
 </li>
@@ -840,7 +800,7 @@
 <h4 id="post">POST</h4>
 <p><em>params</em>:</p>
 <ul>
-<li><strong>feature</strong>: JSON Schema {<strong>uid</strong>: str|bytes, <strong>prototype</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>geometry</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes}</li>
+<li><strong>feature</strong>: JSON Schema {<strong>description</strong>: str|bytes, <strong>uid</strong>: str|bytes, <strong>prototype</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>geometry</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -862,8 +822,8 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 <h4 id="get">GET</h4>
 <p><em>params</em>:</p>
 <ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
 <li><strong>uids</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -871,8 +831,8 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Ricerca delle features.</strong></p>
-<p><strong>nota</strong>: uid accetta valori multipli separati da virgola </p>
+<p><strong>Recupero delle informazioni delle features.</strong></p>
+<p><strong>nota</strong>: uids accetta valori multipli separati da virgola </p>
 <p>viene restituito una struttura di questo tipo:</p>
 <div class="codehilite"><pre><span></span><code>    <span class="err">{</span>                                                                                                                                                      
         <span class="ss">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -888,31 +848,28 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 <span class="err">}</span>
 </code></pre></div>
 
-<p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features</p>
+<p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features.</p>
 <p>Possibili risposte:</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri</li>
 </ul>
-<h2 id="featurescntxtuid">/features/{cntxt}/{uid}</h2>
-<h4 id="delete">DELETE</h4>
-<p><em>params</em>:</p>
-<ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
-<li><strong>uid</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<p><strong>Cancellazione delle Features</strong> NON FUNGE</p>
-<p><strong>nota</strong>: uid accetta valori multipli separati da virgola. Cancella esclusivamente ciò che trova senza andare in caso alcini degli uid passati no fossero presenti.</p>
-<p><strong>nota</strong>: cntxt è pleonastico ma imposto per come è costruito il routing dell'api.</p>
+<h2 id="featuresuid">/features/{uid}</h2>
 <h4 id="get_1">GET</h4>
 <p><em>params</em>:</p>
 <ul>
+<li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>cntxt</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>description</em>:</p>
+<p><strong>Alias di recupero informazioni della specifica feature</strong></p>
+<h4 id="delete">DELETE</h4>
+<p><em>params</em>:</p>
+<ul>
 <li><strong>uid</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -921,21 +878,13 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Alias di ricerca della specifica Feature nello lo specifico contesto</strong></p>
-<h2 id="featurescntxt">/features/{cntxt}</h2>
-<h4 id="get_2">GET</h4>
-<p><em>params</em>:</p>
+<p><strong>Cancellazione delle Features</strong></p>
+<p>Se la feature viene cancellata correttamente ne restituisce la struttura</p>
+<p>Possibili risposte:</p>
 <ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
-<li><strong>uids</strong>: Basic text / string value</li>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
 </ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<p><strong>Alias di ricerca delle Features nello lo specifico contesto</strong></p>
                 
               
               

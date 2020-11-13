@@ -458,20 +458,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#context_feature_info" class="md-nav__link">
-    context_feature_info
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#context_features_info" class="md-nav__link">
-    context_features_info
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create_feature" class="md-nav__link">
     create_feature
   </a>
@@ -481,6 +467,13 @@
           <li class="md-nav__item">
   <a href="#del_feature" class="md-nav__link">
     del_feature
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature_info" class="md-nav__link">
+    feature_info
   </a>
   
 </li>
@@ -878,20 +871,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#context_feature_info" class="md-nav__link">
-    context_feature_info
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#context_features_info" class="md-nav__link">
-    context_features_info
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create_feature" class="md-nav__link">
     create_feature
   </a>
@@ -901,6 +880,13 @@
           <li class="md-nav__item">
   <a href="#del_feature" class="md-nav__link">
     del_feature
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feature_info" class="md-nav__link">
+    feature_info
   </a>
   
 </li>
@@ -1314,13 +1300,7 @@
 238
 239
 240
-241
-242
-243
-244
-245
-246
-247</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+241</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1422,13 +1402,13 @@
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
 
     <span class="sd">&#39;&#39;&#39;</span>
 
-<span class="sd">**Ricerca delle features.**</span>
+<span class="sd">**Recupero delle informazioni delle features.**</span>
 
-<span class="sd">__nota__: uid accetta valori multipli separati da virgola</span>
+<span class="sd">__nota__: uids accetta valori multipli separati da virgola</span>
 
 <span class="sd">viene restituito una struttura di questo tipo:</span>
 
@@ -1460,7 +1440,7 @@
 
 <span class="sd">per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all&#39; \</span>
 
-<span class="sd">interno delle properties delle singole features</span>
+<span class="sd">interno delle properties delle singole features.</span>
 
 <span class="sd">Possibili risposte:</span>
 
@@ -1500,73 +1480,67 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
-        <span class="k">raise</span> <span class="n">e</span>
-
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{cntxt}</span><span class="s1">/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">del_feature</span><span class="p">(</span> <span class="n">cntxt</span><span class="p">,</span><span class="n">uid</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">feature_info</span><span class="p">(</span> <span class="n">uid</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">**Cancellazione delle Features** NON FUNGE</span>
+<span class="sd">**Alias di recupero informazioni della specifica feature**</span>
 
-<span class="sd">__nota__: uid accetta valori multipli separati da virgola. Cancella esclusivamente ciò che trova \</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">senza andare in caso alcini degli uid passati no fossero presenti.</span>
+    <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="n">cntxt</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
 
-<span class="sd">__nota__: cntxt è pleonastico ma imposto per come è costruito il routing dell&#39;api.</span>
+<span class="c1">##@hug.delete(&#39;/{cntxt}/{uid}&#39;)</span>
+
+<span class="c1">##def del_feature( cntxt,uid, request=None, response=None ):</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">del_feature</span><span class="p">(</span> <span class="n">uid</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">**Cancellazione delle Features**</span>
+
+<span class="sd">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
+
+<span class="sd">Possibili risposte:</span>
+
+<span class="sd">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+
+<span class="sd">- _200 OK_: Nel caso in cui la feature venga creata correttamente.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uids</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">))</span> <span class="ow">and</span> <span class="n">uids</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">uids</span><span class="o">=</span><span class="p">[</span><span class="n">uids</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
 
-    <span class="n">uids</span><span class="o">=</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">uids</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;None value not allowed&quot;</span>
 
-    <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">uids</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
 
-        <span class="k">try</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
-            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">u</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
 
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="k">pass</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&#39; not foud.&quot;</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{cntxt}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">context_features_info</span><span class="p">(</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias di ricerca delle Features nello lo specifico contesto**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">uids</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{cntxt}</span><span class="s1">/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">context_feature_info</span><span class="p">(</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias di ricerca della specifica Feature nello lo specifico contesto**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">uid</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1575,57 +1549,9 @@
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>
-<h3 id="context_feature_info">context_feature_info</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">context_feature_info</span><span class="p">(</span>
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias di ricerca della specifica Feature nello lo specifico contesto</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{cntxt}/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">context_feature_info</span><span class="p">(</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">**Alias di ricerca della specifica Feature nello lo specifico contesto**</span>
-
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">uid</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h3 id="context_features_info">context_features_info</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">context_features_info</span><span class="p">(</span>
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias di ricerca delle Features nello lo specifico contesto</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{cntxt}&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">context_features_info</span><span class="p">(</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">**Alias di ricerca delle Features nello lo specifico contesto**</span>
-
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">uids</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
-    <span class="n">feature</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f8e653cc5b0</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">feature</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f7b47059b80</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1712,49 +1638,56 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 </details>
 <h3 id="del_feature">del_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">del_feature</span><span class="p">(</span>
-    <span class="n">cntxt</span><span class="p">,</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<p><strong>Cancellazione delle Features</strong> NON FUNGE</p>
-<p><strong>nota</strong>: uid accetta valori multipli separati da virgola. Cancella esclusivamente ciò che trova senza andare in caso alcini degli uid passati no fossero presenti.</p>
-<p><strong>nota</strong>: cntxt è pleonastico ma imposto per come è costruito il routing dell'api.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/{cntxt}/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Cancellazione delle Features</strong></p>
+<p>Se la feature viene cancellata correttamente ne restituisce la struttura</p>
+<p>Possibili risposte:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
+</ul>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">del_feature</span><span class="p">(</span><span class="w"> </span><span class="n">cntxt</span><span class="p">,</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">del_feature</span><span class="p">(</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">**Cancellazione delle Features** NON FUNGE</span>
+<span class="ss">**Cancellazione delle Features**</span>
 
-<span class="ss">__nota__: uid accetta valori multipli separati da virgola. Cancella esclusivamente ciò che trova \</span>
+<span class="ss">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
 
-<span class="ss">senza andare in caso alcini degli uid passati no fossero presenti.</span>
+<span class="ss">Possibili risposte:</span>
 
-<span class="ss">__nota__: cntxt è pleonastico ma imposto per come è costruito il routing dell&#39;api.</span>
+<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+
+<span class="ss">- _200 OK_: Nel caso in cui la feature venga creata correttamente.</span>
 
 <span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uids</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="k">set</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">uids</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">uids</span><span class="o">=[</span><span class="n">uids</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">uids</span><span class="o">=</span><span class="k">filter</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="ss">&quot;None value not allowed&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">uids</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">u</span><span class="o">]=</span><span class="k">None</span><span class="w"></span>
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]=</span><span class="k">None</span><span class="w"></span>
 
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;feature &#39;{uid}&#39; not foud.&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
@@ -1762,17 +1695,41 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 </code></pre></div>
 
 </details>
-<h3 id="features_info">features_info</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span>
+<h3 id="feature_info">feature_info</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">feature_info</span><span class="p">(</span>
+    <span class="n">uid</span><span class="p">,</span>
     <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<p><strong>Ricerca delle features.</strong></p>
-<p><strong>nota</strong>: uid accetta valori multipli separati da virgola </p>
+<p><strong>Alias di recupero informazioni della specifica feature</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">feature_info</span><span class="p">(</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">**Alias di recupero informazioni della specifica feature**</span>
+
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="n">cntxt</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="features_info">features_info</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span>
+    <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Recupero delle informazioni delle features.</strong></p>
+<p><strong>nota</strong>: uids accetta valori multipli separati da virgola </p>
 <p>viene restituito una struttura di questo tipo:</p>
 <div class="codehilite"><pre><span></span><code>    <span class="err">{</span>                                                                                                                                                      
         <span class="ss">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
@@ -1788,20 +1745,20 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
     <span class="err">}</span>
 </code></pre></div>
 
-<p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features</p>
+<p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features.</p>
 <p>Possibili risposte:</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri</li>
 </ul>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="s1">&#39;&#39;&#39;</span>
 
-<span class="s1">**Ricerca delle features.**</span>
+<span class="s1">**Recupero delle informazioni delle features.**</span>
 
-<span class="s1">__nota__: uid accetta valori multipli separati da virgola</span>
+<span class="s1">__nota__: uids accetta valori multipli separati da virgola</span>
 
 <span class="s1">viene restituito una struttura di questo tipo:</span>
 
@@ -1833,7 +1790,7 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 
 <span class="s1">per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all&#39;</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
 
-<span class="n">interno</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">singole</span><span class="w"> </span><span class="n">features</span><span class="w"></span>
+<span class="n">interno</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">singole</span><span class="w"> </span><span class="n">features</span><span class="p">.</span><span class="w"></span>
 
 <span class="n">Possibili</span><span class="w"> </span><span class="nl">risposte</span><span class="p">:</span><span class="w"></span>
 
@@ -1872,8 +1829,6 @@ Il parametro geometry deve essere un GeoJson (ancora non validato)</p>
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
