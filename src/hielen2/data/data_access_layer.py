@@ -19,8 +19,8 @@ def _threadpool(f):
 
 class Series():
 
-    def __init__(self,code):
-        series_info=db['series'][code]
+    def __init__(self,uid):
+        series_info=db['series'][uid]
 
         self.__dict__.update(series_info)
         geninfo=dict((k,w) for k,w in series_info.items() if k in ( "modules","operator","operands" ) )
@@ -47,7 +47,7 @@ class Series():
             timeto = self.last
 
         try:
-            out = db['datacache'][self.code].to_frame()
+            out = db['datacache'][self.uid].to_frame()
             if timefrom is not None and out.index.max() < timefrom:
                 out = out.tail(1)
             else:
@@ -115,7 +115,7 @@ class Generator:
         try:
             v=value.split('.')
             assert (v.__len__()==2)
-            return (key,db['elements'][v[0]][v[1]])
+            return (key,db['features'][v[0]][v[1]])
         except Exception:
             pass
 

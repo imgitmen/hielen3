@@ -14,7 +14,7 @@ def new_protptype(prototype,request=None, response=None):
 def prototypes(request=None, response=None ):
     out=ResponseFormatter()
     try:
-        out.data=db['elements_proto'][None]
+        out.data=db['features_proto'][None]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -25,7 +25,7 @@ def prototypes(request=None, response=None ):
 def protptype(prototype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['elements_proto'][prototype]
+        out.data=db['features_proto'][prototype]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -35,7 +35,7 @@ def protptype(prototype, request=None, response=None):
 def prototype_forms(prototype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['elements_proto'][prototype]['forms']
+        out.data=db['features_proto'][prototype]['forms']
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -46,7 +46,7 @@ def prototype_forms(prototype, request=None, response=None):
 def prototype_form(prototype, form, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['elements_proto'][prototype]['forms'][form]
+        out.data=db['features_proto'][prototype]['forms'][form]
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -57,7 +57,7 @@ def prototype_form(prototype, form, request=None, response=None):
 def prototype_struct(prototype, request=None, response=None):
     out=ResponseFormatter()
     try:
-        out.data=db['elements_proto'][prototype]['struct']
+        out.data=db['features_proto'][prototype]['struct']
     except KeyError as e:
         out.status=out.status=falcon.HTTP_NOT_FOUND
         out.message = str(e)

@@ -93,7 +93,7 @@ class JsonDB(DB):
                     self.db=self.db.drop(key,axis=1)
                 else:
                     #Request to insert key, raises ValueError
-                    value['uuid']=key
+                    value['uid']=key
                     value=DataFrame([value]).T
                     value.columns=[key]
                     self.db=self.db.join(value,how='left')
@@ -139,7 +139,7 @@ class JsonDB(DB):
 class JsonCache(DB):
 
     def __init__(self,connection):
-        self.cache=read_json(connection,convert_dates=False).set_index(['uuid','timestamp'])['value'].sort_index()
+        self.cache=read_json(connection,convert_dates=False).set_index(['uid','timestamp'])['value'].sort_index()
         self.filename=connection
 
     def __getitem__(self,key):

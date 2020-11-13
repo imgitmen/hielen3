@@ -1,6 +1,102 @@
 CHANGELOG
 =========
 
+### **12 Novembre 2020**
+- ovunque nel mondo il parmetro 'uuid' (universal unique id) diventa 'uid'.
+- rinominazione POST `/elements` -> POST `/features`.
+- rinominazione GET `/elements` -> GET `/parameters` e modifica uscita in questo schema:
+
+        {
+            <feature1_UID>:[
+                {
+                    "series":<feature1_param1_series_UID>,
+                    "param":<feature1_param1_name>,
+                    "um":<feature1_param1_measurement_unit>
+                },
+
+                ...
+
+                {
+                    "series":<feature1_paramN_series_UID,
+                    "param":<feature1_paramN_name>,
+                    "um":<feature1_paramN_meaurement_unit>
+
+                }
+            ],
+
+            ...
+
+            <featureX_UID>:[
+                {
+                    "series":<featureX_param1_series_UID>,
+                    "param":<featureX_param1_name>,
+                    "um":<featureX_param1_measurement_unit>
+                },
+
+                ...
+
+                {
+                    "series":<featureX_paramM_series_UID,
+                    "param":<featureX_paramM_name>,
+                    "um":<featureX_paramM_meaurement_unit>
+
+                }
+            ]
+        }
+
+- introduzione api `/features` con lo schema usato da Daniele e SimoneD:
+    
+    GET `/features` 
+
+    GET `/features/{context}/`
+
+    GET `/features/{context}/{feature}`
+
+
+    _uscita_:
+
+    nota 1: viene introdotto ___"context"___ allo stesso livello di features.
+
+    nota 2: ___"cod"___ diventa ___"label"___.
+
+    nota 3: dalle properties vengono elminate ___"z"___ e ___"mslm"___.
+
+    nota 4: ___"state"___ viene mantenuto ma per ora è inutilizzato
+
+
+
+        {
+			"context":<context_name>,
+			"features": [
+				{
+					"type": "Feature",
+					"properties": {
+						"uid": ...,
+						"label": ...,
+						"date": ...,
+						"type": ...,
+						"style": ...,
+						"state": ...
+					},
+					"geometry": <GeoJson Validable>
+				},
+
+                ...
+                
+                {
+					"type": "Feature",
+					"properties": {
+						"uid": ...,
+						"label": ...,
+						"date": ...,
+						"type": ...,
+						"style": ...,
+						"state": ...
+					},
+					"geometry": <GeoJson Validable>
+				}
+			]
+		}
 
 
 ## 2.0.3

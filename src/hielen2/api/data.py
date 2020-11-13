@@ -81,22 +81,22 @@ def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=
         return hug.types.json(out.to_json(orient='table'))
 
 
-@hug.get('/{el}/', output=data_out_handler)
-def tabular_data_el( el, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
+@hug.get('/{feature}/', output=data_out_handler)
+def tabular_data_el( feature, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
   
     try:
-        element=db['elements'][el]
+        ft=db['features'][feature]
     except KeyError:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)                       
-        out.message=str(el) + " not found"                                           
+        out.message=str(feature) + " not found"                                           
         response = out.format(response=response,request=request)                    
         return 
     try:
     
         if par is None:
-            parameters=[ f"{element['uuid']}:{e}" for e in element['parameters'].keys() ]
+            parameters=[ f"{ft['uid']}:{e}" for e in element['parameters'].keys() ]
         else:
-            parameters=[ f"{element['uuid']}:{par}" ]
+            parameters=[ f"{ft['uid']}:{par}" ]
 
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
@@ -117,7 +117,7 @@ def tabular_data_el( el, par=None, timefrom=None, timeto=None, content_type=None
 
 
 
-@hug.get('/{el}/{par}', output=data_out_handler)
+@hug.get('/{feature}/{par}', output=data_out_handler)
 def tabular_data_par( el=None, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
 
     return tabular_data_el( el=el,par=par,timefrom=timefrom,timeto=timeto,request=request, response=response )
