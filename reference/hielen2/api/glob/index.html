@@ -400,8 +400,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../elements/" title="Elements" class="md-nav__link">
-      Elements
+    <a href="../features/" title="Features" class="md-nav__link">
+      Features
     </a>
   </li>
 
@@ -491,6 +491,18 @@
   <li class="md-nav__item">
     <a href="../" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parameters/" title="Parameters" class="md-nav__link">
+      Parameters
     </a>
   </li>
 
@@ -786,13 +798,21 @@
 48
 49
 50
-51</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
 <span class="kn">import</span> <span class="nn">hug</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">elements</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">data</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">features</span>
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
@@ -814,6 +834,14 @@
 
 <span class="sd">&#39;&#39;&#39;</span>
 
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/parameters&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">elemman</span><span class="p">():</span>
+
+    <span class="sd">&#39;&#39;&#39; parameters manager &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">parameters</span><span class="p">]</span>
+
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/prototypes&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">protoman</span><span class="p">():</span>
@@ -822,14 +850,6 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">prototypes</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/elements&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">elemman</span><span class="p">():</span>
-
-    <span class="sd">&#39;&#39;&#39; Elements manager &#39;&#39;&#39;</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">elements</span><span class="p">]</span>
-
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
@@ -837,6 +857,14 @@
     <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/features&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
+
+    <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">features</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -848,13 +876,13 @@
 </code></pre></div>
 
 <p>Series manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/features&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="s1">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">data</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">features</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -864,14 +892,14 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<p>Elements manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/elements&#39;</span><span class="p">)</span><span class="w"></span>
+<p>parameters manager </p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/parameters&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">elemman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39; Elements manager &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;&#39;&#39; parameters manager &#39;&#39;&#39;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">elements</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">parameters</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -910,7 +938,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../elements/" title="Elements" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../features/" title="Features" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -919,7 +947,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Elements
+                Features
               </span>
             </div>
           </a>

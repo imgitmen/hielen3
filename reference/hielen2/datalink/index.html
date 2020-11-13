@@ -610,8 +610,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api/elements/" title="Elements" class="md-nav__link">
-      Elements
+    <a href="../api/features/" title="Features" class="md-nav__link">
+      Features
     </a>
   </li>
 
@@ -636,6 +636,18 @@
   <li class="md-nav__item">
     <a href="../api/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
     </a>
   </li>
 
@@ -1434,7 +1446,7 @@
 
                     <span class="c1">#Request to insert key, raises ValueError</span>
 
-                    <span class="n">value</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+                    <span class="n">value</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
 
                     <span class="n">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
 
@@ -1502,7 +1514,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;uid&#39;</span><span class="p">,</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">connection</span>
 
@@ -1618,7 +1630,7 @@ inheritance.</p>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="k">connection</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="k">False</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;uuid&#39;,&#39;timestamp&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;value&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="k">connection</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="k">False</span><span class="p">).</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;uid&#39;,&#39;timestamp&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;value&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="o">=</span><span class="k">connection</span><span class="w"></span>
 
@@ -1795,7 +1807,7 @@ inheritance.</p>
 
 <span class="w">                    </span><span class="n">#Request</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">raises</span><span class="w"> </span><span class="n">ValueError</span><span class="w"></span>
 
-<span class="w">                    </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;uuid&#39;</span><span class="o">]=</span><span class="k">key</span><span class="w"></span>
+<span class="w">                    </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;uid&#39;</span><span class="o">]=</span><span class="k">key</span><span class="w"></span>
 
 <span class="w">                    </span><span class="k">value</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="o">[</span><span class="n">value</span><span class="o">]</span><span class="p">).</span><span class="n">T</span><span class="w"></span>
 

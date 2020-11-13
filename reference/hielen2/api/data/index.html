@@ -615,8 +615,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../elements/" title="Elements" class="md-nav__link">
-      Elements
+    <a href="../features/" title="Features" class="md-nav__link">
+      Features
     </a>
   </li>
 
@@ -641,6 +641,18 @@
   <li class="md-nav__item">
     <a href="../" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parameters/" title="Parameters" class="md-nav__link">
+      Parameters
     </a>
   </li>
 
@@ -1346,19 +1358,19 @@
 
         <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">))</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{el}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span> <span class="n">el</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span> <span class="n">feature</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">element</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;elements&#39;</span><span class="p">][</span><span class="n">el</span><span class="p">]</span>
+        <span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -1368,11 +1380,11 @@
 
         <span class="k">if</span> <span class="n">par</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">]</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ft</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">element</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">]</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">par</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">]</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ft</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">par</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -1396,7 +1408,7 @@
 
     <span class="k">return</span> <span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="n">datamap</span><span class="p">]),</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{el}</span><span class="s1">/</span><span class="si">{par}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/</span><span class="si">{par}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">tabular_data_par</span><span class="p">(</span> <span class="n">el</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
 
@@ -1439,7 +1451,7 @@
 </details>
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f74e0305d60</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7feda52f7df0</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
@@ -1532,7 +1544,7 @@
 </details>
 <h3 id="tabular_data_el">tabular_data_el</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span>
-    <span class="n">el</span><span class="p">,</span>
+    <span class="n">feature</span><span class="p">,</span>
     <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1542,19 +1554,19 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{el}/&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">el</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">element</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;elements&#39;</span><span class="o">][</span><span class="n">el</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">el</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
@@ -1564,11 +1576,11 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">par</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">parameters</span><span class="o">=[</span><span class="n"> f&quot;{element[&#39;uuid&#39;</span><span class="o">]</span><span class="err">}:{</span><span class="n">e</span><span class="err">}</span><span class="ss">&quot; for e in element[&#39;parameters&#39;].keys() ]</span>
+<span class="w">            </span><span class="k">parameters</span><span class="o">=[</span><span class="n"> f&quot;{ft[&#39;uid&#39;</span><span class="o">]</span><span class="err">}:{</span><span class="n">e</span><span class="err">}</span><span class="ss">&quot; for e in element[&#39;parameters&#39;].keys() ]</span>
 
 <span class="ss">        else:</span>
 
-<span class="ss">            parameters=[ f&quot;</span><span class="err">{</span><span class="k">element</span><span class="o">[</span><span class="n">&#39;uuid&#39;</span><span class="o">]</span><span class="err">}:{</span><span class="n">par</span><span class="err">}</span><span class="ss">&quot; ]</span>
+<span class="ss">            parameters=[ f&quot;</span><span class="err">{</span><span class="n">ft</span><span class="o">[</span><span class="n">&#39;uid&#39;</span><span class="o">]</span><span class="err">}:{</span><span class="n">par</span><span class="err">}</span><span class="ss">&quot; ]</span>
 
 <span class="ss">    except KeyError as e:</span>
 
@@ -1606,7 +1618,7 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{el}/{par}&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/{par}&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">tabular_data_par</span><span class="p">(</span><span class="w"> </span><span class="n">el</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2286,13 +2298,13 @@ validation errors.</p>
           </a>
         
         
-          <a href="../elements/" title="Elements" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../features/" title="Features" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Elements
+                Features
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
