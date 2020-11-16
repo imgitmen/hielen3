@@ -110,7 +110,7 @@ CHANGELOG
         }
 
 
-## **2.0.3**
+## **v2.0.3**
 ### **11 Novembre 2020**
 - Modificata api POST `/elements`: la variabile `element` è descritta dalla Classe hielen2.api.data.ElementSchema e validata. In paricolare è stato introdotto l'attibuto `context`
 - Modifcata api GET `/data`: la variabile `datamap` è descritta dalla Classe hielen2.api.data.DataMapSchema e validata.
