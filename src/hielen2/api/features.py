@@ -78,13 +78,14 @@ viene restituito una struttura di questo tipo:
                 {
                     "type": "Feature",
                     "properties": {
-			...
+                        ...
                     },
 
                     "geometry": <GeoJson Validable>
                 },
-		...
-	}
+                ...
+            ]
+        }
 
 ___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \
 "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora \
