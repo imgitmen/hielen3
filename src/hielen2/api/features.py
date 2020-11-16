@@ -20,7 +20,6 @@ not alowed here, 'cause them are structural info of the feature.
     location=fields.Str(default=None)
     style=fields.Str(default=None)
     status=fields.Str(default=None)
-    geometry=fields.Nested(GeoJSONSchema)
 
 
 @hug.post('/')
