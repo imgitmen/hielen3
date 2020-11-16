@@ -875,6 +875,13 @@
 
 </li>
 <li>
+<p>analogo discorso per  PUT <code>/feature/{uid}</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c">properties:&lt;json schema Properties&gt;</span>
+<span class="c">geometry:&lt;json schema GeoJson&gt;</span>
+</code></pre></div>
+
+</li>
+<li>
 <p>sistemata la risposta di GET <code>/feature</code>, modificando il livello di "geometry"</p>
 </li>
 <li>implementata api PUT <code>/features/{uid}</code>. Accetta il paramentro <code>properties</code> con uno schema analogo al parmetro <code>feature</code> di POST <code>/features</code> con queste differenze: <strong>nello schema della PUT, <code>uid</code> e <code>prototype</code> NON vengono accettati perchè sono campi chiave della feature e non possono essere modificati</strong>. lo <code>uid</code> della feature deve essere specificato come url e non come parametro.</li>

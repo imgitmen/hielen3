@@ -816,7 +816,7 @@
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>geometry</strong>: , <strong>description</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>geometry</strong>: , <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -888,7 +888,8 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>geometry</strong>: , <strong>description</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>geometry</strong>: , <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
+<li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -897,6 +898,11 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 </ul>
 <p><em>description</em>:</p>
 <p><strong>Modifica delle properties di una feature</strong></p>
+<p>Possibili risposte:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>202 OK</em>: Nel caso in cui la feature venga modificata correttamente.</li>
+</ul>
 <h4 id="delete">DELETE</h4>
 <p><em>params</em>:</p>
 <ul>
@@ -913,7 +919,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p>Possibili risposte:</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
-<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
+<li><em>202 OK</em>: Nel caso in cui la feature venga eliminata correttamente.</li>
 </ul>
                 
               
