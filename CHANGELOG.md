@@ -3,7 +3,6 @@ CHANGELOG
 
 ## **v2.0.4**
 ### **16 Novembre 2020**
-
 - per coerenza rivisti i parmaetri di POST `/feature`:
 
 		uid:<string>

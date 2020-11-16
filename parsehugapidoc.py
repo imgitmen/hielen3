@@ -20,7 +20,7 @@ def get_titles(struct):
     return titles
 
 def get_prot_md(info):
-    output=""
+    output="-----------------------------------"
     try:
         output="_params_:\n\n"+"\n".join([f"- **{k}**: {w['type']}" for k,w in info['inputs'].items()])
         output=output+"\n\n"
@@ -34,7 +34,6 @@ def get_prot_md(info):
         pass  
 
     try:
-        #output=output+re.sub(r"\s+",r" ",re.sub(r"\n|\t"," ",info['usage']))
         output=output+"_description_:\n\n"+info['usage']+"\n\n"
     except KeyError:
         pass

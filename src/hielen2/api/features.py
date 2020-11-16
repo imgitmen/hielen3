@@ -10,10 +10,6 @@ from marshmallow_geojson import GeoJSONSchema
 
 
 class FeaturePropertiesSchema(Schema):
-    '''
-Schema used to validate Feature modifications (PUT `/feature/{uid}`). `uid` and `prototypes` fields are \
-not alowed here, 'cause them are structural info of the feature.
-'''
     context=fields.Str(default="no-context",allow_none=False)
     label=fields.Str(default=None)
     description=fields.Str(default=None)
