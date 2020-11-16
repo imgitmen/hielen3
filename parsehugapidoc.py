@@ -45,8 +45,8 @@ def get_title_md(title,calls):
     for call,struct in calls.items():
         output=output+f"## **{call.capitalize()}**\n\n"
         for prot,info in struct.items():
-            output=output+f"####{prot}\n-------------\n"
-            output=output+get_prot_md(info)
+            output=output+f"#### {prot}\n-------------\n"
+            output=output+get_prot_md(info)+"\n\n\n\n"
         output=output+"\n"
     return output
 
