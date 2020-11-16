@@ -20,7 +20,7 @@ def get_titles(struct):
     return titles
 
 def get_prot_md(info):
-    output="-----------------------------------"
+    output=""
     try:
         output="_params_:\n\n"+"\n".join([f"- **{k}**: {w['type']}" for k,w in info['inputs'].items()])
         output=output+"\n\n"
