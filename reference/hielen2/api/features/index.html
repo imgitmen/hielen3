@@ -1636,7 +1636,11 @@
 314
 315
 316
-317</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+317
+318
+319
+320
+321</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1708,7 +1712,9 @@
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span><span class="n">feature</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeatureSchema</span><span class="p">()),</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">prototype</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> \
+
+        <span class="n">geometry</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="sd">&#39;&#39;&#39;</span>
 
@@ -1738,17 +1744,19 @@
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">prototype</span><span class="o">=</span><span class="n">feature</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;prototype&#39;</span><span class="p">)</span>
+        <span class="n">feature</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;uid&quot;</span><span class="p">:</span><span class="n">uid</span><span class="p">,</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span><span class="n">geometry</span><span class="p">}</span>
+
+        <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-                <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;decontextualized&#39;</span>
+                <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;no-context&#39;</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-            <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;decontextualized&#39;</span>
+            <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;no-context&#39;</span>
 
         <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s1">&#39;struct&#39;</span><span class="p">]</span> <span class="p">)</span>
 
@@ -1963,7 +1971,10 @@
 <h2 id="functions">Functions</h2>
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
-    <span class="n">feature</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac741a1700</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">uid</span><span class="p">,</span>
+    <span class="n">prototype</span><span class="p">,</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcf5ee87790</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcf5ee87a00</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1982,7 +1993,9 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 </ul>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="n">hug</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 
-<span class="n">def</span> <span class="nf">create_feature</span><span class="p">(</span><span class="n">feature</span><span class="p">:</span><span class="nf">JsonValidable</span><span class="p">(</span><span class="nf">FeatureSchema</span><span class="p">()),</span><span class="n">request</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
+<span class="n">def</span> <span class="nf">create_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">prototype</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span><span class="nf">JsonValidable</span><span class="p">(</span><span class="nf">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span> <span class="err">\</span>
+
+        <span class="n">geometry</span><span class="p">:</span><span class="nf">JsonValidable</span><span class="p">(</span><span class="nf">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">None</span><span class="p">):</span>
 
     <span class="s1">&#39;&#39;&#39;</span>
 
@@ -2012,17 +2025,19 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="s1">    try:</span>
 
-<span class="s1">        prototype=feature.pop(&#39;</span><span class="n">prototype</span><span class="s1">&#39;)</span>
+<span class="s1">        feature={&quot;uid&quot;:uid,&quot;geometry&quot;:geometry}</span>
+
+<span class="s1">        feature.update(properties)</span>
 
 <span class="s1">        try:</span>
 
 <span class="s1">            if feature[&#39;</span><span class="n">context</span><span class="s1">&#39;] is None:</span>
 
-<span class="s1">                feature[&#39;</span><span class="n">context</span><span class="s1">&#39;]=&#39;</span><span class="n">decontextualized</span><span class="s1">&#39;</span>
+<span class="s1">                feature[&#39;</span><span class="n">context</span><span class="s1">&#39;]=&#39;</span><span class="n">no</span><span class="o">-</span><span class="n">context</span><span class="s1">&#39;</span>
 
 <span class="s1">        except KeyError:</span>
 
-<span class="s1">            feature[&#39;</span><span class="n">context</span><span class="s1">&#39;]=&#39;</span><span class="n">decontextualized</span><span class="s1">&#39;</span>
+<span class="s1">            feature[&#39;</span><span class="n">context</span><span class="s1">&#39;]=&#39;</span><span class="n">no</span><span class="o">-</span><span class="n">context</span><span class="s1">&#39;</span>
 
 <span class="s1">        feature.update( db[&#39;</span><span class="n">features_proto</span><span class="s1">&#39;][prototype][&#39;</span><span class="n">struct</span><span class="s1">&#39;] )</span>
 
@@ -2255,7 +2270,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac741a1a30</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcf5ee87b50</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
