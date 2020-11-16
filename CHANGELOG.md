@@ -4,6 +4,7 @@ CHANGELOG
 ## **v2.0.4**
 ### **16 Novembre 2020**
 - introduzione dello Schema GeoJson per la validazione
+- modificata POST `/features/` per accettare un GeoJson nell'attibuto `geometry` del Json principale `feature`
 
 ### **13 Novembre 2020**
 - rinominazione DELETE `/elements` -> DELETE `/features`.
@@ -64,27 +65,29 @@ CHANGELOG
 
     _uscita_:
 
-    nota 1: viene introdotto ___"context"___ allo stesso livello di features.
+    nota 1: NON viene introdotto ___"context"___, come invece preventivato
 
     nota 2: ___"cod"___ diventa ___"label"___.
+
+    nota 3: ___"date"___ diventa ___"timestamp"___
 
     nota 3: dalle properties vengono elminate ___"z"___ e ___"mslm"___.
 
     nota 4: ___"state"___ viene mantenuto ma per ora è inutilizzato
 
         {
-            "context":<context_name>,
             features": [
                 {
                     "type": "Feature",
                     "properties": {
-                    "uid": ...,
-                    "label": ...,
-                    "date": ...,
-                    "type": ...,
-                    "style": ...,
-                    "state": ...
-                },
+                        "uid": ...,
+                        "label": ...,
+                        "context":...,
+                        "date": ...,
+                        "type": ...,
+                        "style": ...,
+                        "state": ...
+                    },
                     "geometry": <GeoJson Validable>
                 },
 
@@ -93,17 +96,18 @@ CHANGELOG
                 {
                     "type": "Feature",
                     "properties": {
-                        "uid": ...,
-                        "label": ...,
-                        "date": ...,
-                        "type": ...,
-                        "style": ...,
-                        "state": ...
-                    },
-                "geometry": <GeoJson Validable>
-            }
-        ]
-    }
+                            "uid": ...,
+                            "label": ...,
+                            "context": ...,
+                            "date": ...,
+                            "type": ...,
+                            "style": ...,
+                            "state": ...
+                        },
+                    "geometry": <GeoJson Validable>
+                }
+            ]
+        }
 
 
 ## **2.0.3**
