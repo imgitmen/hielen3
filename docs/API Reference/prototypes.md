@@ -1,7 +1,7 @@
 #Prototypes
 ## **/prototypes/**
 
-####POST
+#### POST
 -------------
 _params_:
 
@@ -12,17 +12,25 @@ _result_:
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
 
-####GET
+
+
+
+
+#### GET
 -------------
 _result_:
 
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
+
+
+
+
 
 
 ## **/prototypes/{prototype}**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -32,11 +40,15 @@ _result_:
 
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
+
+
+
+
 
 
 ## **/prototypes/{prototype}/forms**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -48,9 +60,13 @@ _result_:
 - **content_type**: application/json; charset=utf-8
 
 
+
+
+
+
 ## **/prototypes/{prototype}/forms/{form}**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -63,9 +79,13 @@ _result_:
 - **content_type**: application/json; charset=utf-8
 
 
+
+
+
+
 ## **/prototypes/{prototype}/struct**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -75,5 +95,9 @@ _result_:
 
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
+
+
+
+
 
 

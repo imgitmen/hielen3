@@ -1,7 +1,7 @@
 #Data
 ## **/data/**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -14,9 +14,13 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
+
+
+
+
 ## **/data/{feature}/**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -32,9 +36,13 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
+
+
+
+
 ## **/data/{feature}/{par}**
 
-####GET
+#### GET
 -------------
 _params_:
 
@@ -48,5 +56,9 @@ _result_:
 
 - **format**: Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
+
+
+
+
 
 
