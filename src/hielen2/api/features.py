@@ -73,14 +73,13 @@ __nota__: uids accetta valori multipli separati da virgola
 
 viene restituito una struttura di questo tipo:
 
-        {                                                                                                                                                      
+        {
             "features": [
                 {
                     "type": "Feature",
                     "properties": {
                         ...
                     },
-
                     "geometry": <GeoJson Validable>
                 },
                 ...
