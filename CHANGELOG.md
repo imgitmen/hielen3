@@ -4,6 +4,13 @@ CHANGELOG
 ## **v2.0.4**
 ### **16 Novembre 2020**
 
+- per coerenza rivisti i parmaetri di POST `/feature`:
+
+		uid:<string>
+		prototype:<string>
+		properties:<json schema Properties>
+		geometry:j<son schema GeoJson>
+
 - sistemata la risposta di GET `/feature`, modificando il livello di "geometry"
 - implementata api PUT `/features/{uid}`. Accetta il paramentro `properties` con uno schema analogo al parmetro `feature` di POST `/features` con queste differenze: **nello schema della PUT, `uid` e `prototype` NON vengono accettati perchè sono campi chiave della feature e non possono essere modificati**. lo `uid` della feature deve essere specificato come url e non come parametro.
 - introduzione dello Schema GeoJson per la validazione

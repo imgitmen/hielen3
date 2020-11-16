@@ -40,7 +40,8 @@ not alowed here, 'cause them are structural info of the feature.
 
 
 @hug.post('/')
-def create_feature(feature:JsonValidable(FeatureSchema()),request=None,response=None):
+def create_feature(uid, prototype, properties:JsonValidable(FeaturePropertiesSchema())={}, \
+        geometry:JsonValidable(GeoJSONSchema())={}, request=None,response=None):
 
     '''
 **Creazione delle Features.**
@@ -59,17 +60,17 @@ Possibili risposte:
 - _201 Created_: Nel caso in cui la feature venga creata correttamente.
 '''
 
+    out = ResponseFormatter(status=falcon.HTTP_CREATED)
     
 
-    out = ResponseFormatter(status=falcon.HTTP_CREATED)
     try:
-        prototype=feature.pop('prototype')
+        feature={"uid":uid,"geometry":geometry}
+        feature.update(properties)
         try:
             if feature['context'] is None:
-                feature['context']='decontextualized'
+                feature['context']='no-context'
         except KeyError:
-            feature['context']='decontextualized'
-
+            feature['context']='no-context'
         feature.update( db['features_proto'][prototype]['struct'] )
         feature['parameters']={ k:None for k in feature['parameters'].keys()}
         db['features'][feature['uid']]=feature
