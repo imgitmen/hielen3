@@ -1,12 +1,13 @@
 #Data
-##/data/
+## */data/*
 
 
-####GET
+
+###GET
 -------------
 _params_:
 
-- **datamap**: JSON Schema [{**series**: [str|bytes], **timefrom**: str|bytes, **timeto**: str|bytes}]
+- **datamap**: JSON Schema [{**timefrom**: str|bytes, **timeto**: str|bytes, **series**: [str|bytes]}]
 - **content_type**: Basic text / string value
 
 _result_:
@@ -15,10 +16,11 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
-##/data/{feature}/
+## */data/{feature}/*
 
 
-####GET
+
+###GET
 -------------
 _params_:
 
@@ -34,10 +36,11 @@ _result_:
 - **content_type**: text/plain; charset=utf-8, application/json; charset=utf-8
 
 
-##/data/{feature}/{par}
+## */data/{feature}/{par}*
 
 
-####GET
+
+###GET
 -------------
 _params_:
 
