@@ -20,7 +20,7 @@ def get_titles(struct):
     return titles
 
 def get_prot_md(info):
-    output="\n-----------------------\n\n"
+    output=""
     try:
         output="_params_:\n\n"+"\n".join([f"- **{k}**: {w['type']}" for k,w in info['inputs'].items()])
         output=output+"\n\n"
@@ -45,7 +45,7 @@ def get_title_md(title,calls):
     for call,struct in calls.items():
         output=output+f"##{call.capitalize()}\n"
         for prot,info in struct.items():
-            output=output+f"####{prot}\n"
+            output=output+f"####{prot} CIAO\n-------------\n"
             output=output+get_prot_md(info)
         output=output+"\n"
     return output

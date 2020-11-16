@@ -11,7 +11,8 @@ _result_:
 - **content_type**: application/json; charset=utf-8
 
 ####GET
-----------------
+
+-----------------------
 
 _result_:
 
