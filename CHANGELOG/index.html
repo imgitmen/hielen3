@@ -865,6 +865,8 @@
 <h2 id="v204"><strong>v2.0.4</strong></h2>
 <h3 id="16-novembre-2020"><strong>16 Novembre 2020</strong></h3>
 <ul>
+<li>sistemata la risposta di GET <code>/feature</code>, modificando il livello di "geometry"</li>
+<li>implementata api PUT <code>/features/{uid}</code>. Accetta il paramentro <code>properties</code> con uno schema analogo al parmetro <code>feature</code> di POST <code>/features</code> con queste differenze: <strong>nello schema della PUT, <code>uid</code> e <code>prototype</code> NON vengono accettati perchè sono campi chiave della feature e non possono essere modificati</strong>. lo <code>uid</code> della feature deve essere specificato come url e non come parametro.</li>
 <li>introduzione dello Schema GeoJson per la validazione</li>
 <li>modificata POST <code>/features/</code> per accettare un GeoJson nell'attibuto <code>geometry</code> del Json principale <code>feature</code></li>
 </ul>
