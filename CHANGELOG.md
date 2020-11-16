@@ -1,6 +1,10 @@
 CHANGELOG
 =========
 
+## **v2.0.4**
+### **16 Novembre 2020**
+- introduzione dello Schema GeoJson per la validazione
+
 ### **13 Novembre 2020**
 - rinominazione DELETE `/elements` -> DELETE `/features`.
 - eliminazione degli alias GET `/features/{context}` e `/features/{context}/{uid}` a causa del conflitto l'entry point DELETE `/features`. Il passaggio del context sarà esclusivmante attraverso il parametro cntxt (__nota__: questo nome è dovuto alla collisione del nome con il campo 'context' dell'oggetto request). In caso lo possiamo cambiare.
@@ -102,7 +106,7 @@ CHANGELOG
     }
 
 
-## 2.0.3
+## **2.0.3**
 ### **11 Novembre 2020**
 - Modificata api POST `/elements`: la variabile `element` è descritta dalla Classe hielen2.api.data.ElementSchema e validata. In paricolare è stato introdotto l'attibuto `context`
 - Modifcata api GET `/data`: la variabile `datamap` è descritta dalla Classe hielen2.api.data.DataMapSchema e validata.
@@ -114,7 +118,7 @@ CHANGELOG
 ### **6 Novembre 2020**
 - L'interfaccia DB è ora thread safe!!! (almeno per il dummy json db)
 
-## 2.0.2 
+## **v2.0.2**
 ### **4 Novembre 2020**
 - Implementata la documentazione automatica delle api
 - Implementate le api **POST** `../elements` e **DELETE** `../elements`
