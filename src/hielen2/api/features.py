@@ -6,6 +6,7 @@ from hielen2 import db
 from hielen2.utils import JsonValidable
 from marshmallow import Schema, fields
 from himada.api import ResponseFormatter
+from marshmallow_geojson import GeoJSONSchema
 
 
 class FeatureSchema(Schema):
@@ -16,7 +17,7 @@ class FeatureSchema(Schema):
     description=fields.Str(default=None)
     style=fields.Str(default=None)
     status=fields.Str(default=None)
-    geometry=fields.Str(default=None)
+    geometry=fields.Nested(GeoJSONSchema)
 
 
 @hug.post('/')
