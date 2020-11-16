@@ -9,22 +9,6 @@ from himada.api import ResponseFormatter
 from marshmallow_geojson import GeoJSONSchema
 
 
-class FeatureSchema(Schema):
-    '''
-Schema used to validate Features insertions (POST `/feature`). `uid` and `prototype` fields are \
-mandatory. They are immutable and any change on them won't be allowed in PUT method.
-'''
-    uid=fields.Str(required=True,allow_none=False)
-    prototype=fields.Str(required=True,allow_none=False)
-    context=fields.Str(default="no-context",allow_none=False)
-    label=fields.Str(default=None)
-    description=fields.Str(default=None)
-    location=fields.Str(default=None)
-    style=fields.Str(default=None)
-    status=fields.Str(default=None)
-    geometry=fields.Nested(GeoJSONSchema)
-
-
 class FeaturePropertiesSchema(Schema):
     '''
 Schema used to validate Feature modifications (PUT `/feature/{uid}`). `uid` and `prototypes` fields are \
@@ -157,12 +141,19 @@ def feature_info( uid, cntxt=None, request=None, response=None ):
     return features_info(uid,cntxt,request,response)
 
 @hug.put('/{uid}')
-def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema()), request=None, response=None ):
+def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema())={}, \
+        geometry:JsonValidable(GeoJSONSchema())={}, request=None, response=None ):
     """
 **Modifica delle properties di una feature**
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _202 OK_: Nel caso in cui la feature venga modificata correttamente.
+
 """
     
-    out = ResponseFormatter()
+    out = ResponseFormatter(status=falcon.HTTP_ACCEPTED)
 
     if uid is None:
         out.status=falcon.HTTP_BAD_REQUEST
@@ -170,6 +161,7 @@ def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema()), re
 
     try:
         f=db['features'][uid]
+        properties['geometry']=geometry
         f.update(properties)
         db['features'][uid]=None
         db['features'][uid]=f
@@ -194,11 +186,11 @@ Se la feature viene cancellata correttamente ne restituisce la struttura
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 OK_: Nel caso in cui la feature venga creata correttamente.
+- _202 OK_: Nel caso in cui la feature venga eliminata correttamente.
 
 """
 
-    out = ResponseFormatter()
+    out = ResponseFormatter(falcon.HTTP_ACCEPTED)
     
     if uid is None:
         out.status=falcon.HTTP_BAD_REQUEST
