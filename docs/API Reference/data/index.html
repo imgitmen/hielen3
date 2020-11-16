@@ -808,11 +808,12 @@
                 
                 
                 <h1 id="data">Data</h1>
-<h2 id="data_1">/data/</h2>
+<h2 id="data_1"><strong>/data/</strong></h2>
 <h4 id="get">GET</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>datamap</strong>: JSON Schema [{<strong>series</strong>: [str|bytes], <strong>timefrom</strong>: str|bytes, <strong>timeto</strong>: str|bytes}]</li>
+<li><strong>datamap</strong>: JSON Schema [{<strong>timefrom</strong>: str|bytes, <strong>timeto</strong>: str|bytes, <strong>series</strong>: [str|bytes]}]</li>
 <li><strong>content_type</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -820,8 +821,9 @@
 <li><strong>format</strong>: Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: text/plain; charset=utf-8, application/json; charset=utf-8</li>
 </ul>
-<h2 id="datafeature">/data/{feature}/</h2>
+<h2 id="datafeature"><strong>/data/{feature}/</strong></h2>
 <h4 id="get_1">GET</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>feature</strong>: Basic text / string value</li>
@@ -835,8 +837,9 @@
 <li><strong>format</strong>: Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: text/plain; charset=utf-8, application/json; charset=utf-8</li>
 </ul>
-<h2 id="datafeaturepar">/data/{feature}/{par}</h2>
+<h2 id="datafeaturepar"><strong>/data/{feature}/{par}</strong></h2>
 <h4 id="get_2">GET</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>el</strong>: Basic text / string value</li>

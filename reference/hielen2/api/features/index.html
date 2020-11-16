@@ -1368,13 +1368,7 @@
 292
 293
 294
-295
-296
-297
-298
-299
-300
-301</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+295</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1393,14 +1387,6 @@
 <span class="kn">from</span> <span class="nn">marshmallow_geojson</span> <span class="kn">import</span> <span class="n">GeoJSONSchema</span>
 
 <span class="k">class</span> <span class="nc">FeaturePropertiesSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
-
-    <span class="sd">&#39;&#39;&#39;</span>
-
-<span class="sd">Schema used to validate Feature modifications (PUT `/feature/{uid}`). `uid` and `prototypes` fields are \</span>
-
-<span class="sd">not alowed here, &#39;cause them are structural info of the feature.</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
 
     <span class="n">context</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;no-context&quot;</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
@@ -1508,7 +1494,7 @@
 
 <span class="sd">                    &quot;properties&quot;: {</span>
 
-<span class="sd">            ...</span>
+<span class="sd">                        ...</span>
 
 <span class="sd">                    },</span>
 
@@ -1516,9 +1502,11 @@
 
 <span class="sd">                },</span>
 
-<span class="sd">        ...</span>
+<span class="sd">                ...</span>
 
-<span class="sd">    }</span>
+<span class="sd">            ]</span>
+
+<span class="sd">        }</span>
 
 <span class="sd">___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \</span>
 
@@ -1687,8 +1675,8 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f53ac96a670</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f53ac984790</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fe0c117a6a0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fe0c11927c0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1874,18 +1862,18 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><strong>Recupero delle informazioni delle features.</strong></p>
 <p><strong>nota</strong>: uids accetta valori multipli separati da virgola </p>
 <p>viene restituito una struttura di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code>    <span class="err">{</span>                                                                                                                                                      
-        <span class="ss">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="err">{</span>
-                <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;Feature&quot;</span><span class="p">,</span>
-                <span class="ss">&quot;properties&quot;</span><span class="p">:</span> <span class="err">{</span>
-                    <span class="p">...</span>
-                <span class="err">}</span><span class="p">,</span>
-
-                <span class="ss">&quot;geometry&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">GeoJson</span> <span class="n">Validable</span><span class="o">&gt;</span>
-            <span class="err">}</span><span class="p">,</span>
-            <span class="p">...</span>
-    <span class="err">}</span>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        &quot;features&quot;: [</span>
+<span class="err">            {</span>
+<span class="err">                &quot;type&quot;: &quot;Feature&quot;,</span>
+<span class="err">                &quot;properties&quot;: {</span>
+<span class="err">                    ...</span>
+<span class="err">                },</span>
+<span class="err">                &quot;geometry&quot;: &lt;GeoJson Validable&gt;</span>
+<span class="err">            },</span>
+<span class="err">            ...</span>
+<span class="err">        ]</span>
+<span class="err">    }</span>
 </code></pre></div>
 
 <p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features.</p>
@@ -1915,7 +1903,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="s1">                    &quot;properties&quot;: {</span>
 
-<span class="s1">            ...</span>
+<span class="s1">                        ...</span>
 
 <span class="s1">                    },</span>
 
@@ -1923,9 +1911,11 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="s1">                },</span>
 
-<span class="s1">        ...</span>
+<span class="s1">                ...</span>
 
-<span class="s1">    }</span>
+<span class="s1">            ]</span>
+
+<span class="s1">        }</span>
 
 <span class="s1">___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \</span>
 
@@ -1984,8 +1974,8 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f53ac9848b0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f53ac984b50</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fe0c11928e0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fe0c1192b80</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -2064,28 +2054,69 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<p>Schema used to validate Feature modifications (PUT <code>/feature/{uid}</code>). <code>uid</code> and <code>prototypes</code> fields are not alowed here, 'cause them are structural info of the feature.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">class</span> <span class="nf">FeaturePropertiesSchema</span><span class="p">(</span><span class="k">Schema</span><span class="p">):</span>
+<p>Base schema class with which to define custom schemas.</p>
+<p>Example usage:</p>
+<p>.. code-block:: python</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">datetime</span> <span class="kn">as</span> <span class="nn">dt</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
 
-<span class="s1">Schema used to validate Feature modifications (PUT `/feature/{uid}`). `uid` and `prototypes` fields are \</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">Album</span><span class="p">:</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">release_date</span><span class="p">:</span> <span class="n">dt</span><span class="o">.</span><span class="n">date</span>
 
-<span class="s1">not alowed here, &#39;</span><span class="n">cause</span> <span class="n">them</span> <span class="n">are</span> <span class="n">structural</span> <span class="n">info</span> <span class="n">of</span> <span class="n">the</span> <span class="n">feature</span><span class="p">.</span>
+<span class="k">class</span> <span class="nc">AlbumSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()</span>
+    <span class="n">release_date</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Date</span><span class="p">()</span>
 
-<span class="s1">&#39;&#39;</span><span class="err">&#39;</span>
+<span class="n">album</span> <span class="o">=</span> <span class="n">Album</span><span class="p">(</span><span class="s2">&quot;Beggars Banquet&quot;</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">1968</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">AlbumSchema</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">schema</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">album</span><span class="p">)</span>
+<span class="n">data</span>  <span class="c1"># {&#39;release_date&#39;: &#39;1968-12-06&#39;, &#39;title&#39;: &#39;Beggars Banquet&#39;}</span>
+</code></pre></div>
 
-    <span class="n">context</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="s2">&quot;no-context&quot;</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="no">False</span><span class="p">)</span>
+<p>:param only: Whitelist of the declared fields to select when
+    instantiating the Schema. If None, all fields are used. Nested fields
+    can be represented with dot delimiters.
+:param exclude: Blacklist of the declared fields to exclude
+    when instantiating the Schema. If a field appears in both <code>only</code> and
+    <code>exclude</code>, it is not used. Nested fields can be represented with dot
+    delimiters.
+:param many: Should be set to <code>True</code> if <code>obj</code> is a collection
+    so that the object will be serialized to a list.
+:param context: Optional context passed to :class:<code>fields.Method</code> and
+    :class:<code>fields.Function</code> fields.
+:param load_only: Fields to skip during serialization (write-only fields)
+:param dump_only: Fields to skip during deserialization (read-only fields)
+:param partial: Whether to ignore missing fields and not require
+    any fields declared. Propagates down to <code>Nested</code> fields as well. If
+    its value is an iterable, only missing fields listed in that iterable
+    will be ignored. Use dot delimiters to specify nested fields.
+:param unknown: Whether to exclude, include, or raise an error for unknown
+    fields in the data. Use <code>EXCLUDE</code>, <code>INCLUDE</code> or <code>RAISE</code>.</p>
+<p>.. versionchanged:: 3.0.0
+    <code>prefix</code> parameter removed.</p>
+<p>.. versionchanged:: 2.0.0
+    <code>__validators__</code>, <code>__preprocessors__</code>, and <code>__data_handlers__</code> are removed in favor of
+    <code>marshmallow.decorators.validates_schema</code>,
+    <code>marshmallow.decorators.pre_load</code> and <code>marshmallow.decorators.post_dump</code>.
+    <code>__accessor__</code> and <code>__error_handler__</code> are deprecated. Implement the
+    <code>handle_error</code> and <code>get_attribute</code> methods instead.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">FeaturePropertiesSchema</span>(<span class="n">Schema</span>):
 
-    <span class="n">label</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+    <span class="n">context</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="s">&quot;no-context&quot;</span>,<span class="n">allow_none</span>=<span class="nb">False</span>)
 
-    <span class="n">description</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+    <span class="n">label</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">location</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+    <span class="n">description</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">style</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+    <span class="n">location</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">status</span><span class="o">=</span><span class="n">fields</span><span class="p">.</span><span class="nf">Str</span><span class="p">(</span><span class="k">default</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
+    <span class="n">style</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+
+    <span class="nb">status</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 </code></pre></div>
 
 </details>

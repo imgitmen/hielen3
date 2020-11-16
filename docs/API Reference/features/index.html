@@ -810,13 +810,14 @@
                 
                 
                 <h1 id="features">Features</h1>
-<h2 id="features_1">/features/</h2>
+<h2 id="features_1"><strong>/features/</strong></h2>
 <h4 id="post">POST</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>description</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -837,6 +838,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><em>201 Created</em>: Nel caso in cui la feature venga creata correttamente.</li>
 </ul>
 <h4 id="get">GET</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uids</strong>: Basic text / string value</li>
@@ -851,18 +853,18 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><strong>Recupero delle informazioni delle features.</strong></p>
 <p><strong>nota</strong>: uids accetta valori multipli separati da virgola </p>
 <p>viene restituito una struttura di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code>    <span class="err">{</span>                                                                                                                                                      
-        <span class="ss">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="err">{</span>
-                <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;Feature&quot;</span><span class="p">,</span>
-                <span class="ss">&quot;properties&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="p">...</span>
-                <span class="err">}</span><span class="p">,</span>
-
-                <span class="ss">&quot;geometry&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">GeoJson</span> <span class="n">Validable</span><span class="o">&gt;</span>
-            <span class="err">}</span><span class="p">,</span>
-    <span class="p">...</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        &quot;features&quot;: [</span>
+<span class="err">            {</span>
+<span class="err">                &quot;type&quot;: &quot;Feature&quot;,</span>
+<span class="err">                &quot;properties&quot;: {</span>
+<span class="err">                    ...</span>
+<span class="err">                },</span>
+<span class="err">                &quot;geometry&quot;: &lt;GeoJson Validable&gt;</span>
+<span class="err">            },</span>
+<span class="err">            ...</span>
+<span class="err">        ]</span>
+<span class="err">    }</span>
 </code></pre></div>
 
 <p><strong><em>nota</em></strong>: Al contrario di quanto detto nel TODO non viene inserito il context a livello "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' interno delle properties delle singole features.</p>
@@ -870,8 +872,9 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri</li>
 </ul>
-<h2 id="featuresuid">/features/{uid}</h2>
+<h2 id="featuresuid"><strong>/features/{uid}</strong></h2>
 <h4 id="get_1">GET</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
@@ -885,10 +888,11 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><em>description</em>:</p>
 <p><strong>Alias di recupero informazioni della specifica feature</strong></p>
 <h4 id="put">PUT</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>description</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -904,6 +908,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><em>202 OK</em>: Nel caso in cui la feature venga modificata correttamente.</li>
 </ul>
 <h4 id="delete">DELETE</h4>
+<hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
