@@ -10,11 +10,30 @@ from marshmallow_geojson import GeoJSONSchema
 
 
 class FeatureSchema(Schema):
+    '''
+Schema used to validate Features insertions (POST `/feature`). `uid` and `prototype` fields are \
+mandatory. They are immutable and any change on them won't be allowed in PUT method.
+'''
     uid=fields.Str(required=True,allow_none=False)
     prototype=fields.Str(required=True,allow_none=False)
-    context=fields.Str(default="decontextualized",allow_none=False)
+    context=fields.Str(default="no-context",allow_none=False)
     label=fields.Str(default=None)
     description=fields.Str(default=None)
+    location=fields.Str(default=None)
+    style=fields.Str(default=None)
+    status=fields.Str(default=None)
+    geometry=fields.Nested(GeoJSONSchema)
+
+
+class FeaturePropertiesSchema(Schema):
+    '''
+Schema used to validate Feature modifications (PUT `/feature/{uid}`). `uid` and `prototypes` fields are \
+not alowed here, 'cause them are structural info of the feature.
+'''
+    context=fields.Str(default="no-context",allow_none=False)
+    label=fields.Str(default=None)
+    description=fields.Str(default=None)
+    location=fields.Str(default=None)
     style=fields.Str(default=None)
     status=fields.Str(default=None)
     geometry=fields.Nested(GeoJSONSchema)
@@ -26,9 +45,10 @@ def create_feature(feature:JsonValidable(FeatureSchema()),request=None,response=
     '''
 **Creazione delle Features.**
 
-Ogni feature deve avere il suo codice univoco `uid` e il suo prototipo `prototype`.
+Ogni feature deve avere il suo codice univoco `uid` e il suo prototipo `prototype`. Questi due \
+campi sono immutabli (vedi PUT `/feature/{uid}`).
 Il prototipo della feature forisce informazioni per l'inizializazione della struttura.
-Il parametro geometry deve essere un GeoJson (ancora non validato)
+Il parametro `geometry` deve essere un GeoJson
 
 Se la feature viene creata correttamente ne restituisce la struttura
 
@@ -100,8 +120,11 @@ Possibili risposte:
 
 
     def _format(ft):
+
         try:
-            return { "type":"Feature", "properties":{ k:w for k,w in ft.items() if not k == "parameters" } }
+
+            ft.pop("parameters")
+            return {"type":"Feature","geometry":ft.pop("geometry"),"properties":ft}
         except Exception as e:
             raise e
 
@@ -132,10 +155,33 @@ def feature_info( uid, cntxt=None, request=None, response=None ):
 """
     return features_info(uid,cntxt,request,response)
 
+@hug.put('/{uid}')
+def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema()), request=None, response=None ):
+    """
+**Modifica delle properties di una feature**
+"""
+    
+    out = ResponseFormatter()
+
+    if uid is None:
+        out.status=falcon.HTTP_BAD_REQUEST
+        out.message="None value not allowed"
+
+    try:
+        f=db['features'][uid]
+        f.update(properties)
+        db['features'][uid]=None
+        db['features'][uid]=f
+        out.data=db['features'][uid]
+    except KeyError as e:
+        out.status=falcon.HTTP_NOT_FOUND
+        out.message=f"feature '{uid}' not foud."
+
+    response = out.format(response=response,request=request)
+    return
 
 
-##@hug.delete('/{cntxt}/{uid}')
-##def del_feature( cntxt,uid, request=None, response=None ):
+
 @hug.delete('/{uid}')
 def del_feature( uid, request=None, response=None ):
 

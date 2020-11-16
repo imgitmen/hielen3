@@ -1,3 +1,6 @@
+[tool.portray]
+port = 8001
+
 [tool.portray.mkdocs.theme]
 favicon = "art/hielen2.svg"
 logo = "art/hielen2.svg"
