@@ -1,6 +1,8 @@
 #Prototypes
 ##/prototypes/
-####POST CIAO
+
+
+####POST
 -------------
 _params_:
 
@@ -11,7 +13,9 @@ _result_:
 - **format**: JSON (Javascript Serialized Object Notation)
 - **content_type**: application/json; charset=utf-8
 
-####GET CIAO
+
+
+####GET
 -------------
 _result_:
 
@@ -20,7 +24,9 @@ _result_:
 
 
 ##/prototypes/{prototype}
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
@@ -33,7 +39,9 @@ _result_:
 
 
 ##/prototypes/{prototype}/forms
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
@@ -46,7 +54,9 @@ _result_:
 
 
 ##/prototypes/{prototype}/forms/{form}
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
@@ -60,7 +70,9 @@ _result_:
 
 
 ##/prototypes/{prototype}/struct
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 

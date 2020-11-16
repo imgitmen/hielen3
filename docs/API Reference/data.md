@@ -1,10 +1,12 @@
 #Data
 ##/data/
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
-- **datamap**: JSON Schema [{**timefrom**: str|bytes, **series**: [str|bytes], **timeto**: str|bytes}]
+- **datamap**: JSON Schema [{**series**: [str|bytes], **timefrom**: str|bytes, **timeto**: str|bytes}]
 - **content_type**: Basic text / string value
 
 _result_:
@@ -14,7 +16,9 @@ _result_:
 
 
 ##/data/{feature}/
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
@@ -31,7 +35,9 @@ _result_:
 
 
 ##/data/{feature}/{par}
-####GET CIAO
+
+
+####GET
 -------------
 _params_:
 
