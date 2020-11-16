@@ -159,6 +159,5 @@ CHANGELOG
 - **GET** `/elements`
 - **GET** `/elements/{el}`
 - **DELETE** `/elements/{el}`
-- **PUT** `/elements/{el}`
 
 
