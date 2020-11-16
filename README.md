@@ -1,8 +1,8 @@
-#HIELEN
+# HIELEN
 
-##Prototipazione degli elementi
+## Prototipazione degli elementi
 
-###prototypes
+### prototypes
 Api dedicata alle tipologie di elementi e alle azioni (di input) specifiche. Le azioni sono statiche, nel senso che devono essere approntate in modo programmatico. Attualmente sono: 
     
     config
@@ -22,9 +22,9 @@ tutte le UI create in questo modo saranno aperte su uno specifico elemento del s
 
 con un mimetype di tipo **multipart/form-data**
 
-##Manipolazione elenco elementi
+## Manipolazione elenco elementi
 
-###elements
+### elements
 Api dedicata agli elementi del sistema: il succo della faccenda.
 
 Considerazione: gli elementi sono oggetti che producono "elaborazioni" nel tempo con un caratteristico grado dimensionale (dato, mappe, nuvole). E' sempre possibile "proiettare" una "elaborazione" con grado maggiore su una di grado inferiore. Così da una nuvola può generare mappe e dalla nuvola o dalle mappe possono essere estratte delle serie storiche. 
@@ -41,7 +41,7 @@ Considerazione: gli elementi sono oggetti che producono "elaborazioni" nel tempo
     DELETE {uri}/elements/{el}
     PUT {uri}/elements/{el}
 
-##Interrogazione elementi: operazioni di output
+## Interrogazione elementi: operazioni di output
 L'interrogazione può riguardare più di un elemento contemporaneamente ed è rivolta in questo modo:
 
     sitema --> utente
@@ -50,33 +50,33 @@ Per questo motivo la struttura della richiesta prevede di specificare prima l'az
 
 **nota 1**: non tutte queste api saranno disponibili per tutti gli elementi. Per ogni elemento sarà noto l'elenco a disposizone tramite backend (presumibilemnte attraverso GET {uri}/elements/[{el}])
 
-###series
+### series
 
     GET {uri}/data
     GET {uri}/data/{el}
     GET {uri}/data/{el}/{param}
 
-###bases
+### bases
 
     GET {uri}/bases
     GET {uri}/bases/{el}
 
-###timelines
+### timelines
 
     GET {uri}/timelines
     GET {uri}/timelines/{el}
 
-###maps
+### maps
 
     GET {uri}/maps/[/z/x/y]
     GET {uri}/maps/{el}/[z/x/y]
 
-###clouds
+### clouds
 
     GET {uri}/clouds
     GET {uri}/clouds/{el}
 
-##Azioni sugli elementi: operazioni di input
+## Azioni sugli elementi: operazioni di input
 In questo caso le azioni servono a modificare lo stato di un elemento:
 
     sistema <-- utente
@@ -85,7 +85,7 @@ la richiesta viene composta specificando necessariamente l'elemento prima dell'a
 
 **nota 1**: queste trovano riscontro nell'endpoint forms dell'api prototypes.
 
-###actions
+### actions
 Le due azioni attualemente previste sono:
 
 _config_
