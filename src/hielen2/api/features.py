@@ -144,7 +144,7 @@ def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema())={},
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _202 OK_: Nel caso in cui la feature venga modificata correttamente.
+- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.
 
 """
     
@@ -181,7 +181,7 @@ Se la feature viene cancellata correttamente ne restituisce la struttura
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _202 OK_: Nel caso in cui la feature venga eliminata correttamente.
+- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
 
 """
 
