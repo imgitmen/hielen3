@@ -240,6 +240,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#17-novembre" class="md-nav__link">
+    17 Novembre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v204" class="md-nav__link">
     v2.0.4
   </a>
@@ -375,6 +382,18 @@
   <li class="md-nav__item">
     <a href="../docs/API%20Reference/features/" title="Features" class="md-nav__link">
       Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
+      Actions
     </a>
   </li>
 
@@ -766,6 +785,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#17-novembre" class="md-nav__link">
+    17 Novembre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v204" class="md-nav__link">
     v2.0.4
   </a>
@@ -874,6 +900,10 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
+<h3 id="17-novembre"><strong>17 Novembre</strong></h3>
+<ul>
+<li>Implementata dummy POST /actions/{feature}/{form}: il tipo accettato è multipart/form-data. Si basa sui json dei prototipi per verificare la presenza di valori nei campi obbligatori e si aspetta che i nomi dei campi siano quelli presenti nella definizione di form dello specifico protipo legato alla feature. Tutto il content è scaricato attraverso "continue" il che dovrebbe evitare la morte dei workers in attesa. Attualemnte è implemntato come "dummy", ovvero, funziona tuto il giro del check ma non i moduli specifici non sono ancora agganciati. Invece in risposta manda un json dict compresivo di tutti campi attesi valorizzati con quanto preso in input, nel caso di variabili o con l'hash md5 del file in caso il campo contenga questo tipo di informazione. L'md5 vine calcolato sulla base del file scrito sul filesystem.</li>
+</ul>
 <h2 id="v204"><strong>v2.0.4</strong></h2>
 <h3 id="16-novembre-2020"><strong>16 Novembre 2020</strong></h3>
 <ul>
