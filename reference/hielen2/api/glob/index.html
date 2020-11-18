@@ -400,6 +400,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../data/" title="Data" class="md-nav__link">
       Data
     </a>
@@ -818,13 +830,21 @@
 56
 57
 58
-59</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
 <span class="kn">import</span> <span class="nn">hug</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">features</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">actions</span>
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
@@ -877,6 +897,14 @@
     <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">features</span><span class="p">]</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/actions&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
+
+    <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">actions</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -888,13 +916,13 @@
 </code></pre></div>
 
 <p>Series manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/features&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/actions&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="s1">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">features</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">actions</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
 
 </details>

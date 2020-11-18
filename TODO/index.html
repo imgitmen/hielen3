@@ -236,6 +236,33 @@
     v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD
   </a>
   
+    <nav class="md-nav" aria-label="v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struttura-principale-actionsfeatureaction" class="md-nav__link">
+    Struttura principale /actions/{feature}/{action}:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed" class="md-nav__link">
+    feed:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -476,6 +503,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/hielen2/api/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
         
           
           
@@ -734,6 +773,33 @@
     v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD
   </a>
   
+    <nav class="md-nav" aria-label="v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#struttura-principale-actionsfeatureaction" class="md-nav__link">
+    Struttura principale /actions/{feature}/{action}:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed" class="md-nav__link">
+    feed:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -807,16 +873,24 @@
                 
                 <h2 id="con-priorita">Con Priorità</h2>
 <h3 id="v205-interfacce-delle-azioni-con-risposta-mockup-intento-agganciare-lavoro-simoned"><strong>v2.0.5</strong> Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD</h3>
-<ul>
-<li>Struttura principale <code>/actions/{el}</code>:</li>
-</ul>
-<p><em>config</em>:</p>
+<h4 id="struttura-principale-actionsfeatureaction"><em>Struttura principale <code>/actions/{feature}/{action}</code></em>:</h4>
+<ol>
+<li>~~accettare content-type/multipart~~</li>
+<li>~~recuperare il prototipo di feature e verificare il content~~</li>
+<li>~~collegare il parsing dei field del multipart alla form della feature~~</li>
+<li>~~Implementare dummy POST generico che risponde in base alla from della feture~~</li>
+<li>Fornire le form attraverso /features e non attraverso prototype (un passaggio di meno)</li>
+<li>Definire superclasse source</li>
+<li>Inserire modulo di riferimento tra le info del prototipo</li>
+<li>Implemntare passaggio a modulo (loading dinamico come source dei dati)</li>
+</ol>
+<h4 id="config"><em>config</em>:</h4>
 <ul>
 <li>POST <code>/actions/{el}/config</code></li>
 <li>GET <code>/actions/{el}/config</code></li>
 <li>PUT <code>/actions/{el}/config</code></li>
 </ul>
-<p><em>feed</em>:</p>
+<h4 id="feed"><em>feed</em>:</h4>
 <ul>
 <li>POST <code>/actions/{el}/feed</code></li>
 <li>GET <code>/actions/{el}/feed</code></li>
