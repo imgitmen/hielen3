@@ -24,6 +24,9 @@ Changelog = "CHANGELOG.md"
     "Features" = "docs/API Reference/features.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
+    "Actions" = "docs/API Reference/actions.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
     "Parameters" = "docs/API Reference/parameters.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
