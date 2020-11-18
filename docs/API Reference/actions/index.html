@@ -443,9 +443,15 @@
 <li><em>404 Not Found</em>: Nel caso la feature non esita o non sia definita per essa l'azione richiesta.</li>
 <li><em>202 Accepted</em>: Nel caso in cui l'azione vada a buon fine</li>
 </ul>
-<p><strong>TEMPORANEAMENTE</strong>
-- E' impementato come <em>"DUMMY"</em>: funziona tutto il giro dei check ma i moduli specifici non sono ancora agganciati. 
-- Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati in questo modo: </p>
+<p><strong>TEMPORANEAMENTE</strong></p>
+<ul>
+<li>
+<p>E' impementato come <em>"DUMMY"</em>: funziona tutto il giro dei check ma i moduli specifici non sono ancora agganciati.</p>
+</li>
+<li>
+<p>Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati in questo modo: </p>
+</li>
+</ul>
 <p>se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input.</p>
 <p>se il campo fornito in imput è un file viene, fornito il checksum md5 del file, calcolato dopo che il file è stato salvato sul filesystem.</p>
 <p>i campi non forniti in input vengono restituiti con valore null.</p>
