@@ -44,7 +44,7 @@ in questo modo:
 
 _Se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input._
 
-_Se il campo fornito in imput è un file viene, fornito il checksum md5 del file, calcolato dopo che \
+_Se il campo fornito in imput è un file, viene fornito il checksum md5 del file, calcolato dopo che \
 il file è stato salvato sul filesystem._
 
 _I campi non forniti in input vengono restituiti con valore null._
