@@ -16,7 +16,37 @@ from urllib.parse import unquote
 @hug.post('/{feature}/{form}',parse_body=False)
 @hug.default_input_format( content_type='multipart/form-data')
 def prots(feature=None,form=None, request=None, response=None, **kwargs ):
+    """
+**Esecuzione delle azioni**
 
+Richiede l'esecuzione di una specifica azione su una feature, fornendo tutte le informazioni \
+necessarie attraverso una form dinamica dedicata. L'elenco delle azioni possibili per ogni \
+feature è disponibile attraverso l'api ... (TODO)
+
+- Oltre ai due parametri `feature` e `form`, indicati nella url, accetta un _multipart/form-data_ \
+basato sulla specifica form, selezionata tramite i due parametri espliciti.
+- Tutto il content è scaricato attarverso i chunk dello stream ('100 continue') per evitare il \
+timeout dei workers in caso di contenuti di grandi dimensioni.
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso la feature non esita o non sia definita per essa l'azione richiesta.
+- _202 Accepted_: Nel caso in cui l'azione vada a buon fine
+
+
+**TEMPORANEAMENTE**
+- E' impementato come _"DUMMY"_: funziona tutto il giro dei check ma i moduli specifici non sono \
+ancora agganciati. 
+- Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati \
+in questo modo: 
+
+se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input.
+
+se il campo fornito in imput è un file viene, fornito il checksum md5 del file, calcolato dopo che \
+il file è stato salvato sul filesystem.
+
+i campi non forniti in input vengono restituiti con valore null.
+"""
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
     try:
@@ -69,6 +99,8 @@ def prots(feature=None,form=None, request=None, response=None, **kwargs ):
         if isinstance(w,str):
 #FOR DUMMY RESPONSE
             v=os.path.exists(w) and "md5 "+hashfile(w) or None
+            if os.path.exists(w): 
+                  os.remove(w)
 #REAL
 #            v=os.path.exists(w) and hashfile(w) or None
         else:

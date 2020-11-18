@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ### **17 Novembre**
-- Implementata dummy POST /actions/{feature}/{form}: il tipo accettato è multipart/form-data. Si basa sui json dei prototipi per verificare la presenza di valori nei campi obbligatori e si aspetta che i nomi dei campi siano quelli presenti nella definizione di form dello specifico protipo legato alla feature. Tutto il content è scaricato attraverso "continue" il che dovrebbe evitare la morte dei workers in attesa. Attualemnte è implemntato come "dummy", ovvero, funziona tuto il giro del check ma non i moduli specifici non sono ancora agganciati. Invece in risposta manda un json dict compresivo di tutti campi attesi valorizzati con quanto preso in input, nel caso di variabili o con l'hash md5 del file in caso il campo contenga questo tipo di informazione. L'md5 vine calcolato sulla base del file scrito sul filesystem.
+- Implementata **dummy** POST `/actions/{feature}/{form}`: 
 
 ## **v2.0.4**
 ### **16 Novembre 2020**
