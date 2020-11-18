@@ -35,8 +35,10 @@ Possibili risposte:
 
 
 **TEMPORANEAMENTE**
+
 - E' impementato come _"DUMMY"_: funziona tutto il giro dei check ma i moduli specifici non sono \
-ancora agganciati. 
+ancora agganciati.
+
 - Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati \
 in questo modo: 
 
