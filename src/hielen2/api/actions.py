@@ -42,12 +42,12 @@ ancora agganciati.
 - Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati \
 in questo modo: 
 
-se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input.
+_Se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input._
 
-se il campo fornito in imput è un file viene, fornito il checksum md5 del file, calcolato dopo che \
-il file è stato salvato sul filesystem.
+_Se il campo fornito in imput è un file viene, fornito il checksum md5 del file, calcolato dopo che \
+il file è stato salvato sul filesystem._
 
-i campi non forniti in input vengono restituiti con valore null.
+_I campi non forniti in input vengono restituiti con valore null._
 """
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
