@@ -31,6 +31,7 @@ def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=
     series={}
 
     for s in datamap:
+
         try:
             timefrom=s['timefrom']
         except KeyError:
@@ -94,9 +95,9 @@ def tabular_data_el( feature, par=None, timefrom=None, timeto=None, content_type
     try:
     
         if par is None:
-            parameters=[ f"{ft['uid']}:{e}" for e in element['parameters'].keys() ]
+            series=list(ft['parameters'].values())
         else:
-            parameters=[ f"{ft['uid']}:{par}" ]
+            series=[ ft['parameters'][par] ]
 
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
@@ -104,7 +105,7 @@ def tabular_data_el( feature, par=None, timefrom=None, timeto=None, content_type
         response = out.format(response=response,request=request)
         return
 
-    datamap=dict(parameters=parameters)
+    datamap=dict(series=series)
 
     if timefrom is not None:
         datamap['timefrom']=timefrom
@@ -112,15 +113,14 @@ def tabular_data_el( feature, par=None, timefrom=None, timeto=None, content_type
     if timeto is not None:
         datamap['timeto']=timeto
 
-    return tabular_data(datamap=json.dumps([datamap]),request=request,response=response)
+    return tabular_data(datamap=[datamap],request=request,response=response)
     
 
 
 
 @hug.get('/{feature}/{par}', output=data_out_handler)
-def tabular_data_par( el=None, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
-
-    return tabular_data_el( el=el,par=par,timefrom=timefrom,timeto=timeto,request=request, response=response )
+def tabular_data_par( feature=None, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
+    return tabular_data_el( feature=feature,par=par,timefrom=timefrom,timeto=timeto,request=request, response=response )
 
 
 

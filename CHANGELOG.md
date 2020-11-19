@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+### **19 Novembre**
+- riorganizzata la struttura per la gestione delle classi estese che necessitano di dynamic loading: nel modulo himada2.ext (cartella) vengono raccoliti per comodità gli oggetti che saranno implementati man mano come estensione di superclassi atratte appositamente definite: per ora hielen2.datalink.Source e hielen2.datalink.DB.
+- inserito 'timestamp' nello schema json accettato da POST `/feature` e PUT `/feature`.
+- risolto bug minore di incoerenza su GET `/data/{feature}` e `/data/{feature}/{parameter}`. Quest'ultima continua ad accettare uno tra i nomi dei parametri della feature. Entrambe rispondo intestando le colonne in uscita con lo uid della serie, come GET `/data/`.
+
 ### **17 Novembre**
 - Implementata **dummy** POST `/actions/{feature}/{form}`: 
 

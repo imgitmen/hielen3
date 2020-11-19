@@ -25,4 +25,4 @@ def int_or_str(value):
 
 VERSION = tuple(map(int_or_str, __version__.split('.')))
 
-__all__ = ['api','conf', 'db', ]
+__all__ = ['conf', 'db', ]
