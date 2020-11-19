@@ -30,7 +30,7 @@ timeout dei workers in caso di contenuti di grandi dimensioni.
 
 Possibili risposte:
 
-- _404 Not Found_: Nel caso la feature non esita o non sia definita per essa l'azione richiesta.
+- _404 Not Found_: Nel caso la feature non esista o non sia definita per essa l'azione richiesta.
 - _202 Accepted_: Nel caso in cui l'azione vada a buon fine
 
 

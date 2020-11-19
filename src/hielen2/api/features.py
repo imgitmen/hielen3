@@ -16,6 +16,7 @@ class FeaturePropertiesSchema(Schema):
     location=fields.Str(default=None)
     style=fields.Str(default=None)
     status=fields.Str(default=None)
+    timestamp=fields.Str(default=None)
 
 
 @hug.post('/')
