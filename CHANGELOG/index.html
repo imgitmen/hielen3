@@ -240,6 +240,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#19-novembre" class="md-nav__link">
+    19 Novembre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#17-novembre" class="md-nav__link">
     17 Novembre
   </a>
@@ -451,6 +458,13 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#19-novembre" class="md-nav__link">
+    19 Novembre
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#17-novembre" class="md-nav__link">
     17 Novembre
   </a>
@@ -566,6 +580,12 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
+<h3 id="19-novembre"><strong>19 Novembre</strong></h3>
+<ul>
+<li>riorganizzata la struttura per la gestione delle classi estese che necessitano di dynamic loading: nel modulo himada2.ext (cartella) vengono raccoliti per comodità gli oggetti che saranno implementati man mano come estensione di superclassi atratte appositamente definite: per ora hielen2.datalink.Source e hielen2.datalink.DB.</li>
+<li>inserito 'timestamp' nello schema json accettato da POST <code>/feature</code> e PUT <code>/feature</code>.</li>
+<li>risolto bug minore di incoerenza su GET <code>/data/{feature}</code> e <code>/data/{feature}/{parameter}</code>. Quest'ultima continua ad accettare uno tra i nomi dei parametri della feature. Entrambe rispondo intestando le colonne in uscita con lo uid della serie, come GET <code>/data/</code>.</li>
+</ul>
 <h3 id="17-novembre"><strong>17 Novembre</strong></h3>
 <ul>
 <li>Implementata <strong>dummy</strong> POST <code>/actions/{feature}/{form}</code>: </li>
