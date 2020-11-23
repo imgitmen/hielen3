@@ -12,6 +12,8 @@ from streaming_form_data import StreamingFormDataParser
 from streaming_form_data.targets import FileTarget, ValueTarget
 from himada.api import ResponseFormatter
 from urllib.parse import unquote
+from importlib import import_module
+
 
 @hug.post('/{feature}/{form}',parse_body=False)
 @hug.default_input_format( content_type='multipart/form-data')
@@ -51,15 +53,18 @@ _I campi non forniti in input vengono restituiti con valore null._
 """
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
+    # Tring to manage income feature request and its prototype configuration
     try:
-        t=db['features'][feature]['type']
-        forms=db['features_proto'][t]['forms']
+        proto=db['features'][feature]['type']
+        forms=db['features_proto'][proto]['forms']
+
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
         out.message=f"feature '{feature}' does not exists or it is misconfigured."
         out.format(request=request,response=response)
         return
 
+    # Tring to retrive requested action form configuration
     try:
         form=forms[form]
     except KeyError as e:
@@ -68,6 +73,7 @@ _I campi non forniti in input vengono restituiti con valore null._
         out.format(request=request,response=response)
         return
 
+    
 
     mandatory=form['mandatory'].keys()
 
@@ -79,8 +85,8 @@ _I campi non forniti in input vengono restituiti con valore null._
 
     for k,w in expected_fields.items():
         if w == 'file':
-            t=time.perf_counter()
-            filepath=os.path.join(tempfile.gettempdir(), f"{feature}{k}{t}.part")
+            timenow=time.perf_counter()
+            filepath=os.path.join(tempfile.gettempdir(), f"{feature}{k}{timenow}.part")
             target=FileTarget(filepath)
             parser.register(k, target)
             values[k]=filepath
@@ -119,5 +125,28 @@ _I campi non forniti in input vengono restituiti con valore null._
         out.format(request=request,response=response)
         return
 
-    return kwargs
+    #CHECKS request checks ALL RIGHT. Continuing with code loading
+
+    # Tring to initialize feature action managere module
+    try:
+        mod=db['features_proto'][proto]['module']
+        mod=import_module(mod)
+        result = eval(f"mod.{form}(**kwargs)")
+    except KeyError as e:
+        out.status=falcon.HTTP_NOT_IMPLEMENTED
+        out.message=f"Prototype '{proto}' actions not implemented."
+        out.format(request=request,response=response)
+        return
+    except ModuleNotFoundError as e:
+        out.status=falcon.HTTP_NOT_IMPLEMENTED
+        out.message=f"Prototype '{proto}' actions not implemented."
+        out.format(request=request,response=response)
+        return  
+    except AttributeError as e:
+        out.status=falcon.HTTP_NOT_IMPLEMENTED
+        out.message=f"Prototype '{proto}' action '{form}' not implemented."
+        out.format(request=request,response=response)
+        return 
+
+    return result
 
