@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+### **24 Novembre**
+- Implementate **dummy** `/actions/{feature}/`
+
+### **23 Novembre**
+- Riorganizzato il db delle features per permettere una gestione più razionale
+
 ### **19 Novembre**
 - riorganizzata la struttura per la gestione delle classi estese che necessitano di dynamic loading: nel modulo himada2.ext (cartella) vengono raccoliti per comodità gli oggetti che saranno implementati man mano come estensione di superclassi astratte appositamente definite: per ora hielen2.datalink.Source e hielen2.datalink.DB e hielen2.datalink.DataCache. Oltre alle classi in hielen2.ext, il sitema potrà utilizzare moduli esterni che estendano le superclassi elencate.
 - inserito 'timestamp' nello schema json accettato da POST `/feature` e PUT `/feature`.

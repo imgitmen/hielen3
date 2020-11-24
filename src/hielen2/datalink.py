@@ -7,8 +7,7 @@ from filelock import Timeout, FileLock
 from numpy import nan
 
 def dbinit(conf):
-    conf['substs']
-    return { k:newinstanceof(w['klass'],w['connection'].format(**conf['substs']))  for k,w in conf['db'].items() }
+    return { k:newinstanceof(w['klass'],w['connection'])  for k,w in conf['db'].items() }
 
 class DB(ABC):
 

@@ -14,10 +14,56 @@ from himada.api import ResponseFormatter
 from urllib.parse import unquote
 from importlib import import_module
 
+@hug.get('/{feature}')
+def get_forms(feature=None,form=None, request=None, response=None):
+
+    out = ResponseFormatter(falcon.HTTP_ACCEPTED)
+      
+    # Trying to manage income feature request and its prototype configuration
+    try:
+        proto=db['features'][feature]['type']
+        forms=db['features_proto'][proto]['forms']
+    except KeyError as e:
+        out.status=falcon.HTTP_NOT_FOUND
+        out.message=f"feature '{feature}' does not exists or it is misconfigured."
+        out.format(request=request,response=response)
+        return
+
+    def _clean(f):
+        fo={}
+        try:
+            fo.update(f['mandatory'])
+        except KeyError:
+            pass
+        try:
+            fo.update(f['optional'])
+        except KeyError:
+            pass
+        return fo
+
+    forms={ k:_clean(w) for k,w in forms.items() }
+
+    if form is None:
+        out.data=forms
+    else:
+        try:
+            out.data=forms[form]
+        except KeyError as e:
+            out.status=falcon.HTTP_NOT_FOUND
+            out.message=f"No '{form}' form defined for feature '{feature}'"
+
+    out.format(request=request,response=response)
+    return
+
+
+@hug.get('/{feature}/{form}')
+def get_form(feature=None,form=None, request=None, response=None):
+    return get_forms(feature=feature,form=form,request=request,response=response)
+
 
 @hug.post('/{feature}/{form}',parse_body=False)
 @hug.default_input_format( content_type='multipart/form-data')
-def prots(feature=None,form=None, request=None, response=None, **kwargs ):
+def prots(feature=None,form=None, request=None, response=None):
     """
 **Esecuzione delle azioni**
 
@@ -53,7 +99,7 @@ _I campi non forniti in input vengono restituiti con valore null._
 """
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
-    # Tring to manage income feature request and its prototype configuration
+    # Trying to manage income feature request and its prototype configuration
     try:
         proto=db['features'][feature]['type']
         forms=db['features_proto'][proto]['forms']
@@ -64,20 +110,18 @@ _I campi non forniti in input vengono restituiti con valore null._
         out.format(request=request,response=response)
         return
 
-    # Tring to retrive requested action form configuration
+    # Trying to retrive requested action form configuration
     try:
-        form=forms[form]
+        formstruct=forms[form]
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
         out.message=f"No '{form}' form defined for feature '{feature}'"
         out.format(request=request,response=response)
         return
 
-    
+    mandatory=formstruct['mandatory'].keys()
 
-    mandatory=form['mandatory'].keys()
-
-    expected_fields={ **form['mandatory'], **form['optional'] }
+    expected_fields={ **formstruct['mandatory'], **formstruct['optional'] }
 
     parser = StreamingFormDataParser(headers=request.headers)
 
@@ -127,19 +171,27 @@ _I campi non forniti in input vengono restituiti con valore null._
 
     #CHECKS request checks ALL RIGHT. Continuing with code loading
 
-    # Tring to initialize feature action managere module
+    # Trying to initialize feature action managere module
     try:
         mod=db['features_proto'][proto]['module']
         mod=import_module(mod)
-        result = eval(f"mod.{form}(**kwargs)")
+        toeval=f"mod.{form}(**kwargs)"
+        result = eval(toeval)
+
+#DUMMY ERROR MANAGER
+    except Exception:
+        result=kwargs
+
+#PRODUCTION ERROR MANAGER
+    """
     except KeyError as e:
         out.status=falcon.HTTP_NOT_IMPLEMENTED
         out.message=f"Prototype '{proto}' actions not implemented."
         out.format(request=request,response=response)
         return
     except ModuleNotFoundError as e:
-        out.status=falcon.HTTP_NOT_IMPLEMENTED
-        out.message=f"Prototype '{proto}' actions not implemented."
+        out.status=falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.message=f"Prototype '{proto}' module '{mod}' not found."
         out.format(request=request,response=response)
         return  
     except AttributeError as e:
@@ -147,6 +199,7 @@ _I campi non forniti in input vengono restituiti con valore null._
         out.message=f"Prototype '{proto}' action '{form}' not implemented."
         out.format(request=request,response=response)
         return 
+    """
 
     return result
 
