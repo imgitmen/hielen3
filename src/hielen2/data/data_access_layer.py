@@ -115,7 +115,7 @@ class Generator:
         try:
             v=value.split('.')
             assert (v.__len__()==2)
-            return (key,db['features'][v[0]][v[1]])
+            return (key,db['features'][v[0]]['properties'][v[1]])
         except Exception:
             pass
 

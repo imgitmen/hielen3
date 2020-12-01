@@ -42,19 +42,23 @@ Possibili risposte:
 
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
     
-
     try:
-        feature={"uid":uid,"geometry":geometry}
-        feature.update(properties)
-        try:
-            if feature['context'] is None:
-                feature['context']='no-context'
-        except KeyError:
-            feature['context']='no-context'
-        feature.update( db['features_proto'][prototype]['struct'] )
+        feature={"geometry":geometry}
+        feature.update(db['features_proto'][prototype]['struct'])
+        feature['properties']['uid']=uid
         feature['parameters']={ k:None for k in feature['parameters'].keys()}
-        db['features'][feature['uid']]=feature
-        out.message=db['features'][feature['uid']]
+        
+        try:
+            assert properties['context'] is not None
+        except Exception:
+            properties['context'] = 'no-context'
+
+        feature['properties'].update( properties )
+
+        db['features'][uid]=feature
+
+        out.data=db['features'][uid]
+
     except KeyError as e:
         out.message=f"prototype '{prototype}' not found."
         out.status=falcon.HTTP_NOT_FOUND
@@ -101,13 +105,13 @@ Possibili risposte:
 
 
     def _format(ft):
-
         try:
-
             ft.pop("parameters")
-            return {"type":"Feature","geometry":ft.pop("geometry"),"properties":ft}
+            ft["type"]="Feature"
         except Exception as e:
             raise e
+
+        return ft
 
     out = ResponseFormatter()
 
@@ -117,7 +121,7 @@ Possibili risposte:
     try:
         out.data=dict( 
             features=[ _format(v) for v in db['features'][uids].values() 
-                if cntxt is None or v['context']==cntxt ] 
+                if cntxt is None or v['properties']['context']==cntxt ] 
             )
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
@@ -157,8 +161,8 @@ Possibili risposte:
 
     try:
         f=db['features'][uid]
-        properties['geometry']=geometry
-        f.update(properties)
+        f['properties'].update(properties)
+        f['geometry'].update(geometry)
         db['features'][uid]=None
         db['features'][uid]=f
         out.data=db['features'][uid]

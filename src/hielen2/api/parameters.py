@@ -74,7 +74,7 @@ Possibili risposte:
 
     try:
         out.data={ k:_format(w,params) for k,w in db['features'][uids].items() 
-                if cntxt is None or w['context']==cntxt }
+                if cntxt is None or w['properties']['context']==cntxt }
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
         out.message=(str(e))

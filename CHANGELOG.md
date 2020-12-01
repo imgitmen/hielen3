@@ -1,18 +1,35 @@
 CHANGELOG
 =========
 
-### **24 Novembre**
-- Implementate **dummy** `/actions/{feature}/`
+### **2 Dicmebre 20202**
+- Struttura definitiva delle features:
+        
+        {
+            "properties":"..."
+            "parameters":"..."
+            "geometry":"..."
+        }
 
-### **23 Novembre**
+dove:
+
+- _properties_ mantiene **tutte** le info: quelle di base: `uid`,`type`,`classification`,`location`,`description` e quelle definite per le specifiche azioni definite per la tipologia. In particolare quella di configurzione
+- _parameters_ mantiene la struttura di accesso alle info e ai dati dei parametri definiti per la feature.
+- _geometry_ fornisce le informazioni geometriche della feature.
+
+Rivedute le api `/actions`, `/parameters`, `/features` (`/data` da rivedere)
+
+### **24 Novembre 2020**
+- Implementate **dummy** `/actions/{feature}/` e `/actions/{feature}/{form}`
+
+### **23 Novembre 2020**
 - Riorganizzato il db delle features per permettere una gestione più razionale
 
-### **19 Novembre**
+### **19 Novembre 2020**
 - riorganizzata la struttura per la gestione delle classi estese che necessitano di dynamic loading: nel modulo himada2.ext (cartella) vengono raccoliti per comodità gli oggetti che saranno implementati man mano come estensione di superclassi astratte appositamente definite: per ora hielen2.datalink.Source e hielen2.datalink.DB e hielen2.datalink.DataCache. Oltre alle classi in hielen2.ext, il sitema potrà utilizzare moduli esterni che estendano le superclassi elencate.
 - inserito 'timestamp' nello schema json accettato da POST `/feature` e PUT `/feature`.
 - risolto bug minore di incoerenza su GET `/data/{feature}` e `/data/{feature}/{parameter}`. Quest'ultima continua ad accettare uno tra i nomi dei parametri della feature. Entrambe rispondo intestando le colonne in uscita con lo uid della serie, come GET `/data/`.
 
-### **17 Novembre**
+### **17 Novembre 2020**
 - Implementata **dummy** POST `/actions/{feature}/{form}`: 
 
 ## **v2.0.4**

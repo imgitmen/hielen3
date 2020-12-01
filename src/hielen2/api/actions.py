@@ -21,7 +21,7 @@ def get_forms(feature=None,form=None, request=None, response=None):
       
     # Trying to manage income feature request and its prototype configuration
     try:
-        proto=db['features'][feature]['type']
+        proto=db['features'][feature]['properties']['type']
         forms=db['features_proto'][proto]['forms']
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
@@ -101,7 +101,7 @@ _I campi non forniti in input vengono restituiti con valore null._
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        proto=db['features'][feature]['type']
+        proto=db['features'][feature]['properties']['type']
         forms=db['features_proto'][proto]['forms']
 
     except KeyError as e:
