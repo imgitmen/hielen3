@@ -12,9 +12,11 @@ CHANGELOG
 
 dove:
 
-_properties_ mantiene **tutte** le info della feature. Quelle di base: `uid`,`type`,`classification`,`location`,`description` e quelle definite per le specifiche azioni definite per la tipologia. In particolare quella di configurzione.
-_parameters_ mantiene la struttura di accesso alle info e ai dati dei parametri definiti per la feature.
-_geometry_ fornisce le informazioni geometriche della feature.
+___properties___ mantiene **tutte** le info della feature. Quelle di base: `uid`,`type`,`classification`,`location`,`description` e quelle definite per le specifiche azioni definite per la tipologia. In particolare quella di configurzione.
+
+___parameters___ mantiene la struttura di accesso alle info e ai dati dei parametri definiti per la feature.
+
+___geometry___ fornisce le informazioni geometriche della feature.
 
 Rivedute le api `/actions`, `/parameters`, `/features` (`/data` da rivedere)
 
