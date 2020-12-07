@@ -17,41 +17,46 @@ from importlib import import_module
 @hug.get('/{feature}')
 def get_forms(feature=None,form=None, request=None, response=None):
 
-    out = ResponseFormatter(falcon.HTTP_ACCEPTED)
+    out = ResponseFormatter()
       
     # Trying to manage income feature request and its prototype configuration
     try:
-        proto=db['features'][feature]['properties']['type']
-        forms=db['features_proto'][proto]['forms']
+        properties=db['features'][feature]['properties']
+        protoforms=db['features_proto'][properties['type']]['forms']
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
         out.message=f"feature '{feature}' does not exists or it is misconfigured."
         out.format(request=request,response=response)
         return
 
-    def _clean(f):
-        fo={}
+    if form is not None and form is not list:
+        form=[form]
+
+    # Extract specific info per form
+    def _map_prop(properties,protoform):
+        
+        f={}
         try:
-            fo.update(f['mandatory'])
+            f.update(protoform['mandatory'])
         except KeyError:
             pass
         try:
-            fo.update(f['optional'])
+            f.update(protoform['optional'])
         except KeyError:
             pass
-        return fo
+    
+        form_out={}
+        
+        for k,w in f.items():
+            try:
+                print (properties[k])
+                form_out[k]=properties[k]
+            except KeyError:
+                form_out[k]=None
 
-    forms={ k:_clean(w) for k,w in forms.items() }
+        return form_out
 
-    if form is None:
-        out.data=forms
-    else:
-        try:
-            out.data=forms[form]
-        except KeyError as e:
-            out.status=falcon.HTTP_NOT_FOUND
-            out.message=f"No '{form}' form defined for feature '{feature}'"
-
+    out.data={ k:_map_prop(properties,w) for k,w in protoforms.items() if form is None or k in form }
     out.format(request=request,response=response)
     return
 
@@ -92,7 +97,7 @@ in questo modo:
 
 _Se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input._
 
-_Se il campo fornito in imput è un file, viene fornito il checksum md5 del file, calcolato dopo che \
+_Se il campo fornito in input è un file, viene fornito il checksum md5 del file, calcolato dopo che \
 il file è stato salvato sul filesystem._
 
 _I campi non forniti in input vengono restituiti con valore null._
