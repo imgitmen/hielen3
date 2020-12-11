@@ -1486,9 +1486,7 @@
 324
 325
 326
-327
-328
-329</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+327</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1710,9 +1708,7 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    **Alias di recupero informazioni della specifica feature**</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    **Alias di recupero informazioni della specifica feature**&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cntxt</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
@@ -1734,15 +1730,15 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    **Modifica delle properties di una feature**</span>
+<span class="sd">**Modifica delle properties di una feature**</span>
 
-<span class="sd">    Possibili risposte:</span>
+<span class="sd">Possibili risposte:</span>
 
-<span class="sd">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="sd">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="sd">    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
+<span class="sd">- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span>
 
@@ -1782,17 +1778,17 @@
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    **Cancellazione delle Features**</span>
+<span class="sd">**Cancellazione delle Features**</span>
 
-<span class="sd">    Se la feature viene cancellata correttamente ne restituisce la struttura</span>
+<span class="sd">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
 
-<span class="sd">    Possibili risposte:</span>
+<span class="sd">Possibili risposte:</span>
 
-<span class="sd">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="sd">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="sd">    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
+<span class="sd">- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span>
 
@@ -1829,8 +1825,8 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b68250</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b68520</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb4fc0fa250</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb4fc0fa520</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1962,17 +1958,17 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">    **Cancellazione delle Features**</span>
+<span class="ss">**Cancellazione delle Features**</span>
 
-<span class="ss">    Se la feature viene cancellata correttamente ne restituisce la struttura</span>
+<span class="ss">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
 
-<span class="ss">    Possibili risposte:</span>
+<span class="ss">Possibili risposte:</span>
 
-<span class="ss">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="ss">    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
+<span class="ss">- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
 
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span><span class="w"></span>
 
@@ -2016,9 +2012,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">    **Alias di recupero informazioni della specifica feature**</span>
-
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">    **Alias di recupero informazioni della specifica feature**&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
@@ -2150,8 +2144,8 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b62760</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b4e1c0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb4fc0f4760</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fb4fc0e01c0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -2181,15 +2175,15 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">    **Modifica delle properties di una feature**</span>
+<span class="ss">**Modifica delle properties di una feature**</span>
 
-<span class="ss">    Possibili risposte:</span>
+<span class="ss">Possibili risposte:</span>
 
-<span class="ss">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="ss">    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
+<span class="ss">- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
 
-<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span><span class="w"></span>
 

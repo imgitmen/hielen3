@@ -903,7 +903,7 @@
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>context</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -980,7 +980,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>context</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -989,14 +989,12 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">**</span><span class="n">Modifica</span> <span class="n">delle</span> <span class="n">properties</span> <span class="n">di</span> <span class="n">una</span> <span class="n">feature</span><span class="o">**</span>
-
-<span class="n">Possibili</span> <span class="n">risposte</span><span class="p">:</span>
-
-<span class="o">-</span> <span class="n">_404</span> <span class="k">Not</span> <span class="n">Found_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">il</span> <span class="n">prototipo</span> <span class="n">richiesto</span> <span class="n">non</span> <span class="n">esista</span><span class="p">.</span>
-<span class="o">-</span> <span class="n">_202</span> <span class="n">Accepted_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">la</span> <span class="n">feature</span> <span class="n">venga</span> <span class="n">modificata</span> <span class="n">correttamente</span><span class="p">.</span>
-</code></pre></div>
-
+<p><strong>Modifica delle properties di una feature</strong></p>
+<p>Possibili risposte:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>202 Accepted</em>: Nel caso in cui la feature venga modificata correttamente.</li>
+</ul>
 <h4 id="delete">DELETE</h4>
 <hr />
 <p><em>params</em>:</p>
@@ -1009,15 +1007,13 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">**</span><span class="n">Cancellazione</span> <span class="n">delle</span> <span class="n">Features</span><span class="o">**</span>
-
-<span class="n">Se</span> <span class="n">la</span> <span class="n">feature</span> <span class="n">viene</span> <span class="n">cancellata</span> <span class="n">correttamente</span> <span class="n">ne</span> <span class="n">restituisce</span> <span class="n">la</span> <span class="n">struttura</span>
-
-<span class="n">Possibili</span> <span class="n">risposte</span><span class="p">:</span>
-
-<span class="o">-</span> <span class="n">_404</span> <span class="k">Not</span> <span class="n">Found_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">il</span> <span class="n">prototipo</span> <span class="n">richiesto</span> <span class="n">non</span> <span class="n">esista</span><span class="p">.</span>
-<span class="o">-</span> <span class="n">_202</span> <span class="n">Accepted_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">la</span> <span class="n">feature</span> <span class="n">venga</span> <span class="n">eliminata</span> <span class="n">correttamente</span><span class="p">.</span>
-</code></pre></div>
+<p><strong>Cancellazione delle Features</strong></p>
+<p>Se la feature viene cancellata correttamente ne restituisce la struttura</p>
+<p>Possibili risposte:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
+<li><em>202 Accepted</em>: Nel caso in cui la feature venga eliminata correttamente.</li>
+</ul>
                 
               
               
