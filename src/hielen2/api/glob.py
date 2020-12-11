@@ -4,7 +4,7 @@ import hug
 from . import parameters, prototypes, data, features, actions
 import falcon
 
-'''
+"""
 @hug.not_found()
 def not_found():
 
@@ -14,29 +14,34 @@ def not_found():
             }}
 
 api = hug.get(on_invalid=hug.redirect.not_found)
-'''
+"""
 
-@hug.extend_api('/parameters')
+
+@hug.extend_api("/parameters")
 def elemman():
-    ''' parameters manager '''
+    """ parameters manager """
     return [parameters]
 
-@hug.extend_api('/prototypes')
+
+@hug.extend_api("/prototypes")
 def protoman():
-    ''' Prototypes manager '''
+    """ Prototypes manager """
     return [prototypes]
 
-@hug.extend_api('/data')
+
+@hug.extend_api("/data")
 def dataman():
-    ''' Series manager '''
+    """ Series manager """
     return [data]
 
-@hug.extend_api('/features')
+
+@hug.extend_api("/features")
 def dataman():
-    ''' Series manager '''
+    """ Series manager """
     return [features]
 
-@hug.extend_api('/actions')
+
+@hug.extend_api("/actions")
 def dataman():
-    ''' Series manager '''
+    """ Series manager """
     return [actions]

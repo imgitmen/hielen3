@@ -10,20 +10,26 @@ from marshmallow_geojson import GeoJSONSchema
 
 
 class FeaturePropertiesSchema(Schema):
-    context=fields.Str(default="no-context",allow_none=False)
-    label=fields.Str(default=None)
-    description=fields.Str(default=None)
-    location=fields.Str(default=None)
-    style=fields.Str(default=None)
-    status=fields.Str(default=None)
-    timestamp=fields.Str(default=None)
+    context = fields.Str(default="no-context", allow_none=False)
+    label = fields.Str(default=None)
+    description = fields.Str(default=None)
+    location = fields.Str(default=None)
+    style = fields.Str(default=None)
+    status = fields.Str(default=None)
+    timestamp = fields.Str(default=None)
 
 
-@hug.post('/')
-def create_feature(uid, prototype, properties:JsonValidable(FeaturePropertiesSchema())={}, \
-        geometry:JsonValidable(GeoJSONSchema())={}, request=None,response=None):
+@hug.post("/")
+def create_feature(
+    uid,
+    prototype,
+    properties: JsonValidable(FeaturePropertiesSchema()) = {},
+    geometry: JsonValidable(GeoJSONSchema()) = {},
+    request=None,
+    response=None,
+):
 
-    '''
+    """
 **Creazione delle Features.**
 
 Ogni feature deve avere il suo codice univoco `uid` e il suo prototipo `prototype`. Questi due \
@@ -38,42 +44,45 @@ Possibili risposte:
 - _409 Conflict_: Nel caso in cui il uid fornito esista già.
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
 - _201 Created_: Nel caso in cui la feature venga creata correttamente.
-'''
+"""
 
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
-    
+
     try:
-        feature={"geometry":geometry}
-        proto=db['features_proto'][prototype]
-        feature.update(proto['struct'])
-        feature.update({ k:{ y:None for y in w['args'].keys() } for k,w in proto['forms'].items() })
-        feature['properties']['uid']=uid
-        feature['parameters']={ k:None for k in feature['parameters'].keys()}
-        
+        feature = {"geometry": geometry}
+        proto = db["features_proto"][prototype]
+        feature.update(proto["struct"])
+        feature.update(
+            {k: {y: None for y in w["args"].keys()} for k, w in proto["forms"].items()}
+        )
+        feature["properties"]["uid"] = uid
+        feature["parameters"] = {k: None for k in feature["parameters"].keys()}
+
         try:
-            assert properties['context'] is not None
+            assert properties["context"] is not None
         except Exception:
-            properties['context'] = 'no-context'
+            properties["context"] = "no-context"
 
-        feature['properties'].update( properties )
+        feature["properties"].update(properties)
 
-        db['features'][uid]=feature
+        db["features"][uid] = feature
 
-        out.data=db['features'][uid]
+        out.data = db["features"][uid]
 
     except KeyError as e:
-        out.message=f"prototype '{prototype}' not found."
-        out.status=falcon.HTTP_NOT_FOUND
+        out.message = f"prototype '{prototype}' not found."
+        out.status = falcon.HTTP_NOT_FOUND
     except ValueError as e:
-        out.message=f"feature '{feature['uid']}' exists"
-        out.status=falcon.HTTP_CONFLICT
+        out.message = f"feature '{feature['uid']}' exists"
+        out.status = falcon.HTTP_CONFLICT
 
-    response=out.format(response=response,request=request)
+    response = out.format(response=response, request=request)
     return
 
-@hug.get('/')
-def features_info( uids=None, cntxt=None, request=None, response=None ):
-    '''
+
+@hug.get("/")
+def features_info(uids=None, cntxt=None, request=None, response=None):
+    """
 **Recupero delle informazioni delle features.**
 
 __nota__: uids accetta valori multipli separati da virgola 
@@ -103,107 +112,105 @@ Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui nessuna feature risponda ai criteri
 
-'''
-
-
-    def _format(ftin):
-
-        ftout={"type":"Feature"}
-
-        ftout["geometry"]=ftin["geometry"]
-        ftout["properties"]=ftin["properties"]
-
-        return ftout
+"""
 
     out = ResponseFormatter()
 
-    if not isinstance(uids,(list,set)) and uids is not None:
-        uids=[uids]
+    if not isinstance(uids, (list, set)) and uids is not None:
+        uids = [uids]
 
     try:
-        out.data=dict( 
-            features=[ _format(v) for v in db['features'][uids].values() 
-                if cntxt is None or v['properties']['context']==cntxt ] 
-            )
+        out.data = dict(
+            features=[
+                {
+                    "type": "Feature",
+                    "geometry": v["geometry"],
+                    "properties": v["properties"],
+                }
+                for v in db["features"][uids].values()
+                if cntxt is None or v["properties"]["context"] == cntxt
+            ]
+        )
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=(str(e))
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = str(e)
 
-    response = out.format(response=response,request=request)
+    response = out.format(response=response, request=request)
     return
 
 
-@hug.get('/{uid}')
-def feature_info( uid, cntxt=None, request=None, response=None ):
+@hug.get("/{uid}")
+def feature_info(uid, cntxt=None, request=None, response=None):
     """
-**Alias di recupero informazioni della specifica feature**
-
-"""
-    return features_info(uid,cntxt,request,response)
-
-@hug.put('/{uid}')
-def update_feature( uid, properties:JsonValidable(FeaturePropertiesSchema())={}, \
-        geometry:JsonValidable(GeoJSONSchema())={}, request=None, response=None ):
+    **Alias di recupero informazioni della specifica feature**
     """
-**Modifica delle properties di una feature**
+    return features_info(uid, cntxt, request, response)
 
-Possibili risposte:
 
-- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.
+@hug.put("/{uid}")
+def update_feature(
+    uid,
+    properties: JsonValidable(FeaturePropertiesSchema()) = {},
+    geometry: JsonValidable(GeoJSONSchema()) = {},
+    request=None,
+    response=None,
+):
+    """
+    **Modifica delle properties di una feature**
 
-"""
-    
+    Possibili risposte:
+
+    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.
+    """
+
     out = ResponseFormatter(status=falcon.HTTP_ACCEPTED)
 
     if uid is None:
-        out.status=falcon.HTTP_BAD_REQUEST
-        out.message="None value not allowed"
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = "None value not allowed"
 
     try:
-        f=db['features'][uid]
-        f['properties'].update(properties)
-        f['geometry'].update(geometry)
-        db['features'][uid]=None
-        db['features'][uid]=f
-        out.data=db['features'][uid]
+        f = db["features"][uid]
+        f["properties"].update(properties)
+        f["geometry"].update(geometry)
+        db["features"][uid] = None
+        db["features"][uid] = f
+        out.data = db["features"][uid]
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{uid}' not foud."
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = f"feature '{uid}' not foud."
 
-    response = out.format(response=response,request=request)
+    response = out.format(response=response, request=request)
     return
 
 
-
-@hug.delete('/{uid}')
-def del_feature( uid, request=None, response=None ):
+@hug.delete("/{uid}")
+def del_feature(uid, request=None, response=None):
 
     """
-**Cancellazione delle Features**
+    **Cancellazione delle Features**
 
-Se la feature viene cancellata correttamente ne restituisce la struttura
+    Se la feature viene cancellata correttamente ne restituisce la struttura
 
-Possibili risposte:
+    Possibili risposte:
 
-- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
-
-"""
+    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+    """
 
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
-    
+
     if uid is None:
-        out.status=falcon.HTTP_BAD_REQUEST
-        out.message="None value not allowed"
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = "None value not allowed"
 
     try:
-        out.data=db['features'][uid]
-        db['features'][uid]=None
+        out.data = db["features"][uid]
+        db["features"][uid] = None
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{uid}' not foud."
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = f"feature '{uid}' not foud."
 
-    response = out.format(response=response,request=request)
+    response = out.format(response=response, request=request)
     return
-

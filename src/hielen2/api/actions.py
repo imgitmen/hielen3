@@ -14,52 +14,85 @@ from himada.api import ResponseFormatter
 from urllib.parse import unquote
 from importlib import import_module
 
-@hug.get('/{feature}')
-def get_forms(feature,form=None, request=None, response=None):
 
+@hug.get("/{feature}")
+def get_forms(feature, form=None, request=None, response=None):
+
+    """
+**Recupero dei valori correnti per le form delle azioni di una specifica feature**
+
+L'intento di questa api è quello di fornire i valori richiesti secondo lo schema della form 
+ 
+___nota 1___: `form` accetta valori multipli separati da virgola
+___nota 2___: A seconda dell'action richiesta, alcuni parametri potrebbero essere utilizzati in fase \
+di input ma non registrati. Il che vuol dire che per quei parametri il valore di ritorno sarà null
+ 
+viene restituito una struttura di questo tipo:
+
+
+        {
+            "form1": {
+                "arg1.1":..,
+                "arg1.2":..,
+                ...
+            },
+            "form2": {
+                "arg2.1":..,
+                "arg2.2":..,
+            }
+        }
+
+ 
+Possibili risposte:
+ 
+- _404 Not Found_: Nel non venga trovata la feature richiesta o essa abbia un problema di \
+configurazione
+
+"""
     out = ResponseFormatter()
-      
+
     # Trying to manage income feature request and its prototype configuration
     try:
-        featureobj=db['features'][feature]
-        proto=db['features'][feature]['properties']['type']
-        protoforms=db['features_proto'][proto]['forms']
+        featureobj = db["features"][feature]
+        proto = db["features"][feature]["properties"]["type"]
+        protoforms = db["features_proto"][proto]["forms"]
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{feature}' does not exists or it is misconfigured: {e}"
-        out.format(request=request,response=response)
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
+        out.format(request=request, response=response)
         return
 
     if form is not None and form is not list:
-        form=[form]
+        form = [form]
 
-    out.data={}
-    for k,w in protoforms.items():
+    out.data = {}
+    for k, w in protoforms.items():
         if form is None or k in form:
-            out.data[k]={ y:None for y in w['args'].keys()  }
+            out.data[k] = {y: None for y in w["args"].keys()}
             try:
                 out.data[k].update(featureobj[k])
             except KeyError:
                 pass
 
-    out.format(request=request,response=response)
+    out.format(request=request, response=response)
     return
 
 
-@hug.get('/{feature}/{form}')
-def get_form(feature=None,form=None, request=None, response=None):
-    return get_forms(feature=feature,form=form,request=request,response=response)
+@hug.get("/{feature}/{form}")
+def get_form(feature=None, form=None, request=None, response=None):
+    """
+    **Recupero dei valori correnti per una specifica form delle azioni di una specifica feature**"""
+    return get_forms(feature=feature, form=form, request=request, response=response)
 
 
-@hug.post('/{feature}/{form}',parse_body=False)
-@hug.default_input_format( content_type='multipart/form-data')
-def prots(feature=None,form=None, request=None, response=None):
+@hug.post("/{feature}/{form}", parse_body=False)
+@hug.default_input_format(content_type="multipart/form-data")
+def prots(feature=None, form=None, request=None, response=None):
     """
 **Esecuzione delle azioni**
 
 Richiede l'esecuzione di una specifica azione su una feature, fornendo tutte le informazioni \
-necessarie attraverso una form dinamica dedicata. L'elenco delle azioni possibili per ogni \
-feature è disponibile attraverso l'api ... (TODO)
+necessarie attraverso una form dinamica dedicata.
 
 - Oltre ai due parametri `feature` e `form`, indicati nella url, accetta un _multipart/form-data_ \
 basato sulla specifica form, selezionata tramite i due parametri espliciti.
@@ -68,51 +101,48 @@ timeout dei workers in caso di contenuti di grandi dimensioni.
 
 Possibili risposte:
 
+- _202 Accepted_: Nel caso in cui l'azione vada a buon fine. Risponde con _202 Accepted_ e non con \
+- _200 OK_ perchè l'azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione \
+arbitrario. L'azione quindi viene splittata su un altro processo.
 - _404 Not Found_: Nel caso la feature non esista o non sia definita per essa l'azione richiesta.
-- _202 Accepted_: Nel caso in cui l'azione vada a buon fine
+- _500 Internal Server Error_: Nel caso pessimo che il modulo dichiarato non esista.
+- _501 Not Implemented'_: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti \
+i moduli di gestione
 
 
-**TEMPORANEAMENTE**
+E' stato implementato il meccanismo minimo di gestione che prevede il salvataggio delle info \
+fornite che possono essere fornite tali e quali in uscita (vedi metodo GET dell'api). Questo \
+meccanismo permette di svluppare i moduli a partire da un template con risposta di default.
 
-- E' impementato come _"DUMMY"_: funziona tutto il giro dei check ma i moduli specifici non sono \
-ancora agganciati.
-
-- Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati \
-in questo modo: 
-
-_Se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input._
-
-_Se il campo fornito in input è un file, viene fornito il checksum md5 del file, calcolato dopo che \
-il file è stato salvato sul filesystem._
-
-_I campi non forniti in input vengono restituiti con valore null._
 """
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        properties=db['features'][feature]['properties']
-        proto=properties['type']
-        formstruct=db['features_proto'][proto]['forms'][form]
+        properties = db["features"][feature]["properties"]
+        proto = properties["type"]
+        formstruct = db["features_proto"][proto]["forms"][form]
 
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{feature}' does not exists or it is misconfigured: {e}"
-        out.format(request=request,response=response)
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
+        out.format(request=request, response=response)
         return
-    
+
     parser = StreamingFormDataParser(headers=request.headers)
 
-    values={}
+    values = {}
 
-    #TODO Differenziazione delle tipologie di input
-    for k,w in formstruct['args'].items():
-        if w == 'file':
-            timenow=time.perf_counter()
-            filepath=os.path.join(tempfile.gettempdir(), f"{feature}{k}{timenow}.part")
-            target=FileTarget(filepath)
+    # TODO Differenziazione delle tipologie di input
+    for k, w in formstruct["args"].items():
+        if w == "file":
+            timenow = time.perf_counter()
+            filepath = os.path.join(
+                tempfile.gettempdir(), f"{feature}{k}{timenow}.part"
+            )
+            target = FileTarget(filepath)
             parser.register(k, target)
-            values[k]=filepath
+            values[k] = filepath
         else:
             target = ValueTarget()
             parser.register(k, target)
@@ -124,70 +154,67 @@ _I campi non forniti in input vengono restituiti con valore null._
             break
         parser.data_received(chunk)
 
-    kwargs={}
-    for k,w in values.items():
-        
-        if isinstance(w,str):
-#FOR DUMMY RESPONSE
+    kwargs = {}
+    for k, w in values.items():
+
+        if isinstance(w, str):
+            # FOR DUMMY RESPONSE
             """
             v=os.path.exists(w) and "md5 "+hashfile(w) or None
-            if os.path.exists(w): 
+            if os.path.exists(w):
                   os.remove(w)
             """
-#REAL
-            v=os.path.exists(w) and w or None
+            # REAL
+            v = os.path.exists(w) and w or None
         else:
-            v=unquote(w.value.decode('utf8')) or None
+            v = unquote(w.value.decode("utf8")) or None
 
-        kwargs[k]=v
+        kwargs[k] = v
 
-    m = [ m for m in  formstruct['mandatory'] if kwargs[m] is None ]
+    m = [m for m in formstruct["mandatory"] if kwargs[m] is None]
 
     if m.__len__():
-        out.status=falcon.HTTP_BAD_REQUEST
-        out.message=f"Required parameters {m} not supplied"
-        out.format(request=request,response=response)
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"Required parameters {m} not supplied"
+        out.format(request=request, response=response)
         return
 
-    #CHECKS request checks ALL RIGHT. Continuing with code loading
+    # CHECKS request checks ALL RIGHT. Continuing with code loading
 
     # Trying to initialize feature action manager module
     try:
-        mod=db['features_proto'][proto]['module']
-        mod=import_module(mod)
-        source=mod.Source(properties=properties,filecache=conf['filecache'])
-        result=eval(f"source.{form}(**kwargs)")
+        mod = db["features_proto"][proto]["module"]
+        mod = import_module(mod)
+        source = mod.Source(properties=properties, filecache=conf["filecache"])
+        result = eval(f"source.{form}(**kwargs)")
 
-        
-#PRODUCTION ERROR MANAGER
+    # PRODUCTION ERROR MANAGER
     except KeyError as e:
-        out.status=falcon.HTTP_NOT_IMPLEMENTED
-        out.message=f"Prototype '{proto}' actions not implemented."
-        out.format(request=request,response=response)
+        out.status = falcon.HTTP_NOT_IMPLEMENTED
+        out.message = f"Prototype '{proto}' actions not implemented."
+        out.format(request=request, response=response)
         return
     except ModuleNotFoundError as e:
-        out.status=falcon.HTTP_INTERNAL_SERVER_ERROR
-        out.message=f"Prototype '{proto}' module '{mod}' not found."
-        out.format(request=request,response=response)
-        return  
+        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.message = f"Prototype '{proto}' module '{mod}' not found."
+        out.format(request=request, response=response)
+        return
     except AttributeError as e:
-        out.status=falcon.HTTP_NOT_IMPLEMENTED
-        out.message=f"Prototype '{proto}' action '{form}' not implemented."
-        out.format(request=request,response=response)
+        out.status = falcon.HTTP_NOT_IMPLEMENTED
+        out.message = f"Prototype '{proto}' action '{form}' not implemented."
+        out.format(request=request, response=response)
         return
     except Exception as e:
         raise e
 
     try:
-        db['features'][feature][form].update(result)
-        db['features'].save()
+        db["features"][feature][form].update(result)
+        db["features"].save()
     except KeyError as e:
-        out.status=falcon.HTTP_INTERNAL_SERVER_ERROR
-        out.message=str(e)
-        out.format(request=request,response=response)
-        return  
+        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.message = str(e)
+        out.format(request=request, response=response)
+        return
 
-
-    out.format(request=request,response=response)
+    out.format(request=request, response=response)
     return
-

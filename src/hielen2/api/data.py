@@ -13,115 +13,141 @@ from himada.api import ResponseFormatter
 import asyncio
 
 
-data_out_handler=hug_output_format_conten_type([hug.output_format.text,hug.output_format.json])
-CSV="text/plain; charset=utf-8"
-JSON="application/json; charset=utf-8"
+data_out_handler = hug_output_format_conten_type(
+    [hug.output_format.text, hug.output_format.json]
+)
+CSV = "text/plain; charset=utf-8"
+JSON = "application/json; charset=utf-8"
+
 
 class DataMapSchema(Schema):
-    """
-"""
-    timefrom=fields.Str(default=None,required=False)
-    timeto=fields.Str(default=None,reuired=False)
-    series=fields.List(fields.Str,default=[])
+    """"""
+
+    timefrom = fields.Str(default=None, required=False)
+    timeto = fields.Str(default=None, reuired=False)
+    series = fields.List(fields.Str, default=[])
+
 
 ####### API DATATABLE #######
-@hug.get('/', examples='', output=data_out_handler)
-def tabular_data( datamap:JsonValidable(DataMapSchema(many=True)), content_type=None, request=None, response=None ):
+@hug.get("/", examples="", output=data_out_handler)
+def tabular_data(
+    datamap: JsonValidable(DataMapSchema(many=True)),
+    content_type=None,
+    request=None,
+    response=None,
+):
 
-    series={}
+    series = {}
 
     for s in datamap:
 
         try:
-            timefrom=s['timefrom']
+            timefrom = s["timefrom"]
         except KeyError:
-            timefrom=None
+            timefrom = None
         try:
-            timeto=s['timeto']
+            timeto = s["timeto"]
         except KeyError:
-            timeto=None
+            timeto = None
 
-        for p in s['series']:
+        for p in s["series"]:
 
             if p not in series.keys():
-                series[p]=[]
+                series[p] = []
 
             try:
-                series[p].append( Series(p).thdata(timefrom=timefrom,timeto=timeto) )
+                series[p].append(Series(p).thdata(timefrom=timefrom, timeto=timeto))
             except KeyError as e:
                 out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-                out.message=str(e) + " not found"
-                response = out.format(response=response,request=request)
+                out.message = str(e) + " not found"
+                response = out.format(response=response, request=request)
                 return
 
-    out=DataFrame()
+    out = DataFrame()
 
-    for param,sers in series.items():
+    for param, sers in series.items():
 
-        ser=None
+        ser = None
         for r in sers:
-            s=r.result()
+            s = r.result()
             if ser is None:
                 ser = s
             else:
                 ser = ser.append(s).sort_index()
-                idx= unique( ser.index.values, return_index = True )[1]
-                ser=ser.iloc[idx]
+                idx = unique(ser.index.values, return_index=True)[1]
+                ser = ser.iloc[idx]
 
-        ser.columns=[param]
+        ser.columns = [param]
 
-        out = out.join(ser,how='outer')
+        out = out.join(ser, how="outer")
 
-    out.index.name='timestamp'
-    
-    requested=data_out_handler.requested(request).content_type
+    out.index.name = "timestamp"
 
-    if (requested==CSV):
+    requested = data_out_handler.requested(request).content_type
+
+    if requested == CSV:
         return hug.types.text(out.to_csv())
-    if (requested==JSON):
-        return hug.types.json(out.to_json(orient='table'))
+    if requested == JSON:
+        return hug.types.json(out.to_json(orient="table"))
 
 
-@hug.get('/{feature}/', output=data_out_handler)
-def tabular_data_el( feature, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
-  
+@hug.get("/{feature}/", output=data_out_handler)
+def tabular_data_el(
+    feature,
+    par=None,
+    timefrom=None,
+    timeto=None,
+    content_type=None,
+    request=None,
+    response=None,
+):
+
     try:
-        ft=db['features'][feature]
+        ft = db["features"][feature]
     except KeyError:
-        out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)                       
-        out.message=str(feature) + " not found"                                           
-        response = out.format(response=response,request=request)                    
-        return 
+        out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
+        out.message = str(feature) + " not found"
+        response = out.format(response=response, request=request)
+        return
     try:
-    
+
         if par is None:
-            series=list(ft['parameters'].values())
+            series = list(ft["parameters"].values())
         else:
-            series=[ ft['parameters'][par] ]
+            series = [ft["parameters"][par]]
 
     except KeyError as e:
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-        out.message=str(e) + " not found"
-        response = out.format(response=response,request=request)
+        out.message = str(e) + " not found"
+        response = out.format(response=response, request=request)
         return
 
-    datamap=dict(series=series)
+    datamap = dict(series=series)
 
     if timefrom is not None:
-        datamap['timefrom']=timefrom
+        datamap["timefrom"] = timefrom
 
     if timeto is not None:
-        datamap['timeto']=timeto
+        datamap["timeto"] = timeto
 
-    return tabular_data(datamap=[datamap],request=request,response=response)
-    
-
+    return tabular_data(datamap=[datamap], request=request, response=response)
 
 
-@hug.get('/{feature}/{par}', output=data_out_handler)
-def tabular_data_par( feature=None, par=None, timefrom=None, timeto=None, content_type=None, request=None, response=None ):
-    return tabular_data_el( feature=feature,par=par,timefrom=timefrom,timeto=timeto,request=request, response=response )
-
-
-
-
+@hug.get("/{feature}/{par}", output=data_out_handler)
+def tabular_data_par(
+    feature=None,
+    par=None,
+    timefrom=None,
+    timeto=None,
+    content_type=None,
+    request=None,
+    response=None,
+):
+    return tabular_data_el(
+        feature=feature,
+        par=par,
+        timefrom=timefrom,
+        timeto=timeto,
+        request=request,
+        response=response,
+    )
