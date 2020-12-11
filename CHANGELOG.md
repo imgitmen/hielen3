@@ -2,7 +2,7 @@ CHANGELOG
 =========
 
 ## **v2.0.5**
-### **9 Dicembre 2020
+### **9 Dicembre 2020**
 - Implementata **working** POST `/actions/{feature}/{form}` tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. 
 - Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di `hielen2.datalink.HilenSource`
 - Implementata **working** GET `/actions/{feature}[/{form}]`: Per ogni form richiesta, risponde con tutti i parametri definiti nel relativo prototipo, riempiti con i valori definiti tramite la POST della stessa api. I valori non precedentemente forniti vengono impostati a null
@@ -43,7 +43,7 @@ CHANGELOG
 - Definita la superclasse `hielen2.datalink.HielenSource` con definizione univoca di `__init__` con questo footprint: `(self,featureobject,environment)`. La classe definisce inotre i metodi astratti che vengono utilizzati dal sistema che ogni estensione di questa dovrà implementare.
 
 
-### **2 Dicmebre 2020**
+### **2 Dicembre 2020**
 - Struttura definitiva delle features:
         
         {

@@ -1,38 +1,12 @@
 ## Con Priorità
 
-### **v2.0.5** Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD
-
-#### _Struttura principale `/actions/{feature}/{action}`_:
-
-1. ~~accettare content-type/multipart~~
-2. ~~recuperare il prototipo di feature e verificare il content~~
-3. ~~collegare il parsing dei field del multipart alla form della feature~~
-4. ~~Implementare dummy POST generico che risponde in base alla from della feture~~
-6. ~~rimodellare features db~~
-7. ~~Fornire le form attraverso /features e non attraverso prototype (un passaggio di meno)~~
-8. ~~Definire superclasse source~~
-9. ~~Inserire modulo di riferimento tra le info del prototipo~~
-10. ~~Implemntare passaggio a modulo (loading dinamico come source dei dati)~~
-
-#### _config_:
-
-- POST `/actions/{el}/config`
-- GET `/actions/{el}/config`
-- PUT `/actions/{el}/config`
-
-#### _feed_:
-
-- POST `/actions/{el}/feed`
-- GET `/actions/{el}/feed`
-- PUT `/actions/{el}/feed/{time}`
-
 
 ### **v2.0.6** Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele
 
 - GET `/bases`
-- GET `/bases/{el}`
+- GET `/bases/{feature}`
 - GET `/timelines`
-- GET `/timelines/{el}`
+- GET `/timelines/{feature}`
 - GET `/data/` estensione del modello di datamap per accettare GeoGeson
 
 ### **v2.0.7** Rivistazione del modulo PhotMonitoring come "source". Intento: agganciare le serie dati prodotte dall'elaborazione Photmonitoring alle interfacce
@@ -42,11 +16,11 @@
 ### **v2.0.9** Implementazione delle chiamate di mappa
 
 - GET `/maps/[/z/x/y]`
-- GET `/maps/{el}/[z/x/y]`
+- GET `/maps/{feature}/[z/x/y]`
 
 ### **v2.0.10** Implemntazione chiamate cloud
 
-- GET `/cloud/{el}`
+- GET `/cloud/{feature}`
 
 ## Senza priorità
 - Obiettivo: assegnare una timestamp ad ogni informazione: le properties degli ogetti dovranno essere delle serie dati. Concetto di informazione minima.
