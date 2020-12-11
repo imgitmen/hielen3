@@ -1,23 +1,15 @@
 # coding=utf-8
 
-__name__ = 'hielen2.ext.photomonitoring'
-__version__ = '0.0.1'
-__author__ = 'Alessandro Modesti'
-__email__ = 'it@img-srl.com'
-__description__ = 'photomonitornig hiele actions manager'
-__license__ = 'MIT'
-__uri__ = ''
+from hielen2.datalink import HielenSource
 
+class Source(HielenSource):
 
-def config(**kwargs):
-    return kwargs
+    def config(self,**kwargs):
+        return kwargs
 
-def int_or_str(value):
-    try:
-        return int(value)
-    except ValueError:
-        return value
+    def feed(self,**kwargs):
+        return kwargs
 
-VERSION = tuple(map(int_or_str, __version__.split('.')))
+    def data(self,timefrom=None,timeto=None,geom=None,**kwargs):
+        return kwargs 
 
-__all__ = ['config']

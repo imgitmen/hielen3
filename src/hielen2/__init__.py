@@ -12,10 +12,7 @@ import warnings
 import json
 
 from .datalink import dbinit #, cacheinit
-from .utils import loadjsonfile
 
-
-         
 def _initconf(confile,envfile):
     env=None
     with open(envfile) as ef:
@@ -41,4 +38,4 @@ def int_or_str(value):
 
 VERSION = tuple(map(int_or_str, __version__.split('.')))
 
-__all__ = ['conf', 'db', ]
+__all__ = ['conf', 'db']

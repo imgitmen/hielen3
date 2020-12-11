@@ -6,7 +6,7 @@ import falcon
 import os
 import time
 import json
-from hielen2 import db
+from hielen2 import db, conf
 from hielen2.utils import hashfile
 from streaming_form_data import StreamingFormDataParser
 from streaming_form_data.targets import FileTarget, ValueTarget
@@ -15,48 +15,33 @@ from urllib.parse import unquote
 from importlib import import_module
 
 @hug.get('/{feature}')
-def get_forms(feature=None,form=None, request=None, response=None):
+def get_forms(feature,form=None, request=None, response=None):
 
     out = ResponseFormatter()
       
     # Trying to manage income feature request and its prototype configuration
     try:
-        properties=db['features'][feature]['properties']
-        protoforms=db['features_proto'][properties['type']]['forms']
+        featureobj=db['features'][feature]
+        proto=db['features'][feature]['properties']['type']
+        protoforms=db['features_proto'][proto]['forms']
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{feature}' does not exists or it is misconfigured."
+        out.message=f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request,response=response)
         return
 
     if form is not None and form is not list:
         form=[form]
 
-    # Extract specific info per form
-    def _map_prop(properties,protoform):
-        
-        f={}
-        try:
-            f.update(protoform['mandatory'])
-        except KeyError:
-            pass
-        try:
-            f.update(protoform['optional'])
-        except KeyError:
-            pass
-    
-        form_out={}
-        
-        for k,w in f.items():
+    out.data={}
+    for k,w in protoforms.items():
+        if form is None or k in form:
+            out.data[k]={ y:None for y in w['args'].keys()  }
             try:
-                print (properties[k])
-                form_out[k]=properties[k]
+                out.data[k].update(featureobj[k])
             except KeyError:
-                form_out[k]=None
+                pass
 
-        return form_out
-
-    out.data={ k:_map_prop(properties,w) for k,w in protoforms.items() if form is None or k in form }
     out.format(request=request,response=response)
     return
 
@@ -106,33 +91,22 @@ _I campi non forniti in input vengono restituiti con valore null._
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        proto=db['features'][feature]['properties']['type']
-        forms=db['features_proto'][proto]['forms']
+        properties=db['features'][feature]['properties']
+        proto=properties['type']
+        formstruct=db['features_proto'][proto]['forms'][form]
 
     except KeyError as e:
         out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"feature '{feature}' does not exists or it is misconfigured."
+        out.message=f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request,response=response)
         return
-
-    # Trying to retrive requested action form configuration
-    try:
-        formstruct=forms[form]
-    except KeyError as e:
-        out.status=falcon.HTTP_NOT_FOUND
-        out.message=f"No '{form}' form defined for feature '{feature}'"
-        out.format(request=request,response=response)
-        return
-
-    mandatory=formstruct['mandatory'].keys()
-
-    expected_fields={ **formstruct['mandatory'], **formstruct['optional'] }
-
+    
     parser = StreamingFormDataParser(headers=request.headers)
 
     values={}
 
-    for k,w in expected_fields.items():
+    #TODO Differenziazione delle tipologie di input
+    for k,w in formstruct['args'].items():
         if w == 'file':
             timenow=time.perf_counter()
             filepath=os.path.join(tempfile.gettempdir(), f"{feature}{k}{timenow}.part")
@@ -155,18 +129,19 @@ _I campi non forniti in input vengono restituiti con valore null._
         
         if isinstance(w,str):
 #FOR DUMMY RESPONSE
+            """
             v=os.path.exists(w) and "md5 "+hashfile(w) or None
             if os.path.exists(w): 
                   os.remove(w)
+            """
 #REAL
-#            v=os.path.exists(w) and hashfile(w) or None
+            v=os.path.exists(w) and w or None
         else:
             v=unquote(w.value.decode('utf8')) or None
 
         kwargs[k]=v
 
-
-    m = [ m for m in mandatory if kwargs[m] is None ]
+    m = [ m for m in  formstruct['mandatory'] if kwargs[m] is None ]
 
     if m.__len__():
         out.status=falcon.HTTP_BAD_REQUEST
@@ -176,19 +151,15 @@ _I campi non forniti in input vengono restituiti con valore null._
 
     #CHECKS request checks ALL RIGHT. Continuing with code loading
 
-    # Trying to initialize feature action managere module
+    # Trying to initialize feature action manager module
     try:
         mod=db['features_proto'][proto]['module']
         mod=import_module(mod)
-        toeval=f"mod.{form}(**kwargs)"
-        result = eval(toeval)
+        source=mod.Source(properties=properties,filecache=conf['filecache'])
+        result=eval(f"source.{form}(**kwargs)")
 
-#DUMMY ERROR MANAGER
-    except Exception:
-        result=kwargs
-
+        
 #PRODUCTION ERROR MANAGER
-    """
     except KeyError as e:
         out.status=falcon.HTTP_NOT_IMPLEMENTED
         out.message=f"Prototype '{proto}' actions not implemented."
@@ -203,8 +174,20 @@ _I campi non forniti in input vengono restituiti con valore null._
         out.status=falcon.HTTP_NOT_IMPLEMENTED
         out.message=f"Prototype '{proto}' action '{form}' not implemented."
         out.format(request=request,response=response)
-        return 
-    """
+        return
+    except Exception as e:
+        raise e
 
-    return result
+    try:
+        db['features'][feature][form].update(result)
+        db['features'].save()
+    except KeyError as e:
+        out.status=falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.message=str(e)
+        out.format(request=request,response=response)
+        return  
+
+
+    out.format(request=request,response=response)
+    return
 

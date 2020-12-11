@@ -1,6 +1,6 @@
 [tool.portray]
 port = 8001
-include_reference_documentation = false
+include_reference_documentation = true
 
 [tool.portray.mkdocs.theme]
 favicon = "art/hielen2.svg"

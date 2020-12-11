@@ -1,7 +1,49 @@
 CHANGELOG
 =========
 
-### **2 Dicmebre 20202**
+## **v2.0.5**
+### **9 Dicembre 2020
+- Implementata **working** POST `/actions/{feature}/{form}` tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. 
+- Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di `hielen2.datalink.HilenSource`
+- Implementata **working** GET `/actions/{feature}[/{form}]`: Per ogni form richiesta, risponde con tutti i parametri definiti nel relativo prototipo, riempiti con i valori definiti tramite la POST della stessa api. I valori non precedentemente forniti vengono impostati a null
+- Riveduta e corretta GET `prototypes/{prototype}/forms[/form]`: **ATTENZIONE** adesso risponde con TUTTI i campi dentro il dizionario "args" e comunica i campi obbligatori attraverso l'array "mandatory". Questa struttura è più versatile in quanto, una volta definito il set completo degli argomenti, è possibile definire un numero arbitrario di sottoinsiemi predicativi non necessariamente distiniti: Oltre al sottoinsieme "mandatory" si potrebbe, ad esempio, definire un sottoinsieme di immutabili. Qui sotto una struttura di esempio:
+
+        {
+            "data": {
+                "args": {
+                    "epsg": "string",
+                    "master_image": "file",
+                    "negative_pixel_y_size": "string",
+                    "pixel_x_size": "string",
+                    "rotation_about_the_x_axis": "string",
+                    "rotation_about_the_y_axis": "string",
+                    "step_size": "string",
+                    "window_size_change": "string",
+                    "world_file": "file",
+                    "x_coordinate_of_upper_left_pixel_center": "string",
+                    "y_coordinate_of_upper_left_pixel_center": "string"
+                },
+                "mandatory": [
+                    "master_image",
+                    "step_size",
+                    "window_size_change"
+                ]
+            },
+            "meta": {
+                "data_type": "GET /prototypes/PhotoMonitoring/forms/config",
+                "message": "",
+                "response": "ok"
+            }
+        }
+
+
+### **7 Dicembre 2020**
+- Rimodellato il feature db per contenere gli argomenti delle actions
+- Riveduto il _feature_proto_ db: Inserito il  modulo di riferimento tra le info del prototipo (il modulo contenete la classe estesa di `hielen2.datalink.HielenSource`)
+- Definita la superclasse `hielen2.datalink.HielenSource` con definizione univoca di `__init__` con questo footprint: `(self,featureobject,environment)`. La classe definisce inotre i metodi astratti che vengono utilizzati dal sistema che ogni estensione di questa dovrà implementare.
+
+
+### **2 Dicmebre 2020**
 - Struttura definitiva delle features:
         
         {

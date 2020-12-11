@@ -127,7 +127,6 @@ class JsonDB(DB):
             return self.db.to_dict()
         return self.db[key].to_dict()
 
-
     def pop(self,key):
         return self.__write_jsondb(key,None)
 
@@ -153,3 +152,20 @@ class JsonCache(DB):
     def save(self):
         self.cache.reset_index().to_json(self.filename,orient='records')
 
+class HielenSource(ABC):
+
+    def __init__(self, properties, filecache):
+        self.properties=properties
+        self.filecache=filecache
+
+    @abstractmethod
+    def config(**kwargs):
+        pass
+
+    @abstractmethod
+    def feed(**kwargs):
+        pass
+
+    @abstractmethod
+    def data(timefrom=None,timeto=None,geom=None,**kwargs):
+        pass

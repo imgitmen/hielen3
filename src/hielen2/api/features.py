@@ -44,7 +44,9 @@ Possibili risposte:
     
     try:
         feature={"geometry":geometry}
-        feature.update(db['features_proto'][prototype]['struct'])
+        proto=db['features_proto'][prototype]
+        feature.update(proto['struct'])
+        feature.update({ k:{ y:None for y in w['args'].keys() } for k,w in proto['forms'].items() })
         feature['properties']['uid']=uid
         feature['parameters']={ k:None for k in feature['parameters'].keys()}
         
@@ -104,14 +106,14 @@ Possibili risposte:
 '''
 
 
-    def _format(ft):
-        try:
-            ft.pop("parameters")
-            ft["type"]="Feature"
-        except Exception as e:
-            raise e
+    def _format(ftin):
 
-        return ft
+        ftout={"type":"Feature"}
+
+        ftout["geometry"]=ftin["geometry"]
+        ftout["properties"]=ftin["properties"]
+
+        return ftout
 
     out = ResponseFormatter()
 
@@ -129,7 +131,6 @@ Possibili risposte:
 
     response = out.format(response=response,request=request)
     return
-
 
 
 @hug.get('/{uid}')
