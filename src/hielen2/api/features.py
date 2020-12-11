@@ -82,6 +82,7 @@ Possibili risposte:
 
 @hug.get("/")
 def features_info(uids=None, cntxt=None, request=None, response=None):
+
     """
 **Recupero delle informazioni delle features.**
 
@@ -155,13 +156,15 @@ def update_feature(
     request=None,
     response=None,
 ):
+    
     """
-    **Modifica delle properties di una feature**
+**Modifica delle properties di una feature**
 
-    Possibili risposte:
+Possibili risposte:
 
-    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente."""
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.
+"""
 
     out = ResponseFormatter(status=falcon.HTTP_ACCEPTED)
 
@@ -188,14 +191,15 @@ def update_feature(
 def del_feature(uid, request=None, response=None):
 
     """
-    **Cancellazione delle Features**
+**Cancellazione delle Features**
 
-    Se la feature viene cancellata correttamente ne restituisce la struttura
+Se la feature viene cancellata correttamente ne restituisce la struttura
 
-    Possibili risposte:
+Possibili risposte:
 
-    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente."""
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
 
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
