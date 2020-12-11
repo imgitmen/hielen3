@@ -232,40 +232,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#v205-interfacce-delle-azioni-con-risposta-mockup-intento-agganciare-lavoro-simoned" class="md-nav__link">
-    v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD
-  </a>
-  
-    <nav class="md-nav" aria-label="v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#struttura-principale-actionsfeatureaction" class="md-nav__link">
-    Struttura principale /actions/{feature}/{action}:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#config" class="md-nav__link">
-    config:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feed" class="md-nav__link">
-    feed:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele" class="md-nav__link">
     v2.0.6 Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele
   </a>
@@ -843,40 +809,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#v205-interfacce-delle-azioni-con-risposta-mockup-intento-agganciare-lavoro-simoned" class="md-nav__link">
-    v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD
-  </a>
-  
-    <nav class="md-nav" aria-label="v2.0.5 Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#struttura-principale-actionsfeatureaction" class="md-nav__link">
-    Struttura principale /actions/{feature}/{action}:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#config" class="md-nav__link">
-    config:
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#feed" class="md-nav__link">
-    feed:
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele" class="md-nav__link">
     v2.0.6 Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele
   </a>
@@ -946,37 +878,12 @@
                   <h1>TODO</h1>
                 
                 <h2 id="con-priorita">Con Priorità</h2>
-<h3 id="v205-interfacce-delle-azioni-con-risposta-mockup-intento-agganciare-lavoro-simoned"><strong>v2.0.5</strong> Interfacce delle Azioni con risposta mockup. Intento: agganciare lavoro SimoneD</h3>
-<h4 id="struttura-principale-actionsfeatureaction"><em>Struttura principale <code>/actions/{feature}/{action}</code></em>:</h4>
-<ol>
-<li>~~accettare content-type/multipart~~</li>
-<li>~~recuperare il prototipo di feature e verificare il content~~</li>
-<li>~~collegare il parsing dei field del multipart alla form della feature~~</li>
-<li>~~Implementare dummy POST generico che risponde in base alla from della feture~~</li>
-<li>~~rimodellare features db~~</li>
-<li>~~Fornire le form attraverso /features e non attraverso prototype (un passaggio di meno)~~</li>
-<li>~~Definire superclasse source~~</li>
-<li>~~Inserire modulo di riferimento tra le info del prototipo~~</li>
-<li>~~Implemntare passaggio a modulo (loading dinamico come source dei dati)~~</li>
-</ol>
-<h4 id="config"><em>config</em>:</h4>
-<ul>
-<li>POST <code>/actions/{el}/config</code></li>
-<li>GET <code>/actions/{el}/config</code></li>
-<li>PUT <code>/actions/{el}/config</code></li>
-</ul>
-<h4 id="feed"><em>feed</em>:</h4>
-<ul>
-<li>POST <code>/actions/{el}/feed</code></li>
-<li>GET <code>/actions/{el}/feed</code></li>
-<li>PUT <code>/actions/{el}/feed/{time}</code></li>
-</ul>
 <h3 id="v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele"><strong>v2.0.6</strong> Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele</h3>
 <ul>
 <li>GET <code>/bases</code></li>
-<li>GET <code>/bases/{el}</code></li>
+<li>GET <code>/bases/{feature}</code></li>
 <li>GET <code>/timelines</code></li>
-<li>GET <code>/timelines/{el}</code></li>
+<li>GET <code>/timelines/{feature}</code></li>
 <li>GET <code>/data/</code> estensione del modello di datamap per accettare GeoGeson</li>
 </ul>
 <h3 id="v207-rivistazione-del-modulo-photmonitoring-come-source-intento-agganciare-le-serie-dati-prodotte-dallelaborazione-photmonitoring-alle-interfacce"><strong>v2.0.7</strong> Rivistazione del modulo PhotMonitoring come "source". Intento: agganciare le serie dati prodotte dall'elaborazione Photmonitoring alle interfacce</h3>
@@ -984,11 +891,11 @@
 <h3 id="v209-implementazione-delle-chiamate-di-mappa"><strong>v2.0.9</strong> Implementazione delle chiamate di mappa</h3>
 <ul>
 <li>GET <code>/maps/[/z/x/y]</code></li>
-<li>GET <code>/maps/{el}/[z/x/y]</code></li>
+<li>GET <code>/maps/{feature}/[z/x/y]</code></li>
 </ul>
 <h3 id="v2010-implemntazione-chiamate-cloud"><strong>v2.0.10</strong> Implemntazione chiamate cloud</h3>
 <ul>
-<li>GET <code>/cloud/{el}</code></li>
+<li>GET <code>/cloud/{feature}</code></li>
 </ul>
 <h2 id="senza-priorita">Senza priorità</h2>
 <ul>
