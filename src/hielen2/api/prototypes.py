@@ -71,7 +71,6 @@ def prototypes(request=None, response=None):
                 },
                 ...
             },
-
     """
     out = ResponseFormatter()
     try:

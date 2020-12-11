@@ -89,6 +89,7 @@ __nota__: uids accetta valori multipli separati da virgola
 
 viene restituito una struttura di questo tipo:
 
+
         {
             "features": [
                 {
@@ -102,6 +103,7 @@ viene restituito una struttura di questo tipo:
             ]
         }
 
+
 ___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \
 "features" perchè in effetti è una informazione sempre conosciuta a priori (se si lavora \
 per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all' \
@@ -111,7 +113,6 @@ interno delle properties delle singole features.
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui nessuna feature risponda ai criteri
-
 """
 
     out = ResponseFormatter()
@@ -142,8 +143,7 @@ Possibili risposte:
 @hug.get("/{uid}")
 def feature_info(uid, cntxt=None, request=None, response=None):
     """
-    **Alias di recupero informazioni della specifica feature**
-    """
+    **Alias di recupero informazioni della specifica feature**"""
     return features_info(uid, cntxt, request, response)
 
 
@@ -161,8 +161,7 @@ def update_feature(
     Possibili risposte:
 
     - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.
-    """
+    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente."""
 
     out = ResponseFormatter(status=falcon.HTTP_ACCEPTED)
 
@@ -196,8 +195,7 @@ def del_feature(uid, request=None, response=None):
     Possibili risposte:
 
     - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
-    """
+    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente."""
 
     out = ResponseFormatter(falcon.HTTP_ACCEPTED)
 
