@@ -1,0 +1,2449 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../../art/hielen2.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Data - hielen2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546d78">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-hielen2apidata" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../../.." title="hielen2" class="md-header-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            hielen2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Data
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="hielen2" class="md-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    hielen2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TODO/" title="TODO" class="md-nav__link">
+      TODO
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      API Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1" checked>
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Hielen2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Hielen2" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        Hielen2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datalink/" title="Datalink" class="md-nav__link">
+      Datalink
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-4" type="checkbox" id="nav-5-1-4" checked>
+    
+    <label class="md-nav__link" for="nav-5-1-4">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-4">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Data
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Data" class="md-nav__link md-nav__link--active">
+      Data
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data_out_handler" class="md-nav__link">
+    data_out_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data" class="md-nav__link">
+    tabular_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data_el" class="md-nav__link">
+    tabular_data_el
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data_par" class="md-nav__link">
+    tabular_data_par
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamapschema" class="md-nav__link">
+    DataMapSchema
+  </a>
+  
+    <nav class="md-nav" aria-label="DataMapSchema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Static methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from_dict" class="md-nav__link">
+    from_dict
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    dump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dumps" class="md-nav__link">
+    dumps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_attribute" class="md-nav__link">
+    get_attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_error" class="md-nav__link">
+    handle_error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loads" class="md-nav__link">
+    loads
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_bind_field" class="md-nav__link">
+    on_bind_field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../glob/" title="Glob" class="md-nav__link">
+      Glob
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-5" type="checkbox" id="nav-5-1-5">
+    
+    <label class="md-nav__link" for="nav-5-1-5">
+      Data
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-5">
+        <span class="md-nav__icon md-icon"></span>
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/calculation/" title="Calculation" class="md-nav__link">
+      Calculation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-6" type="checkbox" id="nav-5-1-6">
+    
+    <label class="md-nav__link" for="nav-5-1-6">
+      Ext
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ext" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-6">
+        <span class="md-nav__icon md-icon"></span>
+        Ext
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_csv/" title="Source Csv" class="md-nav__link">
+      Source Csv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/" title="Source Photomonitoring" class="md-nav__link">
+      Source Photomonitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_smori/" title="Source Smori" class="md-nav__link">
+      Source Smori
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_winecap/" title="Source Winecap" class="md-nav__link">
+      Source Winecap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-6-6" type="checkbox" id="nav-5-1-6-6">
+    
+    <label class="md-nav__link" for="nav-5-1-6-6">
+      Source Tinsar
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Tinsar" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-6-6">
+        <span class="md-nav__icon md-icon"></span>
+        Source Tinsar
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_tinsar/cloudpainter/" title="Cloudpainter" class="md-nav__link">
+      Cloudpainter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_tinsar/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data_out_handler" class="md-nav__link">
+    data_out_handler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data" class="md-nav__link">
+    tabular_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data_el" class="md-nav__link">
+    tabular_data_el
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_data_par" class="md-nav__link">
+    tabular_data_par
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamapschema" class="md-nav__link">
+    DataMapSchema
+  </a>
+  
+    <nav class="md-nav" aria-label="DataMapSchema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#static-methods" class="md-nav__link">
+    Static methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Static methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from_dict" class="md-nav__link">
+    from_dict
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dump" class="md-nav__link">
+    dump
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dumps" class="md-nav__link">
+    dumps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_attribute" class="md-nav__link">
+    get_attribute
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#handle_error" class="md-nav__link">
+    handle_error
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load" class="md-nav__link">
+    load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loads" class="md-nav__link">
+    loads
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_bind_field" class="md-nav__link">
+    on_bind_field
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate" class="md-nav__link">
+    validate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/api/data.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-hielen2apidata">Module hielen2.api.data</h1>
+<details class="example"><summary>View Source</summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+
+<span class="c1"># coding=utf-8</span>
+
+<span class="kn">import</span> <span class="nn">hug</span>
+
+<span class="kn">import</span> <span class="nn">falcon</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span><span class="p">,</span> <span class="n">unique</span>
+
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">to_datetime</span>
+
+<span class="kn">from</span> <span class="nn">hielen2</span> <span class="kn">import</span> <span class="n">db</span>
+
+<span class="kn">from</span> <span class="nn">hielen2.data.data_access_layer</span> <span class="kn">import</span> <span class="n">Series</span>
+
+<span class="kn">from</span> <span class="nn">hielen2.utils</span> <span class="kn">import</span> <span class="n">hug_output_format_conten_type</span><span class="p">,</span> <span class="n">JsonValidable</span>
+
+<span class="kn">from</span> <span class="nn">himada.api</span> <span class="kn">import</span> <span class="n">ResponseFormatter</span>
+
+<span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="n">data_out_handler</span><span class="o">=</span><span class="n">hug_output_format_conten_type</span><span class="p">([</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">json</span><span class="p">])</span>
+
+<span class="n">CSV</span><span class="o">=</span><span class="s2">&quot;text/plain; charset=utf-8&quot;</span>
+
+<span class="n">JSON</span><span class="o">=</span><span class="s2">&quot;application/json; charset=utf-8&quot;</span>
+
+<span class="k">class</span> <span class="nc">DataMapSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">timefrom</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">timeto</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">reuired</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">series</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="c1">####### API DATATABLE #######</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span> <span class="n">datamap</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+
+    <span class="n">series</span><span class="o">=</span><span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">datamap</span><span class="p">:</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">timefrom</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;timefrom&#39;</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+            <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">timeto</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;timeto&#39;</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+            <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">]:</span>
+
+            <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span> <span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
+
+                <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+
+                <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+
+                <span class="k">return</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">sers</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="n">ser</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sers</span><span class="p">:</span>
+
+            <span class="n">s</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">ser</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">s</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+                <span class="n">idx</span><span class="o">=</span> <span class="n">unique</span><span class="p">(</span> <span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">ser</span><span class="o">=</span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+        <span class="n">ser</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">param</span><span class="p">]</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+
+    <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+    <span class="n">requested</span><span class="o">=</span><span class="n">data_out_handler</span><span class="o">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">content_type</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">CSV</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">JSON</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">))</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span> <span class="n">feature</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">par</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">series</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">ft</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">series</span><span class="o">=</span><span class="p">[</span> <span class="n">ft</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="n">par</span><span class="p">]</span> <span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="n">datamap</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">datamap</span><span class="p">[</span><span class="s1">&#39;timefrom&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+
+    <span class="k">if</span> <span class="n">timeto</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">datamap</span><span class="p">[</span><span class="s1">&#39;timeto&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+
+    <span class="k">return</span> <span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=</span><span class="p">[</span><span class="n">datamap</span><span class="p">],</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/</span><span class="si">{par}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">tabular_data_par</span><span class="p">(</span> <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">tabular_data_el</span><span class="p">(</span> <span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span><span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span> <span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+</details>
+<h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">CSV</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">JSON</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">db</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">nan</span>
+</code></pre></div>
+
+<h2 id="functions">Functions</h2>
+<h3 id="data_out_handler">data_out_handler</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data_out_handler</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">request</span><span class="p">,</span>
+    <span class="n">response</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">output_type</span><span class="p">(</span><span class="k">data</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+
+        <span class="k">handler</span><span class="o">=</span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="n">response</span><span class="p">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="k">handler</span><span class="p">.</span><span class="n">content_type</span>
+
+        <span class="k">return</span> <span class="k">handler</span><span class="p">(</span><span class="k">data</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="tabular_data">tabular_data</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f8a02356250</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="w"> </span><span class="nl">datamap</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="k">True</span><span class="p">)),</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">series</span><span class="o">=</span><span class="err">{}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">datamap</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">timefrom</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">&#39;timefrom&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">timeto</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">&#39;timeto&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]=</span><span class="err">[]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">).</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="n">sers</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ser</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">sers</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">s</span><span class="o">=</span><span class="n">r</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">idx</span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="w"> </span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ser</span><span class="o">=</span><span class="n">ser</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ser</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">param</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">requested</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">content_type</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">CSV</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="nc">text</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_csv</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">JSON</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">))</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="tabular_data_el">tabular_data_el</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">par</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">series</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">ft</span><span class="o">[</span><span class="n">&#39;parameters&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">series</span><span class="o">=[</span><span class="n"> ft[&#39;parameters&#39;</span><span class="o">][</span><span class="n">par</span><span class="o">]</span><span class="w"> </span><span class="err">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">datamap</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&#39;timefrom&#39;</span><span class="o">]=</span><span class="n">timefrom</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timeto</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&#39;timeto&#39;</span><span class="o">]=</span><span class="n">timeto</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=[</span><span class="n">datamap</span><span class="o">]</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="tabular_data_par">tabular_data_par</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data_par</span><span class="p">(</span>
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/{par}&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_par</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span><span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="datamapschema">DataMapSchema</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">DataMapSchema</span><span class="p">(</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">load_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">dump_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">DataMapSchema</span>(<span class="n">Schema</span>):
+
+    <span class="s">&quot;&quot;&quot;</span>
+
+<span class="s">&quot;&quot;&quot;</span>
+
+    <span class="n">timefrom</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>,<span class="k">required</span>=<span class="nb">False</span>)
+
+    <span class="n">timeto</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>,<span class="n">reuired</span>=<span class="nb">False</span>)
+
+    <span class="n">series</span>=<span class="n">fields</span>.<span class="nb">List</span>(<span class="n">fields</span>.<span class="nb">Str</span>,<span class="k">default</span>=[])
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
+<ul>
+<li>marshmallow.schema.Schema</li>
+<li>marshmallow.base.SchemaABC</li>
+</ul>
+<h4 id="class-variables">Class variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">Meta</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">OPTIONS_CLASS</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">TYPE_MAPPING</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">error_messages</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">opts</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">series</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">timefrom</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">timeto</span>
+</code></pre></div>
+
+<h4 id="static-methods">Static methods</h4>
+<h5 id="from_dict">from_dict</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">marshmallow</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Field</span><span class="p">,</span> <span class="nb">type</span><span class="p">]],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;GeneratedSchema&#39;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span>
+</code></pre></div>
+
+<p>Generate a <code>Schema</code> class given a dictionary of fields.</p>
+<p>.. code-block:: python</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
+
+<span class="n">PersonSchema</span> <span class="o">=</span> <span class="n">Schema</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">()})</span>
+<span class="k">print</span><span class="p">(</span><span class="n">PersonSchema</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;David&quot;</span><span class="p">}))</span>  <span class="c1"># =&gt; {&#39;name&#39;: &#39;David&#39;}</span>
+</code></pre></div>
+
+<p>Generated schemas are not added to the class registry and therefore cannot
+be referred to by name in <code>Nested</code> fields.</p>
+<p>:param dict fields: Dictionary mapping field names to field instances.
+:param str name: Optional name for the class, which will appear in
+    the <code>repr</code> for the class.</p>
+<p>.. versionadded:: 3.0.0</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nd">@classmethod</span>
+
+    <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
+
+        <span class="bp">cls</span><span class="p">,</span>
+
+        <span class="n">fields</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">ma_fields</span><span class="o">.</span><span class="n">Field</span><span class="p">,</span> <span class="nb">type</span><span class="p">]],</span>
+
+        <span class="o">*</span><span class="p">,</span>
+
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;GeneratedSchema&quot;</span>
+
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">:</span>
+
+        <span class="sd">&quot;&quot;&quot;Generate a `Schema` class given a dictionary of fields.</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            from marshmallow import Schema, fields</span>
+
+<span class="sd">            PersonSchema = Schema.from_dict({&quot;name&quot;: fields.Str()})</span>
+
+<span class="sd">            print(PersonSchema().load({&quot;name&quot;: &quot;David&quot;}))  # =&gt; {&#39;name&#39;: &#39;David&#39;}</span>
+
+<span class="sd">        Generated schemas are not added to the class registry and therefore cannot</span>
+
+<span class="sd">        be referred to by name in `Nested` fields.</span>
+
+<span class="sd">        :param dict fields: Dictionary mapping field names to field instances.</span>
+
+<span class="sd">        :param str name: Optional name for the class, which will appear in</span>
+
+<span class="sd">            the ``repr`` for the class.</span>
+
+<span class="sd">        .. versionadded:: 3.0.0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">attrs</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;Meta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span>
+
+            <span class="s2">&quot;GeneratedMeta&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">&quot;Meta&quot;</span><span class="p">,</span> <span class="nb">object</span><span class="p">),),</span> <span class="p">{</span><span class="s2">&quot;register&quot;</span><span class="p">:</span> <span class="bp">False</span><span class="p">}</span>
+
+        <span class="p">)</span>
+
+        <span class="n">schema_cls</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">(</span><span class="bp">cls</span><span class="p">,),</span> <span class="n">attrs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">schema_cls</span>
+</code></pre></div>
+
+</details>
+<h4 id="instance-variables">Instance variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">dict_class</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">set_class</span>
+</code></pre></div>
+
+<h4 id="methods">Methods</h4>
+<h5 id="dump">dump</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Serialize an object to native Python data types according to this
+Schema's fields.</p>
+<p>:param obj: The object to serialize.
+:param many: Whether to serialize <code>obj</code> as a collection. If <code>None</code>, the value
+    for <code>self.many</code> is used.
+:return: A dict of serialized data
+:rtype: dict</p>
+<p>.. versionadded:: 1.0.0
+.. versionchanged:: 3.0.0b7
+    This method returns the serialized data rather than a <code>(data, errors)</code> duple.
+    A :exc:<code>ValidationError &lt;marshmallow.exceptions.ValidationError&gt;</code> is raised
+    if <code>obj</code> is invalid.
+.. versionchanged:: 3.0.0rc9
+    Validation no longer occurs upon serialization.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">dump</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">many</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="kt">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Serialize an object to native Python data types according to this</span>
+
+<span class="s2">        Schema&#39;s fields.</span>
+
+<span class="s2">        :param obj: The object to serialize.</span>
+
+<span class="s2">        :param many: Whether to serialize `obj` as a collection. If `None`, the value</span>
+
+<span class="s2">            for `self.many` is used.</span>
+
+<span class="s2">        :return: A dict of serialized data</span>
+
+<span class="s2">        :rtype: dict</span>
+
+<span class="s2">        .. versionadded:: 1.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0b7</span>
+
+<span class="s2">            This method returns the serialized data rather than a ``(data, errors)`` duple.</span>
+
+<span class="s2">            A :exc:`ValidationError &lt;marshmallow.exceptions.ValidationError&gt;` is raised</span>
+
+<span class="s2">            if ``obj`` is invalid.</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0rc9</span>
+
+<span class="s2">            Validation no longer occurs upon serialization.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">many</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">many</span> <span class="k">if</span> <span class="n">many</span> <span class="k">is</span> <span class="n">None</span> <span class="k">else</span> <span class="kt">bool</span><span class="p">(</span><span class="n">many</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">many</span> <span class="k">and</span> <span class="nf">is_iterable_but_not_string</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+
+            <span class="n">obj</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">_has_processors</span><span class="p">(</span><span class="n">PRE_DUMP</span><span class="p">):</span>
+
+            <span class="n">processed_obj</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_invoke_dump_processors</span><span class="p">(</span>
+
+                <span class="n">PRE_DUMP</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="o">=</span><span class="n">obj</span>
+
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">processed_obj</span> <span class="o">=</span> <span class="n">obj</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_serialize</span><span class="p">(</span><span class="n">processed_obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">_has_processors</span><span class="p">(</span><span class="n">POST_DUMP</span><span class="p">):</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_invoke_dump_processors</span><span class="p">(</span>
+
+                <span class="n">POST_DUMP</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">original_data</span><span class="o">=</span><span class="n">obj</span>
+
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div>
+
+</details>
+<h5 id="dumps">dumps</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Same as :meth:<code>dump</code>, except return a JSON-encoded string.</p>
+<p>:param obj: The object to serialize.
+:param many: Whether to serialize <code>obj</code> as a collection. If <code>None</code>, the value
+    for <code>self.many</code> is used.
+:return: A <code>json</code> string
+:rtype: str</p>
+<p>.. versionadded:: 1.0.0
+.. versionchanged:: 3.0.0b7
+    This method returns the serialized data rather than a <code>(data, errors)</code> duple.
+    A :exc:<code>ValidationError &lt;marshmallow.exceptions.ValidationError&gt;</code> is raised
+    if <code>obj</code> is invalid.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">dumps</span><span class="p">(</span>
+
+        <span class="n">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">many</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="kt">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+
+    <span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Same as :meth:`dump`, except return a JSON-encoded string.</span>
+
+<span class="s2">        :param obj: The object to serialize.</span>
+
+<span class="s2">        :param many: Whether to serialize `obj` as a collection. If `None`, the value</span>
+
+<span class="s2">            for `self.many` is used.</span>
+
+<span class="s2">        :return: A ``json`` string</span>
+
+<span class="s2">        :rtype: str</span>
+
+<span class="s2">        .. versionadded:: 1.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0b7</span>
+
+<span class="s2">            This method returns the serialized data rather than a ``(data, errors)`` duple.</span>
+
+<span class="s2">            A :exc:`ValidationError &lt;marshmallow.exceptions.ValidationError&gt;` is raised</span>
+
+<span class="s2">            if ``obj`` is invalid.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">serialized</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">opts</span><span class="p">.</span><span class="n">render_module</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">serialized</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h5 id="get_attribute">get_attribute</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">default</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Defines how to pull values from an object to serialize.</p>
+<p>.. versionadded:: 2.0.0</p>
+<p>.. versionchanged:: 3.0.0a1
+    Changed position of <code>obj</code> and <code>attr</code>.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">get_attribute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span> <span class="n">attr</span><span class="p">:</span> <span class="n">str</span><span class="p">,</span> <span class="k">default</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Defines how to pull values from an object to serialize.</span>
+
+<span class="s2">        .. versionadded:: 2.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0a1</span>
+
+<span class="s2">            Changed position of ``obj`` and ``attr``.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="nf">get_value</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="k">default</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h5 id="handle_error">handle_error</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">handle_error</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">error</span><span class="p">:</span> <span class="n">marshmallow</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Custom error handler function for the schema.</p>
+<p>:param error: The <code>ValidationError</code> raised during (de)serialization.
+:param data: The original input data.
+:param many: Value of <code>many</code> on dump or load.
+:param partial: Value of <code>partial</code> on load.</p>
+<p>.. versionadded:: 2.0.0</p>
+<p>.. versionchanged:: 3.0.0rc9
+    Receives <code>many</code> and <code>partial</code> (on deserialization) as keyword arguments.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">handle_error</span><span class="p">(</span>
+
+        <span class="n">self</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">many</span><span class="p">:</span> <span class="kt">bool</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+
+    <span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Custom error handler function for the schema.</span>
+
+<span class="s2">        :param error: The `ValidationError` raised during (de)serialization.</span>
+
+<span class="s2">        :param data: The original input data.</span>
+
+<span class="s2">        :param many: Value of ``many`` on dump or load.</span>
+
+<span class="s2">        :param partial: Value of ``partial`` on load.</span>
+
+<span class="s2">        .. versionadded:: 2.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0rc9</span>
+
+<span class="s2">            Receives `many` and `partial` (on deserialization) as keyword arguments.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">pass</span>
+</code></pre></div>
+
+</details>
+<h5 id="load">load</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Deserialize a data structure to an object defined by this Schema's fields.</p>
+<p>:param data: The data to deserialize.
+:param many: Whether to deserialize <code>data</code> as a collection. If <code>None</code>, the
+    value for <code>self.many</code> is used.
+:param partial: Whether to ignore missing fields and not require
+    any fields declared. Propagates down to <code>Nested</code> fields as well. If
+    its value is an iterable, only missing fields listed in that iterable
+    will be ignored. Use dot delimiters to specify nested fields.
+:param unknown: Whether to exclude, include, or raise an error for unknown
+    fields in the data. Use <code>EXCLUDE</code>, <code>INCLUDE</code> or <code>RAISE</code>.
+    If <code>None</code>, the value for <code>self.unknown</code> is used.
+:return: Deserialized data</p>
+<p>.. versionadded:: 1.0.0
+.. versionchanged:: 3.0.0b7
+    This method returns the deserialized data rather than a <code>(data, errors)</code> duple.
+    A :exc:<code>ValidationError &lt;marshmallow.exceptions.ValidationError&gt;</code> is raised
+    if invalid data are passed.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="k">load</span><span class="p">(</span>
+
+        <span class="n">self</span><span class="p">,</span>
+
+        <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="p">[</span>
+
+            <span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="p">[</span><span class="n">str</span><span class="p">,</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">],</span>
+
+            <span class="n">typing</span><span class="p">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="p">[</span><span class="n">str</span><span class="p">,</span> <span class="n">typing</span><span class="p">.</span><span class="n">Any</span><span class="p">]],</span>
+
+        <span class="p">],</span>
+
+        <span class="o">*</span><span class="p">,</span>
+
+        <span class="n">many</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="kt">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="n">partial</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="p">[</span><span class="kt">bool</span><span class="p">,</span> <span class="n">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="p">]]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="n">unknown</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span>
+
+    <span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Deserialize a data structure to an object defined by this Schema&#39;s fields.</span>
+
+<span class="s2">        :param data: The data to deserialize.</span>
+
+<span class="s2">        :param many: Whether to deserialize `data` as a collection. If `None`, the</span>
+
+<span class="s2">            value for `self.many` is used.</span>
+
+<span class="s2">        :param partial: Whether to ignore missing fields and not require</span>
+
+<span class="s2">            any fields declared. Propagates down to ``Nested`` fields as well. If</span>
+
+<span class="s2">            its value is an iterable, only missing fields listed in that iterable</span>
+
+<span class="s2">            will be ignored. Use dot delimiters to specify nested fields.</span>
+
+<span class="s2">        :param unknown: Whether to exclude, include, or raise an error for unknown</span>
+
+<span class="s2">            fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.</span>
+
+<span class="s2">            If `None`, the value for `self.unknown` is used.</span>
+
+<span class="s2">        :return: Deserialized data</span>
+
+<span class="s2">        .. versionadded:: 1.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0b7</span>
+
+<span class="s2">            This method returns the deserialized data rather than a ``(data, errors)`` duple.</span>
+
+<span class="s2">            A :exc:`ValidationError &lt;marshmallow.exceptions.ValidationError&gt;` is raised</span>
+
+<span class="s2">            if invalid data are passed.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_do_load</span><span class="p">(</span>
+
+            <span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">,</span> <span class="n">unknown</span><span class="o">=</span><span class="n">unknown</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="no">True</span>
+
+        <span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h5 id="loads">loads</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">loads</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">json_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Same as :meth:<code>load</code>, except it takes a JSON string as input.</p>
+<p>:param json_data: A JSON string of the data to deserialize.
+:param many: Whether to deserialize <code>obj</code> as a collection. If <code>None</code>, the
+    value for <code>self.many</code> is used.
+:param partial: Whether to ignore missing fields and not require
+    any fields declared. Propagates down to <code>Nested</code> fields as well. If
+    its value is an iterable, only missing fields listed in that iterable
+    will be ignored. Use dot delimiters to specify nested fields.
+:param unknown: Whether to exclude, include, or raise an error for unknown
+    fields in the data. Use <code>EXCLUDE</code>, <code>INCLUDE</code> or <code>RAISE</code>.
+    If <code>None</code>, the value for <code>self.unknown</code> is used.
+:return: Deserialized data</p>
+<p>.. versionadded:: 1.0.0
+.. versionchanged:: 3.0.0b7
+    This method returns the deserialized data rather than a <code>(data, errors)</code> duple.
+    A :exc:<code>ValidationError &lt;marshmallow.exceptions.ValidationError&gt;</code> is raised
+    if invalid data are passed.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">loads</span><span class="p">(</span>
+
+        <span class="n">self</span><span class="p">,</span>
+
+        <span class="n">json_data</span><span class="p">:</span> <span class="n">str</span><span class="p">,</span>
+
+        <span class="o">*</span><span class="p">,</span>
+
+        <span class="n">many</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="kt">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="n">partial</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="p">[</span><span class="kt">bool</span><span class="p">,</span> <span class="n">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="p">]]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="n">unknown</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="o">**</span><span class="n">kwargs</span>
+
+    <span class="p">):</span>
+
+        <span class="s2">&quot;&quot;&quot;Same as :meth:`load`, except it takes a JSON string as input.</span>
+
+<span class="s2">        :param json_data: A JSON string of the data to deserialize.</span>
+
+<span class="s2">        :param many: Whether to deserialize `obj` as a collection. If `None`, the</span>
+
+<span class="s2">            value for `self.many` is used.</span>
+
+<span class="s2">        :param partial: Whether to ignore missing fields and not require</span>
+
+<span class="s2">            any fields declared. Propagates down to ``Nested`` fields as well. If</span>
+
+<span class="s2">            its value is an iterable, only missing fields listed in that iterable</span>
+
+<span class="s2">            will be ignored. Use dot delimiters to specify nested fields.</span>
+
+<span class="s2">        :param unknown: Whether to exclude, include, or raise an error for unknown</span>
+
+<span class="s2">            fields in the data. Use `EXCLUDE`, `INCLUDE` or `RAISE`.</span>
+
+<span class="s2">            If `None`, the value for `self.unknown` is used.</span>
+
+<span class="s2">        :return: Deserialized data</span>
+
+<span class="s2">        .. versionadded:: 1.0.0</span>
+
+<span class="s2">        .. versionchanged:: 3.0.0b7</span>
+
+<span class="s2">            This method returns the deserialized data rather than a ``(data, errors)`` duple.</span>
+
+<span class="s2">            A :exc:`ValidationError &lt;marshmallow.exceptions.ValidationError&gt;` is raised</span>
+
+<span class="s2">            if invalid data are passed.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">opts</span><span class="p">.</span><span class="n">render_module</span><span class="p">.</span><span class="nf">loads</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="k">load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">,</span> <span class="n">unknown</span><span class="o">=</span><span class="n">unknown</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h5 id="on_bind_field">on_bind_field</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_bind_field</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">field_obj</span><span class="p">:</span> <span class="n">marshmallow</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Field</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+<p>Hook to modify a field when it is bound to the <code>Schema</code>.</p>
+<p>No-op by default.</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">on_bind_field</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">field_name</span><span class="p">:</span> <span class="n">str</span><span class="p">,</span> <span class="n">field_obj</span><span class="p">:</span> <span class="n">ma_fields</span><span class="p">.</span><span class="n">Field</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">None</span><span class="p">:</span>
+
+        <span class="s2">&quot;&quot;&quot;Hook to modify a field when it is bound to the `Schema`.</span>
+
+<span class="s2">        No-op by default.</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">None</span>
+</code></pre></div>
+
+</details>
+<h5 id="validate">validate</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+</code></pre></div>
+
+<p>Validate <code>data</code> against the schema, returning a dictionary of
+validation errors.</p>
+<p>:param data: The data to validate.
+:param many: Whether to validate <code>data</code> as a collection. If <code>None</code>, the
+    value for <code>self.many</code> is used.
+:param partial: Whether to ignore missing fields and not require
+    any fields declared. Propagates down to <code>Nested</code> fields as well. If
+    its value is an iterable, only missing fields listed in that iterable
+    will be ignored. Use dot delimiters to specify nested fields.
+:return: A dictionary of validation errors.</p>
+<p>.. versionadded:: 1.1.0</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="nf">validate</span><span class="p">(</span>
+
+        <span class="n">self</span><span class="p">,</span>
+
+        <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="p">,</span>
+
+        <span class="o">*</span><span class="p">,</span>
+
+        <span class="n">many</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="kt">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">None</span><span class="p">,</span>
+
+        <span class="n">partial</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="p">[</span><span class="kt">bool</span><span class="p">,</span> <span class="n">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="p">]]</span> <span class="o">=</span> <span class="n">None</span>
+
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="p">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">str</span><span class="p">,</span> <span class="n">typing</span><span class="p">.</span><span class="n">List</span><span class="p">[</span><span class="n">str</span><span class="p">]]:</span>
+
+        <span class="s2">&quot;&quot;&quot;Validate `data` against the schema, returning a dictionary of</span>
+
+<span class="s2">        validation errors.</span>
+
+<span class="s2">        :param data: The data to validate.</span>
+
+<span class="s2">        :param many: Whether to validate `data` as a collection. If `None`, the</span>
+
+<span class="s2">            value for `self.many` is used.</span>
+
+<span class="s2">        :param partial: Whether to ignore missing fields and not require</span>
+
+<span class="s2">            any fields declared. Propagates down to ``Nested`` fields as well. If</span>
+
+<span class="s2">            its value is an iterable, only missing fields listed in that iterable</span>
+
+<span class="s2">            will be ignored. Use dot delimiters to specify nested fields.</span>
+
+<span class="s2">        :return: A dictionary of validation errors.</span>
+
+<span class="s2">        .. versionadded:: 1.1.0</span>
+
+<span class="s2">        &quot;&quot;&quot;</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="n">self</span><span class="p">.</span><span class="nf">_do_load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="no">False</span><span class="p">)</span>
+
+        <span class="n">except</span> <span class="n">ValidationError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">typing</span><span class="p">.</span><span class="nf">cast</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">Dict</span><span class="p">[</span><span class="n">str</span><span class="p">,</span> <span class="n">typing</span><span class="p">.</span><span class="n">List</span><span class="p">[</span><span class="n">str</span><span class="p">]],</span> <span class="n">exc</span><span class="p">.</span><span class="n">messages</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="err">{}</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../actions/" title="Actions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Actions
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../features/" title="Features" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Features
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

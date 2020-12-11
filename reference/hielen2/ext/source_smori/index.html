@@ -1,0 +1,1205 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../../art/hielen2.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Source Smori - hielen2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546d78">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-hielen2extsource_smori" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../../.." title="hielen2" class="md-header-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            hielen2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Source Smori
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="hielen2" class="md-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    hielen2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TODO/" title="TODO" class="md-nav__link">
+      TODO
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../CHANGELOG/" title="Changelog" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      API Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1" checked>
+    
+    <label class="md-nav__link" for="nav-5-1">
+      Hielen2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Hielen2" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        <span class="md-nav__icon md-icon"></span>
+        Hielen2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datalink/" title="Datalink" class="md-nav__link">
+      Datalink
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-4" type="checkbox" id="nav-5-1-4">
+    
+    <label class="md-nav__link" for="nav-5-1-4">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-4">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/glob/" title="Glob" class="md-nav__link">
+      Glob
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-5" type="checkbox" id="nav-5-1-5">
+    
+    <label class="md-nav__link" for="nav-5-1-5">
+      Data
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-5">
+        <span class="md-nav__icon md-icon"></span>
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/calculation/" title="Calculation" class="md-nav__link">
+      Calculation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-6" type="checkbox" id="nav-5-1-6" checked>
+    
+    <label class="md-nav__link" for="nav-5-1-6">
+      Ext
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ext" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-1-6">
+        <span class="md-nav__icon md-icon"></span>
+        Ext
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_csv/" title="Source Csv" class="md-nav__link">
+      Source Csv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_photomonitoring/" title="Source Photomonitoring" class="md-nav__link">
+      Source Photomonitoring
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Source Smori
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Source Smori" class="md-nav__link md-nav__link--active">
+      Source Smori
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_ch" class="md-nav__link">
+    get_ch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gwo" class="md-nav__link">
+    GWO
+  </a>
+  
+    <nav class="md-nav" aria-label="GWO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getdataseries" class="md-nav__link">
+    getDataSeries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_winecap/" title="Source Winecap" class="md-nav__link">
+      Source Winecap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-6-6" type="checkbox" id="nav-5-1-6-6">
+    
+    <label class="md-nav__link" for="nav-5-1-6-6">
+      Source Tinsar
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Tinsar" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-6-6">
+        <span class="md-nav__icon md-icon"></span>
+        Source Tinsar
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_tinsar/cloudpainter/" title="Cloudpainter" class="md-nav__link">
+      Cloudpainter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_tinsar/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_ch" class="md-nav__link">
+    get_ch
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gwo" class="md-nav__link">
+    GWO
+  </a>
+  
+    <nav class="md-nav" aria-label="GWO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getdataseries" class="md-nav__link">
+    getDataSeries
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/ext/source_smori.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-hielen2extsource_smori">Module hielen2.ext.source_smori</h1>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># coding: utf-8</span>
+
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span><span class="p">,</span> <span class="n">to_datetime</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">()</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">GWO</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;https://www.smori.it/tisma/api/v1/sensor_data.php&#39;</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="o">=</span><span class="n">uri</span>
+
+    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="n">params</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+
+                <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+
+                <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+
+                <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+
+                <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">aggr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;aggr&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">aggr</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;dal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;al&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+        <span class="c1">#print (r.url)</span>
+
+        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">out</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;valore&#39;</span><span class="p">]</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;{stazione}_{unita}_{sensore}&quot;</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+</code></pre></div>
+
+</details>
+<h2 id="functions">Functions</h2>
+<h3 id="get_ch">get_ch</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span>
+    <span class="n">sito</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">id_stazione</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">id_unita</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">id_sensore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">().</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="gwo">GWO</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GWO</span><span class="p">(</span>
+    <span class="n">uri</span><span class="o">=</span><span class="s1">&#39;https://www.smori.it/tisma/api/v1/sensor_data.php&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">GWO</span>():
+
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>,<span class="n">uri</span>=<span class="s">&#39;https://www.smori.it/tisma/api/v1/sensor_data.php&#39;</span>):
+
+        <span class="nb">self</span>.<span class="n">uri</span>=<span class="n">uri</span>
+
+    <span class="n">def</span> <span class="n">getDataSeries</span>(<span class="nb">self</span>,<span class="n">sito</span>=<span class="n">None</span>,<span class="n">stazione</span>=<span class="n">None</span>,<span class="n">unita</span>=<span class="n">None</span>,<span class="n">sensore</span>=<span class="n">None</span>,<span class="n">aggr</span>=<span class="s">&#39;avg&#39;</span>,<span class="n">timefrom</span>=<span class="n">None</span>,<span class="n">timeto</span>=<span class="n">None</span>):
+
+        <span class="nb">params</span>=<span class="n">dict</span>(
+
+                <span class="n">sito</span>=<span class="n">sito</span>,
+
+                <span class="n">stazione</span>=<span class="n">stazione</span>,
+
+                <span class="n">unita</span>=<span class="n">unita</span>,
+
+                <span class="n">sensore</span>=<span class="n">sensore</span>,
+
+                )
+
+        <span class="k">if</span> <span class="n">aggr</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
+
+            <span class="nb">params</span>[<span class="s">&#39;aggr&#39;</span>]=<span class="n">aggr</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
+
+            <span class="nb">params</span>[<span class="s">&#39;dal&#39;</span>]=<span class="n">timefrom</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
+
+            <span class="nb">params</span>[<span class="s">&#39;al&#39;</span>]=<span class="n">timeto</span>
+
+        <span class="nb">r</span> = <span class="n">requests</span>.<span class="nb">get</span>(<span class="n">url</span>=<span class="nb">self</span>.<span class="n">uri</span>, <span class="nb">params</span>=<span class="nb">params</span>)
+
+        <span class="n">out</span>=<span class="n">DataFrame</span>(<span class="n">json</span>.<span class="n">loads</span>(<span class="nb">r</span>.<span class="n">text</span>)[<span class="s">&#39;data&#39;</span>])
+
+        <span class="c1">#print (r.url)</span>
+
+        <span class="k">if</span> <span class="n">out</span>.<span class="n">empty:</span>
+
+            <span class="k">return</span> <span class="n">out</span>
+
+        <span class="n">out</span> = <span class="n">out</span>.<span class="n">set_index</span>([<span class="s">&#39;timestamp&#39;</span>])[<span class="s">&#39;valore&#39;</span>]
+
+        <span class="n">out</span>=<span class="n">out</span>.<span class="n">astype</span>(<span class="n">float</span>, <span class="nb">copy</span>=<span class="nb">False</span>, <span class="n">errors</span>=<span class="s">&#39;ignore&#39;</span>)
+
+        <span class="n">out</span>.<span class="nb">name</span> = <span class="nb">f</span><span class="s">&quot;{stazione}_{unita}_{sensore}&quot;</span>
+
+        <span class="n">out</span>.<span class="nb">index</span>=<span class="n">to_datetime</span>(<span class="n">out</span>.<span class="nb">index</span>)
+
+        <span class="k">return</span> <span class="n">out</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="methods">Methods</h4>
+<h5 id="getdataseries">getDataSeries</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">sito</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">stazione</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">unita</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">sensore</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataSeries</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+
+        <span class="n">params</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span>
+
+                <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+
+                <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+
+                <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+
+                <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+
+                <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">aggr</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;aggr&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">aggr</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;dal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+
+        <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+
+            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;al&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+        <span class="k">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nb">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+
+        <span class="o">#</span><span class="n">print</span> <span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="k">out</span>
+
+        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;valore&#39;</span><span class="p">]</span>
+
+        <span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="k">copy</span><span class="o">=</span><span class="k">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+        <span class="k">out</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="ss">&quot;{stazione}_{unita}_{sensore}&quot;</span>
+
+        <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">out</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../source_photomonitoring/" title="Source Photomonitoring" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Source Photomonitoring
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../source_winecap/" title="Source Winecap" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Source Winecap
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
