@@ -15,8 +15,9 @@ _result_:
 _description_:
 
 
-    ** Definizione di nuovi prototipi **
-    _PLACEHOLDER: Non ancora implementato_
+** Definizione di nuovi prototipi **
+_PLACEHOLDER: Non ancora implementato_
+
 
 
 
@@ -32,61 +33,60 @@ _result_:
 _description_:
 
 
-    **Recupero di tutte le informazioni dei prototipi**
+**Recupero di tutte le informazioni dei prototipi**
 
-    ritorna una struttura json di questo tipo:
+ritorna una struttura json di questo tipo:
 
 
-            {
-                "NomePrototipo1": {
-                    "forms": {
-                        "form1": {
-                            "args": {
-                                "arg1.1": "type_arg1.1",
-                                "arg1.2": "type_arg1.2",
-                                ...
-                            },
-                            "mandatory": [ args keys sublist ]
+        {
+            "NomePrototipo1": {
+                "forms": {
+                    "form1": {
+                        "args": {
+                            "arg1.1": "type_arg1.1",
+                            "arg1.2": "type_arg1.2",
+                            ...
                         },
-                        "form2": {
-                            "args": {
-                                "arg2.1": "type_arg2.1",
-                                "arg2.2": "type_arg2.2",
-                                ...
+                        "mandatory": [ args keys sublist ]
+                    },
+                    "form2": {
+                        "args": {
+                            "arg2.1": "type_arg2.1",
+                            "arg2.2": "type_arg2.2",
+                            ...
+                        },
+                    },
+                    ...
+                },
+                "module": subclass of hielen2.datalink.HilenSource,
+                "struct": {
+                    "parameters": {
+                        "param1": {
+                            "operands": {
+                                "output": "parameter1 name"
                             },
+                            "type": "series type"
+                        },
+                        "param2": {
+                            "operands": {
+                                "output": "parameter2 name"
+                            },
+                            "type": "series type"
                         },
                         ...
                     },
-                    "module": subclass of hielen2.datalink.HilenSource,
-                    "struct": {
-                        "parameters": {
-                            "param1": {
-                                "operands": {
-                                    "output": "parameter1 name"
-                                },
-                                "type": "series type"
-                            },
-                            "param2": {
-                                "operands": {
-                                    "output": "parameter2 name"
-                                },
-                                "type": "series type"
-                            },
-                            ...
-                        },
-                        "properties": {
-                            "classification": feature classification,
-                            "type": feature type
-                        }
+                    "properties": {
+                        "classification": feature classification,
+                        "type": feature type
                     }
-                },
-                "NomePrototipo3": {
-                    ...
-                },
+                }
+            },
+            "NomePrototipo3": {
                 ...
             },
+            ...
+        },
 
-    
 
 
 
@@ -109,7 +109,8 @@ _result_:
 _description_:
 
 
-    **Alias per il recupero di tutte le informazioni di uno specifico prototipo**
+**Alias per il recupero di tutte le informazioni di uno specifico prototipo**
+
 
 
 
@@ -132,7 +133,8 @@ _result_:
 _description_:
 
 
-    **Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**
+**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**
+
 
 
 
@@ -156,7 +158,8 @@ _result_:
 _description_:
 
 
-    **Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**
+**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**
+
 
 
 
