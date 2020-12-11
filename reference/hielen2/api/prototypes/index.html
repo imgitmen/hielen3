@@ -1008,7 +1008,137 @@
 104
 105
 106
-107</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1020,101 +1150,231 @@
 
 <span class="kn">from</span> <span class="nn">himada.api</span> <span class="kn">import</span> <span class="n">ResponseFormatter</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">new_protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">new_protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    ** Definizione di nuovi prototipi **</span>
+
+<span class="sd">    _PLACEHOLDER: Non ancora implementato_&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="s2">&quot;not yet implemented&quot;</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">prototypes</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">prototypes</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Recupero di tutte le informazioni dei prototipi**</span>
+
+<span class="sd">    ritorna una struttura json di questo tipo:</span>
+
+<span class="sd">            {</span>
+
+<span class="sd">                &quot;NomePrototipo1&quot;: {</span>
+
+<span class="sd">                    &quot;forms&quot;: {</span>
+
+<span class="sd">                        &quot;form1&quot;: {</span>
+
+<span class="sd">                            &quot;args&quot;: {</span>
+
+<span class="sd">                                &quot;arg1.1&quot;: &quot;type_arg1.1&quot;,</span>
+
+<span class="sd">                                &quot;arg1.2&quot;: &quot;type_arg1.2&quot;,</span>
+
+<span class="sd">                                ...</span>
+
+<span class="sd">                            },</span>
+
+<span class="sd">                            &quot;mandatory&quot;: [ args keys sublist ]</span>
+
+<span class="sd">                        },</span>
+
+<span class="sd">                        &quot;form2&quot;: {</span>
+
+<span class="sd">                            &quot;args&quot;: {</span>
+
+<span class="sd">                                &quot;arg2.1&quot;: &quot;type_arg2.1&quot;,</span>
+
+<span class="sd">                                &quot;arg2.2&quot;: &quot;type_arg2.2&quot;,</span>
+
+<span class="sd">                                ...</span>
+
+<span class="sd">                            },</span>
+
+<span class="sd">                        },</span>
+
+<span class="sd">                        ...</span>
+
+<span class="sd">                    },</span>
+
+<span class="sd">                    &quot;module&quot;: subclass of hielen2.datalink.HilenSource,</span>
+
+<span class="sd">                    &quot;struct&quot;: {</span>
+
+<span class="sd">                        &quot;parameters&quot;: {</span>
+
+<span class="sd">                            &quot;param1&quot;: {</span>
+
+<span class="sd">                                &quot;operands&quot;: {</span>
+
+<span class="sd">                                    &quot;output&quot;: &quot;parameter1 name&quot;</span>
+
+<span class="sd">                                },</span>
+
+<span class="sd">                                &quot;type&quot;: &quot;series type&quot;</span>
+
+<span class="sd">                            },</span>
+
+<span class="sd">                            &quot;param2&quot;: {</span>
+
+<span class="sd">                                &quot;operands&quot;: {</span>
+
+<span class="sd">                                    &quot;output&quot;: &quot;parameter2 name&quot;</span>
+
+<span class="sd">                                },</span>
+
+<span class="sd">                                &quot;type&quot;: &quot;series type&quot;</span>
+
+<span class="sd">                            },</span>
+
+<span class="sd">                            ...</span>
+
+<span class="sd">                        },</span>
+
+<span class="sd">                        &quot;properties&quot;: {</span>
+
+<span class="sd">                            &quot;classification&quot;: feature classification,</span>
+
+<span class="sd">                            &quot;type&quot;: feature type</span>
+
+<span class="sd">                        }</span>
+
+<span class="sd">                    }</span>
+
+<span class="sd">                },</span>
+
+<span class="sd">                &quot;NomePrototipo3&quot;: {</span>
+
+<span class="sd">                    ...</span>
+
+<span class="sd">                },</span>
+
+<span class="sd">                ...</span>
+
+<span class="sd">            },</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="kc">None</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{prototype}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Alias per il recupero di tutte le informazioni di uno specifico prototipo**&quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{prototype}</span><span class="s1">/forms&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">/forms&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">prototype_forms</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**&quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s1">&#39;forms&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s2">&quot;forms&quot;</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{prototype}</span><span class="s1">/forms/</span><span class="si">{form}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">/forms/</span><span class="si">{form}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">prototype_form</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**&quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s1">&#39;forms&#39;</span><span class="p">][</span><span class="n">form</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s2">&quot;forms&quot;</span><span class="p">][</span><span class="n">form</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{prototype}</span><span class="s1">/struct&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">/struct&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">prototype_struct</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">**Alias per il recupero delle info di inizializzazione delle features legate ad uno specifico \</span>
+
+<span class="sd">prototipo**</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s1">&#39;struct&#39;</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s2">&quot;struct&quot;</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1131,9 +1391,17 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong> Definizione di nuovi prototipi </strong>
+<em>PLACEHOLDER: Non ancora implementato</em></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">new_protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">new_protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    ** Definizione di nuovi prototipi **</span>
+
+<span class="ss">    _PLACEHOLDER: Non ancora implementato_&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="ss">&quot;not yet implemented&quot;</span><span class="w"></span>
 </code></pre></div>
@@ -1148,23 +1416,28 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{prototype}/forms/{form}&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}/forms/{form}&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">prototype_form</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">form</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    **Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_proto&#39;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&#39;forms&#39;</span><span class="o">][</span><span class="n">form</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&quot;forms&quot;</span><span class="o">][</span><span class="n">form</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1176,23 +1449,28 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{prototype}/forms&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}/forms&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">prototype_forms</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    **Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_proto&#39;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&#39;forms&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&quot;forms&quot;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1204,23 +1482,32 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{prototype}/struct&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Alias per il recupero delle info di inizializzazione delle features legate ad uno specifico prototipo</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}/struct&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">prototype_struct</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">**Alias per il recupero delle info di inizializzazione delle features legate ad uno specifico \</span>
+
+<span class="ss">prototipo**</span>
+
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_proto&#39;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&#39;struct&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&quot;struct&quot;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1231,23 +1518,179 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Recupero di tutte le informazioni dei prototipi</strong></p>
+<p>ritorna una struttura json di questo tipo:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        &quot;NomePrototipo1&quot;: {</span>
+<span class="err">            &quot;forms&quot;: {</span>
+<span class="err">                &quot;form1&quot;: {</span>
+<span class="err">                    &quot;args&quot;: {</span>
+<span class="err">                        &quot;arg1.1&quot;: &quot;type_arg1.1&quot;,</span>
+<span class="err">                        &quot;arg1.2&quot;: &quot;type_arg1.2&quot;,</span>
+<span class="err">                        ...</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;mandatory&quot;: [ args keys sublist ]</span>
+<span class="err">                },</span>
+<span class="err">                &quot;form2&quot;: {</span>
+<span class="err">                    &quot;args&quot;: {</span>
+<span class="err">                        &quot;arg2.1&quot;: &quot;type_arg2.1&quot;,</span>
+<span class="err">                        &quot;arg2.2&quot;: &quot;type_arg2.2&quot;,</span>
+<span class="err">                        ...</span>
+<span class="err">                    },</span>
+<span class="err">                },</span>
+<span class="err">                ...</span>
+<span class="err">            },</span>
+<span class="err">            &quot;module&quot;: subclass of hielen2.datalink.HilenSource,</span>
+<span class="err">            &quot;struct&quot;: {</span>
+<span class="err">                &quot;parameters&quot;: {</span>
+<span class="err">                    &quot;param1&quot;: {</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: &quot;parameter1 name&quot;</span>
+<span class="err">                        },</span>
+<span class="err">                        &quot;type&quot;: &quot;series type&quot;</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;param2&quot;: {</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: &quot;parameter2 name&quot;</span>
+<span class="err">                        },</span>
+<span class="err">                        &quot;type&quot;: &quot;series type&quot;</span>
+<span class="err">                    },</span>
+<span class="err">                    ...</span>
+<span class="err">                },</span>
+<span class="err">                &quot;properties&quot;: {</span>
+<span class="err">                    &quot;classification&quot;: feature classification,</span>
+<span class="err">                    &quot;type&quot;: feature type</span>
+<span class="err">                }</span>
+<span class="err">            }</span>
+<span class="err">        },</span>
+<span class="err">        &quot;NomePrototipo3&quot;: {</span>
+<span class="err">            ...</span>
+<span class="err">        },</span>
+<span class="err">        ...</span>
+<span class="err">    },</span>
+</code></pre></div>
 
-<span class="n">def</span><span class="w"> </span><span class="n">prototypes</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">prototypes</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    **Recupero di tutte le informazioni dei prototipi**</span>
+
+<span class="ss">    ritorna una struttura json di questo tipo:</span>
+
+<span class="ss">            {</span>
+
+<span class="ss">                &quot;</span><span class="n">NomePrototipo1</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                    &quot;</span><span class="n">forms</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                        &quot;</span><span class="n">form1</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">args</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="n">arg1</span><span class="mf">.1</span><span class="ss">&quot;: &quot;</span><span class="n">type_arg1</span><span class="mf">.1</span><span class="ss">&quot;,</span>
+
+<span class="ss">                                &quot;</span><span class="n">arg1</span><span class="mf">.2</span><span class="ss">&quot;: &quot;</span><span class="n">type_arg1</span><span class="mf">.2</span><span class="ss">&quot;,</span>
+
+<span class="ss">                                ...</span>
+
+<span class="ss">                            },</span>
+
+<span class="ss">                            &quot;</span><span class="n">mandatory</span><span class="ss">&quot;: [ args keys sublist ]</span>
+
+<span class="ss">                        },</span>
+
+<span class="ss">                        &quot;</span><span class="n">form2</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">args</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="n">arg2</span><span class="mf">.1</span><span class="ss">&quot;: &quot;</span><span class="n">type_arg2</span><span class="mf">.1</span><span class="ss">&quot;,</span>
+
+<span class="ss">                                &quot;</span><span class="n">arg2</span><span class="mf">.2</span><span class="ss">&quot;: &quot;</span><span class="n">type_arg2</span><span class="mf">.2</span><span class="ss">&quot;,</span>
+
+<span class="ss">                                ...</span>
+
+<span class="ss">                            },</span>
+
+<span class="ss">                        },</span>
+
+<span class="ss">                        ...</span>
+
+<span class="ss">                    },</span>
+
+<span class="ss">                    &quot;</span><span class="k">module</span><span class="ss">&quot;: subclass of hielen2.datalink.HilenSource,</span>
+
+<span class="ss">                    &quot;</span><span class="n">struct</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                        &quot;</span><span class="k">parameters</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">param1</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                    &quot;</span><span class="k">output</span><span class="ss">&quot;: &quot;</span><span class="n">parameter1</span><span class="w"> </span><span class="n">name</span><span class="ss">&quot;</span>
+
+<span class="ss">                                },</span>
+
+<span class="ss">                                &quot;</span><span class="n">type</span><span class="ss">&quot;: &quot;</span><span class="n">series</span><span class="w"> </span><span class="n">type</span><span class="ss">&quot;</span>
+
+<span class="ss">                            },</span>
+
+<span class="ss">                            &quot;</span><span class="n">param2</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                    &quot;</span><span class="k">output</span><span class="ss">&quot;: &quot;</span><span class="n">parameter2</span><span class="w"> </span><span class="n">name</span><span class="ss">&quot;</span>
+
+<span class="ss">                                },</span>
+
+<span class="ss">                                &quot;</span><span class="n">type</span><span class="ss">&quot;: &quot;</span><span class="n">series</span><span class="w"> </span><span class="n">type</span><span class="ss">&quot;</span>
+
+<span class="ss">                            },</span>
+
+<span class="ss">                            ...</span>
+
+<span class="ss">                        },</span>
+
+<span class="ss">                        &quot;</span><span class="n">properties</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">classification</span><span class="ss">&quot;: feature classification,</span>
+
+<span class="ss">                            &quot;</span><span class="n">type</span><span class="ss">&quot;: feature type</span>
+
+<span class="ss">                        }</span>
+
+<span class="ss">                    }</span>
+
+<span class="ss">                },</span>
+
+<span class="ss">                &quot;</span><span class="n">NomePrototipo3</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                    ...</span>
+
+<span class="ss">                },</span>
+
+<span class="ss">                ...</span>
+
+<span class="ss">            },</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_proto&#39;</span><span class="o">][</span><span class="n">None</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">None</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1259,23 +1702,28 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{prototype}&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"></span>
+<p><strong>Alias per il recupero di tutte le informazioni di uno specifico prototipo</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    **Alias per il recupero di tutte le informazioni di uno specifico prototipo**&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_proto&#39;</span><span class="o">][</span><span class="n">prototype</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>

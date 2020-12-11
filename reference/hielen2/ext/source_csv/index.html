@@ -918,27 +918,55 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;./incomes&#39;</span><span class="p">,</span><span class="n">restype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">resource</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;last_load.csv&#39;</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">restype</span><span class="p">,</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./incomes&quot;</span><span class="p">,</span>
 
-<span class="k">class</span> <span class="nc">GWO</span><span class="p">():</span>
+    <span class="n">restype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;./incomes&#39;</span><span class="p">,</span><span class="n">restype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;last_load.csv&#39;</span><span class="p">):</span>
+    <span class="n">resource</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">=</span><span class="n">path</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;last_load.csv&quot;</span><span class="p">,</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">restype</span><span class="o">=</span><span class="n">restype</span>
+    <span class="n">column</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">resource</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">column</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])[</span><span class="n">column</span><span class="p">]</span>
+<span class="p">):</span>
 
-        <span class="c1">#out.index=to_datetime(out.index)</span>
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">restype</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">timefrom</span><span class="p">:</span><span class="n">timeto</span><span class="p">]</span>
+        <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span>
+
+    <span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">GWO</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./incomes&quot;</span><span class="p">,</span> <span class="n">restype</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s2">&quot;last_load.csv&quot;</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">restype</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">filename</span>
+
+    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span>
+
+            <span class="n">f</span><span class="s2">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span>
+
+            <span class="n">header</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+            <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+
+        <span class="p">)[</span><span class="n">column</span><span class="p">]</span>
+
+        <span class="c1"># out.index=to_datetime(out.index)</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">timefrom</span><span class="p">:</span><span class="n">timeto</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
@@ -957,9 +985,29 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;./incomes&#39;</span><span class="p">,</span><span class="n">restype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;last_load.csv&#39;</span><span class="p">,</span><span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">restype</span><span class="p">,</span><span class="n">filename</span><span class="p">).</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span><span class="k">column</span><span class="o">=</span><span class="k">column</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="n">path</span><span class="o">=</span><span class="ss">&quot;./incomes&quot;</span><span class="p">,</span>
+
+    <span class="n">restype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">filename</span><span class="o">=</span><span class="ss">&quot;last_load.csv&quot;</span><span class="p">,</span>
+
+    <span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">restype</span><span class="p">,</span> <span class="n">filename</span><span class="p">).</span><span class="n">getDataSeries</span><span class="p">(</span>
+
+        <span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span> <span class="k">column</span><span class="o">=</span><span class="k">column</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span>
+
+    <span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -972,23 +1020,31 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">GWO</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">GWO</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">path</span><span class="o">=</span><span class="s1">&#39;./incomes&#39;</span><span class="p">,</span><span class="n">restype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;last_load.csv&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">path</span><span class="o">=</span><span class="ss">&quot;./incomes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">restype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="o">=</span><span class="ss">&quot;last_load.csv&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">path</span><span class="o">=</span><span class="k">path</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">path</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">restype</span><span class="o">=</span><span class="n">restype</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">restype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">restype</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filename</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="nf">index_col</span><span class="o">=[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">column</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">f</span><span class="ss">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">timefrom:timeto</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="nf">index_col</span><span class="o">=[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="o">[</span><span class="n">column</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">timefrom:timeto</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>
@@ -1006,13 +1062,21 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">resource</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">column</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="nf">index_col</span><span class="o">=[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">column</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_csv</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">f</span><span class="ss">&quot;{self.path}/{self.restype}/{resource}/{self.filename}&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">timefrom:timeto</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="nf">index_col</span><span class="o">=[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="o">[</span><span class="n">column</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">timefrom:timeto</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>

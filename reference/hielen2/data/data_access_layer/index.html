@@ -1116,7 +1116,31 @@
 202
 203
 204
-205</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1146,31 +1170,39 @@
 
     <span class="k">return</span> <span class="n">wrap</span>
 
-<span class="k">class</span> <span class="nc">Series</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">Series</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">uid</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uid</span><span class="p">):</span>
 
-        <span class="n">series_info</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
+        <span class="n">series_info</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">series_info</span><span class="p">)</span>
 
-        <span class="n">geninfo</span><span class="o">=</span><span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">series_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span> <span class="s2">&quot;modules&quot;</span><span class="p">,</span><span class="s2">&quot;operator&quot;</span><span class="p">,</span><span class="s2">&quot;operands&quot;</span> <span class="p">)</span> <span class="p">)</span>
+        <span class="n">geninfo</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+
+            <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">series_info</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;modules&quot;</span><span class="p">,</span> <span class="s2">&quot;operator&quot;</span><span class="p">,</span> <span class="s2">&quot;operands&quot;</span><span class="p">)</span>
+
+        <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="n">Generator</span><span class="p">(</span><span class="o">**</span><span class="n">geninfo</span><span class="p">)</span>
 
     <span class="nd">@_threadpool</span>
 
-    <span class="k">def</span> <span class="nf">thdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">thdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span><span class="n">timefrom</span><span class="p">)</span>
+                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
 
@@ -1180,7 +1212,7 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-                <span class="n">timeto</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span>
+                <span class="n">timeto</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
 
@@ -1188,7 +1220,7 @@
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;datacache&#39;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;datacache&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">]</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">timefrom</span><span class="p">:</span>
 
@@ -1202,7 +1234,7 @@
 
             <span class="n">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
 
-        <span class="n">timefrom2</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="n">timefrom2</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">timefrom2</span> <span class="ow">is</span> <span class="n">nan</span><span class="p">:</span>
 
@@ -1210,13 +1242,13 @@
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="c1">#timefrom2 = max(isot2ut(timefrom2),isot2ut(timefrom) or 1)</span>
+            <span class="c1"># timefrom2 = max(isot2ut(timefrom2),isot2ut(timefrom) or 1)</span>
 
-            <span class="n">timefrom2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">timefrom2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">)</span>
 
             <span class="n">timefrom2</span> <span class="o">=</span> <span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">)</span>
 
-        <span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+        <span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -1226,99 +1258,115 @@
 
             <span class="k">pass</span>
 
-        <span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
+        <span class="n">gen</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-        <span class="n">idx</span><span class="o">=</span> <span class="n">unique</span><span class="p">(</span> <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span> <span class="n">idx</span> <span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
 
         <span class="k">return</span> <span class="n">out</span>
 
 <span class="k">class</span> <span class="nc">Generator</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span> <span class="o">=</span> <span class="n">operator</span> <span class="ow">or</span> <span class="s1">&#39;DataFrame()&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">operator</span> <span class="o">=</span> <span class="n">operator</span> <span class="ow">or</span> <span class="s2">&quot;DataFrame()&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">modules</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">m</span> <span class="ow">in</span> <span class="n">modules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">modules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="sa">f</span><span class="s1">&#39;self.modules[</span><span class="si">{</span><span class="n">k</span><span class="si">!r}</span><span class="s1">]&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">operator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;self.modules[</span><span class="si">{</span><span class="n">k</span><span class="si">!r}</span><span class="s2">]&quot;</span><span class="p">)</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">import_module</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">operands</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">if</span> <span class="n">operands</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">operands</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span> <span class="n">Generator</span><span class="o">.</span><span class="n">_parse_operand</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">operands</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
 
-    <span class="k">def</span> <span class="nf">_parse_operand</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+                <span class="n">Generator</span><span class="o">.</span><span class="n">_parse_operand</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
 
-        <span class="sd">&#39;&#39;&#39;</span>
+            <span class="p">)</span>
 
-<span class="sd">            trying to extract a series</span>
+    <span class="k">def</span> <span class="nf">_parse_operand</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        trying to extract a series</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">Series</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Series</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
             <span class="k">pass</span>
 
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            trying to extract element attribute</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">v</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
-            <span class="k">assert</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">v</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span>
 
-            <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
             <span class="k">pass</span>
 
-        <span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">            giving up. It should be a scalar.</span>
 
 <span class="sd">            return it</span>
 
-<span class="sd">        &#39;&#39;&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">):</span>
 
-        <span class="n">operands</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+        <span class="n">operands</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
 
-        <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span> <span class="p">})</span>
+        <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
 
-        <span class="n">runners</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span><span class="o">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span> <span class="p">}</span>
+            <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">Series</span><span class="p">)}</span>
 
-        <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">runners</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span> <span class="p">)</span>
+        <span class="p">)</span>
 
-        <span class="c1">#operands.update( { k:w.data(timefrom,timeto) for k,w in self.operands.items() if isinstance(w,Series) } )</span>
+        <span class="n">runners</span> <span class="o">=</span> <span class="p">{</span>
 
-        <span class="c1">#print(&#39;OPERANDI&#39;,operands)</span>
+            <span class="n">k</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span>
 
-        <span class="c1">#print(&#39;OPERATORE&#39;, self.operator)</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">Series</span><span class="p">)</span>
+
+        <span class="p">}</span>
+
+        <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">runners</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+
+        <span class="c1"># operands.update( { k:w.data(timefrom,timeto) for k,w in self.operands.items() if isinstance(w,Series) } )</span>
+
+        <span class="c1"># print(&#39;OPERANDI&#39;,operands)</span>
+
+        <span class="c1"># print(&#39;OPERATORE&#39;, self.operator)</span>
 
         <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span>
 </code></pre></div>
@@ -1342,85 +1390,101 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">Generator</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;DataFrame()&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;DataFrame()&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">modules</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">modules</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">modules</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">modules</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">f</span><span class="s1">&#39;self.modules[{k!r}]&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;self.modules[{k!r}]&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">modules</span><span class="o">[</span><span class="n">k</span><span class="o">]=</span><span class="n">import_module</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">modules</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">import_module</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">operands</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="w"> </span><span class="n">Generator</span><span class="p">.</span><span class="n">_parse_operand</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">op</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_parse_operand</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">                </span><span class="n">Generator</span><span class="p">.</span><span class="n">_parse_operand</span><span class="p">(</span><span class="o">*</span><span class="n">op</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">op</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">            </span><span class="p">)</span><span class="w"></span>
 
-<span class="s1">            trying to extract a series</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_parse_operand</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        trying to extract a series</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">Series</span><span class="p">(</span><span class="k">value</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="k">value</span><span class="p">))</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">            trying to extract element attribute</span>
+<span class="ss">            trying to extract element attribute</span>
 
-<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">v</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;.&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">assert</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">assert</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">v[0</span><span class="o">]</span><span class="err">]</span><span class="o">[</span><span class="n">&#39;properties&#39;</span><span class="o">][</span><span class="n">v[1</span><span class="o">]</span><span class="err">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">v[0</span><span class="o">]</span><span class="err">]</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">][</span><span class="n">v[1</span><span class="o">]</span><span class="err">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">            giving up. It should be a scalar.</span>
+<span class="ss">            giving up. It should be a scalar.</span>
 
-<span class="s1">            return it</span>
+<span class="ss">            return it</span>
 
-<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_generate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_generate</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">operands</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span><span class="w"> </span><span class="err">}</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">runners</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
+<span class="w">            </span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">Series</span><span class="p">)</span><span class="err">}</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">runners</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">runners</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#print</span><span class="p">(</span><span class="s1">&#39;OPERANDI&#39;</span><span class="p">,</span><span class="n">operands</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#print</span><span class="p">(</span><span class="s1">&#39;OPERATORE&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">Series</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="n">w</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">runners</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">}</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;OPERANDI&#39;</span><span class="p">,</span><span class="n">operands</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;OPERATORE&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">eval</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
@@ -1433,31 +1497,39 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Series</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">Series</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">uid</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">series_info</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">series_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__dict__</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">series_info</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">geninfo</span><span class="o">=</span><span class="n">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series_info</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;modules&quot;</span><span class="p">,</span><span class="ss">&quot;operator&quot;</span><span class="p">,</span><span class="ss">&quot;operands&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">geninfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">            </span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series_info</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;modules&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;operator&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;operands&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Generator</span><span class="p">(</span><span class="o">**</span><span class="n">geninfo</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="nv">@_threadpool</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thdata</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thdata</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">,</span><span class="n">timefrom</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
@@ -1467,7 +1539,7 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
@@ -1475,7 +1547,7 @@
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">]</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;datacache&quot;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">]</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nl">timefrom</span><span class="p">:</span><span class="w"></span>
 
@@ -1489,7 +1561,7 @@
 
 <span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">timefrom2</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom2</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nl">nan</span><span class="p">:</span><span class="w"></span>
 
@@ -1497,13 +1569,13 @@
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">#timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -1513,15 +1585,15 @@
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">range</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">__len__</span><span class="p">()))</span><span class="w"></span>
+<span class="w">        </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="k">range</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">__len__</span><span class="p">()))</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">idx</span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="w"> </span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n"> idx </span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>
@@ -1537,79 +1609,79 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="k">data</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-        <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="k">self</span><span class="p">.</span><span class="k">first</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-                <span class="n">timefrom</span> <span class="o">=</span> <span class="k">max</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">first</span><span class="p">,</span><span class="n">timefrom</span><span class="p">)</span>
+<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="p">)</span><span class="w"></span>
 
-        <span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-            <span class="n">timefrom</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="k">first</span>
+<span class="w">            </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="w"></span>
 
-        <span class="k">if</span> <span class="n">timeto</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timeto</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="k">self</span><span class="p">.</span><span class="k">last</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-                <span class="n">timeto</span> <span class="o">=</span> <span class="k">min</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">last</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span>
+<span class="w">                </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-        <span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-            <span class="n">timeto</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="k">last</span>
+<span class="w">            </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="w"></span>
 
-        <span class="n">try</span><span class="p">:</span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-            <span class="k">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;datacache&#39;</span><span class="p">][</span><span class="k">self</span><span class="p">.</span><span class="n">uid</span><span class="p">].</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;datacache&quot;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">]</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span><span class="w"></span>
 
-            <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span> <span class="k">and</span> <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">max</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">timefrom</span><span class="p">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nl">timefrom</span><span class="p">:</span><span class="w"></span>
 
-                <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
-            <span class="k">else</span><span class="p">:</span>
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-                <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">[</span><span class="n">timefrom</span><span class="p">:</span><span class="n">timeto</span><span class="p">]</span>
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="o">[</span><span class="n">timefrom:timeto</span><span class="o">]</span><span class="w"></span>
 
-        <span class="k">except</span> <span class="n">KeyError</span><span class="p">:</span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-            <span class="k">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
 
-        <span class="n">timefrom2</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">max</span><span class="p">()</span>
+<span class="w">        </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"></span>
 
-        <span class="k">if</span> <span class="n">timefrom2</span> <span class="k">is</span> <span class="n">nan</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom2</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nl">nan</span><span class="p">:</span><span class="w"></span>
 
-            <span class="n">timefrom2</span> <span class="o">=</span> <span class="n">timefrom</span>
+<span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timefrom</span><span class="w"></span>
 
-        <span class="k">else</span><span class="p">:</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-            <span class="o">#</span><span class="n">timefrom2</span> <span class="o">=</span> <span class="k">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span> <span class="k">or</span> <span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
-            <span class="n">timefrom2</span> <span class="o">=</span> <span class="k">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span> <span class="k">or</span> <span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
-            <span class="n">timefrom2</span> <span class="o">=</span> <span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">)</span>
+<span class="w">            </span><span class="n">timefrom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom2</span><span class="p">)</span><span class="w"></span>
 
-        <span class="n">gen</span> <span class="o">=</span> <span class="k">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+<span class="w">        </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom2</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-        <span class="n">try</span><span class="p">:</span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-            <span class="n">gen</span> <span class="o">=</span> <span class="n">gen</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="w">            </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span><span class="w"></span>
 
-        <span class="k">except</span> <span class="n">AttributeError</span><span class="p">:</span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">AttributeError</span><span class="p">:</span><span class="w"></span>
 
-            <span class="n">pass</span>
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-        <span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">range</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">__len__</span><span class="p">()))</span>
+<span class="w">        </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="k">range</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">__len__</span><span class="p">()))</span><span class="w"></span>
 
-        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">gen</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-        <span class="n">idx</span><span class="o">=</span> <span class="k">unique</span><span class="p">(</span> <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span> <span class="n">return_index</span> <span class="o">=</span> <span class="k">True</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">        </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
 
-        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span> <span class="n">idx</span> <span class="p">]</span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
 
-        <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
-        <span class="k">return</span> <span class="k">out</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1625,9 +1697,9 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@_threadpool</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thdata</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thdata</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>

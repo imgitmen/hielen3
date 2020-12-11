@@ -1458,7 +1458,37 @@
 296
 297
 298
-299</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1478,27 +1508,39 @@
 
 <span class="k">class</span> <span class="nc">FeaturePropertiesSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
 
-    <span class="n">context</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;no-context&quot;</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;no-context&quot;</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">label</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">description</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">location</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">style</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">status</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">timestamp</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">prototype</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> \
+<span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
 
-        <span class="n">geometry</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">uid</span><span class="p">,</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="n">prototype</span><span class="p">,</span>
+
+    <span class="n">properties</span><span class="p">:</span> <span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span> <span class="o">=</span> <span class="p">{},</span>
+
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span> <span class="o">=</span> <span class="p">{},</span>
+
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">**Creazione delle Features.**</span>
 
@@ -1520,59 +1562,63 @@
 
 <span class="sd">- _201 Created_: Nel caso in cui la feature venga creata correttamente.</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">feature</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span><span class="n">geometry</span><span class="p">}</span>
+        <span class="n">feature</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">}</span>
 
-        <span class="n">proto</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_proto&#39;</span><span class="p">][</span><span class="n">prototype</span><span class="p">]</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">]</span>
 
-        <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">proto</span><span class="p">[</span><span class="s1">&#39;struct&#39;</span><span class="p">])</span>
+        <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">proto</span><span class="p">[</span><span class="s2">&quot;struct&quot;</span><span class="p">])</span>
 
-        <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">({</span> <span class="n">k</span><span class="p">:{</span> <span class="n">y</span><span class="p">:</span><span class="kc">None</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">w</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">proto</span><span class="p">[</span><span class="s1">&#39;forms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">})</span>
+        <span class="n">feature</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
 
-        <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">uid</span>
+            <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="p">{</span><span class="n">y</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">w</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">proto</span><span class="p">[</span><span class="s2">&quot;forms&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 
-        <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+        <span class="p">)</span>
+
+        <span class="n">feature</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uid</span>
+
+        <span class="n">feature</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">feature</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">assert</span> <span class="n">properties</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">assert</span> <span class="n">properties</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
-            <span class="n">properties</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;no-context&#39;</span>
+            <span class="n">properties</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;no-context&quot;</span>
 
-        <span class="n">feature</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="n">properties</span> <span class="p">)</span>
+        <span class="n">feature</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">=</span><span class="n">feature</span>
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;prototype &#39;</span><span class="si">{</span><span class="n">prototype</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;prototype &#39;</span><span class="si">{</span><span class="n">prototype</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
     <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">feature</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; exists&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">feature</span><span class="p">[</span><span class="s1">&#39;uid&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39; exists&quot;</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
-    <span class="n">response</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">**Recupero delle informazioni delle features.**</span>
 
@@ -1616,145 +1662,159 @@
 
 <span class="sd">- _404 Not Found_: Nel caso in cui nessuna feature risponda ai criteri</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
-
-    <span class="k">def</span> <span class="nf">_format</span><span class="p">(</span><span class="n">ftin</span><span class="p">):</span>
-
-        <span class="n">ftout</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;Feature&quot;</span><span class="p">}</span>
-
-        <span class="n">ftout</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ftin</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
-
-        <span class="n">ftout</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ftin</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">ftout</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uids</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">))</span> <span class="ow">and</span> <span class="n">uids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uids</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">set</span><span class="p">))</span> <span class="ow">and</span> <span class="n">uids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">uids</span><span class="o">=</span><span class="p">[</span><span class="n">uids</span><span class="p">]</span>
+        <span class="n">uids</span> <span class="o">=</span> <span class="p">[</span><span class="n">uids</span><span class="p">]</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
 
-            <span class="n">features</span><span class="o">=</span><span class="p">[</span> <span class="n">_format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uids</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="n">features</span><span class="o">=</span><span class="p">[</span>
 
-                <span class="k">if</span> <span class="n">cntxt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">cntxt</span> <span class="p">]</span>
+                <span class="p">{</span>
 
-            <span class="p">)</span>
+                    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span>
+
+                    <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">],</span>
+
+                    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">],</span>
+
+                <span class="p">}</span>
+
+                <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uids</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">cntxt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">v</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">][</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">cntxt</span>
+
+            <span class="p">]</span>
+
+        <span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{uid}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">feature_info</span><span class="p">(</span> <span class="n">uid</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias di recupero informazioni della specifica feature**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="n">cntxt</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span> <span class="n">uid</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> \
-
-        <span class="n">geometry</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="p">{},</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">feature_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">**Modifica delle properties di una feature**</span>
+<span class="sd">    **Alias di recupero informazioni della specifica feature**</span>
 
-<span class="sd">Possibili risposte:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="sd">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+    <span class="k">return</span> <span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">cntxt</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
-<span class="sd">- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{uid}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
+
+    <span class="n">uid</span><span class="p">,</span>
+
+    <span class="n">properties</span><span class="p">:</span> <span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span> <span class="o">=</span> <span class="p">{},</span>
+
+    <span class="n">geometry</span><span class="p">:</span> <span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span> <span class="o">=</span> <span class="p">{},</span>
+
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Modifica delle properties di una feature**</span>
+
+<span class="sd">    Possibili risposte:</span>
+
+<span class="sd">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+
+<span class="sd">    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;None value not allowed&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;None value not allowed&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">f</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
-        <span class="n">f</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
 
-        <span class="n">f</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+        <span class="n">f</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">=</span><span class="n">f</span>
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&#39; not foud.&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&#39; not foud.&quot;</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{uid}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{uid}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">del_feature</span><span class="p">(</span> <span class="n">uid</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">del_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">**Cancellazione delle Features**</span>
+<span class="sd">    **Cancellazione delle Features**</span>
 
-<span class="sd">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
+<span class="sd">    Se la feature viene cancellata correttamente ne restituisce la struttura</span>
 
-<span class="sd">Possibili risposte:</span>
+<span class="sd">    Possibili risposte:</span>
 
-<span class="sd">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="sd">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="sd">- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
+<span class="sd">    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">uid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;None value not allowed&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;None value not allowed&quot;</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&#39; not foud.&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">uid</span><span class="si">}</span><span class="s2">&#39; not foud.&quot;</span>
 
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 </code></pre></div>
@@ -1769,8 +1829,8 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f24209a0dc0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f24209ba0d0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b68250</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b68520</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1787,79 +1847,95 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
 <li><em>201 Created</em>: Nel caso in cui la feature venga creata correttamente.</li>
 </ul>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">create_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="nl">properties</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">create_feature</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="nl">geometry</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">uid</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="n">prototype</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">**Creazione delle Features.**</span>
+<span class="w">    </span><span class="nl">properties</span><span class="p">:</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">Ogni feature deve avere il suo codice univoco `uid` e il suo prototipo `prototype`. Questi due \</span>
+<span class="w">    </span><span class="nl">geometry</span><span class="p">:</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">campi sono immutabli (vedi PUT `/feature/{uid}`).</span>
+<span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">Il prototipo della feature forisce informazioni per l&#39;</span><span class="n">inizializazione</span><span class="w"> </span><span class="n">della</span><span class="w"> </span><span class="n">struttura</span><span class="p">.</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">Il</span><span class="w"> </span><span class="n">parametro</span><span class="w"> </span><span class="err">`</span><span class="n">geometry</span><span class="err">`</span><span class="w"> </span><span class="n">deve</span><span class="w"> </span><span class="n">essere</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">GeoJson</span><span class="w"></span>
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="n">Se</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">viene</span><span class="w"> </span><span class="n">creata</span><span class="w"> </span><span class="n">correttamente</span><span class="w"> </span><span class="n">ne</span><span class="w"> </span><span class="n">restituisce</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">struttura</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="n">Possibili</span><span class="w"> </span><span class="nl">risposte</span><span class="p">:</span><span class="w"></span>
+<span class="ss">**Creazione delle Features.**</span>
 
-<span class="o">-</span><span class="w"> </span><span class="n">_409</span><span class="w"> </span><span class="nl">Conflict_</span><span class="p">:</span><span class="w"> </span><span class="n">Nel</span><span class="w"> </span><span class="n">caso</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">cui</span><span class="w"> </span><span class="n">il</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="n">fornito</span><span class="w"> </span><span class="n">esista</span><span class="w"> </span><span class="n">già</span><span class="p">.</span><span class="w"></span>
+<span class="ss">Ogni feature deve avere il suo codice univoco `uid` e il suo prototipo `prototype`. Questi due \</span>
 
-<span class="o">-</span><span class="w"> </span><span class="n">_404</span><span class="w"> </span><span class="ow">Not</span><span class="w"> </span><span class="nl">Found_</span><span class="p">:</span><span class="w"> </span><span class="n">Nel</span><span class="w"> </span><span class="n">caso</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">cui</span><span class="w"> </span><span class="n">il</span><span class="w"> </span><span class="n">prototipo</span><span class="w"> </span><span class="n">richiesto</span><span class="w"> </span><span class="n">non</span><span class="w"> </span><span class="n">esista</span><span class="p">.</span><span class="w"></span>
+<span class="ss">campi sono immutabli (vedi PUT `/feature/{uid}`).</span>
 
-<span class="o">-</span><span class="w"> </span><span class="n">_201</span><span class="w"> </span><span class="nl">Created_</span><span class="p">:</span><span class="w"> </span><span class="n">Nel</span><span class="w"> </span><span class="n">caso</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">cui</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">venga</span><span class="w"> </span><span class="n">creata</span><span class="w"> </span><span class="n">correttamente</span><span class="p">.</span><span class="w"></span>
+<span class="ss">Il prototipo della feature forisce informazioni per l&#39;inizializazione della struttura.</span>
 
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="ss">Il parametro `geometry` deve essere un GeoJson</span>
 
-<span class="s1">    out = ResponseFormatter(status=falcon.HTTP_CREATED)</span>
+<span class="ss">Se la feature viene creata correttamente ne restituisce la struttura</span>
 
-<span class="s1">    try:</span>
+<span class="ss">Possibili risposte:</span>
 
-<span class="s1">        feature={&quot;geometry&quot;:geometry}</span>
+<span class="ss">- _409 Conflict_: Nel caso in cui il uid fornito esista già.</span>
 
-<span class="s1">        proto=db[&#39;</span><span class="n">features_proto</span><span class="s1">&#39;][prototype]</span>
+<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="s1">        feature.update(proto[&#39;</span><span class="n">struct</span><span class="s1">&#39;])</span>
+<span class="ss">- _201 Created_: Nel caso in cui la feature venga creata correttamente.</span>
 
-<span class="s1">        feature.update({ k:{ y:None for y in w[&#39;</span><span class="n">args</span><span class="s1">&#39;].keys() } for k,w in proto[&#39;</span><span class="n">forms</span><span class="s1">&#39;].items() })</span>
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="s1">        feature[&#39;</span><span class="n">properties</span><span class="s1">&#39;][&#39;</span><span class="n">uid</span><span class="s1">&#39;]=uid</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span><span class="w"></span>
 
-<span class="s1">        feature[&#39;</span><span class="k">parameters</span><span class="s1">&#39;]={ k:None for k in feature[&#39;</span><span class="k">parameters</span><span class="s1">&#39;].keys()}</span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        try:</span>
+<span class="w">        </span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;geometry&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">geometry</span><span class="err">}</span><span class="w"></span>
 
-<span class="s1">            assert properties[&#39;</span><span class="n">context</span><span class="s1">&#39;] is not None</span>
+<span class="w">        </span><span class="n">proto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">]</span><span class="w"></span>
 
-<span class="s1">        except Exception:</span>
+<span class="w">        </span><span class="n">feature</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">proto</span><span class="o">[</span><span class="n">&quot;struct&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
-<span class="s1">            properties[&#39;</span><span class="n">context</span><span class="s1">&#39;] = &#39;</span><span class="k">no</span><span class="o">-</span><span class="n">context</span><span class="s1">&#39;</span>
+<span class="w">        </span><span class="n">feature</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"></span>
 
-<span class="s1">        feature[&#39;</span><span class="n">properties</span><span class="s1">&#39;].update( properties )</span>
+<span class="w">            </span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="nl">y</span><span class="p">:</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">w</span><span class="o">[</span><span class="n">&quot;args&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span><span class="err">}</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">proto</span><span class="o">[</span><span class="n">&quot;forms&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">}</span><span class="w"></span>
 
-<span class="s1">        db[&#39;</span><span class="n">features</span><span class="s1">&#39;][uid]=feature</span>
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
 
-<span class="s1">        out.data=db[&#39;</span><span class="n">features</span><span class="s1">&#39;][uid]</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">][</span><span class="n">&quot;uid&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uid</span><span class="w"></span>
 
-<span class="s1">    except KeyError as e:</span>
+<span class="w">        </span><span class="n">feature</span><span class="o">[</span><span class="n">&quot;parameters&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">feature</span><span class="o">[</span><span class="n">&quot;parameters&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span><span class="err">}</span><span class="w"></span>
 
-<span class="s1">        out.message=f&quot;prototype &#39;</span><span class="err">{</span><span class="n">prototype</span><span class="err">}</span><span class="s1">&#39; not found.&quot;</span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        out.status=falcon.HTTP_NOT_FOUND</span>
+<span class="w">            </span><span class="n">assert</span><span class="w"> </span><span class="n">properties</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
-<span class="s1">    except ValueError as e:</span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        out.message=f&quot;feature &#39;</span><span class="err">{</span><span class="n">feature</span><span class="o">[</span><span class="n">&#39;uid&#39;</span><span class="o">]</span><span class="err">}&#39;</span><span class="w"> </span><span class="ow">exists</span><span class="err">&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">properties</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;no-context&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span><span class="w"></span>
+<span class="w">        </span><span class="n">feature</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">]</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;prototype &#39;{prototype}&#39; not found.&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;feature &#39;{feature[&#39;uid&#39;]}&#39; exists&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"></span>
 </code></pre></div>
@@ -1880,45 +1956,45 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
 <li><em>202 Accepted</em>: Nel caso in cui la feature venga eliminata correttamente.</li>
 </ul>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">&#39;/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{uid}&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">del_feature</span><span class="p">(</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">del_feature</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">**Cancellazione delle Features**</span>
+<span class="ss">    **Cancellazione delle Features**</span>
 
-<span class="ss">Se la feature viene cancellata correttamente ne restituisce la struttura</span>
+<span class="ss">    Se la feature viene cancellata correttamente ne restituisce la struttura</span>
 
-<span class="ss">Possibili risposte:</span>
+<span class="ss">    Possibili risposte:</span>
 
-<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="ss">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="ss">- _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
+<span class="ss">    - _202 Accepted_: Nel caso in cui la feature venga eliminata correttamente.</span>
 
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="ss">&quot;None value not allowed&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;None value not allowed&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]=</span><span class="k">None</span><span class="w"></span>
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;feature &#39;{uid}&#39; not foud.&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;feature &#39;{uid}&#39; not foud.&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"></span>
 </code></pre></div>
@@ -1934,17 +2010,17 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 </code></pre></div>
 
 <p><strong>Alias di recupero informazioni della specifica feature</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{uid}&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">feature_info</span><span class="p">(</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">feature_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">**Alias di recupero informazioni della specifica feature**</span>
+<span class="ss">    **Alias di recupero informazioni della specifica feature**</span>
 
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="n">cntxt</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1979,89 +2055,93 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri</li>
 </ul>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">**Recupero delle informazioni delle features.**</span>
+<span class="ss">**Recupero delle informazioni delle features.**</span>
 
-<span class="s1">__nota__: uids accetta valori multipli separati da virgola</span>
+<span class="ss">__nota__: uids accetta valori multipli separati da virgola</span>
 
-<span class="s1">viene restituito una struttura di questo tipo:</span>
+<span class="ss">viene restituito una struttura di questo tipo:</span>
 
-<span class="s1">        {</span>
+<span class="ss">        {</span>
 
-<span class="s1">            &quot;features&quot;: [</span>
+<span class="ss">            &quot;</span><span class="n">features</span><span class="ss">&quot;: [</span>
 
-<span class="s1">                {</span>
+<span class="ss">                {</span>
 
-<span class="s1">                    &quot;type&quot;: &quot;Feature&quot;,</span>
+<span class="ss">                    &quot;</span><span class="n">type</span><span class="ss">&quot;: &quot;</span><span class="n">Feature</span><span class="ss">&quot;,</span>
 
-<span class="s1">                    &quot;properties&quot;: {</span>
+<span class="ss">                    &quot;</span><span class="n">properties</span><span class="ss">&quot;: {</span>
 
-<span class="s1">                        ...</span>
+<span class="ss">                        ...</span>
 
-<span class="s1">                    },</span>
+<span class="ss">                    },</span>
 
-<span class="s1">                    &quot;geometry&quot;: &lt;GeoJson Validable&gt;</span>
+<span class="ss">                    &quot;</span><span class="n">geometry</span><span class="ss">&quot;: &lt;GeoJson Validable&gt;</span>
 
-<span class="s1">                },</span>
+<span class="ss">                },</span>
 
-<span class="s1">                ...</span>
+<span class="ss">                ...</span>
 
-<span class="s1">            ]</span>
+<span class="ss">            ]</span>
 
-<span class="s1">        }</span>
+<span class="ss">        }</span>
 
-<span class="s1">___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \</span>
+<span class="ss">___nota___: Al contrario di quanto detto nel TODO non viene inserito il context a livello \</span>
 
-<span class="s1">&quot;features&quot; perchè in effetti è una informazione sempre conosciuta a priori (se si lavora \</span>
+<span class="ss">&quot;</span><span class="n">features</span><span class="ss">&quot; perchè in effetti è una informazione sempre conosciuta a priori (se si lavora \</span>
 
-<span class="s1">per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all&#39;</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
+<span class="ss">per commesse). Al contrario se si lavora per uids allora ha senso inserie questa info all&#39; \</span>
 
-<span class="n">interno</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">singole</span><span class="w"> </span><span class="n">features</span><span class="p">.</span><span class="w"></span>
+<span class="ss">interno delle properties delle singole features.</span>
 
-<span class="n">Possibili</span><span class="w"> </span><span class="nl">risposte</span><span class="p">:</span><span class="w"></span>
+<span class="ss">Possibili risposte:</span>
 
-<span class="o">-</span><span class="w"> </span><span class="n">_404</span><span class="w"> </span><span class="ow">Not</span><span class="w"> </span><span class="nl">Found_</span><span class="p">:</span><span class="w"> </span><span class="n">Nel</span><span class="w"> </span><span class="n">caso</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">cui</span><span class="w"> </span><span class="n">nessuna</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">risponda</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="n">criteri</span><span class="w"></span>
+<span class="ss">- _404 Not Found_: Nel caso in cui nessuna feature risponda ai criteri</span>
 
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="s1">    def _format(ftin):</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
-<span class="s1">        ftout={&quot;type&quot;:&quot;Feature&quot;}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uids</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">list</span><span class="p">,</span><span class="w"> </span><span class="k">set</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">uids</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        ftout[&quot;geometry&quot;]=ftin[&quot;geometry&quot;]</span>
+<span class="w">        </span><span class="n">uids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">uids</span><span class="o">]</span><span class="w"></span>
 
-<span class="s1">        ftout[&quot;properties&quot;]=ftin[&quot;properties&quot;]</span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="s1">        return ftout</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="w"></span>
 
-<span class="s1">    out = ResponseFormatter()</span>
+<span class="w">            </span><span class="n">features</span><span class="o">=[</span><span class="n"></span>
 
-<span class="s1">    if not isinstance(uids,(list,set)) and uids is not None:</span>
+<span class="n">                {</span>
 
-<span class="s1">        uids=[uids]</span>
+<span class="n">                    &quot;type&quot;: &quot;Feature&quot;,</span>
 
-<span class="s1">    try:</span>
+<span class="n">                    &quot;geometry&quot;: v[&quot;geometry&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">        out.data=dict(</span>
+<span class="w">                    </span><span class="ss">&quot;properties&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">v</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
 
-<span class="s1">            features=[ _format(v) for v in db[&#39;</span><span class="n">features</span><span class="s1">&#39;][uids].values()</span>
+<span class="w">                </span><span class="err">}</span><span class="w"></span>
 
-<span class="s1">                if cntxt is None or v[&#39;</span><span class="n">properties</span><span class="s1">&#39;][&#39;</span><span class="n">context</span><span class="err">&#39;]</span><span class="o">==</span><span class="n">cntxt</span><span class="w"> </span><span class="err">]</span><span class="w"></span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uids</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">            </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cntxt</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">v</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">][</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">cntxt</span><span class="w"></span>
+
+<span class="w">            </span><span class="err">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"></span>
 </code></pre></div>
@@ -2070,8 +2150,8 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f24209ba220</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f24209ba4c0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b62760</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b4e1c0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -2083,53 +2163,63 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
 <li><em>202 Accepted</em>: Nel caso in cui la feature venga modificata correttamente.</li>
 </ul>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="s1">&#39;/{uid}&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="ss">&quot;/{uid}&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">update_feature</span><span class="p">(</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="nl">properties</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span><span class="w"> </span><span class="err">\</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">update_feature</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="nl">geometry</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="o">=</span><span class="err">{}</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">uid</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="nl">properties</span><span class="p">:</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">FeaturePropertiesSchema</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="nl">geometry</span><span class="p">:</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">())</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">**Modifica delle properties di una feature**</span>
+<span class="ss">    **Modifica delle properties di una feature**</span>
 
-<span class="ss">Possibili risposte:</span>
+<span class="ss">    Possibili risposte:</span>
 
-<span class="ss">- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
+<span class="ss">    - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.</span>
 
-<span class="ss">- _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
+<span class="ss">    - _202 Accepted_: Nel caso in cui la feature venga modificata correttamente.</span>
 
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">uid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="ss">&quot;None value not allowed&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;None value not allowed&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">f</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">f</span><span class="o">[</span><span class="n">&#39;properties&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">f</span><span class="o">[</span><span class="n">&quot;properties&quot;</span><span class="o">]</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">f</span><span class="o">[</span><span class="n">&#39;geometry&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">f</span><span class="o">[</span><span class="n">&quot;geometry&quot;</span><span class="o">]</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]=</span><span class="k">None</span><span class="w"></span>
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]=</span><span class="n">f</span><span class="w"></span>
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;feature &#39;{uid}&#39; not foud.&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;feature &#39;{uid}&#39; not foud.&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"></span>
 </code></pre></div>
@@ -2202,19 +2292,19 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
     <code>handle_error</code> and <code>get_attribute</code> methods instead.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">FeaturePropertiesSchema</span>(<span class="n">Schema</span>):
 
-    <span class="n">context</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="s">&quot;no-context&quot;</span>,<span class="n">allow_none</span>=<span class="nb">False</span>)
+    <span class="n">context</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="s">&quot;no-context&quot;</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
-    <span class="n">label</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="n">label</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">description</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="n">description</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">location</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="n">location</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">style</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="n">style</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="nb">status</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="nb">status</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 
-    <span class="n">timestamp</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
+    <span class="n">timestamp</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>)
 </code></pre></div>
 
 </details>

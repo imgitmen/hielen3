@@ -881,6 +881,29 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<p><strong>Recupero dei valori correnti per le form delle azioni di una specifica feature</strong></p>
+<p>L'intento di questa api è quello di fornire i valori richiesti secondo lo schema della form </p>
+<p><strong><em>nota 1</em></strong>: <code>form</code> accetta valori multipli separati da virgola
+<strong><em>nota 2</em></strong>: A seconda dell'action richiesta, alcuni parametri potrebbero essere utilizzati in fase di input ma non registrati. Il che vuol dire che per quei parametri il valore di ritorno sarà null</p>
+<p>viene restituito una struttura di questo tipo:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        &quot;form1&quot;: {</span>
+<span class="err">            &quot;arg1.1&quot;:..,</span>
+<span class="err">            &quot;arg1.2&quot;:..,</span>
+<span class="err">            ...</span>
+<span class="err">        },</span>
+<span class="err">        &quot;form2&quot;: {</span>
+<span class="err">            &quot;arg2.1&quot;:..,</span>
+<span class="err">            &quot;arg2.2&quot;:..,</span>
+<span class="err">        }</span>
+<span class="err">    }</span>
+</code></pre></div>
+
+<p>Possibili risposte:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel non venga trovata la feature richiesta o essa abbia un problema di configurazione</li>
+</ul>
 <h2 id="actionsfeatureform"><strong>/actions/{feature}/{form}</strong></h2>
 <h4 id="get_1">GET</h4>
 <hr />
@@ -894,6 +917,10 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Recupero dei valori correnti per una specifica form delle azioni di una specifica feature**</span>
+</code></pre></div>
+
 <h4 id="post">POST</h4>
 <hr />
 <p><em>params</em>:</p>
@@ -908,28 +935,19 @@
 </ul>
 <p><em>description</em>:</p>
 <p><strong>Esecuzione delle azioni</strong></p>
-<p>Richiede l'esecuzione di una specifica azione su una feature, fornendo tutte le informazioni necessarie attraverso una form dinamica dedicata. L'elenco delle azioni possibili per ogni feature è disponibile attraverso l'api ... (TODO)</p>
+<p>Richiede l'esecuzione di una specifica azione su una feature, fornendo tutte le informazioni necessarie attraverso una form dinamica dedicata.</p>
 <ul>
 <li>Oltre ai due parametri <code>feature</code> e <code>form</code>, indicati nella url, accetta un <em>multipart/form-data</em> basato sulla specifica form, selezionata tramite i due parametri espliciti.</li>
 <li>Tutto il content è scaricato attarverso i chunk dello stream ('100 continue') per evitare il timeout dei workers in caso di contenuti di grandi dimensioni.</li>
 </ul>
 <p>Possibili risposte:</p>
 <ul>
+<li><em>202 Accepted</em>: Nel caso in cui l'azione vada a buon fine. Risponde con <em>202 Accepted</em> e non con - <em>200 OK</em> perchè l'azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione arbitrario. L'azione quindi viene splittata su un altro processo.</li>
 <li><em>404 Not Found</em>: Nel caso la feature non esista o non sia definita per essa l'azione richiesta.</li>
-<li><em>202 Accepted</em>: Nel caso in cui l'azione vada a buon fine</li>
+<li><em>500 Internal Server Error</em>: Nel caso pessimo che il modulo dichiarato non esista.</li>
+<li><em>501 Not Implemented'</em>: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti i moduli di gestione</li>
 </ul>
-<p><strong>TEMPORANEAMENTE</strong></p>
-<ul>
-<li>
-<p>E' impementato come <em>"DUMMY"</em>: funziona tutto il giro dei check ma i moduli specifici non sono ancora agganciati.</p>
-</li>
-<li>
-<p>Risponde con un json dict compresivo di tutti campi attesi per la Form selezionata, valorizzati in questo modo: </p>
-</li>
-</ul>
-<p><em>Se il campo è stato fornito in input ed è uno scalare, viene fornito il valore di input.</em></p>
-<p><em>Se il campo fornito in input è un file, viene fornito il checksum md5 del file, calcolato dopo che il file è stato salvato sul filesystem.</em></p>
-<p><em>I campi non forniti in input vengono restituiti con valore null.</em></p>
+<p>E' stato implementato il meccanismo minimo di gestione che prevede il salvataggio delle info fornite che possono essere fornite tali e quali in uscita (vedi metodo GET dell'api). Questo meccanismo permette di svluppare i moduli a partire da un template con risposta di default.</p>
                 
               
               

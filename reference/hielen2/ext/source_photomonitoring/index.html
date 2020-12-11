@@ -918,15 +918,15 @@
 
 <span class="k">class</span> <span class="nc">Source</span><span class="p">(</span><span class="n">HielenSource</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 
-    <span class="k">def</span> <span class="nf">feed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">feed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 
-    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 </code></pre></div>
@@ -944,15 +944,15 @@
 inheritance.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">Source</span>(<span class="n">HielenSource</span>):
 
-    <span class="n">def</span> <span class="nb">config</span>(<span class="nb">self</span>,**<span class="n">kwargs</span>):
+    <span class="n">def</span> <span class="nb">config</span>(<span class="nb">self</span>, **<span class="n">kwargs</span>):
 
         <span class="k">return</span> <span class="n">kwargs</span>
 
-    <span class="n">def</span> <span class="n">feed</span>(<span class="nb">self</span>,**<span class="n">kwargs</span>):
+    <span class="n">def</span> <span class="n">feed</span>(<span class="nb">self</span>, **<span class="n">kwargs</span>):
 
         <span class="k">return</span> <span class="n">kwargs</span>
 
-    <span class="n">def</span> <span class="n">data</span>(<span class="nb">self</span>,<span class="n">timefrom</span>=<span class="n">None</span>,<span class="n">timeto</span>=<span class="n">None</span>,<span class="n">geom</span>=<span class="n">None</span>,**<span class="n">kwargs</span>):
+    <span class="n">def</span> <span class="n">data</span>(<span class="nb">self</span>, <span class="n">timefrom</span>=<span class="n">None</span>, <span class="n">timeto</span>=<span class="n">None</span>, <span class="n">geom</span>=<span class="n">None</span>, **<span class="n">kwargs</span>):
 
         <span class="k">return</span> <span class="n">kwargs</span>
 </code></pre></div>
@@ -972,7 +972,7 @@ inheritance.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">config</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">config</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 </code></pre></div>
@@ -988,7 +988,7 @@ inheritance.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="k">data</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="k">data</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 </code></pre></div>
@@ -1001,7 +1001,7 @@ inheritance.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">feed</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">feed</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
 </code></pre></div>

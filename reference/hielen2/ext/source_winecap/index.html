@@ -1010,23 +1010,23 @@
 
 <span class="kn">from</span> <span class="nn">hielen.utils</span> <span class="kn">import</span> <span class="n">isot2ut</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">sudo apt-get install libxml2-dev libxslt1-dev</span>
 
 <span class="sd">pip install lxml==4.2.5 zeep</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
-<span class="c1">#key=&#39;80d373db820fea6f8c5f57d125eb509d&#39;</span>
+<span class="c1"># key=&#39;80d373db820fea6f8c5f57d125eb509d&#39;</span>
 
-<span class="n">key</span><span class="o">=</span><span class="s1">&#39;04a71268d386d61801824863ad7e2a5d&#39;</span>
+<span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;04a71268d386d61801824863ad7e2a5d&quot;</span>
 
-<span class="n">GWOmac</span><span class="o">=</span><span class="s1">&#39;00009DEA&#39;</span>
+<span class="n">GWOmac</span> <span class="o">=</span> <span class="s2">&quot;00009DEA&quot;</span>
 
-<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span><span class="n">GW</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">LG</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">CH</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span><span class="n">GW</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">LG</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">CH</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">GW</span><span class="p">)</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">LG</span><span class="p">,</span><span class="n">ch</span><span class="o">=</span><span class="n">CH</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">GW</span><span class="p">)</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">LG</span><span class="p">,</span> <span class="n">ch</span><span class="o">=</span><span class="n">CH</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">threadpool</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">executor</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
@@ -1038,15 +1038,19 @@
 
     <span class="k">return</span> <span class="n">wrap</span>
 
-<span class="k">class</span> <span class="nc">GWO</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">GWO</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="n">GWOmac</span><span class="p">,</span><span class="n">wsdl</span><span class="o">=</span><span class="s1">&#39;http://www.winecap.it/winecapws.wsdl&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="o">=</span><span class="n">key</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">mac</span><span class="o">=</span><span class="n">GWOmac</span><span class="p">,</span> <span class="n">wsdl</span><span class="o">=</span><span class="s2">&quot;http://www.winecap.it/winecapws.wsdl&quot;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="o">=</span><span class="n">mac</span>
+    <span class="p">):</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">=</span><span class="n">Client</span><span class="p">(</span><span class="n">wsdl</span><span class="o">=</span><span class="n">wsdl</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mac</span> <span class="o">=</span> <span class="n">mac</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">wsdl</span><span class="o">=</span><span class="n">wsdl</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_gch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">getChannelHistory</span>
 
@@ -1056,11 +1060,11 @@
 
     <span class="k">def</span> <span class="nf">getSensorsList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gsl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gsl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
 
             <span class="n">timefrom</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
 
@@ -1068,25 +1072,35 @@
 
             <span class="n">timeto</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
 
             <span class="n">timeto</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
 
-        <span class="n">ahead</span><span class="o">=</span><span class="bp">True</span>
+        <span class="n">ahead</span> <span class="o">=</span> <span class="bp">True</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">Series</span><span class="p">()</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">Series</span><span class="p">()</span>
 
         <span class="k">while</span> <span class="n">ahead</span><span class="p">:</span>
 
-            <span class="n">u</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)))</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span>
 
-            <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span> <span class="n">ahead</span> <span class="o">=</span> <span class="bp">False</span>
+                <span class="n">serialize_object</span><span class="p">(</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_gch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mac</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span>
+
+                <span class="p">)</span>
+
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+
+                <span class="n">ahead</span> <span class="o">=</span> <span class="bp">False</span>
 
             <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 
-                <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timeStamp&#39;</span><span class="p">])[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">&quot;timeStamp&quot;</span><span class="p">])[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
 
-                <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
+                <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span>
 
                 <span class="n">timefrom</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -1098,25 +1112,25 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="nd">@threadpool</span>
 
-    <span class="k">def</span> <span class="nf">getThreadedSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">getThreadedSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">getDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="p">[],</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">getDataFrame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reqser</span><span class="o">=</span><span class="p">[],</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-        <span class="n">thds</span><span class="o">=</span><span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reqser</span> <span class="p">]</span>
+        <span class="n">thds</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reqser</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="p">[</span> <span class="n">x</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">thds</span> <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">thds</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">getDataFrameSE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="p">[],</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">getDataFrameSE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reqser</span><span class="o">=</span><span class="p">[],</span> <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reqser</span> <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">reqser</span><span class="p">]</span>
 </code></pre></div>
 
 </details>
@@ -1138,9 +1152,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span><span class="n">GW</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">LG</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">CH</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span><span class="n">GW</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">LG</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">CH</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">GW</span><span class="p">).</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">LG</span><span class="p">,</span><span class="n">ch</span><span class="o">=</span><span class="n">CH</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">GW</span><span class="p">).</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">mac</span><span class="o">=</span><span class="n">LG</span><span class="p">,</span> <span class="n">ch</span><span class="o">=</span><span class="n">CH</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -1172,15 +1186,19 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">GWO</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">GWO</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="o">=</span><span class="k">key</span><span class="p">,</span><span class="n">mac</span><span class="o">=</span><span class="n">GWOmac</span><span class="p">,</span><span class="n">wsdl</span><span class="o">=</span><span class="s1">&#39;http://www.winecap.it/winecapws.wsdl&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="o">=</span><span class="k">key</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">mac</span><span class="o">=</span><span class="n">GWOmac</span><span class="p">,</span><span class="w"> </span><span class="n">wsdl</span><span class="o">=</span><span class="ss">&quot;http://www.winecap.it/winecapws.wsdl&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="o">=</span><span class="n">mac</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="o">=</span><span class="n">Client</span><span class="p">(</span><span class="n">wsdl</span><span class="o">=</span><span class="n">wsdl</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">key</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mac</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Client</span><span class="p">(</span><span class="n">wsdl</span><span class="o">=</span><span class="n">wsdl</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">_gch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">getChannelHistory</span><span class="w"></span>
 
@@ -1190,11 +1208,11 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getSensorsList</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_gsl</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_gsl</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="p">)))</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">mac</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="nc">int</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="nc">int</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"></span>
 
@@ -1202,25 +1220,35 @@
 
 <span class="w">            </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="nc">time</span><span class="p">())</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span><span class="nc">int</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span><span class="w"> </span><span class="nc">int</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ahead</span><span class="o">=</span><span class="k">True</span><span class="w"></span>
+<span class="w">        </span><span class="n">ahead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">Series</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="nl">ahead</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">_gch</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)))</span><span class="w"></span>
+<span class="w">            </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1024</span><span class="err">:</span><span class="w"> </span><span class="n">ahead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+<span class="w">                </span><span class="n">serialize_object</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">self</span><span class="p">.</span><span class="n">_gch</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">mac</span><span class="p">,</span><span class="w"> </span><span class="n">mac</span><span class="p">,</span><span class="w"> </span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1024</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ahead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;timeStamp&#39;</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;value&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&quot;timeStamp&quot;</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">&quot;value&quot;</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">names</span><span class="o">=[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="nf">max</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 
@@ -1232,25 +1260,25 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">,</span><span class="w"> </span><span class="n">unit</span><span class="o">=</span><span class="ss">&quot;s&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 
 <span class="w">    </span><span class="nv">@threadpool</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataFrame</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataFrame</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">reqser</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">thds</span><span class="o">=[</span><span class="n"> self.getThreadedSeries(*x,timefrom,timeto) for x in reqser </span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">thds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">self.getThreadedSeries(*x, timefrom, timeto) for x in reqser</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n"> x.result() for x in thds </span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">x.result() for x in thds</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataFrameSE</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getDataFrameSE</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">reqser</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n"> self.getDataSeries(*x,timefrom,timeto) for x in reqser </span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">self.getDataSeries(*x, timefrom, timeto) for x in reqser</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1265,11 +1293,11 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataFrame</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="p">[],</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataFrame</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">reqser</span><span class="o">=</span><span class="p">[],</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-        <span class="n">thds</span><span class="o">=</span><span class="p">[</span> <span class="k">self</span><span class="p">.</span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">reqser</span> <span class="p">]</span>
+        <span class="n">thds</span> <span class="o">=</span> <span class="p">[</span><span class="k">self</span><span class="p">.</span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">reqser</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="p">[</span> <span class="n">x</span><span class="p">.</span><span class="k">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">thds</span> <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">.</span><span class="k">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">thds</span><span class="p">]</span>
 </code></pre></div>
 
 </details>
@@ -1282,9 +1310,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataFrameSE</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">reqser</span><span class="o">=</span><span class="p">[],</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataFrameSE</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">reqser</span><span class="o">=</span><span class="p">[],</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="p">[</span> <span class="k">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">reqser</span> <span class="p">]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="k">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="k">in</span> <span class="n">reqser</span><span class="p">]</span>
 </code></pre></div>
 
 </details>
@@ -1298,9 +1326,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataSeries</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataSeries</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
 
             <span class="n">timefrom</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
 
@@ -1308,25 +1336,35 @@
 
             <span class="n">timeto</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="k">time</span><span class="p">())</span>
 
-        <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">timeto</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
 
             <span class="n">timeto</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
 
-        <span class="n">ahead</span><span class="o">=</span><span class="k">True</span>
+        <span class="n">ahead</span> <span class="o">=</span> <span class="k">True</span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">Series</span><span class="p">()</span>
+        <span class="k">out</span> <span class="o">=</span> <span class="n">Series</span><span class="p">()</span>
 
         <span class="n">while</span> <span class="n">ahead</span><span class="p">:</span>
 
-            <span class="n">u</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">_gch</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="k">self</span><span class="p">.</span><span class="n">mac</span><span class="p">,</span><span class="n">mac</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">)))</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span>
 
-            <span class="k">if</span> <span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span> <span class="n">ahead</span> <span class="o">=</span> <span class="k">False</span>
+                <span class="n">serialize_object</span><span class="p">(</span>
+
+                    <span class="k">self</span><span class="p">.</span><span class="n">_gch</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span> <span class="k">self</span><span class="p">.</span><span class="n">mac</span><span class="p">,</span> <span class="n">mac</span><span class="p">,</span> <span class="n">ch</span><span class="p">,</span> <span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="p">)</span>
+
+                <span class="p">)</span>
+
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+
+                <span class="n">ahead</span> <span class="o">=</span> <span class="k">False</span>
 
             <span class="k">if</span> <span class="n">u</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 
-                <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timeStamp&#39;</span><span class="p">])[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="ss">&quot;timeStamp&quot;</span><span class="p">])[</span><span class="ss">&quot;value&quot;</span><span class="p">]</span>
 
-                <span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">names</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;timestamp&quot;</span><span class="p">]</span>
 
                 <span class="n">timefrom</span> <span class="o">=</span> <span class="n">u</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -1338,7 +1376,7 @@
 
         <span class="k">out</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-        <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">,</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+        <span class="k">out</span><span class="p">.</span><span class="k">index</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="ss">&quot;s&quot;</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="k">out</span>
 </code></pre></div>
@@ -1352,7 +1390,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getSensorsList</span><span class="p">(</span><span class="k">self</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">_gsl</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span><span class="k">self</span><span class="p">.</span><span class="n">mac</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">_gsl</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="k">key</span><span class="p">,</span> <span class="k">self</span><span class="p">.</span><span class="n">mac</span><span class="p">)))</span>
 </code></pre></div>
 
 </details>
@@ -1366,9 +1404,9 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@threadpool</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">getThreadedSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>

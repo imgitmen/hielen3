@@ -876,9 +876,9 @@
 
 <span class="kn">import</span> <span class="nn">open3d</span> <span class="k">as</span> <span class="nn">o3d</span>
 
-<span class="k">def</span> <span class="nf">valorize</span> <span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span> <span class="n">valcld</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Assigns values to input base cloud points, overlapping the input</span>
 
@@ -948,7 +948,7 @@
 
 <span class="sd">                   d=1 : v(P) = -2.14</span>
 
-<span class="sd">               d=2 : v(P) = 0.51</span>
+<span class="sd">                   d=2 : v(P) = 0.51</span>
 
 <span class="sd">                   d=3 : v(P) = 1.91</span>
 
@@ -968,15 +968,15 @@
 
 <span class="sd">          exact value of the unique closest neighbour, if it exists.</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">basecld</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
+    <span class="n">basecld</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
 
-    <span class="n">basecld</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+    <span class="n">basecld</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">]</span>
 
-    <span class="n">valcld</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
+    <span class="n">valcld</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
 
-    <span class="n">valcld</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+    <span class="n">valcld</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">]</span>
 
     <span class="c1">## Calculating the Series of distance (dist) and value clouds relative</span>
 
@@ -984,17 +984,17 @@
 
     <span class="c1">## in the base cloud.</span>
 
-    <span class="n">k</span><span class="o">=</span><span class="n">KDTree</span><span class="p">(</span><span class="n">valcld</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">valcld</span><span class="p">[[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
-    <span class="n">dist</span><span class="p">,</span><span class="n">idsv</span><span class="o">=</span><span class="n">k</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">basecld</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">group</span><span class="p">,</span><span class="n">distance_upper_bound</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
+    <span class="n">dist</span><span class="p">,</span> <span class="n">idsv</span> <span class="o">=</span> <span class="n">k</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">basecld</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">distance_upper_bound</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
 
-    <span class="n">dist</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 
-    <span class="n">dist</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;dist&#39;</span>
+    <span class="n">dist</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;dist&quot;</span>
 
-    <span class="n">idsv</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">idsv</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="n">idsv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">idsv</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 
-    <span class="n">idsv</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;idsv&#39;</span>
+    <span class="n">idsv</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;idsv&quot;</span>
 
     <span class="c1">## Here we construct the DataFrame contains relation beetween each point</span>
 
@@ -1004,39 +1004,43 @@
 
     <span class="c1">## distances (points with no neighbours)</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idsv</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">idsv</span><span class="p">)</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="kp">inf</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;dist&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="kp">inf</span><span class="p">]</span>
 
     <span class="c1"># Indexind on &#39;idsv&#39;, allows to join with the value cloud and add the &#39;v&#39;</span>
 
     <span class="c1"># info</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;idsv&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;idsv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valcld</span><span class="p">[</span><span class="s1">&#39;v&#39;</span><span class="p">],</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">valcld</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
 
-    <span class="n">values</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cldid&#39;</span><span class="p">,</span><span class="s1">&#39;instance&#39;</span><span class="p">,</span><span class="s1">&#39;dist&#39;</span><span class="p">,</span><span class="s1">&#39;displ&#39;</span><span class="p">]</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cldid&quot;</span><span class="p">,</span> <span class="s2">&quot;instance&quot;</span><span class="p">,</span> <span class="s2">&quot;dist&quot;</span><span class="p">,</span> <span class="s2">&quot;displ&quot;</span><span class="p">]</span>
 
     <span class="c1">## Indexing on &#39;cldid&#39; and &#39;instance&#39;, allow to make DataFrame comparable</span>
 
     <span class="c1">## with base cloud</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;cldid&#39;</span><span class="p">,</span><span class="s1">&#39;instance&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">&quot;cldid&quot;</span><span class="p">,</span> <span class="s2">&quot;instance&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
     <span class="c1">## Here we calculte the [distance based, weighted] mean</span>
 
-    <span class="n">values</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="kp">power</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;dist&#39;</span><span class="p">],</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">values</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="kp">power</span><span class="p">(</span><span class="n">values</span><span class="p">[</span><span class="s2">&quot;dist&quot;</span><span class="p">],</span> <span class="n">degree</span><span class="p">)</span>
 
-    <span class="n">values</span><span class="p">[</span><span class="s1">&#39;contrib&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;displ&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">values</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+    <span class="n">values</span><span class="p">[</span><span class="s2">&quot;contrib&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;displ&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">values</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;cldid&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;contrib&#39;</span><span class="p">])</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span> <span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;cldid&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;contrib&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">])</span>
+
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">values</span>
 
-<span class="k">def</span> <span class="nf">colorize</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">colorize</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Maps each value in the input array with the appropriate</span>
 
@@ -1068,27 +1072,45 @@
 
 <span class="sd">           be clipped</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span> <span class="ow">or</span> <span class="n">vals</span><span class="o">.</span><span class="kp">min</span><span class="p">()</span>
+    <span class="n">vmin</span> <span class="o">=</span> <span class="n">vmin</span> <span class="ow">or</span> <span class="n">vals</span><span class="o">.</span><span class="kp">min</span><span class="p">()</span>
 
-    <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span> <span class="ow">or</span> <span class="n">vals</span><span class="o">.</span><span class="kp">max</span><span class="p">()</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">vmax</span> <span class="ow">or</span> <span class="n">vals</span><span class="o">.</span><span class="kp">max</span><span class="p">()</span>
 
     <span class="n">norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="kp">clip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span><span class="n">Colormap</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span> <span class="n">Colormap</span><span class="p">):</span>
 
         <span class="n">cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s2">&quot;mycmap&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="p">)</span>
 
     <span class="n">mapper</span> <span class="o">=</span> <span class="n">ScalarMappable</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
 
-    <span class="n">cols</span><span class="o">=</span><span class="n">mapper</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">cols</span>
 
-<span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+    <span class="n">basecld</span><span class="p">,</span>
+
+    <span class="n">valcld</span><span class="p">,</span>
+
+    <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+
+    <span class="n">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+
+    <span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+    <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+
+    <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Assigns a color to each point of a base cloud, merging the information</span>
 
@@ -1154,39 +1176,45 @@
 
 <span class="sd">               be clipped</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">basecld</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
+    <span class="n">basecld</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
 
-    <span class="n">basecld</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+    <span class="n">basecld</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">]</span>
 
-    <span class="n">valcld</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
+    <span class="n">valcld</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
 
-    <span class="n">valcld</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+    <span class="n">valcld</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">]</span>
 
-    <span class="n">values</span><span class="o">=</span><span class="n">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span> <span class="n">valcld</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
 
-    <span class="n">values</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;v&#39;</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;v&quot;</span>
 
-    <span class="n">colors</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
 
-            <span class="n">colorize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">),</span>
+        <span class="n">colorize</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">),</span>
 
-            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span>
 
-            <span class="n">index</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">)[[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+        <span class="n">index</span><span class="o">=</span><span class="n">values</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
 
-    <span class="n">result</span><span class="o">=</span><span class="n">basecld</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">nan</span><span class="p">,</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="p">)[[</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]]</span>
 
-    <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">basecld</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">nan</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">result</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">[[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]]</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
 
-    <span class="n">cld</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./cloud.orig.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">cld</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./cloud.orig.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
 
-    <span class="n">rea</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./nuvola_spost_utm.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">decimal</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)[[</span><span class="s1">&#39;X_UTM&#39;</span><span class="p">,</span><span class="s1">&#39;Y_UTM&#39;</span><span class="p">,</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span><span class="s1">&#39;Spostament&#39;</span><span class="p">]]</span>
+    <span class="n">rea</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./nuvola_spost_utm.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">decimal</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)[</span>
+
+        <span class="p">[</span><span class="s2">&quot;X_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Y_UTM&quot;</span><span class="p">,</span> <span class="s2">&quot;Height&quot;</span><span class="p">,</span> <span class="s2">&quot;Spostament&quot;</span><span class="p">]</span>
+
+    <span class="p">]</span>
 
     <span class="c1"># ESEMPIO 1</span>
 
@@ -1196,7 +1224,25 @@
 
     <span class="c1">#</span>
 
-    <span class="n">res</span><span class="o">=</span><span class="n">paint</span><span class="p">(</span><span class="n">cld</span><span class="p">,</span><span class="n">rea</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">group</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">paint</span><span class="p">(</span>
+
+        <span class="n">cld</span><span class="p">,</span>
+
+        <span class="n">rea</span><span class="p">,</span>
+
+        <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+
+        <span class="n">group</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+
+        <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+
+        <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="s2">&quot;blue&quot;</span><span class="p">],</span>
+
+        <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+        <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="p">)</span>
 
     <span class="c1"># ESEMPIO 2</span>
 
@@ -1210,11 +1256,11 @@
 
     <span class="c1"># QUI USO open3d perchè è molto comodo</span>
 
-    <span class="n">pcl</span><span class="o">=</span><span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">PointCloud</span><span class="p">()</span>
+    <span class="n">pcl</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">PointCloud</span><span class="p">()</span>
 
-    <span class="n">pcl</span><span class="o">.</span><span class="n">points</span><span class="o">=</span><span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">pcl</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="p">[[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;z&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
-    <span class="n">pcl</span><span class="o">.</span><span class="n">colors</span><span class="o">=</span><span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="p">[[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">pcl</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="p">[[</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
     <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pcl</span><span class="p">])</span>
 
@@ -1241,7 +1287,7 @@ RGBA color. See matplotlib.colors.Colormap</p>
 color channels values are normalized in range (0,1)</p>
 <p>params:
 vals - array of values.
-cmap - See matplotlib.colors.Colormap object or colour list. 
+cmap - See matplotlib.colors.Colormap object or colour list.
        default ['red','green','blue'].
 vmax - max limit value for colormap. If None is passed, vals.max().
        will be assumed, otherwise vals exceding this parameter will
@@ -1249,55 +1295,55 @@ vmax - max limit value for colormap. If None is passed, vals.max().
 vmin - min limit value for colormap. If None is passed, vals.min()
        will be assumed, otherwise vals under this parameter will
        be clipped</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">colorize</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;red&quot;</span><span class="p">,</span><span class="ss">&quot;green&quot;</span><span class="p">,</span><span class="ss">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">colorize</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;red&quot;</span><span class="p">,</span> <span class="ss">&quot;green&quot;</span><span class="p">,</span> <span class="ss">&quot;blue&quot;</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">    Maps each value in the input array with the appropriate</span>
+<span class="ss">    Maps each value in the input array with the appropriate</span>
 
-<span class="s1">    RGBA color. See matplotlib.colors.Colormap</span>
+<span class="ss">    RGBA color. See matplotlib.colors.Colormap</span>
 
-<span class="s1">    returns:</span>
+<span class="ss">    returns:</span>
 
-<span class="s1">    ndarray with shape (n,4) containing the color tuples [&#39;</span><span class="n">r</span><span class="s1">&#39;,&#39;</span><span class="k">g</span><span class="s1">&#39;,&#39;</span><span class="n">b</span><span class="s1">&#39;,&#39;</span><span class="n">a</span><span class="s1">&#39;]</span>
+<span class="ss">    ndarray with shape (n,4) containing the color tuples [&#39;r&#39;,&#39;g&#39;,&#39;b&#39;,&#39;a&#39;]</span>
 
-<span class="s1">    color channels values are normalized in range (0,1)</span>
+<span class="ss">    color channels values are normalized in range (0,1)</span>
 
-<span class="s1">    params:</span>
+<span class="ss">    params:</span>
 
-<span class="s1">    vals - array of values.</span>
+<span class="ss">    vals - array of values.</span>
 
-<span class="s1">    cmap - See matplotlib.colors.Colormap object or colour list.</span>
+<span class="ss">    cmap - See matplotlib.colors.Colormap object or colour list.</span>
 
-<span class="s1">           default [&#39;</span><span class="n">red</span><span class="s1">&#39;,&#39;</span><span class="n">green</span><span class="s1">&#39;,&#39;</span><span class="n">blue</span><span class="s1">&#39;].</span>
+<span class="ss">           default [&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;].</span>
 
-<span class="s1">    vmax - max limit value for colormap. If None is passed, vals.max().</span>
+<span class="ss">    vmax - max limit value for colormap. If None is passed, vals.max().</span>
 
-<span class="s1">           will be assumed, otherwise vals exceding this parameter will</span>
+<span class="ss">           will be assumed, otherwise vals exceding this parameter will</span>
 
-<span class="s1">           be clipped</span>
+<span class="ss">           be clipped</span>
 
-<span class="s1">    vmin - min limit value for colormap. If None is passed, vals.min()</span>
+<span class="ss">    vmin - min limit value for colormap. If None is passed, vals.min()</span>
 
-<span class="s1">           will be assumed, otherwise vals under this parameter will</span>
+<span class="ss">           will be assumed, otherwise vals under this parameter will</span>
 
-<span class="s1">           be clipped</span>
+<span class="ss">           be clipped</span>
 
-<span class="s1">    &#39;&#39;&#39;</span>
+<span class="ss">    &quot;&quot;&quot;</span>
 
-    <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span> <span class="k">or</span> <span class="n">vals</span><span class="p">.</span><span class="k">min</span><span class="p">()</span>
+    <span class="n">vmin</span> <span class="o">=</span> <span class="n">vmin</span> <span class="k">or</span> <span class="n">vals</span><span class="p">.</span><span class="k">min</span><span class="p">()</span>
 
-    <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span> <span class="k">or</span> <span class="n">vals</span><span class="p">.</span><span class="k">max</span><span class="p">()</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="n">vmax</span> <span class="k">or</span> <span class="n">vals</span><span class="p">.</span><span class="k">max</span><span class="p">()</span>
 
     <span class="n">norm</span> <span class="o">=</span> <span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">clip</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span><span class="n">Colormap</span><span class="p">):</span>
+    <span class="k">if</span> <span class="k">not</span> <span class="n">isinstance</span><span class="p">(</span><span class="n">cmap</span><span class="p">,</span> <span class="n">Colormap</span><span class="p">):</span>
 
         <span class="n">cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="p">.</span><span class="n">from_list</span><span class="p">(</span><span class="ss">&quot;mycmap&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="p">)</span>
 
     <span class="n">mapper</span> <span class="o">=</span> <span class="n">ScalarMappable</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
 
-    <span class="n">cols</span><span class="o">=</span><span class="n">mapper</span><span class="p">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="n">mapper</span><span class="p">.</span><span class="n">to_rgba</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">cols</span>
 </code></pre></div>
@@ -1311,9 +1357,13 @@ vmin - min limit value for colormap. If None is passed, vals.min()
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">cld</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./cloud.orig.csv&#39;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="ss">&quot; &quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">cld</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="ss">&quot;./cloud.orig.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="ss">&quot; &quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">rea</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./nuvola_spost_utm.csv&#39;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="nc">decimal</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">[</span><span class="n">[&#39;X_UTM&#39;,&#39;Y_UTM&#39;,&#39;Height&#39;,&#39;Spostament&#39;</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="w">    </span><span class="n">rea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="ss">&quot;./nuvola_spost_utm.csv&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="ss">&quot;;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nc">decimal</span><span class="o">=</span><span class="ss">&quot;,&quot;</span><span class="p">)</span><span class="o">[</span><span class="n"></span>
+
+<span class="n">        [&quot;X_UTM&quot;, &quot;Y_UTM&quot;, &quot;Height&quot;, &quot;Spostament&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">ESEMPIO</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
 
@@ -1323,7 +1373,25 @@ vmin - min limit value for colormap. If None is passed, vals.min()
 
 <span class="w">    </span><span class="err">#</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">res</span><span class="o">=</span><span class="n">paint</span><span class="p">(</span><span class="n">cld</span><span class="p">,</span><span class="n">rea</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="k">group</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">cmap</span><span class="o">=[</span><span class="n">&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;</span><span class="o">]</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">paint</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">cld</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">rea</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">group</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">cmap</span><span class="o">=[</span><span class="n">&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">ESEMPIO</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
 
@@ -1337,11 +1405,11 @@ vmin - min limit value for colormap. If None is passed, vals.min()
 
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">QUI</span><span class="w"> </span><span class="n">USO</span><span class="w"> </span><span class="n">open3d</span><span class="w"> </span><span class="n">perchè</span><span class="w"> </span><span class="n">è</span><span class="w"> </span><span class="n">molto</span><span class="w"> </span><span class="n">comodo</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">pcl</span><span class="o">=</span><span class="n">o3d</span><span class="p">.</span><span class="n">geometry</span><span class="p">.</span><span class="n">PointCloud</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">pcl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o3d</span><span class="p">.</span><span class="n">geometry</span><span class="p">.</span><span class="n">PointCloud</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">pcl</span><span class="p">.</span><span class="n">points</span><span class="o">=</span><span class="n">o3d</span><span class="p">.</span><span class="n">utility</span><span class="p">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="o">[</span><span class="n">[&#39;x&#39;,&#39;y&#39;,&#39;z&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">pcl</span><span class="p">.</span><span class="n">points</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o3d</span><span class="p">.</span><span class="n">utility</span><span class="p">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="o">[</span><span class="n">[&quot;x&quot;, &quot;y&quot;, &quot;z&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">pcl</span><span class="p">.</span><span class="n">colors</span><span class="o">=</span><span class="n">o3d</span><span class="p">.</span><span class="n">utility</span><span class="p">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="o">[</span><span class="n">[&#39;r&#39;,&#39;g&#39;,&#39;b&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">pcl</span><span class="p">.</span><span class="n">colors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">o3d</span><span class="p">.</span><span class="n">utility</span><span class="p">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">res</span><span class="o">[</span><span class="n">[&quot;r&quot;, &quot;g&quot;, &quot;b&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">o3d</span><span class="p">.</span><span class="n">visualization</span><span class="p">.</span><span class="n">draw_geometries</span><span class="p">(</span><span class="o">[</span><span class="n">pcl</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
@@ -1365,11 +1433,11 @@ of a second valorized cloud overlapping the first one.
 See cloudpainter.valorize and cloudpainter.colorize for futher informations</p>
 <p>result:</p>
 <p>pandas.DataFrame containing ['x','y','z','v','r','g','b'] tuples for
-each point in the base cloud. Points with no neighbours will be 
+each point in the base cloud. Points with no neighbours will be
 assigned with [0.9,0.9,0.9] for ['r','g','b'] and np.nan for ['v']</p>
 <p>params:
 basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),
-           representing the coordinates of the points of the base 
+           representing the coordinates of the points of the base
            cloud. ['x','y','z']</p>
 <p>valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),
            representing the coordinates of the points of the value
@@ -1381,13 +1449,13 @@ basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),
            as:</p>
 <div class="codehilite"><pre><span></span><code>            <span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="o">**</span><span class="n">degree</span>
 
-       <span class="k">where</span> <span class="n">d</span> <span class="k">is</span> <span class="n">the</span> <span class="n">distance</span> <span class="k">between</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">and</span> <span class="n">the</span> 
+       <span class="k">where</span> <span class="n">d</span> <span class="k">is</span> <span class="n">the</span> <span class="n">distance</span> <span class="k">between</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">and</span> <span class="n">the</span>
        <span class="n">base</span> <span class="n">cloud</span> <span class="n">point</span><span class="p">.</span> <span class="n">Degree</span> <span class="mi">0</span> <span class="n">implies</span> <span class="n">the</span> <span class="n">arithmetic</span> <span class="n">mean</span> <span class="k">of</span>
        <span class="k">all</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">values</span> <span class="k">found</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">the</span> <span class="k">relative</span>
        <span class="n">distance</span><span class="p">.</span>
 </code></pre></div>
 
-<p>cmap -     matplotlib.colors.Colormap object or colour list. 
+<p>cmap -     matplotlib.colors.Colormap object or colour list.
            default ['red','green','blue'].
 vmax -     max limit value for colormap. If None is passed, vals.max().
            will be assumed, otherwise vals exceding this parameter will
@@ -1395,101 +1463,121 @@ vmax -     max limit value for colormap. If None is passed, vals.max().
 vmin -     min limit value for colormap. If None is passed, vals.min()
            will be assumed, otherwise vals under this parameter will
            be clipped</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">paint</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="k">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;red&quot;</span><span class="p">,</span><span class="ss">&quot;green&quot;</span><span class="p">,</span><span class="ss">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">paint</span><span class="p">(</span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="n">basecld</span><span class="p">,</span>
 
-<span class="s1">    Assigns a color to each point of a base cloud, merging the information</span>
+    <span class="n">valcld</span><span class="p">,</span>
 
-<span class="s1">    of a second valorized cloud overlapping the first one.</span>
+    <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 
-<span class="s1">    See cloudpainter.valorize and cloudpainter.colorize for futher informations</span>
+    <span class="k">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 
-<span class="s1">    result:</span>
+    <span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 
-<span class="s1">    pandas.DataFrame containing [&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;,&#39;</span><span class="n">v</span><span class="s1">&#39;,&#39;</span><span class="n">r</span><span class="s1">&#39;,&#39;</span><span class="k">g</span><span class="s1">&#39;,&#39;</span><span class="n">b</span><span class="s1">&#39;] tuples for</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;red&quot;</span><span class="p">,</span> <span class="ss">&quot;green&quot;</span><span class="p">,</span> <span class="ss">&quot;blue&quot;</span><span class="p">],</span>
 
-<span class="s1">    each point in the base cloud. Points with no neighbours will be</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-<span class="s1">    assigned with [0.9,0.9,0.9] for [&#39;</span><span class="n">r</span><span class="s1">&#39;,&#39;</span><span class="k">g</span><span class="s1">&#39;,&#39;</span><span class="n">b</span><span class="s1">&#39;] and np.nan for [&#39;</span><span class="n">v</span><span class="s1">&#39;]</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-<span class="s1">    params:</span>
+<span class="p">):</span>
 
-<span class="s1">    basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),</span>
+    <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">               representing the coordinates of the points of the base</span>
+<span class="ss">    Assigns a color to each point of a base cloud, merging the information</span>
 
-<span class="s1">               cloud. [&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;]</span>
+<span class="ss">    of a second valorized cloud overlapping the first one.</span>
 
-<span class="s1">    valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),</span>
+<span class="ss">    See cloudpainter.valorize and cloudpainter.colorize for futher informations</span>
 
-<span class="s1">               representing the coordinates of the points of the value</span>
+<span class="ss">    result:</span>
 
-<span class="s1">               cloud and the value of each of them. [&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;,&#39;</span><span class="n">v</span><span class="s1">&#39;]</span>
+<span class="ss">    pandas.DataFrame containing [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;v&#39;,&#39;r&#39;,&#39;g&#39;,&#39;b&#39;] tuples for</span>
 
-<span class="s1">    distance - maximum search range for neighbours</span>
+<span class="ss">    each point in the base cloud. Points with no neighbours will be</span>
 
-<span class="s1">    group -    maximum number of neighbours to search for</span>
+<span class="ss">    assigned with [0.9,0.9,0.9] for [&#39;r&#39;,&#39;g&#39;,&#39;b&#39;] and np.nan for [&#39;v&#39;]</span>
 
-<span class="s1">    degree -   degree of contribution loss over the distance for each</span>
+<span class="ss">    params:</span>
 
-<span class="s1">               neighbour value. Each value of the neighbours is weighted</span>
+<span class="ss">    basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),</span>
 
-<span class="s1">               as:</span>
+<span class="ss">               representing the coordinates of the points of the base</span>
 
-<span class="s1">                    1/d**degree</span>
+<span class="ss">               cloud. [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;]</span>
 
-<span class="s1">               where d is the distance between the neighbour and the</span>
+<span class="ss">    valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),</span>
 
-<span class="s1">               base cloud point. Degree 0 implies the arithmetic mean of</span>
+<span class="ss">               representing the coordinates of the points of the value</span>
 
-<span class="s1">               all the neighbour values found, regardless the relative</span>
+<span class="ss">               cloud and the value of each of them. [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;v&#39;]</span>
 
-<span class="s1">               distance.</span>
+<span class="ss">    distance - maximum search range for neighbours</span>
 
-<span class="s1">    cmap -     matplotlib.colors.Colormap object or colour list.</span>
+<span class="ss">    group -    maximum number of neighbours to search for</span>
 
-<span class="s1">               default [&#39;</span><span class="n">red</span><span class="s1">&#39;,&#39;</span><span class="n">green</span><span class="s1">&#39;,&#39;</span><span class="n">blue</span><span class="s1">&#39;].</span>
+<span class="ss">    degree -   degree of contribution loss over the distance for each</span>
 
-<span class="s1">    vmax -     max limit value for colormap. If None is passed, vals.max().</span>
+<span class="ss">               neighbour value. Each value of the neighbours is weighted</span>
 
-<span class="s1">               will be assumed, otherwise vals exceding this parameter will</span>
+<span class="ss">               as:</span>
 
-<span class="s1">               be clipped</span>
+<span class="ss">                    1/d**degree</span>
 
-<span class="s1">    vmin -     min limit value for colormap. If None is passed, vals.min()</span>
+<span class="ss">               where d is the distance between the neighbour and the</span>
 
-<span class="s1">               will be assumed, otherwise vals under this parameter will</span>
+<span class="ss">               base cloud point. Degree 0 implies the arithmetic mean of</span>
 
-<span class="s1">               be clipped</span>
+<span class="ss">               all the neighbour values found, regardless the relative</span>
 
-<span class="s1">    &#39;&#39;&#39;</span>
+<span class="ss">               distance.</span>
 
-    <span class="n">basecld</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
+<span class="ss">    cmap -     matplotlib.colors.Colormap object or colour list.</span>
 
-    <span class="n">basecld</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="ss">               default [&#39;red&#39;,&#39;green&#39;,&#39;blue&#39;].</span>
 
-    <span class="n">valcld</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
+<span class="ss">    vmax -     max limit value for colormap. If None is passed, vals.max().</span>
 
-    <span class="n">valcld</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">]</span>
+<span class="ss">               will be assumed, otherwise vals exceding this parameter will</span>
 
-    <span class="k">values</span><span class="o">=</span><span class="n">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span><span class="k">group</span><span class="o">=</span><span class="k">group</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+<span class="ss">               be clipped</span>
 
-    <span class="k">values</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;v&#39;</span>
+<span class="ss">    vmin -     min limit value for colormap. If None is passed, vals.min()</span>
 
-    <span class="n">colors</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="ss">               will be assumed, otherwise vals under this parameter will</span>
 
-            <span class="n">colorize</span><span class="p">(</span><span class="k">values</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">),</span>
+<span class="ss">               be clipped</span>
 
-            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">],</span>
+<span class="ss">    &quot;&quot;&quot;</span>
 
-            <span class="k">index</span><span class="o">=</span><span class="k">values</span><span class="p">.</span><span class="k">index</span><span class="p">)[[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+    <span class="n">basecld</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
 
-    <span class="k">result</span><span class="o">=</span><span class="n">basecld</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">).</span><span class="k">replace</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">basecld</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">]</span>
 
-    <span class="k">result</span><span class="o">=</span><span class="k">result</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">values</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+    <span class="n">valcld</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="k">result</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">,</span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">]]</span>
+    <span class="n">valcld</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">,</span> <span class="ss">&quot;v&quot;</span><span class="p">]</span>
+
+    <span class="k">values</span> <span class="o">=</span> <span class="n">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span> <span class="n">valcld</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span> <span class="k">group</span><span class="o">=</span><span class="k">group</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">)</span>
+
+    <span class="k">values</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;v&quot;</span>
+
+    <span class="n">colors</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span>
+
+        <span class="n">colorize</span><span class="p">(</span><span class="k">values</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">),</span>
+
+        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;r&quot;</span><span class="p">,</span> <span class="ss">&quot;g&quot;</span><span class="p">,</span> <span class="ss">&quot;b&quot;</span><span class="p">,</span> <span class="ss">&quot;a&quot;</span><span class="p">],</span>
+
+        <span class="k">index</span><span class="o">=</span><span class="k">values</span><span class="p">.</span><span class="k">index</span><span class="p">,</span>
+
+    <span class="p">)[[</span><span class="ss">&quot;r&quot;</span><span class="p">,</span> <span class="ss">&quot;g&quot;</span><span class="p">,</span> <span class="ss">&quot;b&quot;</span><span class="p">]]</span>
+
+    <span class="k">result</span> <span class="o">=</span> <span class="n">basecld</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="ss">&quot;left&quot;</span><span class="p">).</span><span class="k">replace</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">9</span><span class="p">)</span>
+
+    <span class="k">result</span> <span class="o">=</span> <span class="k">result</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">values</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="ss">&quot;left&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="k">result</span><span class="p">[[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">,</span> <span class="ss">&quot;v&quot;</span><span class="p">,</span> <span class="ss">&quot;r&quot;</span><span class="p">,</span> <span class="ss">&quot;g&quot;</span><span class="p">,</span> <span class="ss">&quot;b&quot;</span><span class="p">]]</span>
 </code></pre></div>
 
 </details>
@@ -1503,8 +1591,8 @@ vmin -     min limit value for colormap. If None is passed, vals.min()
 <span class="p">)</span>
 </code></pre></div>
 
-<p>Assigns values to input base cloud points, overlapping the input 
-values cloud and calculating, for each point in base cloud, the 
+<p>Assigns values to input base cloud points, overlapping the input
+values cloud and calculating, for each point in base cloud, the
 [distance based, weighted] mean of the values of N nearest
 neighbours, taken from the input values cloud.</p>
 <p>returns:
@@ -1512,7 +1600,7 @@ pandas.Series containing calculated values for all the points in the
 base cloud which has at least one neighbour within the fixed distance</p>
 <p>params:
 basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),
-           representing the coordinates of the points of the base 
+           representing the coordinates of the points of the base
            cloud. ['x','y','z']</p>
 <p>valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),
            representing the coordinates of the points of the value
@@ -1524,12 +1612,12 @@ basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),
            as:</p>
 <div class="codehilite"><pre><span></span><code>            <span class="mi">1</span><span class="o">/</span><span class="n">d</span><span class="o">**</span><span class="n">degree</span>
 
-       <span class="k">where</span> <span class="n">d</span> <span class="k">is</span> <span class="n">the</span> <span class="n">distance</span> <span class="k">between</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">and</span> <span class="n">the</span> 
+       <span class="k">where</span> <span class="n">d</span> <span class="k">is</span> <span class="n">the</span> <span class="n">distance</span> <span class="k">between</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">and</span> <span class="n">the</span>
        <span class="n">base</span> <span class="n">cloud</span> <span class="n">point</span><span class="p">.</span> <span class="n">Degree</span> <span class="mi">0</span> <span class="n">implies</span> <span class="n">the</span> <span class="n">arithmetic</span> <span class="n">mean</span> <span class="k">of</span>
        <span class="k">all</span> <span class="n">the</span> <span class="n">neighbour</span> <span class="k">values</span> <span class="k">found</span><span class="p">,</span> <span class="n">regardless</span> <span class="n">the</span> <span class="k">relative</span>
        <span class="n">distance</span><span class="p">.</span>
 
-       <span class="n">i</span><span class="p">.</span><span class="n">e</span><span class="p">:</span> 
+       <span class="n">i</span><span class="p">.</span><span class="n">e</span><span class="p">:</span>
            <span class="n">N1</span><span class="c1">----------P----N2</span>
 
        <span class="n">Given</span> <span class="n">two</span> <span class="n">neighbours</span><span class="p">,</span> <span class="n">N1</span> <span class="k">and</span> <span class="n">N2</span><span class="p">,</span> <span class="k">for</span> <span class="n">a</span> <span class="n">fixed</span> <span class="n">point</span> <span class="n">P</span>
@@ -1551,167 +1639,171 @@ basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),
            <span class="n">d</span><span class="o">=</span><span class="mi">5</span> <span class="p">:</span> <span class="n">v</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">.</span><span class="mi">81</span>
            <span class="p">..</span>
            <span class="n">d</span><span class="o">=</span><span class="mi">9</span> <span class="p">:</span> <span class="n">v</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="p">.</span><span class="mi">99</span>
-           <span class="p">..</span>       
+           <span class="p">..</span>
            <span class="n">d</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="n">v</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">=</span> <span class="mi">3</span>  <span class="o">&lt;</span><span class="c1">-- convergence to the closest&#39;s value</span>
 </code></pre></div>
 
 <p>Note: with group=1 and degree=0, each base cloud point assumes the
       exact value of the unique closest neighbour, if it exists.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">valorize</span> <span class="p">(</span><span class="n">basecld</span><span class="p">,</span><span class="n">valcld</span><span class="p">,</span><span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="k">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">valorize</span><span class="p">(</span><span class="n">basecld</span><span class="p">,</span> <span class="n">valcld</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="k">group</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+    <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="s1">    Assigns values to input base cloud points, overlapping the input</span>
+<span class="ss">    Assigns values to input base cloud points, overlapping the input</span>
 
-<span class="s1">    values cloud and calculating, for each point in base cloud, the</span>
+<span class="ss">    values cloud and calculating, for each point in base cloud, the</span>
 
-<span class="s1">    [distance based, weighted] mean of the values of N nearest</span>
+<span class="ss">    [distance based, weighted] mean of the values of N nearest</span>
 
-<span class="s1">    neighbours, taken from the input values cloud.</span>
+<span class="ss">    neighbours, taken from the input values cloud.</span>
 
-<span class="s1">    returns:</span>
+<span class="ss">    returns:</span>
 
-<span class="s1">    pandas.Series containing calculated values for all the points in the</span>
+<span class="ss">    pandas.Series containing calculated values for all the points in the</span>
 
-<span class="s1">    base cloud which has at least one neighbour within the fixed distance</span>
+<span class="ss">    base cloud which has at least one neighbour within the fixed distance</span>
 
-<span class="s1">    params:</span>
+<span class="ss">    params:</span>
 
-<span class="s1">    basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),</span>
+<span class="ss">    basecld -  pandas.DataFrame or numpy.ndarray with shape (n,3),</span>
 
-<span class="s1">               representing the coordinates of the points of the base</span>
+<span class="ss">               representing the coordinates of the points of the base</span>
 
-<span class="s1">               cloud. [&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;]</span>
+<span class="ss">               cloud. [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;]</span>
 
-<span class="s1">    valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),</span>
+<span class="ss">    valcld -   pandas.DataFrame or numpy.ndarray with shape (n,4),</span>
 
-<span class="s1">               representing the coordinates of the points of the value</span>
+<span class="ss">               representing the coordinates of the points of the value</span>
 
-<span class="s1">               cloud and the value of each of them. [&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;,&#39;</span><span class="n">v</span><span class="s1">&#39;]</span>
+<span class="ss">               cloud and the value of each of them. [&#39;x&#39;,&#39;y&#39;,&#39;z&#39;,&#39;v&#39;]</span>
 
-<span class="s1">    distance - maximum search range for neighbours</span>
+<span class="ss">    distance - maximum search range for neighbours</span>
 
-<span class="s1">    group -    maximum number of neighbours to search for</span>
+<span class="ss">    group -    maximum number of neighbours to search for</span>
 
-<span class="s1">    degree -   degree of contribution loss over the distance for each</span>
+<span class="ss">    degree -   degree of contribution loss over the distance for each</span>
 
-<span class="s1">               neighbour value. Each value of the neighbours is weighted</span>
+<span class="ss">               neighbour value. Each value of the neighbours is weighted</span>
 
-<span class="s1">               as:</span>
+<span class="ss">               as:</span>
 
-<span class="s1">                    1/d**degree</span>
+<span class="ss">                    1/d**degree</span>
 
-<span class="s1">               where d is the distance between the neighbour and the</span>
+<span class="ss">               where d is the distance between the neighbour and the</span>
 
-<span class="s1">               base cloud point. Degree 0 implies the arithmetic mean of</span>
+<span class="ss">               base cloud point. Degree 0 implies the arithmetic mean of</span>
 
-<span class="s1">               all the neighbour values found, regardless the relative</span>
+<span class="ss">               all the neighbour values found, regardless the relative</span>
 
-<span class="s1">               distance.</span>
+<span class="ss">               distance.</span>
 
-<span class="s1">               i.e:</span>
+<span class="ss">               i.e:</span>
 
-<span class="s1">                   N1----------P----N2</span>
+<span class="ss">                   N1----------P----N2</span>
 
-<span class="s1">               Given two neighbours, N1 and N2, for a fixed point P</span>
+<span class="ss">               Given two neighbours, N1 and N2, for a fixed point P</span>
 
-<span class="s1">               where:</span>
+<span class="ss">               where:</span>
 
-<span class="s1">                   d(N1)=10; v(N1)=-15</span>
+<span class="ss">                   d(N1)=10; v(N1)=-15</span>
 
-<span class="s1">                   d(N2)=4; v(N2)=3</span>
+<span class="ss">                   d(N2)=4; v(N2)=3</span>
 
-<span class="s1">                   v(P) = (-15/10**d+3/4**d)/(1/10**d+1/4**d)</span>
+<span class="ss">                   v(P) = (-15/10**d+3/4**d)/(1/10**d+1/4**d)</span>
 
-<span class="s1">               being d the degree, we have:</span>
+<span class="ss">               being d the degree, we have:</span>
 
-<span class="s1">                   d=0 : v(P) = -6    &lt;-- arimetic mean</span>
+<span class="ss">                   d=0 : v(P) = -6    &lt;-- arimetic mean</span>
 
-<span class="s1">                   d=1 : v(P) = -2.14</span>
+<span class="ss">                   d=1 : v(P) = -2.14</span>
 
-<span class="s1">               d=2 : v(P) = 0.51</span>
+<span class="ss">                   d=2 : v(P) = 0.51</span>
 
-<span class="s1">                   d=3 : v(P) = 1.91</span>
+<span class="ss">                   d=3 : v(P) = 1.91</span>
 
-<span class="s1">                   d=4 : v(P) = 2.55</span>
+<span class="ss">                   d=4 : v(P) = 2.55</span>
 
-<span class="s1">                   d=5 : v(P) = 2.81</span>
+<span class="ss">                   d=5 : v(P) = 2.81</span>
 
-<span class="s1">                   ..</span>
+<span class="ss">                   ..</span>
 
-<span class="s1">                   d=9 : v(P) = 2.99</span>
+<span class="ss">                   d=9 : v(P) = 2.99</span>
 
-<span class="s1">                   ..</span>
+<span class="ss">                   ..</span>
 
-<span class="s1">                   d(x): v(P) = 3  &lt;-- convergence to the closest&#39;</span><span class="n">s</span> <span class="n">value</span>
+<span class="ss">                   d(x): v(P) = 3  &lt;-- convergence to the closest&#39;s value</span>
 
-    <span class="n">Note</span><span class="p">:</span> <span class="k">with</span> <span class="k">group</span><span class="o">=</span><span class="mi">1</span> <span class="k">and</span> <span class="n">degree</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="k">each</span> <span class="n">base</span> <span class="n">cloud</span> <span class="n">point</span> <span class="n">assumes</span> <span class="n">the</span>
+<span class="ss">    Note: with group=1 and degree=0, each base cloud point assumes the</span>
 
-          <span class="n">exact</span> <span class="n">value</span> <span class="k">of</span> <span class="n">the</span> <span class="k">unique</span> <span class="n">closest</span> <span class="n">neighbour</span><span class="p">,</span> <span class="k">if</span> <span class="n">it</span> <span class="k">exists</span><span class="p">.</span>
+<span class="ss">          exact value of the unique closest neighbour, if it exists.</span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+<span class="ss">    &quot;&quot;&quot;</span>
 
-<span class="s1">    basecld=pd.DataFrame(basecld)</span>
+    <span class="n">basecld</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">basecld</span><span class="p">)</span>
 
-<span class="s1">    basecld.columns=[&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;]</span>
+    <span class="n">basecld</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">]</span>
 
-<span class="s1">    valcld=pd.DataFrame(valcld)</span>
+    <span class="n">valcld</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">valcld</span><span class="p">)</span>
 
-<span class="s1">    valcld.columns=[&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;,&#39;</span><span class="n">v</span><span class="s1">&#39;]</span>
+    <span class="n">valcld</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">,</span> <span class="ss">&quot;v&quot;</span><span class="p">]</span>
 
-<span class="s1">    ## Calculating the Series of distance (dist) and value clouds relative</span>
+    <span class="o">##</span> <span class="n">Calculating</span> <span class="n">the</span> <span class="n">Series</span> <span class="k">of</span> <span class="n">distance</span> <span class="p">(</span><span class="n">dist</span><span class="p">)</span> <span class="k">and</span> <span class="n">value</span> <span class="n">clouds</span> <span class="k">relative</span>
 
-<span class="s1">    ## ids (idsv). the position of each cell in the arrays reflects the cells</span>
+    <span class="o">##</span> <span class="n">ids</span> <span class="p">(</span><span class="n">idsv</span><span class="p">).</span> <span class="n">the</span> <span class="k">position</span> <span class="k">of</span> <span class="k">each</span> <span class="n">cell</span> <span class="k">in</span> <span class="n">the</span> <span class="n">arrays</span> <span class="n">reflects</span> <span class="n">the</span> <span class="n">cells</span>
 
-<span class="s1">    ## in the base cloud.</span>
+    <span class="o">##</span> <span class="k">in</span> <span class="n">the</span> <span class="n">base</span> <span class="n">cloud</span><span class="p">.</span>
 
-<span class="s1">    k=KDTree(valcld[[&#39;</span><span class="n">x</span><span class="s1">&#39;,&#39;</span><span class="n">y</span><span class="s1">&#39;,&#39;</span><span class="n">z</span><span class="s1">&#39;]].values)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">KDTree</span><span class="p">(</span><span class="n">valcld</span><span class="p">[[</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="ss">&quot;z&quot;</span><span class="p">]].</span><span class="k">values</span><span class="p">)</span>
 
-<span class="s1">    dist,idsv=k.query(basecld.values,group,distance_upper_bound=distance)</span>
+    <span class="n">dist</span><span class="p">,</span> <span class="n">idsv</span> <span class="o">=</span> <span class="n">k</span><span class="p">.</span><span class="n">query</span><span class="p">(</span><span class="n">basecld</span><span class="p">.</span><span class="k">values</span><span class="p">,</span> <span class="k">group</span><span class="p">,</span> <span class="n">distance_upper_bound</span><span class="o">=</span><span class="n">distance</span><span class="p">)</span>
 
-<span class="s1">    dist=pd.DataFrame(dist).stack()</span>
+    <span class="n">dist</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist</span><span class="p">).</span><span class="n">stack</span><span class="p">()</span>
 
-<span class="s1">    dist.name=&#39;</span><span class="n">dist</span><span class="s1">&#39;</span>
+    <span class="n">dist</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;dist&quot;</span>
 
-<span class="s1">    idsv=pd.DataFrame(idsv).stack()</span>
+    <span class="n">idsv</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">idsv</span><span class="p">).</span><span class="n">stack</span><span class="p">()</span>
 
-<span class="s1">    idsv.name=&#39;</span><span class="n">idsv</span><span class="s1">&#39;</span>
+    <span class="n">idsv</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;idsv&quot;</span>
 
-<span class="s1">    ## Here we construct the DataFrame contains relation beetween each point</span>
+    <span class="o">##</span> <span class="n">Here</span> <span class="n">we</span> <span class="n">construct</span> <span class="n">the</span> <span class="n">DataFrame</span> <span class="k">contains</span> <span class="n">relation</span> <span class="n">beetween</span> <span class="k">each</span> <span class="n">point</span>
 
-<span class="s1">    ## in base cloud (base cloud index) and his neighbous (value cloud ids,</span>
+    <span class="o">##</span> <span class="k">in</span> <span class="n">base</span> <span class="n">cloud</span> <span class="p">(</span><span class="n">base</span> <span class="n">cloud</span> <span class="k">index</span><span class="p">)</span> <span class="k">and</span> <span class="n">his</span> <span class="n">neighbous</span> <span class="p">(</span><span class="n">value</span> <span class="n">cloud</span> <span class="n">ids</span><span class="p">,</span>
 
-<span class="s1">    ## distance and neighbour group progressive). Then we clean the infinite</span>
+    <span class="o">##</span> <span class="n">distance</span> <span class="k">and</span> <span class="n">neighbour</span> <span class="k">group</span> <span class="n">progressive</span><span class="p">).</span> <span class="k">Then</span> <span class="n">we</span> <span class="n">clean</span> <span class="n">the</span> <span class="n">infinite</span>
 
-<span class="s1">    ## distances (points with no neighbours)</span>
+    <span class="o">##</span> <span class="n">distances</span> <span class="p">(</span><span class="n">points</span> <span class="k">with</span> <span class="k">no</span> <span class="n">neighbours</span><span class="p">)</span>
 
-<span class="s1">    values=dist.to_frame().join(idsv)</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="n">dist</span><span class="p">.</span><span class="n">to_frame</span><span class="p">().</span><span class="k">join</span><span class="p">(</span><span class="n">idsv</span><span class="p">)</span>
 
-<span class="s1">    values=values[values[&#39;</span><span class="n">dist</span><span class="s1">&#39;] != np.inf]</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="k">values</span><span class="p">[</span><span class="k">values</span><span class="p">[</span><span class="ss">&quot;dist&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">np</span><span class="p">.</span><span class="n">inf</span><span class="p">]</span>
 
-<span class="s1">    # Indexind on &#39;</span><span class="n">idsv</span><span class="s1">&#39;, allows to join with the value cloud and add the &#39;</span><span class="n">v</span><span class="s1">&#39;</span>
+    <span class="o">#</span> <span class="n">Indexind</span> <span class="k">on</span> <span class="s1">&#39;idsv&#39;</span><span class="p">,</span> <span class="n">allows</span> <span class="k">to</span> <span class="k">join</span> <span class="k">with</span> <span class="n">the</span> <span class="n">value</span> <span class="n">cloud</span> <span class="k">and</span> <span class="k">add</span> <span class="n">the</span> <span class="s1">&#39;v&#39;</span>
 
-<span class="s1">    # info</span>
+    <span class="o">#</span> <span class="n">info</span>
 
-<span class="s1">    values=values.reset_index().set_index(&#39;</span><span class="n">idsv</span><span class="s1">&#39;).sort_index()</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="k">values</span><span class="p">.</span><span class="n">reset_index</span><span class="p">().</span><span class="n">set_index</span><span class="p">(</span><span class="ss">&quot;idsv&quot;</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
 
-<span class="s1">    values=values.join(valcld[&#39;</span><span class="n">v</span><span class="s1">&#39;],how=&#39;</span><span class="k">left</span><span class="s1">&#39;)</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="k">values</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">valcld</span><span class="p">[</span><span class="ss">&quot;v&quot;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="ss">&quot;left&quot;</span><span class="p">)</span>
 
-<span class="s1">    values.columns=[&#39;</span><span class="n">cldid</span><span class="s1">&#39;,&#39;</span><span class="n">instance</span><span class="s1">&#39;,&#39;</span><span class="n">dist</span><span class="s1">&#39;,&#39;</span><span class="n">displ</span><span class="s1">&#39;]</span>
+    <span class="k">values</span><span class="p">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="ss">&quot;cldid&quot;</span><span class="p">,</span> <span class="ss">&quot;instance&quot;</span><span class="p">,</span> <span class="ss">&quot;dist&quot;</span><span class="p">,</span> <span class="ss">&quot;displ&quot;</span><span class="p">]</span>
 
-<span class="s1">    ## Indexing on &#39;</span><span class="n">cldid</span><span class="s1">&#39; and &#39;</span><span class="n">instance</span><span class="s1">&#39;, allow to make DataFrame comparable</span>
+    <span class="o">##</span> <span class="n">Indexing</span> <span class="k">on</span> <span class="s1">&#39;cldid&#39;</span> <span class="k">and</span> <span class="s1">&#39;instance&#39;</span><span class="p">,</span> <span class="n">allow</span> <span class="k">to</span> <span class="n">make</span> <span class="n">DataFrame</span> <span class="n">comparable</span>
 
-<span class="s1">    ## with base cloud</span>
+    <span class="o">##</span> <span class="k">with</span> <span class="n">base</span> <span class="n">cloud</span>
 
-<span class="s1">    values=values.set_index([&#39;</span><span class="n">cldid</span><span class="s1">&#39;,&#39;</span><span class="n">instance</span><span class="s1">&#39;]).sort_index()</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="k">values</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="ss">&quot;cldid&quot;</span><span class="p">,</span> <span class="ss">&quot;instance&quot;</span><span class="p">]).</span><span class="n">sort_index</span><span class="p">()</span>
 
-<span class="s1">    ## Here we calculte the [distance based, weighted] mean</span>
+    <span class="o">##</span> <span class="n">Here</span> <span class="n">we</span> <span class="n">calculte</span> <span class="n">the</span> <span class="p">[</span><span class="n">distance</span> <span class="n">based</span><span class="p">,</span> <span class="n">weighted</span><span class="p">]</span> <span class="n">mean</span>
 
-<span class="s1">    values[&#39;</span><span class="n">weight</span><span class="s1">&#39;]=1/np.power(values[&#39;</span><span class="n">dist</span><span class="s1">&#39;],degree)</span>
+    <span class="k">values</span><span class="p">[</span><span class="ss">&quot;weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="n">power</span><span class="p">(</span><span class="k">values</span><span class="p">[</span><span class="ss">&quot;dist&quot;</span><span class="p">],</span> <span class="n">degree</span><span class="p">)</span>
 
-<span class="s1">    values[&#39;</span><span class="n">contrib</span><span class="s1">&#39;]=values[&#39;</span><span class="n">displ</span><span class="s1">&#39;]*values[&#39;</span><span class="n">weight</span><span class="s1">&#39;]</span>
+    <span class="k">values</span><span class="p">[</span><span class="ss">&quot;contrib&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="k">values</span><span class="p">[</span><span class="ss">&quot;displ&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="k">values</span><span class="p">[</span><span class="ss">&quot;weight&quot;</span><span class="p">]</span>
 
-<span class="s1">    values=values.groupby(&#39;</span><span class="n">cldid</span><span class="s1">&#39;).apply( lambda x: sum(x[&#39;</span><span class="n">contrib</span><span class="s1">&#39;])/sum(x[&#39;</span><span class="n">weight</span><span class="err">&#39;</span><span class="p">])</span> <span class="p">)</span>
+    <span class="k">values</span> <span class="o">=</span> <span class="k">values</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="ss">&quot;cldid&quot;</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span>
+
+        <span class="n">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="k">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="ss">&quot;contrib&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="k">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="ss">&quot;weight&quot;</span><span class="p">])</span>
+
+    <span class="p">)</span>
 
     <span class="k">return</span> <span class="k">values</span>
 </code></pre></div>

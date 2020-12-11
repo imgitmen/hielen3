@@ -922,7 +922,7 @@
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">@hug.not_found()</span>
 
@@ -938,45 +938,45 @@
 
 <span class="sd">api = hug.get(on_invalid=hug.redirect.not_found)</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/parameters&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/parameters&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">elemman</span><span class="p">():</span>
 
-    <span class="sd">&#39;&#39;&#39; parameters manager &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; parameters manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">parameters</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/prototypes&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/prototypes&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">protoman</span><span class="p">():</span>
 
-    <span class="sd">&#39;&#39;&#39; Prototypes manager &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Prototypes manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">prototypes</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/data&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/data&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
 
-    <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Series manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">data</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/features&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/features&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
 
-    <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Series manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">features</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/actions&#39;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/actions&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
 
-    <span class="sd">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span>
+    <span class="sd">&quot;&quot;&quot; Series manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">actions</span><span class="p">]</span>
 </code></pre></div>
@@ -990,11 +990,11 @@
 </code></pre></div>
 
 <p>Series manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/actions&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/actions&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39; Series manager &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; Series manager &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">actions</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
@@ -1007,11 +1007,11 @@
 </code></pre></div>
 
 <p>parameters manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/parameters&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/parameters&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">elemman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39; parameters manager &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; parameters manager &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">parameters</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
@@ -1024,11 +1024,11 @@
 </code></pre></div>
 
 <p>Prototypes manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s1">&#39;/prototypes&#39;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/prototypes&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">protoman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="s1">&#39;&#39;&#39; Prototypes manager &#39;&#39;&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; Prototypes manager &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">prototypes</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>

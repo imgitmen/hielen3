@@ -918,59 +918,109 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">id_sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_ch</span><span class="p">(</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">()</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-<span class="k">class</span> <span class="nc">GWO</span><span class="p">():</span>
+    <span class="n">id_stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">uri</span><span class="o">=</span><span class="s1">&#39;https://www.smori.it/tisma/api/v1/sensor_data.php&#39;</span><span class="p">):</span>
+    <span class="n">id_unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="o">=</span><span class="n">uri</span>
+    <span class="n">id_sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">aggr</span><span class="o">=</span><span class="s2">&quot;avg&quot;</span><span class="p">,</span>
 
-        <span class="n">params</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-                <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
 
-                <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+<span class="p">):</span>
 
-                <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">()</span><span class="o">.</span><span class="n">getDataSeries</span><span class="p">(</span>
 
-                <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+        <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
 
-                <span class="p">)</span>
+        <span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span>
+
+        <span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span>
+
+        <span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span>
+
+        <span class="n">aggr</span><span class="o">=</span><span class="s2">&quot;avg&quot;</span><span class="p">,</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span>
+
+    <span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">GWO</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="s2">&quot;https://www.smori.it/tisma/api/v1/sensor_data.php&quot;</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span>
+
+    <span class="k">def</span> <span class="nf">getDataSeries</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="p">,</span>
+
+        <span class="n">sito</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+        <span class="n">stazione</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+        <span class="n">unita</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+        <span class="n">sensore</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+        <span class="n">aggr</span><span class="o">=</span><span class="s2">&quot;avg&quot;</span><span class="p">,</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+
+    <span class="p">):</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+
+            <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+
+            <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+
+            <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+
+            <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">aggr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;aggr&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">aggr</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;aggr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aggr</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;dal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;dal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timefrom</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;al&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+            <span class="n">params</span><span class="p">[</span><span class="s2">&quot;al&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeto</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="p">)[</span><span class="s2">&quot;data&quot;</span><span class="p">])</span>
 
-        <span class="c1">#print (r.url)</span>
+        <span class="c1"># print (r.url)</span>
 
         <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="n">out</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;valore&#39;</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">&quot;timestamp&quot;</span><span class="p">])[</span><span class="s2">&quot;valore&quot;</span><span class="p">]</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;{stazione}_{unita}_{sensore}&quot;</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
@@ -989,9 +1039,41 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">id_sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">get_ch</span><span class="p">(</span>
 
-    <span class="k">return</span> <span class="n">GWO</span><span class="p">().</span><span class="n">getDataSeries</span><span class="p">(</span><span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span>
+    <span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">id_stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">id_unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">id_sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">aggr</span><span class="o">=</span><span class="ss">&quot;avg&quot;</span><span class="p">,</span>
+
+    <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">GWO</span><span class="p">().</span><span class="n">getDataSeries</span><span class="p">(</span>
+
+        <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+
+        <span class="n">stazione</span><span class="o">=</span><span class="n">id_stazione</span><span class="p">,</span>
+
+        <span class="n">unita</span><span class="o">=</span><span class="n">id_unita</span><span class="p">,</span>
+
+        <span class="n">sensore</span><span class="o">=</span><span class="n">id_sensore</span><span class="p">,</span>
+
+        <span class="n">aggr</span><span class="o">=</span><span class="ss">&quot;avg&quot;</span><span class="p">,</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span>
+
+    <span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -1002,55 +1084,73 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">GWO</span>():
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">GWO:</span>
 
-    <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>,<span class="n">uri</span>=<span class="s">&#39;https://www.smori.it/tisma/api/v1/sensor_data.php&#39;</span>):
+    <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>, <span class="n">uri</span>=<span class="s">&quot;https://www.smori.it/tisma/api/v1/sensor_data.php&quot;</span>):
 
-        <span class="nb">self</span>.<span class="n">uri</span>=<span class="n">uri</span>
+        <span class="nb">self</span>.<span class="n">uri</span> = <span class="n">uri</span>
 
-    <span class="n">def</span> <span class="n">getDataSeries</span>(<span class="nb">self</span>,<span class="n">sito</span>=<span class="n">None</span>,<span class="n">stazione</span>=<span class="n">None</span>,<span class="n">unita</span>=<span class="n">None</span>,<span class="n">sensore</span>=<span class="n">None</span>,<span class="n">aggr</span>=<span class="s">&#39;avg&#39;</span>,<span class="n">timefrom</span>=<span class="n">None</span>,<span class="n">timeto</span>=<span class="n">None</span>):
+    <span class="n">def</span> <span class="n">getDataSeries</span>(
 
-        <span class="nb">params</span>=<span class="n">dict</span>(
+        <span class="nb">self</span>,
 
-                <span class="n">sito</span>=<span class="n">sito</span>,
+        <span class="n">sito</span>=<span class="n">None</span>,
 
-                <span class="n">stazione</span>=<span class="n">stazione</span>,
+        <span class="n">stazione</span>=<span class="n">None</span>,
 
-                <span class="n">unita</span>=<span class="n">unita</span>,
+        <span class="n">unita</span>=<span class="n">None</span>,
 
-                <span class="n">sensore</span>=<span class="n">sensore</span>,
+        <span class="n">sensore</span>=<span class="n">None</span>,
 
-                )
+        <span class="n">aggr</span>=<span class="s">&quot;avg&quot;</span>,
+
+        <span class="n">timefrom</span>=<span class="n">None</span>,
+
+        <span class="n">timeto</span>=<span class="n">None</span>,
+
+    ):
+
+        <span class="nb">params</span> = <span class="n">dict</span>(
+
+            <span class="n">sito</span>=<span class="n">sito</span>,
+
+            <span class="n">stazione</span>=<span class="n">stazione</span>,
+
+            <span class="n">unita</span>=<span class="n">unita</span>,
+
+            <span class="n">sensore</span>=<span class="n">sensore</span>,
+
+        )
 
         <span class="k">if</span> <span class="n">aggr</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
 
-            <span class="nb">params</span>[<span class="s">&#39;aggr&#39;</span>]=<span class="n">aggr</span>
+            <span class="nb">params</span>[<span class="s">&quot;aggr&quot;</span>] = <span class="n">aggr</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
 
-            <span class="nb">params</span>[<span class="s">&#39;dal&#39;</span>]=<span class="n">timefrom</span>
+            <span class="nb">params</span>[<span class="s">&quot;dal&quot;</span>] = <span class="n">timefrom</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
 
-            <span class="nb">params</span>[<span class="s">&#39;al&#39;</span>]=<span class="n">timeto</span>
+            <span class="nb">params</span>[<span class="s">&quot;al&quot;</span>] = <span class="n">timeto</span>
 
         <span class="nb">r</span> = <span class="n">requests</span>.<span class="nb">get</span>(<span class="n">url</span>=<span class="nb">self</span>.<span class="n">uri</span>, <span class="nb">params</span>=<span class="nb">params</span>)
 
-        <span class="n">out</span>=<span class="n">DataFrame</span>(<span class="n">json</span>.<span class="n">loads</span>(<span class="nb">r</span>.<span class="n">text</span>)[<span class="s">&#39;data&#39;</span>])
+        <span class="n">out</span> = <span class="n">DataFrame</span>(<span class="n">json</span>.<span class="n">loads</span>(<span class="nb">r</span>.<span class="n">text</span>)[<span class="s">&quot;data&quot;</span>])
 
-        <span class="c1">#print (r.url)</span>
+        <span class="c1"># print (r.url)</span>
 
         <span class="k">if</span> <span class="n">out</span>.<span class="n">empty:</span>
 
             <span class="k">return</span> <span class="n">out</span>
 
-        <span class="n">out</span> = <span class="n">out</span>.<span class="n">set_index</span>([<span class="s">&#39;timestamp&#39;</span>])[<span class="s">&#39;valore&#39;</span>]
+        <span class="n">out</span> = <span class="n">out</span>.<span class="n">set_index</span>([<span class="s">&quot;timestamp&quot;</span>])[<span class="s">&quot;valore&quot;</span>]
 
-        <span class="n">out</span>=<span class="n">out</span>.<span class="n">astype</span>(<span class="n">float</span>, <span class="nb">copy</span>=<span class="nb">False</span>, <span class="n">errors</span>=<span class="s">&#39;ignore&#39;</span>)
+        <span class="n">out</span> = <span class="n">out</span>.<span class="n">astype</span>(<span class="n">float</span>, <span class="nb">copy</span>=<span class="nb">False</span>, <span class="n">errors</span>=<span class="s">&quot;ignore&quot;</span>)
 
         <span class="n">out</span>.<span class="nb">name</span> = <span class="nb">f</span><span class="s">&quot;{stazione}_{unita}_{sensore}&quot;</span>
 
-        <span class="n">out</span>.<span class="nb">index</span>=<span class="n">to_datetime</span>(<span class="n">out</span>.<span class="nb">index</span>)
+        <span class="n">out</span>.<span class="nb">index</span> = <span class="n">to_datetime</span>(<span class="n">out</span>.<span class="nb">index</span>)
 
         <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
@@ -1071,49 +1171,67 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataSeries</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">aggr</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">getDataSeries</span><span class="p">(</span>
 
-        <span class="n">params</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span>
+        <span class="k">self</span><span class="p">,</span>
 
-                <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+        <span class="n">sito</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-                <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+        <span class="n">stazione</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-                <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+        <span class="n">unita</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-                <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+        <span class="n">sensore</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-                <span class="p">)</span>
+        <span class="n">aggr</span><span class="o">=</span><span class="ss">&quot;avg&quot;</span><span class="p">,</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+    <span class="p">):</span>
+
+        <span class="n">params</span> <span class="o">=</span> <span class="n">dict</span><span class="p">(</span>
+
+            <span class="n">sito</span><span class="o">=</span><span class="n">sito</span><span class="p">,</span>
+
+            <span class="n">stazione</span><span class="o">=</span><span class="n">stazione</span><span class="p">,</span>
+
+            <span class="n">unita</span><span class="o">=</span><span class="n">unita</span><span class="p">,</span>
+
+            <span class="n">sensore</span><span class="o">=</span><span class="n">sensore</span><span class="p">,</span>
+
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">aggr</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;aggr&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">aggr</span>
+            <span class="n">params</span><span class="p">[</span><span class="ss">&quot;aggr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aggr</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;dal&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+            <span class="n">params</span><span class="p">[</span><span class="ss">&quot;dal&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timefrom</span>
 
         <span class="k">if</span> <span class="n">timefrom</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
 
-            <span class="n">params</span><span class="p">[</span><span class="s1">&#39;al&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+            <span class="n">params</span><span class="p">[</span><span class="ss">&quot;al&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeto</span>
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nb">text</span><span class="p">)[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+        <span class="k">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="nb">text</span><span class="p">)[</span><span class="ss">&quot;data&quot;</span><span class="p">])</span>
 
-        <span class="o">#</span><span class="n">print</span> <span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">url</span><span class="p">)</span>
+        <span class="o">#</span> <span class="n">print</span> <span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">url</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="k">out</span>
 
-        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])[</span><span class="s1">&#39;valore&#39;</span><span class="p">]</span>
+        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">set_index</span><span class="p">([</span><span class="ss">&quot;timestamp&quot;</span><span class="p">])[</span><span class="ss">&quot;valore&quot;</span><span class="p">]</span>
 
-        <span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="k">copy</span><span class="o">=</span><span class="k">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+        <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="k">copy</span><span class="o">=</span><span class="k">False</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="ss">&quot;ignore&quot;</span><span class="p">)</span>
 
         <span class="k">out</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">f</span><span class="ss">&quot;{stazione}_{unita}_{sensore}&quot;</span>
 
-        <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+        <span class="k">out</span><span class="p">.</span><span class="k">index</span> <span class="o">=</span> <span class="n">to_datetime</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="k">out</span>
 </code></pre></div>

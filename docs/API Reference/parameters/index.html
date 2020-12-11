@@ -949,26 +949,30 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Ricerca dei parametri associati alle features</strong>.</p>
-<p><strong>nota</strong>: uid accetta valori multipli separati da virgola </p>
-<p>viene restituito una struttura di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
-<span class="err">        &quot;&lt;fetUID&gt;&quot;:[</span>
-<span class="err">            {</span>
-<span class="err">                &quot;series&quot;:&quot;&lt;series_UID&gt;&quot;,</span>
-<span class="err">                &quot;param&quot;:&quot;&lt;param_name&gt;&quot;,</span>
-<span class="err">                &quot;um&quot;:&quot;&lt;mearurement_unit&gt;&quot;</span>
-<span class="err">            }</span>
-<span class="err">            ...</span>
-<span class="err">        ]</span>
-<span class="err">        ...</span>
-<span class="err">    }</span>
+<div class="codehilite"><pre><span></span><code><span class="o">**</span><span class="n">Ricerca</span> <span class="n">dei</span> <span class="n">parametri</span> <span class="n">associati</span> <span class="n">alle</span> <span class="n">features</span><span class="o">**</span><span class="p">.</span>
+
+<span class="n">__nota__</span><span class="p">:</span> <span class="n">uid</span> <span class="n">accetta</span> <span class="n">valori</span> <span class="n">multipli</span> <span class="n">separati</span> <span class="n">da</span> <span class="n">virgola</span>
+
+<span class="n">viene</span> <span class="n">restituita</span> <span class="n">una</span> <span class="n">struttura</span> <span class="n">di</span> <span class="n">questo</span> <span class="n">tipo</span><span class="p">:</span>
+
+        <span class="err">{</span>
+            <span class="ss">&quot;&lt;fetUID&gt;&quot;</span><span class="p">:[</span>
+                <span class="err">{</span>
+                    <span class="ss">&quot;series&quot;</span><span class="p">:</span><span class="ss">&quot;&lt;series_UID&gt;&quot;</span><span class="p">,</span>
+                    <span class="ss">&quot;param&quot;</span><span class="p">:</span><span class="ss">&quot;&lt;param_name&gt;&quot;</span><span class="p">,</span>
+                    <span class="ss">&quot;um&quot;</span><span class="p">:</span><span class="ss">&quot;&lt;mearurement_unit&gt;&quot;</span>
+                <span class="err">}</span>
+                <span class="p">...</span>
+            <span class="p">]</span>
+            <span class="p">...</span>
+        <span class="err">}</span>
+
+
+<span class="n">Possibili</span> <span class="n">risposte</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="n">_404</span> <span class="k">Not</span> <span class="n">Found_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">nessun</span> <span class="n">parametro</span> <span class="n">risponda</span> <span class="n">ai</span> <span class="n">criteri</span>
 </code></pre></div>
 
-<p>Possibili risposte:</p>
-<ul>
-<li><em>404 Not Found</em>: Nel caso in cui nessun parametro risponda ai criteri</li>
-</ul>
 <h2 id="parameterscntxt"><strong>/parameters/{cntxt}</strong></h2>
 <h4 id="get_1">GET</h4>
 <hr />
@@ -984,7 +988,9 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Alias di ricerca dei Parametri nello lo specifico contesto</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dei Parametri nello lo specifico contesto**</span>
+</code></pre></div>
+
 <h2 id="parameterscntxtuid"><strong>/parameters/{cntxt}/{uid}</strong></h2>
 <h4 id="get_2">GET</h4>
 <hr />
@@ -1000,7 +1006,9 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Alias di ricerca dei Parametri della specifica Feature lo specifico contesto</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dei Parametri della specifica Feature lo specifico contesto**</span>
+</code></pre></div>
+
 <h2 id="parameterscntxtuidparam"><strong>/parameters/{cntxt}/{uid}/{param}</strong></h2>
 <h4 id="get_3">GET</h4>
 <hr />
@@ -1016,7 +1024,8 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<p><strong>Alias di ricerca dello specifico Parametro della specifica Feature lo specifico contesto</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dello specifico Parametro della specifica Feature lo specifico contesto**</span>
+</code></pre></div>
                 
               
               

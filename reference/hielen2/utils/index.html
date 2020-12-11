@@ -1200,7 +1200,17 @@
 244
 245
 246
-247</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1220,9 +1230,15 @@
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
 
-<span class="k">def</span> <span class="nf">hug_output_format_conten_type</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="p">[],</span>
+<span class="k">def</span> <span class="nf">hug_output_format_conten_type</span><span class="p">(</span>
 
-        <span class="n">error</span><span class="o">=</span><span class="s1">&#39;The requested format does not match any of those allowed&#39;</span><span class="p">,</span> <span class="n">ctpar</span><span class="o">=</span><span class="s1">&#39;content_type&#39;</span><span class="p">):</span>
+    <span class="n">handlers</span><span class="o">=</span><span class="p">[],</span>
+
+    <span class="n">error</span><span class="o">=</span><span class="s2">&quot;The requested format does not match any of those allowed&quot;</span><span class="p">,</span>
+
+    <span class="n">ctpar</span><span class="o">=</span><span class="s2">&quot;content_type&quot;</span><span class="p">,</span>
+
+<span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;Returns a different handler depending on the input param ctpar</span>
 
@@ -1234,27 +1250,27 @@
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">default</span><span class="o">=</span><span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">default</span> <span class="o">=</span> <span class="kc">None</span>
 
-    <span class="n">handlers</span><span class="o">=</span><span class="p">{</span> <span class="n">h</span><span class="o">.</span><span class="n">content_type</span><span class="p">:</span><span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span> <span class="p">}</span>
+    <span class="n">handlers</span> <span class="o">=</span> <span class="p">{</span><span class="n">h</span><span class="o">.</span><span class="n">content_type</span><span class="p">:</span> <span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">par</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="n">ctpar</span><span class="p">]</span>
+            <span class="n">par</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">_params</span><span class="p">[</span><span class="n">ctpar</span><span class="p">]</span>
 
-            <span class="n">handler</span><span class="o">=</span><span class="kc">None</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="kc">None</span>
 
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">handlers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
-                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">par</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
 
-                    <span class="n">handler</span><span class="o">=</span><span class="n">h</span>
+                    <span class="n">handler</span> <span class="o">=</span> <span class="n">h</span>
 
                     <span class="k">break</span>
 
@@ -1272,13 +1288,17 @@
 
     <span class="k">def</span> <span class="nf">output_type</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
 
-        <span class="n">handler</span><span class="o">=</span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
         <span class="n">response</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="n">handler</span><span class="o">.</span><span class="n">content_type</span>
 
         <span class="k">return</span> <span class="n">handler</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
-    <span class="n">output_type</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;Supports any of the following formats: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="vm">__doc__</span> <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">handlers</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
+    <span class="n">output_type</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="s2">&quot;Supports any of the following formats: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+
+        <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="vm">__doc__</span> <span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">handlers</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="p">)</span>
 
     <span class="n">output_type</span><span class="o">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">handlers</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
@@ -1286,27 +1306,27 @@
 
     <span class="k">return</span> <span class="n">output_type</span>
 
-<span class="k">def</span> <span class="nf">newinstanceof</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">newinstanceof</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-    <span class="n">klass_ar</span><span class="o">=</span><span class="n">klass</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+    <span class="n">klass_ar</span> <span class="o">=</span> <span class="n">klass</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
-    <span class="n">module</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">klass_ar</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">klass_ar</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">klass</span><span class="o">=</span><span class="n">klass_ar</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">klass</span> <span class="o">=</span> <span class="n">klass_ar</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">),</span><span class="n">klass</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">),</span> <span class="n">klass</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">ut2isot</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-     <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="ow">or</span> <span class="mi">1</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="ow">or</span> <span class="mi">1</span>
 
-     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">isot2ut</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="ow">or</span> <span class="s2">&quot;1970-01-01T01:00:01.00000Z&quot;</span>
 
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;[^\d]&#39;</span><span class="p">,</span> <span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^\d]$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">))))</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">split</span><span class="p">(</span><span class="s2">&quot;[^\d]&quot;</span><span class="p">,</span> <span class="n">sub</span><span class="p">(</span><span class="s2">&quot;[^\d]$&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">))))</span>
 
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">mktime</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span>
 
@@ -1316,17 +1336,17 @@
 
         <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jf</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">savejsonfile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">struct</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">savejsonfile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">struct</span><span class="p">):</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
 
-        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span><span class="n">jf</span><span class="p">)</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">jf</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">eprint</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">eprint</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
-        <span class="nb">print</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">hashfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 
@@ -1334,7 +1354,7 @@
 
     <span class="n">hasher</span> <span class="o">=</span> <span class="n">md5</span><span class="p">()</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
 
         <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
 
@@ -1346,7 +1366,7 @@
 
     <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 
-<span class="k">class</span> <span class="nc">JsonValidable</span><span class="p">():</span>
+<span class="k">class</span> <span class="nc">JsonValidable</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1360,81 +1380,81 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__field_doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">field</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__field_doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
 
-        <span class="n">required</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="s2">&quot;!&quot;</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="s2">&quot;!&quot;</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="n">allow_none</span><span class="o">=</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">allow_none</span> <span class="ow">and</span> <span class="s2">&quot;!&quot;</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">allow_none</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">allow_none</span> <span class="ow">and</span> <span class="s2">&quot;!&quot;</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">types</span><span class="o">=</span><span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="vm">__class__</span><span class="p">])</span>
+            <span class="n">types</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="vm">__class__</span><span class="p">])</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span>  <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">:</span>
 
-                <span class="n">f</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">inner</span><span class="p">)</span>
+                <span class="n">f</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">allow_none</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">inner</span><span class="p">)</span>
 
-                <span class="n">types</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">]&quot;</span>
+                <span class="n">types</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s2">]&quot;</span>
 
             <span class="k">elif</span> <span class="n">field</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="n">fields</span><span class="o">.</span><span class="n">Dict</span><span class="p">:</span>
 
-                <span class="n">kf</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">key_field</span><span class="p">)</span>
+                <span class="n">kf</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">allow_none</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">key_field</span><span class="p">)</span>
 
-                <span class="n">vf</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">value_field</span><span class="p">)</span>
+                <span class="n">vf</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">allow_none</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">value_field</span><span class="p">)</span>
 
-                <span class="n">types</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="si">{</span><span class="n">kf</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">vf</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
+                <span class="n">types</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="si">{</span><span class="n">kf</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">vf</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">types</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+                <span class="n">types</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="k">return</span> <span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">types</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">allow_none</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__schema_doc__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
-        <span class="n">flds</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">flds</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
-            <span class="n">types</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">types</span><span class="p">,</span> <span class="n">required</span><span class="p">,</span> <span class="n">allow_none</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-            <span class="c1">#TODO formattare required e allow_none</span>
+            <span class="c1"># TODO formattare required e allow_none</span>
 
-            <span class="c1">#flds.append( f&quot;**{n}**{required}{allow_none}: {types}&quot;)</span>
+            <span class="c1"># flds.append( f&quot;**{n}**{required}{allow_none}: {types}&quot;)</span>
 
-            <span class="n">flds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;**</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">**: </span><span class="si">{</span><span class="n">types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">flds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">**: </span><span class="si">{</span><span class="n">types</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-        <span class="n">fields</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">flds</span> <span class="p">)</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">flds</span><span class="p">)</span>
 
-        <span class="n">fields</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="si">{</span><span class="n">fields</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">{{</span><span class="si">{</span><span class="n">fields</span><span class="si">}</span><span class="se">}}</span><span class="s2">&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">many</span><span class="p">:</span>
 
-            <span class="n">fields</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">fields</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="n">fields</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">fields</span><span class="si">}</span><span class="s2">]&quot;</span>
 
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;JSON Schema </span><span class="si">{</span><span class="n">fields</span><span class="si">}</span><span class="s2">&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">schema</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema</span><span class="p">):</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">schema</span> <span class="o">=</span> <span class="n">schema</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="o">=</span><span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
 
             <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">w</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">TYPE_MAPPING</span><span class="p">[</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">))[</span><span class="mi">0</span><span class="p">]]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__schema_doc__</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span><span class="p">:</span>
 
@@ -1459,11 +1479,11 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">eprint</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">eprint</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">fname</span><span class="o">=</span><span class="ss">&quot;error&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="ss">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 
-        <span class="n">print</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">print</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -1479,7 +1499,7 @@
 
     <span class="n">hasher</span> <span class="o">=</span> <span class="n">md5</span><span class="p">()</span>
 
-    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
+    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="ss">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">afile</span><span class="p">:</span>
 
         <span class="n">buf</span> <span class="o">=</span> <span class="n">afile</span><span class="p">.</span><span class="k">read</span><span class="p">(</span><span class="n">BLOCKSIZE</span><span class="p">)</span>
 
@@ -1504,9 +1524,15 @@
 <p>Returns a different handler depending on the input param ctpar
 If none match and no default is given falcon.HTTPNotAcceptable(error)
 is raised</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">hug_output_format_conten_type</span><span class="p">(</span><span class="n">handlers</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">hug_output_format_conten_type</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;The requested format does not match any of those allowed&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">ctpar</span><span class="o">=</span><span class="s1">&#39;content_type&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">handlers</span><span class="o">=</span><span class="err">[]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">error</span><span class="o">=</span><span class="ss">&quot;The requested format does not match any of those allowed&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">ctpar</span><span class="o">=</span><span class="ss">&quot;content_type&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;Returns a different handler depending on the input param ctpar</span>
 
@@ -1518,27 +1544,27 @@ is raised</p>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">default</span><span class="o">=</span><span class="n">handlers</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handlers</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">default</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">        </span><span class="k">default</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">handlers</span><span class="o">=</span><span class="err">{</span><span class="w"> </span><span class="n">h</span><span class="p">.</span><span class="nl">content_type</span><span class="p">:</span><span class="n">h</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="n">h</span><span class="p">.</span><span class="nl">content_type</span><span class="p">:</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="err">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">par</span><span class="o">=</span><span class="n">request</span><span class="p">.</span><span class="n">_params</span><span class="o">[</span><span class="n">ctpar</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">par</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="p">.</span><span class="n">_params</span><span class="o">[</span><span class="n">ctpar</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">handler</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">            </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">par</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">par</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;;&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">k</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;;&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">handler</span><span class="o">=</span><span class="n">h</span><span class="w"></span>
+<span class="w">                    </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h</span><span class="w"></span>
 
 <span class="w">                    </span><span class="k">break</span><span class="w"></span>
 
@@ -1556,13 +1582,17 @@ is raised</p>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">output_type</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">handler</span><span class="o">=</span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">response</span><span class="p">.</span><span class="n">content_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handler</span><span class="p">.</span><span class="n">content_type</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">handler</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">output_type</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;Supports any of the following formats: {0}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">function</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="k">values</span><span class="p">()))</span><span class="w"></span>
+<span class="w">    </span><span class="n">output_type</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;Supports any of the following formats: {0}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">function</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="k">values</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">output_type</span><span class="p">.</span><span class="n">content_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">handlers</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span><span class="w"></span>
 
@@ -1582,7 +1612,7 @@ is raised</p>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">t</span> <span class="k">or</span> <span class="ss">&quot;1970-01-01T01:00:01.00000Z&quot;</span>
 
-    <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span> <span class="o">*</span><span class="k">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;[^\d]&#39;</span><span class="p">,</span> <span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^\d]$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">))))</span>
+    <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="o">*</span><span class="k">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">split</span><span class="p">(</span><span class="ss">&quot;[^\d]&quot;</span><span class="p">,</span> <span class="n">sub</span><span class="p">(</span><span class="ss">&quot;[^\d]$&quot;</span><span class="p">,</span> <span class="ss">&quot;&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">))))</span>
 
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">mktime</span><span class="p">(</span><span class="n">dt</span><span class="p">.</span><span class="n">timetuple</span><span class="p">()))</span>
 </code></pre></div>
@@ -1610,15 +1640,15 @@ is raised</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="s s-Atom">def</span> <span class="nf">newinstanceof</span><span class="p">(</span><span class="s s-Atom">klass</span><span class="p">,</span><span class="o">*</span><span class="s s-Atom">args</span><span class="p">,</span><span class="s s-Atom">**kwargs</span><span class="p">)</span><span class="s s-Atom">:</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="s s-Atom">def</span> <span class="nf">newinstanceof</span><span class="p">(</span><span class="s s-Atom">klass</span><span class="p">,</span> <span class="o">*</span><span class="s s-Atom">args</span><span class="p">,</span> <span class="s s-Atom">**kwargs</span><span class="p">)</span><span class="s s-Atom">:</span>
 
-    <span class="s s-Atom">klass_ar</span><span class="o">=</span><span class="s s-Atom">klass</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s s-Atom">&#39;.&#39;</span><span class="p">)</span>
+    <span class="s s-Atom">klass_ar</span> <span class="o">=</span> <span class="s s-Atom">klass</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
 
-    <span class="s s-Atom">module=&#39;.&#39;</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s s-Atom">klass_ar</span><span class="p">[:-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="s s-Atom">module</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s s-Atom">klass_ar</span><span class="p">[:-</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="s s-Atom">klass</span><span class="o">=</span><span class="s s-Atom">klass_ar</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="s s-Atom">klass</span> <span class="o">=</span> <span class="s s-Atom">klass_ar</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="s s-Atom">return</span> <span class="nf">getattr</span><span class="p">(</span><span class="nf">import_module</span><span class="p">(</span><span class="s s-Atom">module</span><span class="p">),</span><span class="s s-Atom">klass</span><span class="p">)(</span><span class="o">*</span><span class="s s-Atom">args</span><span class="p">,</span><span class="s s-Atom">**kwargs</span><span class="p">)</span>
+    <span class="s s-Atom">return</span> <span class="nf">getattr</span><span class="p">(</span><span class="nf">import_module</span><span class="p">(</span><span class="s s-Atom">module</span><span class="p">),</span> <span class="s s-Atom">klass</span><span class="p">)(</span><span class="o">*</span><span class="s s-Atom">args</span><span class="p">,</span> <span class="s s-Atom">**kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -1629,11 +1659,11 @@ is raised</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">savejsonfile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">struct</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">savejsonfile</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">struct</span><span class="p">):</span>
 
-    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
+    <span class="k">with</span> <span class="k">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="ss">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">jf</span><span class="p">:</span>
 
-        <span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span><span class="n">jf</span><span class="p">)</span>
+        <span class="n">json</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">struct</span><span class="p">,</span> <span class="n">jf</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -1645,9 +1675,9 @@ is raised</p>
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">ut2isot</span><span class="p">(</span><span class="n">u</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
-     <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="k">or</span> <span class="mi">1</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="k">or</span> <span class="mi">1</span>
 
-     <span class="k">return</span> <span class="n">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">str</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
 </code></pre></div>
 
 </details>
@@ -1661,7 +1691,7 @@ is raised</p>
 <p>JSON Validator class.
 It is initailzed with a marshmallow.Schema instance. When <strong>call</strong> function is invoked,     uses marshmallow facilities to validate the json and raise errors.</p>
 <p>Once initalized, changes <strong>doc</strong> in order to descibe the json accepted.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">JsonValidable</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
@@ -1675,81 +1705,81 @@ It is initailzed with a marshmallow.Schema instance. When <strong>call</strong> 
 
 <span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">field</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">field</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">required</span><span class="o">=</span><span class="n">field</span><span class="p">.</span><span class="n">required</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ss">&quot;!&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">required</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">required</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ss">&quot;!&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">allow_none</span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">allow_none</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ss">&quot;!&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">allow_none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">allow_none</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ss">&quot;!&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">types</span><span class="o">=</span><span class="ss">&quot;|&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">field.__class__</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;|&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">field.__class__</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">__class__</span><span class="w"> </span><span class="k">is</span><span class="w">  </span><span class="n">fields</span><span class="p">.</span><span class="nl">List</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">__class__</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="nl">List</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">f</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="k">inner</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">allow_none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="k">inner</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">types</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;[{f}]&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="n">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;[{f}]&quot;</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">elif</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="n">__class__</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span><span class="nl">Dict</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">kf</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="n">key_field</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">kf</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">allow_none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="n">key_field</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">vf</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="n">value_field</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">vf</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">allow_none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">field</span><span class="p">.</span><span class="n">value_field</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">types</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{{{kf},{vf}}}&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="n">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{{{kf},{vf}}}&quot;</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">types</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="n">types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">types</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">allow_none</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__schema_doc__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">flds</span><span class="o">=</span><span class="err">[]</span><span class="w"></span>
+<span class="w">        </span><span class="n">flds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="n">f</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="n">fields</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="n">fields</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">types</span><span class="p">,</span><span class="n">required</span><span class="p">,</span><span class="n">allow_none</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">types</span><span class="p">,</span><span class="w"> </span><span class="n">required</span><span class="p">,</span><span class="w"> </span><span class="n">allow_none</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__field_doc__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">#TODO</span><span class="w"> </span><span class="n">formattare</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">allow_none</span><span class="w"></span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">TODO</span><span class="w"> </span><span class="n">formattare</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">allow_none</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">#flds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;**{n}**{required}{allow_none}: {types}&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">flds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;**{n}**{required}{allow_none}: {types}&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">flds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;**{n}**: {types}&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">flds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;**{n}**: {types}&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">fields</span><span class="o">=</span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="w"> </span><span class="n">flds</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;, &quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">flds</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">fields</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{{{fields}}}&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{{{fields}}}&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="nl">many</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">fields</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;[{fields}]&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">fields</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;[{fields}]&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;JSON Schema {fields}&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">schema</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">schema</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">schema</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">=</span><span class="err">{}</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">w</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">findall</span><span class="p">(</span><span class="n">r</span><span class="ss">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">w</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">findall</span><span class="p">(</span><span class="n">r</span><span class="ss">&quot;&#39;(.*)&#39;&quot;</span><span class="p">,</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">k</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">w</span><span class="o">]=[</span><span class="n">findall(r&quot;&#39;(.*)&#39;&quot;,str(k))[0</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">TYPE_MAPPING</span><span class="o">[</span><span class="n">w</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">findall(r&quot;&#39;(.*)&#39;&quot;, str(k))[0</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">__schema_doc__</span><span class="p">())</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">type</span><span class="p">(</span><span class="k">value</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nl">list</span><span class="p">:</span><span class="w"></span>
 

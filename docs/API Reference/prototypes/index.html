@@ -1000,6 +1000,11 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">** Definizione di nuovi prototipi **</span>
+<span class="c">_PLACEHOLDER: Non ancora implementato_</span>
+</code></pre></div>
+
 <h4 id="get">GET</h4>
 <hr />
 <p><em>result</em>:</p>
@@ -1007,6 +1012,62 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">**</span><span class="n">Recupero</span> <span class="n">di</span> <span class="n">tutte</span> <span class="n">le</span> <span class="n">informazioni</span> <span class="n">dei</span> <span class="n">prototipi</span><span class="o">**</span>
+
+<span class="n">ritorna</span> <span class="n">una</span> <span class="n">struttura</span> <span class="n">json</span> <span class="n">di</span> <span class="n">questo</span> <span class="n">tipo</span><span class="p">:</span>
+
+
+        <span class="err">{</span>
+            <span class="ss">&quot;NomePrototipo1&quot;</span><span class="p">:</span> <span class="err">{</span>
+                <span class="ss">&quot;forms&quot;</span><span class="p">:</span> <span class="err">{</span>
+                    <span class="ss">&quot;form1&quot;</span><span class="p">:</span> <span class="err">{</span>
+                        <span class="ss">&quot;args&quot;</span><span class="p">:</span> <span class="err">{</span>
+                            <span class="ss">&quot;arg1.1&quot;</span><span class="p">:</span> <span class="ss">&quot;type_arg1.1&quot;</span><span class="p">,</span>
+                            <span class="ss">&quot;arg1.2&quot;</span><span class="p">:</span> <span class="ss">&quot;type_arg1.2&quot;</span><span class="p">,</span>
+                            <span class="p">...</span>
+                        <span class="err">}</span><span class="p">,</span>
+                        <span class="ss">&quot;mandatory&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="n">args</span> <span class="n">keys</span> <span class="k">sublist</span> <span class="p">]</span>
+                    <span class="err">}</span><span class="p">,</span>
+                    <span class="ss">&quot;form2&quot;</span><span class="p">:</span> <span class="err">{</span>
+                        <span class="ss">&quot;args&quot;</span><span class="p">:</span> <span class="err">{</span>
+                            <span class="ss">&quot;arg2.1&quot;</span><span class="p">:</span> <span class="ss">&quot;type_arg2.1&quot;</span><span class="p">,</span>
+                            <span class="ss">&quot;arg2.2&quot;</span><span class="p">:</span> <span class="ss">&quot;type_arg2.2&quot;</span><span class="p">,</span>
+                            <span class="p">...</span>
+                        <span class="err">}</span><span class="p">,</span>
+                    <span class="err">}</span><span class="p">,</span>
+                    <span class="p">...</span>
+                <span class="err">}</span><span class="p">,</span>
+                <span class="ss">&quot;module&quot;</span><span class="p">:</span> <span class="n">subclass</span> <span class="k">of</span> <span class="n">hielen2</span><span class="p">.</span><span class="n">datalink</span><span class="p">.</span><span class="n">HilenSource</span><span class="p">,</span>
+                <span class="ss">&quot;struct&quot;</span><span class="p">:</span> <span class="err">{</span>
+                    <span class="ss">&quot;parameters&quot;</span><span class="p">:</span> <span class="err">{</span>
+                        <span class="ss">&quot;param1&quot;</span><span class="p">:</span> <span class="err">{</span>
+                            <span class="ss">&quot;operands&quot;</span><span class="p">:</span> <span class="err">{</span>
+                                <span class="ss">&quot;output&quot;</span><span class="p">:</span> <span class="ss">&quot;parameter1 name&quot;</span>
+                            <span class="err">}</span><span class="p">,</span>
+                            <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;series type&quot;</span>
+                        <span class="err">}</span><span class="p">,</span>
+                        <span class="ss">&quot;param2&quot;</span><span class="p">:</span> <span class="err">{</span>
+                            <span class="ss">&quot;operands&quot;</span><span class="p">:</span> <span class="err">{</span>
+                                <span class="ss">&quot;output&quot;</span><span class="p">:</span> <span class="ss">&quot;parameter2 name&quot;</span>
+                            <span class="err">}</span><span class="p">,</span>
+                            <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;series type&quot;</span>
+                        <span class="err">}</span><span class="p">,</span>
+                        <span class="p">...</span>
+                    <span class="err">}</span><span class="p">,</span>
+                    <span class="ss">&quot;properties&quot;</span><span class="p">:</span> <span class="err">{</span>
+                        <span class="ss">&quot;classification&quot;</span><span class="p">:</span> <span class="n">feature</span> <span class="n">classification</span><span class="p">,</span>
+                        <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="n">feature</span> <span class="k">type</span>
+                    <span class="err">}</span>
+                <span class="err">}</span>
+            <span class="err">}</span><span class="p">,</span>
+            <span class="ss">&quot;NomePrototipo3&quot;</span><span class="p">:</span> <span class="err">{</span>
+                <span class="p">...</span>
+            <span class="err">}</span><span class="p">,</span>
+            <span class="p">...</span>
+        <span class="err">}</span><span class="p">,</span>
+</code></pre></div>
+
 <h2 id="prototypesprototype"><strong>/prototypes/{prototype}</strong></h2>
 <h4 id="get_1">GET</h4>
 <hr />
@@ -1019,6 +1080,10 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias per il recupero di tutte le informazioni di uno specifico prototipo**</span>
+</code></pre></div>
+
 <h2 id="prototypesprototypeforms"><strong>/prototypes/{prototype}/forms</strong></h2>
 <h4 id="get_2">GET</h4>
 <hr />
@@ -1031,6 +1096,10 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**</span>
+</code></pre></div>
+
 <h2 id="prototypesprototypeformsform"><strong>/prototypes/{prototype}/forms/{form}</strong></h2>
 <h4 id="get_3">GET</h4>
 <hr />
@@ -1044,6 +1113,10 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**</span>
+</code></pre></div>
+
 <h2 id="prototypesprototypestruct"><strong>/prototypes/{prototype}/struct</strong></h2>
 <h4 id="get_4">GET</h4>
 <hr />
@@ -1056,6 +1129,8 @@
 <li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
+<p><em>description</em>:</p>
+<p><strong>Alias per il recupero delle info di inizializzazione delle features legate ad uno specifico prototipo</strong></p>
                 
               
               

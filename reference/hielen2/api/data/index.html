@@ -1328,7 +1328,65 @@
 180
 181
 182
-183</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1354,79 +1412,91 @@
 
 <span class="kn">import</span> <span class="nn">asyncio</span>
 
-<span class="n">data_out_handler</span><span class="o">=</span><span class="n">hug_output_format_conten_type</span><span class="p">([</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">json</span><span class="p">])</span>
+<span class="n">data_out_handler</span> <span class="o">=</span> <span class="n">hug_output_format_conten_type</span><span class="p">(</span>
 
-<span class="n">CSV</span><span class="o">=</span><span class="s2">&quot;text/plain; charset=utf-8&quot;</span>
+    <span class="p">[</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">json</span><span class="p">]</span>
 
-<span class="n">JSON</span><span class="o">=</span><span class="s2">&quot;application/json; charset=utf-8&quot;</span>
+<span class="p">)</span>
+
+<span class="n">CSV</span> <span class="o">=</span> <span class="s2">&quot;text/plain; charset=utf-8&quot;</span>
+
+<span class="n">JSON</span> <span class="o">=</span> <span class="s2">&quot;application/json; charset=utf-8&quot;</span>
 
 <span class="k">class</span> <span class="nc">DataMapSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">timefrom</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">timefrom</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">timeto</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">reuired</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="n">timeto</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">reuired</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">series</span><span class="o">=</span><span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">List</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">Str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
 
 <span class="c1">####### API DATATABLE #######</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span> <span class="n">datamap</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
 
-    <span class="n">series</span><span class="o">=</span><span class="p">{}</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)),</span>
+
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="n">series</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">datamap</span><span class="p">:</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">timefrom</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;timefrom&#39;</span><span class="p">]</span>
+            <span class="n">timefrom</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;timefrom&quot;</span><span class="p">]</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-            <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span>
+            <span class="n">timefrom</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">timeto</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;timeto&#39;</span><span class="p">]</span>
+            <span class="n">timeto</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;timeto&quot;</span><span class="p">]</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-            <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span>
+            <span class="n">timeto</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]:</span>
 
             <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
 
-                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">=</span><span class="p">[]</span>
+                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">))</span>
 
             <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
 
-                <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
 
-                <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
                 <span class="k">return</span>
 
-    <span class="n">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">param</span><span class="p">,</span><span class="n">sers</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">sers</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
-        <span class="n">ser</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">ser</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">sers</span><span class="p">:</span>
 
-            <span class="n">s</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 
             <span class="k">if</span> <span class="n">ser</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -1436,41 +1506,57 @@
 
                 <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-                <span class="n">idx</span><span class="o">=</span> <span class="n">unique</span><span class="p">(</span> <span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
-                <span class="n">ser</span><span class="o">=</span><span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
 
-        <span class="n">ser</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">param</span><span class="p">]</span>
+        <span class="n">ser</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">param</span><span class="p">]</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
 
-    <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
 
-    <span class="n">requested</span><span class="o">=</span><span class="n">data_out_handler</span><span class="o">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">content_type</span>
+    <span class="n">requested</span> <span class="o">=</span> <span class="n">data_out_handler</span><span class="o">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">content_type</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">CSV</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">requested</span> <span class="o">==</span> <span class="n">CSV</span><span class="p">:</span>
 
         <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">JSON</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">requested</span> <span class="o">==</span> <span class="n">JSON</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;table&quot;</span><span class="p">))</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{feature}</span><span class="s2">/&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span> <span class="n">feature</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">tabular_data_el</span><span class="p">(</span>
+
+    <span class="n">feature</span><span class="p">,</span>
+
+    <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
 
-        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
         <span class="k">return</span>
 
@@ -1478,39 +1564,69 @@
 
         <span class="k">if</span> <span class="n">par</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">series</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">ft</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ft</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="n">series</span><span class="o">=</span><span class="p">[</span> <span class="n">ft</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">][</span><span class="n">par</span><span class="p">]</span> <span class="p">]</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="p">[</span><span class="n">ft</span><span class="p">[</span><span class="s2">&quot;parameters&quot;</span><span class="p">][</span><span class="n">par</span><span class="p">]]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
 
-        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
         <span class="k">return</span>
 
-    <span class="n">datamap</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span>
+    <span class="n">datamap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">timefrom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">datamap</span><span class="p">[</span><span class="s1">&#39;timefrom&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timefrom</span>
+        <span class="n">datamap</span><span class="p">[</span><span class="s2">&quot;timefrom&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timefrom</span>
 
     <span class="k">if</span> <span class="n">timeto</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">datamap</span><span class="p">[</span><span class="s1">&#39;timeto&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">timeto</span>
+        <span class="n">datamap</span><span class="p">[</span><span class="s2">&quot;timeto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeto</span>
 
-    <span class="k">return</span> <span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=</span><span class="p">[</span><span class="n">datamap</span><span class="p">],</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=</span><span class="p">[</span><span class="n">datamap</span><span class="p">],</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{feature}</span><span class="s1">/</span><span class="si">{par}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{feature}</span><span class="s2">/</span><span class="si">{par}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">tabular_data_par</span><span class="p">(</span> <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span> <span class="p">):</span>
+<span class="k">def</span> <span class="nf">tabular_data_par</span><span class="p">(</span>
 
-    <span class="k">return</span> <span class="n">tabular_data_el</span><span class="p">(</span> <span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span><span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span> <span class="p">)</span>
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">par</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">tabular_data_el</span><span class="p">(</span>
+
+        <span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span>
+
+        <span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span>
+
+        <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span>
+
+        <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span>
+
+    <span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1539,7 +1655,7 @@
 <p>Supports any of the following formats: Free form UTF-8 text, JSON (Javascript Serialized Object Notation)</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">output_type</span><span class="p">(</span><span class="k">data</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
 
-        <span class="k">handler</span><span class="o">=</span><span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">handler</span> <span class="o">=</span> <span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
 
         <span class="n">response</span><span class="p">.</span><span class="n">content_type</span> <span class="o">=</span> <span class="k">handler</span><span class="p">.</span><span class="n">content_type</span>
 
@@ -1549,66 +1665,76 @@
 </details>
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f242098b250</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fbbd4b4d190</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="w"> </span><span class="nl">datamap</span><span class="p">:</span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="k">True</span><span class="p">)),</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">series</span><span class="o">=</span><span class="err">{}</span><span class="w"></span>
+<span class="w">    </span><span class="nl">datamap</span><span class="p">:</span><span class="w"> </span><span class="n">JsonValidable</span><span class="p">(</span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="k">True</span><span class="p">)),</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">datamap</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">timefrom</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">&#39;timefrom&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">&quot;timefrom&quot;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">            </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">timeto</span><span class="o">=</span><span class="n">s</span><span class="o">[</span><span class="n">&#39;timeto&#39;</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">&quot;timeto&quot;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">            </span><span class="n">timeto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">s</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]=</span><span class="err">[]</span><span class="w"></span>
+<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">).</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">Series</span><span class="p">(</span><span class="n">p</span><span class="p">).</span><span class="n">thdata</span><span class="p">(</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">))</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+<span class="w">                </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">                </span><span class="k">return</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="n">sers</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">sers</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ser</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">        </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">sers</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">s</span><span class="o">=</span><span class="n">r</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">ser</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
@@ -1618,25 +1744,25 @@
 
 <span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">idx</span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="w"> </span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="n">ser</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">ser</span><span class="o">=</span><span class="n">ser</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ser</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">param</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">ser</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">param</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span><span class="w"></span>
+<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">requested</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">content_type</span><span class="w"></span>
+<span class="w">    </span><span class="n">requested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_out_handler</span><span class="p">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">content_type</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">CSV</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">CSV</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="nc">text</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_csv</span><span class="p">())</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">requested</span><span class="o">==</span><span class="n">JSON</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">JSON</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;table&quot;</span><span class="p">))</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1652,21 +1778,37 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{feature}/&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">feature</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">ft</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
@@ -1674,33 +1816,33 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">par</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">series</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">ft</span><span class="o">[</span><span class="n">&#39;parameters&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">())</span><span class="w"></span>
+<span class="w">            </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">ft</span><span class="o">[</span><span class="n">&quot;parameters&quot;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">())</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">series</span><span class="o">=[</span><span class="n"> ft[&#39;parameters&#39;</span><span class="o">][</span><span class="n">par</span><span class="o">]</span><span class="w"> </span><span class="err">]</span><span class="w"></span>
+<span class="w">            </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">ft[&quot;parameters&quot;</span><span class="o">][</span><span class="n">par</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">datamap</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">datamap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timefrom</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&#39;timefrom&#39;</span><span class="o">]=</span><span class="n">timefrom</span><span class="w"></span>
+<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&quot;timefrom&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timefrom</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timeto</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&#39;timeto&#39;</span><span class="o">]=</span><span class="n">timeto</span><span class="w"></span>
+<span class="w">        </span><span class="n">datamap</span><span class="o">[</span><span class="n">&quot;timeto&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">timeto</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=[</span><span class="n">datamap</span><span class="o">]</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data</span><span class="p">(</span><span class="n">datamap</span><span class="o">=[</span><span class="n">datamap</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1716,11 +1858,41 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="s1">&#39;/{feature}/{par}&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{feature}/{par}&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_par</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">tabular_data_par</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"> </span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span><span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">par</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">content_type</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">tabular_data_el</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">feature</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">par</span><span class="o">=</span><span class="n">par</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timefrom</span><span class="o">=</span><span class="n">timefrom</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timeto</span><span class="o">=</span><span class="n">timeto</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1741,15 +1913,13 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">DataMapSchema</span>(<span class="n">Schema</span>):
 
-    <span class="s">&quot;&quot;&quot;</span>
+    <span class="s">&quot;&quot;&quot;&quot;&quot;&quot;</span>
 
-<span class="s">&quot;&quot;&quot;</span>
+    <span class="n">timefrom</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>, <span class="k">required</span>=<span class="nb">False</span>)
 
-    <span class="n">timefrom</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>,<span class="k">required</span>=<span class="nb">False</span>)
+    <span class="n">timeto</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>, <span class="n">reuired</span>=<span class="nb">False</span>)
 
-    <span class="n">timeto</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">default</span>=<span class="n">None</span>,<span class="n">reuired</span>=<span class="nb">False</span>)
-
-    <span class="n">series</span>=<span class="n">fields</span>.<span class="nb">List</span>(<span class="n">fields</span>.<span class="nb">Str</span>,<span class="k">default</span>=[])
+    <span class="n">series</span> = <span class="n">fields</span>.<span class="nb">List</span>(<span class="n">fields</span>.<span class="nb">Str</span>, <span class="k">default</span>=[])
 </code></pre></div>
 
 </details>
