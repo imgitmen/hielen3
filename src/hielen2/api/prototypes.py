@@ -126,7 +126,7 @@ def prototype_form(prototype, form, request=None, response=None):
     response = out.format(response=response, request=request)
 
 
-@hug.get("/{prototype}/struct", examples="")
+@hug.get("/{prototype}/struct", examples=""):
     """
 **Alias per il recupero delle info di inizializzazione delle features legate ad uno specifico \
 prototipo**
