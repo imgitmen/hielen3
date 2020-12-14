@@ -1210,9 +1210,7 @@
 348
 349
 350
-351
-352
-353</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+351</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1370,11 +1368,9 @@
 
 <span class="sd">Possibili risposte:</span>
 
-<span class="sd">- _202 Accepted_: Nel caso in cui l&#39;azione vada a buon fine. Risponde con _202 Accepted_ e non con \</span>
+<span class="sd">- _200 OK_: Nel caso in cui l&#39;azione vada a buon fine. L&#39;azione richiesta viene presa in carico ma \</span>
 
-<span class="sd">- _200 OK_ perchè l&#39;azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione \</span>
-
-<span class="sd">arbitrario. L&#39;azione quindi viene splittata su un altro processo.</span>
+<span class="sd">potrebbe avere un tempo di esecuzione arbitrario. L&#39;azione quindi viene splittata su un altro processo.</span>
 
 <span class="sd">- _404 Not Found_: Nel caso la feature non esista o non sia definita per essa l&#39;azione richiesta.</span>
 
@@ -1392,7 +1388,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
     <span class="c1"># Trying to manage income feature request and its prototype configuration</span>
 
@@ -1742,7 +1738,7 @@
 </ul>
 <p>Possibili risposte:</p>
 <ul>
-<li><em>202 Accepted</em>: Nel caso in cui l'azione vada a buon fine. Risponde con <em>202 Accepted</em> e non con - <em>200 OK</em> perchè l'azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione arbitrario. L'azione quindi viene splittata su un altro processo.</li>
+<li><em>200 OK</em>: Nel caso in cui l'azione vada a buon fine. L'azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione arbitrario. L'azione quindi viene splittata su un altro processo.</li>
 <li><em>404 Not Found</em>: Nel caso la feature non esista o non sia definita per essa l'azione richiesta.</li>
 <li><em>500 Internal Server Error</em>: Nel caso pessimo che il modulo dichiarato non esista.</li>
 <li><em>501 Not Implemented'</em>: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti i moduli di gestione</li>
@@ -1772,11 +1768,9 @@
 
 <span class="ss">Possibili risposte:</span>
 
-<span class="ss">- _202 Accepted_: Nel caso in cui l&#39;azione vada a buon fine. Risponde con _202 Accepted_ e non con \</span>
+<span class="ss">- _200 OK_: Nel caso in cui l&#39;azione vada a buon fine. L&#39;azione richiesta viene presa in carico ma \</span>
 
-<span class="ss">- _200 OK_ perchè l&#39;azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione \</span>
-
-<span class="ss">arbitrario. L&#39;azione quindi viene splittata su un altro processo.</span>
+<span class="ss">potrebbe avere un tempo di esecuzione arbitrario. L&#39;azione quindi viene splittata su un altro processo.</span>
 
 <span class="ss">- _404 Not Found_: Nel caso la feature non esista o non sia definita per essa l&#39;azione richiesta.</span>
 
@@ -1794,7 +1788,7 @@
 
 <span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_ACCEPTED</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">Trying</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">manage</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">prototype</span><span class="w"> </span><span class="n">configuration</span><span class="w"></span>
 
