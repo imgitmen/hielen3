@@ -101,9 +101,8 @@ timeout dei workers in caso di contenuti di grandi dimensioni.
 
 Possibili risposte:
 
-- _202 Accepted_: Nel caso in cui l'azione vada a buon fine. Risponde con _202 Accepted_ e non con \
-- _200 OK_ perchè l'azione richiesta viene presa in carico ma potrebbe avere un tempo di esecuzione \
-arbitrario. L'azione quindi viene splittata su un altro processo.
+- _200 OK_: Nel caso in cui l'azione vada a buon fine. L'azione richiesta viene presa in carico ma \
+potrebbe avere un tempo di esecuzione arbitrario. L'azione quindi viene splittata su un altro processo.
 - _404 Not Found_: Nel caso la feature non esista o non sia definita per essa l'azione richiesta.
 - _500 Internal Server Error_: Nel caso pessimo che il modulo dichiarato non esista.
 - _501 Not Implemented'_: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti \
@@ -115,7 +114,7 @@ fornite che possono essere fornite tali e quali in uscita (vedi metodo GET dell'
 meccanismo permette di svluppare i moduli a partire da un template con risposta di default.
 
 """
-    out = ResponseFormatter(falcon.HTTP_ACCEPTED)
+    out = ResponseFormatter()
 
     # Trying to manage income feature request and its prototype configuration
     try:
