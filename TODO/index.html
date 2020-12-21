@@ -232,6 +232,34 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configurazione-hielen2extphotomonitoring" class="md-nav__link">
+    Configurazione hielen2.ext.PhotoMonitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed-hielen2extphotomonitoring" class="md-nav__link">
+    Feed hielen2.ext.PhotoMonitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurazione-hielen2exttinsar" class="md-nav__link">
+    Configurazione hielen2.ext.TinSAR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed-hielen2exttinsar" class="md-nav__link">
+    Feed hielen2.ext.TinSAR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele" class="md-nav__link">
     v2.0.6 Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele
   </a>
@@ -809,6 +837,34 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configurazione-hielen2extphotomonitoring" class="md-nav__link">
+    Configurazione hielen2.ext.PhotoMonitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed-hielen2extphotomonitoring" class="md-nav__link">
+    Feed hielen2.ext.PhotoMonitoring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configurazione-hielen2exttinsar" class="md-nav__link">
+    Configurazione hielen2.ext.TinSAR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed-hielen2exttinsar" class="md-nav__link">
+    Feed hielen2.ext.TinSAR
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele" class="md-nav__link">
     v2.0.6 Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele
   </a>
@@ -878,6 +934,42 @@
                   <h1>TODO</h1>
                 
                 <h2 id="con-priorita">Con Priorità</h2>
+<ul>
+<li>inserire timestamp come riferimento della master_image</li>
+</ul>
+<h3 id="configurazione-hielen2extphotomonitoring">Configurazione hielen2.ext.PhotoMonitoring</h3>
+<ul>
+<li>analisi del formato della master image</li>
+<li>recupero info geografiche da immagine (se esistono) </li>
+<li>salvataggio (stoccaggio) dell'immagine di base in filecache/{uid} (eventualmente compressa)</li>
+<li>recupero info geografiche da da world_file (se esiste, sovrascrive info quelle della master image )</li>
+<li>recupero info georaficeh da parametri (se esistono, sovreascrive info al punto precedente)</li>
+<li>in caso non esistano info di proiezione geografica si considera cartesiano con coordinate sui pixel della basemap:</li>
+<li>configurare file netCDF e salvarlo in filecache/{uid}/multidim.nc (dati)</li>
+<li>definire percorso di salvataggio tiles: filecache/{uid}/{map}/ (tiles mappe)</li>
+<li>salvare il primo tile a risoluzione adeguata: filecache/{uid}/{map}/base.png</li>
+</ul>
+<h3 id="feed-hielen2extphotomonitoring">Feed hielen2.ext.PhotoMonitoring</h3>
+<ul>
+<li>analisi dei file csv in ingresso (NS, EW, Correlation se esiste)</li>
+<li>aggirnamento di filecache/{uid}/multidim.nc</li>
+</ul>
+<h3 id="configurazione-hielen2exttinsar">Configurazione hielen2.ext.TinSAR</h3>
+<ul>
+<li>analisi della formato della master cloud</li>
+<li>salvataggio (stoccaggio) della nuvola di base</li>
+<li>recupero info geografiche</li>
+<li>in caso non esistano info di proiezione geografica si considera spazio cartesiano con coordinate con adeguate alla nuvola base (da verificare)</li>
+<li>configurare file netCDF e salvarlo in filecache/{uid}/multidim.nc (dati)</li>
+<li>definire percorso di salvataggio tiles: filecache/{uid}/{map}/ (tiles mappe)</li>
+<li>configurare cartella di cache per potree filecache/{uid}/{cloud} (potree)</li>
+</ul>
+<h3 id="feed-hielen2exttinsar">Feed hielen2.ext.TinSAR</h3>
+<ol>
+<li>Analisi file in ingresso</li>
+<li>aggiornamento filecache/{uid}/multidim.nc</li>
+<li>aggiornamento filecache/{uid}/{cloud}</li>
+</ol>
 <h3 id="v206-interfacce-delle-informazioni-con-risposta-mockup-intento-agganciare-lavoro-daniele"><strong>v2.0.6</strong> Interfacce delle Informazioni con risposta mockup. Intento: agganciare lavoro Daniele</h3>
 <ul>
 <li>GET <code>/bases</code></li>
@@ -899,7 +991,13 @@
 </ul>
 <h2 id="senza-priorita">Senza priorità</h2>
 <ul>
-<li>Obiettivo: assegnare una timestamp ad ogni informazione: le properties degli ogetti dovranno essere delle serie dati. Concetto di informazione minima.</li>
+<li><strong>Moduli HielenSource</strong>: attualmente, per comodità, vengono sviluppati come sotto moduli di hielen2 ma il modo corretto è quello di separare lo sviluppo. Sarà sempre possibile farlo dal momento che le strutture vengono sviluppate con l'obiettivo della separazione.</li>
+<li>
+<p><strong>Moduli HielenSource</strong>: Definire in backend le form come Marshmallow.Schema in modo da condividere la struttura tra moduli e api</p>
+</li>
+<li>
+<p>Obiettivo: assegnare una timestamp ad ogni informazione: le properties degli ogetti dovranno essere delle serie dati. Concetto di informazione minima.</p>
+</li>
 <li>Implementare procedura di testing delle api</li>
 <li>verificare il default dei campi marshmallow (sembra non prenderlo in considerazione, prob non arriva null ma "")</li>
 <li>POST <code>/prototypes</code></li>
