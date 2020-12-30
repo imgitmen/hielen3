@@ -240,6 +240,34 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#30-dicembre-2020" class="md-nav__link">
+    30 Dicembre 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-dicembre-20202" class="md-nav__link">
+    22 Dicembre 20202
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-dicembre-2020" class="md-nav__link">
+    20 Dicembre 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-dicembre-2020" class="md-nav__link">
+    15 Dicembre 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#v205" class="md-nav__link">
     v2.0.5
   </a>
@@ -783,18 +811,6 @@
 
 
   <li class="md-nav__item">
-    <a href="../reference/hielen2/ext/source_photomonitoring/" title="Source Photomonitoring" class="md-nav__link">
-      Source Photomonitoring
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../reference/hielen2/ext/source_smori/" title="Source Smori" class="md-nav__link">
       Source Smori
     </a>
@@ -810,6 +826,68 @@
     <a href="../reference/hielen2/ext/source_winecap/" title="Source Winecap" class="md-nav__link">
       Source Winecap
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-6-5" type="checkbox" id="nav-5-1-6-5">
+    
+    <label class="md-nav__link" for="nav-5-1-6-5">
+      Source Photomonitoring
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Photomonitoring" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-6-5">
+        <span class="md-nav__icon md-icon"></span>
+        Source Photomonitoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/hielen2/ext/source_photomonitoring/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/hielen2/ext/source_photomonitoring/ncmangle/" title="Ncmangle" class="md-nav__link">
+      Ncmangle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../reference/hielen2/ext/source_photomonitoring/phm/" title="Phm" class="md-nav__link">
+      Phm
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -900,6 +978,34 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#30-dicembre-2020" class="md-nav__link">
+    30 Dicembre 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-dicembre-20202" class="md-nav__link">
+    22 Dicembre 20202
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#20-dicembre-2020" class="md-nav__link">
+    20 Dicembre 2020
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-dicembre-2020" class="md-nav__link">
+    15 Dicembre 2020
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v205" class="md-nav__link">
@@ -1072,11 +1178,35 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
+<h3 id="30-dicembre-2020"><strong>30 Dicembre 2020</strong></h3>
+<ul>
+<li>sviluppo (non completo) di config hielen2.ext.PhotoMonitoring: </li>
+<li>Implementato il metodo di recupero e settaggio delle informazioni geometriche/geografiche dell'immagine in ingresso</li>
+<li>Aggancio del codice originale per la gesgione del netcdf (in debug)</li>
+</ul>
+<h3 id="22-dicembre-20202"><strong>22 Dicembre 20202</strong></h3>
+<ul>
+<li>Delineata la gestione di mappa delle immagini prodotte: Ogni immagine prodotta sarà sempre associata al suo <code>crs</code> e la matrice di trasformazione affine, anche nele caso in cui queste informazioni non dovessero essere passate in configurazione. In questo caso si assume un piano cartesiano con udm in m e una matrice identità per le trasformazioni affini. Sarà dunque sempre possibile gestire le immagini come mappe (slippy maps) e sfruttare la tassellazione, il cacheing dei tasselli.</li>
+</ul>
+<h3 id="20-dicembre-2020"><strong>20 Dicembre 2020</strong></h3>
+<ul>
+<li>Modificata l'api POST <code>/actions/{feature}/{form}</code> in modo da interrogare la Source (per ora solo PhotoMonitoring) sulla definizione delle azioni:</li>
+<li>Implementate le classi di Schema per config e feed per il modulo <code>hielen2.ext.PhotoMonitoring</code>. <strong>ATTENZIONE</strong> per <em>config</em>: introdotto il campo "timestamp", eliminati i campi espliciti relativi al word_file (<code>word_file</code> mantenuto), modificato il campo <code>epsg</code> in <code>csr</code>.</li>
+</ul>
+<h3 id="15-dicembre-2020"><strong>15 Dicembre 2020</strong></h3>
+<ul>
+<li>Delineato il modello di scrittura dei Source plugin secondo un template univoco. Ogni plugin potrà essere un modulo python definito come segue:</li>
+</ul>
+<p><strong>deve</strong> definire tante classi <code>marshmallow.Schema</code> quante sono le azioni che vengono prese in carico dal Template. <a href="https://github.com/marshmallow-code/marshmallow">Marsmallow</a> è un serializzatore di oggetti python. Lo schema definito servirà per definire i campi in ingresso per ogni azione e fare i check dei valori in ingresso.</p>
+<p>Il nome delle classi Schema <strong>deve</strong> seguire questa sintassi: <code>class {Action}Schema(marshmallow.Schema)</code> dove {Action} è il nome dell'azione (es.: config, feed, ..) con l'iniziale <em>maiuscola</em>.
+Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> cfr. https://marshmallow.readthedocs.io/en/stable/ ). ATTENZIONE: in caso fosse necessario l'ingresso di file o comunque oggetti blob dovrà essere utilizzato come field la classe <code>hielen2.utils.LocalFile</code>. In questo modo il sistema risolverà la chiamata API salvando in locale lo stream dei dati associato a quel determinato field, il quale sarà accessibile al template attraverso un path che verrà fornito insieme agli altri campi al momento della chiamata del metodo di gestione dell'azione (vedi sotto).</p>
+<p><strong>deve</strong> implementare una classe <code>Source(hielen2.datalink.HielenSource)</code> che esponga tanti metodi quante sono le dichiarazioni di Schema seguendo questa sintassi: il metodo di gestione dell'azione <strong>deve</strong> chiamarsi come l'azione stessa ( tutto in <em>minuscolo</em> ). Le classi estese sfrutteranno il metodo <code>__init__</code> della superclasse in modo da avere a disposizione tutto quello di cui necessitano.</p>
+<p>Questo modello permette di svincolare i template dalla necessità di conoscere a priori le azioni ammmissibili per il sistema. Infatti, facendo introspezione su un template che segua le regole di sintassi sarà sempre possibile conoscere le azioni definite ed esternalizzarle al front-end che in base alle definizioni delle classi di Schema delle azioni, sarà sempre in grado di instanziare una form adeguata.</p>
 <h2 id="v205"><strong>v2.0.5</strong></h2>
 <h3 id="9-dicembre-2020"><strong>9 Dicembre 2020</strong></h3>
 <ul>
 <li>Implementata <strong>working</strong> POST <code>/actions/{feature}/{form}</code> tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. </li>
-<li>Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di <code>hielen2.datalink.HilenSource</code></li>
+<li>Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di <code>hielen2.datalink.HielenSource</code></li>
 <li>Implementata <strong>working</strong> GET <code>/actions/{feature}[/{form}]</code>: Per ogni form richiesta, risponde con tutti i parametri definiti nel relativo prototipo, riempiti con i valori definiti tramite la POST della stessa api. I valori non precedentemente forniti vengono impostati a null</li>
 <li>Riveduta e corretta GET <code>prototypes/{prototype}/forms[/form]</code>: <strong>ATTENZIONE</strong> adesso risponde con TUTTI i campi dentro il dizionario "args" e comunica i campi obbligatori attraverso l'array "mandatory". Questa struttura è più versatile in quanto, una volta definito il set completo degli argomenti, è possibile definire un numero arbitrario di sottoinsiemi predicativi non necessariamente distiniti: Oltre al sottoinsieme "mandatory" si potrebbe, ad esempio, definire un sottoinsieme di immutabili. Qui sotto una struttura di esempio:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
 <span class="err">    &quot;data&quot;: {</span>
@@ -1153,7 +1283,7 @@
 <h3 id="16-novembre-2020"><strong>16 Novembre 2020</strong></h3>
 <ul>
 <li>
-<p>per coerenza rivisti i parmaetri di POST <code>/feature</code>:</p>
+<p>per coerenza rivisti i parametri di POST <code>/feature</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="c">uid:&lt;string&gt;</span>
 <span class="c">prototype:&lt;string&gt;</span>
 <span class="c">properties:&lt;json schema Properties&gt;</span>
