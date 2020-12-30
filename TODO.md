@@ -4,10 +4,9 @@
 
 ### Rivisitazione del'api GET `/prototypes` e  GET `/actions` per l'introspezione dei plugin
 
-### Configurazione hielen2.ext.PhotoMonitoring
+### Configurazione hielen2.ext.PhotoMonitoring (netCDF)
 
-configurazione netCDF:
--   definizione array dimensionali X,Y 1) creo gli array di dimensione adeguata, 2) applico la matrice di trasformazione affine, 3) applico la proiezione da crs in input a EPSG:3857 
+-   definizione array dimensionali X,Y: 1- creo gli array di dimensione adeguata, 2- applico la matrice di trasformazione affine, 3- applico la proiezione da crs in input a EPSG:3857 
 -   salvare file in filecache/{uid}/multidim.nc (dati)
 -   definire percorso di salvataggio tiles: filecache/{uid}/{map}/ (tiles mappe)
 -   salvare il primo tile a risoluzione adeguata: filecache/{uid}/{map}/base.png
