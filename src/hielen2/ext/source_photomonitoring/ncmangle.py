@@ -5,13 +5,15 @@ import re
 from netCDF4 import Dataset, date2num
 import os
 
+
+'''
     timestamp = fields.Str(required=True, allow_none=False)
     master_image = fileds.Str(required=True, allow_none=False)
     step_size = fields.Str(required=False, default="8")
     window_size_change = fields.Str(required=False,default="0")
     world_file = fields.Str(required=False,default=None)
     crs: "EPSG:3857"
-
+'''
 
 
 class NCMangler():
