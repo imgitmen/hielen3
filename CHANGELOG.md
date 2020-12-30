@@ -1,10 +1,32 @@
 CHANGELOG
 =========
 
+### **30 Dicembre 2020**
+- sviluppo (non completo) di config hielen2.ext.PhotoMonitoring: 
+- Implementato il metodo di recupero e settaggio delle informazioni geometriche/geografiche dell'immagine in ingresso
+- Aggancio del codice originale per la gesgione del netcdf (in debug)
+
+### **22 Dicembre 20202**
+- Delineata la gestione di mappa delle immagini prodotte: Ogni immagine prodotta sarà sempre associata al suo `crs` e la matrice di trasformazione affine, anche nele caso in cui queste informazioni non dovessero essere passate in configurazione. In questo caso si assume un piano cartesiano con udm in m e una matrice identità per le trasformazioni affini. Sarà dunque sempre possibile gestire le immagini come mappe (slippy maps) e sfruttare la tassellazione, il cacheing dei tasselli.
+
+### **20 Dicembre 2020**
+- Modificata l'api POST `/actions/{feature}/{form}` in modo da interrogare la Source (per ora solo PhotoMonitoring) sulla definizione delle azioni:
+- Implementate le classi di Schema per config e feed per il modulo `hielen2.ext.PhotoMonitoring`. **ATTENZIONE** per _config_: introdotto il campo "timestamp", eliminati i campi espliciti relativi al word_file (`word_file` mantenuto), modificato il campo `epsg` in `csr`.
+
+### **15 Dicembre 2020**
+- Delineato il modello di scrittura dei Source plugin secondo un template univoco. Ogni plugin potrà essere un modulo python definito come segue:
+
+**deve** definire tante classi `marshmallow.Schema` quante sono le azioni che vengono prese in carico dal Template. [Marsmallow](https://github.com/marshmallow-code/marshmallow) è un serializzatore di oggetti python. Lo schema definito servirà per definire i campi in ingresso per ogni azione e fare i check dei valori in ingresso. Il nome delle classi Schema **deve** seguire questa sintassi: `class {Action}Schema(marshmallow.Schema)` dove {Action} è il nome dell'azione (es.: config, feed, ..) con l'iniziale _maiuscola_.
+Nella classe vengono definiti i tipi dei campi (`marshmallow.fields` cfr. https://marshmallow.readthedocs.io/en/stable/ ). ATTENZIONE: in caso fosse necessario l'ingresso di file o comunque oggetti blob dovrà essere utilizzato come field la classe `hielen2.utils.LocalFile`. In questo modo il sistema risolverà la chiamata API salvando in locale lo stream dei dati associato a quel determinato field, il quale sarà accessibile al template attraverso un path che verrà fornito insieme agli altri campi al momento della chiamata del metodo di gestione dell'azione (vedi sotto).
+
+**deve** implementare una classe `Source(hielen2.datalink.HielenSource)` che esponga tanti metodi quante sono le dichiarazioni di Schema seguendo questa sintassi: il metodo di gestione dell'azione **deve** chiamarsi come l'azione stessa ( tutto in _minuscolo_ ). Le classi estese sfrutteranno il metodo `__init__` della superclasse in modo da avere a disposizione tutto quello di cui necessitano.
+
+Questo modello permette di svincolare i template dalla necessità di conoscere a priori le azioni ammmissibili per il sistema. Infatti, facendo introspezione su un template che segua le regole di sintassi sarà sempre possibile conoscere le azioni definite ed esternalizzarle al front-end che in base alle definizioni delle classi di Schema delle azioni, sarà sempre in grado di instanziare una form adeguata.
+
 ## **v2.0.5**
 ### **9 Dicembre 2020**
 - Implementata **working** POST `/actions/{feature}/{form}` tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. 
-- Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di `hielen2.datalink.HilenSource`
+- Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di `hielen2.datalink.HielenSource`
 - Implementata **working** GET `/actions/{feature}[/{form}]`: Per ogni form richiesta, risponde con tutti i parametri definiti nel relativo prototipo, riempiti con i valori definiti tramite la POST della stessa api. I valori non precedentemente forniti vengono impostati a null
 - Riveduta e corretta GET `prototypes/{prototype}/forms[/form]`: **ATTENZIONE** adesso risponde con TUTTI i campi dentro il dizionario "args" e comunica i campi obbligatori attraverso l'array "mandatory". Questa struttura è più versatile in quanto, una volta definito il set completo degli argomenti, è possibile definire un numero arbitrario di sottoinsiemi predicativi non necessariamente distiniti: Oltre al sottoinsieme "mandatory" si potrebbe, ad esempio, definire un sottoinsieme di immutabili. Qui sotto una struttura di esempio:
 
@@ -78,7 +100,7 @@ Rivedute le api `/actions`, `/parameters`, `/features` (`/data` da rivedere)
 
 ## **v2.0.4**
 ### **16 Novembre 2020**
-- per coerenza rivisti i parmaetri di POST `/feature`:
+- per coerenza rivisti i parametri di POST `/feature`:
 
 		uid:<string>
 		prototype:<string>

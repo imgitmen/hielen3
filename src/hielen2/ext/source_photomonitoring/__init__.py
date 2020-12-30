@@ -1,14 +1,13 @@
 # coding=utf-8
 
-from hielen2.datalink import HielenSource
+__name__ = "Source_Photomonitoring"
+__version__ = "0.0.1"
+__author__ = "Alessandro Modesti"
+__email__ = "it@img-srl.com"
+__description__ = "HielenSource extensione"
+__license__ = "MIT"
+__uri__ = ""
 
+from .phm import Source, ConfigSchema
 
-class Source(HielenSource):
-    def config(self, **kwargs):
-        return kwargs
-
-    def feed(self, **kwargs):
-        return kwargs
-
-    def data(self, timefrom=None, timeto=None, geom=None, **kwargs):
-        return kwargs
+__all__ = ["Source", "ConfigSchema"]

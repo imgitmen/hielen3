@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
+import os
 from pandas import DataFrame, read_json
 from abc import ABC, abstractmethod
 from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
@@ -161,9 +162,12 @@ class JsonCache(DB):
 
 
 class HielenSource(ABC):
-    def __init__(self, properties, filecache):
-        self.properties = properties
-        self.filecache = filecache
+    def __init__(self, feature, filecache):
+        self.__dict__.update(feature.pop('properties'))
+        self.geometry=feature.pop('geometry')
+        self.actions=feature
+        self.filecache = os.path.join(filecache,self.uid)
+        os.makedirs(self.filecache, exist_ok=True)
 
     @abstractmethod
     def config(**kwargs):

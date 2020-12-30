@@ -7,7 +7,7 @@ import os
 import time
 import json
 from hielen2 import db, conf
-from hielen2.utils import hashfile
+from hielen2.utils import hashfile, getSchemaDict
 from streaming_form_data import StreamingFormDataParser
 from streaming_form_data.targets import FileTarget, ValueTarget
 from himada.api import ResponseFormatter
@@ -118,13 +118,26 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        properties = db["features"][feature]["properties"]
-        proto = properties["type"]
-        formstruct = db["features_proto"][proto]["forms"][form]
-
+        feat = db["features"][feature]
+        proto = feat["properties"]["type"]
     except KeyError as e:
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
+        out.format(request=request, response=response)
+        return
+    
+    try:
+        mod = db["features_proto"][proto]["module"]
+        mod = import_module(mod)
+        schema=getSchemaDict(eval(f"mod.{form.capitalize()}Schema")())
+    except KeyError as e:
+        out.status = falcon.HTTP_NOT_IMPLEMENTED
+        out.message = f"Prototype '{proto}' actions not implemented."
+        out.format(request=request, response=response)
+        return
+    except ModuleNotFoundError as e:
+        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.message = f"Prototype '{proto}' module '{mod}' not found."
         out.format(request=request, response=response)
         return
 
@@ -133,11 +146,11 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     values = {}
 
     # TODO Differenziazione delle tipologie di input
-    for k, w in formstruct["args"].items():
-        if w == "file":
+    for k, w in schema["fields"].items():
+        if w == "LocalFile":
             timenow = time.perf_counter()
             filepath = os.path.join(
-                tempfile.gettempdir(), f"{feature}{k}{timenow}.part"
+                tempfile.gettempdir(), f"{feature}.{k}.{timenow}.part"
             )
             target = FileTarget(filepath)
             parser.register(k, target)
@@ -154,23 +167,15 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
         parser.data_received(chunk)
 
     kwargs = {}
-    for k, w in values.items():
 
+    for k, w in values.items():
         if isinstance(w, str):
-            # FOR DUMMY RESPONSE
-            """
-            v=os.path.exists(w) and "md5 "+hashfile(w) or None
-            if os.path.exists(w):
-                  os.remove(w)
-            """
-            # REAL
             v = os.path.exists(w) and w or None
         else:
             v = unquote(w.value.decode("utf8")) or None
-
         kwargs[k] = v
 
-    m = [m for m in formstruct["mandatory"] if kwargs[m] is None]
+    m = [m for m in schema["required"] if kwargs[m] is None]
 
     if m.__len__():
         out.status = falcon.HTTP_BAD_REQUEST
@@ -182,26 +187,13 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
 
     # Trying to initialize feature action manager module
     try:
-        mod = db["features_proto"][proto]["module"]
-        mod = import_module(mod)
-        source = mod.Source(properties=properties, filecache=conf["filecache"])
+        source = mod.Source(feature=feat, filecache=conf["filecache"])
         result = eval(f"source.{form}(**kwargs)")
-
-    # PRODUCTION ERROR MANAGER
-    except KeyError as e:
-        out.status = falcon.HTTP_NOT_IMPLEMENTED
-        out.message = f"Prototype '{proto}' actions not implemented."
-        out.format(request=request, response=response)
-        return
-    except ModuleNotFoundError as e:
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
-        out.message = f"Prototype '{proto}' module '{mod}' not found."
-        out.format(request=request, response=response)
-        return
     except AttributeError as e:
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Prototype '{proto}' action '{form}' not implemented."
         out.format(request=request, response=response)
+        raise e
         return
     except Exception as e:
         raise e

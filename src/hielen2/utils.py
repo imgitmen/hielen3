@@ -110,6 +110,27 @@ def hashfile(filename):
     return hasher.hexdigest()
 
 
+### MARSHMALLOW
+
+def getSchemaDict(schema):
+
+    out = { "fields":{},"required":[] }
+
+    for k,w in schema.dump_fields.items():
+        out['fields'][k]=w.__class__.__name__
+        w.__dict__['required'] and out["required"].append(k)
+
+    return out
+
+
+class LocalFile(fields.String):
+    """
+    Local Filepath manager used to identify a file into the system.
+    Mainliy usefull for action Schema declaration in hielen2.HielenSource extention
+    """
+    pass
+
+
 class JsonValidable:
     """
     JSON Validator class.
