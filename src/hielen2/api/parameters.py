@@ -37,26 +37,19 @@ def features_params(cntxt=None, uids=None, params=None, request=None, response=N
 
     """
 
-    def _format(ft, params=None):
+    def _format(param, series):
 
-        if ft is None:
-            return []
+        if series is None:
+            return None
 
         parameters = []
 
-        if not isinstance(params, (list, set)) and params is not None:
-            params = [params]
-
         try:
-            for param, series in ft["parameters"].items():
-                if series is not None and params is None or param in params:
-                    parameters.append(
-                        {
-                            "series": series,
-                            "name": param,
-                            "unit": db["series"][series]["mu"],
-                        }
-                    )
+            parameters.append({
+                "series": series,
+                "name": param,
+                "unit": db["series"][series]["mu"],
+                })
         except AttributeError as e:
             pass
         except TypeError as e:
@@ -66,17 +59,35 @@ def features_params(cntxt=None, uids=None, params=None, request=None, response=N
 
     out = ResponseFormatter()
 
-    if not isinstance(uids, (list, set)) and uids is not None:
-        uids = [uids]
-
     try:
-        out.data = {
-            k: _format(w, params)
-            for k, w in db["features"][uids].items()
-            if cntxt is None or w["properties"]["context"] == cntxt
-        }
+        
+        if not isinstance(params, (list, set)) and params is not None:
+            params = [params]
+   
+        feats=db["features"][uids]
+        if not isinstance(feats,list):
+            feats=[feats]
+
+        out.data = {}
+    
+        for f in feats:
+            if cntxt is None or f["context"] == cntxt:
+                parameters=[]
+                try:
+                    for p,s in f['parameters'].items():
+                        if s is not None and (params is None or p in params):
+                            parameters.append({
+                                "series":s,
+                                "param":p,
+                                "unit":db["series"][s]["mu"]})
+                except AttributeError:
+                    pass
+
+                out.data[f['uid']]=parameters
+
+
     except KeyError as e:
-        out.status = falcon.HTTP_NOT_FOUND
+        out.status = falcon.HTTP_OK
         out.message = str(e)
 
     response = out.format(response=response, request=request)

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from hielen2.datalink import HielenSource
+from hielen2.source import HielenSource
 
 
 class Source(HielenSource):

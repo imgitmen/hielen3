@@ -7,7 +7,7 @@ import os
 import time
 import json
 from hielen2 import db, conf
-from hielen2.utils import hashfile, getSchemaDict
+import hielen2.source as sourceman
 from streaming_form_data import StreamingFormDataParser
 from streaming_form_data.targets import FileTarget, ValueTarget
 from himada.api import ResponseFormatter
@@ -16,33 +16,37 @@ from importlib import import_module
 
 
 @hug.get("/{feature}")
-def get_forms(feature, form=None, request=None, response=None):
+def features_actions_values(feature, actions=None, timestamp=None, request=None, response=None):
 
     """
-**Recupero dei valori correnti per le form delle azioni di una specifica feature**
+**Recupero dello stato corrente delle azioni effettuate su una feature**
 
-L'intento di questa api è quello di fornire i valori richiesti secondo lo schema della form 
+L'intento di questa api è quello di fornire i valori richiesti secondo lo schema dell'azione  
  
-___nota 1___: `form` accetta valori multipli separati da virgola
+___nota 1___: `actions` accetta valori multipli separati da virgola
 ___nota 2___: A seconda dell'action richiesta, alcuni parametri potrebbero essere utilizzati in fase \
 di input ma non registrati. Il che vuol dire che per quei parametri il valore di ritorno sarà null
  
 viene restituito una struttura di questo tipo:
 
-
-        {
-            "form1": {
-                "arg1.1":..,
-                "arg1.2":..,
-                ...
+        [
+            { "feature"*:...,
+              "action_name*":...,
+              "timestamp": ...,
+              "value":{...}
             },
-            "form2": {
-                "arg2.1":..,
-                "arg2.2":..,
-            }
-        }
+            { "feature"*:...,
+              "action_name*":...,
+              "timestamp": ...,
+              "value":{...}
+            },
+            ...
+        ]
 
- 
+
+___nota 3___ :(*) I campi "feature" e "action" potrebbero non essere restituiti nella struttura \
+nel caso in cui essi risultino non ambigui. "timestamp" e "value" vengono sempre restituiti
+
 Possibili risposte:
  
 - _404 Not Found_: Nel non venga trovata la feature richiesta o essa abbia un problema di \
@@ -53,49 +57,39 @@ configurazione
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        featureobj = db["features"][feature]
-        proto = db["features"][feature]["properties"]["type"]
-        protoforms = db["features_proto"][proto]["forms"]
-    except KeyError as e:
+        feat = db["features"][feature]
+        featobj = sourceman.sourceFactory(feat,conf['filecache'])
+        out.data = featobj.getActionValues(actions,timestamp)
+        if out.data is not list:
+            out.data=[out.data]
+    except Exception as e:
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request, response=response)
         return
 
-    if form is not None and form is not list:
-        form = [form]
-
-    out.data = {}
-    for k, w in protoforms.items():
-        if form is None or k in form:
-            out.data[k] = {y: None for y in w["args"].keys()}
-            try:
-                out.data[k].update(featureobj[k])
-            except KeyError:
-                pass
-
     out.format(request=request, response=response)
     return
 
 
-@hug.get("/{feature}/{form}")
-def get_form(feature=None, form=None, request=None, response=None):
+@hug.get("/{feature}/{action}")
+def feature_action_values(feature, action, timestamp=None, request=None, response=None):
     """
-    **Recupero dei valori correnti per una specifica form delle azioni di una specifica feature**"""
-    return get_forms(feature=feature, form=form, request=request, response=response)
+    **Recupero dello stato corrente per una specifica azione di una specifica feature**"""
+    return features_actions_values(feature, action, timestamp, request=request, response=response)
 
 
-@hug.post("/{feature}/{form}", parse_body=False)
+@hug.post("/{feature}/{action}", parse_body=False)
 @hug.default_input_format(content_type="multipart/form-data")
-def prots(feature=None, form=None, request=None, response=None):
+def make_action(feature, action, request=None, response=None):
     """
 **Esecuzione delle azioni**
 
 Richiede l'esecuzione di una specifica azione su una feature, fornendo tutte le informazioni \
 necessarie attraverso una form dinamica dedicata.
 
-- Oltre ai due parametri `feature` e `form`, indicati nella url, accetta un _multipart/form-data_ \
-basato sulla specifica form, selezionata tramite i due parametri espliciti.
+- Oltre ai due parametri `feature` e `form`, `timestamp`, indicati nella url, accetta un \
+_multipart/form-data_ basato sulla specifica form, selezionata tramite i due parametri espliciti.
 - Tutto il content è scaricato attarverso i chunk dello stream ('100 continue') per evitare il \
 timeout dei workers in caso di contenuti di grandi dimensioni.
 
@@ -119,25 +113,26 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     # Trying to manage income feature request and its prototype configuration
     try:
         feat = db["features"][feature]
-        proto = feat["properties"]["type"]
+        featobj = sourceman.sourceFactory(feat,conf['filecache'])
     except KeyError as e:
+        #raise e
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request, response=response)
         return
     
     try:
-        mod = db["features_proto"][proto]["module"]
-        mod = import_module(mod)
-        schema=getSchemaDict(eval(f"mod.{form.capitalize()}Schema")())
+        schema=featobj.getActionSchema(action)
     except KeyError as e:
+        raise e
         out.status = falcon.HTTP_NOT_IMPLEMENTED
-        out.message = f"Prototype '{proto}' actions not implemented."
+        out.message = f"Prototype '{featobj.type}' actions not implemented."
         out.format(request=request, response=response)
         return
     except ModuleNotFoundError as e:
+        #raise e
         out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
-        out.message = f"Prototype '{proto}' module '{mod}' not found."
+        out.message = f"Prototype '{featobj.type}' module not found."
         out.format(request=request, response=response)
         return
 
@@ -187,24 +182,31 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
 
     # Trying to initialize feature action manager module
     try:
-        source = mod.Source(feature=feat, filecache=conf["filecache"])
-        result = eval(f"source.{form}(**kwargs)")
+        result = featobj.execAction(action,**kwargs)
     except AttributeError as e:
-        out.status = falcon.HTTP_NOT_IMPLEMENTED
-        out.message = f"Prototype '{proto}' action '{form}' not implemented."
-        out.format(request=request, response=response)
         raise e
+        out.status = falcon.HTTP_NOT_IMPLEMENTED
+        out.message = f"Action '{action}' not implemented."
+        out.format(request=request, response=response)
         return
     except Exception as e:
         raise e
+        pass
 
     try:
-        db["features"][feature][form].update(result)
+        db["actions"][feature,action,result['timestamp']]={"value":result}
         db["features"].save()
     except KeyError as e:
+        #raise e
         out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
         out.message = str(e)
         out.format(request=request, response=response)
+    except ValueError as e:
+        #raise e
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = str(e)
+        out.format(request=request, response=response)
+
         return
 
     out.format(request=request, response=response)

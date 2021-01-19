@@ -13,12 +13,25 @@ import os
     window_size_change = fields.Str(required=False,default="0")
     world_file = fields.Str(required=False,default=None)
     crs: "EPSG:3857"
+
+
+    {'driver': 'GTiff',
+ 'dtype': 'uint16',
+ 'nodata': 0.0,
+ 'width': 3545,
+ 'height': 1842,
+ 'count': 1,
+ 'crs': CRS.from_epsg(32622),
+ 'transform': Affine(15.0, 0.0, 464947.5,
+        0.0, -15.0, 7977067.5)}
+
+
 '''
 
 
 class NCMangler():
 
-    def __init__(self, targetfile=None,dims=None,timestamp=None,step_size=8,window_size_change=0,**kwargs):
+    def __init__(self, targetfile,timestamp,height,width,step_size=8,window_size_change=0,transform=None,crs=None,**kwargs):
         """
         Crea il file netCDF secondo un formato standard
 
@@ -34,17 +47,21 @@ class NCMangler():
 
         if not os.path.exists(targetfile):
 
+            height=float(height)
+            width=float(width)
+            window_size_change=float(window_size_change)
+            step_size=float(step_size)
 
-            xdim=(dims[1]-window_size_change*2)/step_size
-            ydim=(dims[2]-window_size_change*2)/step_size
+            ydim=(height-window_size_change*2)/step_size
+            xdim=(width-window_size_change*2)/step_size
 
-            y_values=np.arange(window_size_change,xdim)*step_size
-            x_values=np.arange(window_size_change,ydim)*step_size
+            x_values=np.arange(window_size_change,xdim)*step_size*transform[0]+transform[2]
+            y_values=np.arange(window_size_change,ydim)*step_size*transform[3]+transform[5]
 
             rootgrp = Dataset(targetfile, 'w', format="NETCDF4")
             rootgrp.Conventions="CF-1.7"
-
             rootgrp.timestamp= str(np.datetime64(timestamp))
+
 
             # time informations
             rootgrp.createDimension("time", None)

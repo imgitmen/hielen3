@@ -49,21 +49,23 @@ Possibili risposte:
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
 
     try:
-        feature = {"geometry": geometry}
-        proto = db["features_proto"][prototype]
-        feature.update(proto["struct"])
-        feature.update(
-            {k: {y: None for y in w["args"].keys()} for k, w in proto["forms"].items()}
-        )
-        feature["properties"]["uid"] = uid
-        feature["parameters"] = {k: None for k in feature["parameters"].keys()}
+        feature = db["features_proto"][prototype]['struct']
+
+#TODO CREARE SERIES
+
+        feature['parameters']={ k:None for k in feature['parameters'].keys() }
+
+##
+
+        feature["geometry"]= geometry
+        feature["uid"] = uid
 
         try:
             assert properties["context"] is not None
         except Exception:
             properties["context"] = "no-context"
 
-        feature["properties"].update(properties)
+        feature.update(properties)
 
         db["features"][uid] = feature
 
@@ -118,21 +120,19 @@ Possibili risposte:
 
     out = ResponseFormatter()
 
-    if not isinstance(uids, (list, set)) and uids is not None:
-        uids = [uids]
-
     try:
-        out.data = dict(
-            features=[
-                {
+        out.data = []
+        extract=db["features"][uids]
+        if not isinstance(extract,list):
+            extract=[extract]
+        for v in extract:
+            if cntxt is None or v["context"] == cntxt:
+                out.data.append({
                     "type": "Feature",
-                    "geometry": v["geometry"],
-                    "properties": v["properties"],
-                }
-                for v in db["features"][uids].values()
-                if cntxt is None or v["properties"]["context"] == cntxt
-            ]
-        )
+                    "geometry": v.pop("geometry"),
+                    "parameters": v.pop("parameters"),
+                    "properties": v
+                    })
     except KeyError as e:
         out.status = falcon.HTTP_NOT_FOUND
         out.message = str(e)
@@ -173,11 +173,11 @@ Possibili risposte:
         out.message = "None value not allowed"
 
     try:
-        f = db["features"][uid]
-        f["properties"].update(properties)
-        f["geometry"].update(geometry)
+        feat = db["features"][uid]
+        feat.update(properties)
+        feat["geometry"].update(geometry)
         db["features"][uid] = None
-        db["features"][uid] = f
+        db["features"][uid] = feat
         out.data = db["features"][uid]
     except KeyError as e:
         out.status = falcon.HTTP_NOT_FOUND
@@ -216,3 +216,4 @@ Possibili risposte:
 
     response = out.format(response=response, request=request)
     return
+

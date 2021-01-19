@@ -1,6 +1,114 @@
 CHANGELOG
 =========
 
+## **v2.0.5**
+### **19 Gennaio 2021**
+
+- Revisione concettuale sulle api e modifiche:
+
+`GET /parametes` lo schema di ritorno è il seguente:
+
+{    ...,
+     "data": {
+        "ARCCE01": [
+            {
+                "series": "ARCCE01_Rotazione_X",
+                **"param"**: "Rotazione X",
+                "unit": "mm/m"},
+               .....
+            }
+        ]
+}
+
+
+semplicemente **"param"** al posto di **"name"**
+
+
+- **actionSchemata** è l'api che fornirà gli schemi per le azioni e va a sostituire quella che era "prototypes". Questa esiste ancora (forse per poco) ma più che altro le informazioni che stanno nella relativa tabella mi servono per il back-end
+    si chiama così (in pratica come prototypes):
+   
+    GET ../actionschemata[/{prototypes}[/{actions}]]
+
+
+- **action** come prima, è l'api che gestisce le azioni
+
+    La versione `POST` nella sostanza non è cambiata a parte il fatto che per default un'azione dichiarerà sempre un timestamp per default. Ma questa cosa al front-end non interessa dal momento che le info le recupera da actionSchemanta. E' invece importante nella scrittura dei plugin perché in questo modo le azioni possono essere gestite temporalmente.
+
+    La versione `GET`, invece cambia sostanzialmente: non fornirà più i default per la post MA potrà fornire una serie temporale di azioni associate a dei valori di elaborazione che danno informazioni all'utente. in questo formato:
+
+    
+	GET ../actions[/{feature}[/{action}]]
+
+ritorna:
+
+    [ { "timestamp":....,"value":.... }, { "timestamp":...., "value":.... }, .... ]
+
+esempio:
+
+    GET ../actions/ciaociaociao4/config
+
+
+	{
+		"meta": {
+			"response": "ok",
+			"message": "",
+			"data_type": "GET /actions/ciaociaociao4/config"
+		},
+		"data": [
+			[
+				{
+					"timestamp": "2020-12-30 01:00:05",
+					"value": {
+						"master_image": "TIFF image data, little-endian, direntries=14, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545",
+						"step_size": "35",
+						"window_size_change": "10",
+						"transform": [
+							15.0,
+							0.0,
+							464947.5,
+							0.0,
+							-15.0,
+							7977067.5
+						],
+						"cache": "20201230010005",
+						"crs": null
+					}
+				},
+				{
+					"timestamp": "2020-12-30 01:00:07",
+					"value": {
+						"master_image": "TIFF image data, little-endian, direntries=16, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545",
+						"timestamp": "2020-12-30 01:00:07",
+						"step_size": "35",
+						"window_size_change": "10",
+						"transform": [
+							15.0,
+							0.0,
+							464947.5,
+							0.0,
+							-15.0,
+							7977067.5
+						],
+						"cache": "20201230010007",
+						"crs": "EPSG:32622"
+					}
+				}
+			]
+		]
+	}
+    
+
+### **15 Gennaio 2021**
+
+- rimodellato il db: dalla tabella "features" sono state eliminate le colonne "a priori" delle azioni. Queste ultime sono state inserite in una nuova tabella "actions" con chiave multipla ("feature","action","timestamp"). 
+- Rivista l'interfaccia db per permettere l'interrogazione su chiave multipla
+
+
+### **10 Gennaio 2021**
+- Progettazione della gestione temporale delle azioni e separazione del concetto di form da quello di risultato della azione: ogni **azione** ha uno **schema di input** e dei **risultati in output** con uno schema **non necessariamente** coincidente. Quello che viene fornito alle form sono i dati necessari ad intraprendere un'azione. I risultati dell'azione devono essere registrati con una marcatura temporale. In questo modo ogni azione è univocamente determinata e gestibile con un modello del tipo ("feature","action","timestamp"), con una cardinalità 1-a-molti tra features e azioni 
+
+- Portata a termine la migrazione della gestione delle azioni che vengono ora completamente affidate ai singoli moduli. L'iterfaccia di alto livello è ora in grado di gestire agonsticamente le chiamate ad azioni arbitrarie purchè ben definite all'interno dei moduli. In questo modo cade il vincolo di definizione do azione "a priori" 
+
 ### **30 Dicembre 2020**
 - sviluppo (non completo) di config hielen2.ext.PhotoMonitoring: 
 - Implementato il metodo di recupero e settaggio delle informazioni geometriche/geografiche dell'immagine in ingresso

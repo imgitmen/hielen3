@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
 from filelock import Timeout, FileLock
 from numpy import nan
+import json
 
 
 def dbinit(conf):
@@ -128,15 +129,15 @@ class JsonDB(DB):
                         raise ValueError(f"key {key!r} is not fully determinated")
 
                     keydict=dict(zip(self.schema['primary_key'],key))
+                
+                    keydict['value']=value
 
-                    value.update(keydict)
-                    df = DataFrame([value.values()])
-                    df.columns=value.keys()
+                    df=read_json(json.dumps([keydict]),convert_dates=False)
                     df=df.set_index(self.schema['primary_key'])
 
                     try:
                         self.db = self.db.append(df,verify_integrity=True).sort_index()
-                    except ValueError:
+                    except ValueError as e:
                         raise ValueError(f"key {key} to insert exists")
 
                     self.db.replace({nan: None, NaT: None}, inplace=True)

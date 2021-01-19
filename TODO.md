@@ -1,5 +1,7 @@
 ## Con Priorità
 
+### ***classe JsonDB: RIVEDERE L'INSERIMENTO!!! E' cambiato il modello****
+
 ### Introduzione delle classi Schema per tutte le azioni di tutte le tipologie
 
 ### Rivisitazione del'api GET `/prototypes` e  GET `/actions` per l'introspezione dei plugin

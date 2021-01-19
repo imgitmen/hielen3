@@ -8,6 +8,7 @@ __description__ = "HielenSource extensione"
 __license__ = "MIT"
 __uri__ = ""
 
-from .phm import Source, ConfigSchema
+from .phm import Source, ConfigSchema, FeedSchema
+from . import ncmangle
 
-__all__ = ["Source", "ConfigSchema"]
+__all__ = ["Source", "ConfigSchema", "FeedSchema"]

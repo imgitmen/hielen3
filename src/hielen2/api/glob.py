@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import parameters, prototypes, data, features, actions
+from . import parameters, prototypes, data, features, actions, actionschemata
 import falcon
 
 """
@@ -45,3 +45,8 @@ def dataman():
 def dataman():
     """ Series manager """
     return [actions]
+
+@hug.extend_api("/actionschemata")
+def dataman():
+    """ Series manager """
+    return [actionschemata]
