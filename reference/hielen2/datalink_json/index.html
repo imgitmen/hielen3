@@ -16,7 +16,7 @@
     
     
       
-        <title>Datalink - hielen2</title>
+        <title>Datalink Json - hielen2</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-hielen2datalink" class="md-skip">
+        <a href="#module-hielen2datalink_json" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Datalink
+              Datalink Json
             
           </span>
         </div>
@@ -351,6 +351,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../datalink/" title="Datalink" class="md-nav__link">
+      Datalink
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -362,12 +374,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Datalink
+        Datalink Json
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Datalink" class="md-nav__link md-nav__link--active">
-      Datalink
+    <a href="./" title="Datalink Json" class="md-nav__link md-nav__link--active">
+      Datalink Json
     </a>
     
       
@@ -568,18 +580,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../datalink_json/" title="Datalink Json" class="md-nav__link">
-      Datalink Json
-    </a>
   </li>
 
         
@@ -1215,7 +1215,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/datalink.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/datalink_json.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -1223,7 +1223,7 @@
                   
                 
                 
-                <h1 id="module-hielen2datalink">Module hielen2.datalink</h1>
+                <h1 id="module-hielen2datalink_json">Module hielen2.datalink_json</h1>
 <details class="example"><summary>View Source</summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
@@ -1566,6 +1566,8 @@
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
 
+<span class="kn">import</span> <span class="nn">json</span>
+
 <span class="k">def</span> <span class="nf">dbinit</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
 
     <span class="k">return</span> <span class="p">{</span>
@@ -1760,11 +1762,9 @@
 
                     <span class="n">keydict</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s1">&#39;primary_key&#39;</span><span class="p">],</span><span class="n">key</span><span class="p">))</span>
 
-                    <span class="n">value</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">keydict</span><span class="p">)</span>
+                    <span class="n">keydict</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">value</span>
 
-                    <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([</span><span class="n">value</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
-
-                    <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                    <span class="n">df</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">([</span><span class="n">keydict</span><span class="p">]),</span><span class="n">convert_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
                     <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="p">[</span><span class="s1">&#39;primary_key&#39;</span><span class="p">])</span>
 
@@ -1772,7 +1772,7 @@
 
                         <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">verify_integrity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-                    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> to insert exists&quot;</span><span class="p">)</span>
 
@@ -1949,8 +1949,8 @@ inheritance.</p>
 </ul>
 <h4 id="descendants">Descendants</h4>
 <ul>
-<li>hielen2.datalink.JsonDB</li>
-<li>hielen2.datalink.JsonCache</li>
+<li>hielen2.datalink_json.JsonDB</li>
+<li>hielen2.datalink_json.JsonCache</li>
 </ul>
 <h4 id="methods">Methods</h4>
 <h5 id="pop">pop</h5>
@@ -2013,7 +2013,7 @@ inheritance.</p>
 <hr />
 <h4 id="ancestors-in-mro_1">Ancestors (in MRO)</h4>
 <ul>
-<li>hielen2.datalink.DB</li>
+<li>hielen2.datalink_json.DB</li>
 <li>abc.ABC</li>
 </ul>
 <h4 id="methods_1">Methods</h4>
@@ -2212,11 +2212,9 @@ inheritance.</p>
 
 <span class="w">                    </span><span class="n">keydict</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span><span class="n">zip</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="o">[</span><span class="n">&#39;primary_key&#39;</span><span class="o">]</span><span class="p">,</span><span class="k">key</span><span class="p">))</span><span class="w"></span>
 
-<span class="w">                    </span><span class="k">value</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">keydict</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">keydict</span><span class="o">[</span><span class="n">&#39;value&#39;</span><span class="o">]=</span><span class="k">value</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="o">[</span><span class="n">value.values()</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">                    </span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span><span class="w"></span>
+<span class="w">                    </span><span class="n">df</span><span class="o">=</span><span class="n">read_json</span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="o">[</span><span class="n">keydict</span><span class="o">]</span><span class="p">),</span><span class="n">convert_dates</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">                    </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="o">[</span><span class="n">&#39;primary_key&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
@@ -2224,7 +2222,7 @@ inheritance.</p>
 
 <span class="w">                        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">verify_integrity</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="nl">ValueError</span><span class="p">:</span><span class="w"></span>
+<span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">                        </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;key {key} to insert exists&quot;</span><span class="p">)</span><span class="w"></span>
 
@@ -2307,7 +2305,7 @@ inheritance.</p>
 <hr />
 <h4 id="ancestors-in-mro_2">Ancestors (in MRO)</h4>
 <ul>
-<li>hielen2.datalink.DB</li>
+<li>hielen2.datalink_json.DB</li>
 <li>abc.ABC</li>
 </ul>
 <h4 id="methods_2">Methods</h4>
@@ -2376,7 +2374,7 @@ inheritance.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../../docs/API%20Reference/data/" title="Data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../datalink/" title="Datalink" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2385,19 +2383,19 @@ inheritance.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Data
+                Datalink
               </span>
             </div>
           </a>
         
         
-          <a href="../datalink_json/" title="Datalink Json" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Datalink Json
+                Index
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
