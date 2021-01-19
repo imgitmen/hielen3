@@ -240,11 +240,11 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#v205" class="md-nav__link">
-    v2.0.5
+  <a href="#v206" class="md-nav__link">
+    v2.0.6
   </a>
   
-    <nav class="md-nav" aria-label="v2.0.5">
+    <nav class="md-nav" aria-label="v2.0.6">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -302,7 +302,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#v205_1" class="md-nav__link">
+  <a href="#v205" class="md-nav__link">
     v2.0.5
   </a>
   
@@ -1050,11 +1050,11 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#v205" class="md-nav__link">
-    v2.0.5
+  <a href="#v206" class="md-nav__link">
+    v2.0.6
   </a>
   
-    <nav class="md-nav" aria-label="v2.0.5">
+    <nav class="md-nav" aria-label="v2.0.6">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1112,7 +1112,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#v205_1" class="md-nav__link">
+  <a href="#v205" class="md-nav__link">
     v2.0.5
   </a>
   
@@ -1282,7 +1282,7 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
-<h2 id="v205"><strong>v2.0.5</strong></h2>
+<h2 id="v206"><strong>v2.0.6</strong></h2>
 <h3 id="19-gennaio-2021"><strong>19 Gennaio 2021</strong></h3>
 <ul>
 <li>Revisione concettuale sulle api e modifiche:</li>
@@ -1409,7 +1409,7 @@
 Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> cfr. https://marshmallow.readthedocs.io/en/stable/ ). ATTENZIONE: in caso fosse necessario l'ingresso di file o comunque oggetti blob dovrà essere utilizzato come field la classe <code>hielen2.utils.LocalFile</code>. In questo modo il sistema risolverà la chiamata API salvando in locale lo stream dei dati associato a quel determinato field, il quale sarà accessibile al template attraverso un path che verrà fornito insieme agli altri campi al momento della chiamata del metodo di gestione dell'azione (vedi sotto).</p>
 <p><strong>deve</strong> implementare una classe <code>Source(hielen2.datalink.HielenSource)</code> che esponga tanti metodi quante sono le dichiarazioni di Schema seguendo questa sintassi: il metodo di gestione dell'azione <strong>deve</strong> chiamarsi come l'azione stessa ( tutto in <em>minuscolo</em> ). Le classi estese sfrutteranno il metodo <code>__init__</code> della superclasse in modo da avere a disposizione tutto quello di cui necessitano.</p>
 <p>Questo modello permette di svincolare i template dalla necessità di conoscere a priori le azioni ammmissibili per il sistema. Infatti, facendo introspezione su un template che segua le regole di sintassi sarà sempre possibile conoscere le azioni definite ed esternalizzarle al front-end che in base alle definizioni delle classi di Schema delle azioni, sarà sempre in grado di instanziare una form adeguata.</p>
-<h2 id="v205_1"><strong>v2.0.5</strong></h2>
+<h2 id="v205"><strong>v2.0.5</strong></h2>
 <h3 id="9-dicembre-2020"><strong>9 Dicembre 2020</strong></h3>
 <ul>
 <li>Implementata <strong>working</strong> POST <code>/actions/{feature}/{form}</code> tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. </li>
