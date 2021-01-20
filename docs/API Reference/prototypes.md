@@ -40,7 +40,7 @@ ritorna una struttura json di questo tipo:
 
 	"data": {
 	    "uid": ...,
-	    "module": "...,
+	    "module": ...,
 	    "struct": {
 		"classification": ...,
 		"type": ...,
@@ -51,7 +51,7 @@ ritorna una struttura json di questo tipo:
 			    "output": ...
 			}
 		    },
-                    ...
+                    "...",
 		    "parN": {
 			"type": ...,
 			"operands": {
