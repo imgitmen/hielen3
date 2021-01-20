@@ -1,12 +1,12 @@
 # coding=utf-8
 
-__name__ = "hielen2"
-__version__ = "2.0.5"
-__author__ = "Alessandro Modesti"
-__email__ = "it@img-srl.com"
-__description__ = "Multidimention Hierarichical Elaboration Engine"
-__license__ = "MIT"
-__uri__ = ""
+__name__ = 'hielen2'
+__version__ = '2.0.6'
+__author__ = 'Alessandro Modesti'
+__email__ = 'it@img-srl.com'
+__description__ = 'Multidimention Hierarichical Elaboration Engine'
+__license__ = 'MIT'
+__uri__ = ''
 
 import warnings
 import json
