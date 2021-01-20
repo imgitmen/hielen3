@@ -61,7 +61,10 @@ class HielenSource(ABC):
             action=slice(None,None)
         if timestamp is None:
             timestamp=slice(None,None)
-        return db['actions'][self.uid,action,timestamp]
+        try:
+            return db['actions'][self.uid,action,timestamp]
+        except KeyError:
+            return []
 
     @abstractmethod
     def data(timefrom=None, timeto=None, geom=None, **kwargs):
