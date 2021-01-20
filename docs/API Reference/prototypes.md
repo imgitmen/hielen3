@@ -38,29 +38,29 @@ _description_:
 ritorna una struttura json di questo tipo:
 
 
-	"data": {
-	    "uid": ...,
-	    "module": ...,
-	    "struct": {
-		"classification": ...,
-		"type": ...,
-		"parameters": {
-		    "par1": {
-			"type": ...,
-			"operands": {
-			    "output": ...
-			}
-		    },
-                    "...",
-		    "parN": {
-			"type": ...,
-			"operands": {
-			    "output": ...
-			}
-		    }
-		}
-	    }
-	}
+    "data": {
+        "uid": ...,
+        "module": ...,
+        "struct": {
+            "classification": ...,
+            "type": ...,
+            "parameters": {
+                "par1": {
+                    "type": ...,
+                    "operands": {
+                        "output": ...
+                    }
+                },
+                "...",
+                "parN": {
+                    "type": ...,
+                    "operands": {
+                        "output": ...
+                    }
+                }
+            }
+        }
+    }
 
 
 

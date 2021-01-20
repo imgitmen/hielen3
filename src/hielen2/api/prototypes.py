@@ -23,77 +23,58 @@ def prototypes(request=None, response=None):
 
 ritorna una struttura json di questo tipo:
 
-
-    "data": {
-        "uid": ...,
-        "module": ...,
-        "struct": {
-            "classification": ...,
-            "type": ...,
-            "parameters": {
-                "par1": {
+        {
+            {
+                "uid1": ...,
+                "module1": ...,
+                "struct": {
+                    "classification": ...,
                     "type": ...,
-                    "operands": {
-                        "output": ...
+                    "parameters": {
+                        "par1_1": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        },
+                        "...",
+                        "par1_N": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        }
                     }
-                },
-                "...",
-                "parN": {
+                }
+            },
+            {
+                "uid2": ...,
+                "module2": ...,
+                "struct": {
+                    "classification": ...,
                     "type": ...,
-                    "operands": {
-                        "output": ...
+                    "parameters": {
+                        "par2_1": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        },
+                        "...",
+                        "par2_N": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-
 """
     out = ResponseFormatter()
     try:
         out.data = db["features_proto"][None]
-    except KeyError as e:
-        out.status = out.status = falcon.HTTP_NOT_FOUND
-        out.message = str(e)
-    response = out.format(response=response, request=request)
-
-
-@hug.get("/{prototype}")
-def protptype(prototype, request=None, response=None):
-    """
-**Alias per il recupero di tutte le informazioni di uno specifico prototipo**
-"""
-    out = ResponseFormatter()
-    try:
-        out.data = db["features_proto"][prototype]
-    except KeyError as e:
-        out.status = out.status = falcon.HTTP_NOT_FOUND
-        out.message = str(e)
-    response = out.format(response=response, request=request)
-
-
-@hug.get("/{prototype}/forms")
-def prototype_forms(prototype, request=None, response=None):
-    """
-**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**
-"""
-    out = ResponseFormatter()
-    try:
-        out.data = db["features_proto"][prototype]["forms"]
-    except KeyError as e:
-        out.status = out.status = falcon.HTTP_NOT_FOUND
-        out.message = str(e)
-    response = out.format(response=response, request=request)
-
-
-@hug.get("/{prototype}/forms/{form}")
-def prototype_form(prototype, form, request=None, response=None):
-    """
-**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**
-"""
-    out = ResponseFormatter()
-    try:
-        out.data = db["features_proto"][prototype]["forms"][form]
     except KeyError as e:
         out.status = out.status = falcon.HTTP_NOT_FOUND
         out.message = str(e)
