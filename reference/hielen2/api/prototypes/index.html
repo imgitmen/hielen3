@@ -561,20 +561,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prototype_form" class="md-nav__link">
-    prototype_form
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prototype_forms" class="md-nav__link">
-    prototype_forms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prototype_struct" class="md-nav__link">
     prototype_struct
   </a>
@@ -584,13 +570,6 @@
           <li class="md-nav__item">
   <a href="#prototypes" class="md-nav__link">
     prototypes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protptype" class="md-nav__link">
-    protptype
   </a>
   
 </li>
@@ -916,20 +895,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prototype_form" class="md-nav__link">
-    prototype_form
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prototype_forms" class="md-nav__link">
-    prototype_forms
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prototype_struct" class="md-nav__link">
     prototype_struct
   </a>
@@ -939,13 +904,6 @@
           <li class="md-nav__item">
   <a href="#prototypes" class="md-nav__link">
     prototypes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#protptype" class="md-nav__link">
-    protptype
   </a>
   
 </li>
@@ -1148,29 +1106,7 @@
 170
 171
 172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+173</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1206,41 +1142,93 @@
 
 <span class="sd">ritorna una struttura json di questo tipo:</span>
 
-<span class="sd">    &quot;data&quot;: {</span>
+<span class="sd">        {</span>
 
-<span class="sd">        &quot;uid&quot;: ...,</span>
+<span class="sd">            {</span>
 
-<span class="sd">        &quot;module&quot;: ...,</span>
+<span class="sd">                &quot;uid1&quot;: ...,</span>
 
-<span class="sd">        &quot;struct&quot;: {</span>
+<span class="sd">                &quot;module1&quot;: ...,</span>
 
-<span class="sd">            &quot;classification&quot;: ...,</span>
+<span class="sd">                &quot;struct&quot;: {</span>
 
-<span class="sd">            &quot;type&quot;: ...,</span>
-
-<span class="sd">            &quot;parameters&quot;: {</span>
-
-<span class="sd">                &quot;par1&quot;: {</span>
+<span class="sd">                    &quot;classification&quot;: ...,</span>
 
 <span class="sd">                    &quot;type&quot;: ...,</span>
 
-<span class="sd">                    &quot;operands&quot;: {</span>
+<span class="sd">                    &quot;parameters&quot;: {</span>
 
-<span class="sd">                        &quot;output&quot;: ...</span>
+<span class="sd">                        &quot;par1_1&quot;: {</span>
+
+<span class="sd">                            &quot;type&quot;: ...,</span>
+
+<span class="sd">                            &quot;operands&quot;: {</span>
+
+<span class="sd">                                &quot;output&quot;: ...</span>
+
+<span class="sd">                            }</span>
+
+<span class="sd">                        },</span>
+
+<span class="sd">                        &quot;...&quot;,</span>
+
+<span class="sd">                        &quot;par1_N&quot;: {</span>
+
+<span class="sd">                            &quot;type&quot;: ...,</span>
+
+<span class="sd">                            &quot;operands&quot;: {</span>
+
+<span class="sd">                                &quot;output&quot;: ...</span>
+
+<span class="sd">                            }</span>
+
+<span class="sd">                        }</span>
 
 <span class="sd">                    }</span>
 
-<span class="sd">                },</span>
+<span class="sd">                }</span>
 
-<span class="sd">                &quot;...&quot;,</span>
+<span class="sd">            },</span>
 
-<span class="sd">                &quot;parN&quot;: {</span>
+<span class="sd">            {</span>
+
+<span class="sd">                &quot;uid2&quot;: ...,</span>
+
+<span class="sd">                &quot;module2&quot;: ...,</span>
+
+<span class="sd">                &quot;struct&quot;: {</span>
+
+<span class="sd">                    &quot;classification&quot;: ...,</span>
 
 <span class="sd">                    &quot;type&quot;: ...,</span>
 
-<span class="sd">                    &quot;operands&quot;: {</span>
+<span class="sd">                    &quot;parameters&quot;: {</span>
 
-<span class="sd">                        &quot;output&quot;: ...</span>
+<span class="sd">                        &quot;par2_1&quot;: {</span>
+
+<span class="sd">                            &quot;type&quot;: ...,</span>
+
+<span class="sd">                            &quot;operands&quot;: {</span>
+
+<span class="sd">                                &quot;output&quot;: ...</span>
+
+<span class="sd">                            }</span>
+
+<span class="sd">                        },</span>
+
+<span class="sd">                        &quot;...&quot;,</span>
+
+<span class="sd">                        &quot;par2_N&quot;: {</span>
+
+<span class="sd">                            &quot;type&quot;: ...,</span>
+
+<span class="sd">                            &quot;operands&quot;: {</span>
+
+<span class="sd">                                &quot;output&quot;: ...</span>
+
+<span class="sd">                            }</span>
+
+<span class="sd">                        }</span>
 
 <span class="sd">                    }</span>
 
@@ -1250,8 +1238,6 @@
 
 <span class="sd">        }</span>
 
-<span class="sd">    }</span>
-
 <span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
@@ -1259,78 +1245,6 @@
     <span class="k">try</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="kc">None</span><span class="p">]</span>
-
-    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias per il recupero di tutte le informazioni di uno specifico prototipo**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">]</span>
-
-    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">/forms&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">prototype_forms</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s2">&quot;forms&quot;</span><span class="p">]</span>
-
-    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{prototype}</span><span class="s2">/forms/</span><span class="si">{form}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">prototype_form</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
-
-    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
-
-    <span class="k">try</span><span class="p">:</span>
-
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_proto&quot;</span><span class="p">][</span><span class="n">prototype</span><span class="p">][</span><span class="s2">&quot;forms&quot;</span><span class="p">][</span><span class="n">form</span><span class="p">]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -1399,77 +1313,6 @@
 </code></pre></div>
 
 </details>
-<h3 id="prototype_form">prototype_form</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">prototype_form</span><span class="p">(</span>
-    <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">form</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}/forms/{form}&quot;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">prototype_form</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">form</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**</span>
-
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&quot;forms&quot;</span><span class="o">][</span><span class="n">form</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h3 id="prototype_forms">prototype_forms</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">prototype_forms</span><span class="p">(</span>
-    <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}/forms&quot;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">prototype_forms</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**</span>
-
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">][</span><span class="n">&quot;forms&quot;</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
 <h3 id="prototype_struct">prototype_struct</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">prototype_struct</span><span class="p">(</span>
     <span class="n">prototype</span><span class="p">,</span>
@@ -1516,29 +1359,54 @@
 
 <p><strong>Recupero di tutte le informazioni dei prototipi</strong></p>
 <p>ritorna una struttura json di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">&quot;data&quot;: {</span>
-<span class="err">    &quot;uid&quot;: ...,</span>
-<span class="err">    &quot;module&quot;: ...,</span>
-<span class="err">    &quot;struct&quot;: {</span>
-<span class="err">        &quot;classification&quot;: ...,</span>
-<span class="err">        &quot;type&quot;: ...,</span>
-<span class="err">        &quot;parameters&quot;: {</span>
-<span class="err">            &quot;par1&quot;: {</span>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        {</span>
+<span class="err">            &quot;uid1&quot;: ...,</span>
+<span class="err">            &quot;module1&quot;: ...,</span>
+<span class="err">            &quot;struct&quot;: {</span>
+<span class="err">                &quot;classification&quot;: ...,</span>
 <span class="err">                &quot;type&quot;: ...,</span>
-<span class="err">                &quot;operands&quot;: {</span>
-<span class="err">                    &quot;output&quot;: ...</span>
+<span class="err">                &quot;parameters&quot;: {</span>
+<span class="err">                    &quot;par1_1&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;...&quot;,</span>
+<span class="err">                    &quot;par1_N&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    }</span>
 <span class="err">                }</span>
-<span class="err">            },</span>
-<span class="err">            &quot;...&quot;,</span>
-<span class="err">            &quot;parN&quot;: {</span>
+<span class="err">            }</span>
+<span class="err">        },</span>
+<span class="err">        {</span>
+<span class="err">            &quot;uid2&quot;: ...,</span>
+<span class="err">            &quot;module2&quot;: ...,</span>
+<span class="err">            &quot;struct&quot;: {</span>
+<span class="err">                &quot;classification&quot;: ...,</span>
 <span class="err">                &quot;type&quot;: ...,</span>
-<span class="err">                &quot;operands&quot;: {</span>
-<span class="err">                    &quot;output&quot;: ...</span>
+<span class="err">                &quot;parameters&quot;: {</span>
+<span class="err">                    &quot;par2_1&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;...&quot;,</span>
+<span class="err">                    &quot;par2_N&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    }</span>
 <span class="err">                }</span>
 <span class="err">            }</span>
 <span class="err">        }</span>
 <span class="err">    }</span>
-<span class="err">}</span>
 </code></pre></div>
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
@@ -1551,41 +1419,93 @@
 
 <span class="ss">ritorna una struttura json di questo tipo:</span>
 
-<span class="ss">    &quot;</span><span class="k">data</span><span class="ss">&quot;: {</span>
+<span class="ss">        {</span>
 
-<span class="ss">        &quot;</span><span class="n">uid</span><span class="ss">&quot;: ...,</span>
+<span class="ss">            {</span>
 
-<span class="ss">        &quot;</span><span class="k">module</span><span class="ss">&quot;: ...,</span>
+<span class="ss">                &quot;</span><span class="n">uid1</span><span class="ss">&quot;: ...,</span>
 
-<span class="ss">        &quot;</span><span class="n">struct</span><span class="ss">&quot;: {</span>
+<span class="ss">                &quot;</span><span class="n">module1</span><span class="ss">&quot;: ...,</span>
 
-<span class="ss">            &quot;</span><span class="n">classification</span><span class="ss">&quot;: ...,</span>
+<span class="ss">                &quot;</span><span class="n">struct</span><span class="ss">&quot;: {</span>
 
-<span class="ss">            &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
-
-<span class="ss">            &quot;</span><span class="k">parameters</span><span class="ss">&quot;: {</span>
-
-<span class="ss">                &quot;</span><span class="n">par1</span><span class="ss">&quot;: {</span>
+<span class="ss">                    &quot;</span><span class="n">classification</span><span class="ss">&quot;: ...,</span>
 
 <span class="ss">                    &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
 
-<span class="ss">                    &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+<span class="ss">                    &quot;</span><span class="k">parameters</span><span class="ss">&quot;: {</span>
 
-<span class="ss">                        &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+<span class="ss">                        &quot;</span><span class="n">par1_1</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                            &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+
+<span class="ss">                            }</span>
+
+<span class="ss">                        },</span>
+
+<span class="ss">                        &quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
+
+<span class="ss">                        &quot;</span><span class="n">par1_N</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                            &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+
+<span class="ss">                            }</span>
+
+<span class="ss">                        }</span>
 
 <span class="ss">                    }</span>
 
-<span class="ss">                },</span>
+<span class="ss">                }</span>
 
-<span class="ss">                &quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
+<span class="ss">            },</span>
 
-<span class="ss">                &quot;</span><span class="n">parN</span><span class="ss">&quot;: {</span>
+<span class="ss">            {</span>
+
+<span class="ss">                &quot;</span><span class="n">uid2</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                &quot;</span><span class="n">module2</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                &quot;</span><span class="n">struct</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                    &quot;</span><span class="n">classification</span><span class="ss">&quot;: ...,</span>
 
 <span class="ss">                    &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
 
-<span class="ss">                    &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+<span class="ss">                    &quot;</span><span class="k">parameters</span><span class="ss">&quot;: {</span>
 
-<span class="ss">                        &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+<span class="ss">                        &quot;</span><span class="n">par2_1</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                            &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+
+<span class="ss">                            }</span>
+
+<span class="ss">                        },</span>
+
+<span class="ss">                        &quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
+
+<span class="ss">                        &quot;</span><span class="n">par2_N</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                            &quot;</span><span class="n">type</span><span class="ss">&quot;: ...,</span>
+
+<span class="ss">                            &quot;</span><span class="n">operands</span><span class="ss">&quot;: {</span>
+
+<span class="ss">                                &quot;</span><span class="k">output</span><span class="ss">&quot;: ...</span>
+
+<span class="ss">                            }</span>
+
+<span class="ss">                        }</span>
 
 <span class="ss">                    }</span>
 
@@ -1595,8 +1515,6 @@
 
 <span class="ss">        }</span>
 
-<span class="ss">    }</span>
-
 <span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
@@ -1604,41 +1522,6 @@
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">None</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h3 id="protptype">protptype</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">protptype</span><span class="p">(</span>
-    <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias per il recupero di tutte le informazioni di uno specifico prototipo</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{prototype}&quot;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">protptype</span><span class="p">(</span><span class="n">prototype</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">**Alias per il recupero di tutte le informazioni di uno specifico prototipo**</span>
-
-<span class="ss">&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_proto&quot;</span><span class="o">][</span><span class="n">prototype</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 

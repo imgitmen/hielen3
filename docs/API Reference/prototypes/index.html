@@ -290,66 +290,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prototypesprototype" class="md-nav__link">
-    /prototypes/{prototype}
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_1" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prototypesprototypeforms" class="md-nav__link">
-    /prototypes/{prototype}/forms
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}/forms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_2" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prototypesprototypeformsform" class="md-nav__link">
-    /prototypes/{prototype}/forms/{form}
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}/forms/{form}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_3" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prototypesprototypestruct" class="md-nav__link">
     /prototypes/{prototype}/struct
   </a>
@@ -358,7 +298,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_4" class="md-nav__link">
+  <a href="#get_1" class="md-nav__link">
     GET
   </a>
   
@@ -962,66 +902,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prototypesprototype" class="md-nav__link">
-    /prototypes/{prototype}
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_1" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prototypesprototypeforms" class="md-nav__link">
-    /prototypes/{prototype}/forms
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}/forms">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_2" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prototypesprototypeformsform" class="md-nav__link">
-    /prototypes/{prototype}/forms/{form}
-  </a>
-  
-    <nav class="md-nav" aria-label="/prototypes/{prototype}/forms/{form}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_3" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prototypesprototypestruct" class="md-nav__link">
     /prototypes/{prototype}/struct
   </a>
@@ -1030,7 +910,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get_4" class="md-nav__link">
+  <a href="#get_1" class="md-nav__link">
     GET
   </a>
   
@@ -1087,76 +967,58 @@
 <p><em>description</em>:</p>
 <p><strong>Recupero di tutte le informazioni dei prototipi</strong></p>
 <p>ritorna una struttura json di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">&quot;data&quot;: {</span>
-<span class="err">    &quot;uid&quot;: ...,</span>
-<span class="err">    &quot;module&quot;: ...,</span>
-<span class="err">    &quot;struct&quot;: {</span>
-<span class="err">        &quot;classification&quot;: ...,</span>
-<span class="err">        &quot;type&quot;: ...,</span>
-<span class="err">        &quot;parameters&quot;: {</span>
-<span class="err">            &quot;par1&quot;: {</span>
+<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
+<span class="err">        {</span>
+<span class="err">            &quot;uid1&quot;: ...,</span>
+<span class="err">            &quot;module1&quot;: ...,</span>
+<span class="err">            &quot;struct&quot;: {</span>
+<span class="err">                &quot;classification&quot;: ...,</span>
 <span class="err">                &quot;type&quot;: ...,</span>
-<span class="err">                &quot;operands&quot;: {</span>
-<span class="err">                    &quot;output&quot;: ...</span>
+<span class="err">                &quot;parameters&quot;: {</span>
+<span class="err">                    &quot;par1_1&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;...&quot;,</span>
+<span class="err">                    &quot;par1_N&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    }</span>
 <span class="err">                }</span>
-<span class="err">            },</span>
-<span class="err">            &quot;...&quot;,</span>
-<span class="err">            &quot;parN&quot;: {</span>
+<span class="err">            }</span>
+<span class="err">        },</span>
+<span class="err">        {</span>
+<span class="err">            &quot;uid2&quot;: ...,</span>
+<span class="err">            &quot;module2&quot;: ...,</span>
+<span class="err">            &quot;struct&quot;: {</span>
+<span class="err">                &quot;classification&quot;: ...,</span>
 <span class="err">                &quot;type&quot;: ...,</span>
-<span class="err">                &quot;operands&quot;: {</span>
-<span class="err">                    &quot;output&quot;: ...</span>
+<span class="err">                &quot;parameters&quot;: {</span>
+<span class="err">                    &quot;par2_1&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    },</span>
+<span class="err">                    &quot;...&quot;,</span>
+<span class="err">                    &quot;par2_N&quot;: {</span>
+<span class="err">                        &quot;type&quot;: ...,</span>
+<span class="err">                        &quot;operands&quot;: {</span>
+<span class="err">                            &quot;output&quot;: ...</span>
+<span class="err">                        }</span>
+<span class="err">                    }</span>
 <span class="err">                }</span>
 <span class="err">            }</span>
 <span class="err">        }</span>
 <span class="err">    }</span>
-<span class="err">}</span>
 </code></pre></div>
 
-<h2 id="prototypesprototype"><strong>/prototypes/{prototype}</strong></h2>
-<h4 id="get_1">GET</h4>
-<hr />
-<p><em>params</em>:</p>
-<ul>
-<li><strong>prototype</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<p><strong>Alias per il recupero di tutte le informazioni di uno specifico prototipo</strong></p>
-<h2 id="prototypesprototypeforms"><strong>/prototypes/{prototype}/forms</strong></h2>
-<h4 id="get_2">GET</h4>
-<hr />
-<p><em>params</em>:</p>
-<ul>
-<li><strong>prototype</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<p><strong>Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo</strong></p>
-<h2 id="prototypesprototypeformsform"><strong>/prototypes/{prototype}/forms/{form}</strong></h2>
-<h4 id="get_3">GET</h4>
-<hr />
-<p><em>params</em>:</p>
-<ul>
-<li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>form</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<p><strong>Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo</strong></p>
 <h2 id="prototypesprototypestruct"><strong>/prototypes/{prototype}/struct</strong></h2>
-<h4 id="get_4">GET</h4>
+<h4 id="get_1">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
