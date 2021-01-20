@@ -2,37 +2,62 @@ CHANGELOG
 =========
 
 ## **v2.0.6**
-### **19 Gennaio 2021**
 
-- Revisione concettuale sulle api e modifiche:
+### **20 Gennaio 2021**
 
-`GET /parametes` lo schema di ritorno è il seguente:
+- modulo `hielen2.ext.source_PhotoMonitoring`:
 
-{    ...,
-     "data": {
-        "ARCCE01": [
-            {
-                "series": "ARCCE01_Rotazione_X",
-                **"param"**: "Rotazione X",
-                "unit": "mm/m"},
-               .....
-            }
-        ]
-}
+    rimodellato sulla base del modulo `hielen2.source`.
+
+	definite le classi schema per le azioni:
+    
+		## action 'config' (Completamente Funzionante)
+
+		class ConfigSchema(ActionSchema):
+			master_image = LocalFile(required=True, allow_none=False)
+			step_size = fields.Str(required=False, default="8")
+			window_size_change = fields.Str(required=False,default="0")
+			geo_reference_file = LocalFile(required=False,default=None)
+			crs=fields.Str(required=False,default=None)
+
+		## action 'feed'
+
+		class FeedSchema(ActionSchema):
+			reference_time = fields.Str(required=False, allow_none=False)
+			NS_displacement = LocalFile(required=False, allow_none=False)
+			EW_displacement = LocalFile(required=False, allow_none=False)
+			Coer = LocalFile(required=False, allow_none=False)
 
 
-semplicemente **"param"** al posto di **"name"**
+### **18 Gennaio 2021**
+
+Revisione concettuale delle API e modifiche:
+
+- **GET /parametes**: lo schema di ritorno è il seguente (semplicemente _"param"_ al posto di _"name"_):
 
 
-- **actionSchemata** è l'api che fornirà gli schemi per le azioni e va a sostituire quella che era "prototypes". Questa esiste ancora (forse per poco) ma più che altro le informazioni che stanno nella relativa tabella mi servono per il back-end
-    si chiama così (in pratica come prototypes):
-   
+        {    ...,
+             "data": {
+                "ARCCE01": [
+                    {
+                        "series": "ARCCE01_Rotazione_X",
+                        "param": "Rotazione X",
+                        "unit": "mm/m"},
+                       .....
+                    }
+                ]
+        }
+
+
+- **actionSchemata** è l'api che fornirà gli schemi per le azioni e va a sostituire quella che era "prototypes". Questa esiste ancora e mantiene il legame tra prototipo e modulo ma più che altro le informazioni che stanno nella relativa tabella mi servono per il back-end
+
+       
     GET ../actionschemata[/{prototypes}[/{actions}]]
 
 
-- **action** come prima, è l'api che gestisce le azioni
+- **action** come prima, è l'api che gestisce le azioni:
 
-    La versione `POST` nella sostanza non è cambiata a parte il fatto che per default un'azione dichiarerà sempre un timestamp per default. Ma questa cosa al front-end non interessa dal momento che le info le recupera da actionSchemanta. E' invece importante nella scrittura dei plugin perché in questo modo le azioni possono essere gestite temporalmente.
+    La versione `POST` nella sostanza non è cambiata a parte il fatto che un'azione dichiarerà sempre un timestamp per default. Ma questa cosa al front-end non interessa dal momento che le info le recupera da actionSchemanta. E' invece importante nella scrittura dei plugin perché in questo modo le azioni possono essere gestite temporalmente.
 
     La versione `GET`, invece cambia sostanzialmente: non fornirà più i default per la post MA potrà fornire una serie temporale di azioni associate a dei valori di elaborazione che danno informazioni all'utente. in questo formato:
 
@@ -45,7 +70,7 @@ ritorna:
 
 esempio:
 
-    GET ../actions/ciaociaociao4/config
+    GET ../actions/featurecode/config
 
 
 	{
@@ -97,12 +122,25 @@ esempio:
 		]
 	}
     
-
 ### **15 Gennaio 2021**
+- modulo `hielene2.source`: 
 
+    Implementato il metodo `sourceFactory` per la generazione degli ogetti `HeielenSource` in base ai prototipi che sfrutta il cariacmanto dinamico dei moduli specifici (metodo `loadModule`)
+
+    Implementati i metodi e le classi per la gestione agnostica delle azioni ed il recupero degli schemi: `getActionSchema`, `moduleAction`, `HielenSource.execAction`, `HielenSource.getActionValues`
+
+    Implementata la gestione dell'ambiente di cache dedicato alle singole istanze di HielenSource: `HielenSource.makeCachePath`, `HielenSource.getRelativePath`
+
+    Definita la classe primitiva per i modelli di schema per le azioni che impone la definizione della marcatura temporale:
+
+         
+         class ActionSchema(Schema):
+            timestamp = fields.Str(required=True, allow_none=False)
+
+
+### **13 Gennaio 2021**
 - rimodellato il db: dalla tabella "features" sono state eliminate le colonne "a priori" delle azioni. Queste ultime sono state inserite in una nuova tabella "actions" con chiave multipla ("feature","action","timestamp"). 
 - Rivista l'interfaccia db per permettere l'interrogazione su chiave multipla
-
 
 ### **10 Gennaio 2021**
 - Progettazione della gestione temporale delle azioni e separazione del concetto di form da quello di risultato della azione: ogni **azione** ha uno **schema di input** e dei **risultati in output** con uno schema **non necessariamente** coincidente. Quello che viene fornito alle form sono i dati necessari ad intraprendere un'azione. I risultati dell'azione devono essere registrati con una marcatura temporale. In questo modo ogni azione è univocamente determinata e gestibile con un modello del tipo ("feature","action","timestamp"), con una cardinalità 1-a-molti tra features e azioni 

@@ -9,17 +9,17 @@ name = "material"
 palette = {primary = "blue grey", accent = "pink"}
 
 [[tool.portray.mkdocs.nav]]
-Home = "README.md"
+Home = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
 TODO = "TODO.md"
 
 [[tool.portray.mkdocs.nav]]
-Changelog = "CHANGELOG.md"
-
-[[tool.portray.mkdocs.nav]]
     [[tool.portray.mkdocs.nav."API Reference"]]
     "Prototypes" = "docs/API Reference/prototypes.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "ActionSchemata" = "docs/API Reference/actionschemata.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
     "Features" = "docs/API Reference/features.md"

@@ -1,5 +1,14 @@
 ## Con Priorità
 
+## Organizzazione
+
+## Configurazione
+
+First Header | Second Header
+------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
+
 ### ***classe JsonDB: RIVEDERE L'INSERIMENTO!!! E' cambiato il modello****
 
 ### Introduzione delle classi Schema per tutte le azioni di tutte le tipologie

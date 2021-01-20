@@ -24,54 +24,30 @@ def prototypes(request=None, response=None):
 ritorna una struttura json di questo tipo:
 
 
-        {
-            "NomePrototipo1": {
-                "forms": {
-                    "form1": {
-                        "args": {
-                            "arg1.1": "type_arg1.1",
-                            "arg1.2": "type_arg1.2",
-                            ...
-                        },
-                        "mandatory": [ args keys sublist ]
-                    },
-                    "form2": {
-                        "args": {
-                            "arg2.1": "type_arg2.1",
-                            "arg2.2": "type_arg2.2",
-                            ...
-                        },
-                    },
+	"data": {
+	    "uid": ...,
+	    "module": "...,
+	    "struct": {
+		"classification": ...,
+		"type": ...,
+		"parameters": {
+		    "par1": {
+			"type": ...,
+			"operands": {
+			    "output": ...
+			}
+		    },
                     ...
-                },
-                "module": subclass of hielen2.datalink.HilenSource,
-                "struct": {
-                    "parameters": {
-                        "param1": {
-                            "operands": {
-                                "output": "parameter1 name"
-                            },
-                            "type": "series type"
-                        },
-                        "param2": {
-                            "operands": {
-                                "output": "parameter2 name"
-                            },
-                            "type": "series type"
-                        },
-                        ...
-                    },
-                    "properties": {
-                        "classification": feature classification,
-                        "type": feature type
-                    }
-                }
-            },
-            "NomePrototipo3": {
-                ...
-            },
-            ...
-        },
+		    "parN": {
+			"type": ...,
+			"operands": {
+			    "output": ...
+			}
+		    }
+		}
+	    }
+	}
+
 """
     out = ResponseFormatter()
     try:
