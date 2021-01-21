@@ -69,7 +69,7 @@ Possibili risposte:
 
         db["features"][uid] = feature
 
-        out.data = { "features": db["features"][uid] }
+        out.data = db["features"][uid]
 
     except KeyError as e:
         out.message = f"prototype '{prototype}' not found."
@@ -121,13 +121,13 @@ Possibili risposte:
     out = ResponseFormatter()
 
     try:
-        out.data = []
+        out.data = {"features":[]}
         extract=db["features"][uids]
         if not isinstance(extract,list):
             extract=[extract]
         for v in extract:
             if cntxt is None or v["context"] == cntxt:
-                out.data.append({
+                out.data['features'].append({
                     "type": "Feature",
                     "geometry": v.pop("geometry"),
                     "parameters": v.pop("parameters"),

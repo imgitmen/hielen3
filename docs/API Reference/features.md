@@ -7,7 +7,7 @@ _params_:
 
 - **uid**: Basic text / string value
 - **prototype**: Basic text / string value
-- **properties**: JSON Schema {**location**: str|bytes, **timestamp**: str|bytes, **label**: str|bytes, **style**: str|bytes, **context**: str|bytes, **description**: str|bytes, **status**: str|bytes}
+- **properties**: JSON Schema {**style**: str|bytes, **description**: str|bytes, **status**: str|bytes, **context**: str|bytes, **location**: str|bytes, **label**: str|bytes, **timestamp**: str|bytes}
 - **geometry**: JSON Schema {}
 
 _result_:
@@ -114,7 +114,7 @@ _description_:
 _params_:
 
 - **uid**: Basic text / string value
-- **properties**: JSON Schema {**location**: str|bytes, **timestamp**: str|bytes, **label**: str|bytes, **style**: str|bytes, **context**: str|bytes, **description**: str|bytes, **status**: str|bytes}
+- **properties**: JSON Schema {**style**: str|bytes, **description**: str|bytes, **status**: str|bytes, **context**: str|bytes, **location**: str|bytes, **label**: str|bytes, **timestamp**: str|bytes}
 - **geometry**: JSON Schema {}
 
 _result_:
