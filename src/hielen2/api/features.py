@@ -69,7 +69,7 @@ Possibili risposte:
 
         db["features"][uid] = feature
 
-        out.data = db["features"][uid]
+        out.data = { "features": db["features"][uid] }
 
     except KeyError as e:
         out.message = f"prototype '{prototype}' not found."
