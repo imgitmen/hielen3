@@ -60,7 +60,7 @@ configurazione
         feat = db["features"][feature]
         featobj = sourceman.sourceFactory(feat,conf['filecache'])
         out.data = featobj.getActionValues(actions,timestamp)
-        if out.data is not list:
+        if not isinstance(out.data,list):
             out.data=[out.data]
     except Exception as e:
         out.status = falcon.HTTP_NOT_FOUND

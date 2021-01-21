@@ -1,30 +1,9 @@
 ## Con Priorità
 
-## Organizzazione
 
-## Configurazione
+### MODULO ESTESO hielen2.ext.source_PhotoMonitoring
 
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
-
-### ***classe JsonDB: RIVEDERE L'INSERIMENTO!!! E' cambiato il modello****
-
-### Introduzione delle classi Schema per tutte le azioni di tutte le tipologie
-
-### Rivisitazione del'api GET `/prototypes` e  GET `/actions` per l'introspezione dei plugin
-
-### Configurazione hielen2.ext.PhotoMonitoring (netCDF)
-
--   definizione array dimensionali X,Y: 1- creo gli array di dimensione adeguata, 2- applico la matrice di trasformazione affine, 3- applico la proiezione da crs in input a EPSG:3857 
--   salvare file in filecache/{uid}/multidim.nc (dati)
--   definire percorso di salvataggio tiles: filecache/{uid}/{map}/ (tiles mappe)
--   salvare il primo tile a risoluzione adeguata: filecache/{uid}/{map}/base.png
--   salvataggio (stoccaggio) dell'immagine di base in filecache/{uid} (eventualmente compressa)
-	
-
-### Feed hielen2.ext.PhotoMonitoring
+-   
 
 -   analisi dei file csv in ingresso (NS, EW, Correlation se esiste)
 -   aggirnamento di filecache/{uid}/multidim.nc
