@@ -2257,7 +2257,7 @@ validation errors.</p>
 <p>Minimal ActionSchema object. Used to define at least a timestamp</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">FeedSchema</span>(<span class="n">ActionSchema</span>):
 
-    <span class="n">reference_time</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
+    <span class="n">reference_time</span> = <span class="n">fields</span>.<span class="nb">DateTime</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
     <span class="n">NS_displacement</span> = <span class="n">LocalFile</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 

@@ -1584,7 +1584,7 @@
 
 <span class="s s-Atom">class</span> <span class="nv">FeedSchema</span><span class="p">(</span><span class="nv">ActionSchema</span><span class="p">)</span><span class="s s-Atom">:</span>
 
-    <span class="s s-Atom">reference_time</span> <span class="o">=</span> <span class="s s-Atom">fields</span><span class="p">.</span><span class="nv">Str</span><span class="p">(</span><span class="s s-Atom">required</span><span class="o">=</span><span class="nv">False</span><span class="p">,</span> <span class="s s-Atom">allow_none</span><span class="o">=</span><span class="nv">False</span><span class="p">)</span>
+    <span class="s s-Atom">reference_time</span> <span class="o">=</span> <span class="s s-Atom">fields</span><span class="p">.</span><span class="nv">DateTime</span><span class="p">(</span><span class="s s-Atom">required</span><span class="o">=</span><span class="nv">False</span><span class="p">,</span> <span class="s s-Atom">allow_none</span><span class="o">=</span><span class="nv">False</span><span class="p">)</span>
 
     <span class="nv">NS_displacement</span> <span class="o">=</span> <span class="nv">LocalFile</span><span class="p">(</span><span class="s s-Atom">required</span><span class="o">=</span><span class="nv">False</span><span class="p">,</span> <span class="s s-Atom">allow_none</span><span class="o">=</span><span class="nv">False</span><span class="p">)</span>
 
@@ -2368,7 +2368,7 @@ validation errors.</p>
 <p>Minimal ActionSchema object. Used to define at least a timestamp</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">FeedSchema</span>(<span class="n">ActionSchema</span>):
 
-    <span class="n">reference_time</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
+    <span class="n">reference_time</span> = <span class="n">fields</span>.<span class="nb">DateTime</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
     <span class="n">NS_displacement</span> = <span class="n">LocalFile</span>(<span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
