@@ -20,7 +20,7 @@ class ConfigSchema(ActionSchema):
 
 
 class FeedSchema(ActionSchema):
-    reference_time = fields.Str(required=False, allow_none=False)
+    reference_time = fields.DateTime(required=False, allow_none=False)
     NS_displacement = LocalFile(required=False, allow_none=False)    
     EW_displacement = LocalFile(required=False, allow_none=False)    
     Coer = LocalFile(required=False, allow_none=False)    

@@ -37,104 +37,54 @@ _description_:
 
 ritorna una struttura json di questo tipo:
 
-
-    "data": {
-        "uid": ...,
-        "module": ...,
-        "struct": {
-            "classification": ...,
-            "type": ...,
-            "parameters": {
-                "par1": {
+        {
+            {
+                "uid1": ...,
+                "module1": ...,
+                "struct": {
+                    "classification": ...,
                     "type": ...,
-                    "operands": {
-                        "output": ...
+                    "parameters": {
+                        "par1_1": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        },
+                        "...",
+                        "par1_N": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        }
                     }
-                },
-                "...",
-                "parN": {
+                }
+            },
+            {
+                "uid2": ...,
+                "module2": ...,
+                "struct": {
+                    "classification": ...,
                     "type": ...,
-                    "operands": {
-                        "output": ...
+                    "parameters": {
+                        "par2_1": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        },
+                        "...",
+                        "par2_N": {
+                            "type": ...,
+                            "operands": {
+                                "output": ...
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-
-
-
-
-
-
-
-
-## **/prototypes/{prototype}**
-
-#### GET
--------------
-_params_:
-
-- **prototype**: Basic text / string value
-
-_result_:
-
-- **format**: JSON (Javascript Serialized Object Notation)
-- **content_type**: application/json; charset=utf-8
-
-_description_:
-
-
-**Alias per il recupero di tutte le informazioni di uno specifico prototipo**
-
-
-
-
-
-
-
-## **/prototypes/{prototype}/forms**
-
-#### GET
--------------
-_params_:
-
-- **prototype**: Basic text / string value
-
-_result_:
-
-- **format**: JSON (Javascript Serialized Object Notation)
-- **content_type**: application/json; charset=utf-8
-
-_description_:
-
-
-**Alias per il recupero di tutte le informazioni delle form di uno specifico prototipo**
-
-
-
-
-
-
-
-## **/prototypes/{prototype}/forms/{form}**
-
-#### GET
--------------
-_params_:
-
-- **prototype**: Basic text / string value
-- **form**: Basic text / string value
-
-_result_:
-
-- **format**: JSON (Javascript Serialized Object Notation)
-- **content_type**: application/json; charset=utf-8
-
-_description_:
-
-
-**Alias per il recupero di tutte le informazioni di una specifica form di uno specifico prototipo**
 
 
 

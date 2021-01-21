@@ -33,7 +33,7 @@ class ActionSchema(Schema):
     '''
     Minimal ActionSchema object. Used to define at least a timestamp
     '''
-    timestamp = fields.Str(required=True, allow_none=False)
+    timestamp = fields.DateTime(required=True, allow_none=False)
 
 class HielenSource(ABC):
     def __init__(self, feature, filecache):

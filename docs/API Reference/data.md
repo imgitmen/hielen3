@@ -5,7 +5,7 @@
 -------------
 _params_:
 
-- **datamap**: JSON Schema [{**timefrom**: str|bytes, **series**: [str|bytes], **timeto**: str|bytes}]
+- **datamap**: JSON Schema [{**timefrom**: str|bytes, **timeto**: str|bytes, **series**: [str|bytes]}]
 - **content_type**: Basic text / string value
 
 _result_:
