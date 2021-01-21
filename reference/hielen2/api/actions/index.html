@@ -1376,7 +1376,7 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">featobj</span><span class="o">.</span><span class="n">getActionValues</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span><span class="n">timestamp</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
 
             <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">]</span>
 
@@ -1760,7 +1760,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featobj</span><span class="p">.</span><span class="n">getActionValues</span><span class="p">(</span><span class="n">actions</span><span class="p">,</span><span class="nc">timestamp</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">list</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="p">,</span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=[</span><span class="n">out.data</span><span class="o">]</span><span class="w"></span>
 
