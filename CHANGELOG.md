@@ -2,6 +2,8 @@ CHANGELOG
 =========
 
 ## **v2.0.6**
+### **22 Gennaio 2021**
+- Ristrutturata la pagina di [TODO](http://development.imgback.com/docs/hielen2/TODO/), inserita categorizzazione e valutazione delle tempistica delle attività
 
 ### **20 Gennaio 2021**
 
