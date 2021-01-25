@@ -2,6 +2,21 @@ CHANGELOG
 =========
 
 ## **v2.0.6**
+### **25 Gennaio 2021**
+
+- Inserito il campo "hint" nella risposta di GET `/actionschemata[/{feature}[/{action}]]`
+
+- Implementata astrazione di DELETE `/actions/{feature}/{action}/`. 
+
+    Prima della rimozione della specifica azione dal db, vengono chimati i metodi preposti alla gestione della rimozione delle informazioni in cache, che si presuppone siano implemetati dai relativi moduli. I moduli possono implementare questi metodi solo se necessario.
+
+    Sintassi:
+
+    Invocando il metodo deleteActionValues(self,action,timestamp) della superclasse Hielen2.Source, essa tenterà di utilizzare il metodo della sottoclasse il cui nome è cotruito dal'unione della parola "delete" + il nome dell'azione con la prima lettera maiuscola: es: "deleteConfig". la superclasse passerà sempre un timestamp per individuare l'azione specifica
+
+- Implementato il metodo "deleteConfig" della classe Hielen2.ext.source_PhotoMonitoring
+
+
 ### **22 Gennaio 2021**
 - Ristrutturata la pagina di [TODO](http://development.imgback.com/docs/hielen2/TODO/), inserita categorizzazione e valutazione delle tempistica delle attività
 

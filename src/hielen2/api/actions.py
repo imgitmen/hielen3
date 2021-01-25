@@ -71,12 +71,33 @@ configurazione
     out.format(request=request, response=response)
     return
 
-
 @hug.get("/{feature}/{action}")
 def feature_action_values(feature, action, timestamp=None, request=None, response=None):
     """
     **Recupero dello stato corrente per una specifica azione di una specifica feature**"""
     return features_actions_values(feature, action, timestamp, request=request, response=response)
+
+
+@hug.delete("/{feature}/{action}")
+def feature_action_delete(feature,action,timestamp,request=None,response=None):
+    """
+    **Eliminazione di una determinata azione di una secifica feature**"""
+    out = ResponseFormatter()
+
+    # Trying to manage income feature request and its prototype configuration
+    try:
+        feat = db["features"][feature]
+        featobj = sourceman.sourceFactory(feat,conf['filecache'])
+        out.data = featobj.deleteActionValues(action,timestamp)
+    except Exception as e:
+        out.status = falcon.HTTP_NOT_FOUND
+        out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
+        out.format(request=request, response=response)
+        return
+
+    out.format(request=request, response=response)
+    return
+
 
 
 @hug.post("/{feature}/{action}", parse_body=False)
@@ -184,11 +205,16 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     try:
         result = featobj.execAction(action,**kwargs)
     except AttributeError as e:
-        raise e
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Action '{action}' not implemented."
         out.format(request=request, response=response)
         return
+    except ValueError as e:
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"Action values error: {e}."
+        out.format(request=request, response=response)
+        return
+
     except Exception as e:
         raise e
         pass

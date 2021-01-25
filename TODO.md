@@ -8,8 +8,9 @@ Giorni/Uomo effettivi | Priorità | Complessità | Copertura | Attività
 --------------------- | -------- | ----------- | --------- | -----------
 1    | 2        | bassa     | bassa | Features Prototypes o Interfaccia di modulo: Integrare informazioni capability: [series,map,cloud] e cachable (non sempre è vantaggioso usare la cache)
 2    | 2        | media     | media | Mapserver: istanza mapserver con workers (vedi Ecoplame) per la gestione delle mappe statiche tassellate (chiamate wms standard)
-1    | 4        | bassa     | alta  | inserire "suggerimenti" nei prototipi delle azioni da passare nella nella risposta alla chiamata "/actionSchemata"
+xx    | -        | bassa     | **Completo**  | inserire "suggerimenti" nei prototipi delle azioni da passare nella nella risposta alla chiamata "/actionSchemata"
 xx    | -        | bassa    | alta | Completare la Progettazione/Implementazione per la generazione delle istanze delle serie dati associate alla feature sulla base dei prototipi. _Non essenziale per Nhazca_
+xx    | -        | bassa | **Completo** | API: DELETE `/action/{feature}/{config}`
 
 ### astrazione interrogazione **series**:
 Giorni/Uomo effettivi | Priorità | Complessità | Copertura | Attività

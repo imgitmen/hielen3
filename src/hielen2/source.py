@@ -66,6 +66,23 @@ class HielenSource(ABC):
         except KeyError:
             return []
 
+    def deleteActionValues(self, action, timestamp):
+        out=db['actions'][self.uid,action,timestamp]
+        
+        try:
+            f"{action.capitalize()}Schema"
+            self.__getattribute__(f"delete{action.capitalize()}")(timestamp)
+        except Exception as e:
+            pass
+        
+        try:
+            db['actions'][self.uid,action,timestamp]=None
+        except Exception as e:
+            raise ValueError(e)
+
+        return out
+
+
     @abstractmethod
     def data(timefrom=None, timeto=None, geom=None, **kwargs):
         pass

@@ -114,7 +114,7 @@ def hashfile(filename):
 
 def getSchemaDict(schema):
 
-    out = { "fields":{},"required":[] }
+    out = { "fields":{},"required":[], "hint":schema.__doc__ }
 
     for k,w in schema.dump_fields.items():
         out['fields'][k]=w.__class__.__name__
