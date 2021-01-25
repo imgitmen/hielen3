@@ -470,6 +470,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#feature_action_delete" class="md-nav__link">
+    feature_action_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#feature_action_values" class="md-nav__link">
     feature_action_values
   </a>
@@ -888,6 +895,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#feature_action_delete" class="md-nav__link">
+    feature_action_delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#feature_action_values" class="md-nav__link">
     feature_action_values
   </a>
@@ -1278,7 +1292,49 @@
 342
 343
 344
-345</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1403,6 +1459,40 @@
 <span class="sd">    **Recupero dello stato corrente per una specifica azione di una specifica feature**&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">features_actions_values</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{feature}</span><span class="s2">/</span><span class="si">{action}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">feature_action_delete</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">timestamp</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    **Eliminazione di una determinata azione di una secifica feature**&quot;&quot;&quot;</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
+
+    <span class="c1"># Trying to manage income feature request and its prototype configuration</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">feat</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
+
+        <span class="n">featobj</span> <span class="o">=</span> <span class="n">sourceman</span><span class="o">.</span><span class="n">sourceFactory</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;filecache&#39;</span><span class="p">])</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">featobj</span><span class="o">.</span><span class="n">deleteActionValues</span><span class="p">(</span><span class="n">action</span><span class="p">,</span><span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;feature &#39;</span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">&#39; does not exists or it is misconfigured: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">return</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{feature}</span><span class="s2">/</span><span class="si">{action}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">parse_body</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
@@ -1576,11 +1666,19 @@
 
     <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="k">raise</span> <span class="n">e</span>
-
         <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_IMPLEMENTED</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Action &#39;</span><span class="si">{</span><span class="n">action</span><span class="si">}</span><span class="s2">&#39; not implemented.&quot;</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">return</span>
+
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_BAD_REQUEST</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Action values error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.&quot;</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
@@ -1634,6 +1732,53 @@
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>
+<h3 id="feature_action_delete">feature_action_delete</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">feature_action_delete</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">action</span><span class="p">,</span>
+    <span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Eliminazione di una determinata azione di una secifica feature</strong></p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{feature}/{action}&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">feature_action_delete</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="k">action</span><span class="p">,</span><span class="nc">timestamp</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    **Eliminazione di una determinata azione di una secifica feature**&quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">Trying</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">manage</span><span class="w"> </span><span class="n">income</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">prototype</span><span class="w"> </span><span class="n">configuration</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features&quot;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">featobj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sourceman</span><span class="p">.</span><span class="n">sourceFactory</span><span class="p">(</span><span class="n">feat</span><span class="p">,</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;filecache&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">featobj</span><span class="p">.</span><span class="n">deleteActionValues</span><span class="p">(</span><span class="k">action</span><span class="p">,</span><span class="nc">timestamp</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;feature &#39;{feature}&#39; does not exists or it is misconfigured: {e}&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"></span>
+</code></pre></div>
+
+</details>
 <h3 id="feature_action_values">feature_action_values</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">feature_action_values</span><span class="p">(</span>
     <span class="n">feature</span><span class="p">,</span>
@@ -1975,11 +2120,19 @@
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
-
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_IMPLEMENTED</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;Action &#39;{action}&#39; not implemented.&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_BAD_REQUEST</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;Action values error: {e}.&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 

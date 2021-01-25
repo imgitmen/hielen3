@@ -1648,7 +1648,7 @@
 
 <span class="k">def</span> <span class="nf">getSchemaDict</span><span class="p">(</span><span class="n">schema</span><span class="p">):</span>
 
-    <span class="n">out</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;fields&quot;</span><span class="p">:{},</span><span class="s2">&quot;required&quot;</span><span class="p">:[]</span> <span class="p">}</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;fields&quot;</span><span class="p">:{},</span><span class="s2">&quot;required&quot;</span><span class="p">:[],</span> <span class="s2">&quot;hint&quot;</span><span class="p">:</span><span class="n">schema</span><span class="o">.</span><span class="vm">__doc__</span> <span class="p">}</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">schema</span><span class="o">.</span><span class="n">dump_fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
@@ -1799,7 +1799,7 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">getSchemaDict</span><span class="p">(</span><span class="k">schema</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;fields&quot;</span><span class="err">:{}</span><span class="p">,</span><span class="ss">&quot;required&quot;</span><span class="err">:[]</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;fields&quot;</span><span class="err">:{}</span><span class="p">,</span><span class="ss">&quot;required&quot;</span><span class="err">:[]</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hint&quot;</span><span class="err">:</span><span class="k">schema</span><span class="p">.</span><span class="n">__doc__</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">schema</span><span class="p">.</span><span class="n">dump_fields</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 

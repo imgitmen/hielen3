@@ -836,6 +836,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#deleteactionvalues" class="md-nav__link">
+    deleteActionValues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#execaction" class="md-nav__link">
     execAction
   </a>
@@ -990,6 +997,13 @@
           <li class="md-nav__item">
   <a href="#data" class="md-nav__link">
     data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deleteactionvalues" class="md-nav__link">
+    deleteActionValues
   </a>
   
 </li>
@@ -1155,6 +1169,40 @@ inheritance.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="k">data</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">geom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="n">kwargs</span>
+</code></pre></div>
+
+</details>
+<h5 id="deleteactionvalues">deleteActionValues</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">deleteActionValues</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">action</span><span class="p">,</span>
+    <span class="n">timestamp</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">deleteActionValues</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">):</span>
+
+        <span class="k">out</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="k">self</span><span class="p">.</span><span class="n">uid</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="k">timestamp</span><span class="p">]</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="n">f</span><span class="ss">&quot;{action.capitalize()}Schema&quot;</span>
+
+            <span class="k">self</span><span class="p">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;delete{action.capitalize()}&quot;</span><span class="p">)(</span><span class="k">timestamp</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="k">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">pass</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">][</span><span class="k">self</span><span class="p">.</span><span class="n">uid</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="k">timestamp</span><span class="p">]</span><span class="o">=</span><span class="k">None</span>
+
+        <span class="k">except</span> <span class="k">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">raise</span> <span class="n">ValueError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">out</span>
 </code></pre></div>
 
 </details>
