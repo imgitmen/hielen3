@@ -16,6 +16,8 @@ CHANGELOG
 
 - Implementato il metodo "deleteConfig" della classe Hielen2.ext.source_PhotoMonitoring
 
+- Corretto bug minore di gestione delle azioni in caso esse producano errori non preventivati.
+
 
 ### **22 Gennaio 2021**
 - Ristrutturata la pagina di [TODO](http://development.imgback.com/docs/hielen2/TODO/), inserita categorizzazione e valutazione delle tempistica delle attività

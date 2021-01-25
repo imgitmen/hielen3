@@ -78,6 +78,28 @@ _description_:
 
 
 
+#### DELETE
+-------------
+_params_:
+
+- **feature**: Basic text / string value
+- **action**: Basic text / string value
+- **timestamp**: Basic text / string value
+
+_result_:
+
+- **format**: JSON (Javascript Serialized Object Notation)
+- **content_type**: application/json; charset=utf-8
+
+_description_:
+
+
+    **Eliminazione di una determinata azione di una secifica feature**
+
+
+
+
+
 #### POST
 -------------
 _params_:
