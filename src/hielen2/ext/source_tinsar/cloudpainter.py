@@ -1,12 +1,14 @@
 # coding: utf-8
 import pandas as pd
 import numpy as np
+import laspy
 from scipy.spatial import KDTree
 from matplotlib.colors import Normalize, Colormap, LinearSegmentedColormap
 from matplotlib.cm import ScalarMappable
+import getopt
+import sys
 
 import open3d as o3d
-
 
 def valorize(basecld, valcld, distance=10, group=1, degree=0):
 
@@ -73,6 +75,8 @@ def valorize(basecld, valcld, distance=10, group=1, degree=0):
           exact value of the unique closest neighbour, if it exists.
 
     """
+
+    print ("CHECK: Enter Valorize")
     basecld = pd.DataFrame(basecld)
     basecld.columns = ["x", "y", "z"]
     valcld = pd.DataFrame(valcld)
@@ -88,6 +92,7 @@ def valorize(basecld, valcld, distance=10, group=1, degree=0):
     idsv = pd.DataFrame(idsv).stack()
     idsv.name = "idsv"
 
+    print ("CHECK: Distance calculation done")
     ## Here we construct the DataFrame contains relation beetween each point
     ## in base cloud (base cloud index) and his neighbous (value cloud ids,
     ## distance and neighbour group progressive). Then we clean the infinite
@@ -112,6 +117,7 @@ def valorize(basecld, valcld, distance=10, group=1, degree=0):
         lambda x: sum(x["contrib"]) / sum(x["weight"])
     )
 
+    print ("CHECK: Weight calculation done")
     return values
 
 
@@ -138,6 +144,7 @@ def colorize(vals, cmap=["red", "green", "blue"], vmin=None, vmax=None):
 
     """
 
+    print ("CHECK: Enter Colorize")
     vmin = vmin or vals.min()
     vmax = vmax or vals.max()
 
@@ -154,8 +161,8 @@ def colorize(vals, cmap=["red", "green", "blue"], vmin=None, vmax=None):
 
 
 def paint(
-    basecld,
     valcld,
+    basecld=None,
     distance=10,
     group=1,
     degree=0,
@@ -209,13 +216,17 @@ def paint(
 
     """
 
-    basecld = pd.DataFrame(basecld)
-    basecld.columns = ["x", "y", "z"]
     valcld = pd.DataFrame(valcld)
     valcld.columns = ["x", "y", "z", "v"]
+    values=None
 
-    values = valorize(basecld, valcld, distance=distance, group=group, degree=degree)
-    values.name = "v"
+    if basecld is not None:
+        basecld = pd.DataFrame(basecld)
+        basecld.columns = ["x", "y", "z"]
+        values = valorize(basecld, valcld, distance=distance, group=group, degree=degree)
+        values.name = "v"
+    else:
+        values = valcld["v"] 
 
     colors = pd.DataFrame(
         colorize(values, cmap=cmap, vmin=vmin, vmax=vmax),
@@ -223,46 +234,163 @@ def paint(
         index=values.index,
     )[["r", "g", "b"]]
 
-    result = basecld.join(colors, how="left").replace(np.nan, 0.9)
-    result = result.join(values, how="left")
+    if basecld is not None:
+        result = basecld.join(colors, how="left").replace(np.nan, 0.9)
+        result = result.join(values, how="left")
+    else:
+        result = valcld.join(colors,how="left")
 
     return result[["x", "y", "z", "v", "r", "g", "b"]]
 
+#65536
+def makelaz(frame,filetowrite,coordmult=1,colormult=1,scale=[1,1,1],framevalues=None):
+    hdr = laspy.header.Header(point_format=2)
+    frame.columns=['x','y','z','r','g','b']
+    outfile = laspy.file.File(filetowrite,mode='w',header=hdr)
+    x=frame['x']*coordmult
+    y=frame['y']*coordmult
+    z=frame['z']*coordmult
+    r=frame['r']*colormult
+    g=frame['g']*colormult
+    b=frame['b']*colormult
+    #outfile.header.min=[ np.floor(np.min(x)), np.floor(np.min(y)), np.floor(np.min(z)) ]
+    #outfile.header.max=[ np.ceil(np.max(x)), np.ceil(np.max(y)), np.ceil(np.max(z)) ]
+    #outfile.header.offset=outfile.header.min
+    outfile.header.scale=scale
+    outfile.x=x.values
+    outfile.y=y.values
+    outfile.z=z.values
+    outfile.Red=r.values
+    outfile.Green=g.values
+    outfile.Blue=b.values
+    outfile.header.offset=outfile.header.min
+    outfile.close()
 
-def main():
 
-    cld = pd.read_csv("./cloud.orig.csv", header=None, sep=" ")
-    rea = pd.read_csv("./nuvola_spost_utm.csv", sep=";", decimal=",")[
-        ["X_UTM", "Y_UTM", "Height", "Spostament"]
-    ]
-
-    # ESEMPIO 1
-    # Smooth --- Il peso dei vicini è alto, la distanza di influenza è alta e i limiti di colore sono
-    # impostati tra min e max dei valori in ingresso
-    #
-    res = paint(
-        cld,
-        rea,
-        distance=10,
-        group=10,
-        degree=2,
-        cmap=["red", "green", "blue"],
-        vmin=None,
-        vmax=None,
-    )
-
-    # ESEMPIO 2
-    # N-N secco --- Un solo vicino che assegna il colore. I limiti di colore più stretti del range dei
-    # valori in ingresso
-    #
-    ### res=paint(cld,rea,distance=10,group=1,degree=0,cmap=['red','orange','yellow'],vmin=-2.5,vmax=2.5)
-
-    # QUI USO open3d perchè è molto comodo
+def openpcl(res):
+    #QUI USO open3d perchè è molto comodo
     pcl = o3d.geometry.PointCloud()
     pcl.points = o3d.utility.Vector3dVector(res[["x", "y", "z"]].values)
     pcl.colors = o3d.utility.Vector3dVector(res[["r", "g", "b"]].values)
     o3d.visualization.draw_geometries([pcl])
 
+def usage():
+    helptext = r"""usage: cloudainter.py [option] path/to/radar/result.csv
+parmeters:
+path/to/radar/result.csv     : path for csv based radar cloud in the format
+                               X,Y,Z,V,...
+options:
+-b path    --basecloud=path  : path for csv based reference cloud in the
+                               format X,Y,Z,...
+-g number  --group=number    : max number of neighbours to interpolate
+-d number  --distance=number : nearest neighbour max radius
+-D number  --degree=number   : neighbour contribute attenuation degree
+                               along distance
+-c csv     --colors=csv      : colormap as comma separated colors names
+-o path    --outfile=path    : output file name. Ignored when --output=view
+-O type    --output=type     : output types: [laz|csv|view]. Default laz
+-v number  --vmin=number     : min value for the colormap range
+-V number  --vmax=numner     : max value for the colormap range"""
+
+    print (helptext)
+
 
 if __name__ == "__main__":
-    main()
+
+    #DEFAULTS
+    datacloud=None
+    basecloud=None
+    group=1
+    distance=5
+    degree=0
+    colors=['violet','blue','cyan','green','yellow','orange','red']
+    outfile=None
+    output='las'
+    vmin=-500
+    vmax=500
+
+    try:
+        opts, args = getopt.getopt(
+                sys.argv[1:], 
+                "b:g:d:D:c:o:O:v:V:",
+                [
+                    "basecloud=",
+                    "group=",
+                    "distance=",
+                    "degree=",
+                    "colors=",
+                    "outfile=",
+                    "output=",
+                    "vmin=",
+                    "vmax="
+                ])
+
+
+        for o,a in opts:
+            if o in ("-b", "--basecloud"):
+                basecloud=a
+            elif o in ("-g", "--group"):
+                group=a
+            elif o in ("-d", "--distance"):
+                distance=a
+            elif o in ("-D", "--degree"):
+                degree=a
+            elif o in ("-c", "--colors"):
+                colors=a.split(",")
+            elif o in ("-o", "--outfile"):
+                outfile=a
+            elif o in ("-O", "--output"):
+                output=a
+            elif o in ("-v", "--vmin"):
+                vmin=a
+            elif o in ("-V", "--vmax"):
+                vmax=a
+            else:
+                assert False, "unhandled option"
+
+        try:
+            infile=args[0]
+        except Exception:
+            raise Exception(f"No file")
+
+        datacloud = pd.read_csv(infile)
+        datacloud = datacloud[datacloud.columns[0:4]]
+        datacloud.columns = ["X","Y","Z","V"]
+
+        if basecloud is not None: 
+            basecloud = pd.read_csv(basecloud)
+            basecloud = basecloud[basecloud.columns[0:3]]
+            basecloud.columns = ["X","Y","Z"]
+    
+        result = paint(
+                valcld=datacloud,
+                basecld=basecloud,
+                distance=distance,
+                degree=degree,
+                group=group,
+                cmap=colors,
+                vmin=vmin,
+                vmax=vmax
+                )
+
+        print (output)
+
+        if outfile is None:
+            outfile = '.'.join([infile,output])
+
+        if output == 'las':
+            makelaz(result[["x","y","z","r","g","b"]],outfile)
+        elif output == 'csv':
+            result.to_csv(outfile,index=False)
+        elif output == 'view':
+            openpcl(result)
+        else:
+            raise Exception(f'unkwnown output type:{output}')
+
+    except Exception as err:
+        # print help information and exit:
+        print(err) 
+        usage()
+        sys.exit(2)
+
+

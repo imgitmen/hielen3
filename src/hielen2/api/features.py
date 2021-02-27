@@ -65,7 +65,9 @@ Possibili risposte:
         except Exception:
             properties["context"] = "no-context"
 
+
         feature.update(properties)
+
 
         db["features"][uid] = feature
 

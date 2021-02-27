@@ -11,6 +11,7 @@ Giorni/Uomo effettivi | Priorità | Complessità | Copertura | Attività
 xx    | -        | bassa     | **Completo**  | inserire "suggerimenti" nei prototipi delle azioni da passare nella nella risposta alla chiamata "/actionSchemata"
 xx    | -        | bassa    | alta | Completare la Progettazione/Implementazione per la generazione delle istanze delle serie dati associate alla feature sulla base dei prototipi. _Non essenziale per Nhazca_
 xx    | -        | bassa | **Completo** | API: DELETE `/action/{feature}/{config}`
+2     | 3        | media | media  | Modello di dipendenza azione-azione: field list, inserire default in actionSchemata 
 
 ### astrazione interrogazione **series**:
 Giorni/Uomo effettivi | Priorità | Complessità | Copertura | Attività
@@ -83,6 +84,8 @@ Giorni/Uomo effettivi | Priorità | Complessità | Copertura | Attività
 6 | 5 | media | media | Restituire in output il prodotto "html" della nuvola di punti. _Nota_: Produzione html parzialmente implementato da sviluppo di GC.
 
 ## ALTRO SENZA PRIORITA'
+- Gestione degli schemi del db: Definendo gli schemi Marshmallow per le tabelle dei DB è possibile utilizzare Dump e Load per aggirare la non seriabilità di datetime
+- Gestione della cache per le azioni: i moduli gestiscono la "produzione" la cache deve essere gestita esternamente
 - **Moduli HielenSource**: attualmente, per comodità, vengono sviluppati come sotto moduli di hielen2 ma il modo corretto è quello di separare lo sviluppo. Sarà sempre possibile farlo dal momento che le strutture vengono sviluppate con l'obiettivo della separazione.
 - Implementare procedura di testing delle api
 - verificare il default dei campi marshmallow (sembra non prenderlo in considerazione, prob non arriva null ma "")

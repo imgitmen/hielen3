@@ -14,6 +14,7 @@ from himada.api import ResponseFormatter
 from urllib.parse import unquote
 from importlib import import_module
 
+import traceback
 
 @hug.get("/{feature}")
 def features_actions_values(feature, actions=None, timestamp=None, request=None, response=None):
@@ -63,6 +64,7 @@ configurazione
         if not isinstance(out.data,list):
             out.data=[out.data]
     except Exception as e:
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request, response=response)
@@ -90,6 +92,7 @@ def feature_action_delete(feature,action,timestamp,request=None,response=None):
         featobj = sourceman.sourceFactory(feat,conf['filecache'])
         out.data = featobj.deleteActionValues(action,timestamp)
     except Exception as e:
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request, response=response)
@@ -136,7 +139,7 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
         feat = db["features"][feature]
         featobj = sourceman.sourceFactory(feat,conf['filecache'])
     except KeyError as e:
-        #raise e
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"
         out.format(request=request, response=response)
@@ -145,13 +148,13 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     try:
         schema=featobj.getActionSchema(action)
     except KeyError as e:
-        raise e
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Prototype '{featobj.type}' actions not implemented."
         out.format(request=request, response=response)
         return
     except ModuleNotFoundError as e:
-        #raise e
+        traceback.print_exc()
         out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
         out.message = f"Prototype '{featobj.type}' module not found."
         out.format(request=request, response=response)
@@ -205,30 +208,31 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     try:
         result = featobj.execAction(action,**kwargs)
     except AttributeError as e:
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Action '{action}' not implemented."
         out.format(request=request, response=response)
         return
     except ValueError as e:
+        traceback.print_exc()
         out.status = falcon.HTTP_BAD_REQUEST
         out.message = f"Action values error: {e}."
         out.format(request=request, response=response)
         return
 
     except Exception as e:
-        raise e
-        pass
+        traceback.print_exc()
 
     try:
         db["actions"][feature,action,result['timestamp']]={"value":result}
         db["features"].save()
     except KeyError as e:
-        #raise e
+        traceback.print_exc()
         out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
         out.message = str(e)
         out.format(request=request, response=response)
     except ValueError as e:
-        #raise e
+        traceback.print_exc()
         out.status = falcon.HTTP_BAD_REQUEST
         out.message = str(e)
         out.format(request=request, response=response)

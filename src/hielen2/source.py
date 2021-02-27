@@ -1,56 +1,109 @@
 #!/usr/bin/env python
 # coding=utf-8
-import os
+import os, re
+from glob import glob
+from pathlib import Path, os
 from inspect import ismodule
 from abc import ABC, abstractmethod
 from importlib import import_module
 from hielen2 import db, conf
 from hielen2.utils import getSchemaDict
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, ValidationError
+from numpy import datetime64
 
 def loadModule(proto):
     if ismodule(proto):
         return proto
     mod=db["features_proto"][proto]["module"]
-    return import_module(mod)
-
+    try:
+        return import_module(mod)
+    except Exception as e:
+        raise e
+        return proto
 
 def moduleActions(proto):
     mod=loadModule(proto)
-    return [ k.replace('Schema','').lower() for k in mod.__dict__.keys() if 'Schema' in k ]
+    try:
+        return [ k.replace('Schema','').lower() for k in mod.__dict__.keys() if 'Schema' in k ]
+    except Exception as e:
+        return []
 
+def getActionSchemaClass(proto, action):
+    mod=loadModule(proto)
+    return mod.__getattribute__(f"{action.capitalize()}Schema")
 
 def getActionSchema(proto, action):
-    mod=loadModule(proto)
-    return getSchemaDict(mod.__getattribute__(f"{action.capitalize()}Schema")())
-
+    return getSchemaDict(getActionSchemaClass(proto, action)())
 
 def sourceFactory(featdict,filecache):
     mod = loadModule(featdict['type'])
     return mod.Source(feature=featdict, filecache=filecache)
 
+
+class SourceFileCache():
+    def __init__(self, filecache, subpath=''):
+        self.filecache = Path(filecache) / subpath
+
+    def __truediv__(self, other):
+        other = str(other).replace(f"{self.filecache}{os.sep}","")
+        return self.filecache / other
+
+    def mkdir(self,path):
+        outpath = self / path
+        os.makedirs( outpath , exist_ok=True)
+        return outpath
+
+    def list(self):
+        l = glob(str(self.filecache / '*/'))
+        l = [ a.replace(f"{self.filecache}{os.sep}","") for a in l]
+        l.sort()
+        return l
+
+    def hasher(self,*args,**kwargs):
+        h=[ *args ]
+        h.extend(list(kwargs.values()))
+        h=''.join([ str(a) for a in h])
+        return re.sub("[^\d]","",h)  
+
+def _agoodtime(t):
+
+    try:
+        t=np.datetime64(t)
+        assert not np.isnat(t)
+        t=str(t)
+    except Exception:
+        t=None
+    return t
+
+
+class StringTime(fields.DateTime):
+
+    def _deserialize(self, value, attr, data, **kwargs):
+        return str(super()._deserialize(value, attr, data, **kwargs))
+
+    def _serialize(self, value, attr, obj, **kwargs):
+        return _agoodtime(value)
+
 class ActionSchema(Schema):
     '''
     Minimal ActionSchema object. Used to define at least a timestamp
     '''
-    timestamp = fields.DateTime(required=True, allow_none=False)
+    timestamp = StringTime(required=True, allow_none=False)
 
 class HielenSource(ABC):
     def __init__(self, feature, filecache):
         self.__dict__.update(feature)
         self.module = import_module(self.__module__)
         #TODO possibili problemi di sicurezza
-        self.filecache = os.path.join(filecache,self.uid)
-
-    def makeCachePath(self,path):
-        outpath=os.path.join(self.filecache, path)
-        os.makedirs(outpath, exist_ok=True)
-        return outpath
-
-    def getRelativePath(self,path):
-        return path.replace(f"{self.filecache}/","")
+        self.filecache = SourceFileCache( filecache, self.uid )
 
     def execAction(self,action,**kwargs):
+        aclass=getActionSchemaClass(self.module,action)
+        try:
+            kwargs=aclass().load(kwargs)
+        except ValidationError as e:
+            raise ValueError(e)
+
         return self.__getattribute__(action)(**kwargs)
 
     def getActionSchema(self,action):
@@ -71,7 +124,7 @@ class HielenSource(ABC):
         
         try:
             f"{action.capitalize()}Schema"
-            self.__getattribute__(f"delete{action.capitalize()}")(timestamp)
+            self.__getattribute__(f"clean{action.capitalize()}")(timestamp)
         except Exception as e:
             pass
         
@@ -81,6 +134,10 @@ class HielenSource(ABC):
             raise ValueError(e)
 
         return out
+
+    @abstractmethod
+    def map(timestamp):
+        pass
 
 
     @abstractmethod

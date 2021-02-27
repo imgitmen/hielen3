@@ -9,6 +9,5 @@ __license__ = "MIT"
 __uri__ = ""
 
 from .phm import Source, ConfigSchema, FeedSchema
-from . import ncmangle
 
 __all__ = ["Source", "ConfigSchema", "FeedSchema"]

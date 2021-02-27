@@ -2,6 +2,9 @@ CHANGELOG
 =========
 
 ## **v2.0.6**
+### **27 Gennaio 2021**
+- Inserita la validazione dei campi delle action 
+
 ### **25 Gennaio 2021**
 
 - Inserito il campo "hint" nella risposta di GET `/actionschemata[/{feature}[/{action}]]`
