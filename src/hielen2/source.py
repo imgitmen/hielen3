@@ -14,6 +14,7 @@ from numpy import datetime64
 def loadModule(proto):
     if ismodule(proto):
         return proto
+
     mod=db["features_proto"][proto]["module"]
     try:
         return import_module(mod)
@@ -35,29 +36,25 @@ def getActionSchemaClass(proto, action):
 def getActionSchema(proto, action):
     return getSchemaDict(getActionSchemaClass(proto, action)())
 
-def sourceFactory(featdict,filecache):
-    mod = loadModule(featdict['type'])
-    return mod.Source(feature=featdict, filecache=filecache)
+def sourceFactory(feat):
+    if isinstance(feat, str):
+        feat=db['features'][feat]
+    return loadModule(feat['type']).Source(feature=feat)
 
 
-class SourceFileCache():
-    def __init__(self, filecache, subpath=''):
-        self.filecache = Path(filecache) / subpath
+class SourceCache():
+
+    def __init__(self, syspath, subpath=''):
+        self.cache=Path(syspath) / subpath
 
     def __truediv__(self, other):
-        other = str(other).replace(f"{self.filecache}{os.sep}","")
-        return self.filecache / other
+        other = str(other).replace(f"{self.cache}{os.sep}","")
+        return self.cache / other
 
-    def mkdir(self,path):
+    def mkdir(self,path=''):
         outpath = self / path
         os.makedirs( outpath , exist_ok=True)
         return outpath
-
-    def list(self):
-        l = glob(str(self.filecache / '*/'))
-        l = [ a.replace(f"{self.filecache}{os.sep}","") for a in l]
-        l.sort()
-        return l
 
     def hasher(self,*args,**kwargs):
         h=[ *args ]
@@ -91,11 +88,12 @@ class ActionSchema(Schema):
     timestamp = StringTime(required=True, allow_none=False)
 
 class HielenSource(ABC):
-    def __init__(self, feature, filecache):
+    def __init__(self, feature):
         self.__dict__.update(feature)
         self.module = import_module(self.__module__)
         #TODO possibili problemi di sicurezza
-        self.filecache = SourceFileCache( filecache, self.uid )
+        for k,w in conf['syscache'].items():
+            self.__setattr__(k, SourceCache(w,self.uid) )
 
     def execAction(self,action,**kwargs):
         aclass=getActionSchemaClass(self.module,action)
@@ -115,9 +113,13 @@ class HielenSource(ABC):
         if timestamp is None:
             timestamp=slice(None,None)
         try:
-            return db['actions'][self.uid,action,timestamp]
+            out = db['actions'][self.uid,action,timestamp]
+            if not isinstance(out,list):
+                out = [out]
         except KeyError:
             return []
+
+        return out
 
     def deleteActionValues(self, action, timestamp):
         out=db['actions'][self.uid,action,timestamp]
@@ -134,10 +136,6 @@ class HielenSource(ABC):
             raise ValueError(e)
 
         return out
-
-    @abstractmethod
-    def map(timestamp):
-        pass
 
 
     @abstractmethod

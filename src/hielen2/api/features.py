@@ -3,10 +3,11 @@
 import hug
 import falcon
 from hielen2 import db
-from hielen2.utils import JsonValidable
+from hielen2.utils import JsonValidable, hasher
 from marshmallow import Schema, fields
 from himada.api import ResponseFormatter
 from marshmallow_geojson import GeoJSONSchema
+import traceback
 
 
 class FeaturePropertiesSchema(Schema):
@@ -17,6 +18,8 @@ class FeaturePropertiesSchema(Schema):
     style = fields.Str(default=None)
     status = fields.Str(default=None)
     timestamp = fields.Str(default=None)
+
+
 
 
 @hug.post("/")
@@ -49,35 +52,58 @@ Possibili risposte:
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
 
     try:
-        feature = db["features_proto"][prototype]['struct']
+#        feature = db["features_proto"][prototype]['struct']
 
-#TODO CREARE SERIES
-
-        feature['parameters']={ k:None for k in feature['parameters'].keys() }
-
-##
-
+        feature = db["features_proto"][prototype]
         feature["geometry"]= geometry
-        feature["uid"] = uid
+        feature["uid"]=uid
+        feature["type"]=prototype
 
         try:
             assert properties["context"] is not None
         except Exception:
             properties["context"] = "no-context"
 
-
         feature.update(properties)
+       
+        try:
+            db["features"][uid]
+            raise ValueError ( f"feature {uid} exists" )
+        except KeyError:
+            pass
 
+        params={}
 
-        db["features"][uid] = feature
+        for v in feature['parameters']:
+            param=v['param']
+            struct=v['struct']
+            suid=hasher(uid,param)
+
+            try:
+                db['series'][suid]
+                raise ValueError( f"serires '{uid}_{param}' ({suid}) exists" )
+            except KeyError:
+                pass
+            
+            for k,w in struct.pop('init_operands').items():
+                struct['operands'][k]=eval(w.replace('{{new}}','feature'))
+
+            db['series'][suid]=struct
+            params[param]=suid
+
+        feature['parameters']=params
+
+        db["features"][uid]=feature
 
         out.data = db["features"][uid]
 
     except KeyError as e:
+        traceback.print_exc()
         out.message = f"prototype '{prototype}' not found."
         out.status = falcon.HTTP_NOT_FOUND
     except ValueError as e:
-        out.message = f"feature '{feature['uid']}' exists"
+        traceback.print_exc()
+        out.message = str(e)
         out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
@@ -211,6 +237,10 @@ Possibili risposte:
 
     try:
         out.data = db["features"][uid]
+        for v in out.data['parameters'].values():
+            if v is not None:
+                db['series'][v] = None
+
         db["features"][uid] = None
     except KeyError as e:
         out.status = falcon.HTTP_NOT_FOUND

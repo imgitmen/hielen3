@@ -58,8 +58,8 @@ configurazione
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        feat = db["features"][feature]
-        featobj = sourceman.sourceFactory(feat,conf['filecache'])
+        #feat = db["features"][feature]
+        featobj = sourceman.sourceFactory(feature)
         out.data = featobj.getActionValues(actions,timestamp)
         if not isinstance(out.data,list):
             out.data=[out.data]
@@ -88,8 +88,8 @@ def feature_action_delete(feature,action,timestamp,request=None,response=None):
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        feat = db["features"][feature]
-        featobj = sourceman.sourceFactory(feat,conf['filecache'])
+        #feat = db["features"][feature]
+        featobj = sourceman.sourceFactory(feature)
         out.data = featobj.deleteActionValues(action,timestamp)
     except Exception as e:
         traceback.print_exc()
@@ -136,8 +136,8 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        feat = db["features"][feature]
-        featobj = sourceman.sourceFactory(feat,conf['filecache'])
+        #feat = db["features"][feature]
+        featobj = sourceman.sourceFactory(feature)
     except KeyError as e:
         traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND

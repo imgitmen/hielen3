@@ -13,7 +13,7 @@ from himada.api import ResponseFormatter
 import traceback
 
 @hug.get('/map/')
-def map(features, timestamp=None, output=None, request=None, response=None):
+def map(features, timestamp=None, paramser=None, timeref=None, request=None, response=None):
 
     """
 
@@ -22,9 +22,19 @@ def map(features, timestamp=None, output=None, request=None, response=None):
 
     # Trying to manage income feature request and its prototype configuration
     try:
-        feat = db["features"][features]
-        featobj = sourceman.sourceFactory(feat,conf['filecache'])
-        featobj.map(timestamp)
+        #feat = db["features"][features]
+        featobj = sourceman.sourceFactory(feature)
+
+
+        print ("\n\n\n")
+        print ("FEATS",features) 
+        print ("TIMESTAMP",timestamp)
+        print ("TIMEREF",timeref)
+        print ("PARAMSER", paramser)
+        print ("\n\n\n")
+
+
+        out.data=featobj.map(timestamp, timeref, paramser)
     except Exception as e:
         traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
@@ -37,8 +47,8 @@ def map(features, timestamp=None, output=None, request=None, response=None):
 
 
 @hug.get('/map/{feature}')
-def map_feat(feature,timestamp=None, output=None, request=None, response=None):
-    return map(feature,timestamp,output,request,response)
+def map_feat(feature,timestamp=None, paramser=None, timeref=None, request=None, response=None):
+    return map(features=feature,timestamp=timestamp,paramser=paramser,timeref=timeref,request=request,response=response)
     
 """
 @hug.get('/map/{feature}/{param}')

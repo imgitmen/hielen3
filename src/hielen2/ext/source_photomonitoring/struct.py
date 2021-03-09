@@ -251,9 +251,25 @@ def _render(heatmap,vectors=None,colors=["green","red","blue"],vmin=0,vmax=5):
     return data
 
 
-def generate_map(targetfile,timestamp=None, timeref=None, param="NS",step_size=1,colors=["red","green","blue"],vmin=-150,vmax=150):
+def generate_map(targetfile,timestamp=None, timeref=None, param=None,step_size=None,colors=None,vmin=None,vmax=None):
+
+
+    if timestamp is None:
+        pass
+    if param is None:
+        param="R"
+    if step_size is None:
+        stap_size=1
+    if colors is None:
+        colors=["red","green","blue"]
+    if vmin is None:
+        vmin=-150
+    if vmax is None:
+        vmax= 150
+
 
     dataset=xr.open_dataset(targetfile)
+
 
     if timestamp is None:
         timestamp = str(dataset.time[-1].values)

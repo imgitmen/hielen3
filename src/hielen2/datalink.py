@@ -5,7 +5,8 @@ from abc import ABC, abstractmethod
 from hielen2.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
 from filelock import Timeout, FileLock
 from numpy import nan
-
+from pathlib import Path
+import os
 
 def dbinit(conf):
     return {
@@ -175,7 +176,6 @@ class JsonDB(DB):
         return out
 
 
-
     def __getitem__(self, key=None):
 
         self.__chk_and_reload_jsondb()
@@ -194,7 +194,7 @@ class JsonDB(DB):
     def __setitem__(self, key=None, value=None):
         self.__write_jsondb(key, value)
 
-
+'''
 class JsonCache(DB):
     def __init__(self, connection):
         self.cache = (
@@ -215,4 +215,145 @@ class JsonCache(DB):
 
     def save(self):
         self.cache.reset_index().to_json(self.filename, orient="records")
+'''
+
+class CsvGroupCache():
+    def __init__(self,connection,lock_timeout_seconds=10):
+        self.cachepath=connection
+        self.lts=lock_timeout_seconds
+
+    def __getitem__(self,key):
+        return CsvCache(self.cachepath,key,self.lts)
+
+
+
+class CsvCache():
+    def __init__(self, cachepath, item, lock_timeout_seconds=10):
+
+        assert isinstance(item,str)
+        assert item.__len__() == 32
+
+        self.itemcachepath = Path(cachepath) / item[0:8] / item[8:16] / item[16:24] / item[24:32]
+        os.makedirs( self.itemcachepath , exist_ok=True) 
+        self.csv = str( self.itemcachepath / f"{item}.csv" )
+        self.lock = FileLock(f"{self.csv}.lock", timeout = lock_timeout_seconds)
+        self.md5file = f"{self.csv}.md5"
+        self.md5 = None
+        self.__chk_and_reload_cache(force=True)
+
+    def __brute_load_cache(self):
+        try:
+            self.db = read_csv(self.csv, header="None", sep=";")
+            self.db = self.db.set_index(self.db.columns[0])
+        except Exception as e:
+            self.db = DataFrame()
+
+    def __chk_and_reload_cache(self, force=False):
+        """
+        Needs to check for cache file changes in a thread safe way!!
+        """
+
+        md5 = None
+        error = None
+        try:
+            self.lock.acquire()
+            try:
+                if force:
+                    raise FileNotFoundError()
+
+                with open(self.md5file) as o:
+                    md5 = o.read()
+
+                if not md5 == self.md5:
+                    self.md5 = md5
+
+                self.__brute_load_cache()
+
+            except FileNotFoundError as e:
+                ## refershing hash
+                try:
+                    self.md5 = hashfile(self.csv)
+                    with open(self.md5file, "w") as o:
+                        o.write(self.md5)
+                except FileNotFoundError as e:
+                    pass
+
+                self.__brute_load_cache()
+            finally:
+                self.lock.release()
+
+        except Timeout:
+            pass
+
+    def save(self):
+        try:
+            self.lock.acquire()
+            try:
+                self.db.to_csv(self.csv,header=None,sep=";")
+                self.md5 = hashfile(self.csv)
+                with open(self.md5file, "w") as o:
+                    o.write(self.md5)
+            finally:
+                self.lock.release()
+        except Timeout as e:
+            # Just to remind Timout error here
+            raise e
+
+    def update(self, value):
+        """
+        Needs to lock for writing json-database
+        """
+
+        
+        try:
+            value=value.to_frame()
+        except AttributeError as e:
+            pass
+
+        value.columns=list(range(value.columns.__len__()))
+
+        error = None
+        try:
+            self.lock.acquire()
+            try:
+                self.__chk_and_reload_cache()
+                self.db.drop(value.index,axis=0,errors='ignore')
+                self.db = self.db.append(value).sort_index()
+                self.save()
+            except Exception as e:
+                error = e
+            finally:
+                self.lock.release()
+        except Timeout as e:
+            error = e
+
+        if error is not None:
+            raise error
+
+
+    def get (self, key=None):
+        self.__chk_and_reload_csv()
+        return self.db.loc[key]
+
+    def pop(self, key):
+        out=None
+        try:
+            self.lock.acquire()
+            try:
+                self.__chk_and_reload_csv()
+                out=self.db[key].copy()
+                self.db[key].drop(inplace=True)
+                self.save()
+            except Exception as e:
+                error = e
+            finally:
+                self.lock.release()
+        except Timeout as e:
+            error = e
+
+        if error is not None:
+            raise error
+
+        return out
+
 

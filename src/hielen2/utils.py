@@ -98,6 +98,12 @@ def eprint(*args, fname="error", **kwargs):
     with open(fname, "a") as f:
         print(*args, file=f, **kwargs)
 
+def hasher(*args,**kwargs):                                                                                                                           
+    h=[ *args ]
+    h.extend(list(kwargs.values()))
+    h=''.join([ str(a) for a in h])
+    return md5( f'{h}'.encode() ).hexdigest()
+
 
 def hashfile(filename):
     BLOCKSIZE = 65536

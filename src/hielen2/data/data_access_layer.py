@@ -114,6 +114,7 @@ class Generator:
             trying to extract element attribute
         """
 
+        #TODO modificare per utilizare configurazione
         try:
             v = value.split(".")
             assert v.__len__() == 2

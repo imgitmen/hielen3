@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from hielen2.source import HielenSource, ActionSchema, StringTime
-from hielen2.utils import LocalFile
+from hielen2.source import HielenSource, ActionSchema, StringTime, sourceFactory
+from hielen2.maps.mapper import setMFparams 
 import rasterio
 import magic
 import os
@@ -66,8 +66,11 @@ class Source(HielenSource):
     PhotoMonitoring source manager
     '''
 
-    def config_cache_path(self,timestamp):
-        return self.filecache / self.filecache.hasher(timestamp)
+    def hasher(self,*args,**kwargs):
+        h=[ *args ]
+        h.extend(list(kwargs.values()))
+        h=''.join([ str(a) for a in h])
+        return re.sub("[^\d]","",h)
 
     def config_last_before(self,timestamp):
         c=self.getActionValues('config',slice(None,timestamp))
@@ -76,11 +79,14 @@ class Source(HielenSource):
         except Exception as e:
             return None
 
-    def config_nc_file_path(self,timestamp):
-        return self.config_cache_path(timestamp) / "master.nc"
+    def ncfile_path(self,timestamp):
+        return self.filecache / f"{self.hasher(timestamp)}.nc"
 
-    def config_master_image_path(self,timestamp):
-        return self.config_cache_path(timestamp) / "master.img"
+    def masterimg_path(self,timestamp):
+        return self.mapcache / f"{self.hasher(timestamp)}.tiff"
+
+    def mapfile_path(self,timestamp):
+        return self.mapcache / f"{self.hasher(timestamp)}.map"
 
     def config(self, **kwargs):
 
@@ -91,8 +97,11 @@ class Source(HielenSource):
         #Temporary image path
         path_temp_image=Path(kwargs["master_image"])
         
-        self.filecache.mkdir( self.config_cache_path(timestamp) )
-        path_master_image=self.config_master_image_path(timestamp)
+        self.filecache.mkdir()
+        self.mapcache.mkdir()
+
+        path_masterimg=self.masterimg_path(timestamp)
+        path_mapfile=self.mapfile_path(timestamp)
         path_geo_ref=None
 
         try:
@@ -152,28 +161,35 @@ class Source(HielenSource):
                 else:
                     rgb = src.read()
 
-                with rasterio.open(path_master_image, 'w', **meta) as dst:
+                with rasterio.open(path_masterimg, 'w', **meta) as dst:
                     for i in range(0, rgb.__len__()):
                         dst.write(rgb[i],i+1)
+
+                bands=dst.meta['count']
+                outcrs=dst.meta['crs']
+                outum=outcrs.linear_units
+
+                #Master_image is ok. Macking mapfile
+                setMFparams(path_mapfile, bands=bands, crs=outcrs, um=outum)
 
         except Exception as e:
             raise ValueError(e)
 
                     
-        out['master_image']=magic.from_file(str(path_master_image))
-        out['timestamp']=timestamp
-        out['step_size']=kwargs['step_size']
-        out['window_size_change']=kwargs['window_size_change']
-        out['meta']=meta
 
-        x_offset=kwargs['window_size_change']
-        y_offset=kwargs['window_size_change']
-        step_size=kwargs['step_size']
+        x_offset=y_offset=kwargs['window_size_change'] or 0
+        step_size=kwargs['step_size'] or 1
+
+        out['master_image']=magic.from_file(str(path_masterimg))
+        out['timestamp']=timestamp
+        out['step_size']=step_size
+        out['window_size_change']=x_offset
+        out['meta']=meta
 
         x_values=arange(y_offset,meta['width'],step_size)*meta['transform'][0]+meta['transform'][2]
         y_values=arange(x_offset,meta['height'],step_size)*meta['transform'][4]+meta['transform'][5]
 
-        ncpath=self.config_nc_file_path(timestamp)
+        ncpath=self.ncfile_path(timestamp)
 
         config_NC(ncpath,timestamp,x_values,y_values).close()
 
@@ -198,7 +214,7 @@ class Source(HielenSource):
         timestamp=kwargs["timestamp"]
         reftime=self.config_last_before(timestamp)['timestamp']
 
-        ncpath=self.config_nc_file_path(reftime)
+        ncpath=self.ncfile_path(reftime)
         
         frames={"ns":None,"ew":None,"corr":None}
 
@@ -215,41 +231,66 @@ class Source(HielenSource):
 
         return kwargs
 
-
     def cleanFeed(timestamp):
         pass
 
-
-    def map( self, timestamp=None, timeref=None, param="RV" ):
-        
-        conf=self.config_last_before(timestamp)
-        ncfile=self.config_nc_file_path(conf['timestamp'])
-
-        conf=conf['value']
-        path_image=self.config_cache_path(conf['timestamp'])/'img.tiff'
-
-        h=conf['meta']['height']
-        w=conf['meta']['width']
-        wsc=int(conf['window_size_change'])
-
-        imgout=zeros([h,w,4])
-        imagearray=generate_map(ncfile,timestamp,timeref,param=param,step_size=conf['step_size'])
-        imgout[wsc:,wsc:]=imagearray[:h-wsc,:w-wsc]
-
-
-        conf['meta']['count']=3
-        conf['meta']['compress']='LZW'
-        conf['meta']['driver']='GTiff'
-        conf['meta']['dtype']='uint8'
-
-        imagearray=imagearray[:h-wsc,:w-wsc,0:conf['meta']['count']]
-
-        with rasterio.open(path_image, 'w', **conf['meta']) as dst:
-            for i in range(0, conf['meta']['count']):
-                dst.write(imagearray[:,:,i],i+1)
-
-
-
-
-    def data(self, timefrom=None, timeto=None, geom=None, **kwargs):
+    def data(feat, timefrom=None, timeto=None, geom=None, **kwargs):
         return kwargs
+
+
+def map( feat, timestamp=None, timeref=None, param="RV" ):
+
+    feat = sourceFactory(feat)
+    
+    conf=feat.config_last_before(timestamp)
+
+    reftimestamp=timeref or conf['timestamp']
+
+    ncfile=feat.ncfile_path(conf['timestamp'])
+    mapfile=feat.mapfile_path(conf['timestamp'])
+
+    conf=conf['value']
+
+    imgname=f"{feat.hasher(timestamp)}_{feat.hasher(reftimestamp)}_{param}.tiff"
+
+    path_image=feat.mapcache / imgname
+
+    h=conf['meta']['height']
+    w=conf['meta']['width']
+    wsc=int(conf['window_size_change'])
+
+    imgout=zeros([h,w,4])
+    imagearray=generate_map(ncfile,timestamp=timestamp,timeref=timeref,param=param,step_size=conf['step_size'])
+    imgout[wsc:,wsc:]=imagearray[:h-wsc,:w-wsc]
+
+
+    conf['meta']['count']=3
+    conf['meta']['compress']='LZW'
+    conf['meta']['driver']='GTiff'
+    conf['meta']['dtype']='uint8'
+
+    imagearray=imagearray[:h-wsc,:w-wsc,0:conf['meta']['count']]
+
+    with rasterio.open(path_image, 'w', **conf['meta']) as dst:
+        for i in range(0, conf['meta']['count']):
+            dst.write(imagearray[:,:,i],i+1)
+
+    url=[ 
+            "http://localhost:8081/maps/mapserv",
+            "?map="+ str(mapfile),
+            "&SERVICE=WMS&VERSION=1.1.1",
+            "&imgfile="+ str(imgname),
+            "&layers=imglyr",
+            "&transparent=true",
+            "&format=image/png",
+            "&mode=tile",
+            "&tilemode=gmap",
+            "&tile=364+214+10",
+
+        ]
+
+    return "".join(url)
+
+
+
+
