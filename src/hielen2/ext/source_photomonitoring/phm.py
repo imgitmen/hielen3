@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from hielen2.source import HielenSource, ActionSchema, StringTime, sourceFactory
+from hielen2.utils import LocalFile
 from hielen2.maps.mapper import setMFparams 
 import rasterio
 import magic
@@ -11,7 +12,7 @@ from .struct import config_NC, feed_NC, generate_map
 from marshmallow import fields
 from shutil import rmtree
 from numpy import arange, full, zeros
-from pandas import read_csv, DataFrame
+from pandas import read_csv, DataFrame, Series, DatetimeIndex
 import traceback
 
 class ConfigSchema(ActionSchema):
@@ -70,7 +71,7 @@ class Source(HielenSource):
         h=[ *args ]
         h.extend(list(kwargs.values()))
         h=''.join([ str(a) for a in h])
-        return re.sub("[^\d]","",h)
+        return re.sub("[^\d]","",h)[0:14]
 
     def config_last_before(self,timestamp):
         c=self.getActionValues('config',slice(None,timestamp))
@@ -196,9 +197,10 @@ class Source(HielenSource):
         return out 
 
     def cleanConfig(self,timestamp):
-        p = self.config_cache_path(timestamp)
-        #TODO delete sub actions
-        rmtree(p)
+
+        os.unlink(self.ncfile_path(timestamp))
+        os.unlink(self.masterimg_path(timestamp))
+        os.unlink(self.mapfile_path(timestamp))
 
 
     def feed(self, **kwargs):
@@ -238,31 +240,36 @@ class Source(HielenSource):
         return kwargs
 
 
-def map( feat, timestamp=None, timeref=None, param="RV" ):
+def map( feature, times=None, timeref=None, output="RV" ):
 
-    feat = sourceFactory(feat)
+    feature = sourceFactory(feature)
+
+    timestamp=None
+
+    if isinstance(times,slice):
+        timestamp=times.stop
+    else:
+        timestamp=times
     
-    conf=feat.config_last_before(timestamp)
+    conf=feature.config_last_before(timestamp)
 
     reftimestamp=timeref or conf['timestamp']
 
-    ncfile=feat.ncfile_path(conf['timestamp'])
-    mapfile=feat.mapfile_path(conf['timestamp'])
+    ncfile=feature.ncfile_path(conf['timestamp'])
+    mapfile=feature.mapfile_path(conf['timestamp'])
 
     conf=conf['value']
-
-    imgname=f"{feat.hasher(timestamp)}_{feat.hasher(reftimestamp)}_{param}.tiff"
-
-    path_image=feat.mapcache / imgname
 
     h=conf['meta']['height']
     w=conf['meta']['width']
     wsc=int(conf['window_size_change'])
 
     imgout=zeros([h,w,4])
-    imagearray=generate_map(ncfile,timestamp=timestamp,timeref=timeref,param=param,step_size=conf['step_size'])
+    timestamp,imagearray=generate_map(ncfile,timestamp=timestamp,timeref=timeref,param=output,step_size=conf['step_size'])
     imgout[wsc:,wsc:]=imagearray[:h-wsc,:w-wsc]
 
+    imgname=f"{feature.hasher(timestamp)}_{feature.hasher(reftimestamp)}_{output}.tiff"
+    path_image=feature.mapcache / imgname
 
     conf['meta']['count']=3
     conf['meta']['compress']='LZW'
@@ -289,7 +296,11 @@ def map( feat, timestamp=None, timeref=None, param="RV" ):
 
         ]
 
-    return "".join(url)
+    url="".join(url)
+
+    ser=Series([url],index=DatetimeIndex([timestamp]))
+
+    return ser
 
 
 

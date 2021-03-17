@@ -99,10 +99,10 @@ class HielenSource(ABC):
         aclass=getActionSchemaClass(self.module,action)
         try:
             kwargs=aclass().load(kwargs)
-        except ValidationError as e:
+            return self.__getattribute__(action)(**kwargs)
+        except Exception as e:
             raise ValueError(e)
 
-        return self.__getattribute__(action)(**kwargs)
 
     def getActionSchema(self,action):
         return getActionSchema(self.module,action)
@@ -121,19 +121,27 @@ class HielenSource(ABC):
 
         return out
 
-    def deleteActionValues(self, action, timestamp):
-        out=db['actions'][self.uid,action,timestamp]
+    def deleteActionValues(self, action=None, timestamp=None):
+        out=self.getActionValues(action,timestamp)
+
+        if not isinstance(out,list):
+            out=[out]
+
+        for act in out:
+
+            a=act['action']
+            t=act['timestamp']
         
-        try:
-            f"{action.capitalize()}Schema"
-            self.__getattribute__(f"clean{action.capitalize()}")(timestamp)
-        except Exception as e:
-            pass
-        
-        try:
-            db['actions'][self.uid,action,timestamp]=None
-        except Exception as e:
-            raise ValueError(e)
+            try:
+                f"{a.capitalize()}Schema"
+                self.__getattribute__(f"clean{a.capitalize()}")(t)
+            except Exception as e:
+                pass
+            
+            try:
+                db['actions'][self.uid,a,t]=None
+            except Exception as e:
+                raise ValueError(e)
 
         return out
 

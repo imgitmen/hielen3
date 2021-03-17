@@ -136,6 +136,42 @@ class LocalFile(fields.String):
     """
     pass
 
+class Selection(fields.String):
+    """
+    Provides python object which pertims selection on narry. It axcept a three filed \
+    string separated by ":". 
+    ":" presence is managed as:
+
+    "start:stop:step"
+
+    ie.:
+
+        "start:stop" - extracts from start to stop
+    
+        "start:" - extracts from start to max 
+
+        "start" - extract exactly start
+
+    """
+    
+    def _deserialize(self,value, attr, data, **kwargs):
+
+        try:
+            if value is None or value == "":
+                #return [None,None,None]
+                return slice(None,None,None)
+                
+            value = [ v or None for v in value.split(';') ]
+            
+            if value.__len__() == 1:
+                return slice(value[0],value[0])
+               
+            return slice(*value[0:3])
+            #return value[0:3]
+        except Exception as e:
+            raise ValueError(e)
+
+
 
 class JsonValidable:
     """
@@ -198,3 +234,4 @@ class JsonValidable:
             fixed_value = value
 
         return self.schema.loads(fixed_value)
+

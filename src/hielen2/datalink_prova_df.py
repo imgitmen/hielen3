@@ -245,16 +245,14 @@ class fsHielenCache(JsonDB):
 
     def __setitem__(self,key,value):
 
-        if value is not None and not isinstance(value,Series):
-            raise ValueError("pandas.Series required")
+        if value is not None and not isinstance(value,(DataFrame,Series)):
+            raise ValueError("pandas.DataFrame or pandas.Series required")
 
         try:
             assert isinstance(key,str)
             assert key.__len__() == 32
         except AssertionError as e:
             raise ValueError(f"key {key} doesn't seems to match requirement format")
-
-        #testing existence (stops if exits)
 
         if value is not None:
             super().__setitem__(key,{})
@@ -269,16 +267,17 @@ class fsHielenCache(JsonDB):
         else:
             super().__setitem__(key,None)
             try:
-                CsvCache(self.cachepath,key,self.lts).drop()
+                item=CsvCache(self.cachepath,key,self.lts)
+                item.cleanfs()
             except FileNotFoundError as e:
                 pass
     
        
     def update(self,key,value):
 
-        if value is not None and not isinstance(value,Series):
+        if value is not None and not isinstance(value,(DataFrame,Series)):
         #if value is not None and not isinstance(value,DataFrame):
-            raise ValueError("pandas.Series required")
+            raise ValueError("pandas.DataFrame or pandas.Series required")
 
         if value is not None:
             info=super().__getitem__(key)
@@ -290,11 +289,12 @@ class fsHielenCache(JsonDB):
             self.db.loc[key]=statistics
 
 
-class CsvCache():
+class CsvCache(DataFrame):
     def __init__(self, cachepath, item, lock_timeout_seconds=10):
 
-        self.cachepath = Path(cachepath) / item[0:8] / item[8:16] / item[16:24] / item[24:32]
+        super().__init__({})
 
+        self.cachepath = Path(cachepath) / item[0:8] / item[8:16] / item[16:24] / item[24:32]
         self.db=None
         self.csv = str( self.cachepath / f"{item}.csv" )
         self.lock = FileLock(f"{self.csv}.lock", timeout = lock_timeout_seconds)
@@ -302,16 +302,15 @@ class CsvCache():
         self.md5 = None
         #self.__chk_and_reload_cache(force=True)
 
-    def __repr__(self):
-        return self.db.__repr__()
-
     def __brute_load_cache(self):
         try:
-            self.db = read_csv(self.csv, header=None, sep=";",index_col=0,parse_dates=True)[1]
+            tmpdf = read_csv(self.csv, header=None, sep=";", parse_dates=True)
+            super().__init__(tmpdf)
+            print ('STOCAZZO')
+            print (self)
+            print ('CETTESEFREGE')
         except Exception as e:
-            self.db = Series()
-
-        self.db.name="s"
+            pass
 
     def __chk_and_reload_cache(self, force=False):
         """
@@ -355,7 +354,7 @@ class CsvCache():
         try:
             self.lock.acquire()
             try:
-                self.db.to_csv(self.csv,header=None,sep=";")
+                self.to_csv(self.csv,header=None,sep=";")
                 self.md5 = hashfile(self.csv)
                 with open(self.md5file, "w") as o:
                     o.write(self.md5)
@@ -365,13 +364,13 @@ class CsvCache():
             # Just to remind Timout error here
             raise e
 
-    def drop(self):
+    def cleanfs(self):
         try:
             self.lock.acquire()
             try:
                 os.unlink(self.csv)
                 os.unlink(self.md5file)
-                self.db=None
+                self.drop(self.index,axis=1,inplace=True)
             finally:
                 self.lock.release()
         except Timeout as e:
@@ -379,24 +378,27 @@ class CsvCache():
             raise e
 
 
-
-    def update(self, value:Series):
+    def update(self, value):
         """
         Needs to lock for writing json-database
         """
         
+        try:
+            value=value.to_frame()
+        except AttributeError as e:
+            pass
+
+        value=value.reset_index()
+        value.columns=list(range(value.columns.__len__()))
+        value=value.set_index(value.columns[0])
+
         error = None
         try:
             self.lock.acquire()
             try:
                 self.__chk_and_reload_cache()
-
-                self.db.drop(value.index,errors='ignore',inplace=True)
-
-                value.name='s'
-
-                self.db = self.db.append(value).sort_index()
-
+                self.drop(value.index,axis=0,errors='ignore',inplace=True)
+                self.append(value,inplace=True).sort_index(inplace=True)
                 self.save()
             except Exception as e:
                 error = e

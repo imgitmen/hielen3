@@ -1,7 +1,12 @@
 # coding: utf-8
 import numpy as np
 import pandas as pd
+import matplotlib
+
+matplotlib.use('Agg')
+
 import matplotlib.pyplot as plt
+
 from matplotlib.colors import LinearSegmentedColormap
 import xarray as xr, datetime
 import scipy.ndimage as snd
@@ -149,7 +154,7 @@ def _open_matrix(dataset, step_size=1, param="RV"):
     ns=dataset.ns
     ew=dataset.ew
 
-    if param in ("RV","R","V"):
+    if param in ("D","V"):
         h=np.sqrt(ns**2+ew**2)
 
     if param in ("EW"): 
@@ -248,6 +253,8 @@ def _render(heatmap,vectors=None,colors=["green","red","blue"],vmin=0,vmax=5):
     data = np.frombuffer(fig.canvas.tostring_argb(), dtype=np.uint8)
     data = data.reshape(fig.canvas.get_width_height()[::-1] + (4,))[:, :, [3,2,1,0]]
 
+    plt.close()
+
     return data
 
 
@@ -288,7 +295,7 @@ def generate_map(targetfile,timestamp=None, timeref=None, param=None,step_size=N
         
     managed=_open_matrix(dataset=ds1, param=param, step_size=step_size)
 
-    return _render(**managed, colors=colors, vmin=vmin, vmax=vmax )
+    return [timestamp, _render(**managed, colors=colors, vmin=vmin, vmax=vmax )]
 
 
 class Render():

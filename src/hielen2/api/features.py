@@ -4,6 +4,7 @@ import hug
 import falcon
 from hielen2 import db
 from hielen2.utils import JsonValidable, hasher
+import hielen2.source as sourceman
 from marshmallow import Schema, fields
 from himada.api import ResponseFormatter
 from marshmallow_geojson import GeoJSONSchema
@@ -239,10 +240,21 @@ Possibili risposte:
         out.data = db["features"][uid]
         for v in out.data['parameters'].values():
             if v is not None:
-                db['series'][v] = None
+                try:
+                    db['datacache'][v] = None
+                except KeyError as e:
+                    pass
+
+                try:
+                    db['series'][v] = None
+                except KeyError as e:
+                    pass
+
+        sourceman.sourceFactory(uid).deleteActionValues()
 
         db["features"][uid] = None
     except KeyError as e:
+        traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{uid}' not foud."
 

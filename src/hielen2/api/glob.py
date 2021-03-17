@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import parameters, prototypes, data, features, actions, actionschemata, prepare
+from . import parameters, prototypes, data, features, actions, actionschemata, mapping
 import falcon
 
 """
@@ -51,7 +51,7 @@ def scheman():
     """ Series manager """
     return [actionschemata]
 
-@hug.extend_api("/prepare")
+@hug.extend_api("/mapping")
 def mapsman():
     """ Series manager """
-    return [prepare]
+    return [mapping]

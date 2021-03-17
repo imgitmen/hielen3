@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-from pandas import DataFrame
+from pandas import DataFrame,Series
 from time import time
 from concurrent.futures import ThreadPoolExecutor
 from functools import wraps
@@ -31,55 +31,30 @@ class Series:
         self.generator = Generator(**geninfo)
 
     @_threadpool
-    def thdata(self, timefrom=None, timeto=None, *args, **kwargs):
-        return self.data(timefrom, timeto)
+    def thdata(self, times=None, timeref=None, refresh=None, *args, **kwargs):
+        return self.data(times, timeref, refresh)
 
-    def data(self, timefrom=None, timeto=None):
-
-        if timefrom is not None:
-            if self.first is not None:
-                timefrom = max(self.first, timefrom)
-        else:
-            timefrom = self.first
-
-        if timeto is not None:
-            if self.last is not None:
-                timeto = min(self.last, timeto)
-        else:
-            timeto = self.last
+    def data(self, times=None, timeref=None, refresh=None, *args, **kwargs):
 
         try:
-            out = db["datacache"][self.uid].get(slice(timefrom,timeto))
-            if timefrom is not None and out.index.max() < timefrom:
-                out = out.tail(1)
-            else:
-                out = out[timefrom:timeto]
+            
+            if refresh is not None and refresh:
+                raise KeyError
+
+            out = db["datacache"][self.uid][times]
+
         except KeyError:
-            out = DataFrame()
+            out = self.generator._generate(times, timeref=timeref,**kwargs)
+            try:
+                out = out[out.columns[0]]
+            except AttributeError:
+                pass
 
-        timefrom2 = out.index.max()
+            try:
+                db["datacache"].update(self.uid,out)
+            except KeyError as e:
+                db["datacache"][self.uid]=out
 
-        if timefrom2 is nan:
-            timefrom2 = timefrom
-        else:
-            # timefrom2 = max(isot2ut(timefrom2),isot2ut(timefrom) or 1)
-            timefrom2 = max(isot2ut(timefrom2), isot2ut(timefrom) or 1)
-            timefrom2 = ut2isot(timefrom2)
-
-        gen = self.generator._generate(timefrom=timefrom2, timeto=timeto)
-
-
-
-        try:
-            gen = gen.to_frame()
-        except AttributeError:
-            pass
-
-        gen.columns = list(range(gen.columns.__len__()))
-
-        out = out.append(gen).sort_index()
-        idx = unique(out.index.values, return_index=True)[1]
-        out = out.iloc[idx]
         out.index.name = "timestamp"
 
         return out
@@ -88,7 +63,7 @@ class Series:
 class Generator:
     def __init__(self, modules=None, operator=None, operands=None):
 
-        self.operator = operator or "DataFrame()"
+        self.operator = operator or "mod.map(**operands)"
         self.modules = {}
 
         if not modules is None:
@@ -112,6 +87,7 @@ class Generator:
         except KeyError:
             pass
 
+
         """
             trying to extract element attribute
         """
@@ -131,21 +107,23 @@ class Generator:
 
         return (key, value)
 
-    def _generate(self, timefrom, timeto):
+    def _generate(self, times, timeref, **kwargs):
 
-        operands = dict(timefrom=timefrom, timeto=timeto)
+        operands = dict(times=times, timeref=timeref, **kwargs)
         operands.update(
             {k: w for k, w in self.operands.items() if not isinstance(w, Series)}
         )
 
         runners = {
-            k: w.thdata(timefrom, timeto)
+            k: w.thdata(times, timeref)
             for k, w in self.operands.items()
             if isinstance(w, Series)
         }
-        operands.update({k: w.result() for k, w in runners.items()})
-        # operands.update( { k:w.data(timefrom,timeto) for k,w in self.operands.items() if isinstance(w,Series) } )
 
-        # print('OPERANDI',operands)
-        # print('OPERATORE', self.operator)
+        operands.update({k: w.result() for k, w in runners.items()})
+        #operands.update( { k:w.data(times, timeref, **kwargs) for k,w in self.operands.items() if isinstance(w,Series) } )
+
+        #print('OPERANDI',operands)
+        #print('OPERATORE', self.operator)
+
         return eval(self.operator)

@@ -83,7 +83,7 @@ def feature_action_values(feature, action, timestamp=None, request=None, respons
 @hug.delete("/{feature}/{action}")
 def feature_action_delete(feature,action,timestamp,request=None,response=None):
     """
-    **Eliminazione di una determinata azione di una secifica feature**"""
+    **Eliminazione di una determinata azione di una specifica feature**"""
     out = ResponseFormatter()
 
     # Trying to manage income feature request and its prototype configuration

@@ -8,6 +8,6 @@ __description__ = "HielenSource extensione"
 __license__ = "MIT"
 __uri__ = ""
 
-from .phm import Source, ConfigSchema, FeedSchema
+from .phm import Source, ConfigSchema, FeedSchema, map
 
-__all__ = ["Source", "ConfigSchema", "FeedSchema"]
+__all__ = ["Source", "ConfigSchema", "FeedSchema", "map"]
