@@ -1,0 +1,1265 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../../art/hielen2.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Mapper - hielen2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546d78">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-hielen2mapsmapper" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../../.." title="hielen2" class="md-header-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            hielen2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Mapper
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="hielen2" class="md-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    hielen2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../CHANGELOG/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TODO/" title="TODO" class="md-nav__link">
+      TODO
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      API Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/actionschemata/" title="ActionSchemata" class="md-nav__link">
+      ActionSchemata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1" checked>
+    
+    <label class="md-nav__link" for="nav-4-1">
+      Hielen2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Hielen2" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon"></span>
+        Hielen2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datalink/" title="Datalink" class="md-nav__link">
+      Datalink
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../datalink_prova_df/" title="Datalink Prova Df" class="md-nav__link">
+      Datalink Prova Df
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source/" title="Source" class="md-nav__link">
+      Source
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-6" type="checkbox" id="nav-4-1-6">
+    
+    <label class="md-nav__link" for="nav-4-1-6">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-6">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/actionschemata/" title="Actionschemata" class="md-nav__link">
+      Actionschemata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/glob/" title="Glob" class="md-nav__link">
+      Glob
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/mapping/" title="Mapping" class="md-nav__link">
+      Mapping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/prepare/" title="Prepare" class="md-nav__link">
+      Prepare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-7" type="checkbox" id="nav-4-1-7">
+    
+    <label class="md-nav__link" for="nav-4-1-7">
+      Data
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-7">
+        <span class="md-nav__icon md-icon"></span>
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/calculation/" title="Calculation" class="md-nav__link">
+      Calculation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../data/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8" type="checkbox" id="nav-4-1-8">
+    
+    <label class="md-nav__link" for="nav-4-1-8">
+      Ext
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ext" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-8">
+        <span class="md-nav__icon md-icon"></span>
+        Ext
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_csv/" title="Source Csv" class="md-nav__link">
+      Source Csv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_smori/" title="Source Smori" class="md-nav__link">
+      Source Smori
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_winecap/" title="Source Winecap" class="md-nav__link">
+      Source Winecap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8-5" type="checkbox" id="nav-4-1-8-5">
+    
+    <label class="md-nav__link" for="nav-4-1-8-5">
+      Source Photomonitoring
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Photomonitoring" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-1-8-5">
+        <span class="md-nav__icon md-icon"></span>
+        Source Photomonitoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/phm/" title="Phm" class="md-nav__link">
+      Phm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/phm_ok/" title="Phm Ok" class="md-nav__link">
+      Phm Ok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/rendering/" title="Rendering" class="md-nav__link">
+      Rendering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/struct/" title="Struct" class="md-nav__link">
+      Struct
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_photomonitoring/struct_ok/" title="Struct Ok" class="md-nav__link">
+      Struct Ok
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8-6" type="checkbox" id="nav-4-1-8-6">
+    
+    <label class="md-nav__link" for="nav-4-1-8-6">
+      Source Tinsar
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Tinsar" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-1-8-6">
+        <span class="md-nav__icon md-icon"></span>
+        Source Tinsar
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_tinsar/cloudpainter/" title="Cloudpainter" class="md-nav__link">
+      Cloudpainter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_tinsar/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-9" type="checkbox" id="nav-4-1-9" checked>
+    
+    <label class="md-nav__link" for="nav-4-1-9">
+      Maps
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Maps" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-9">
+        <span class="md-nav__icon md-icon"></span>
+        Maps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Mapper
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Mapper" class="md-nav__link md-nav__link--active">
+      Mapper
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setmfparams" class="md-nav__link">
+    setMFparams
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setmfparams" class="md-nav__link">
+    setMFparams
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/maps/mapper.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-hielen2mapsmapper">Module hielen2.maps.mapper</h1>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">outmapf</span><span class="w"> </span><span class="o">&lt;</span><span class="k">output</span><span class="w"> </span><span class="n">mapfile</span><span class="p">,</span><span class="w"> </span><span class="k">absolute</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="k">relative</span><span class="w"> </span><span class="p">(</span><span class="k">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">script</span><span class="p">)</span><span class="w"> </span><span class="k">path</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">filename</span><span class="p">:</span><span class="w"> </span><span class="n">MANDATORY</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">bands</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">bands</span><span class="p">;</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;1, 2, 3&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">scale1</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="n">band</span><span class="w"> </span><span class="p">(</span><span class="n">red</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">B</span><span class="o">/</span><span class="n">W</span><span class="p">)</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="p">(</span><span class="nf">min</span><span class="p">,</span><span class="nf">max</span><span class="p">);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;0,255&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">RGB</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;0,65536&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">B</span><span class="o">/</span><span class="n">W</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">scale2</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="k">second</span><span class="w"> </span><span class="n">band</span><span class="w"> </span><span class="p">(</span><span class="n">green</span><span class="p">)</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="p">(</span><span class="nf">min</span><span class="p">,</span><span class="nf">max</span><span class="p">);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;0,255&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">scale3</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="n">third</span><span class="w"> </span><span class="n">band</span><span class="w"> </span><span class="p">(</span><span class="n">blue</span><span class="p">)</span><span class="w"> </span><span class="n">processing</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="p">(</span><span class="nf">min</span><span class="p">,</span><span class="nf">max</span><span class="p">);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;0,255&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">crs</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="n">CRS</span><span class="w"> </span><span class="n">projection</span><span class="w"> </span><span class="p">(</span><span class="n">EPSG</span><span class="w"> </span><span class="n">number</span><span class="p">);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;3857&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">lyrext</span><span class="w"> </span><span class="o">&lt;</span><span class="nc">image</span><span class="w"> </span><span class="n">extent</span><span class="w"> </span><span class="p">(</span><span class="n">minX</span><span class="p">,</span><span class="w"> </span><span class="n">minY</span><span class="p">,</span><span class="w"> </span><span class="n">maxX</span><span class="p">,</span><span class="w"> </span><span class="n">maxY</span><span class="p">);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;-20026376.39 -20048966.10 20026376.39 20048966.10&#39;</span><span class="w">    </span><span class="p">(</span><span class="o">=</span><span class="w"> </span><span class="n">fullext</span><span class="w"> </span><span class="nl">EPSG</span><span class="p">:</span><span class="mi">3857</span><span class="p">)</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">datadir</span><span class="w"> </span><span class="o">&lt;</span><span class="n">raster</span><span class="w"> </span><span class="nc">image</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">directory</span><span class="p">,</span><span class="w"> </span><span class="k">relative</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">mapfile</span><span class="w"> </span><span class="n">location</span><span class="p">;</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;../data&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">inmapf</span><span class="w"> </span><span class="o">&lt;</span><span class="k">input</span><span class="w"> </span><span class="n">mapfile</span><span class="p">,</span><span class="w"> </span><span class="k">absolute</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="k">relative</span><span class="w"> </span><span class="p">(</span><span class="k">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">script</span><span class="p">)</span><span class="w"> </span><span class="k">path</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">filename</span><span class="p">;</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;SAGraster.map&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">um</span><span class="w"> </span><span class="o">&lt;</span><span class="n">unit</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">measurement</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DD&#39;</span><span class="w"> </span><span class="p">...);</span><span class="w"> </span><span class="n">defaults</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="s1">&#39;METERS&#39;</span><span class="o">&gt;</span><span class="w"></span>
+
+<span class="n">import</span><span class="w"> </span><span class="n">mappyfile</span><span class="w"></span>
+
+<span class="n">import</span><span class="w"> </span><span class="n">re</span><span class="w"></span>
+
+<span class="k">from</span><span class="w"> </span><span class="n">hielen2</span><span class="w"> </span><span class="n">import</span><span class="w"> </span><span class="n">conf</span><span class="w"></span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">setMFparams</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">outmapf</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">bands</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">scale</span><span class="o">=[</span><span class="n">&#39;0,255&#39;,&#39;0,255&#39;,&#39;0,255&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">lyrext</span><span class="o">=</span><span class="s1">&#39;-20026376.39 -20048966.10 20026376.39 20048966.10&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">datadir</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">inmapf</span><span class="o">=</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;maptemplate&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">um</span><span class="o">=</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ows_onlineresources</span><span class="o">=</span><span class="ss">&quot;http://pippo&amp;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappyfile</span><span class="p">.</span><span class="k">open</span><span class="p">(</span><span class="n">inmapf</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;shapepath&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datadir</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;web&quot;</span><span class="o">][</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_onlineresource&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ows_onlineresources</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">bands</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">scale</span><span class="o">=[</span><span class="n">&#39;0,65536&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;layers&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">tbands</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="nf">str</span><span class="p">,(</span><span class="k">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">bands</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&#39;processing&#39;</span><span class="o">]=[</span><span class="n">f&#39;BANDS={tbands}&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">bands</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">layer</span><span class="o">[</span><span class="n">&#39;processing&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;SCALE_{i+1}={scale[i]}&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;projection&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;init={str(crs).lower()}&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;units&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;METRES?&#39;</span><span class="p">,</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span><span class="n">um</span><span class="p">.</span><span class="nf">upper</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_srs&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">crs</span><span class="p">).</span><span class="nf">upper</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_extent&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lyrext</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mappyfile</span><span class="p">.</span><span class="k">save</span><span class="p">(</span><span class="n">mapfile</span><span class="p">,</span><span class="w"> </span><span class="n">outmapf</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">conf</span>
+</code></pre></div>
+
+<h2 id="functions">Functions</h2>
+<h3 id="setmfparams">setMFparams</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setMFparams</span><span class="p">(</span>
+    <span class="n">outmapf</span><span class="p">,</span>
+    <span class="n">bands</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">scale</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0,255&#39;</span><span class="p">,</span> <span class="s1">&#39;0,255&#39;</span><span class="p">,</span> <span class="s1">&#39;0,255&#39;</span><span class="p">],</span>
+    <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span>
+    <span class="n">lyrext</span><span class="o">=</span><span class="s1">&#39;-20026376.39 -20048966.10 20026376.39 20048966.10&#39;</span><span class="p">,</span>
+    <span class="n">datadir</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">inmapf</span><span class="o">=</span><span class="s1">&#39;/home/fantamodeman/SVILUPPOandTESTING/python_sandbox/dev/modules/hielen2/src/var/template.map&#39;</span><span class="p">,</span>
+    <span class="n">um</span><span class="o">=</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span>
+    <span class="n">ows_onlineresources</span><span class="o">=</span><span class="s1">&#39;http://pippo&amp;&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">setMFparams</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">outmapf</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">bands</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">scale</span><span class="o">=[</span><span class="n">&#39;0,255&#39;,&#39;0,255&#39;,&#39;0,255&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:3857&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">lyrext</span><span class="o">=</span><span class="s1">&#39;-20026376.39 -20048966.10 20026376.39 20048966.10&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">datadir</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">inmapf</span><span class="o">=</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;maptemplate&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">um</span><span class="o">=</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ows_onlineresources</span><span class="o">=</span><span class="ss">&quot;http://pippo&amp;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mappyfile</span><span class="p">.</span><span class="k">open</span><span class="p">(</span><span class="n">inmapf</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;shapepath&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">datadir</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;web&quot;</span><span class="o">][</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_onlineresource&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ows_onlineresources</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">bands</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">scale</span><span class="o">=[</span><span class="n">&#39;0,65536&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mapfile</span><span class="o">[</span><span class="n">&quot;layers&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">tbands</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="nf">str</span><span class="p">,(</span><span class="k">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">bands</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&#39;processing&#39;</span><span class="o">]=[</span><span class="n">f&#39;BANDS={tbands}&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">bands</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">layer</span><span class="o">[</span><span class="n">&#39;processing&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;SCALE_{i+1}={scale[i]}&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;projection&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;init={str(crs).lower()}&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;units&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;METRES?&#39;</span><span class="p">,</span><span class="s1">&#39;METERS&#39;</span><span class="p">,</span><span class="n">um</span><span class="p">.</span><span class="nf">upper</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_srs&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">crs</span><span class="p">).</span><span class="nf">upper</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">layer</span><span class="o">[</span><span class="n">&quot;metadata&quot;</span><span class="o">][</span><span class="n">&quot;ows_extent&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lyrext</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">mappyfile</span><span class="p">.</span><span class="k">save</span><span class="p">(</span><span class="n">mapfile</span><span class="p">,</span><span class="w"> </span><span class="n">outmapf</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

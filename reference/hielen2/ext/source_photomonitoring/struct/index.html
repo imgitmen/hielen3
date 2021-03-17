@@ -1,0 +1,2257 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="shortcut icon" href="../../../../../art/hielen2.svg">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+    
+    
+      
+        <title>Struct - hielen2</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.d3202873.min.css">
+      
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.ff0a5ce4.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#546d78">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#module-hielen2extsource_photomonitoringstruct" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../../../../.." title="hielen2" class="md-header-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            hielen2
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Struct
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="hielen2" class="md-nav__button md-logo" aria-label="hielen2">
+      
+  <img src="../../../../../art/hielen2.svg" alt="logo">
+
+    </a>
+    hielen2
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com-hielen2/fantamodeman/hielen2/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    hielen2
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../CHANGELOG/" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../TODO/" title="TODO" class="md-nav__link">
+      TODO
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      API Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        API Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/actionschemata/" title="ActionSchemata" class="md-nav__link">
+      ActionSchemata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../../docs/API%20Reference/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Reference
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Reference" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon"></span>
+        Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1" type="checkbox" id="nav-4-1" checked>
+    
+    <label class="md-nav__link" for="nav-4-1">
+      Hielen2
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Hielen2" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-1">
+        <span class="md-nav__icon md-icon"></span>
+        Hielen2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../datalink/" title="Datalink" class="md-nav__link">
+      Datalink
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../datalink_prova_df/" title="Datalink Prova Df" class="md-nav__link">
+      Datalink Prova Df
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../source/" title="Source" class="md-nav__link">
+      Source
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../utils/" title="Utils" class="md-nav__link">
+      Utils
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-6" type="checkbox" id="nav-4-1-6">
+    
+    <label class="md-nav__link" for="nav-4-1-6">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-6">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/actions/" title="Actions" class="md-nav__link">
+      Actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/actionschemata/" title="Actionschemata" class="md-nav__link">
+      Actionschemata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/data/" title="Data" class="md-nav__link">
+      Data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/features/" title="Features" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/glob/" title="Glob" class="md-nav__link">
+      Glob
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/mapping/" title="Mapping" class="md-nav__link">
+      Mapping
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/parameters/" title="Parameters" class="md-nav__link">
+      Parameters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/prepare/" title="Prepare" class="md-nav__link">
+      Prepare
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/prototypes/" title="Prototypes" class="md-nav__link">
+      Prototypes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-7" type="checkbox" id="nav-4-1-7">
+    
+    <label class="md-nav__link" for="nav-4-1-7">
+      Data
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Data" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-7">
+        <span class="md-nav__icon md-icon"></span>
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/calculation/" title="Calculation" class="md-nav__link">
+      Calculation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../data/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8" type="checkbox" id="nav-4-1-8" checked>
+    
+    <label class="md-nav__link" for="nav-4-1-8">
+      Ext
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Ext" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-8">
+        <span class="md-nav__icon md-icon"></span>
+        Ext
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_csv/" title="Source Csv" class="md-nav__link">
+      Source Csv
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_smori/" title="Source Smori" class="md-nav__link">
+      Source Smori
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_winecap/" title="Source Winecap" class="md-nav__link">
+      Source Winecap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8-5" type="checkbox" id="nav-4-1-8-5" checked>
+    
+    <label class="md-nav__link" for="nav-4-1-8-5">
+      Source Photomonitoring
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Photomonitoring" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-1-8-5">
+        <span class="md-nav__icon md-icon"></span>
+        Source Photomonitoring
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../phm/" title="Phm" class="md-nav__link">
+      Phm
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../phm_ok/" title="Phm Ok" class="md-nav__link">
+      Phm Ok
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rendering/" title="Rendering" class="md-nav__link">
+      Rendering
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Struct
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" title="Struct" class="md-nav__link md-nav__link--active">
+      Struct
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agoodtime" class="md-nav__link">
+    agoodtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config_nc" class="md-nav__link">
+    config_NC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed_nc" class="md-nav__link">
+    feed_NC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_map" class="md-nav__link">
+    generate_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#render" class="md-nav__link">
+    Render
+  </a>
+  
+    <nav class="md-nav" aria-label="Render">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extract_data" class="md-nav__link">
+    extract_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isbasetime" class="md-nav__link">
+    isbasetime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../struct_ok/" title="Struct Ok" class="md-nav__link">
+      Struct Ok
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-8-6" type="checkbox" id="nav-4-1-8-6">
+    
+    <label class="md-nav__link" for="nav-4-1-8-6">
+      Source Tinsar
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Source Tinsar" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-1-8-6">
+        <span class="md-nav__icon md-icon"></span>
+        Source Tinsar
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_tinsar/cloudpainter/" title="Cloudpainter" class="md-nav__link">
+      Cloudpainter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_tinsar/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-1-9" type="checkbox" id="nav-4-1-9">
+    
+    <label class="md-nav__link" for="nav-4-1-9">
+      Maps
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Maps" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-1-9">
+        <span class="md-nav__icon md-icon"></span>
+        Maps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../maps/data_access_layer/" title="Data Access Layer" class="md-nav__link">
+      Data Access Layer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../maps/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../maps/mapper/" title="Mapper" class="md-nav__link">
+      Mapper
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agoodtime" class="md-nav__link">
+    agoodtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config_nc" class="md-nav__link">
+    config_NC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#feed_nc" class="md-nav__link">
+    feed_NC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate_map" class="md-nav__link">
+    generate_map
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    Classes
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#render" class="md-nav__link">
+    Render
+  </a>
+  
+    <nav class="md-nav" aria-label="Render">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#instance-variables" class="md-nav__link">
+    Instance variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extract_data" class="md-nav__link">
+    extract_data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#isbasetime" class="md-nav__link">
+    isbasetime
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/ext/source_photomonitoring/struct.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="module-hielen2extsource_photomonitoringstruct">Module hielen2.ext.source_photomonitoring.struct</h1>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># coding: utf-8</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
+
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span><span class="o">,</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">snd</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">date2num</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">PIL</span>
+
+<span class="k">def</span> <span class="nf">config_NC</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Crea il file netCDF secondo un formato standard</span>
+
+<span class="sd">    returns: la struttura dati del file NetCDF</span>
+
+<span class="sd">    params</span>
+
+<span class="sd">    tagetfile: nome del file</span>
+
+<span class="sd">    refitime: tempo zero</span>
+
+<span class="sd">    y_values: array delle y</span>
+
+<span class="sd">    x_values: array  delle x</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">Conventions</span><span class="o">=</span><span class="s2">&quot;CF-1.7&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">timestamp</span><span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="c1"># time informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;f8&quot;</span><span class="p">,(</span><span class="s2">&quot;time&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;hours since </span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">calendar</span><span class="o">=</span><span class="s2">&quot;standard&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;observation_time&quot;</span>
+
+    <span class="c1"># y informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">y_values</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;f4&quot;</span><span class="p">,(</span><span class="s2">&quot;y&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;projection_y_coordinate&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">][:]</span><span class="o">=</span><span class="n">y_values</span>
+
+    <span class="c1"># x informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createDimension</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">x_values</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;f4&quot;</span><span class="p">,(</span><span class="s2">&quot;x&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;projection_x_coordinate&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">][:]</span><span class="o">=</span><span class="n">x_values</span>
+
+    <span class="c1"># corr (correlation coefficient) informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;corr&quot;</span><span class="p">,</span><span class="s2">&quot;f4&quot;</span><span class="p">,(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;corr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="s2">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;corr&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;correlation_coefficient&quot;</span>
+
+    <span class="c1"># ns (north-south) informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;ns&quot;</span><span class="p">,</span><span class="s2">&quot;f4&quot;</span><span class="p">,(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">nan</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;ns&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="s2">&quot;px&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;ns&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;north_south_axis_displacement&quot;</span>
+
+    <span class="c1"># ew (east-west) informations</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">createVariable</span><span class="p">(</span><span class="s2">&quot;ew&quot;</span><span class="p">,</span><span class="s2">&quot;f4&quot;</span><span class="p">,(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">nan</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;ew&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">=</span><span class="s2">&quot;px&quot;</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;ew&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">long_name</span><span class="o">=</span><span class="s2">&quot;east_west_axis_displacement&quot;</span>
+
+    <span class="c1">#zf=np.zeros((y_values.__len__(),x_values.__len__()))</span>
+
+    <span class="c1">#feed_NC(dataset,timestamp,ns=zf,ew=zf,corr=zf)</span>
+
+    <span class="k">return</span> <span class="n">dataset</span>
+
+<span class="k">def</span> <span class="nf">feed_NC</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Appende i grid al file netCDF</span>
+
+<span class="sd">    target: netCDF4.Dataset or path to a valid .nc file</span>
+
+<span class="sd">    time: timestamp del dato</span>
+
+<span class="sd">    kwarg: dict nomevariabile:datagrid</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;NETCDF4&quot;</span><span class="p">)</span>
+
+    <span class="n">timevar</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span>
+
+    <span class="n">time</span><span class="o">=</span><span class="n">date2num</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="o">.</span><span class="kp">tolist</span><span class="p">(),</span> <span class="n">timevar</span><span class="o">.</span><span class="n">units</span><span class="p">)</span>
+
+    <span class="c1"># If exists substitute</span>
+
+    <span class="n">position</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">where</span><span class="p">(</span> <span class="n">timevar</span> <span class="o">==</span> <span class="n">time</span> <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">position</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+
+        <span class="n">position</span><span class="o">=</span><span class="n">timevar</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">timevar</span><span class="p">[</span><span class="n">position</span><span class="p">]</span><span class="o">=</span><span class="n">time</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">y_slice</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">w</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="n">x_slice</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">w</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">dataset</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">position</span><span class="p">,</span><span class="n">y_slice</span><span class="p">,</span><span class="n">x_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+                <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">dataset</span>
+
+<span class="k">def</span> <span class="nf">agoodtime</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnat</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">t</span>
+
+<span class="c1">#CASS METHOD</span>
+
+<span class="k">def</span> <span class="nf">_open_matrix</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="s2">&quot;RV&quot;</span><span class="p">):</span>
+
+    <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">    params</span>
+
+<span class="sd">    dataset: dataset at fixed time</span>
+
+<span class="sd">    param: &quot;RV&quot; result + vector</span>
+
+<span class="sd">            &quot;R&quot;  results</span>
+
+<span class="sd">            &quot;V&quot;  vector</span>
+
+<span class="sd">            &quot;NS&quot; North-South&quot;</span>
+
+<span class="sd">            &quot;EW&quot; East-West</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># filtro con maschera di correlazione</span>
+
+    <span class="c1"># se tutte le celle di corr sono null il minimo è TRUE altrimenti FALSE.</span>
+
+    <span class="c1"># Inverto la condizione per sapere se c&#39;è qualcosa</span>
+
+    <span class="n">ns</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">ns</span>
+
+    <span class="n">ew</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">ew</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="s2">&quot;V&quot;</span><span class="p">):</span>
+
+        <span class="n">h</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">sqrt</span><span class="p">(</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;EW&quot;</span><span class="p">):</span>
+
+        <span class="n">h</span><span class="o">=</span><span class="n">ew</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;NS&quot;</span><span class="p">):</span>
+
+        <span class="n">h</span><span class="o">=</span><span class="n">ns</span>
+
+    <span class="c1"># upsampling</span>
+
+    <span class="n">h</span><span class="o">=</span><span class="n">snd</span><span class="o">.</span><span class="n">zoom</span><span class="p">(</span><span class="n">h</span><span class="p">,</span><span class="n">step_size</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+    <span class="n">Y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">h</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">h</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">heatmap</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">)])</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span><span class="s2">&quot;NS&quot;</span><span class="p">,</span><span class="s2">&quot;EW&quot;</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">heatmap</span><span class="o">=</span><span class="n">heatmap</span><span class="p">,</span><span class="n">vectors</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># A questo punto solo RV o V</span>
+
+    <span class="c1"># Elaboro i versori</span>
+
+    <span class="c1"># upsampling</span>
+
+    <span class="n">a</span><span class="o">=</span><span class="n">snd</span><span class="o">.</span><span class="n">zoom</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">arctan2</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span><span class="n">ew</span><span class="p">),</span><span class="n">step_size</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+    <span class="kp">angle</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">coords</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">X</span><span class="p">)])</span>
+
+    <span class="c1">#riduco il versore</span>
+
+    <span class="n">rollingside</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">step_size</span><span class="o">*</span><span class="mi">6</span><span class="p">)</span>
+
+    <span class="c1">#CON MEDIA</span>
+
+    <span class="c1">#https://stackoverflow.com/questions/52886703/xarray-multidimensional-binning-array-reduction-on-sample-dataset-of-4-x4-to</span>
+
+    <span class="n">coeff</span><span class="o">=</span><span class="n">heatmap</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rollingside</span><span class="p">)</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rollingside</span><span class="p">))</span><span class="o">.</span><span class="kp">mean</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">,</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">coeff</span><span class="o">=</span><span class="n">heatmap</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">rollingside</span><span class="p">)</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rollingside</span><span class="p">))</span><span class="o">.</span><span class="kp">mean</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">,</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="kp">angle</span><span class="o">=</span><span class="kp">angle</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rollingside</span><span class="p">)</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rollingside</span><span class="p">))</span><span class="o">.</span><span class="kp">mean</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">,</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="kp">angle</span><span class="o">=</span><span class="kp">angle</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">rollingside</span><span class="p">)</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">rollingside</span><span class="p">))</span><span class="o">.</span><span class="kp">mean</span><span class="p">(</span><span class="s1">&#39;tmp&#39;</span><span class="p">,</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1">#SENZA MEDIA</span>
+
+    <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">    coeff=coeff[::rollingside,::rollingside]</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># filtro **ARBITRARIAMENTE** quelli che superano il 2 sigma</span>
+
+    <span class="c1"># coeff=coeff.where(coeff&lt;coeff.mean()+coeff.std()*2)</span>
+
+    <span class="c1"># normalizzo su un valore adeguato</span>
+
+    <span class="n">coeff</span><span class="o">=</span><span class="n">coeff</span><span class="o">/</span><span class="p">(</span><span class="n">coeff</span><span class="o">.</span><span class="kp">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="c1"># applico il logaritmo per enfatizzare gli spostamenti minimi e</span>
+
+    <span class="c1"># ridurre l&#39;impatto visivo degli outlayers</span>
+
+    <span class="c1"># coeff=np.log(1+coeff)</span>
+
+    <span class="c1"># filtro l&#39;angolo in base al grid del coefficiente</span>
+
+    <span class="kp">angle</span><span class="o">=</span><span class="kp">angle</span><span class="o">.</span><span class="kp">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">abs</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="kp">abs</span><span class="p">(</span><span class="n">coeff</span><span class="o">.</span><span class="kp">mean</span><span class="p">()))</span>
+
+    <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">meshgrid</span><span class="p">(</span><span class="kp">angle</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="kp">angle</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+    <span class="n">dY</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">sin</span><span class="p">(</span><span class="kp">angle</span><span class="p">)</span><span class="o">*</span><span class="n">coeff</span>
+
+    <span class="n">dX</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">cos</span><span class="p">(</span><span class="kp">angle</span><span class="p">)</span><span class="o">*</span><span class="n">coeff</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">):</span>
+
+        <span class="n">heatmap</span><span class="o">=</span><span class="n">heatmap</span><span class="o">.</span><span class="kp">where</span><span class="p">(</span><span class="n">heatmap</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="kp">nan</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">heatmap</span><span class="o">=</span><span class="n">heatmap</span><span class="p">,</span><span class="n">vectors</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">dX</span><span class="p">,</span><span class="n">dY</span><span class="p">))</span>
+
+<span class="c1"># CLASS METHOD</span>
+
+<span class="k">def</span> <span class="nf">_render</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">vectors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+
+    <span class="n">cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s2">&quot;mycmap&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
+
+    <span class="n">W</span><span class="o">=</span><span class="n">heatmap</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">H</span><span class="o">=</span><span class="n">heatmap</span><span class="o">.</span><span class="kp">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">dpi</span><span class="o">=</span><span class="mi">72</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">(</span><span class="n">W</span><span class="o">/</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi</span><span class="p">,</span><span class="n">H</span><span class="o">/</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;None&quot;</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">(</span><span class="n">fig</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">vectors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="o">*</span><span class="n">vectors</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mf">0.0008</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">frombuffer</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">tostring_argb</span><span class="p">(),</span> <span class="kp">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="kp">reshape</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">get_width_height</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span><span class="p">,))[:,</span> <span class="p">:,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">param</span><span class="o">=</span><span class="s2">&quot;R&quot;</span>
+
+    <span class="k">if</span> <span class="n">step_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">stap_size</span><span class="o">=</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">colors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">vmin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">vmin</span><span class="o">=-</span><span class="mi">150</span>
+
+    <span class="k">if</span> <span class="n">vmax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">vmax</span><span class="o">=</span> <span class="mi">150</span>
+
+    <span class="n">dataset</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">targetfile</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="n">ds1</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">timestamp</span><span class="p">)</span>
+
+    <span class="n">ds1</span><span class="o">=</span><span class="n">ds1</span><span class="o">.</span><span class="kp">where</span><span class="p">(</span><span class="n">ds1</span><span class="o">.</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">timeref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">timeref</span> <span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">ds2</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">ds2</span><span class="o">=</span><span class="n">ds2</span><span class="o">.</span><span class="kp">where</span><span class="p">(</span><span class="n">ds2</span><span class="o">.</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">ds1</span><span class="o">=</span><span class="n">ds1</span><span class="o">-</span><span class="n">ds2</span>
+
+        <span class="n">ds1</span><span class="o">.</span><span class="n">attrs</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">attrs</span>
+
+    <span class="n">managed</span><span class="o">=</span><span class="n">_open_matrix</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">ds1</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">_render</span><span class="p">(</span><span class="o">**</span><span class="n">managed</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span> <span class="p">)]</span>
+
+<span class="k">class</span> <span class="nc">Render</span><span class="p">():</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">timeline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="n">times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span>
+
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.000000000&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),(</span><span class="n">times</span><span class="p">)))</span>
+
+    <span class="nd">@property</span>
+
+    <span class="k">def</span> <span class="nf">reftime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">timestamp</span>
+
+    <span class="k">def</span> <span class="nf">isbasetime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">time</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reftime</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="s2">&quot;R&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">        params</span>
+
+<span class="sd">        geom: point to extract</span>
+
+<span class="sd">        timefrom: time lower limit</span>
+
+<span class="sd">        timeto: time upper limit</span>
+
+<span class="sd">        param: &quot;R&quot; result (the module itself)</span>
+
+<span class="sd">                &quot;NS&quot; North-South component</span>
+
+<span class="sd">                &quot;EW&quot; Eeast-West component</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
+
+        <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">dst</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">timeref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isbasetime</span><span class="p">(</span><span class="n">timeref</span><span class="p">):</span>
+
+            <span class="n">ref</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+            <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">ns</span>
+
+            <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ew&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">ew</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;RV&quot;</span><span class="p">):</span>
+
+            <span class="n">out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">):</span>
+
+            <span class="n">out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;NS&quot;</span><span class="p">):</span>
+
+            <span class="n">out</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;EW&quot;</span><span class="p">):</span>
+
+            <span class="n">out</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+</code></pre></div>
+
+</details>
+<h2 id="functions">Functions</h2>
+<h3 id="agoodtime">agoodtime</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">agoodtime</span><span class="p">(</span>
+    <span class="n">t</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">agoodtime</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+
+    <span class="n">try</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="n">assert</span> <span class="k">not</span> <span class="n">np</span><span class="p">.</span><span class="n">isnat</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="k">Exception</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="k">None</span>
+
+    <span class="k">return</span> <span class="n">t</span>
+</code></pre></div>
+
+</details>
+<h3 id="config_nc">config_NC</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">config_NC</span><span class="p">(</span>
+    <span class="n">target</span><span class="p">,</span>
+    <span class="n">timestamp</span><span class="p">,</span>
+    <span class="n">x_values</span><span class="p">,</span>
+    <span class="n">y_values</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Crea il file netCDF secondo un formato standard</p>
+<p>returns: la struttura dati del file NetCDF</p>
+<p>params
+tagetfile: nome del file
+refitime: tempo zero
+y_values: array delle y
+x_values: array  delle x</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">config_NC</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="k">timestamp</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">):</span>
+
+    <span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    Crea il file netCDF secondo un formato standard</span>
+
+<span class="ss">    returns: la struttura dati del file NetCDF</span>
+
+<span class="ss">    params</span>
+
+<span class="ss">    tagetfile: nome del file</span>
+
+<span class="ss">    refitime: tempo zero</span>
+
+<span class="ss">    y_values: array delle y</span>
+
+<span class="ss">    x_values: array  delle x</span>
+
+<span class="ss">    &quot;&quot;&quot;</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="ss">&quot;NETCDF4&quot;</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">Conventions</span><span class="o">=</span><span class="ss">&quot;CF-1.7&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="k">timestamp</span><span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
+
+    <span class="o">#</span> <span class="k">time</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createDimension</span><span class="p">(</span><span class="ss">&quot;time&quot;</span><span class="p">,</span> <span class="k">None</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;time&quot;</span><span class="p">,</span><span class="ss">&quot;f8&quot;</span><span class="p">,(</span><span class="ss">&quot;time&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;time&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;hours since {timestamp}&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;time&quot;</span><span class="p">].</span><span class="n">calendar</span><span class="o">=</span><span class="ss">&quot;standard&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;time&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;observation_time&quot;</span>
+
+    <span class="o">#</span> <span class="n">y</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createDimension</span><span class="p">(</span><span class="ss">&quot;y&quot;</span><span class="p">,</span> <span class="n">y_values</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;y&quot;</span><span class="p">,</span><span class="ss">&quot;f4&quot;</span><span class="p">,(</span><span class="ss">&quot;y&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;y&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;y&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;projection_y_coordinate&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;y&quot;</span><span class="p">][:]</span><span class="o">=</span><span class="n">y_values</span>
+
+    <span class="o">#</span> <span class="n">x</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createDimension</span><span class="p">(</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="n">x_values</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;x&quot;</span><span class="p">,</span><span class="ss">&quot;f4&quot;</span><span class="p">,(</span><span class="ss">&quot;x&quot;</span><span class="p">,))</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;projection_x_coordinate&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;x&quot;</span><span class="p">][:]</span><span class="o">=</span><span class="n">x_values</span>
+
+    <span class="o">#</span> <span class="n">corr</span> <span class="p">(</span><span class="n">correlation</span> <span class="n">coefficient</span><span class="p">)</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;corr&quot;</span><span class="p">,</span><span class="ss">&quot;f4&quot;</span><span class="p">,(</span><span class="ss">&quot;time&quot;</span><span class="p">,</span><span class="ss">&quot;y&quot;</span><span class="p">,</span><span class="ss">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;corr&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="ss">&quot;1&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;corr&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;correlation_coefficient&quot;</span>
+
+    <span class="o">#</span> <span class="n">ns</span> <span class="p">(</span><span class="n">north</span><span class="o">-</span><span class="n">south</span><span class="p">)</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;ns&quot;</span><span class="p">,</span><span class="ss">&quot;f4&quot;</span><span class="p">,(</span><span class="ss">&quot;time&quot;</span><span class="p">,</span><span class="ss">&quot;y&quot;</span><span class="p">,</span><span class="ss">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;ns&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="ss">&quot;px&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;ns&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;north_south_axis_displacement&quot;</span>
+
+    <span class="o">#</span> <span class="n">ew</span> <span class="p">(</span><span class="n">east</span><span class="o">-</span><span class="n">west</span><span class="p">)</span> <span class="n">informations</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">createVariable</span><span class="p">(</span><span class="ss">&quot;ew&quot;</span><span class="p">,</span><span class="ss">&quot;f4&quot;</span><span class="p">,(</span><span class="ss">&quot;time&quot;</span><span class="p">,</span><span class="ss">&quot;y&quot;</span><span class="p">,</span><span class="ss">&quot;x&quot;</span><span class="p">,),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">nan</span><span class="p">,</span><span class="n">zlib</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="n">least_significant_digit</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;ew&quot;</span><span class="p">].</span><span class="n">units</span><span class="o">=</span><span class="ss">&quot;px&quot;</span>
+
+    <span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="p">[</span><span class="ss">&quot;ew&quot;</span><span class="p">].</span><span class="n">long_name</span><span class="o">=</span><span class="ss">&quot;east_west_axis_displacement&quot;</span>
+
+    <span class="o">#</span><span class="n">zf</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">y_values</span><span class="p">.</span><span class="n">__len__</span><span class="p">(),</span><span class="n">x_values</span><span class="p">.</span><span class="n">__len__</span><span class="p">()))</span>
+
+    <span class="o">#</span><span class="n">feed_NC</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="k">timestamp</span><span class="p">,</span><span class="n">ns</span><span class="o">=</span><span class="n">zf</span><span class="p">,</span><span class="n">ew</span><span class="o">=</span><span class="n">zf</span><span class="p">,</span><span class="n">corr</span><span class="o">=</span><span class="n">zf</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dataset</span>
+</code></pre></div>
+
+</details>
+<h3 id="feed_nc">feed_NC</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">feed_NC</span><span class="p">(</span>
+    <span class="n">target</span><span class="p">,</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Appende i grid al file netCDF</p>
+<p>target: netCDF4.Dataset or path to a valid .nc file
+time: timestamp del dato
+kwarg: dict nomevariabile:datagrid</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">feed_NC</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="nc">time</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    Appende i grid al file netCDF</span>
+
+<span class="ss">    target: netCDF4.Dataset or path to a valid .nc file</span>
+
+<span class="ss">    time: timestamp del dato</span>
+
+<span class="ss">    kwarg: dict nomevariabile:datagrid</span>
+
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="n">Dataset</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dataset</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">format</span><span class="o">=</span><span class="ss">&quot;NETCDF4&quot;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timevar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="o">[</span><span class="n">&#39;time&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="nc">time</span><span class="o">=</span><span class="n">date2num</span><span class="p">(</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="nc">time</span><span class="p">).</span><span class="n">tolist</span><span class="p">(),</span><span class="w"> </span><span class="n">timevar</span><span class="p">.</span><span class="n">units</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="ow">exists</span><span class="w"> </span><span class="n">substitute</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">position</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="k">where</span><span class="p">(</span><span class="w"> </span><span class="n">timevar</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">position</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="k">position</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="nl">TypeError</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">position</span><span class="o">=</span><span class="n">timevar</span><span class="p">.</span><span class="n">shape</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">timevar</span><span class="o">[</span><span class="n">position</span><span class="o">]=</span><span class="nc">time</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">kwargs</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">y_slice</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">w</span><span class="p">.</span><span class="n">shape</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">x_slice</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">w</span><span class="p">.</span><span class="n">shape</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">dataset</span><span class="p">.</span><span class="n">variables</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">position,y_slice,x_slice</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">w</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">dataset</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h3 id="generate_map">generate_map</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">generate_map</span><span class="p">(</span>
+    <span class="n">targetfile</span><span class="p">,</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="k">timestamp</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="k">timestamp</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">pass</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">param</span><span class="o">=</span><span class="ss">&quot;R&quot;</span>
+
+    <span class="k">if</span> <span class="n">step_size</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">stap_size</span><span class="o">=</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">colors</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="ss">&quot;red&quot;</span><span class="p">,</span><span class="ss">&quot;green&quot;</span><span class="p">,</span><span class="ss">&quot;blue&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">vmin</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">vmin</span><span class="o">=-</span><span class="mi">150</span>
+
+    <span class="k">if</span> <span class="n">vmax</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">vmax</span><span class="o">=</span> <span class="mi">150</span>
+
+    <span class="n">dataset</span><span class="o">=</span><span class="n">xr</span><span class="p">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">targetfile</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="k">timestamp</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="k">timestamp</span> <span class="o">=</span> <span class="n">str</span><span class="p">(</span><span class="n">dataset</span><span class="p">.</span><span class="k">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="k">values</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="k">timestamp</span> <span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
+
+    <span class="n">ds1</span><span class="o">=</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="k">time</span><span class="o">=</span><span class="k">timestamp</span><span class="p">)</span>
+
+    <span class="n">ds1</span><span class="o">=</span><span class="n">ds1</span><span class="p">.</span><span class="k">where</span><span class="p">(</span><span class="n">ds1</span><span class="p">.</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">timeref</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+
+        <span class="n">timeref</span> <span class="o">=</span> <span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">ds2</span><span class="o">=</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="k">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">ds2</span><span class="o">=</span><span class="n">ds2</span><span class="p">.</span><span class="k">where</span><span class="p">(</span><span class="n">ds2</span><span class="p">.</span><span class="n">corr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">ds1</span><span class="o">=</span><span class="n">ds1</span><span class="o">-</span><span class="n">ds2</span>
+
+        <span class="n">ds1</span><span class="p">.</span><span class="n">attrs</span><span class="o">=</span><span class="n">dataset</span><span class="p">.</span><span class="n">attrs</span>
+
+    <span class="n">managed</span><span class="o">=</span><span class="n">_open_matrix</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">ds1</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">param</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="k">timestamp</span><span class="p">,</span> <span class="n">_render</span><span class="p">(</span><span class="o">**</span><span class="n">managed</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span> <span class="p">)]</span>
+</code></pre></div>
+
+</details>
+<h2 id="classes">Classes</h2>
+<h3 id="render">Render</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Render</span><span class="p">(</span>
+    <span class="o">/</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Render</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">timeline</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="nc">time</span><span class="p">.</span><span class="k">values</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s1">&#39;.000000000&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">),(</span><span class="n">times</span><span class="p">)))</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@property</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">reftime</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="nc">timestamp</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">isbasetime</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="nc">time</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="nc">time</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">reftime</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">extract_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="ss">&quot;R&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">        params</span>
+
+<span class="s1">        geom: point to extract</span>
+
+<span class="s1">        timefrom: time lower limit</span>
+
+<span class="s1">        timeto: time upper limit</span>
+
+<span class="s1">        param: &quot;R&quot; result (the module itself)</span>
+
+<span class="s1">                &quot;NS&quot; North-South component</span>
+
+<span class="s1">                &quot;EW&quot; Eeast-West component</span>
+
+<span class="s1">        &#39;&#39;&#39;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timefrom</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timeto</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">dst</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="nc">time</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">timeref</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">isbasetime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">ref</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,</span><span class="nc">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">dst</span><span class="o">[</span><span class="n">&#39;ns&#39;</span><span class="o">]=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ns</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">dst</span><span class="o">[</span><span class="n">&#39;ew&#39;</span><span class="o">]=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ew</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;R&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;RV&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;V&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;NS&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">param</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;EW&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="k">out</span><span class="p">,</span><span class="k">index</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="nc">time</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;xxx&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">dropna</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="instance-variables">Instance variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">reftime</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">timeline</span>
+</code></pre></div>
+
+<h4 id="methods">Methods</h4>
+<h5 id="extract_data">extract_data</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">geom</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">param</span><span class="o">=</span><span class="s1">&#39;R&#39;</span><span class="p">,</span>
+    <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>params
+geom: point to extract
+timefrom: time lower limit
+timeto: time upper limit
+param: "R" result (the module itself)
+        "NS" North-South component
+        "EW" Eeast-West component</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">extract_data</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="ss">&quot;R&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+
+        <span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">        params</span>
+
+<span class="s1">        geom: point to extract</span>
+
+<span class="s1">        timefrom: time lower limit</span>
+
+<span class="s1">        timeto: time upper limit</span>
+
+<span class="s1">        param: &quot;R&quot; result (the module itself)</span>
+
+<span class="s1">                &quot;NS&quot; North-South component</span>
+
+<span class="s1">                &quot;EW&quot; Eeast-West component</span>
+
+<span class="s1">        &#39;&#39;&#39;</span>
+
+        <span class="n">timefrom</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
+
+        <span class="n">timeto</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
+
+        <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">dst</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="k">time</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">timeref</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span> <span class="k">and</span> <span class="k">not</span> <span class="k">self</span><span class="p">.</span><span class="n">isbasetime</span><span class="p">(</span><span class="n">timeref</span><span class="p">):</span>
+
+            <span class="k">ref</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="k">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+            <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ns</span>
+
+            <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ew&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ew</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;R&quot;</span><span class="p">,</span> <span class="ss">&quot;RV&quot;</span><span class="p">):</span>
+
+            <span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;V&quot;</span><span class="p">):</span>
+
+            <span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;NS&quot;</span><span class="p">):</span>
+
+            <span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span>
+
+        <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;EW&quot;</span><span class="p">):</span>
+
+            <span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span>
+
+        <span class="k">out</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="k">out</span><span class="p">,</span><span class="k">index</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">time</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">]).</span><span class="n">dropna</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="k">out</span>
+</code></pre></div>
+
+</details>
+<h5 id="isbasetime">isbasetime</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">isbasetime</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">time</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">isbasetime</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="k">time</span><span class="p">):</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="k">time</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="p">.</span><span class="n">datetime64</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">reftime</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="k">Exception</span><span class="p">:</span>
+
+            <span class="k">return</span> <span class="k">False</span>
+</code></pre></div>
+
+</details>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../rendering/" title="Rendering" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Rendering
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../struct_ok/" title="Struct Ok" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Struct Ok
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Powered by
+        <a href="http://timothycrosley.github.io/portray">portray.</a>
+        You too can
+        <a href="http://timothycrosley.github.io/portray">
+          portray</a>
+        your Python project well using automatic documentation.
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../../assets/javascripts/vendor.2d1db4bd.min.js"></script>
+      <script src="../../../../../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../../../assets/javascripts/worker/search.5eca75d3.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
