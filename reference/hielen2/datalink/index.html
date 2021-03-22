@@ -781,8 +781,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api/mapping/" title="Mapping" class="md-nav__link">
-      Mapping
+    <a href="../api/maps/" title="Maps" class="md-nav__link">
+      Maps
     </a>
   </li>
 
@@ -2094,7 +2094,9 @@
 632
 633
 634
-635</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+635
+636
+637</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2171,6 +2173,8 @@
         <span class="k">try</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">read_json</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">jsonfile</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="n">nan</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="n">NaT</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -3181,6 +3185,8 @@ inheritance.</p>
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read_json</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">jsonfile</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="n">convert_dates</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="err">{</span><span class="nl">nan</span><span class="p">:</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="nl">NaT</span><span class="p">:</span><span class="w"> </span><span class="k">None</span><span class="err">}</span><span class="p">,</span><span class="w"> </span><span class="n">inplace</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 

@@ -494,8 +494,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../api/mapping/" title="Mapping" class="md-nav__link">
-      Mapping
+    <a href="../../api/maps/" title="Maps" class="md-nav__link">
+      Maps
     </a>
   </li>
 
@@ -1861,7 +1861,7 @@
 
 <span class="w">    </span><span class="n">imgout</span><span class="o">[</span><span class="n">wsc:,wsc:</span><span class="o">]=</span><span class="n">imagearray</span><span class="o">[</span><span class="n">:h-wsc,:w-wsc</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">imgname</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{source.hasher(timestamp)}_{source.hasher(reftimestamp)}_{output}.tiff&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">imgname</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{source.hasher(reftimestamp)}_{source.hasher(timestamp)}_{output}.tiff&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">path_image</span><span class="o">=</span><span class="n">source</span><span class="p">.</span><span class="n">mapcache</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">imgname</span><span class="w"></span>
 
@@ -1883,27 +1883,27 @@
 
 <span class="w">    </span><span class="n">url</span><span class="o">=[</span><span class="n"></span>
 
-<span class="n">            &quot;http://localhost:8081/maps/mapserv&quot;,</span>
+<span class="n">            source.mapurl,</span>
 
-<span class="n">            &quot;?map=&quot;+ str(mapfile),</span>
+<span class="n">            &quot;/&quot; + str(mapfile).split(&quot;/&quot;)[-1</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;SERVICE=WMS&amp;VERSION=1.1.1&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;?SERVICE=WMS&amp;VERSION=1.1.1&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;imgfile=&quot;+ str(imgname),</span>
+<span class="w">            </span><span class="ss">&quot;&amp;imgfile=&quot;</span><span class="o">+</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">imgname</span><span class="p">),</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;layers=imglyr&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;layers=imglyr&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;transparent=true&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;transparent=true&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;format=image/png&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;format=image/png&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;mode=tile&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;mode=tile&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;tilemode=gmap&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;tilemode=gmap&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">            &quot;&amp;tile=364+214+10&quot;,</span>
+<span class="w">            </span><span class="ss">&quot;&amp;tile={}+{}+{}&quot;</span><span class="p">,</span><span class="w"></span>
 
-<span class="n">        </span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="err">]</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">url</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="w"></span>
 
