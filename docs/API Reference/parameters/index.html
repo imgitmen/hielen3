@@ -331,11 +331,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameterscntxt" class="md-nav__link">
-    /parameters/{cntxt}
+  <a href="#parametersuid" class="md-nav__link">
+    /parameters/{uid}
   </a>
   
-    <nav class="md-nav" aria-label="/parameters/{cntxt}">
+    <nav class="md-nav" aria-label="/parameters/{uid}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -351,35 +351,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameterscntxtuid" class="md-nav__link">
-    /parameters/{cntxt}/{uid}
+  <a href="#parametersuidparam" class="md-nav__link">
+    /parameters/{uid}/{param}
   </a>
   
-    <nav class="md-nav" aria-label="/parameters/{cntxt}/{uid}">
+    <nav class="md-nav" aria-label="/parameters/{uid}/{param}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#get_2" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameterscntxtuidparam" class="md-nav__link">
-    /parameters/{cntxt}/{uid}/{param}
-  </a>
-  
-    <nav class="md-nav" aria-label="/parameters/{cntxt}/{uid}/{param}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_3" class="md-nav__link">
     GET
   </a>
   
@@ -1026,11 +1006,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameterscntxt" class="md-nav__link">
-    /parameters/{cntxt}
+  <a href="#parametersuid" class="md-nav__link">
+    /parameters/{uid}
   </a>
   
-    <nav class="md-nav" aria-label="/parameters/{cntxt}">
+    <nav class="md-nav" aria-label="/parameters/{uid}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1046,35 +1026,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameterscntxtuid" class="md-nav__link">
-    /parameters/{cntxt}/{uid}
+  <a href="#parametersuidparam" class="md-nav__link">
+    /parameters/{uid}/{param}
   </a>
   
-    <nav class="md-nav" aria-label="/parameters/{cntxt}/{uid}">
+    <nav class="md-nav" aria-label="/parameters/{uid}/{param}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#get_2" class="md-nav__link">
-    GET
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameterscntxtuidparam" class="md-nav__link">
-    /parameters/{cntxt}/{uid}/{param}
-  </a>
-  
-    <nav class="md-nav" aria-label="/parameters/{cntxt}/{uid}/{param}">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get_3" class="md-nav__link">
     GET
   </a>
   
@@ -1111,9 +1071,9 @@
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
 <li><strong>uids</strong>: Basic text / string value</li>
 <li><strong>params</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -1145,14 +1105,14 @@
 <span class="o">-</span> <span class="n">_404</span> <span class="k">Not</span> <span class="n">Found_</span><span class="p">:</span> <span class="n">Nel</span> <span class="n">caso</span> <span class="k">in</span> <span class="n">cui</span> <span class="n">nessun</span> <span class="n">parametro</span> <span class="n">risponda</span> <span class="n">ai</span> <span class="n">criteri</span>
 </code></pre></div>
 
-<h2 id="parameterscntxt"><strong>/parameters/{cntxt}</strong></h2>
+<h2 id="parametersuid"><strong>/parameters/{uid}</strong></h2>
 <h4 id="get_1">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
-<li><strong>uids</strong>: Basic text / string value</li>
+<li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>params</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -1160,35 +1120,17 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>description</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dei Parametri nello lo specifico contesto**</span>
+<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dei Parametri della specifica Feature**</span>
 </code></pre></div>
 
-<h2 id="parameterscntxtuid"><strong>/parameters/{cntxt}/{uid}</strong></h2>
+<h2 id="parametersuidparam"><strong>/parameters/{uid}/{param}</strong></h2>
 <h4 id="get_2">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
-<li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>params</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8</li>
-</ul>
-<p><em>description</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">**Alias di ricerca dei Parametri della specifica Feature lo specifico contesto**</span>
-</code></pre></div>
-
-<h2 id="parameterscntxtuidparam"><strong>/parameters/{cntxt}/{uid}/{param}</strong></h2>
-<h4 id="get_3">GET</h4>
-<hr />
-<p><em>params</em>:</p>
-<ul>
-<li><strong>cntxt</strong>: Basic text / string value</li>
 <li><strong>uid</strong>: Basic text / string value</li>
 <li><strong>param</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>

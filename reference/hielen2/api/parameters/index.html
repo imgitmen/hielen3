@@ -561,13 +561,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#context_features_params" class="md-nav__link">
-    context_features_params
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#features_params" class="md-nav__link">
     features_params
   </a>
@@ -993,13 +986,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#context_features_params" class="md-nav__link">
-    context_features_params
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#features_params" class="md-nav__link">
     features_params
   </a>
@@ -1166,51 +1152,7 @@
 132
 133
 134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+135</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1228,7 +1170,7 @@
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">examples</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">features_params</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1265,36 +1207,6 @@
 <span class="sd">    - _404 Not Found_: Nel caso in cui nessun parametro risponda ai criteri</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="nf">_format</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="n">parameters</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="k">try</span><span class="p">:</span>
-
-            <span class="n">parameters</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-
-                <span class="s2">&quot;series&quot;</span><span class="p">:</span> <span class="n">series</span><span class="p">,</span>
-
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">param</span><span class="p">,</span>
-
-                <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="n">series</span><span class="p">][</span><span class="s2">&quot;mu&quot;</span><span class="p">],</span>
-
-                <span class="p">})</span>
-
-        <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-            <span class="k">pass</span>
-
-        <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-            <span class="k">pass</span>
-
-        <span class="k">return</span> <span class="n">parameters</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
 
@@ -1348,39 +1260,25 @@
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{uid}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">context_features_params</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">context_feature_params</span><span class="p">(</span>
 
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 
 <span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">    **Alias di ricerca dei Parametri nello lo specifico contesto**&quot;&quot;&quot;</span>
+<span class="sd">    **Alias di ricerca dei Parametri della specifica Feature**&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span> <span class="n">uids</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">features_params</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">cntxt</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/</span><span class="si">{uid}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">context_feature_params</span><span class="p">(</span>
-
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-
-<span class="p">):</span>
-
-    <span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">    **Alias di ricerca dei Parametri della specifica Feature lo specifico contesto**&quot;&quot;&quot;</span>
-
-    <span class="k">return</span> <span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/</span><span class="si">{uid}</span><span class="s2">/</span><span class="si">{param}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{uid}</span><span class="s2">/</span><span class="si">{param}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">context_feature_params</span><span class="p">(</span>
 
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">uid</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 
 <span class="p">):</span>
 
@@ -1388,7 +1286,7 @@
 
 <span class="sd">    **Alias di ricerca dello specifico Parametro della specifica Feature lo specifico contesto**&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span> <span class="n">uid</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">features_params</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">cntxt</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1399,20 +1297,20 @@
 <h2 id="functions">Functions</h2>
 <h3 id="context_feature_params">context_feature_params</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">context_feature_params</span><span class="p">(</span>
+    <span class="n">uid</span><span class="p">,</span>
+    <span class="n">param</span><span class="p">,</span>
     <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">uid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p><strong>Alias di ricerca dello specifico Parametro della specifica Feature lo specifico contesto</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{cntxt}/{uid}/{param}&quot;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{uid}/{param}&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">context_feature_params</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">    </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
 
 <span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -1420,42 +1318,15 @@
 
 <span class="ss">    **Alias di ricerca dello specifico Parametro della specifica Feature lo specifico contesto**&quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"></span>
-</code></pre></div>
-
-</details>
-<h3 id="context_features_params">context_features_params</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">context_features_params</span><span class="p">(</span>
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
-<span class="p">)</span>
-</code></pre></div>
-
-<p><strong>Alias di ricerca dei Parametri nello lo specifico contesto</strong></p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{cntxt}&quot;</span><span class="p">)</span><span class="w"></span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">context_features_params</span><span class="p">(</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
-
-<span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">    **Alias di ricerca dei Parametri nello lo specifico contesto**&quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">features_params</span><span class="p">(</span><span class="n">uid</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
 <h3 id="features_params">features_params</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">features_params</span><span class="p">(</span>
-    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -1483,7 +1354,7 @@
 </ul>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">examples</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">features_params</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="n">def</span><span class="w"> </span><span class="n">features_params</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
@@ -1520,36 +1391,6 @@
 <span class="ss">    - _404 Not Found_: Nel caso in cui nessun parametro risponda ai criteri</span>
 
 <span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_format</span><span class="p">(</span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">None</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">parameters</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="err">{</span><span class="w"></span>
-
-<span class="w">                </span><span class="ss">&quot;series&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"></span>
-
-<span class="w">                </span><span class="ss">&quot;name&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"></span>
-
-<span class="w">                </span><span class="ss">&quot;unit&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">series</span><span class="o">][</span><span class="n">&quot;mu&quot;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
-
-<span class="w">                </span><span class="err">}</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">pass</span><span class="w"></span>
-
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">TypeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">pass</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">parameters</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
 
