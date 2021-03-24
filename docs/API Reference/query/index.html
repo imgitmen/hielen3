@@ -16,7 +16,7 @@
     
     
       
-        <title>Maps - hielen2</title>
+        <title>Query - hielen2</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#maps" class="md-skip">
+        <a href="#query" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Maps
+              Query
             
           </span>
         </div>
@@ -893,11 +893,11 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#maps_1" class="md-nav__link">
-    /maps/
+  <a href="#querycapability" class="md-nav__link">
+    /query/{capability}
   </a>
   
-    <nav class="md-nav" aria-label="/maps/">
+    <nav class="md-nav" aria-label="/query/{capability}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -913,11 +913,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mapsfeature" class="md-nav__link">
-    /maps/{feature}/
+  <a href="#querycapabilityfeature" class="md-nav__link">
+    /query/{capability}/{feature}/
   </a>
   
-    <nav class="md-nav" aria-label="/maps/{feature}/">
+    <nav class="md-nav" aria-label="/query/{capability}/{feature}/">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -933,11 +933,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mapsfeaturepar" class="md-nav__link">
-    /maps/{feature}/{par}
+  <a href="#querycapabilityfeaturepar" class="md-nav__link">
+    /query/{capability}/{feature}/{par}
   </a>
   
-    <nav class="md-nav" aria-label="/maps/{feature}/{par}">
+    <nav class="md-nav" aria-label="/query/{capability}/{feature}/{par}">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -964,7 +964,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/docs/API Reference/maps.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/docs/API Reference/query.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -972,13 +972,14 @@
                   
                 
                 
-                <h1 id="maps">Maps</h1>
-<h2 id="maps_1"><strong>/maps/</strong></h2>
+                <h1 id="query">Query</h1>
+<h2 id="querycapability"><strong>/query/{capability}</strong></h2>
 <h4 id="get">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>datamap</strong>: JSON Schema [{<strong>series</strong>: [str|bytes], <strong>refresh</strong>: bool, <strong>timeref</strong>: str|bytes, <strong>times</strong>: }]</li>
+<li><strong>capability</strong>: Basic text / string value</li>
+<li><strong>datamap</strong>: JSON Schema [{<strong>series</strong>: [str|bytes], <strong>times</strong>: , <strong>refresh</strong>: bool, <strong>timeref</strong>: str|bytes}]</li>
 <li><strong>content_type</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -986,11 +987,12 @@
 <li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8</li>
 </ul>
-<h2 id="mapsfeature"><strong>/maps/{feature}/</strong></h2>
+<h2 id="querycapabilityfeature"><strong>/query/{capability}/{feature}/</strong></h2>
 <h4 id="get_1">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
+<li><strong>capability</strong>: Basic text / string value</li>
 <li><strong>feature</strong>: Basic text / string value</li>
 <li><strong>par</strong>: Basic text / string value</li>
 <li><strong>times</strong>: Basic text / string value</li>
@@ -1003,11 +1005,12 @@
 <li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</li>
 <li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8</li>
 </ul>
-<h2 id="mapsfeaturepar"><strong>/maps/{feature}/{par}</strong></h2>
+<h2 id="querycapabilityfeaturepar"><strong>/query/{capability}/{feature}/{par}</strong></h2>
 <h4 id="get_2">GET</h4>
 <hr />
 <p><em>params</em>:</p>
 <ul>
+<li><strong>capability</strong>: Basic text / string value</li>
 <li><strong>feature</strong>: Basic text / string value</li>
 <li><strong>par</strong>: Basic text / string value</li>
 <li><strong>times</strong>: Basic text / string value</li>
