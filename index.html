@@ -1246,16 +1246,16 @@
 </ul>
 <p><code>hielen2.ext.source_photomonitoring</code></p>
 <h3 id="29-marzo-2021"><strong>29 Marzo 2021</strong></h3>
+<p>inserito il concetto di "info" nelle richieste a feature: Con questo parametro si riescono a centralizzare le chiamate che si focalizzano sulle feature e si separano le informazioni di secondo livello ad esse legate. In questo modo la risposta di default risulta piuttosto leggera ma diventa uno strumento potente e versatile specificando esplicitamente l'estrazione di iformazioni accessorie. Attualmente il parametro "info" accetta un array in cui può essere richiesta l'estrazione di queste info:</p>
 <ul>
-<li>inserito il concetto di "info" nelle richieste a feature: Con questo parametro si riescono a centralizzare le chiamate che si focalizzano sulle feature e si separano le informazioni di secondo livello ad esse legate. In questo modo la risposta di default risulta piuttosto leggera ma diventa uno strumento potente e versatile specificando esplicitamente l'estrazione di iformazioni accessorie. Attualmente il parametro "info" accetta un array in cui può essere richiesta l'estrazione di queste info</li>
+<li><em>geometry</em>: il GeoJson della geometria della feature</li>
+<li><em>capabilities</em>: le possibili interrogazioni effetuabili sulla feature è un array che contiene uno o più di questi valori: "data","map","cloud". la feature risponderà a chiamate del tipo <code>/query/{capability}</code>. Nel caso l'array fosse vuoto la feature non risponderebbe ad alcuna interrogazione.</li>
+<li><em>parameters</em>: l'elenco dei parametri associati alla feature come riportati dal'API GET <code>/parametes/</code>. Quest'ultima API diviene inutile e sarà eliminata in futuro</li>
+<li><em>timeline</em>: la timeline dei dati associati ai parametri della feature. Utile per lo più per le query map e cloud</li>
+<li><em>data</em>: informazioni specifiche di per la capability "data"</li>
+<li><em>map</em>: informazioni specifiche per la capability "map" (il formato è esattamente quello del nodo "map" del backbone di geoframe)</li>
+<li><em>cloud</em>: informazioni specifiche per la capability "cloud"</li>
 </ul>
-<p><em>geometry</em>: il GeoJson della geometria della feature
-<em>capabilities</em>: le possibili interrogazioni effetuabili sulla feature è un array che contiene uno o più di questi valori: "data","map","cloud". la feature risponderà a chiamate del tipo <code>/query/{capability}</code>. Nel caso l'array fosse vuoto la feature non risponderebbe ad alcuna interrogazione.
-<em>parameters</em>: l'elenco dei parametri associati alla feature come riportati dal'API GET <code>/parametes/</code>. Quest'ultima API diviene inutile e sarà eliminata in futuro
-<em>timeline</em>: la timeline dei dati associati ai parametri della feature. Utile per lo più per le query map e cloud
-<em>data</em>: informazioni specifiche di per la capability "data"
-<em>map</em>: informazioni specifiche per la capability "map" (il formato è esattamente quello del nodo "map" del backbone di geoframe)
-<em>cloud</em>: informazioni specifiche per la capability "cloud"</p>
 <h3 id="23-marzo-2021"><strong>23 Marzo 2021</strong></h3>
 <ul>
 <li>unificata la struttura di backend che gestisce le chiamate alle serie (dati, mappe e in futuro clouds): Eliminati moduli <code>hielen2.data.data_access_layer</code> e <code>hielen2.maps.data_access_layer</code> e sostituiti entrambi con <code>hielen2.query</code>, il modulo dichiara la classe <code>hielen2.quert.Series</code> che prevede il parametro <code>capability</code> per distingure tra ["data","map","cloud"]. </li>
