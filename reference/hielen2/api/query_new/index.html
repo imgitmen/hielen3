@@ -16,7 +16,7 @@
     
     
       
-        <title>Query - hielen2</title>
+        <title>Query New - hielen2</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-hielen2apiquery" class="md-skip">
+        <a href="#module-hielen2apiquery_new" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Query
+              Query New
             
           </span>
         </div>
@@ -542,6 +542,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../query/" title="Query" class="md-nav__link">
+      Query
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -553,12 +565,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Query
+        Query New
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Query" class="md-nav__link md-nav__link--active">
-      Query
+    <a href="./" title="Query New" class="md-nav__link md-nav__link--active">
+      Query New
     </a>
     
       
@@ -762,18 +774,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../query_new/" title="Query New" class="md-nav__link">
-      Query New
-    </a>
   </li>
 
         
@@ -1321,7 +1321,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/api/query.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com-hielen2/fantamodeman/hielen2/edit/master/reference/hielen2/api/query_new.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -1329,7 +1329,7 @@
                   
                 
                 
-                <h1 id="module-hielen2apiquery">Module hielen2.api.query</h1>
+                <h1 id="module-hielen2apiquery_new">Module hielen2.api.query_new</h1>
 <details class="example"><summary>View Source</summary><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
   2
   3
@@ -1604,7 +1604,11 @@
 272
 273
 274
-275</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+275
+276
+277
+278
+279</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1624,7 +1628,7 @@
 
 <span class="kn">from</span> <span class="nn">hielen2.query</span> <span class="kn">import</span> <span class="n">Series</span>
 
-<span class="kn">from</span> <span class="nn">hielen2.utils</span> <span class="kn">import</span> <span class="n">hug_output_format_conten_type</span><span class="p">,</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">Selection</span>
+<span class="kn">from</span> <span class="nn">hielen2.utils</span> <span class="kn">import</span> <span class="n">hug_output_format_conten_type</span><span class="p">,</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">Selection</span><span class="p">,</span> <span class="n">GeoJsonField</span>
 
 <span class="kn">from</span> <span class="nn">himada.api</span> <span class="kn">import</span> <span class="n">ResponseFormatter</span>
 
@@ -1654,9 +1658,9 @@
 
     <span class="n">refresh</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">geometry</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">Nested</span><span class="p">(</span><span class="n">GeoJSONSchema</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#    geometry = fields.Nested(GeoJSONSchema, required=False, allow_none=True)</span>
 
-    <span class="c1">#geometry = fields.Str(default=None, required=False, allow_none=True)</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">GeoJsonField</span><span class="p">(</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 
 <span class="c1">####### API DATATABLE #######</span>
 
@@ -1732,7 +1736,13 @@
 
         <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="n">ser</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">ser</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">param</span><span class="p">,</span><span class="n">ser</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
+
+            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
 
@@ -1776,14 +1786,6 @@
 
 <span class="p">):</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
-
-        <span class="n">geometry</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">geometry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-        <span class="n">geometry</span> <span class="o">=</span> <span class="s2">&quot;null&quot;</span>
-
     <span class="k">try</span><span class="p">:</span>
 
         <span class="n">ft</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_info&quot;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span>
@@ -1818,9 +1820,15 @@
 
         <span class="k">return</span>
 
-    <span class="n">datamap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s2">&quot;#PLACEHOLDER#&quot;</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">refresh</span><span class="p">)</span>
+    <span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="n">datamap</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;#PLACEHOLDER#&quot;&#39;</span><span class="p">,</span><span class="n">geometry</span><span class="p">)</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="n">GeoJsonField</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span>
+
+    <span class="n">datamap</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="n">refresh</span><span class="p">)</span>
+
+    <span class="n">datamap</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span>
+
+    <span class="nb">print</span> <span class="p">(</span><span class="n">datamap</span><span class="p">)</span>
 
     <span class="n">datamap</span> <span class="o">=</span> <span class="n">DataMapSchema</span><span class="p">()</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span>
 
@@ -1918,7 +1926,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f02ed96ebe0</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen2</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f02ed9d2af0</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1998,7 +2006,13 @@
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">ser</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ser</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;_&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="o">[</span><span class="n">param,ser.name</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
 
@@ -2060,14 +2074,6 @@
 
 <span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">list</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;,&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="w"></span>
-
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_info&quot;</span><span class="o">][</span><span class="n">feature</span><span class="o">]</span><span class="w"></span>
@@ -2102,9 +2108,15 @@
 
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">datamap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="ss">&quot;#PLACEHOLDER#&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="n">refresh</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">DataMapSchema</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">datamap</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">datamap</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="s1">&#39;&quot;#PLACEHOLDER#&quot;&#39;</span><span class="p">,</span><span class="n">geometry</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">geometry</span><span class="o">=</span><span class="n">GeoJsonField</span><span class="p">(</span><span class="n">allow_none</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">deserialize</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">datamap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dict</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="n">refresh</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">datamap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">datamap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataMapSchema</span><span class="p">().</span><span class="n">loads</span><span class="p">(</span><span class="n">datamap</span><span class="p">)</span><span class="w"></span>
 
@@ -2211,7 +2223,9 @@
 
     <span class="n">refresh</span> = <span class="n">fields</span>.<span class="nb">Bool</span>(<span class="k">default</span>=<span class="nb">False</span>, <span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
 
-    <span class="n">geometry</span> = <span class="n">fields</span>.<span class="n">Nested</span>(<span class="n">GeoJSONSchema</span>, <span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
+<span class="c1">#    geometry = fields.Nested(GeoJSONSchema, required=False, allow_none=True)</span>
+
+    <span class="n">geometry</span> = <span class="n">GeoJsonField</span>( <span class="k">default</span>=<span class="n">None</span>, <span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">True</span> )
 </code></pre></div>
 
 </details>
@@ -2849,7 +2863,7 @@ validation errors.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../prototypes/" title="Prototypes" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../query/" title="Query" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2858,19 +2872,19 @@ validation errors.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Prototypes
+                Query
               </span>
             </div>
           </a>
         
         
-          <a href="../query_new/" title="Query New" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../data/data_access_layer/" title="Data Access Layer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Query New
+                Data Access Layer
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
