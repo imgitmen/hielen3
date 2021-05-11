@@ -874,30 +874,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../struct_good/" title="Struct Good" class="md-nav__link">
-      Struct Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../struct_new/" title="Struct New" class="md-nav__link">
-      Struct New
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -944,6 +920,18 @@
   <li class="md-nav__item">
     <a href="../../source_tinsar/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../source_tinsar/tin/" title="Tin" class="md-nav__link">
+      Tin
     </a>
   </li>
 
@@ -1066,7 +1054,21 @@
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">PIL</span>
+
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">snd</span>
+
 <span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="kn">import</span> <span class="nn">geojson</span>
 
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;Agg&#39;</span><span class="p">)</span>
 
@@ -1074,17 +1076,9 @@
 
 <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LinearSegmentedColormap</span>
 
-<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span><span class="o">,</span> <span class="nn">datetime</span>
-
-<span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">snd</span>
-
-<span class="kn">import</span> <span class="nn">re</span>
-
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">date2num</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="kn">import</span> <span class="nn">PIL</span>
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="n">JSONDecodeError</span>
 
 <span class="k">def</span> <span class="nf">config_NC</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">):</span>
 
@@ -1378,7 +1372,7 @@
 
 <span class="c1"># CLASS METHOD</span>
 
-<span class="k">def</span> <span class="nf">_render</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">vectors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_render</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">vectors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;green&quot;</span><span class="p">,</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s2">&quot;blue&quot;</span><span class="p">],</span><span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
 
     <span class="n">cmap</span> <span class="o">=</span> <span class="n">LinearSegmentedColormap</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="s2">&quot;mycmap&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span>
 
@@ -1406,7 +1400,7 @@
 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
 
-    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.80</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.80</span><span class="p">,</span><span class="n">origin</span><span class="o">=</span><span class="s1">&#39;upper&#39;</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">vectors</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -1424,7 +1418,7 @@
 
     <span class="k">return</span> <span class="n">data</span>
 
-<span class="k">def</span> <span class="nf">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="n">timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -1480,7 +1474,7 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">_render</span><span class="p">(</span><span class="o">**</span><span class="n">managed</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span> <span class="p">)]</span>
 
-<span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span><span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">output</span><span class="o">=</span><span class="s2">&quot;D&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="sd">&#39;&#39;&#39;</span>
 
@@ -1492,7 +1486,7 @@
 
 <span class="sd">    timeto: time upper limit</span>
 
-<span class="sd">    param: &quot;D&quot; Displacement</span>
+<span class="sd">    output: &quot;D&quot; Displacement</span>
 
 <span class="sd">           &quot;V&quot; Direction</span>
 
@@ -1503,6 +1497,50 @@
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">dataset</span><span class="o">=</span><span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">targetfile</span><span class="p">)</span>
+
+    <span class="c1">#1 manipola json</span>
+
+    <span class="c1">#2 se json è un punto extrac &quot;nearest&quot;</span>
+
+    <span class="c1">#3 altrimenti boundigbox e slices</span>
+
+    <span class="k">if</span> <span class="n">times</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">times</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">geometry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geojson</span><span class="o">.</span><span class="n">Point</span><span class="p">([</span><span class="mi">800</span><span class="p">,</span><span class="mi">800</span><span class="p">])</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geojson</span><span class="o">.</span><span class="kp">loads</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="kp">dumps</span><span class="p">(</span><span class="n">geometry</span><span class="p">))</span>
+
+    <span class="n">coords</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">coords</span><span class="p">(</span><span class="n">geometry</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">geojson</span><span class="o">.</span><span class="n">Point</span><span class="p">)</span> <span class="p">:</span>
+
+        <span class="n">query</span><span class="o">=</span><span class="p">{</span>
+
+                <span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+
+                <span class="o">**</span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">],</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+                <span class="p">}</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">geojson</span><span class="o">.</span><span class="n">Polygon</span><span class="p">):</span>
+
+        <span class="n">coords</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span>
+
+        <span class="n">query</span><span class="o">=</span><span class="p">{</span>
+
+                <span class="s1">&#39;method&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+
+                <span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="kp">min</span><span class="p">(),</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="kp">max</span><span class="p">()),</span>
+
+                <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="kp">min</span><span class="p">(),</span><span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="kp">max</span><span class="p">())</span>
+
+                <span class="p">}</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -1518,41 +1556,45 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">timefrom</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
-
-    <span class="n">timeto</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
-
     <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
 
-    <span class="n">dst</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">))</span>
+    <span class="n">dst</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">times</span><span class="p">)</span>
 
 <span class="c1">#    if timeref is not None and not targetfile.isbasetime(timeref):</span>
 
     <span class="k">if</span> <span class="n">timeref</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">ref</span><span class="o">=</span><span class="n">targetfile</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+        <span class="n">ref</span><span class="o">=</span><span class="n">targetfile</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="o">**</span><span class="n">query</span><span class="p">)</span>
 
         <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">ns</span>
 
         <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ew&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="o">-</span><span class="n">ref</span><span class="o">.</span><span class="n">ew</span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">):</span>
 
         <span class="n">out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="kp">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;V&quot;</span><span class="p">):</span>
 
         <span class="n">out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="kp">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;NS&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;NS&quot;</span><span class="p">):</span>
 
         <span class="n">out</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ns</span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;EW&quot;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">output</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;EW&quot;</span><span class="p">):</span>
 
         <span class="n">out</span><span class="o">=</span><span class="n">dst</span><span class="o">.</span><span class="n">ew</span>
 
-    <span class="n">out</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">values</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">])</span><span class="c1">#.dropna()</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;param&quot;</span>
+
+    <span class="n">out</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])]),</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">a</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="p">},</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">result_type</span><span class="o">=</span><span class="s1">&#39;expand&#39;</span><span class="p">)</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;time&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">out</span>
 
@@ -1784,25 +1826,24 @@ x_values: array  delle x</p>
 <h3 id="extract_data">extract_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">extract_data</span><span class="p">(</span>
     <span class="n">targetfile</span><span class="p">,</span>
-    <span class="n">geom</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
-    <span class="n">timefrom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">timeto</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">param</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">output</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
     <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<p>params
+<p>params 
 geom: point to extract
 timefrom: time lower limit
 timeto: time upper limit
-param: "D" Displacement
+output: "D" Displacement
        "V" Direction
        "NS" North-South component
        "EW" Eeast-West component</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">extract_data</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">geom</span><span class="o">=</span><span class="p">[</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">],</span><span class="n">timefrom</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">timeto</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">extract_data</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="k">output</span><span class="o">=</span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-    <span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="s1">&#39;&#39;&#39;</span>
 
 <span class="s1">    params</span>
 
@@ -1812,7 +1853,7 @@ param: "D" Displacement
 
 <span class="s1">    timeto: time upper limit</span>
 
-<span class="s1">    param: &quot;D&quot; Displacement</span>
+<span class="s1">    output: &quot;D&quot; Displacement</span>
 
 <span class="s1">           &quot;V&quot; Direction</span>
 
@@ -1820,11 +1861,55 @@ param: "D" Displacement
 
 <span class="s1">           &quot;EW&quot; Eeast-West component</span>
 
-<span class="s1">    &#39;&#39;&#39;</span>
+<span class="s1">    &#39;&#39;&#39;</span><span class="w"></span>
 
-    <span class="n">dataset</span><span class="o">=</span><span class="n">xr</span><span class="p">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">targetfile</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dataset</span><span class="o">=</span><span class="n">xr</span><span class="p">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">targetfile</span><span class="p">)</span><span class="w"></span>
 
-    <span class="ss">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="n">#1</span><span class="w"> </span><span class="n">manipola</span><span class="w"> </span><span class="n">json</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">#2</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="n">è</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">punto</span><span class="w"> </span><span class="n">extrac</span><span class="w"> </span><span class="ss">&quot;nearest&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">#3</span><span class="w"> </span><span class="n">altrimenti</span><span class="w"> </span><span class="n">boundigbox</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">slices</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geojson</span><span class="p">.</span><span class="n">Point</span><span class="p">(</span><span class="o">[</span><span class="n">800,800</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">geojson</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">geojson</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">geometry</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">coords</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">geojson</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">coords</span><span class="p">(</span><span class="n">geometry</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">geojson</span><span class="p">.</span><span class="n">Point</span><span class="p">)</span><span class="w"> </span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">query</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
+
+<span class="w">                </span><span class="s1">&#39;method&#39;</span><span class="err">:</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="o">**</span><span class="n">dict</span><span class="p">(</span><span class="n">zip</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;x&#39;,&#39;y&#39;</span><span class="o">]</span><span class="p">,</span><span class="n">coords</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">                </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">geojson</span><span class="p">.</span><span class="n">Polygon</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">coords</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">coords</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">query</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
+
+<span class="w">                </span><span class="s1">&#39;method&#39;</span><span class="err">:</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;x&quot;</span><span class="err">:</span><span class="n">slice</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">.</span><span class="nf">min</span><span class="p">(),</span><span class="n">coords</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">.</span><span class="nf">max</span><span class="p">()),</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;y&quot;</span><span class="err">:</span><span class="n">slice</span><span class="p">(</span><span class="n">coords</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">.</span><span class="nf">min</span><span class="p">(),</span><span class="n">coords</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">.</span><span class="nf">max</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">                </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
 
 <span class="ss">    def isbasetime(self,time):</span>
 
@@ -1836,45 +1921,49 @@ param: "D" Displacement
 
 <span class="ss">            return False</span>
 
-<span class="ss">    &quot;&quot;&quot;</span>
+<span class="ss">    &quot;&quot;&quot;</span><span class="w"></span>
 
-    <span class="n">timefrom</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timefrom</span><span class="p">)</span>
+<span class="w">    </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="w"></span>
 
-    <span class="n">timeto</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeto</span><span class="p">)</span>
+<span class="w">    </span><span class="n">dst</span><span class="o">=</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="nc">time</span><span class="o">=</span><span class="n">times</span><span class="p">)</span><span class="w"></span>
 
-    <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+<span class="err">#</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timeref</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">targetfile</span><span class="p">.</span><span class="n">isbasetime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-    <span class="n">dst</span><span class="o">=</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">).</span><span class="n">sel</span><span class="p">(</span><span class="k">time</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">timefrom</span><span class="p">,</span><span class="n">timeto</span><span class="p">))</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">timeref</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="o">#</span>    <span class="k">if</span> <span class="n">timeref</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span> <span class="k">and</span> <span class="k">not</span> <span class="n">targetfile</span><span class="p">.</span><span class="n">isbasetime</span><span class="p">(</span><span class="n">timeref</span><span class="p">):</span>
+<span class="w">        </span><span class="k">ref</span><span class="o">=</span><span class="n">targetfile</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="nc">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="o">**</span><span class="n">query</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="n">timeref</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
+<span class="w">        </span><span class="n">dst</span><span class="o">[</span><span class="n">&#39;ns&#39;</span><span class="o">]=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ns</span><span class="w"></span>
 
-        <span class="k">ref</span><span class="o">=</span><span class="n">targetfile</span><span class="p">.</span><span class="n">dataset</span><span class="p">.</span><span class="n">sel</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">y</span><span class="o">=</span><span class="n">geom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="k">time</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="k">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dst</span><span class="o">[</span><span class="n">&#39;ew&#39;</span><span class="o">]=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ew</span><span class="w"></span>
 
-        <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ns</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;D&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-        <span class="n">dst</span><span class="p">[</span><span class="s1">&#39;ew&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">-</span><span class="k">ref</span><span class="p">.</span><span class="n">ew</span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="nf">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;D&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;V&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="p">))</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;V&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;NS&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="p">,</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="p">))</span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;NS&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">output</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;EW&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ns</span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="n">param</span> <span class="k">in</span> <span class="p">(</span><span class="ss">&quot;EW&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="n">name</span><span class="o">=</span><span class="ss">&quot;param&quot;</span><span class="w"></span>
 
-        <span class="k">out</span><span class="o">=</span><span class="n">dst</span><span class="p">.</span><span class="n">ew</span>
+<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="w"></span>
 
-    <span class="k">out</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="k">out</span><span class="p">,</span><span class="k">index</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">time</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xxx&#39;</span><span class="p">])</span><span class="o">#</span><span class="p">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">to_dataframe</span><span class="p">().</span><span class="n">reset_index</span><span class="p">().</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span><span class="w"></span>
 
-    <span class="k">return</span> <span class="k">out</span>
+<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">a</span><span class="p">:</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="ss">&quot;name&quot;</span><span class="err">:</span><span class="ss">&quot;_&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="o">[</span><span class="n">str(a[&#39;x&#39;</span><span class="o">]</span><span class="p">),</span><span class="nf">str</span><span class="p">(</span><span class="n">a</span><span class="o">[</span><span class="n">&#39;y&#39;</span><span class="o">]</span><span class="p">)</span><span class="err">]</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;value&quot;</span><span class="err">:</span><span class="n">a</span><span class="o">[</span><span class="n">name</span><span class="o">]</span><span class="w"> </span><span class="err">}</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">result_type</span><span class="o">=</span><span class="s1">&#39;expand&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">reset_index</span><span class="p">().</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;time&#39;,&#39;name&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">unstack</span><span class="p">().</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1960,12 +2049,13 @@ kwarg: dict nomevariabile:datagrid</p>
     <span class="n">param</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">step_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="k">timestamp</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">generate_map</span><span class="p">(</span><span class="n">targetfile</span><span class="p">,</span><span class="k">timestamp</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">norm</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmin</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">vmax</span><span class="o">=</span><span class="k">None</span><span class="p">):</span>
 
     <span class="k">if</span> <span class="k">timestamp</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span>
 
@@ -2056,13 +2146,13 @@ kwarg: dict nomevariabile:datagrid</p>
           </a>
         
         
-          <a href="../struct_good/" title="Struct Good" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../source_tinsar/cloudpainter/" title="Cloudpainter" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Struct Good
+                Cloudpainter
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

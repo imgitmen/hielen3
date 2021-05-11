@@ -872,30 +872,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ext/source_photomonitoring/struct_good/" title="Struct Good" class="md-nav__link">
-      Struct Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../ext/source_photomonitoring/struct_new/" title="Struct New" class="md-nav__link">
-      Struct New
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -942,6 +918,18 @@
   <li class="md-nav__item">
     <a href="../../ext/source_tinsar/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/source_tinsar/tin/" title="Tin" class="md-nav__link">
+      Tin
     </a>
   </li>
 
@@ -1446,7 +1434,25 @@
 386
 387
 388
-389</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1706,6 +1712,8 @@
 
     <span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
 
+    <span class="n">toremove</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="c1"># TODO Differenziazione delle tipologie di input</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">[</span><span class="s2">&quot;fields&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -1726,6 +1734,8 @@
 
             <span class="n">values</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">filepath</span>
 
+            <span class="n">toremove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
         <span class="k">else</span><span class="p">:</span>
 
             <span class="n">target</span> <span class="o">=</span> <span class="n">ValueTarget</span><span class="p">()</span>
@@ -1733,6 +1743,18 @@
             <span class="n">parser</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
 
             <span class="n">values</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="nf">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">):</span>
+
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">toremove</span><span class="p">:</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">FileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
 
     <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
 
@@ -1768,6 +1790,8 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
+        <span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span>
+
         <span class="k">return</span>
 
     <span class="c1"># CHECKS request checks ALL RIGHT. Continuing with code loading</span>
@@ -1788,9 +1812,11 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
+        <span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span>
+
         <span class="k">return</span>
 
-    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -1800,15 +1826,15 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
+        <span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span>
+
         <span class="k">return</span>
-
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
     <span class="k">try</span><span class="p">:</span>
 
         <span class="n">db</span><span class="p">[</span><span class="s2">&quot;actions&quot;</span><span class="p">][</span><span class="n">feature</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="n">result</span><span class="p">}</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -1830,9 +1856,7 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
 
-        <span class="k">return</span>
-
-    <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span>
 
     <span class="k">return</span>
 </code></pre></div>
@@ -2158,6 +2182,8 @@
 
 <span class="w">    </span><span class="k">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
+<span class="w">    </span><span class="n">toremove</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
+
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">TODO</span><span class="w"> </span><span class="n">Differenziazione</span><span class="w"> </span><span class="n">delle</span><span class="w"> </span><span class="n">tipologie</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="k">input</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">schema</span><span class="o">[</span><span class="n">&quot;fields&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
@@ -2178,6 +2204,8 @@
 
 <span class="w">            </span><span class="k">values</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">filepath</span><span class="w"></span>
 
+<span class="w">            </span><span class="n">toremove</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ValueTarget</span><span class="p">()</span><span class="w"></span>
@@ -2185,6 +2213,18 @@
 <span class="w">            </span><span class="n">parser</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">values</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">toremove</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">os</span><span class="p">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">FileNotFoundError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="k">True</span><span class="err">:</span><span class="w"></span>
 
@@ -2220,6 +2260,8 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
 <span class="w">    </span><span class="err">#</span><span class="w"> </span><span class="n">CHECKS</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">checks</span><span class="w"> </span><span class="ow">ALL</span><span class="w"> </span><span class="nf">RIGHT</span><span class="p">.</span><span class="w"> </span><span class="n">Continuing</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="n">loading</span><span class="w"></span>
@@ -2240,9 +2282,11 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">traceback</span><span class="p">.</span><span class="n">print_exc</span><span class="p">()</span><span class="w"></span>
 
@@ -2252,15 +2296,15 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
-
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">traceback</span><span class="p">.</span><span class="n">print_exc</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;actions&quot;</span><span class="o">][</span><span class="n">feature,action,result[&#39;timestamp&#39;</span><span class="o">]</span><span class="err">]</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;value&quot;</span><span class="err">:</span><span class="k">result</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -2282,9 +2326,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">removetempfiles</span><span class="p">(</span><span class="n">toremove</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"></span>
 </code></pre></div>

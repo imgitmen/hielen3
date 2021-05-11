@@ -787,30 +787,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="reference/hielen2/ext/source_photomonitoring/struct_good/" title="Struct Good" class="md-nav__link">
-      Struct Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="reference/hielen2/ext/source_photomonitoring/struct_new/" title="Struct New" class="md-nav__link">
-      Struct New
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -861,6 +837,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="reference/hielen2/ext/source_tinsar/tin/" title="Tin" class="md-nav__link">
+      Tin
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -903,6 +891,34 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v2010" class="md-nav__link">
+    v2.0.10
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-maggio-2021" class="md-nav__link">
+    10 Maggio 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-maggio-2021" class="md-nav__link">
+    7 Maggio 2021
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30-aprile-2021" class="md-nav__link">
+    30 Aprile 2021
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v209" class="md-nav__link">
@@ -1296,6 +1312,118 @@
                 
                 
                 <h1 id="changelog">CHANGELOG</h1>
+<h2 id="v2010"><strong>v2.0.10</strong></h2>
+<h2 id="10-maggio-2021"><strong>10 Maggio 2021</strong></h2>
+<ul>
+<li>Integrazione di ColorMap, e Config Time Operands</li>
+</ul>
+<h2 id="7-maggio-2021"><strong>7 Maggio 2021</strong></h2>
+<ul>
+<li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. (vedi https://development.imgback.com/api/hielen2/actionschemata)</li>
+</ul>
+<p><em>Come funziona ColorMap</em>:</p>
+<p>In base alla risposta di actionschemata, il front-end aprirà, su questo campo, l'interfaccia di scelta dei colori. Il risultato dell'interazione sarà sintetizzato in un json: Quando lo schema di un'azione presenta un campo ColorMap, l'azione accetta come parametro il nome del campo valorizzato con un array di lunghezza variabile di COPPIE (valore,colore)</p>
+<div class="codehilite"><pre><span></span><code><span class="err">[</span>
+<span class="err">    [</span>
+<span class="err">        valore,</span>
+<span class="err">        colore</span>
+<span class="err">    ],</span>
+<span class="err">    [</span>
+<span class="err">        valore,</span>
+<span class="err">        colore,</span>
+<span class="err">    ]</span>
+<span class="err">    ...</span>
+<span class="err">]</span>
+</code></pre></div>
+
+<p>dove:</p>
+<p><code>valore</code> è un numero di qualsiasi genere con punto decimale
+<code>colore</code> è una stringa di colore hex</p>
+<p>esempio:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">[</span>
+<span class="err">    [</span>
+<span class="err">        -0.25,</span>
+<span class="err">        &#39;#FFFF00&#39;</span>
+<span class="err">    ],</span>
+<span class="err">    [</span>
+<span class="err">        -0.125,</span>
+<span class="err">        &#39;#00FF00&#39;</span>
+<span class="err">    ],</span>
+<span class="err">    [</span>
+<span class="err">        0,</span>
+<span class="err">        &#39;#0000FF&#39;</span>
+<span class="err">    ],</span>
+<span class="err">    [</span>
+<span class="err">        0.5,</span>
+<span class="err">        &#39;#FF00FF&#39;</span>
+<span class="err">    ],</span>
+<span class="err">    [</span>
+<span class="err">        1,</span>
+<span class="err">        &#39;#AEBD00&#39;</span>
+<span class="err">    ],</span>
+<span class="err">                                            ]</span>
+</code></pre></div>
+
+<p>dove per ogni campo viene fornito il colore della rappresentazione e il valore di riferimento a cui associarlo. Un array tipo quello descritto viene inteso così:</p>
+<p>[-inf,-0.25) : "#FFFF00",
+[-0.25,-0.125) : "#FFFF00" --&gt; #00FF00",
+[-0.125,0.0) : #00FF00" --&gt; "#0000FF",
+[0.0,0.5) : "#0000FF" --&gt; "#FF00FF",
+[0.5,1.0) : "#FF00FF" --&gt; "#AEBD00"
+[1.0,inf) : "#AEBD00"</p>
+<p>La colormap così passata in configurazione per ogni parametro viene assegnata come operando di elaborazione e l'informazione viene mantenuta per ogni serie.
+L'API <code>features</code> è stata modificata in modo da fornire l'informazione di colormap quando viene specificata l'opzione info=parameters</p>
+<p>esempio:</p>
+<p>https://development.imgback.com/api/hielen2/features/esempio4?info=parameters</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    ...,</span>
+<span class="err">    &quot;parameters&quot;: [</span>
+<span class="err">        {</span>
+<span class="err">            &quot;series&quot;: &quot;2b6c9efb4e83f64e757ce862f8b6c2e0&quot;,</span>
+<span class="err">            &quot;param&quot;: &quot;East-West_Displacement&quot;,</span>
+<span class="err">            &quot;unit&quot;: &quot;mm&quot;,</span>
+<span class="err">            &quot;cmap&quot;: [</span>
+<span class="err">                [</span>
+<span class="err">                    -0.25,</span>
+<span class="err">                    &quot;#FFFF00&quot;,</span>
+<span class="err">                    0</span>
+<span class="err">                ],</span>
+<span class="err">                [</span>
+<span class="err">                    -0.125,</span>
+<span class="err">                    &quot;#00FF00&quot;,</span>
+<span class="err">                    10</span>
+<span class="err">                ],</span>
+<span class="err">                [</span>
+<span class="err">                    0,</span>
+<span class="err">                    &quot;#0000FF&quot;,</span>
+<span class="err">                    20</span>
+<span class="err">                ],</span>
+<span class="err">                [</span>
+<span class="err">                    0.5,</span>
+<span class="err">                    &quot;#FF00FF&quot;,</span>
+<span class="err">                    60</span>
+<span class="err">                ],</span>
+<span class="err">                [</span>
+<span class="err">                    1,</span>
+<span class="err">                    &quot;#AEBD00&quot;,</span>
+<span class="err">                    100</span>
+<span class="err">                ]</span>
+<span class="err">            ]</span>
+<span class="err">        },</span>
+<span class="err">        ...</span>
+<span class="err">    ],</span>
+<span class="err">    ...</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<p>dove ogni <code>cmap</code> è un array ordinato di triplette utile alla creazione della relativa colorbar. Ogni tipletta fornisce questa infromazione:</p>
+<p>cmap[x][0]: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.
+cmap[x][1]: colore in esadecimale.
+cmap[x][2]: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
+<h2 id="30-aprile-2021"><strong>30 Aprile 2021</strong></h2>
+<ul>
+<li>Gestione generalizzata degli operandi "config time" per i parametri: Ora la classe Source espone dei metodi per dare la possibilità alle sotto classi di definire operandi di elaborazione custom.</li>
+</ul>
 <h2 id="v209"><strong>v2.0.9</strong></h2>
 <h2 id="22-aprile-2021"><strong>22 Aprile 2021</strong></h2>
 <ul>

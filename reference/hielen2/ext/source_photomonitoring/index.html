@@ -1170,6 +1170,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#retriveseries" class="md-nav__link">
+    retriveSeries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setparamoperand" class="md-nav__link">
+    setParamOperand
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1212,30 +1226,6 @@
   <li class="md-nav__item">
     <a href="struct/" title="Struct" class="md-nav__link">
       Struct
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="struct_good/" title="Struct Good" class="md-nav__link">
-      Struct Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="struct_new/" title="Struct New" class="md-nav__link">
-      Struct New
     </a>
   </li>
 
@@ -1286,6 +1276,18 @@
   <li class="md-nav__item">
     <a href="../source_tinsar/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../source_tinsar/tin/" title="Tin" class="md-nav__link">
+      Tin
     </a>
   </li>
 
@@ -1708,6 +1710,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#retriveseries" class="md-nav__link">
+    retriveSeries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setparamoperand" class="md-nav__link">
+    setParamOperand
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1770,8 +1786,6 @@
 <ul>
 <li><a href="phm/">hielen2.ext.source_photomonitoring.phm</a></li>
 <li><a href="struct/">hielen2.ext.source_photomonitoring.struct</a></li>
-<li><a href="struct_good/">hielen2.ext.source_photomonitoring.struct_good</a></li>
-<li><a href="struct_new/">hielen2.ext.source_photomonitoring.struct_new</a></li>
 </ul>
 <h2 id="classes">Classes</h2>
 <h3 id="configschema">ConfigSchema</h3>
@@ -1788,52 +1802,28 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<p>'master_image' (required): the base image used as reference grid for elaboration. It can be any image format managed by rasterio pyhton library (GeoTIFF, jpeg, ...). Any elaboration image based on the 'master_image' will share geometry and reference system with it.</p>
-<p>'step_size': Pixels sub samplig ratio expected for the elaboration grids compared to 'master_image'. (see Feed Action)</p>
-<p>'windows_size_change': Pixel expressed, upper-left corner position (both vertical and orizontal) expected for the overlaying elaboration grids starting from the upper-left corner of the 'master_image'</p>
-<p>'geo_reference_file': Reference file for the geolocalization of the 'master_image' and all the dependent elaboration images. It can be a standard world file (six lines text file) according to http://www.kralidis.ca/gis/worldfile.htm, as well an '.aux.xml' file according to https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/auxiliary-files.htm (just the Coordinate system, the Transformation and the Projection informations are here managed).
-IMPORTANT: When a valid 'geo_regerence_file' is provided, therein informations overwrite the ones possibly embedded into the 'master_image'</p>
-<p>'crs': the Coordinate Reference System of the master_image in the string form 'autority:code' (i.e.: 'EPSG:3857'). 
-IMPORTANT: If a valid 'crs' is provided, this value overwrites the ones possibly provided with the 'geo_regerence_file' and/or embeded into the 'master_image'</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">ConfigSchema</span>(<span class="n">ActionSchema</span>):
+<p>Minimal ActionSchema object. Used to define at least a timestamp</p>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">ConfigSchema</span>(<span class="n">ActionSchema</span>,<span class="n">GeoInfoSchema</span>):
 
-    <span class="s">&quot;&quot;&quot;&#39;master_image&#39; (required): the base image used as reference grid for elaboration. It can be any \</span>
+    <span class="n">hints</span> = <span class="n">dict</span> (
 
-<span class="s">image format managed by rasterio pyhton library (GeoTIFF, jpeg, ...). Any elaboration image based \</span>
+            <span class="n">master_image</span> = <span class="s">&quot;The base image used as reference grid for elaboration. It can be any image format managed by rasterio pyhton library (GeoTIFF, jpeg, ...). Any elaboration image based on the &#39;master_image&#39; will share geometry and reference system with it.&quot;</span>,
 
-<span class="s">on the &#39;master_image&#39; will share geometry and reference system with it.</span>
+            <span class="n">step_size</span> = <span class="s">&quot;Pixels sub samplig ratio expected for the elaboration grids compared to &#39;master_image&#39;. (see Feed Action)&quot;</span>,
 
-<span class="s">&#39;step_size&#39;: Pixels sub samplig ratio expected for the elaboration grids compared to &#39;master_image&#39;. \</span>
+            <span class="n">window_size_change</span> = <span class="s">&quot;Pixel expressed, upper-left corner position (both vertical and orizontal) expected for the overlaying elaboration grids starting from the upper-left corner of the &#39;master_image&quot;</span>,
 
-<span class="s">(see Feed Action)</span>
+            <span class="n">ns_cmap</span> = <span class="s">&quot;East-Weast colormap range&quot;</span>,
 
-<span class="s">&#39;windows_size_change&#39;: Pixel expressed, upper-left corner position (both vertical and orizontal) expected \</span>
+            <span class="n">ew_cmap</span> = <span class="s">&quot;Nord-South colormap range&quot;</span>,
 
-<span class="s">for the overlaying elaboration grids starting from the upper-left corner of the &#39;master_image&#39;</span>
+            <span class="n">displ_cmap</span> = <span class="s">&quot;Displacement colormap range&quot;</span>,
 
-<span class="s">&#39;geo_reference_file&#39;: Reference file for the geolocalization of the &#39;master_image&#39; and all the dependent \</span>
+            **<span class="n">GeoInfoSchema</span>.<span class="n">hints</span>,
 
-<span class="s">elaboration images. It can be a standard world file (six lines text file) according to \</span>
+            **<span class="n">ActionSchema</span>.<span class="n">hints</span>
 
-<span class="s">http://www.kralidis.ca/gis/worldfile.htm, as well an &#39;.aux.xml&#39; file according to \</span>
-
-<span class="s">https://desktop.arcgis.com/en/arcmap/10.3/manage-data/raster-and-images/auxiliary-files.htm \</span>
-
-<span class="s">(just the Coordinate system, the Transformation and the Projection informations are here managed).</span>
-
-<span class="s">IMPORTANT: When a valid &#39;geo_regerence_file&#39; is provided, therein informations overwrite the ones \</span>
-
-<span class="s">possibly embedded into the &#39;master_image&#39;</span>
-
-<span class="s">&#39;crs&#39;: the Coordinate Reference System of the master_image in the string form &#39;autority:code&#39; \</span>
-
-<span class="s">(i.e.: &#39;EPSG:3857&#39;).</span>
-
-<span class="s">IMPORTANT: If a valid &#39;crs&#39; is provided, this value overwrites the ones possibly provided with the \</span>
-
-<span class="s">&#39;geo_regerence_file&#39; and/or embeded into the &#39;master_image&#39;</span>
-
-<span class="s">&quot;&quot;&quot;</span>
+            )
 
     <span class="n">master_image</span> = <span class="n">LocalFile</span>(<span class="k">required</span>=<span class="nb">True</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
@@ -1841,9 +1831,17 @@ IMPORTANT: If a valid 'crs' is provided, this value overwrites the ones possibly
 
     <span class="n">window_size_change</span> = <span class="n">fields</span>.<span class="n">Number</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="k">default</span>=<span class="mi">0</span>, <span class="n">allow_none</span>=<span class="nb">True</span>, <span class="n">as_string</span>=<span class="nb">False</span>)
 
-    <span class="n">geo_reference_file</span> = <span class="n">LocalFile</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="k">default</span>=<span class="n">None</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
+<span class="c1">#    ew_cmap=ColorMap(fields.Tuple((fields.Number(),fields.String())),required=False,allow_none=True,default=None)</span>
 
-    <span class="n">crs</span>=<span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="k">default</span>=<span class="n">None</span>,<span class="n">allow_none</span>=<span class="nb">True</span>)
+<span class="c1">#    ns_cmap=ColorMap(fields.Tuple((fields.Number(),fields.String())),required=False,allow_none=True,default=None)</span>
+
+<span class="c1">#    displ_cmap=ColorMap(fields.Tuple((fields.Number(),fields.String())),required=False,allow_none=True,default=None)</span>
+
+    <span class="n">ew_cmap</span>=<span class="n">ColorMap</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="n">allow_none</span>=<span class="nb">True</span>,<span class="k">default</span>=<span class="n">None</span>)
+
+    <span class="n">ns_cmap</span>=<span class="n">ColorMap</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="n">allow_none</span>=<span class="nb">True</span>,<span class="k">default</span>=<span class="n">None</span>)
+
+    <span class="n">displ_cmap</span>=<span class="n">ColorMap</span>(<span class="k">required</span>=<span class="nb">False</span>,<span class="n">allow_none</span>=<span class="nb">True</span>,<span class="k">default</span>=<span class="n">None</span>)
 </code></pre></div>
 
 </details>
@@ -1851,6 +1849,7 @@ IMPORTANT: If a valid 'crs' is provided, this value overwrites the ones possibly
 <h4 id="ancestors-in-mro">Ancestors (in MRO)</h4>
 <ul>
 <li>hielen2.source.ActionSchema</li>
+<li>hielen2.source.GeoInfoSchema</li>
 <li>marshmallow.schema.Schema</li>
 <li>marshmallow.base.SchemaABC</li>
 </ul>
@@ -1864,16 +1863,22 @@ IMPORTANT: If a valid 'crs' is provided, this value overwrites the ones possibly
 <div class="codehilite"><pre><span></span><code><span class="n">TYPE_MAPPING</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="n">crs</span>
+<div class="codehilite"><pre><span></span><code><span class="n">displ_cmap</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">error_messages</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="n">geo_reference_file</span>
+<div class="codehilite"><pre><span></span><code><span class="n">ew_cmap</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">hints</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">master_image</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">ns_cmap</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">opts</span>
@@ -2478,23 +2483,22 @@ validation errors.</p>
 <span class="p">)</span>
 </code></pre></div>
 
-<p>reference_time: timestamp of the reference "master_image". If Null assumes last "master_image" configured.</p>
-<p>NS_displacement: textfile containing the grid of the North-South displacement.</p>
-<p>EW_displacement: textfile containing the grid of the East-Weast displacement.</p>
-<p>CORR: textfile containing the grid of the coerence info</p>
+<p>Minimal ActionSchema object. Used to define at least a timestamp</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">FeedSchema</span>(<span class="n">ActionSchema</span>):
 
-    <span class="s">&quot;&quot;&quot;reference_time: timestamp of the reference &quot;</span><span class="n">master_image</span><span class="s">&quot;. If Null assumes last \</span>
+    <span class="n">hints</span> = <span class="n">dict</span> (
 
-<span class="s">&quot;</span><span class="n">master_image</span><span class="s">&quot; configured.</span>
+            <span class="n">reference_time</span> = <span class="s">&quot;timestamp of the reference &#39;master_image&#39;. If Null assumes last &#39;master_image&#39; configured.&quot;</span>,
 
-<span class="s">NS_displacement: textfile containing the grid of the North-South displacement.</span>
+            <span class="n">NS_displacement</span> = <span class="s">&quot;textfile containing the grid of the North-South displacement.&quot;</span>,
 
-<span class="s">EW_displacement: textfile containing the grid of the East-Weast displacement.</span>
+            <span class="n">EW_displacement</span> = <span class="s">&quot;textfile containing the grid of the East-Weast displacement.&quot;</span>,
 
-<span class="s">CORR: textfile containing the grid of the coerence info</span>
+            <span class="n">CORR</span> = <span class="s">&quot;textfile containing the grid of the coerence info&quot;</span>,
 
-<span class="s">&quot;&quot;&quot;</span>
+            **<span class="n">ActionSchema</span>.<span class="n">hints</span>
+
+            )
 
     <span class="n">NS_displacement</span> = <span class="n">LocalFile</span>(<span class="k">required</span>=<span class="nb">True</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 
@@ -2531,6 +2535,9 @@ validation errors.</p>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">error_messages</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">hints</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">opts</span>
@@ -3228,6 +3235,8 @@ validation errors.</p>
 
 <span class="s2">            crs=None</span>
 
+<span class="s2">        geographic=True</span>
+
 <span class="s2">        try:</span>
 
 <span class="s2">            with rasterio.open(temp_base_file) as src:</span>
@@ -3245,6 +3254,8 @@ validation errors.</p>
 <span class="s2">                    meta[&#39;crs&#39;]=meta[&#39;crs&#39;].to_string()</span>
 
 <span class="s2">                except AttributeError:</span>
+
+<span class="s2">                    geographic=False</span>
 
 <span class="s2">                    meta[&#39;crs&#39;]=&#39;epsg:3857&#39;</span>
 
@@ -3280,21 +3291,21 @@ validation errors.</p>
 
 <span class="s2">                    rgb.append( full(rgb[0].shape,dtype=&quot;</span><span class="s s-Atom">uint8</span><span class="s2">&quot;,fill_value=255) )</span>
 
-<span class="s2">                if src.crs is None:</span>
+<span class="s2">                if geographic:</span>
 
-<span class="s2">                    bounds=src.bounds</span>
-
-<span class="s2">                    minlon=bounds.left</span>
-
-<span class="s2">                    minlat=bounds.top</span>
-
-<span class="s2">                    maxlon=bounds.right</span>
-
-<span class="s2">                    maxlat=bounds.bottom</span>
+<span class="s2">                    minlon,minlat,maxlon,maxlat = transform_bounds(src.crs,&#39;EPSG:4326&#39;,*src.bounds)</span>
 
 <span class="s2">                else:</span>
 
-<span class="s2">                    minlon,minlat,maxlon,maxlat = transform_bounds(src.crs,&#39;EPSG:4326&#39;,*src.bounds)</span>
+<span class="s2">                    bounds=src.bounds</span>
+
+<span class="s2">                    minlon=bounds.left * 4.4915764206e-06</span>
+
+<span class="s2">                    minlat=bounds.top * 4.4915764206e-06</span>
+
+<span class="s2">                    maxlon=bounds.right * 4.4915764206e-06</span>
+
+<span class="s2">                    maxlat=bounds.bottom * 4.4915764206e-06</span>
 
 <span class="s2">                with rasterio.open(mapbase, &#39;w&#39;, **meta) as dst:</span>
 
@@ -3314,7 +3325,7 @@ validation errors.</p>
 
 <span class="s2">                    outum=outcrs.linear_units</span>
 
-<span class="s2">                #Master_image is ok. Making mapfoile</span>
+<span class="s2">                #Master_image is ok. Making mapfile</span>
 
 <span class="s2">                mapmanager.setMFparams(bands=bands,crs=outcrs,um=outum)</span>
 
@@ -3350,13 +3361,13 @@ validation errors.</p>
 
 <span class="s2">                &quot;</span><span class="s s-Atom">zoom</span><span class="s2">&quot;:{</span>
 
-<span class="s2">                    &quot;</span><span class="s s-Atom">default</span><span class="s2">&quot;:int(20/(sqrt((maxlat-minlat)**2+(maxlon-minlon)**2)))</span>
+<span class="s2">                    &quot;</span><span class="s s-Atom">default</span><span class="s2">&quot;:min(int(20/(sqrt((maxlat-minlat)**2+(maxlon-minlon)**2))),20)</span>
 
 <span class="s2">                    },</span>
 
 <span class="s2">                &quot;</span><span class="s s-Atom">basemapurl</span><span class="s2">&quot;: mapmanager.geturl(mapbasename),</span>
 
-<span class="s2">                &quot;</span><span class="s s-Atom">geographic</span><span class="s2">&quot;: crs is not None</span>
+<span class="s2">                &quot;</span><span class="s s-Atom">geographic</span><span class="s2">&quot;: geographic</span>
 
 <span class="s2">        })</span>
 
@@ -3379,6 +3390,12 @@ validation errors.</p>
 <span class="s2">        ncpath=self.ncfile(timestamp)</span>
 
 <span class="s2">        config_NC(ncpath,timestamp,x_values,y_values).close()</span>
+
+<span class="s2">        self.setParamOperand(&#39;East-West_Displacement&#39;,&#39;cmap&#39;,kwargs[&#39;ew_cmap&#39;])</span>
+
+<span class="s2">        self.setParamOperand(&#39;North-South_Displacement&#39;,&#39;cmap&#39;,kwargs[&#39;ns_cmap&#39;])</span>
+
+<span class="s2">        self.setParamOperand(&#39;Displacement&#39;,&#39;cmap&#39;,kwargs[&#39;displ_cmap&#39;])</span>
 
 <span class="s2">        return out</span>
 
@@ -3470,7 +3487,7 @@ validation errors.</p>
 
 <span class="s2">        return data</span>
 
-<span class="s2">    def map( self, times=None, timeref=None, geometry=None, output=&quot;</span><span class="nv">D</span><span class="s2">&quot;, **kwargs ):</span>
+<span class="s2">    def map( self, times=None, timeref=None, geometry=None, output=&quot;</span><span class="nv">D</span><span class="s2">&quot;, cmap=None, norm=None, **kwargs ):</span>
 
 <span class="s2">        timestamp=None</span>
 
@@ -3502,7 +3519,23 @@ validation errors.</p>
 
 <span class="s2">        wsc=int(conf[&#39;window_size_change&#39;])</span>
 
-<span class="s2">        timestamp,imgarray=generate_map(ncfile,timestamp=timestamp,timeref=timeref,param=output,step_size=conf[&#39;step_size&#39;])</span>
+<span class="s2">        timestamp,imgarray=generate_map(</span>
+
+<span class="s2">                ncfile,</span>
+
+<span class="s2">                timestamp=timestamp,</span>
+
+<span class="s2">                timeref=timeref,</span>
+
+<span class="s2">                param=output,</span>
+
+<span class="s2">                step_size=conf[&#39;step_size&#39;],</span>
+
+<span class="s2">                cmap=cmap,</span>
+
+<span class="s2">                norm=norm</span>
+
+<span class="s2">                )</span>
 
 <span class="s2">        imgname=f&quot;</span><span class="p">{</span><span class="s s-Atom">mapname</span><span class="p">}</span><span class="k">_</span><span class="p">{</span><span class="s s-Atom">self</span><span class="p">.</span><span class="nf">hasher</span><span class="p">(</span><span class="s s-Atom">timestamp</span><span class="p">)[</span><span class="s s-Atom">:</span><span class="mi">14</span><span class="p">]}</span><span class="k">_</span><span class="p">{</span><span class="s s-Atom">output</span><span class="p">}.</span><span class="s s-Atom">tif</span><span class="err">&quot;</span>
 
@@ -3652,6 +3685,8 @@ validation errors.</p>
 
             <span class="s s-Atom">crs</span><span class="o">=</span><span class="nv">None</span>
 
+        <span class="s s-Atom">geographic</span><span class="o">=</span><span class="nv">True</span>
+
         <span class="nn">try</span><span class="p">:</span>
 
             <span class="s s-Atom">with</span> <span class="s s-Atom">rasterio</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s s-Atom">temp_base_file</span><span class="p">)</span> <span class="s s-Atom">as</span> <span class="nn">src</span><span class="p">:</span>
@@ -3669,6 +3704,8 @@ validation errors.</p>
                     <span class="s s-Atom">meta</span><span class="p">[</span><span class="s s-Atom">&#39;crs&#39;</span><span class="p">]</span><span class="o">=</span><span class="s s-Atom">meta</span><span class="p">[</span><span class="s s-Atom">&#39;crs&#39;</span><span class="p">].</span><span class="nf">to_string</span><span class="p">()</span>
 
                 <span class="s s-Atom">except</span> <span class="nv">AttributeError</span><span class="s s-Atom">:</span>
+
+                    <span class="s s-Atom">geographic</span><span class="o">=</span><span class="nv">False</span>
 
                     <span class="s s-Atom">meta</span><span class="p">[</span><span class="s s-Atom">&#39;crs&#39;</span><span class="p">]</span><span class="s s-Atom">=&#39;epsg:3857&#39;</span>
 
@@ -3704,21 +3741,21 @@ validation errors.</p>
 
                     <span class="s s-Atom">rgb</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span> <span class="nf">full</span><span class="p">(</span><span class="s s-Atom">rgb</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="s s-Atom">shape</span><span class="p">,</span><span class="s s-Atom">dtype=</span><span class="s2">&quot;uint8&quot;</span><span class="p">,</span><span class="s s-Atom">fill_value</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span> <span class="p">)</span>
 
-                <span class="s s-Atom">if</span> <span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">crs</span> <span class="o">is</span> <span class="nv">None</span><span class="s s-Atom">:</span>
+                <span class="s s-Atom">if</span> <span class="nn">geographic</span><span class="p">:</span>
 
-                    <span class="s s-Atom">bounds</span><span class="o">=</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">bounds</span>
-
-                    <span class="s s-Atom">minlon</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">left</span>
-
-                    <span class="s s-Atom">minlat</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">top</span>
-
-                    <span class="s s-Atom">maxlon</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">right</span>
-
-                    <span class="s s-Atom">maxlat</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">bottom</span>
+                    <span class="s s-Atom">minlon</span><span class="p">,</span><span class="s s-Atom">minlat</span><span class="p">,</span><span class="s s-Atom">maxlon</span><span class="p">,</span><span class="s s-Atom">maxlat</span> <span class="o">=</span> <span class="nf">transform_bounds</span><span class="p">(</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">crs</span><span class="p">,</span><span class="s s-Atom">&#39;EPSG:4326&#39;</span><span class="p">,</span><span class="o">*</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">bounds</span><span class="p">)</span>
 
                 <span class="nn">else</span><span class="p">:</span>
 
-                    <span class="s s-Atom">minlon</span><span class="p">,</span><span class="s s-Atom">minlat</span><span class="p">,</span><span class="s s-Atom">maxlon</span><span class="p">,</span><span class="s s-Atom">maxlat</span> <span class="o">=</span> <span class="nf">transform_bounds</span><span class="p">(</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">crs</span><span class="p">,</span><span class="s s-Atom">&#39;EPSG:4326&#39;</span><span class="p">,</span><span class="o">*</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">bounds</span><span class="p">)</span>
+                    <span class="s s-Atom">bounds</span><span class="o">=</span><span class="s s-Atom">src</span><span class="p">.</span><span class="s s-Atom">bounds</span>
+
+                    <span class="s s-Atom">minlon</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">left</span> <span class="o">*</span> <span class="mf">4.4915764206e-06</span>
+
+                    <span class="s s-Atom">minlat</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">top</span> <span class="o">*</span> <span class="mf">4.4915764206e-06</span>
+
+                    <span class="s s-Atom">maxlon</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">right</span> <span class="o">*</span> <span class="mf">4.4915764206e-06</span>
+
+                    <span class="s s-Atom">maxlat</span><span class="o">=</span><span class="s s-Atom">bounds</span><span class="p">.</span><span class="s s-Atom">bottom</span> <span class="o">*</span> <span class="mf">4.4915764206e-06</span>
 
                 <span class="s s-Atom">with</span> <span class="s s-Atom">rasterio</span><span class="p">.</span><span class="nf">open</span><span class="p">(</span><span class="s s-Atom">mapbase</span><span class="p">,</span> <span class="s s-Atom">&#39;w&#39;</span><span class="p">,</span> <span class="s s-Atom">**meta</span><span class="p">)</span> <span class="s s-Atom">as</span> <span class="nn">dst</span><span class="p">:</span>
 
@@ -3738,7 +3775,7 @@ validation errors.</p>
 
                     <span class="s s-Atom">outum</span><span class="o">=</span><span class="s s-Atom">outcrs</span><span class="p">.</span><span class="s s-Atom">linear_units</span>
 
-                <span class="s s-Atom">#</span><span class="nv">Master_image</span> <span class="o">is</span> <span class="s s-Atom">ok</span><span class="p">.</span> <span class="nv">Making</span> <span class="s s-Atom">mapfoile</span>
+                <span class="s s-Atom">#</span><span class="nv">Master_image</span> <span class="o">is</span> <span class="s s-Atom">ok</span><span class="p">.</span> <span class="nv">Making</span> <span class="s s-Atom">mapfile</span>
 
                 <span class="s s-Atom">mapmanager</span><span class="p">.</span><span class="nf">setMFparams</span><span class="p">(</span><span class="s s-Atom">bands</span><span class="o">=</span><span class="s s-Atom">bands</span><span class="p">,</span><span class="s s-Atom">crs</span><span class="o">=</span><span class="s s-Atom">outcrs</span><span class="p">,</span><span class="s s-Atom">um</span><span class="o">=</span><span class="s s-Atom">outum</span><span class="p">)</span>
 
@@ -3774,13 +3811,13 @@ validation errors.</p>
 
                 <span class="s2">&quot;zoom&quot;</span><span class="s s-Atom">:</span><span class="p">{</span>
 
-                    <span class="s2">&quot;default&quot;</span><span class="s s-Atom">:</span><span class="nf">int</span><span class="p">(</span><span class="mi">20</span><span class="s s-Atom">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="s s-Atom">maxlat</span><span class="o">-</span><span class="s s-Atom">minlat</span><span class="p">)</span><span class="s s-Atom">**</span><span class="mi">2</span><span class="s s-Atom">+</span><span class="p">(</span><span class="s s-Atom">maxlon</span><span class="o">-</span><span class="s s-Atom">minlon</span><span class="p">)</span><span class="s s-Atom">**</span><span class="mi">2</span><span class="p">)))</span>
+                    <span class="s2">&quot;default&quot;</span><span class="s s-Atom">:</span><span class="nf">min</span><span class="p">(</span><span class="nf">int</span><span class="p">(</span><span class="mi">20</span><span class="s s-Atom">/</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">((</span><span class="s s-Atom">maxlat</span><span class="o">-</span><span class="s s-Atom">minlat</span><span class="p">)</span><span class="s s-Atom">**</span><span class="mi">2</span><span class="s s-Atom">+</span><span class="p">(</span><span class="s s-Atom">maxlon</span><span class="o">-</span><span class="s s-Atom">minlon</span><span class="p">)</span><span class="s s-Atom">**</span><span class="mi">2</span><span class="p">))),</span><span class="mi">20</span><span class="p">)</span>
 
                     <span class="p">},</span>
 
                 <span class="s2">&quot;basemapurl&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">mapmanager</span><span class="p">.</span><span class="nf">geturl</span><span class="p">(</span><span class="s s-Atom">mapbasename</span><span class="p">),</span>
 
-                <span class="s2">&quot;geographic&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">crs</span> <span class="o">is</span> <span class="o">not</span> <span class="nv">None</span>
+                <span class="s2">&quot;geographic&quot;</span><span class="s s-Atom">:</span> <span class="s s-Atom">geographic</span>
 
         <span class="p">})</span>
 
@@ -3803,6 +3840,12 @@ validation errors.</p>
         <span class="s s-Atom">ncpath</span><span class="o">=</span><span class="s s-Atom">self</span><span class="p">.</span><span class="nf">ncfile</span><span class="p">(</span><span class="s s-Atom">timestamp</span><span class="p">)</span>
 
         <span class="nf">config_NC</span><span class="p">(</span><span class="s s-Atom">ncpath</span><span class="p">,</span><span class="s s-Atom">timestamp</span><span class="p">,</span><span class="s s-Atom">x_values</span><span class="p">,</span><span class="s s-Atom">y_values</span><span class="p">).</span><span class="nf">close</span><span class="p">()</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">setParamOperand</span><span class="p">(</span><span class="s s-Atom">&#39;East-West_Displacement&#39;</span><span class="p">,</span><span class="s s-Atom">&#39;cmap&#39;</span><span class="p">,</span><span class="s s-Atom">kwargs</span><span class="p">[</span><span class="s s-Atom">&#39;ew_cmap&#39;</span><span class="p">])</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">setParamOperand</span><span class="p">(</span><span class="s s-Atom">&#39;North-South_Displacement&#39;</span><span class="p">,</span><span class="s s-Atom">&#39;cmap&#39;</span><span class="p">,</span><span class="s s-Atom">kwargs</span><span class="p">[</span><span class="s s-Atom">&#39;ns_cmap&#39;</span><span class="p">])</span>
+
+        <span class="s s-Atom">self</span><span class="p">.</span><span class="nf">setParamOperand</span><span class="p">(</span><span class="s s-Atom">&#39;Displacement&#39;</span><span class="p">,</span><span class="s s-Atom">&#39;cmap&#39;</span><span class="p">,</span><span class="s s-Atom">kwargs</span><span class="p">[</span><span class="s s-Atom">&#39;displ_cmap&#39;</span><span class="p">])</span>
 
         <span class="s s-Atom">return</span> <span class="s s-Atom">out</span>
 </code></pre></div>
@@ -4069,11 +4112,13 @@ validation errors.</p>
     <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">output</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="w"> </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">output</span><span class="o">=</span><span class="ss">&quot;D&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">cmap</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">norm</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="nc">timestamp</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
 
@@ -4105,7 +4150,23 @@ validation errors.</p>
 
 <span class="w">        </span><span class="n">wsc</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;window_size_change&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="nc">timestamp</span><span class="p">,</span><span class="n">imgarray</span><span class="o">=</span><span class="n">generate_map</span><span class="p">(</span><span class="n">ncfile</span><span class="p">,</span><span class="nc">timestamp</span><span class="o">=</span><span class="nc">timestamp</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">param</span><span class="o">=</span><span class="k">output</span><span class="p">,</span><span class="n">step_size</span><span class="o">=</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;step_size&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nc">timestamp</span><span class="p">,</span><span class="n">imgarray</span><span class="o">=</span><span class="n">generate_map</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ncfile</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="nc">timestamp</span><span class="o">=</span><span class="nc">timestamp</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">param</span><span class="o">=</span><span class="k">output</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">step_size</span><span class="o">=</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;step_size&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="w"></span>
+
+<span class="w">                </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">imgname</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{mapname}_{self.hasher(timestamp)[:14]}_{output}.tif&quot;</span><span class="w"></span>
 
@@ -4147,6 +4208,60 @@ validation errors.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">ncfile</span><span class="p">(</span><span class="k">self</span><span class="p">,</span><span class="k">timestamp</span><span class="p">):</span>
 
         <span class="k">return</span> <span class="k">self</span><span class="p">.</span><span class="n">filecache</span> <span class="o">/</span> <span class="n">f</span><span class="ss">&quot;{self.hasher(timestamp)}.nc&quot;</span>
+</code></pre></div>
+
+</details>
+<h5 id="retriveseries">retriveSeries</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retriveSeries</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">parameters</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">retriveSeries</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">parameters</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_info&quot;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">parameters</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">ft</span><span class="o">[</span><span class="n">&quot;parameters&quot;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">())</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">ft[&quot;parameters&quot;</span><span class="o">][</span><span class="n">parameters</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="w">  </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w">  </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">series</span><span class="w"></span>
+</code></pre></div>
+
+</details>
+<h5 id="setparamoperand">setParamOperand</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setParamOperand</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">param</span><span class="p">,</span>
+    <span class="n">operand</span><span class="p">,</span>
+    <span class="n">value</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setParamOperand</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">operand</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">serid</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">retriveSeries</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ser</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">serid</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">ser</span><span class="o">[</span><span class="n">&#39;operands&#39;</span><span class="o">][</span><span class="n">operand</span><span class="o">]=</span><span class="k">value</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">serid</span><span class="o">]=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">serid</span><span class="o">]=</span><span class="n">ser</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">save</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 </details>

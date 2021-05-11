@@ -896,30 +896,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ext/source_photomonitoring/struct_good/" title="Struct Good" class="md-nav__link">
-      Struct Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ext/source_photomonitoring/struct_new/" title="Struct New" class="md-nav__link">
-      Struct New
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -966,6 +942,18 @@
   <li class="md-nav__item">
     <a href="../ext/source_tinsar/" title="Index" class="md-nav__link">
       Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/source_tinsar/tin/" title="Tin" class="md-nav__link">
+      Tin
     </a>
   </li>
 
@@ -1400,7 +1388,11 @@
 290
 291
 292
-293</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+293
+294
+295
+296
+297</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1563,6 +1555,10 @@
                 <span class="k">raise</span> <span class="ne">KeyError</span>
 
             <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;datacache&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uid</span><span class="p">][</span><span class="n">times</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+                <span class="k">raise</span> <span class="ne">KeyError</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
@@ -1954,6 +1950,10 @@
 
 <span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;datacache&quot;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">][</span><span class="n">times</span><span class="o">]</span><span class="w"></span>
 
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="w"></span>
+
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
@@ -2115,6 +2115,10 @@
 <span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;datacache&quot;</span><span class="o">][</span><span class="n">self.uid</span><span class="o">][</span><span class="n">times</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="w"></span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
