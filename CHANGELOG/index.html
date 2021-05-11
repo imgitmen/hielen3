@@ -1773,7 +1773,7 @@
 </ul>
 <h3 id="7-maggio-2021"><strong>7 Maggio 2021</strong></h3>
 <ul>
-<li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. <a href="https://development.imgback.com/api/hielen2/actionschemata/PhotoMonitoring">PhotoMonitoring actionschemata</a></li>
+<li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. Es.: <a href="https://development.imgback.com/api/hielen2/actionschemata/PhotoMonitoring">PhotoMonitoring actionschemata</a></li>
 </ul>
 <p><em>Come funziona ColorMap</em>:</p>
 <p>Incontrando il campo definito come "ColorMap" all'interno di una risposta di <code>actionschemata</code>, il front-end aprirà l'interfaccia di scelta dei colori.
@@ -1827,7 +1827,7 @@ Il risultato dell'interazione dovrà essere sintetizzato in un json da fronire c
 <p>[0.5,1.0) : <img alt="#FF00FF" src="https://via.placeholder.com/15/ff00ff/000000?text=+" /> --&gt; <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
 <p>[1.0,inf) : <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
 <p>L'informazione sulla colormap può essere associata ad ongi singola serire dati e può essere fornita in front-end su richiesta: allo scopo L'API <code>features</code> è stata modificata in modo da fornire la colormap insieme con i parametri delle features specificando l'opzione info=parameters,...</p>
-<p><a href="https://development.imgback.com/api/hielen2/features/esempio4?info=parameters">esempio</a>:</p>
+<p><a href="https://development.imgback.com/api/hielen2/features/esempio4?info=parameters">esempio (vedi chiamata)</a>:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
 <span class="err">    ...,</span>
 <span class="err">    &quot;parameters&quot;: [</span>
@@ -1870,9 +1870,9 @@ Il risultato dell'interazione dovrà essere sintetizzato in un json da fronire c
 </code></pre></div>
 
 <p>dove ogni <code>cmap</code> è un array ordinato di triplette utile alla creazione della relativa colorbar. Ogni tipletta fornisce questa infromazione:</p>
-<p>cmap[x][0]: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.</p>
-<p>cmap[x][1]: colore in esadecimale.</p>
-<p>cmap[x][2]: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
+<p><code>cmap[x][0]</code>: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.</p>
+<p><code>cmap[x][1]</code>: colore in esadecimale.</p>
+<p><code>cmap[x][2]</code>: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
 <h3 id="30-aprile-2021"><strong>30 Aprile 2021</strong></h3>
 <ul>
 <li>Gestione generalizzata degli operandi "config time" per i parametri: Ora la classe Source espone dei metodi per dare la possibilità alle sotto classi di definire operandi di elaborazione custom.</li>
