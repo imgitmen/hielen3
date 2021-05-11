@@ -1776,7 +1776,8 @@
 <li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. <a href="https://development.imgback.com/api/hielen2/actionschemata/PhotoMonitoring">PhotoMonitoring actionschemata</a></li>
 </ul>
 <p><em>Come funziona ColorMap</em>:</p>
-<p>In base alla risposta di actionschemata, il front-end aprirà, su questo campo, l'interfaccia di scelta dei colori. Il risultato dell'interazione sarà sintetizzato in un json: Quando lo schema di un'azione presenta un campo ColorMap, l'azione accetta come parametro il nome del campo valorizzato con un array di lunghezza variabile di COPPIE (valore,colore)</p>
+<p>Incontrando il campo definito come "ColorMap" all'interno di una risposta di <code>actionschemata</code>, il front-end aprirà l'interfaccia di scelta dei colori.
+Il risultato dell'interazione dovrà essere sintetizzato in un json da fronire come parametro all'azione corrispondente. Il json dovrà essere nella forma di un array di lunghezza variabile di COPPIE (valore,colore):</p>
 <div class="codehilite"><pre><span></span><code><span class="err">[</span>
 <span class="err">    [</span>
 <span class="err">        valore,</span>
@@ -1818,15 +1819,14 @@
 <span class="err">                                            ]</span>
 </code></pre></div>
 
-<p>dove per ogni campo viene fornito il colore della rappresentazione e il valore di riferimento a cui associarlo. Un array tipo quello descritto viene inteso così:</p>
+<p>Un array del genere verrebbe inteso in questo modo:</p>
 <p>[-inf,-0.25) : <img alt="#FFFF00" src="https://via.placeholder.com/15/ffff00/000000?text=+" /></p>
 <p>[-0.25,-0.125) : <img alt="#FFFF00" src="https://via.placeholder.com/15/ffff00/000000?text=+" /> --&gt; <img alt="#00FF00" src="https://via.placeholder.com/15/00ff00/000000?text=+" /></p>
 <p>[-0.125,0.0) : <img alt="#00FF00" src="https://via.placeholder.com/15/00ff00/000000?text=+" /> --&gt; <img alt="#0000FF" src="https://via.placeholder.com/15/0000ff/000000?text=+" /></p>
 <p>[0.0,0.5) : <img alt="#0000FF" src="https://via.placeholder.com/15/0000ff/000000?text=+" /> --&gt; <img alt="#FF00FF" src="https://via.placeholder.com/15/ff00ff/000000?text=+" /></p>
 <p>[0.5,1.0) : <img alt="#FF00FF" src="https://via.placeholder.com/15/ff00ff/000000?text=+" /> --&gt; <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
 <p>[1.0,inf) : <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
-<p>La colormap così passata in configurazione per ogni parametro viene assegnata come operando di elaborazione e l'informazione viene mantenuta per ogni serie.
-L'API <code>features</code> è stata modificata in modo da fornire l'informazione di colormap quando viene specificata l'opzione info=parameters</p>
+<p>L'informazione sulla colormap può essere associata ad ongi singola serire dati e può essere fornita in front-end su richiesta: allo scopo L'API <code>features</code> è stata modificata in modo da fornire la colormap insieme con i parametri delle features specificando l'opzione info=parameters,...</p>
 <p><a href="https://development.imgback.com/api/hielen2/features/esempio4?info=parameters">esempio</a>:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
 <span class="err">    ...,</span>
@@ -1870,9 +1870,9 @@ L'API <code>features</code> è stata modificata in modo da fornire l'informazion
 </code></pre></div>
 
 <p>dove ogni <code>cmap</code> è un array ordinato di triplette utile alla creazione della relativa colorbar. Ogni tipletta fornisce questa infromazione:</p>
-<p>cmap[x][0]: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.
-cmap[x][1]: colore in esadecimale.
-cmap[x][2]: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
+<p>cmap[x][0]: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.</p>
+<p>cmap[x][1]: colore in esadecimale.</p>
+<p>cmap[x][2]: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
 <h3 id="30-aprile-2021"><strong>30 Aprile 2021</strong></h3>
 <ul>
 <li>Gestione generalizzata degli operandi "config time" per i parametri: Ora la classe Source espone dei metodi per dare la possibilità alle sotto classi di definire operandi di elaborazione custom.</li>
