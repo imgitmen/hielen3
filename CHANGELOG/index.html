@@ -220,26 +220,32 @@
     v2.0.10
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="v2.0.10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#10-maggio-2021" class="md-nav__link">
     10 Maggio 2021
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#7-maggio-2021" class="md-nav__link">
     7 Maggio 2021
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#30-aprile-2021" class="md-nav__link">
     30 Aprile 2021
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -248,12 +254,18 @@
     v2.0.9
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="v2.0.9">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#22-aprile-2021" class="md-nav__link">
     22 Aprile 2021
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1327,26 +1339,32 @@
     v2.0.10
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="v2.0.10">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#10-maggio-2021" class="md-nav__link">
     10 Maggio 2021
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#7-maggio-2021" class="md-nav__link">
     7 Maggio 2021
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#30-aprile-2021" class="md-nav__link">
     30 Aprile 2021
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1355,12 +1373,18 @@
     v2.0.9
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="v2.0.9">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#22-aprile-2021" class="md-nav__link">
     22 Aprile 2021
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1743,13 +1767,13 @@
                 
                 <h1 id="changelog">CHANGELOG</h1>
 <h2 id="v2010"><strong>v2.0.10</strong></h2>
-<h2 id="10-maggio-2021"><strong>10 Maggio 2021</strong></h2>
+<h3 id="10-maggio-2021"><strong>10 Maggio 2021</strong></h3>
 <ul>
 <li>Integrazione di ColorMap, e Config Time Operands</li>
 </ul>
-<h2 id="7-maggio-2021"><strong>7 Maggio 2021</strong></h2>
+<h3 id="7-maggio-2021"><strong>7 Maggio 2021</strong></h3>
 <ul>
-<li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. (vedi https://development.imgback.com/api/hielen2/actionschemata)</li>
+<li>Introduzione della classe marshmallow "ColorMap" per la serializzazione delle informazioni custom di colorazione dei dati: tra i vari campi che possono essere ritornati da actionschemata ora ne esiste uno chiamato <strong>ColorMap</strong>. <a href="https://development.imgback.com/api/hielen2/actionschemata/PhotoMonitoring">PhotoMonitoring actionschemata</a></li>
 </ul>
 <p><em>Come funziona ColorMap</em>:</p>
 <p>In base alla risposta di actionschemata, il front-end aprirà, su questo campo, l'interfaccia di scelta dei colori. Il risultato dell'interazione sarà sintetizzato in un json: Quando lo schema di un'azione presenta un campo ColorMap, l'azione accetta come parametro il nome del campo valorizzato con un array di lunghezza variabile di COPPIE (valore,colore)</p>
@@ -1767,8 +1791,8 @@
 </code></pre></div>
 
 <p>dove:</p>
-<p><code>valore</code> è un numero di qualsiasi genere con punto decimale
-<code>colore</code> è una stringa di colore hex</p>
+<p><code>valore</code> è un numero di qualsiasi genere con punto decimale</p>
+<p><code>colore</code> è una stringa di colore hex</p>
 <p>esempio:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">[</span>
 <span class="err">    [</span>
@@ -1795,16 +1819,15 @@
 </code></pre></div>
 
 <p>dove per ogni campo viene fornito il colore della rappresentazione e il valore di riferimento a cui associarlo. Un array tipo quello descritto viene inteso così:</p>
-<p>[-inf,-0.25) : "#FFFF00",
-[-0.25,-0.125) : "#FFFF00" --&gt; #00FF00",
-[-0.125,0.0) : #00FF00" --&gt; "#0000FF",
-[0.0,0.5) : "#0000FF" --&gt; "#FF00FF",
-[0.5,1.0) : "#FF00FF" --&gt; "#AEBD00"
-[1.0,inf) : "#AEBD00"</p>
+<p>[-inf,-0.25) : <img alt="#FFFF00" src="https://via.placeholder.com/15/ffff00/000000?text=+" /></p>
+<p>[-0.25,-0.125) : <img alt="#FFFF00" src="https://via.placeholder.com/15/ffff00/000000?text=+" /> --&gt; <img alt="#00FF00" src="https://via.placeholder.com/15/00ff00/000000?text=+" /></p>
+<p>[-0.125,0.0) : <img alt="#00FF00" src="https://via.placeholder.com/15/00ff00/000000?text=+" /> --&gt; <img alt="#0000FF" src="https://via.placeholder.com/15/0000ff/000000?text=+" /></p>
+<p>[0.0,0.5) : <img alt="#0000FF" src="https://via.placeholder.com/15/0000ff/000000?text=+" /> --&gt; <img alt="#FF00FF" src="https://via.placeholder.com/15/ff00ff/000000?text=+" /></p>
+<p>[0.5,1.0) : <img alt="#FF00FF" src="https://via.placeholder.com/15/ff00ff/000000?text=+" /> --&gt; <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
+<p>[1.0,inf) : <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
 <p>La colormap così passata in configurazione per ogni parametro viene assegnata come operando di elaborazione e l'informazione viene mantenuta per ogni serie.
 L'API <code>features</code> è stata modificata in modo da fornire l'informazione di colormap quando viene specificata l'opzione info=parameters</p>
-<p>esempio:</p>
-<p>https://development.imgback.com/api/hielen2/features/esempio4?info=parameters</p>
+<p><a href="https://development.imgback.com/api/hielen2/features/esempio4?info=parameters">esempio</a>:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
 <span class="err">    ...,</span>
 <span class="err">    &quot;parameters&quot;: [</span>
@@ -1850,12 +1873,12 @@ L'API <code>features</code> è stata modificata in modo da fornire l'informazion
 <p>cmap[x][0]: etichetta del valore, possibilmente da piazzare sulla colorbar alla giusta posizione.
 cmap[x][1]: colore in esadecimale.
 cmap[x][2]: posizione dell'ancora del gradiente per il rispettivo colore, nonché per l'eventuale etichetta del valore. La posizione è espressa in percentuale sull'intera colorbar.</p>
-<h2 id="30-aprile-2021"><strong>30 Aprile 2021</strong></h2>
+<h3 id="30-aprile-2021"><strong>30 Aprile 2021</strong></h3>
 <ul>
 <li>Gestione generalizzata degli operandi "config time" per i parametri: Ora la classe Source espone dei metodi per dare la possibilità alle sotto classi di definire operandi di elaborazione custom.</li>
 </ul>
 <h2 id="v209"><strong>v2.0.9</strong></h2>
-<h2 id="22-aprile-2021"><strong>22 Aprile 2021</strong></h2>
+<h3 id="22-aprile-2021"><strong>22 Aprile 2021</strong></h3>
 <ul>
 <li>implementata l'interrogazione tramite GeoJson</li>
 <li>Correzione di molti bugs</li>
