@@ -15,12 +15,20 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="hielen.svg"
+   sodipodi:docname="hielen2.svg"
    inkscape:export-filename="/home/fantamodeman/SVILUPPOandTESTING/python_sandbox/dev/modules/hielen2/art/hielen.png"
    inkscape:export-xdpi="120"
    inkscape:export-ydpi="120">
   <defs
-     id="defs2" />
+     id="defs2">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 50 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="100 : 50 : 1"
+       inkscape:persp3d-origin="50 : 33.333333 : 1"
+       id="perspective909" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -29,8 +37,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="573.71699"
-     inkscape:cy="232.39937"
+     inkscape:cx="579.19289"
+     inkscape:cy="227.39381"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -42,7 +50,9 @@
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:object-paths="true"
+     inkscape:snap-smooth-nodes="true" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -61,9 +71,9 @@
      id="layer1"
      transform="translate(-61.232074,-51.358052)">
     <path
-       id="path988"
-       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.19877362;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
-       d="m 98.52565,88.817769 c 4.73766,-0.07095 8.5581,3.748141 8.49019,8.485892 v 0.01099 39.693879 0.0129 c 0.0663,4.68698 -3.67822,8.48375 -8.36565,8.48375 -4.687434,0 -8.431924,-3.79677 -8.365642,-8.48375 v -0.0129 -39.693879 -0.01099 c -0.06651,-4.637729 3.603461,-8.416466 8.241102,-8.485892 z m 24.1135,-33.061054 c 2.81051,-0.043 5.06179,2.205386 5.02238,5.015952 v 0.01288 81.144193 0.0129 c 0.0394,2.78021 -2.16674,5.01811 -4.94723,5.01811 -2.78047,0 -4.98662,-2.2379 -4.94724,-5.01811 v -0.0129 -81.144193 -0.01288 c -0.0385,-2.749349 2.1228,-4.973884 4.87209,-5.015952 z m -0.0517,-3.298305 c -4.53005,0.06932 -8.18198,3.831516 -8.11849,8.361646 v 7.556618 h -14.23093 c -12.18121,0 -21.987532,9.806326 -21.987532,21.98753 v 21.987536 c 0,7.1958 3.423831,13.56165 8.736036,17.56809 v 7.05383 c -0.09169,6.48574 5.17721,11.82947 11.663586,11.82947 6.48638,0 11.7553,-5.34373 11.66358,-11.82947 v -2.63383 h 4.15526 v 7.55548 c -0.0649,4.57898 3.66574,8.36335 8.24518,8.36335 4.57946,0 8.31063,-3.78437 8.24576,-8.36335 v -9.34962 c 7.81101,-3.36669 13.25375,-11.12018 13.25375,-20.19395 V 90.364204 c 0,-9.073772 -5.44274,-16.826698 -13.25375,-20.193394 v -9.350754 c 0.0649,-4.627007 -3.74553,-8.432426 -8.37245,-8.361646 z"
+       id="path925"
+       style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#ccff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:7.27125263;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+       d="m 111.17742,61.35836 a 3.6359901,3.6359901 0 0 0 -2.19913,0.788194 L 78.446846,79.774373 a 3.6359901,3.6359901 0 0 0 -2.28718,3.958713 v 35.171134 a 3.6359901,3.6359901 0 0 0 2.325523,4.0347 l 30.372381,17.53479 a 3.6359901,3.6359901 0 0 0 4.75828,-0.004 l 30.3589,-17.5277 a 3.6359901,3.6359901 0 0 0 2.33049,-4.03185 V 83.747998 a 3.6359901,3.6359901 0 0 0 -2.25735,-3.957294 L 113.50507,62.157206 a 3.6359901,3.6359901 0 0 0 -2.32765,-0.798846 z m -3.58024,9.983064 V 95.048265 L 87.067969,83.194843 Z m 7.27055,0.0015 20.52993,11.851999 -20.52993,11.853387 z M 83.430211,89.492609 103.96085,101.34603 83.430211,113.20016 Z m 55.605199,0 v 23.707551 l -20.53065,-11.85413 z m -31.43823,18.150441 v 23.70754 L 87.065837,119.49715 Z m 7.27055,0 20.53206,11.85414 -20.53206,11.8548 z m 44.91926,-6.28504 a 48.554917,49.999998 0 0 1 -48.55491,50.00004 48.554917,49.999998 0 0 1 -48.554921,-50.00004 48.554917,49.999998 0 0 1 48.554921,-49.999958 48.554917,49.999998 0 0 1 48.55491,49.999958 z"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
