@@ -1379,7 +1379,7 @@
                 
                 <h1 id="hielen">HIELEN</h1>
 <p>Hielen (HIerarchical ELaboration ENgine) è una suite di api REST dedicata alla rappresentazione e alla gestione delle evoluzioni temporali di fenomeni dotati di caratteristiche spaziali.
-Essa è stata modellata sulle esigenze del monitoraggio strutturale, ambientale e geognostico, con l'obiettivo di astrarre lo strato fisico degli acquisitori istallati sul campo e fornire un ambiente omogeneo per l'analisi dei dati relativi all'evoluzione dei fenomeni monitorati.</p>
+Essa è stata modellata sulle esigenze del monitoraggio strutturale, ambientale e geognostico, con l'obiettivo di astrarre lo strato fisico degli acquisitori installati sul campo e fornire un ambiente omogeneo per l'analisi dei dati relativi all'evoluzione dei fenomeni monitorati.</p>
 <h2 id="note-generali-sulle-api">Note generali sulle API</h2>
 <h3 id="1-costruzione-della-url">1. Costruzione della URL</h3>
 <p>In questo documento si farà riferimento alle specifiche api in questo modo:</p>
@@ -1397,7 +1397,7 @@ Essa è stata modellata sulle esigenze del monitoraggio strutturale, ambientale 
 
 <p>dove la parte <code>www.hostname.com/api/hielen</code> sarà il punto d'ingresso per tutte le api della specifica installazione e dipenderà esclusivamente dalla configurazione del webserver che ospita la suite</p>
 <h3 id="2-utilizzo-dei-potocolli-standard-http">2.  Utilizzo dei potocolli standard HTTP</h3>
-<p>Le API seguno le direttive REST per cui ognuna di esse sfrutta i diversi protocolli http per svolgere azioni differenti:</p>
+<p>Le API seguno le direttive REST e dunque ognuna di esse sfrutta i diversi protocolli http per svolgere azioni differenti. In generale:</p>
 <p><strong>POST</strong> per la creazione di un nuovo elemento</p>
 <p><strong>GET</strong> per il recupero di informazioni di uno o più elementi</p>
 <p><strong>PUT</strong> per la modifica di un elemento </p>
@@ -1406,7 +1406,7 @@ Essa è stata modellata sulle esigenze del monitoraggio strutturale, ambientale 
 <div class="codehilite"><pre><span></span><code><span class="err">POST www.hostname.com/api/hielen/features?...</span>
 </code></pre></div>
 
-<p>potrà essere utilizzato per creare una feature. mentre</p>
+<p>potrà essere utilizzato per creare un elemento di tipo feature. mentre</p>
 <div class="codehilite"><pre><span></span><code><span class="err">GET www.hostname.com/api/hielen/features/uuid_feature</span>
 </code></pre></div>
 
@@ -1432,6 +1432,12 @@ Essa è stata modellata sulle esigenze del monitoraggio strutturale, ambientale 
 <li>il campo <strong>data</strong> contiene la risposta prodotta dall'esecuzione, generalmente un json, se essa è andata a buon fine.</li>
 </ul>
 <h2 id="struttura-generale-delle-api">Struttura generale delle API</h2>
+<p>La suite è suddivisa in cinque API principali</p>
+<p>prototypes
+actionschemata
+features
+actions
+query</p>
 <h2 id="manipolazione-elenco-elementi">Manipolazione elenco elementi</h2>
 <h3 id="features">features</h3>
 <p>Gli elementi sono oggetti che producono "elaborazioni" nel tempo con un caratteristico grado dimensionale (dato, mappe, nuvole). E' sempre possibile "proiettare" una "elaborazione" con grado maggiore su una di grado inferiore. Così da una nuvola può generare mappe e dalla nuvola o dalle mappe possono essere estratte delle serie storiche. </p>
