@@ -1210,7 +1210,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>context</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -1220,8 +1220,8 @@
 </ul>
 <p><em>description</em>:</p>
 <p><strong>Creazione delle Features.</strong></p>
-<p>Ogni feature deve avere il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli (vedi PUT <code>/feature/{uid}</code>). </p>
-<p>Il prototipo della feature forisce informazioni per l'inizializazione della struttura. Il parametro <code>geometry</code> deve essere un GeoJson</p>
+<p>Ogni feature deve avere il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli (vedi PUT <code>/feature/{uid}</code>). 
+Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p>Se la feature viene creata correttamente ne restituisce la struttura</p>
 <p>Possibili risposte:</p>
 <ul>
@@ -1287,7 +1287,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>context</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>label</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>

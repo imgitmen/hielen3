@@ -2124,9 +2124,7 @@
 640
 641
 642
-643
-644
-645</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+643</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2239,8 +2237,6 @@
 <span class="sd">Ogni feature deve avere il suo il suo prototipo `prototype` ed in fase di creazione viene \</span>
 
 <span class="sd">creato il campo `uid`. Questi due campi sono immutabli (vedi PUT `/feature/{uid}`). \</span>
-
-<span class="sd">Il prototipo della feature forisce informazioni per l&#39;inizializazione della struttura. \</span>
 
 <span class="sd">Il parametro `geometry` deve essere un GeoJson</span>
 
@@ -2782,16 +2778,16 @@
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc5aaabdc10</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc5aaabdfa0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="s1">&#39;coordinates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f951f5eac10</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f951f5eafd0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;Point&#39;</span><span class="p">,</span> <span class="s1">&#39;coordinates&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p><strong>Creazione delle Features.</strong></p>
-<p>Ogni feature deve avere il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli (vedi PUT <code>/feature/{uid}</code>). </p>
-<p>Il prototipo della feature forisce informazioni per l'inizializazione della struttura. Il parametro <code>geometry</code> deve essere un GeoJson</p>
+<p>Ogni feature deve avere il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli (vedi PUT <code>/feature/{uid}</code>). 
+Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p>Se la feature viene creata correttamente ne restituisce la struttura</p>
 <p>Possibili risposte:</p>
 <ul>
@@ -2822,8 +2818,6 @@
 <span class="ss">Ogni feature deve avere il suo il suo prototipo `prototype` ed in fase di creazione viene \</span>
 
 <span class="ss">creato il campo `uid`. Questi due campi sono immutabli (vedi PUT `/feature/{uid}`). \</span>
-
-<span class="ss">Il prototipo della feature forisce informazioni per l&#39;inizializazione della struttura. \</span>
 
 <span class="ss">Il parametro `geometry` deve essere un GeoJson</span>
 
@@ -3413,8 +3407,8 @@
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc5aaabdb80</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc5aaaca2b0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f951f5eae50</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f951f601310</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
