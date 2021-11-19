@@ -406,7 +406,7 @@
 <ul>
 <li>modifica api <code>POST /feature/</code>: non prende più il parametro <strong>"uid"</strong>. Il campo "uid" della feature viene ora generato dalla chiamata, secondo gli standard di "uuid".</li>
 <li>modifica definizione della classe <code>hielen3.api.feature.FeaturePropertiesSchema</code>: rinominato il campo <strong>"context"</strong> in <strong>"milieu"</strong>. Questo coinvolge la chiamata API <code>POST /feature/</code> in quanto la classe modificata gestisce e valida il json da passare al parametro <code>properies</code> dell'API.</li>
-<li>modifica api <code>POST,GET,PUT,DELETE /feature/</code>: rinominato il parametro <strong>"cntxt"</strong> in <strong>"milieu"</strong>. La parola "milieu" al contrario di "context" non da problemi di interpretazione al sottostante strato di "Hug" (per questo motivo era stata utilizzata "cntxt"). In questo modo vengono uniformati i parmametri di queste API con il campo della classe di gestione delle properties.</li>
+<li>modifica api <code>POST,GET,PUT,DELETE /feature/</code>: rinominato il parametro <strong>"cntxt"</strong> in <strong>"milieu"</strong>. La parola "milieu" al contrario di "context" non dà problemi di interpretazione al sottostante strato di "Hug" (per questo motivo era stata utilizzata "cntxt"). In questo modo vengono uniformati i parmametri di queste API con il campo della classe di gestione delle properties.</li>
 </ul>
                 
               
