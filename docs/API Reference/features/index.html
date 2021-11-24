@@ -465,7 +465,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -474,11 +474,35 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
 <p><strong>Creazione delle Features.</strong></p>
-<p>Ogni feature deve avere il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli (vedi PUT <code>/feature/{uid}</code>). 
-Il parametro <code>geometry</code> deve essere un GeoJson</p>
-<p>Se la feature viene creata correttamente ne restituisce la struttura</p>
-<p>Possibili risposte:</p>
+<p>Ogni feature viene creata sulla  il suo il suo prototipo <code>prototype</code> ed in fase di creazione viene creato il campo <code>uid</code>. Questi due campi sono immutabli. Vedi <a href="#put-featuresuid">PUT feature</a></p>
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>prototype</strong>: Definisce il tipo della feature e accetta uno dei valori recuperabili attraverso l'API <a href="../prototypes/#get">GET prototype</a></p>
+</li>
+<li>
+<p><strong>properties</strong>: Json dei campi anagrafici della feature, utilizzati dal sistema. Nessuno di essi è obbligatorio. Lo schema è il seguente:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    &quot;milieu&quot;: &quot;Stringa: gruppo in cui inserire la feature&quot;,</span>
+<span class="err">    &quot;label&quot;:  &quot;Stringa: etichetta mnemonica della feature&quot;,</span>
+<span class="err">    &quot;description&quot;: &quot;Stringa: descrizione della feature&quot;,</span>
+<span class="err">    &quot;location&quot;: &quot;Stringa: descrizione mnemonica della posizioni&quot;,</span>
+<span class="err">    &quot;style&quot;: &quot;Stringa: informazioni per le direttive csv&quot;,</span>
+<span class="err">    &quot;status&quot;: &quot;Stringa: informaizoni di stato&quot;,</span>
+<span class="err">    &quot;timestamp&quot;: &quot;Stringa: data di creazione della feature nel formato YYYY-MM-DD HH:MM:SS&quot;</span>
+<span class="err">}</span>
+</code></pre></div>
+
+</li>
+<li>
+<p><strong>geometry</strong> : Accetta un <a href="https://geojson.org/">GeoJson</a></p>
+</li>
+</ul>
+<p>OUTPUT:</p>
+<p>Se la feature viene creata correttamente la sua struttura viene restituita all'interno del campo <code>data</code> del json di risposta standard</p>
+<p>RESPONSE CODES:</p>
 <ul>
 <li><em>409 Conflict</em>: Nel caso in cui il uid fornito esista già.</li>
 <li><em>404 Not Found</em>: Nel caso in cui il prototipo richiesto non esista.</li>
@@ -498,26 +522,32 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
 <p><strong>Recupero delle informazioni delle features.</strong></p>
-<p><strong>nota</strong>: uids accetta valori multipli separati da virgola </p>
-<p>viene restituita una struttura "data" di questo tipo:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">    {</span>
-<span class="err">        &quot;features&quot;: [</span>
-<span class="err">            {</span>
-<span class="err">                &quot;type&quot;: &quot;Feature&quot;,</span>
-<span class="err">                &quot;properties&quot;: {</span>
-<span class="err">                    ...</span>
-<span class="err">                },</span>
-<span class="err">                &quot;geometry&quot;: &lt;GeoJson Validable&gt;</span>
-<span class="err">            },</span>
-<span class="err">            ...</span>
-<span class="err">        ]</span>
-<span class="err">    }</span>
-</code></pre></div>
-
-<p>Possibili risposte:</p>
+<p>PARAMETRI:</p>
 <ul>
-<li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri</li>
+<li>
+<p><strong>uids</strong>: Lista "comma separated" degli id delle features da recuperare. Nel caso in cui non venisse fornito alcun valore, verrebbe fornita in output l'intera lista delle features presenti nel sistema.</p>
+</li>
+<li>
+<p><strong>milieu</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
+</li>
+<li>
+<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Di default vengono incluse le informazioni.
+Le classi di informazione disponibili sono:</p>
+<ul>
+<li>capabilities: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
+<li>parameters:</li>
+<li>timeline:</li>
+</ul>
+</li>
+</ul>
+<p>OUTPUT:</p>
+<p>Se la feature viene creata correttamente la sua struttura viene restituita all'interno del campo <code>data</code> del json di risposta standard</p>
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>200 OK</em>: Nel caso vengano trovate features corrispondenti ai criteri di ricerca</li>
+<li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri di ricerca</li>
 </ul>
 <h3 id="get-featuresuid"><strong>GET    <em>/features/{uid}</em></strong></h3>
 <hr />
@@ -541,7 +571,7 @@ Il parametro <code>geometry</code> deve essere un GeoJson</p>
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
