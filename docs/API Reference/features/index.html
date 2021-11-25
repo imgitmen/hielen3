@@ -465,7 +465,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -533,17 +533,59 @@
 <p><strong>milieu</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
 </li>
 <li>
-<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Di default vengono incluse le informazioni.
-Le classi di informazione disponibili sono:</p>
+<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Le classi di informazione disponibili sono:</p>
 <ul>
-<li>capabilities: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
-<li>parameters:</li>
-<li>timeline:</li>
+<li><em>capabilities</em>: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
+<li><em>parameters</em>: parametri (timeseries) associati alla feature, interrogabili tramite <a href="../query/#get">GET query</a></li>
+<li><em>timeline</em>: eventuale timeline globale dei parametri della feature</li>
 </ul>
 </li>
 </ul>
+<p>ESEMPIO:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">    GET features?milieu=619d00137303c&amp;info=parameters,capabilities</span>
+</code></pre></div>
+
 <p>OUTPUT:</p>
-<p>Se la feature viene creata correttamente la sua struttura viene restituita all'interno del campo <code>data</code> del json di risposta standard</p>
+<p>All'interno del campo <code>data</code> del json di risposta standard viene restituito un oggetto "chiave, valore" json che é interpretabile come GeoJson estraendo la lista dei values.
+L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quindi un struttura di questo tipo:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">&quot;features&quot;: {</span>
+<span class="err">    &quot;1285beb4&quot;: {</span>
+<span class="err">        &quot;type&quot;: &quot;Feature&quot;,</span>
+<span class="err">            &quot;properties&quot;: {</span>
+<span class="err">            &quot;uid&quot;: &quot;1285beb4&quot;,</span>
+<span class="err">            &quot;classification&quot;: &quot;Source&quot;,</span>
+<span class="err">            &quot;milieu&quot;: &quot;619d00137303c&quot;,</span>
+<span class="err">            &quot;description&quot;: null,</span>
+<span class="err">            &quot;label&quot;: &quot;CAM1&quot;,</span>
+<span class="err">            &quot;location&quot;: null,</span>
+<span class="err">            &quot;status&quot;: &quot;0&quot;,</span>
+<span class="err">            &quot;style&quot;: &quot;9cecce36&quot;,</span>
+<span class="err">            &quot;timestamp&quot;: &quot;2021-11-10 00:00:00&quot;,</span>
+<span class="err">            &quot;type&quot;: &quot;PhotoMonitoring&quot;,</span>
+<span class="err">            &quot;inmap&quot;: null</span>
+<span class="err">            },</span>
+<span class="err">            &quot;parameters&quot;: [</span>
+<span class="err">            {</span>
+<span class="err">                &quot;series&quot;: &quot;06578ff5509871eef7e62f8d2bc175de&quot;,</span>
+<span class="err">                        &quot;param&quot;: &quot;Displacement&quot;,</span>
+<span class="err">                        &quot;unit&quot;: &quot;mm&quot;,</span>
+<span class="err">                },</span>
+<span class="err">                {</span>
+<span class="err">                        &quot;series&quot;: &quot;2388b145eed5036e78afff43114cf7f7&quot;,</span>
+<span class="err">                        &quot;param&quot;: &quot;Correlation_Coefficient&quot;,</span>
+<span class="err">                        &quot;unit&quot;: &quot;number&quot;,</span>
+<span class="err">                },</span>
+<span class="err">            ],</span>
+<span class="err">            &quot;timeline&quot;: [</span>
+<span class="err">              &quot;2021-11-04T15:11:45&quot;</span>
+<span class="err">            ],</span>
+<span class="err">            &quot;capabilities&quot;: [</span>
+<span class="err">            &quot;map&quot;</span>
+<span class="err">        ]</span>
+<span class="err">        },</span>
+<span class="err">}</span>
+</code></pre></div>
+
 <p>RESPONSE CODES:</p>
 <ul>
 <li><em>200 OK</em>: Nel caso vengano trovate features corrispondenti ai criteri di ricerca</li>
@@ -563,15 +605,36 @@ Le classi di informazione disponibili sono:</p>
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">**Alias di recupero informazioni della specifica feature**</span>
+<p>DESCRIZIONE:</p>
+<p><strong>Alias di recupero informazioni della specifica feature</strong></p>
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Le classi di informazione disponibili sono:</p>
+<ul>
+<li><em>capabilities</em>: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
+<li><em>parameters</em>: parametri (timeseries) associati alla feature, interrogabili tramite <a href="../query/#get">GET query</a></li>
+<li><em>timeline</em>: eventuale timeline globale dei parametri della feature</li>
+</ul>
+</li>
+</ul>
+<p>ESEMPIO:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">    GET features/1285beb4&amp;info=parameters,capabilities</span>
 </code></pre></div>
 
+<p>OUTPUT:</p>
+<p>Vedi <a href="#get">GET features</a></p>
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>200 OK</em>: Nel caso vengano trovate features corrispondenti ai criteri di ricerca</li>
+<li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri di ricerca</li>
+</ul>
 <h3 id="put-featuresuid"><strong>PUT    <em>/features/{uid}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
