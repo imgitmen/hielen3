@@ -465,8 +465,9 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>timestamp</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
+<li><strong>uid</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -485,7 +486,7 @@
 <li>
 <p><strong>properties</strong>: Json dei campi anagrafici della feature, utilizzati dal sistema. Nessuno di essi è obbligatorio. Lo schema è il seguente:</p>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;milieu&quot;: &quot;Stringa: gruppo in cui inserire la feature&quot;,</span>
+<span class="err">    &quot;context&quot;: &quot;Stringa: gruppo in cui inserire la feature&quot;,</span>
 <span class="err">    &quot;label&quot;:  &quot;Stringa: etichetta mnemonica della feature&quot;,</span>
 <span class="err">    &quot;description&quot;: &quot;Stringa: descrizione della feature&quot;,</span>
 <span class="err">    &quot;location&quot;: &quot;Stringa: descrizione mnemonica della posizioni&quot;,</span>
@@ -513,7 +514,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uids</strong>: Basic text / string value</li>
-<li><strong>milieu</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 <li><strong>info</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -530,7 +531,7 @@
 <p><strong>uids</strong>: Lista "comma separated" degli id delle features da recuperare. Nel caso in cui non venisse fornito alcun valore, verrebbe fornita in output l'intera lista delle features presenti nel sistema.</p>
 </li>
 <li>
-<p><strong>milieu</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
+<p><strong>cntxt</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
 </li>
 <li>
 <p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Le classi di informazione disponibili sono:</p>
@@ -542,7 +543,7 @@
 </li>
 </ul>
 <p>ESEMPIO:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">    GET features?milieu=619d00137303c&amp;info=parameters,capabilities</span>
+<div class="codehilite"><pre><span></span><code><span class="err">    GET features?cntxt=619d00137303c&amp;info=parameters,capabilities</span>
 </code></pre></div>
 
 <p>OUTPUT:</p>
@@ -554,7 +555,7 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 <span class="err">            &quot;properties&quot;: {</span>
 <span class="err">            &quot;uid&quot;: &quot;1285beb4&quot;,</span>
 <span class="err">            &quot;classification&quot;: &quot;Source&quot;,</span>
-<span class="err">            &quot;milieu&quot;: &quot;619d00137303c&quot;,</span>
+<span class="err">            &quot;context&quot;: &quot;619d00137303c&quot;,</span>
 <span class="err">            &quot;description&quot;: null,</span>
 <span class="err">            &quot;label&quot;: &quot;CAM1&quot;,</span>
 <span class="err">            &quot;location&quot;: null,</span>
@@ -596,7 +597,7 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>milieu</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 <li><strong>info</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
@@ -634,7 +635,7 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>style</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>milieu</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>location</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>timestamp</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
