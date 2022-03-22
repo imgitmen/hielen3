@@ -1,0 +1,39 @@
+[tool.portray]
+port = 8001
+#include_reference_documentation = true
+include_reference_documentation = false
+
+[tool.portray.mkdocs.theme]
+favicon = "art/hielen.svg"
+logo = "art/hielen.svg"
+name = "material"
+palette = {primary = "blue grey", accent = "pink"}
+
+[[tool.portray.mkdocs.nav]]
+Home = "README.md"
+
+[[tool.portray.mkdocs.nav]]
+Changelog = "CHANGELOG.md"
+
+[[tool.portray.mkdocs.nav]]
+TODO = "TODO.md"
+
+[[tool.portray.mkdocs.nav]]
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Prototypes" = "docs/API Reference/prototypes.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "ActionSchemata" = "docs/API Reference/actionschemata.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Features" = "docs/API Reference/features.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Actions" = "docs/API Reference/actions.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Parameters" = "docs/API Reference/parameters.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
+    "Query" = "docs/API Reference/query.md"
+

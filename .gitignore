@@ -1,0 +1,12 @@
+build                                                                                                                                                          
+install.sh
+*egg-info
+*__pycache__
+src/fakedb*
+src/incomes
+src/conf*
+src/var*
+vault*
+docs*
+testing*
+ATTENZIONE

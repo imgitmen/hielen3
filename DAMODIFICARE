@@ -1,0 +1,10 @@
+
+hielen.conf mariadb -> MariaDB
+hielen.conf modify feature_geometry
+hielen.conf modify feature_info
+
+ALTER TABLE geoframe.feature_geometry ADD elevation DECIMAL(10,3) NULL;
+
+drop view v_feature;
+create view v_feature as select `f`.`uuid` AS `feature`,`f`.`context` AS `context`,'Feature' AS `type`,json_object('uid',`f`.`uuid`,'type',`f`.`ftype`,'classification',`f`.`classification`,'context',`f`.`context`,'description',`f`.`description`,'label',`f`.`label`,'location',`f`.`location`,'status',`f`.`status`,'style',`f`.`style`,'timestamp',`f`.`timestamp`,'inmap',NULL) AS `properties`,json_arrayagg(distinct `s`.`capability`) AS `capabilities`,json_arrayagg(json_object('param',`p`.`label`,'mu',`s`.`mu`,'series',`p`.`series`,'cmap',NULL,'capability',`s`.`capability`)) AS `parameters`,`g`.`geometry` AS `geometry`,`g`.elevation AS `elevation` from (((`feature` `f` left join `feature_parameter` `p` on(`f`.`uuid` = `p`.`feature`)) left join `series` `s` on(`p`.`series` = `s`.`uuid`)) left join `feature_geometry` `g` on(`f`.`uuid` = `g`.`feature`)) group by `f`.`uuid`;
+

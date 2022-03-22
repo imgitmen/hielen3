@@ -1,0 +1,2 @@
+os.system("{BIN}/PotreeConverter .tmp.txt -f xyz -o point_clouds -p {idd} --material ELEVATION --edl-enabled --overwrite".format(BIN=BIN, idd=unique_dirname))
+
