@@ -19,14 +19,22 @@ def __parse_out__(out):
     except Exception as e:
         return {}
 
-def manage_stream(resource,timeout=10,times=20,destroytime=300):
 
-    session=Session(**conf["aws"]["options"])
+def manage_stream(resource,creds,timeout=10,times=20,destroytime=120):
+
+    #creds_=conf["aws"]["options"]
+    #creds.update(creds_)
+
+    session=Session(**creds)
 
     try:
         endpoint = session.client('kinesisvideo').get_data_endpoint(StreamName=f'stream-{resource}',APIName='GET_HLS_STREAMING_SESSION_URL')['DataEndpoint']
         client_kvac = session.client('kinesis-video-archived-media',endpoint_url=endpoint)
-    except Exception:
+    except Exception as e:
+        db['resources_queues'][resource,uuid()]={
+                "status":"GONE", 
+                "timestamp": str(datetime.now()),
+                "url":None }
         return
 
 
@@ -119,13 +127,27 @@ def start_stream(resource=None):
 
         u=Cognito(**conf["aws"]["pool"])
         u.authenticate(conf["aws"]["pwd"])
-        url ="https://api.wsn-cloud.com/api/portal/post_command"
-        data={"wsn_sn": resource, "command_code": 8, "command_args":["1"]}
+
         headers={"Authorization":u.id_token}
 
-        res=requests.post(url=url,json=data,headers=headers)
+        url_creds ="https://api.wsn-cloud.com/api/portal/get_stream_viewer_creds"
+        res=requests.get(url=url_creds,headers=headers)
 
-        print (res.__dict__)
+        creds=res.json()
+
+        creds={
+                'aws_access_key_id':creds['access_id'],
+                'aws_secret_access_key':creds['secret_key'],
+                "region_name": "eu-west-1"
+                }
+
+        url_cmmnd ="https://api.wsn-cloud.com/api/portal/post_command"
+
+        data={"wsn_sn": resource, "command_code": 8, "command_args":["1"]}
+
+        res=requests.post(url=url_cmmnd,json=data,headers=headers)
+
+        #print (res.__dict__)
 
         if res.status_code in [ 200, 409 ]:
             db['resources_queues'][resource,uuid()]={
@@ -134,7 +156,8 @@ def start_stream(resource=None):
                     "url":None }
      
             out=__parse_out__(db['resources_queues'][resource])
-            Thread(target=manage_stream,args=(resource,),daemon=True).start()
+
+            Thread(target=manage_stream,args=(resource,creds),daemon=True).start()
 
         outcode=res.status_code
 
