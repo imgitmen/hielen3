@@ -16,7 +16,7 @@ Home = "README.md"
 Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
-BACKLOG = "BACKLOG.md"
+Backlog = "BACKLOG.md"
 
 [[tool.portray.mkdocs.nav]]
     [[tool.portray.mkdocs.nav."API Reference"]]
