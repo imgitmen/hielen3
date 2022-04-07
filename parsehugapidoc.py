@@ -80,5 +80,6 @@ if __name__ == "__main__":
         try:
             with open(outfile,"w") as o: o.write(md)
         except Exception as e:
+            print e
             print ("ERROR with", outfile)
 
