@@ -1,7 +1,7 @@
 [tool.portray]
 port = 8001
-#include_reference_documentation = true
-include_reference_documentation = false
+include_reference_documentation = true
+#include_reference_documentation = false
 
 [tool.portray.mkdocs.theme]
 favicon = "art/hielen.svg"
@@ -16,7 +16,7 @@ Home = "README.md"
 Changelog = "CHANGELOG.md"
 
 [[tool.portray.mkdocs.nav]]
-TODO = "TODO.md"
+BACKLOG = "BACKLOG.md"
 
 [[tool.portray.mkdocs.nav]]
     [[tool.portray.mkdocs.nav."API Reference"]]
