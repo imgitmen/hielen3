@@ -77,5 +77,8 @@ if __name__ == "__main__":
     for title,struct in get_titles(parsed['documentation']['handlers']).items():
         md=get_title_md(title,struct)
         outfile=f"{outpath}/{title}.md"
-        with open(outfile,"w") as o: o.write(md)
+        try:
+            with open(outfile,"w") as o: o.write(md)
+        except Exception as e:
+            print ("ERROR with", outfile)
 
