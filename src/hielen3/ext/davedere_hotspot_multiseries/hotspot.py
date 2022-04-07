@@ -10,11 +10,15 @@ from pathlib import Path
 #import hielen3.tools.calc as calc
 import traceback
 
-
-class ConfigSchema(ActionSchema):
+class ConfigSchema():
     pass
+
+class Source():
+    pass
+
+"""
+class ConfigSchema(ActionSchema):
     
-    """
     _self_hints={
             "Logger info": {
                 0:["logger_type","The logger type"],
@@ -26,12 +30,9 @@ class ConfigSchema(ActionSchema):
     logger_type = fields.Str(required=True, allow_none=False)
     logger_serial = fields.Str(reuired=True, allow_none=False)
     logger_header = LoggerHeader(required=False,allow_none=True,default=None)
-    """
-
 
 
 class Source(DataSource):
-    '''
     RawSourceData manager
     '''
 
@@ -48,14 +49,14 @@ class Source(DataSource):
             chlist=[]
 
            
-        """
+        '''
         param:0
         column:1
         raw_mu:2
         ing_mu:3
         signal_cond:4
         poli_coeff:5
-        """
+        '''
 
         for chinfo in chlist:
 
@@ -139,4 +140,4 @@ class Source(DataSource):
         # out.columns=[self.uid]
         # out.index=to_datetime(out.index)
         return out.loc[times]
-'''
+"""
