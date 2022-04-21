@@ -181,7 +181,6 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                raise e
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
@@ -208,7 +207,7 @@ class HSeries:
                 db["datacache"][self.uuid]=out
 
         except Exception as e:
-            raise e
+            #raise e
             pass
 
         return out
@@ -347,7 +346,7 @@ class HSeries:
             out.index.name = "timestamp"
 
         except Exception as e:
-            raise e
+            #raise e
             pass
 
         return out.to_frame()
