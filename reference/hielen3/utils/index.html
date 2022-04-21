@@ -514,6 +514,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#dataframe2jsonizabledict" class="md-nav__link">
+    dataframe2jsonizabledict
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#eprint" class="md-nav__link">
     eprint
   </a>
@@ -1204,6 +1211,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../tools/hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
+      Hls Facility Good
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tools/hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
       Hls Facility Old
     </a>
@@ -1278,6 +1297,13 @@
           <li class="md-nav__item">
   <a href="#agoodtime" class="md-nav__link">
     agoodtime
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dataframe2jsonizabledict" class="md-nav__link">
+    dataframe2jsonizabledict
   </a>
   
 </li>
@@ -1922,7 +1948,31 @@
 400
 401
 402
-403</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1948,9 +1998,33 @@
 
 <span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span>
 
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
 <span class="k">def</span> <span class="nf">uuid</span><span class="p">():</span>
 
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">DataFrame</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">,</span><span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">&#39;datetime64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">squeeze</span> <span class="ow">and</span> <span class="n">out</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">squeeze</span> <span class="ow">and</span> <span class="n">out</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">out</span>
 
 <span class="k">def</span> <span class="nf">hug_output_format_conten_type</span><span class="p">(</span>
 
@@ -2357,6 +2431,38 @@
         <span class="n">t</span><span class="o">=</span><span class="k">None</span>
 
     <span class="k">return</span> <span class="n">t</span>
+</code></pre></div>
+
+</details>
+<h3 id="dataframe2jsonizabledict">dataframe2jsonizabledict</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dataframe2jsonizabledict</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">,</span>
+    <span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">DataFrame</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">,</span><span class="n">squeeze</span><span class="o">=</span><span class="k">True</span><span class="p">):</span>
+
+    <span class="n">try</span><span class="p">:</span>
+
+        <span class="k">out</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="n">df</span><span class="p">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">&#39;datetime64&#39;</span><span class="p">]).</span><span class="n">astype</span><span class="p">(</span><span class="n">str</span><span class="p">)).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">squeeze</span> <span class="k">and</span> <span class="k">out</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="n">squeeze</span> <span class="k">and</span> <span class="k">out</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="k">out</span> <span class="o">=</span> <span class="k">out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="k">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">raise</span> <span class="n">e</span>
+
+        <span class="k">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="k">out</span>
 </code></pre></div>
 
 </details>

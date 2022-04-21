@@ -1256,6 +1256,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../tools/hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
+      Hls Facility Good
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../tools/hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
       Hls Facility Old
     </a>
@@ -1678,7 +1690,7 @@
 
 <span class="w">            </span><span class="n">a</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> &#39;times&#39;, *a.columns[1:</span><span class="o">]</span><span class="w"> </span><span class="err">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
@@ -2523,6 +2535,18 @@ validation errors.</p>
 
         <span class="nb">self</span>.<span class="n">parameters</span>.<span class="n">set</span>(
 
+                <span class="s">&quot;camera&quot;</span>,
+
+                <span class="nb">cache</span>=<span class="s">&#39;inactive&#39;</span>,
+
+                <span class="n">modules</span>={<span class="s">&quot;hls&quot;</span>: <span class="s">&quot;hielen3.tools.hls_facility&quot;</span>},
+
+                <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;hls.start_stream(resource={serial!r})&quot;</span>,
+
+                <span class="n">capability</span>=<span class="s">&quot;stream&quot;</span>)
+
+        <span class="nb">self</span>.<span class="n">parameters</span>.<span class="n">set</span>(
+
                 <span class="s">&quot;temperature&quot;</span>,
 
                 <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
@@ -2757,6 +2781,18 @@ validation errors.</p>
             <span class="k">if</span> <span class="n">radar_1</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">radar_1</span><span class="o">=</span><span class="ss">&quot;&quot;</span>
 
             <span class="k">if</span> <span class="n">radar_2</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">radar_2</span><span class="o">=</span><span class="ss">&quot;&quot;</span>
+
+        <span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">.</span><span class="k">set</span><span class="p">(</span>
+
+                <span class="ss">&quot;camera&quot;</span><span class="p">,</span>
+
+                <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;inactive&#39;</span><span class="p">,</span>
+
+                <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;hls&quot;</span><span class="p">:</span> <span class="ss">&quot;hielen3.tools.hls_facility&quot;</span><span class="err">}</span><span class="p">,</span>
+
+                <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;hls.start_stream(resource={serial!r})&quot;</span><span class="p">,</span>
+
+                <span class="n">capability</span><span class="o">=</span><span class="ss">&quot;stream&quot;</span><span class="p">)</span>
 
         <span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">.</span><span class="k">set</span><span class="p">(</span>
 

@@ -16,7 +16,7 @@
     
     
       
-        <title>Hls Facility Old - hielen3</title>
+        <title>Hls Facility Good - hielen3</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-hielen3toolshls_facility_old" class="md-skip">
+        <a href="#module-hielen3toolshls_facility_good" class="md-skip">
           Skip to content
         </a>
       
@@ -86,7 +86,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Hls Facility Old
+              Hls Facility Good
             
           </span>
         </div>
@@ -934,18 +934,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
-      Hls Facility Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -957,12 +945,12 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Hls Facility Old
+        Hls Facility Good
         <span class="md-nav__icon md-icon"></span>
       </label>
     
-    <a href="./" title="Hls Facility Old" class="md-nav__link md-nav__link--active">
-      Hls Facility Old
+    <a href="./" title="Hls Facility Good" class="md-nav__link md-nav__link--active">
+      Hls Facility Good
     </a>
     
       
@@ -1030,6 +1018,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
+      Hls Facility Old
+    </a>
   </li>
 
         
@@ -1143,7 +1143,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/imgitmen/hielen3/edit/master/reference/hielen3/tools/hls_facility_old.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/imgitmen/hielen3/edit/master/reference/hielen3/tools/hls_facility_good.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -1151,7 +1151,7 @@
                   
                 
                 
-                <h1 id="module-hielen3toolshls_facility_old">Module hielen3.tools.hls_facility_old</h1>
+                <h1 id="module-hielen3toolshls_facility_good">Module hielen3.tools.hls_facility_good</h1>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># coding: utf-8</span>
 
 <span class="kn">import</span> <span class="nn">boto3</span>
@@ -1188,9 +1188,13 @@
 
         <span class="k">return</span> <span class="p">{}</span>
 
-<span class="k">def</span> <span class="nf">manage_stream</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">destroytime</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">manage_stream</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">creds</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">destroytime</span><span class="o">=</span><span class="mi">120</span><span class="p">):</span>
 
-    <span class="n">session</span><span class="o">=</span><span class="n">Session</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;aws&quot;</span><span class="p">][</span><span class="s2">&quot;options&quot;</span><span class="p">])</span>
+    <span class="c1">#creds_=conf[&quot;aws&quot;][&quot;options&quot;]</span>
+
+    <span class="c1">#creds.update(creds_)</span>
+
+    <span class="n">session</span><span class="o">=</span><span class="n">Session</span><span class="p">(</span><span class="o">**</span><span class="n">creds</span><span class="p">)</span>
 
     <span class="k">try</span><span class="p">:</span>
 
@@ -1198,7 +1202,15 @@
 
         <span class="n">client_kvac</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis-video-archived-media&#39;</span><span class="p">,</span><span class="n">endpoint_url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span>
 
-    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">,</span><span class="n">uuid</span><span class="p">()]</span><span class="o">=</span><span class="p">{</span>
+
+                <span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;GONE&quot;</span><span class="p">,</span>
+
+                <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()),</span>
+
+                <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="bp">None</span> <span class="p">}</span>
 
         <span class="k">return</span>
 
@@ -1322,33 +1334,59 @@
 
         <span class="n">resource</span><span class="o">=</span><span class="n">resources</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="o">%</span><span class="n">resources</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
 
-    <span class="n">u</span><span class="o">=</span><span class="n">Cognito</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;aws&quot;</span><span class="p">][</span><span class="s2">&quot;pool&quot;</span><span class="p">])</span>
+    <span class="k">try</span><span class="p">:</span>
 
-    <span class="n">u</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;aws&quot;</span><span class="p">][</span><span class="s2">&quot;pwd&quot;</span><span class="p">])</span>
+        <span class="n">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">])</span>
 
-    <span class="n">url</span> <span class="o">=</span><span class="s2">&quot;https://api.wsn-cloud.com/api/portal/post_command&quot;</span>
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;wsn_sn&quot;</span><span class="p">:</span> <span class="n">resource</span><span class="p">,</span> <span class="s2">&quot;command_code&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;command_args&quot;</span><span class="p">:[</span><span class="s2">&quot;1&quot;</span><span class="p">]}</span>
+        <span class="n">out</span><span class="o">=</span><span class="bp">None</span>
 
-    <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span><span class="n">u</span><span class="o">.</span><span class="n">id_token</span><span class="p">}</span>
-
-    <span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-
-    <span class="k">print</span> <span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">409</span> <span class="p">]:</span>
+    <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;TIMEOUT&quot;</span><span class="p">,</span><span class="s2">&quot;GONE&quot;</span><span class="p">]:</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">])</span>
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">([</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;resource&#39;</span><span class="p">],</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;queue&#39;</span><span class="p">]])</span>
 
-            <span class="k">if</span> <span class="n">out</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;TIMEOUT&quot;</span><span class="p">,</span><span class="s2">&quot;GONE&quot;</span><span class="p">]:</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
 
-                <span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">([</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;resource&#39;</span><span class="p">],</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;queue&#39;</span><span class="p">]])</span>
+            <span class="k">pass</span>
 
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
 
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="n">u</span><span class="o">=</span><span class="n">Cognito</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;aws&quot;</span><span class="p">][</span><span class="s2">&quot;pool&quot;</span><span class="p">])</span>
+
+        <span class="n">u</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s2">&quot;aws&quot;</span><span class="p">][</span><span class="s2">&quot;pwd&quot;</span><span class="p">])</span>
+
+        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span><span class="n">u</span><span class="o">.</span><span class="n">id_token</span><span class="p">}</span>
+
+        <span class="n">url_creds</span> <span class="o">=</span><span class="s2">&quot;https://api.wsn-cloud.com/api/portal/get_stream_viewer_creds&quot;</span>
+
+        <span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_creds</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="n">creds</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="n">creds</span><span class="o">=</span><span class="p">{</span>
+
+                <span class="s1">&#39;aws_access_key_id&#39;</span><span class="p">:</span><span class="n">creds</span><span class="p">[</span><span class="s1">&#39;access_id&#39;</span><span class="p">],</span>
+
+                <span class="s1">&#39;aws_secret_access_key&#39;</span><span class="p">:</span><span class="n">creds</span><span class="p">[</span><span class="s1">&#39;secret_key&#39;</span><span class="p">],</span>
+
+                <span class="s2">&quot;region_name&quot;</span><span class="p">:</span> <span class="s2">&quot;eu-west-1&quot;</span>
+
+                <span class="p">}</span>
+
+        <span class="n">url_cmmnd</span> <span class="o">=</span><span class="s2">&quot;https://api.wsn-cloud.com/api/portal/post_command&quot;</span>
+
+        <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;wsn_sn&quot;</span><span class="p">:</span> <span class="n">resource</span><span class="p">,</span> <span class="s2">&quot;command_code&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;command_args&quot;</span><span class="p">:[</span><span class="s2">&quot;1&quot;</span><span class="p">]}</span>
+
+        <span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_cmmnd</span><span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+        <span class="c1">#print (res.__dict__)</span>
+
+        <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="ow">in</span> <span class="p">[</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">409</span> <span class="p">]:</span>
 
             <span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">,</span><span class="n">uuid</span><span class="p">()]</span><span class="o">=</span><span class="p">{</span>
 
@@ -1358,15 +1396,13 @@
 
                     <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="bp">None</span> <span class="p">}</span>
 
-            <span class="n">out</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">]</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;resources_queues&#39;</span><span class="p">][</span><span class="n">resource</span><span class="p">])</span>
 
-            <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">manage_stream</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">resource</span><span class="p">,),</span><span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">manage_stream</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">creds</span><span class="p">),</span><span class="n">daemon</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
-    <span class="k">else</span><span class="p">:</span>
+        <span class="n">outcode</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">status_code</span>
 
-        <span class="n">outcode</span><span class="o">=</span><span class="mi">404</span>
-
-    <span class="k">return</span> <span class="n">__parse_out__</span><span class="p">(</span><span class="n">out</span><span class="p">),</span><span class="n">outcode</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">,</span><span class="n">outcode</span>
 
 <span class="k">def</span> <span class="nf">get_stream</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
 
@@ -1436,15 +1472,20 @@
 <h3 id="manage_stream">manage_stream</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">manage_stream</span><span class="p">(</span>
     <span class="n">resource</span><span class="p">,</span>
+    <span class="n">creds</span><span class="p">,</span>
     <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
     <span class="n">times</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-    <span class="n">destroytime</span><span class="o">=</span><span class="mi">300</span>
+    <span class="n">destroytime</span><span class="o">=</span><span class="mi">120</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">manage_stream</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">destroytime</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">manage_stream</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">creds</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">destroytime</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">session</span><span class="o">=</span><span class="k">Session</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;options&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">#creds_</span><span class="o">=</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;options&quot;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">#creds</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">creds_</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">session</span><span class="o">=</span><span class="k">Session</span><span class="p">(</span><span class="o">**</span><span class="n">creds</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -1452,7 +1493,15 @@
 
 <span class="w">        </span><span class="n">client_kvac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">session</span><span class="p">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;kinesis-video-archived-media&#39;</span><span class="p">,</span><span class="n">endpoint_url</span><span class="o">=</span><span class="n">endpoint</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource,uuid()</span><span class="o">]=</span><span class="err">{</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;status&quot;</span><span class="err">:</span><span class="ss">&quot;GONE&quot;</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;timestamp&quot;</span><span class="err">:</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="nc">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()),</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;url&quot;</span><span class="err">:</span><span class="k">None</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"></span>
 
@@ -1591,33 +1640,59 @@
 
 <span class="w">        </span><span class="n">resource</span><span class="o">=</span><span class="n">resources</span><span class="o">[</span><span class="n">int(random()*100)%resources.__len__()</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">u</span><span class="o">=</span><span class="n">Cognito</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;pool&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">u</span><span class="p">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;pwd&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">url</span><span class="w"> </span><span class="o">=</span><span class="ss">&quot;https://api.wsn-cloud.com/api/portal/post_command&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">data</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;wsn_sn&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">resource</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;command_code&quot;</span><span class="err">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;command_args&quot;</span><span class="err">:</span><span class="o">[</span><span class="n">&quot;1&quot;</span><span class="o">]</span><span class="err">}</span><span class="w"></span>
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">headers</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;Authorization&quot;</span><span class="err">:</span><span class="n">u</span><span class="p">.</span><span class="n">id_token</span><span class="err">}</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="k">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">__dict__</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">status_code</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n"> 200, 409 </span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="k">out</span><span class="o">[</span><span class="n">&#39;status&#39;</span><span class="o">]</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;TIMEOUT&quot;,&quot;GONE&quot;</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="o">[</span><span class="n">out[&#39;resource&#39;</span><span class="o">]</span><span class="p">,</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;queue&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="o">[</span><span class="n">&#39;status&#39;</span><span class="o">]</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&quot;TIMEOUT&quot;,&quot;GONE&quot;</span><span class="o">]</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="o">[</span><span class="n">out[&#39;resource&#39;</span><span class="o">]</span><span class="p">,</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;queue&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="nl">TypeError</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">u</span><span class="o">=</span><span class="n">Cognito</span><span class="p">(</span><span class="o">**</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;pool&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">u</span><span class="p">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&quot;aws&quot;</span><span class="o">][</span><span class="n">&quot;pwd&quot;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">headers</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;Authorization&quot;</span><span class="err">:</span><span class="n">u</span><span class="p">.</span><span class="n">id_token</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">url_creds</span><span class="w"> </span><span class="o">=</span><span class="ss">&quot;https://api.wsn-cloud.com/api/portal/get_stream_viewer_creds&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_creds</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">creds</span><span class="o">=</span><span class="n">res</span><span class="p">.</span><span class="n">json</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">creds</span><span class="o">=</span><span class="err">{</span><span class="w"></span>
+
+<span class="w">                </span><span class="s1">&#39;aws_access_key_id&#39;</span><span class="err">:</span><span class="n">creds</span><span class="o">[</span><span class="n">&#39;access_id&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="s1">&#39;aws_secret_access_key&#39;</span><span class="err">:</span><span class="n">creds</span><span class="o">[</span><span class="n">&#39;secret_key&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="ss">&quot;region_name&quot;</span><span class="err">:</span><span class="w"> </span><span class="ss">&quot;eu-west-1&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">url_cmmnd</span><span class="w"> </span><span class="o">=</span><span class="ss">&quot;https://api.wsn-cloud.com/api/portal/post_command&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">data</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;wsn_sn&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">resource</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;command_code&quot;</span><span class="err">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;command_args&quot;</span><span class="err">:</span><span class="o">[</span><span class="n">&quot;1&quot;</span><span class="o">]</span><span class="err">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">res</span><span class="o">=</span><span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url_cmmnd</span><span class="p">,</span><span class="n">json</span><span class="o">=</span><span class="k">data</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">__dict__</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">status_code</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n"> 200, 409 </span><span class="o">]</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource,uuid()</span><span class="o">]=</span><span class="err">{</span><span class="w"></span>
 
@@ -1627,15 +1702,13 @@
 
 <span class="w">                    </span><span class="ss">&quot;url&quot;</span><span class="err">:</span><span class="k">None</span><span class="w"> </span><span class="err">}</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource</span><span class="o">]</span><span class="w"></span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="n">__parse_out__</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;resources_queues&#39;</span><span class="o">][</span><span class="n">resource</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">manage_stream</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">resource</span><span class="p">,),</span><span class="n">daemon</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="k">start</span><span class="p">()</span><span class="w"></span>
+<span class="w">            </span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">manage_stream</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span><span class="n">creds</span><span class="p">),</span><span class="n">daemon</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="k">start</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">outcode</span><span class="o">=</span><span class="n">res</span><span class="p">.</span><span class="n">status_code</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">outcode</span><span class="o">=</span><span class="mi">404</span><span class="w"></span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">__parse_out__</span><span class="p">(</span><span class="k">out</span><span class="p">),</span><span class="n">outcode</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">,</span><span class="n">outcode</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -1657,7 +1730,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../hls_facility_good/" title="Hls Facility Good" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../hls_facility/" title="Hls Facility" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1666,19 +1739,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Hls Facility Good
+                Hls Facility
               </span>
             </div>
           </a>
         
         
-          <a href="../" title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../hls_facility_old/" title="Hls Facility Old" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Index
+                Hls Facility Old
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

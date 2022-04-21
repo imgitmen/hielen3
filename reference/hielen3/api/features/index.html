@@ -1165,6 +1165,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../tools/hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
+      Hls Facility Good
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../tools/hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
       Hls Facility Old
     </a>
@@ -2000,7 +2012,15 @@
 558
 559
 560
-561</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+561
+562
+563
+564
+565
+566
+567
+568
+569</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2012,7 +2032,7 @@
 
 <span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">hasher</span><span class="p">,</span> <span class="n">ResponseFormatter</span><span class="p">,</span> <span class="n">uuid</span>
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">hasher</span><span class="p">,</span> <span class="n">ResponseFormatter</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">dataframe2jsonizabledict</span>
 
 <span class="kn">from</span> <span class="nn">hielen3.feature</span> <span class="kn">import</span> <span class="n">HFeature</span>
 
@@ -2190,7 +2210,9 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">])</span>
+
+        <span class="c1">#json.loads(db[&#39;features&#39;][f].to_json(orient=&#39;records&#39;))[0]</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">)</span>
 
@@ -2388,7 +2410,9 @@
 
         <span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">feafra</span><span class="o">.</span><span class="n">notnull</span><span class="p">(),</span> <span class="kc">None</span><span class="p">)</span>
 
-        <span class="n">feafra</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">feafra</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s2">&quot;context&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">))</span>
+        <span class="c1">#feafra=json.loads(feafra.droplevel(&quot;context&quot;).to_json(orient=&#39;index&#39;))</span>
+
+        <span class="n">feafra</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">feafra</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s2">&quot;context&quot;</span><span class="p">),</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">,</span><span class="n">squeeze</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;features&quot;</span><span class="p">:</span><span class="n">feafra</span> <span class="p">}</span>
 
@@ -2498,7 +2522,9 @@
 
                 <span class="p">)</span><span class="o">.</span><span class="n">uuid</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#out.data=json.loads(db[&#39;features&#39;][f].to_json(orient=&#39;records&#39;))[0]</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">])</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">)</span>
 
@@ -2544,7 +2570,9 @@
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">]</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1">#out.data=json.loads(db[&#39;features&#39;][uid].to_json(orient=&#39;records&#39;))[0]</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uid</span><span class="p">])</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;uid&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">)</span>
 
@@ -2572,8 +2600,8 @@
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac50204550</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac50204970</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ffa402f65e0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ffa402f6a00</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -2711,7 +2739,9 @@
 
         <span class="s">&quot;&quot;&quot;</span>
 
-        <span class="k">out</span><span class="p">.</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="err">&#39;</span><span class="n">features</span><span class="err">&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">].</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="err">&#39;</span><span class="n">records</span><span class="err">&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">out</span><span class="p">.</span><span class="n">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="err">&#39;</span><span class="n">features</span><span class="err">&#39;</span><span class="p">][</span><span class="n">f</span><span class="p">])</span>
+
+        <span class="cp">#json.loads(db[&#39;features&#39;][f].to_json(orient=&#39;records&#39;))[0]</span>
 
         <span class="k">out</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="s">&quot;uid&quot;</span><span class="p">]</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">&#39;</span><span class="n">uuid</span><span class="err">&#39;</span><span class="p">)</span>
 
@@ -2780,7 +2810,9 @@
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">#out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uid</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">[</span><span class="n">&quot;uid&quot;</span><span class="o">]=</span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">)</span><span class="w"></span>
 
@@ -3135,7 +3167,9 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 
         <span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">feafra</span><span class="p">.</span><span class="n">notnull</span><span class="p">(),</span> <span class="n">None</span><span class="p">)</span>
 
-        <span class="n">feafra</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">feafra</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s">&quot;context&quot;</span><span class="p">).</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="err">&#39;</span><span class="n">index</span><span class="err">&#39;</span><span class="p">))</span>
+        <span class="cp">#feafra=json.loads(feafra.droplevel(&quot;context&quot;).to_json(orient=&#39;index&#39;))</span>
+
+        <span class="n">feafra</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">feafra</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s">&quot;context&quot;</span><span class="p">),</span><span class="n">orient</span><span class="o">=</span><span class="err">&#39;</span><span class="n">index</span><span class="err">&#39;</span><span class="p">,</span><span class="n">squeeze</span><span class="o">=</span><span class="n">False</span><span class="p">)</span>
 
         <span class="k">out</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;features&quot;</span><span class="o">:</span><span class="n">feafra</span> <span class="p">}</span>
 
@@ -3218,8 +3252,8 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac50204910</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fac50204bb0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ffa402f69a0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ffa402f6c40</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -3279,7 +3313,9 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 
 <span class="w">                </span><span class="p">).</span><span class="n">uuid</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">f</span><span class="o">]</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">#out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">f</span><span class="o">]</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">))</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">f</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">[</span><span class="n">&quot;uid&quot;</span><span class="o">]=</span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;uuid&#39;</span><span class="p">)</span><span class="w"></span>
 

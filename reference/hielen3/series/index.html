@@ -534,6 +534,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    stream
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#thvalues" class="md-nav__link">
     thvalues
   </a>
@@ -1053,6 +1060,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../tools/hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
+      Hls Facility Good
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tools/hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
       Hls Facility Old
     </a>
@@ -1171,6 +1190,13 @@
           <li class="md-nav__item">
   <a href="#setup" class="md-nav__link">
     setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    stream
   </a>
   
 </li>
@@ -1710,7 +1736,69 @@
 490
 491
 492
-493</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1726,7 +1814,7 @@
 
 <span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">isot2ut</span><span class="p">,</span> <span class="n">ut2isot</span><span class="p">,</span> <span class="n">agoodtime</span><span class="p">,</span> <span class="n">uuid</span> <span class="k">as</span> <span class="n">getuuid</span>
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">isot2ut</span><span class="p">,</span> <span class="n">ut2isot</span><span class="p">,</span> <span class="n">agoodtime</span><span class="p">,</span> <span class="n">uuid</span> <span class="k">as</span> <span class="n">getuuid</span><span class="p">,</span> <span class="n">dataframe2jsonizabledict</span>
 
 <span class="kn">import</span> <span class="nn">traceback</span>
 
@@ -1752,7 +1840,7 @@
 
             <span class="k">return</span>
 
-        <span class="n">series_info</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">series_info</span> <span class="o">=</span> <span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">series_info</span><span class="p">)</span>
 
@@ -1784,7 +1872,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span> <span class="ow">or</span> <span class="s2">&quot;data&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orient</span><span class="o">=</span> <span class="n">orient</span> <span class="ow">or</span> <span class="s1">&#39;data&#39;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__loaded__</span><span class="o">=</span><span class="kc">False</span>
 
@@ -1796,7 +1884,11 @@
 
         <span class="n">db</span><span class="p">[</span><span class="s1">&#39;datacache&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">times</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">):</span>
+
+            <span class="k">return</span> <span class="n">capability</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;map&#39;</span><span class="p">,</span><span class="s1">&#39;cloud&#39;</span><span class="p">,</span><span class="s1">&#39;stream&#39;</span><span class="p">]</span>
 
         <span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span> <span class="ow">or</span> <span class="n">getuuid</span><span class="p">()</span>
 
@@ -1827,6 +1919,10 @@
         <span class="k">if</span> <span class="n">mu</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
 
             <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mu</span>
+
+        <span class="k">if</span> <span class="n">capability</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">):</span>
+
+            <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;capability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">capability</span>
 
         <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">setups</span>
 
@@ -1860,9 +1956,13 @@
 
     <span class="k">def</span> <span class="nf">thvalues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">orient</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">capability</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="o">!=</span> <span class="s1">&#39;data&#39;</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;data&#39; capability&quot;</span> <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
@@ -1942,7 +2042,7 @@
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="c1">#raise e</span>
+                <span class="k">raise</span> <span class="n">e</span>
 
                 <span class="n">gen</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 
@@ -1987,6 +2087,10 @@
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="o">!=</span> <span class="s1">&#39;map&#39;</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;map&#39; capability&quot;</span> <span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -2060,6 +2164,10 @@
 
     <span class="k">def</span> <span class="nf">cloud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">refresh</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="o">!=</span> <span class="s1">&#39;cloud&#39;</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;cloud&#39; capability&quot;</span> <span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
 
             <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span>
@@ -2123,6 +2231,48 @@
         <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
 
         <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">def</span> <span class="nf">stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="o">!=</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;stream&#39; capability&quot;</span> <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
+
+        <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">out</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="n">gen</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;queue&#39;</span><span class="p">]],</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]])</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">raise</span> <span class="n">e</span>
+
+                <span class="n">gen</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+            <span class="n">gen</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;queue&#39;</span>
+
+            <span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">gen</span><span class="p">[</span><span class="o">~</span><span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
+
+            <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="n">e</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 
     <span class="k">class</span> <span class="nc">_Generator</span><span class="p">:</span>
 
@@ -2234,7 +2384,7 @@
 
 <span class="w">            </span><span class="k">return</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">series_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"></span>
+<span class="w">        </span><span class="n">series_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__dict__</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">series_info</span><span class="p">)</span><span class="w"></span>
 
@@ -2266,7 +2416,7 @@
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;data&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">orient</span><span class="o">=</span><span class="w"> </span><span class="n">orient</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__loaded__</span><span class="o">=</span><span class="k">False</span><span class="w"></span>
 
@@ -2278,7 +2428,11 @@
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="k">key</span><span class="o">=</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">))</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;map&#39;,&#39;cloud&#39;,&#39;stream&#39;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">getuuid</span><span class="p">()</span><span class="w"></span>
 
@@ -2309,6 +2463,10 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">mu</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span><span class="w"> </span><span class="nf">str</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;mu&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">setups</span><span class="w"></span>
 
@@ -2342,9 +2500,13 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thvalues</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getattr__</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">orient</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getattr__</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span><span class="w"></span>
 
@@ -2424,7 +2586,7 @@
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
@@ -2469,6 +2631,10 @@
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;map&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;map&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -2542,6 +2708,10 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">cloud</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;cloud&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;cloud&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
@@ -2605,6 +2775,48 @@
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">stream</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;stream&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;stream&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;no&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="o">[</span><span class="n">out[&#39;queue&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">,</span><span class="k">index</span><span class="o">=[</span><span class="n">out[&#39;timestamp&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">gen</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;queue&#39;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="o">[</span><span class="n">~gen.index.duplicated()</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">class</span><span class="w"> </span><span class="nl">_Generator</span><span class="p">:</span><span class="w"></span>
 
@@ -2716,6 +2928,10 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">cloud</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;cloud&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;cloud&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
@@ -2795,6 +3011,10 @@
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span><span class="w"></span>
@@ -2873,7 +3093,7 @@
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
@@ -2931,6 +3151,10 @@
 </code></pre></div>
 
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;map&#39;</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;map&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -3012,11 +3236,16 @@
     <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">operands</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;map&#39;,&#39;cloud&#39;,&#39;stream&#39;</span><span class="o">]</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">getuuid</span><span class="p">()</span><span class="w"></span>
 
@@ -3048,6 +3277,10 @@
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;mu&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mu</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span><span class="w"></span>
+
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">setups</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">#TODO</span><span class="w"> </span><span class="n">fare</span><span class="w"> </span><span class="n">il</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">coerenza</span><span class="w"> </span><span class="n">tra</span><span class="w"> </span><span class="n">operandi</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">operatore</span><span class="w"></span>
@@ -3078,6 +3311,61 @@
 </code></pre></div>
 
 </details>
+<h5 id="stream">stream</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">stream</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">timeref</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">stream</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="k">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="k">self</span><span class="p">.</span><span class="n">capability</span> <span class="o">!=</span> <span class="s1">&#39;stream&#39;</span><span class="p">:</span>
+
+            <span class="n">raise</span> <span class="n">ValueError</span><span class="p">(</span> <span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;stream&#39; capability&quot;</span> <span class="p">)</span>
+
+        <span class="k">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
+
+        <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
+
+        <span class="k">cache</span><span class="o">=</span><span class="ss">&quot;no&quot;</span>
+
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="n">try</span><span class="p">:</span>
+
+                <span class="k">out</span><span class="o">=</span><span class="k">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="n">gen</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([</span><span class="k">out</span><span class="p">[</span><span class="s1">&#39;queue&#39;</span><span class="p">]],</span><span class="k">index</span><span class="o">=</span><span class="p">[</span><span class="k">out</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]])</span>
+
+            <span class="k">except</span> <span class="k">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">raise</span> <span class="n">e</span>
+
+                <span class="n">gen</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+            <span class="n">gen</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;queue&#39;</span>
+
+            <span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+
+            <span class="k">out</span> <span class="o">=</span> <span class="n">gen</span><span class="p">[</span><span class="o">~</span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">duplicated</span><span class="p">()]</span>
+
+            <span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="ss">&quot;timestamp&quot;</span>
+
+        <span class="k">except</span> <span class="k">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">raise</span> <span class="n">e</span>
+
+            <span class="n">pass</span>
+
+        <span class="k">return</span> <span class="k">out</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+</code></pre></div>
+
+</details>
 <h5 id="thvalues">thvalues</h5>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">thvalues</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -3089,7 +3377,7 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thvalues</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getattr__</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">orient</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getattr__</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="p">)(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 </details>
