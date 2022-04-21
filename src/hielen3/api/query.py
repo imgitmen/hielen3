@@ -43,21 +43,23 @@ def tabular_data(
 
     for query in datamap:
 
-        ss = query.pop('series')
+        #ss = query.pop('series')
+
+        try:
+            ss=db['series'][query.pop('series')]
+            ss=list(ss[ss['capability']==capability]['uuid'].values)
+        except KeyError as e:
+            out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
+            out.message = str(e) + " not found"
+            response = out.format(response=response, request=request)
+            return
 
         for p in ss:
-            
             if p not in series.keys():
                 series[p] = []
 
-            try:
-                series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
-            except KeyError as e:
-                out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
-                out.message = str(e) + " not found"
-                response = out.format(response=response, request=request)
-                return
-
+            series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
+           
     out = DataFrame()
 
     for param, sers in series.items():
@@ -122,8 +124,8 @@ def tabular_data_el(
 
     try:
         series=list(db['features_parameters'][feature,par]['series'].values)
-        series=db['series'][series]
-        series=list(series[series['capability']==capability]['uuid'].values)
+        #series=db['series'][series]
+        #series=list(series[series['capability']==capability]['uuid'].values)
     except KeyError as e:
         raise e
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
