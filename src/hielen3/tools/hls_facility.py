@@ -6,34 +6,49 @@ import requests
 from time import sleep
 from random import random
 from hielen3 import db,conf
-from hielen3.utils import uuid
-from datetime import datetime, timedelta
+from hielen3.utils import uuid, dataframe2jsonizabledict
+from numpy import datetime64, timedelta64 
 import json
 from threading import Thread
 
-resources=["21C04004","22D01001","22D01002","22D01003","22D01005","22D01006","22D01009","22D01011","22D01012","22D01015","22D01016","22D01017","22D01018","22D01019"]
 
-def __parse_out__(out):
-    try:
-        return json.loads(out.to_json(orient='records'))[0]
-    except Exception as e:
-        return {}
+def manage_stream(resource,timeout=10,times=20,destroytime=120):
 
+    u=Cognito(**conf["aws"]["pool"])
+    u.authenticate(conf["aws"]["pwd"])
 
-def manage_stream(resource,creds,timeout=10,times=20,destroytime=120):
+    headers={"Authorization":u.id_token}
 
-    #creds_=conf["aws"]["options"]
-    #creds.update(creds_)
-
-    session=Session(**creds)
+    url_creds ="https://api.wsn-cloud.com/api/portal/get_stream_viewer_creds"
+    res=requests.get(url=url_creds,headers=headers)
 
     try:
+        if res.status_code in [ 200, 409 ]:
+            creds=res.json()
+
+            creds={
+                    'aws_access_key_id':creds['access_id'],
+                    'aws_secret_access_key':creds['secret_key'],
+                    "region_name": "eu-west-1"
+                    }
+
+            url_cmmnd ="https://api.wsn-cloud.com/api/portal/post_command"
+
+            data={"wsn_sn": resource, "command_code": 8, "command_args":["1"]}
+
+            res=requests.post(url=url_cmmnd,json=data,headers=headers)
+
+            session=Session(**creds)
+        else:
+            raise Exception('wrong code')
+
         endpoint = session.client('kinesisvideo').get_data_endpoint(StreamName=f'stream-{resource}',APIName='GET_HLS_STREAMING_SESSION_URL')['DataEndpoint']
         client_kvac = session.client('kinesis-video-archived-media',endpoint_url=endpoint)
+
     except Exception as e:
         db['resources_queues'][resource,uuid()]={
                 "status":"GONE", 
-                "timestamp": str(datetime.now()),
+                "timestamp": str(datetime64("now")),
                 "url":None }
         return
 
@@ -52,8 +67,9 @@ def manage_stream(resource,creds,timeout=10,times=20,destroytime=120):
     for i in range(times):
         print (f"resource: {resource}, time: {timeout*i} secs")
         try:
-            out=__parse_out__(db['resources_queues'][resource])
+            out=dataframe2jsonizabledict(db['resources_queues'][resource])
             out["status"]="AVAILABLE"
+            out["timestamp"]=str(datetime64("now"))
         except KeyError:
             return
         
@@ -71,18 +87,6 @@ def manage_stream(resource,creds,timeout=10,times=20,destroytime=120):
                 db['resources_queues'][resource]=out
                 return
 
-            """
-            try:
-                while True:
-                    sleep(destroytime)
-                    print(client_kvac.get_hls_streaming_session_url(**req)['HLSStreamingSessionURL'])
-            except Exception as e:
-                out["status"]="GONE"
-                print (out["status"])
-                db['resources_queues'][resource]=out
-                return
-            """
-
         except KeyError as e:
             return
 
@@ -95,73 +99,56 @@ def manage_stream(resource,creds,timeout=10,times=20,destroytime=120):
         sleep(timeout)
 
     try:
-        out=__parse_out__(db['resources_queues'][resource])
+        out=dataframe2jsonizabledict(db['resources_queues'][resource])
         out["status"]="TIMEOUT"
         print (out["status"])
         db['resources_queues'][resource]=out
     except KeyError:
         pass
 
-
-
 def start_stream(resource=None):
 
     out={}
-    outcode=200
 
     if resource is None:
-        resource=resources[int(random()*100)%resources.__len__()]
+        raise KeyError('No resource')
 
     try:
-        out=__parse_out__(db['resources_queues'][resource])
+        out=dataframe2jsonizabledict(db['resources_queues'][resource])
     except KeyError as e:
         out=None
 
-    if out is None or out['status'] in ["TIMEOUT","GONE"]:
-        try:
-            db['resources_queues'].pop([out['resource'],out['queue']])
-        except KeyError:
-            pass
-        except TypeError:
-            pass
+    nowtime=datetime64("now")
 
-        u=Cognito(**conf["aws"]["pool"])
-        u.authenticate(conf["aws"]["pwd"])
 
-        headers={"Authorization":u.id_token}
+    #if out is None or out['status'] in ["TIMEOUT","GONE","INIT"]:
 
-        url_creds ="https://api.wsn-cloud.com/api/portal/get_stream_viewer_creds"
-        res=requests.get(url=url_creds,headers=headers)
+    try:
+        if ( nowtime-datetime64(out["timestamp"]) ) < timedelta64(1200):
+            return out
+    except Exception as e:
+        pass
 
-        creds=res.json()
-
-        creds={
-                'aws_access_key_id':creds['access_id'],
-                'aws_secret_access_key':creds['secret_key'],
-                "region_name": "eu-west-1"
-                }
-
-        url_cmmnd ="https://api.wsn-cloud.com/api/portal/post_command"
-
-        data={"wsn_sn": resource, "command_code": 8, "command_args":["1"]}
-
-        res=requests.post(url=url_cmmnd,json=data,headers=headers)
-
-        #print (res.__dict__)
-
-        if res.status_code in [ 200, 409 ]:
-            db['resources_queues'][resource,uuid()]={
+    try:
+        db['resources_queues'].pop([out['resource'],out['queue']])
+    except KeyError:
+        pass
+    except TypeError:
+        pass
+    
+    try:
+        db['resources_queues'][resource,uuid()]={
                     "status":"INIT", 
-                    "timestamp": str(datetime.now()), 
+                    "timestamp": str(nowtime), 
                     "url":None }
-     
-            out=__parse_out__(db['resources_queues'][resource])
 
-            Thread(target=manage_stream,args=(resource,creds),daemon=True).start()
+        out=dataframe2jsonizabledict(db['resources_queues'][resource])
 
-        outcode=res.status_code
+        Thread(target=manage_stream,args=(resource,),daemon=True).start()
+    except Exception as e:
+        pass
 
-    return out,outcode 
+    return out 
 
 
 def get_stream(queue):
@@ -177,7 +164,7 @@ def get_stream(queue):
         except KeyError as e:
             outcode=404
 
-    return __parse_out__(out),outcode
+    return out,outcode
 
 
 

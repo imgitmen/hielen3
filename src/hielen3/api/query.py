@@ -51,7 +51,7 @@ def tabular_data(
                 series[p] = []
 
             try:
-                series[p].append( HSeries(p,orient=capability).thvalues(**query,**kwargs) )
+                series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
             except KeyError as e:
                 out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
                 out.message = str(e) + " not found"
@@ -122,13 +122,20 @@ def tabular_data_el(
 
     try:
         series=list(db['features_parameters'][feature,par]['series'].values)
-    except KeyError:
+        series=db['series'][series]
+        series=list(series[series['capability']==capability]['uuid'].values)
+    except KeyError as e:
+        raise e
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
         out.message = str(feature) + " not found"
         response = out.format(response=response, request=request)
         return
 
     datamap = dict(series=series, times=times, timeref=timeref, geometry="#PLACEHOLDER#", refresh=refresh)
+
+    #print (datamap)
+
+
     datamap=json.dumps(datamap).replace('"#PLACEHOLDER#"',geometry)
 
     datamap = DataMapSchema().loads(datamap)

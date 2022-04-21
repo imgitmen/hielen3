@@ -18,7 +18,7 @@ def logger_serials(folder='gestecno_rfi/data'):
 
     folder=Path( conf['incomepath']) / folder / "*"
 
-    serials=Series(glob(str(folder))).apply(Path)
+    serials=Series(glob(str(folder)),dtype='object').apply(Path)
 
     serials=serials[serials.apply(Path.is_dir)]
 
@@ -58,7 +58,6 @@ class Feature(HFeature):
     def config(self, serial, radar_1=None, radar_2=None, pluviometer=None, **kwargs):
 
         """
-
         Timestamp,
         0:Alarm,
         1:Temp_°C,
@@ -75,13 +74,20 @@ class Feature(HFeature):
             if radar_1 is None: radar_1=""
             if radar_2 is None: radar_2=""
 
+
+        self.parameters.set(
+                "camera",
+                cache='inactive',
+                modules={"hls": "hielen3.tools.hls_facility"},
+                operator=f"hls.start_stream(resource={serial!r})",
+                capability="stream")
+
         self.parameters.set(
                 "temperature",
                 cache='active',
                 mu='°C',
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=2)")
-
 
         self.parameters.set(
                 "humidity",
@@ -147,9 +153,12 @@ class Feature(HFeature):
 
 
 
+
+
 def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', func=None, **kwargs ):
 
-    folder=Path(conf['incomepath']) / folder 
+    folder=Path(conf['incomepath']) / folder
+
 
     def __extract_gestecno__(path):
         a=DataFrame([],dtype='float64')
@@ -160,8 +169,8 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
                 a = a[a[0].apply(lambda x: match('^\d{4}-\d{2}',x)).notna()]
 
             a.columns = [ 'times', *a.columns[1:] ]
-
-        except Exception:
+        
+        except Exception as e:
             pass
 
         return a

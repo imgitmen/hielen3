@@ -6,7 +6,7 @@ from functools import wraps
 from numpy import nan, unique, round
 from importlib import import_module
 from hielen3 import db
-from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid
+from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, dataframe2jsonizabledict
 import traceback
 
 def _threadpool(f):
@@ -27,7 +27,7 @@ class HSeries:
         if self.__loaded__:
             return
 
-        series_info = db["series"][self.uuid].to_dict(orient="records")[0]
+        series_info = dataframe2jsonizabledict(db["series"][self.uuid])
 
         self.__dict__.update(series_info)
 
@@ -56,7 +56,7 @@ class HSeries:
             raise ValueError
 
         self.uuid=uuid
-        self.orient=orient or "data"
+        self.orient= orient or 'data'
         self.__loaded__=False
         if not delayed:
             self.__delayed_load__()
@@ -65,7 +65,10 @@ class HSeries:
         db['datacache'].pop(key=(self.uuid, times))
 
 
-    def setup(uuid=None,operator=None,modules=None,cache=None,mu=None,datatype=None,operands=None):
+    def setup(uuid=None,operator=None,modules=None,cache=None,mu=None,datatype=None,operands=None, capability='data'):
+
+        def _managed_capabilities_(capability):
+            return capability in ['data','map','cloud','stream']
 
         uuid=uuid or getuuid()
 
@@ -89,6 +92,9 @@ class HSeries:
 
         if mu is not None and isinstance(mu, str):
             setups['mu'] = mu
+
+        if capability is not None and _managed_capabilities_(capability):
+            setups['capability'] = capability
         
         db["series"][uuid]=setups
         
@@ -116,9 +122,13 @@ class HSeries:
 
     @_threadpool
     def thvalues(self, **kwargs):
-        return self.__getattr__(self.orient)(**kwargs)
+        return self.__getattr__(self.capability)(**kwargs)
+
 
     def data(self, times=None, timeref=None, cache=None, geometry=None, **kwargs):
+
+        if self.capability != 'data':
+            raise ValueError( f"{self.uuid} has not 'data' capability" )
 
         self.__delayed_load__()
 
@@ -171,7 +181,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                #raise e
+                raise e
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
@@ -203,7 +213,11 @@ class HSeries:
 
         return out
 
+
     def map(self, times=None, timeref=None, geometry=None, refresh=None, **kwargs):
+
+        if self.capability != 'map':
+            raise ValueError( f"{self.uuid} has not 'map' capability" )
 
         try:
             cache=self.cache
@@ -259,6 +273,9 @@ class HSeries:
 
     def cloud(self, times=None, timeref=None, geometry=None, refresh=None, **kwargs):
 
+        if self.capability != 'cloud':
+            raise ValueError( f"{self.uuid} has not 'cloud' capability" )
+
         try:
             cache=self.cache
         except Exception as e:
@@ -302,6 +319,38 @@ class HSeries:
         out.index.name = "timestamp"
 
         return out
+    
+
+    def stream(self, times=None, timeref=None, cache=None, geometry=None, **kwargs):
+
+        if self.capability != 'stream':
+            raise ValueError( f"{self.uuid} has not 'stream' capability" )
+
+        self.__delayed_load__()
+
+        timeref=agoodtime(timeref)
+
+        cache="no"
+
+        try:
+
+            try:
+                out=self.generator._generate(**kwargs)
+                gen = Series([out['queue']],index=[out['timestamp']])
+            except Exception as e:
+                raise e
+                gen = Series([],dtype='object')
+
+            gen.name='queue'
+            gen.index=DatetimeIndex(gen.index)
+            out = gen[~gen.index.duplicated()]
+            out.index.name = "timestamp"
+
+        except Exception as e:
+            raise e
+            pass
+
+        return out.to_frame()
 
 
     class _Generator:

@@ -12,9 +12,23 @@ from marshmallow import Schema, fields
 from numpy import datetime64, isnat
 from collections.abc import Iterable
 from uuid import uuid4
+from pandas import DataFrame
 
 def uuid():
     return str(uuid4())
+
+def dataframe2jsonizabledict(df:DataFrame,orient='records',squeeze=True):
+    try:
+        out=df.assign(**df.select_dtypes(['datetime64']).astype(str)).to_dict(orient=orient)
+        if squeeze and out.__len__() == 0:
+            out = []
+        if squeeze and out.__len__() == 1:
+            out = out[0]
+    except Exception as e:
+        raise e
+        out = []
+
+    return out
 
 def hug_output_format_conten_type(
     handlers=[],

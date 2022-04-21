@@ -1,6 +1,12 @@
 CHANGELOG
 =========
-## **v3.0.3**
+## **v3.1.6**
+### **21 Aprile 2022**
+- implementazione dell'api GET /queue/
+- implementazione della capability "stream"
+- gestione delle richieste kynetics
+
+## **v3.1.0**
 ### **5 Marzo 2022**
 - modifica api `POST /feature/`: non prende più il parametro **"uid"**. Il campo "uid" della feature viene ora generato dalla chiamata, secondo gli standard di "uuid".
 - modifica definizione della classe `hielen3.api.feature.FeaturePropertiesSchema`: rinominato il campo **"context"** in **"milieu"**. Questo coinvolge la chiamata API `POST /feature/` in quanto la classe modificata gestisce e valida il json da passare al parametro `properies` dell'API.

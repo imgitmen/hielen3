@@ -179,6 +179,7 @@ class HFeature(ABC):
             return self.parameters[param]
 
         def __setitem__(self, param, series):
+
             if isinstance(series,HSeries):
                 series=series.uuid
 

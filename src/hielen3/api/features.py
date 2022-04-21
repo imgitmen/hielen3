@@ -4,7 +4,7 @@ import hug
 import falcon
 import json
 from hielen3 import db
-from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid
+from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict
 from hielen3.feature import HFeature
 from hielen3.geje import GeoJSONSchema
 from pandas import Series
@@ -121,7 +121,9 @@ RESPONSE CODES:
         feature_info.update({"data":None, "map":None, "cloud":None})
         """
 
-        out.data=json.loads(db['features'][f].to_json(orient='records'))[0]
+        out.data=dataframe2jsonizabledict(db['features'][f])
+
+        #json.loads(db['features'][f].to_json(orient='records'))[0]
 
         out.data["uid"]=out.data.pop('uuid')
 
@@ -250,9 +252,14 @@ RESPONSE CODES:
 
     try:
         feafra=db['features_info'][uids,cntxt][good_info]
+
+
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
-        feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
+
+        #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
+        feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)
+
         out.data = { "features":feafra }
         feafra=None
 
@@ -335,7 +342,8 @@ Possibili risposte:
                 ).uuid
 
 
-        out.data=json.loads(db['features'][f].to_json(orient='records'))[0]
+        #out.data=json.loads(db['features'][f].to_json(orient='records'))[0]
+        out.data=dataframe2jsonizabledict(db['features'][f])
 
         out.data["uid"]=out.data.pop('uuid')
          
@@ -372,7 +380,8 @@ Possibili risposte:
         out.message = "None value not allowed"
 
     try:
-        out.data=json.loads(db['features'][uid].to_json(orient='records'))[0]
+        #out.data=json.loads(db['features'][uid].to_json(orient='records'))[0]
+        out.data=dataframe2jsonizabledict(db['features'][uid])
         out.data["uid"]=out.data.pop('uuid')
         HFeature.drop(uuid=uid)
 
