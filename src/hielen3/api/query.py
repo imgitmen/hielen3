@@ -124,10 +124,7 @@ def tabular_data_el(
 
     try:
         series=list(db['features_parameters'][feature,par]['series'].values)
-        #series=db['series'][series]
-        #series=list(series[series['capability']==capability]['uuid'].values)
     except KeyError as e:
-        raise e
         out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
         out.message = str(feature) + " not found"
         response = out.format(response=response, request=request)
