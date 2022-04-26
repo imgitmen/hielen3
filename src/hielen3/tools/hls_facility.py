@@ -124,6 +124,9 @@ def start_stream(resource=None):
     #if out is None or out['status'] in ["TIMEOUT","GONE","INIT"]:
 
     try:
+        if out['status'] in ["TIMEOUT","GONE"]:
+            raise Exception
+
         if ( nowtime-datetime64(out["timestamp"]) ) < timedelta64(1200):
             return out
     except Exception as e:
