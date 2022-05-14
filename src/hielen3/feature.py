@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
-from inspect import ismodule
 from abc import ABC, abstractmethod
 from importlib import import_module
 from hielen3 import db 
 from hielen3.utils import uuid as newuuid
 from hielen3.series import HSeries
-from marshmallow import Schema, fields, ValidationError, INCLUDE
+from marshmallow import fields 
 from numpy import datetime64, isnat
 from pandas import DataFrame
 
@@ -33,6 +32,11 @@ class StringTime(fields.DateTime):
 
 
 class HFeature(ABC):
+
+    @abstractmethod
+    def config(*args, **kwargs):
+        pass
+
 
     def modules(ftype=None):
         return db['features_type'][ftype]['module'].apply(import_module)

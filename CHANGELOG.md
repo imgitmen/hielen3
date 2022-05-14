@@ -1,5 +1,12 @@
 CHANGELOG
 =========
+## **v3.2.0**
+### **10 Maggio 2022**
+- ristrutturato in modello di astrazione delle feature
+- implementazione del modulo di base `hielen3.ext.feature_instrument`
+- implementazione del module di base `hielen3.ext.feature_datetree_filesystem_source` che permette la configurazione delle sorgenti basate su strutture di files organizzate secondo il pattern SOURCE/YYYY/MM/DD
+
+
 ## **v3.1.6**
 ### **21 Aprile 2022**
 - implementazione dell'api GET /queue/

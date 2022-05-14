@@ -245,17 +245,20 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
         df=concat([df,u])
 
     if columns is None:
-        columns = df.columns
+        columns = list(df.columns)
 
     if not isinstance(columns,(list,tuple,set)):
         columns=[columns]
 
-    columns=list(columns)
+    columns = list(columns)
 
     df=df[columns].sort_index().loc[(serials, times), :]
 
-    if serials.__len__() == 1:
-        df = df.droplevel('serial',axis=0)
+    try:
+        if serials.__len__() == 1:
+            df = df.droplevel('serial',axis=0)
+    except Exception as e:
+        pass
 
     return df
 
