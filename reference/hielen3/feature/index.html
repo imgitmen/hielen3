@@ -486,6 +486,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create" class="md-nav__link">
     create
   </a>
@@ -885,6 +892,54 @@
 
 
   <li class="md-nav__item">
+    <a href="../ext/feature_datetree_filesystem_source/" title="Feature Datetree Filesystem Source" class="md-nav__link">
+      Feature Datetree Filesystem Source
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/feature_instrument/" title="Feature Instrument" class="md-nav__link">
+      Feature Instrument
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/feature_instrument_piezometer/" title="Feature Instrument Piezometer" class="md-nav__link">
+      Feature Instrument Piezometer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/feature_instrument_shapearray/" title="Feature Instrument Shapearray" class="md-nav__link">
+      Feature Instrument Shapearray
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ext/" title="Index" class="md-nav__link">
       Index
     </a>
@@ -898,14 +953,64 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-2" type="checkbox" id="nav-5-1-11-2">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-6" type="checkbox" id="nav-5-1-11-6">
     
-    <label class="md-nav__link" for="nav-5-1-11-2">
+    <label class="md-nav__link" for="nav-5-1-11-6">
+      Feature Logger Gestecno
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-11-6">
+        <span class="md-nav__icon md-icon"></span>
+        Feature Logger Gestecno
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/feature_logger_gestecno/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ext/feature_logger_gestecno/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-7" type="checkbox" id="nav-5-1-11-7">
+    
+    <label class="md-nav__link" for="nav-5-1-11-7">
       Feature Rfilogger
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-2">
+      <label class="md-nav__title" for="nav-5-1-11-7">
         <span class="md-nav__icon md-icon"></span>
         Feature Rfilogger
       </label>
@@ -1321,6 +1426,13 @@
           <li class="md-nav__item">
   <a href="#cleancache" class="md-nav__link">
     cleanCache
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
   </a>
   
 </li>
@@ -2002,11 +2114,13 @@
 494
 495
 496
-497</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+497
+498
+499
+500
+501</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
-
-<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">ismodule</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
@@ -2018,7 +2132,7 @@
 
 <span class="kn">from</span> <span class="nn">hielen3.series</span> <span class="kn">import</span> <span class="n">HSeries</span>
 
-<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">INCLUDE</span>
+<span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">fields</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">datetime64</span><span class="p">,</span> <span class="n">isnat</span>
 
@@ -2053,6 +2167,12 @@
         <span class="k">return</span> <span class="n">_agoodtime</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">HFeature</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="nd">@abstractmethod</span>
+
+    <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -2503,9 +2623,6 @@
 </td></tr></table>
 </details>
 <h2 id="variables">Variables</h2>
-<div class="codehilite"><pre><span></span><code><span class="n">INCLUDE</span>
-</code></pre></div>
-
 <div class="codehilite"><pre><span></span><code><span class="n">db</span>
 </code></pre></div>
 
@@ -2522,6 +2639,12 @@
 <p>Helper class that provides a standard way to create an ABC using
 inheritance.</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">HFeature</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2978,6 +3101,8 @@ inheritance.</p>
 </ul>
 <h4 id="descendants">Descendants</h4>
 <ul>
+<li>Feature_instrument.Feature</li>
+<li>hielen3.ext.feature_logger_gestecno.logger.Feature</li>
 <li>hielen3.ext.feature_rfilogger.rfilogger.Feature</li>
 </ul>
 <h4 id="instance-variables">Instance variables</h4>
@@ -3037,6 +3162,21 @@ inheritance.</p>
         <span class="k">except</span> <span class="n">KeyError</span><span class="p">:</span>
 
             <span class="k">return</span> <span class="k">None</span>
+</code></pre></div>
+
+</details>
+<h5 id="config">config</h5>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">config</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 </code></pre></div>
 
 </details>

@@ -630,9 +630,107 @@
 
 
   <li class="md-nav__item">
+    <a href="../../feature_datetree_filesystem_source/" title="Feature Datetree Filesystem Source" class="md-nav__link">
+      Feature Datetree Filesystem Source
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature_instrument/" title="Feature Instrument" class="md-nav__link">
+      Feature Instrument
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature_instrument_piezometer/" title="Feature Instrument Piezometer" class="md-nav__link">
+      Feature Instrument Piezometer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature_instrument_shapearray/" title="Feature Instrument Shapearray" class="md-nav__link">
+      Feature Instrument Shapearray
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../" title="Index" class="md-nav__link">
       Index
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-6" type="checkbox" id="nav-5-1-11-6">
+    
+    <label class="md-nav__link" for="nav-5-1-11-6">
+      Feature Logger Gestecno
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-11-6">
+        <span class="md-nav__icon md-icon"></span>
+        Feature Logger Gestecno
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature_logger_gestecno/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../feature_logger_gestecno/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -645,14 +743,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-2" type="checkbox" id="nav-5-1-11-2" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-7" type="checkbox" id="nav-5-1-11-7" checked>
     
-    <label class="md-nav__link" for="nav-5-1-11-2">
+    <label class="md-nav__link" for="nav-5-1-11-7">
       Feature Rfilogger
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-2">
+      <label class="md-nav__title" for="nav-5-1-11-7">
         <span class="md-nav__icon md-icon"></span>
         Feature Rfilogger
       </label>
@@ -2020,19 +2118,25 @@
 
     <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
 
-        <span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="nb">set</span><span class="p">)):</span>
 
         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
 
-    <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
 
     <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">serials</span><span class="p">,</span> <span class="n">times</span><span class="p">),</span> <span class="p">:]</span>
 
-    <span class="k">if</span> <span class="n">serials</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">serials</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">pass</span>
 
     <span class="k">return</span> <span class="n">df</span>
 </code></pre></div>
@@ -2204,19 +2308,25 @@
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="w"></span>
+<span class="w">        </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">columns</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">tuple</span><span class="p">,</span><span class="k">set</span><span class="p">))</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">columns</span><span class="o">=[</span><span class="n">columns</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">columns</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">[</span><span class="n">columns</span><span class="o">]</span><span class="p">.</span><span class="n">sort_index</span><span class="p">().</span><span class="n">loc</span><span class="o">[</span><span class="n">(serials, times), :</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">serials</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">serials</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">df</span><span class="w"></span>
 </code></pre></div>

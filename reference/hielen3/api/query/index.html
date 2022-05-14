@@ -845,6 +845,54 @@
 
 
   <li class="md-nav__item">
+    <a href="../../ext/feature_datetree_filesystem_source/" title="Feature Datetree Filesystem Source" class="md-nav__link">
+      Feature Datetree Filesystem Source
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/feature_instrument/" title="Feature Instrument" class="md-nav__link">
+      Feature Instrument
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/feature_instrument_piezometer/" title="Feature Instrument Piezometer" class="md-nav__link">
+      Feature Instrument Piezometer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/feature_instrument_shapearray/" title="Feature Instrument Shapearray" class="md-nav__link">
+      Feature Instrument Shapearray
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../ext/" title="Index" class="md-nav__link">
       Index
     </a>
@@ -858,14 +906,64 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-2" type="checkbox" id="nav-5-1-11-2">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-6" type="checkbox" id="nav-5-1-11-6">
     
-    <label class="md-nav__link" for="nav-5-1-11-2">
+    <label class="md-nav__link" for="nav-5-1-11-6">
+      Feature Logger Gestecno
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-11-6">
+        <span class="md-nav__icon md-icon"></span>
+        Feature Logger Gestecno
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/feature_logger_gestecno/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ext/feature_logger_gestecno/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-7" type="checkbox" id="nav-5-1-11-7">
+    
+    <label class="md-nav__link" for="nav-5-1-11-7">
       Feature Rfilogger
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-2">
+      <label class="md-nav__title" for="nav-5-1-11-7">
         <span class="md-nav__icon md-icon"></span>
         Feature Rfilogger
       </label>
@@ -1694,13 +1792,7 @@
 268
 269
 270
-271
-272
-273
-274
-275
-276
-277</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+271</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -1898,13 +1990,7 @@
 
         <span class="n">series</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_parameters&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">,</span><span class="n">par</span><span class="p">][</span><span class="s1">&#39;series&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 
-        <span class="c1">#series=db[&#39;series&#39;][series]</span>
-
-        <span class="c1">#series=list(series[series[&#39;capability&#39;]==capability][&#39;uuid&#39;].values)</span>
-
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="k">raise</span> <span class="n">e</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
 
@@ -2016,7 +2102,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f1ab1d9b700</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f25c6fd2700</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2190,13 +2276,7 @@
 
 <span class="w">        </span><span class="n">series</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_parameters&#39;</span><span class="o">][</span><span class="n">feature,par</span><span class="o">][</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">#series</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">series</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">#series</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">series</span><span class="o">[</span><span class="n">series[&#39;capability&#39;</span><span class="o">]==</span><span class="n">capability</span><span class="err">]</span><span class="o">[</span><span class="n">&#39;uuid&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">)</span><span class="w"></span>
-
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
 
