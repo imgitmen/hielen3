@@ -41,8 +41,8 @@ class ConfigSchema(ActionSchema):
             }
 
     serial = fields.String(required=True, allow_none=False)
-    radar_1 = PolyCoeff(default=[0,1],required=False, allow_none=True)
-    radar_2 = PolyCoeff(default=[0,1], reqired=False, allow_none=True)
+    radar_1 = PolyCoeff(default=[0,1], required=False, allow_none=True)
+    radar_2 = PolyCoeff(default=[0,1], required=False, allow_none=True)
     pluviometer = PolyCoeff(default=[0,0.2], reqired=False, allow_none=True)
 
 

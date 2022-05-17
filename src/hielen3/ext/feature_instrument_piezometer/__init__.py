@@ -9,5 +9,8 @@ __license__ = "MIT"
 __uri__ = ""
 
 
-from hielen3.ext.feature_instrument import *
+#from hielen3.ext.feature_instrument import *
+from .feature import Feature, ConfigSchema
+
+__all__ = ["Feature","ConfigSchema"]
 

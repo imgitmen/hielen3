@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **v3.2.1**
+## **17 Maggio 2022**
+- feature piezometer
+- feature shapearray
+
+
 ## **v3.2.0**
 ### **10 Maggio 2022**
 - ristrutturato in modello di astrazione delle feature

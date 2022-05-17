@@ -147,6 +147,7 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     try:
         schema=featobj.schemata[action]
     except KeyError as e:
+        raise e
         traceback.print_exc()
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Prototype '{featobj.ftype}' actions not implemented."
@@ -224,6 +225,7 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
     try:
         result = featobj.execute(action,**kwargs)
     except AttributeError as e:
+        raise e
         traceback.print_exc()
         out.status = falcon.HTTP_NOT_IMPLEMENTED
         out.message = f"Action '{action}' not implemented."
