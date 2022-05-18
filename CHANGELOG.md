@@ -1,5 +1,12 @@
 CHANGELOG
 =========
+## **v3.2.2**
+## **18 Maggio 2022**
+- introdotto concetto di ordinal dei parmaetri associai alle feature:
+modificato hielen3.Feature, hielen3.ext.feature_instrument_piezometer
+modificato database: aggiunta colonna ordinal alla tabella feature_parameter e modificata la vista v_features_parameter per ordinare i parametri
+
+
 ## **v3.2.1**
 ## **17 Maggio 2022**
 - feature piezometer

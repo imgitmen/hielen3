@@ -88,13 +88,8 @@ def add(left, right):
     return left + right
 
 
-@aligned
 def sub(left, right):
-    try:
-        right = right.fillna(0)
-    except Exception as e:
-        pass
-    return left - right
+    return add(left, -1 * right)
 
 @aligned
 def mult(left, right):
@@ -110,6 +105,29 @@ def filter(b,window=50,center=True,min_periods=1):
     d = abs(b - b.rolling(window=window, center=center, min_periods=min_periods).apply(mean))
     stdv = abs(b.rolling(window=window, center=center, min_periods=min_periods).apply(std))
     return b[d < 3 * stdv]
+
+
+def threshold(S0, limit=0, how='<', action='clean'):
+    """
+    action: ['clean','drop','signal']
+    """
+
+    out=eval(f"S0 {how} {limit}")
+
+    if action == 'signal':
+        return out
+
+    if action == 'drop':
+        S1 = S0[out].copy()
+        return S1
+
+    if action == 'clean':
+        S1=S0.copy()
+        S1[out] = nan
+        return S1
+    
+
+
 
 
 def instant_velocity(S0,time_unit_denom='hours'):

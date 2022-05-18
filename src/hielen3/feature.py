@@ -145,7 +145,7 @@ class HFeature(ABC):
             self.uuid=uuid
             self.parameters=None
 
-        def set(self,param,**setups):
+        def set(self,param,ordinal=None,**setups):
 
             try:
                 if self.parameters is None:
@@ -161,7 +161,7 @@ class HFeature(ABC):
             except Exception as e:
                 pass
 
-            self[param]=HSeries.setup(uuid=ser,**setups)
+            self[param]={"series":HSeries.setup(uuid=ser,**setups), "ordinal":ordinal}
 
         def __len__(self):
 
@@ -184,10 +184,20 @@ class HFeature(ABC):
 
         def __setitem__(self, param, series):
 
+            try:
+                ordinal=series['ordinal']
+            except Exception as e:
+                ordinal=None
+
+            try:
+                series=series['series']
+            except Exception as e:
+                pass
+
             if isinstance(series,HSeries):
                 series=series.uuid
 
-            db['features_parameters'][(self.uuid,param)]=series
+            db['features_parameters'][(self.uuid,param)]={"series":series,"ordinal":ordinal}
             self.__demand__()
 
 

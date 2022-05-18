@@ -20,7 +20,7 @@ class ConfigSchema(ActionSchema):
                 }
             }
 
-    source_series = fields.String(required=True, allow_none=False)
+    source_series = fields.String(required=False, allow_none=False)
     poly = PolyCoeff(default=[0,1], required=False, allow_none=True)
     head_height = fields.Number(default=0.0, required=False, allow_none=True)
     sensor_depth = fields.Number(default=0.0, required=False, allow_none=True)
@@ -45,27 +45,26 @@ class Feature(HFeature):
 
         if source_series is not None and poly is not None:
             self.parameters.set(
-                    'water_head',
+                    'battente',
                     cache='active',
                     mu="m",
                     modules={"calc":"hielen3.tools.calc"}, 
                     operands={"S0":source_series},
-                    operator=f"calc.poly_trans2(S0,{poly})"
+                    operator=f"calc.filter(calc.poly_trans2(S0,{poly}))",
+                    first=timezero,
+                    ordinal=1
                     )
 
-            try:
-                zero=self.parmeters['water_head'].data(slice(timezero,timezero)).squeeze()
-            except Exception as e:
-                zero = 0
-
-            contribute=head_height - sensor_depth - zero
+            contribute=head_height - sensor_depth
+            limit=0
 
             self.parameters.set(
-                    'water_height',
+                    'quota falda',
                     cache='active',
-                    mu="m",
+                    mu="m.s.l.m.",
                     modules={"calc":"hielen3.tools.calc"},
-                    operands={"S0":self.parameters["water_head"]},
-                    operator=f"calc.filter(calc.add(S0,{contribute}))"
+                    operands={"S0":self.parameters["battente"]},
+                    operator=f"calc.add(calc.threshold(S0, limit={limit}, how='>', action='clean'), {contribute})",
+                    ordinal=0
                     )
 

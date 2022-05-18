@@ -65,7 +65,7 @@ class HSeries:
         db['datacache'].pop(key=(self.uuid, times))
 
 
-    def setup(uuid=None,operator=None,modules=None,cache=None,mu=None,datatype=None,operands=None, capability='data'):
+    def setup(uuid=None,operator=None,modules=None,cache=None,mu=None,datatype=None,operands=None, capability='data', first=None):
 
         def _managed_capabilities_(capability):
             return capability in ['data','map','cloud','stream']
@@ -95,6 +95,9 @@ class HSeries:
 
         if capability is not None and _managed_capabilities_(capability):
             setups['capability'] = capability
+
+        if first is not None:
+            setups['first'] = first
         
         db["series"][uuid]=setups
         
@@ -181,6 +184,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
+                raise e
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
