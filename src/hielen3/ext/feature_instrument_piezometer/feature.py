@@ -64,7 +64,7 @@ class Feature(HFeature):
                     mu="m.s.l.m.",
                     modules={"calc":"hielen3.tools.calc"},
                     operands={"S0":self.parameters["battente"]},
-                    operator=f"calc.add(calc.threshold(S0, limit={limit}, how='>', action='clean'), {contribute})",
+                    operator=f"calc.add(calc.threshold(S0, limit={limit}, how='<', action='clean'), {contribute})",
                     ordinal=0
                     )
 
