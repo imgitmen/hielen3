@@ -2168,7 +2168,23 @@
 498
 499
 500
-501</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2378,7 +2394,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">=</span><span class="kc">None</span>
 
-        <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">ordinal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">):</span>
 
             <span class="k">try</span><span class="p">:</span>
 
@@ -2400,7 +2416,7 @@
 
                 <span class="k">pass</span>
 
-            <span class="bp">self</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">=</span><span class="n">HSeries</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">HSeries</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">),</span> <span class="s2">&quot;ordinal&quot;</span><span class="p">:</span><span class="n">ordinal</span><span class="p">}</span>
 
         <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
@@ -2432,11 +2448,27 @@
 
         <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">series</span><span class="p">):</span>
 
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="n">series</span><span class="p">[</span><span class="s1">&#39;ordinal&#39;</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="kc">None</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
+
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">HSeries</span><span class="p">):</span>
 
                 <span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="o">.</span><span class="n">uuid</span>
 
-            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_parameters&#39;</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span><span class="n">param</span><span class="p">)]</span><span class="o">=</span><span class="n">series</span>
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_parameters&#39;</span><span class="p">][(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span><span class="n">param</span><span class="p">)]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">series</span><span class="p">,</span><span class="s2">&quot;ordinal&quot;</span><span class="p">:</span><span class="n">ordinal</span><span class="p">}</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__demand__</span><span class="p">()</span>
 
@@ -2850,7 +2882,7 @@ inheritance.</p>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="k">parameters</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="k">set</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="k">set</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">param</span><span class="p">,</span><span class="n">ordinal</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -2872,7 +2904,7 @@ inheritance.</p>
 
 <span class="w">                </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">self</span><span class="o">[</span><span class="n">param</span><span class="o">]=</span><span class="n">HSeries</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">self</span><span class="o">[</span><span class="n">param</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;series&quot;</span><span class="err">:</span><span class="n">HSeries</span><span class="p">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">),</span><span class="w"> </span><span class="ss">&quot;ordinal&quot;</span><span class="err">:</span><span class="n">ordinal</span><span class="err">}</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">__len__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2904,11 +2936,27 @@ inheritance.</p>
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ordinal</span><span class="o">=</span><span class="n">series</span><span class="o">[</span><span class="n">&#39;ordinal&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">ordinal</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">pass</span><span class="w"></span>
+
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">HSeries</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">.</span><span class="n">uuid</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_parameters&#39;</span><span class="o">][</span><span class="n">(self.uuid,param)</span><span class="o">]=</span><span class="n">series</span><span class="w"></span>
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_parameters&#39;</span><span class="o">][</span><span class="n">(self.uuid,param)</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;series&quot;</span><span class="err">:</span><span class="n">series</span><span class="p">,</span><span class="ss">&quot;ordinal&quot;</span><span class="err">:</span><span class="n">ordinal</span><span class="err">}</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">__demand__</span><span class="p">()</span><span class="w"></span>
 

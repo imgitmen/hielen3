@@ -1944,7 +1944,13 @@
 550
 551
 552
-553</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+553
+554
+555
+556
+557
+558
+559</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2030,7 +2036,7 @@
 
         <span class="n">db</span><span class="p">[</span><span class="s1">&#39;datacache&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span> <span class="n">times</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">def</span> <span class="nf">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">):</span>
 
@@ -2069,6 +2075,10 @@
         <span class="k">if</span> <span class="n">capability</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">):</span>
 
             <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;capability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">capability</span>
+
+        <span class="k">if</span> <span class="n">first</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">first</span>
 
         <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">setups</span>
 
@@ -2187,6 +2197,8 @@
                 <span class="k">if</span> <span class="n">gen</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">()</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">raise</span> <span class="n">e</span>
 
                 <span class="n">gen</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 
@@ -2572,7 +2584,7 @@
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="k">key</span><span class="o">=</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">))</span><span class="w"></span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">first</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2611,6 +2623,10 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;first&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">first</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">setups</span><span class="w"></span>
 
@@ -2729,6 +2745,8 @@
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
@@ -3235,6 +3253,8 @@
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
+
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">self.uuid</span><span class="o">]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
@@ -3377,11 +3397,12 @@
     <span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">operands</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span>
+    <span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+    <span class="n">first</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">modules</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">mu</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">datatype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">operands</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">capability</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">first</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -3420,6 +3441,10 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;first&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">first</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">setups</span><span class="w"></span>
 
