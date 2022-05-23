@@ -678,6 +678,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../query2/" title="Query2" class="md-nav__link">
+      Query2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../queue/" title="Queue" class="md-nav__link">
       Queue
     </a>
@@ -1392,13 +1404,21 @@
 76
 77
 78
-79</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
 <span class="kn">import</span> <span class="nn">hug</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">actionschemata</span><span class="p">,</span> <span class="n">hls</span><span class="p">,</span> <span class="n">queue</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">query2</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">actionschemata</span><span class="p">,</span> <span class="n">hls</span><span class="p">,</span> <span class="n">queue</span>
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
@@ -1471,6 +1491,14 @@
     <span class="sd">&quot;&quot;&quot; Data manager &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">query</span><span class="p">]</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/query2&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
+
+    <span class="sd">&quot;&quot;&quot; Data manager &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">query2</span><span class="p">]</span>
 </code></pre></div>
 </td></tr></table>
 </details>
@@ -1499,13 +1527,13 @@
 </code></pre></div>
 
 <p>Data manager </p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query&quot;</span><span class="p">)</span><span class="w"></span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query2&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot; Data manager &quot;&quot;&quot;</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">query</span><span class="o">]</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">query2</span><span class="o">]</span><span class="w"></span>
 </code></pre></div>
 
 </details>
