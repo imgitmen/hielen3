@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, features, actions, actionschemata, hls, queue
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue
 import falcon
 
 """
@@ -48,5 +48,10 @@ def scheman():
 def dataman():
     """ Data manager """
     return [query]
+
+@hug.extend_api("/query2")
+def dataman():
+    """ Data manager """
+    return [query2]
 
 
