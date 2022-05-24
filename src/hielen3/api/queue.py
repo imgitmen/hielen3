@@ -12,11 +12,11 @@ def retrive(queue,request=None,response=None):
 
     out.data,outcode=hls.get_stream(queue)
 
-    out.data = dataframe2jsonizabledict(out.data)
-
     if outcode == 404:
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"queue not found: {queue}"
+    else:
+        out.data = dataframe2jsonizabledict(out.data)
 
     out.format(request=request,response=response)
 

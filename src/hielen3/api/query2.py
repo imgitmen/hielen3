@@ -40,6 +40,7 @@ def tabular_data(
 ):
 
     series = {}
+    out = ResponseFormatter()
 
     for query in datamap:
 
@@ -49,7 +50,7 @@ def tabular_data(
             ss=db['series'][query.pop('series')]
             ss=list(ss[ss['capability']==capability]['uuid'].values)
         except KeyError as e:
-            out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
+            out.status=falcon.HTTP_NOT_FOUND
             out.message = str(e) + " not found"
             response = out.format(response=response, request=request)
             return
@@ -60,7 +61,7 @@ def tabular_data(
 
             series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
            
-    out = DataFrame()
+    df = DataFrame()
 
     for param, sers in series.items():
 
@@ -79,20 +80,21 @@ def tabular_data(
         except Exception as e:
             ser.name=param
 
-        out = out.join(ser, how="outer")
+        df = df.join(ser, how="outer")
 
-    out.index.name = "timestamp"
+    df.index.name = "timestamp"
 
     requested = data_out_handler.requested(request).content_type
     
     if requested == CSV:
-        return hug.types.text(out.to_csv(sep=';',date_format="%Y-%m-%d %H:%M:%S"))
+        return hug.types.text(df.to_csv(sep=';',date_format="%Y-%m-%d %H:%M:%S"))
     if requested == JSON:
-        out.index=out.index.astype('str')
-        out.columns.names=['S']
-        out = out.replace({nan:None})
-        out = { series:data.to_records().tolist() for series,data in out.groupby('S',axis=1) }
-        return out
+        df.index=df.index.astype('str')
+        df.columns.names=['S']
+        df = df.replace({nan:None})
+        out.data = { series:data.to_records().tolist() for series,data in df.groupby('S',axis=1) }
+        response = out.format(response=response, request=request)
+        return 
 
 
 @hug.get("/{capability}/{feature}/", output=data_out_handler)
