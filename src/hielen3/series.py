@@ -353,7 +353,12 @@ class HSeries:
             #raise e
             pass
 
-        return out.to_frame()
+        try:
+            out = out[out.columns[0]]
+        except Exception as e:
+            pass
+
+        return out
 
 
     class _Generator:
