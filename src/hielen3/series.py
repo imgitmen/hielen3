@@ -353,12 +353,14 @@ class HSeries:
             #raise e
             pass
 
+        """
         try:
             out = out[out.columns[0]]
         except Exception as e:
             pass
+        """
 
-        return out
+        return out.to_frame()
 
 
     class _Generator:
