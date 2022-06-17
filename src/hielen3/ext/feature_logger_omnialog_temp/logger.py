@@ -42,19 +42,19 @@ class Feature(HFeature):
 
         header={
                 1:{ "name": "battery", "mu":"V", "ordinal":1},
-                2:{ "name": "temp", "mu":"\°C", "ordinal": 2},
+                2:{ "name": "temp", "mu":"°C", "ordinal": 2},
                 4:{ "name": "CE01_ch_A", "mu": "mA", "ordinal": 3},
                 5:{ "name": "CE01_ch_B", "mu": "mA", "ordinal": 4},
-                6:{ "name": "CE01_temp", "mu": "\°C", "ordinal": 5},
+                6:{ "name": "CE01_temp", "mu": "°C", "ordinal": 5},
                 7:{ "name": "CE02_ch_A", "mu": "mA", "ordinal": 6},
                 8:{ "name": "CE02_ch_B", "mu": "mA", "ordinal": 7},
-                9:{ "name": "CE02_temp", "mu": "\°C", "ordinal": 8},
+                9:{ "name": "CE02_temp", "mu": "°C", "ordinal": 8},
                 10:{ "name": "CE03_ch_A", "mu": "mA", "ordinal": 9},
                 11:{ "name": "CE03_ch_B", "mu": "mA", "ordinal": 10},
-                12:{ "name": "CE03_temp", "mu": "\°C", "ordinal": 11},
+                12:{ "name": "CE03_temp", "mu": "°C", "ordinal": 11},
                 13:{ "name": "CE04_ch_A", "mu": "mA", "ordinal": 12},
                 14:{ "name": "CE04_ch_B", "mu": "mA", "ordinal": 13},
-                15:{ "name": "CE04_temp", "mu": "\°C", "ordinal": 14}
+                15:{ "name": "CE04_temp", "mu": "°C", "ordinal": 14}
             }
 
 

@@ -30,7 +30,7 @@ class ConfigSchema(ActionSchema):
                 3:["C_timezero", "time of the zero reading", False, None ]
                 },
             "Channel Temp": {
-                0:["T_param name", "Label of the axis. i.e.: 'X'", False, None],
+                0:["T_param_name", "Label of the axis. i.e.: 'X'", False, None],
                 1:["T_source_series", "Reference raw series", False, None],
                 2:["T_coefficents", "polinomial coefficients array", False, None],
                 3:["T_timezero", "time of the zero reading", False, None ]
