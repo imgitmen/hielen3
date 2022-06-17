@@ -38,23 +38,23 @@ class ConfigSchema(ActionSchema):
 
             }
 
-    A_param_name = fields.String(required=False, allow_none=False)
-    A_source_series = fields.String(required=False, allow_none=False)
+    A_param_name = fields.String(required=False, allow_none=True)
+    A_source_series = fields.String(required=False, allow_none=True)
     A_poly = PolyCoeff(default=[0,1], required=False, allow_none=True)
     A_timezero =  StringTime(required=False, allow_none=True)
 
-    B_param_name = fields.String(required=False, allow_none=False)
-    B_source_series = fields.String(required=False, allow_none=False)
+    B_param_name = fields.String(required=False, allow_none=True)
+    B_source_series = fields.String(required=False, allow_none=True)
     B_poly = PolyCoeff(default=[0,1], required=False, allow_none=True)
     B_timezero =  StringTime(required=False, allow_none=True)
 
-    C_param_name = fields.String(required=False, allow_none=False)
-    C_source_series = fields.String(required=False, allow_none=False)
+    C_param_name = fields.String(required=False, allow_none=True)
+    C_source_series = fields.String(required=False, allow_none=True)
     C_poly = PolyCoeff(default=[0,1], required=False, allow_none=True)
     C_timezero =  StringTime(required=False, allow_none=True)
 
-    T_param_name = fields.String(required=False, allow_none=False)
-    T_source_series = fields.String(required=False, allow_none=False)
+    T_param_name = fields.String(required=False, allow_none=True)
+    T_source_series = fields.String(required=False, allow_none=True)
     T_poly = PolyCoeff(default=[0,1], required=False, allow_none=True)
     T_timezero =  StringTime(required=False, allow_none=True)
 
