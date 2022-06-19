@@ -41,7 +41,7 @@ def poly_trans2(S0, *args):
     return __res__
 
 
-def slope(S0, unit, radius):
+def slope(S0, unit="°", radius=1):
 
     if unit == "°":
         S0 = radians(S0)

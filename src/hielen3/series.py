@@ -184,7 +184,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                raise e
+                #raise e
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
