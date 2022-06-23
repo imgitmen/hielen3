@@ -37,6 +37,8 @@ class ConfigSchema(ActionSchema):
                 0:["radar_1", "Radar 1 polynomial coefficients", False, None],
                 1:["radar_2", "Radar 2 polynomial coefficients", False, None],
                 2:["pluviometer", "Pluviometer polynomial coefficients", False, None],
+                3:["h_radar_1", "Quote over sea level radar 1", False, None],
+                4:["h_radar_2", "Quote over sea level radar 2", False, None]
                 }
             }
 
@@ -44,6 +46,8 @@ class ConfigSchema(ActionSchema):
     radar_1 = PolyCoeff(default=[0,1], required=False, allow_none=True)
     radar_2 = PolyCoeff(default=[0,1], required=False, allow_none=True)
     pluviometer = PolyCoeff(default=[0,0.2], reqired=False, allow_none=True)
+    h_radar_1 = fields.Number(required=True, allow_none=True)
+    h_radar_2 = fields.Number(required=True, allow_none=True)
 
 
 
@@ -55,7 +59,7 @@ class Feature(HFeature):
     def setup(self,**kwargs):
         pass
     
-    def config(self, serial, radar_1=None, radar_2=None, pluviometer=None, **kwargs):
+    def config(self, serial, radar_1=None, radar_2=None, pluviometer=None, h_radar_1=None, h_radar_2=None, **kwargs):
 
         """
         Timestamp,
@@ -70,14 +74,22 @@ class Feature(HFeature):
 
         source=str(self.__module__)
 
+        try:
+            timestamp = kwargs["timestamp"]
+        except KeyError as e:
+            timestamp = None
+
         if not self.parameters.__len__():
             if radar_1 is None: radar_1=""
             if radar_2 is None: radar_2=""
+            if h_radar_1 is None: h_radar_1=0
+            if h_radar_2 is None: h_radar_2=0
 
 
         self.parameters.set(
                 "camera",
                 cache='inactive',
+                ordinal=100,
                 modules={"hls": "hielen3.tools.hls_facility"},
                 operator=f"hls.start_stream(resource={serial!r})",
                 capability="stream")
@@ -86,6 +98,8 @@ class Feature(HFeature):
                 "temperature",
                 cache='active',
                 mu='°C',
+                ordinal=4,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=2)")
 
@@ -93,6 +107,8 @@ class Feature(HFeature):
                 "humidity",
                 cache='active',
                 mu='%%',
+                ordinal=5,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=3)")
 
@@ -100,6 +116,8 @@ class Feature(HFeature):
                 "battery",
                 cache='active',
                 mu='V',
+                ordinal=3,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=4)")
 
@@ -107,6 +125,8 @@ class Feature(HFeature):
                 "radar 1",
                 cache='active',
                 mu='mA',
+                ordinal=6,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=5)")
 
@@ -114,6 +134,8 @@ class Feature(HFeature):
                 "radar 2",
                 cache='active',
                 mu='mA',
+                ordinal=7,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=6)")
       
@@ -121,6 +143,8 @@ class Feature(HFeature):
                 "pluviometer",
                 cache='active',
                 mu='count',
+                ordinal=5,
+                first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=7)")
 
@@ -129,6 +153,8 @@ class Feature(HFeature):
                     'rain',
                     cache='active',
                     mu='mm/h',
+                    ordinal=2,
+                    first=timestamp,
                     modules={"calc":"hielen3.tools.calc"}, 
                     operands={"S0":self.parameters["pluviometer"].uuid},
                     operator=f"calc.instant_velocity(calc.poly_trans2(S0,{pluviometer}))")
@@ -137,19 +163,23 @@ class Feature(HFeature):
             self.parameters.set(
                     'level 1',
                     cache='active',
-                    mu="m",
+                    mu="m.s.l.m.",
+                    ordinal=0,
+                    first=timestamp,
                     modules={"calc":"hielen3.tools.calc"}, 
                     operands={"S0":self.parameters["radar 1"].uuid},
-                    operator=f"calc.poly_trans2(S0,{radar_1})")
+                    operator=f"{h_radar_2} - calc.poly_trans2(S0,{radar_1})")
 
         if radar_2 is not None:
             self.parameters.set(
                     'level 2',
                     cache='active',
-                    mu="m",
+                    mu="m.s.l.m",
+                    ordinal=1,
+                    first=timestamp,
                     modules={"calc":"hielen3.tools.calc"}, 
                     operands={"S0":self.parameters["radar 2"].uuid},
-                    operator=f"calc.poly_trans2(S0,{radar_2})")
+                    operator=f"{h_radar_2} - calc.poly_trans2(S0,{radar_2})")
 
 
 
