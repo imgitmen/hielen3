@@ -2134,6 +2134,10 @@
 
                 <span class="mi">2</span>:[<span class="s">&quot;pluviometer&quot;</span>, <span class="s">&quot;Pluviometer polynomial coefficients&quot;</span>, <span class="nb">False</span>, <span class="n">None</span>],
 
+                <span class="mi">3</span>:[<span class="s">&quot;h_radar_1&quot;</span>, <span class="s">&quot;Quote over sea level radar 1&quot;</span>, <span class="nb">False</span>, <span class="n">None</span>],
+
+                <span class="mi">4</span>:[<span class="s">&quot;h_radar_2&quot;</span>, <span class="s">&quot;Quote over sea level radar 2&quot;</span>, <span class="nb">False</span>, <span class="n">None</span>]
+
                 }
 
             }
@@ -2145,6 +2149,10 @@
     <span class="n">radar_2</span> = <span class="n">PolyCoeff</span>(<span class="k">default</span>=[<span class="mi">0</span>,<span class="mi">1</span>], <span class="k">required</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
 
     <span class="n">pluviometer</span> = <span class="n">PolyCoeff</span>(<span class="k">default</span>=[<span class="mi">0</span>,<span class="mf">0.2</span>], <span class="n">reqired</span>=<span class="nb">False</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
+
+    <span class="n">h_radar_1</span> = <span class="n">fields</span>.<span class="n">Number</span>(<span class="k">required</span>=<span class="nb">True</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
+
+    <span class="n">h_radar_2</span> = <span class="n">fields</span>.<span class="n">Number</span>(<span class="k">required</span>=<span class="nb">True</span>, <span class="n">allow_none</span>=<span class="nb">True</span>)
 </code></pre></div>
 
 </details>
@@ -2167,6 +2175,12 @@
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">error_messages</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">h_radar_1</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">h_radar_2</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="n">opts</span>
@@ -2781,7 +2795,7 @@ validation errors.</p>
 
         <span class="nb">pass</span>
 
-    <span class="n">def</span> <span class="nb">config</span>(<span class="nb">self</span>, <span class="n">serial</span>, <span class="n">radar_1</span>=<span class="n">None</span>, <span class="n">radar_2</span>=<span class="n">None</span>, <span class="n">pluviometer</span>=<span class="n">None</span>, **<span class="n">kwargs</span>):
+    <span class="n">def</span> <span class="nb">config</span>(<span class="nb">self</span>, <span class="n">serial</span>, <span class="n">radar_1</span>=<span class="n">None</span>, <span class="n">radar_2</span>=<span class="n">None</span>, <span class="n">pluviometer</span>=<span class="n">None</span>, <span class="n">h_radar_1</span>=<span class="n">None</span>, <span class="n">h_radar_2</span>=<span class="n">None</span>, **<span class="n">kwargs</span>):
 
         <span class="s">&quot;&quot;&quot;</span>
 
@@ -2805,17 +2819,31 @@ validation errors.</p>
 
         <span class="nb">source</span>=<span class="n">str</span>(<span class="nb">self</span>.<span class="n">__module__</span>)
 
+        <span class="n">try:</span>
+
+            <span class="n">timestamp</span> = <span class="n">kwargs</span>[<span class="s">&quot;timestamp&quot;</span>]
+
+        <span class="n">except</span> <span class="n">KeyError</span> <span class="n">as</span> <span class="n">e:</span>
+
+            <span class="n">timestamp</span> = <span class="n">None</span>
+
         <span class="k">if</span> <span class="nb">not</span> <span class="nb">self</span>.<span class="n">parameters</span>.<span class="n">__len__</span>():
 
             <span class="k">if</span> <span class="n">radar_1</span> <span class="k">is</span> <span class="n">None:</span> <span class="n">radar_1</span>=<span class="s">&quot;&quot;</span>
 
             <span class="k">if</span> <span class="n">radar_2</span> <span class="k">is</span> <span class="n">None:</span> <span class="n">radar_2</span>=<span class="s">&quot;&quot;</span>
 
+            <span class="k">if</span> <span class="n">h_radar_1</span> <span class="k">is</span> <span class="n">None:</span> <span class="n">h_radar_1</span>=<span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">h_radar_2</span> <span class="k">is</span> <span class="n">None:</span> <span class="n">h_radar_2</span>=<span class="mi">0</span>
+
         <span class="nb">self</span>.<span class="n">parameters</span>.<span class="n">set</span>(
 
                 <span class="s">&quot;camera&quot;</span>,
 
                 <span class="nb">cache</span>=<span class="s">&#39;inactive&#39;</span>,
+
+                <span class="n">ordinal</span>=<span class="mi">100</span>,
 
                 <span class="n">modules</span>={<span class="s">&quot;hls&quot;</span>: <span class="s">&quot;hielen3.tools.hls_facility&quot;</span>},
 
@@ -2831,6 +2859,10 @@ validation errors.</p>
 
                 <span class="n">mu</span>=<span class="s">&#39;°C&#39;</span>,
 
+                <span class="n">ordinal</span>=<span class="mi">4</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
+
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
                 <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;source.retrive(serials={serial!r},times=times,columns=2)&quot;</span>)
@@ -2842,6 +2874,10 @@ validation errors.</p>
                 <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
 
                 <span class="n">mu</span>=<span class="s">&#39;%%&#39;</span>,
+
+                <span class="n">ordinal</span>=<span class="mi">5</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
 
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
@@ -2855,6 +2891,10 @@ validation errors.</p>
 
                 <span class="n">mu</span>=<span class="s">&#39;V&#39;</span>,
 
+                <span class="n">ordinal</span>=<span class="mi">3</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
+
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
                 <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;source.retrive(serials={serial!r},times=times,columns=4)&quot;</span>)
@@ -2866,6 +2906,10 @@ validation errors.</p>
                 <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
 
                 <span class="n">mu</span>=<span class="s">&#39;mA&#39;</span>,
+
+                <span class="n">ordinal</span>=<span class="mi">6</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
 
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
@@ -2879,6 +2923,10 @@ validation errors.</p>
 
                 <span class="n">mu</span>=<span class="s">&#39;mA&#39;</span>,
 
+                <span class="n">ordinal</span>=<span class="mi">7</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
+
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
                 <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;source.retrive(serials={serial!r},times=times,columns=6)&quot;</span>)
@@ -2890,6 +2938,10 @@ validation errors.</p>
                 <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
 
                 <span class="n">mu</span>=<span class="s">&#39;count&#39;</span>,
+
+                <span class="n">ordinal</span>=<span class="mi">5</span>,
+
+                <span class="nb">first</span>=<span class="n">timestamp</span>,
 
                 <span class="n">modules</span>={<span class="s">&quot;source&quot;</span>:<span class="n">source</span>},
 
@@ -2905,6 +2957,10 @@ validation errors.</p>
 
                     <span class="n">mu</span>=<span class="s">&#39;mm/h&#39;</span>,
 
+                    <span class="n">ordinal</span>=<span class="mi">2</span>,
+
+                    <span class="nb">first</span>=<span class="n">timestamp</span>,
+
                     <span class="n">modules</span>={<span class="s">&quot;calc&quot;</span>:<span class="s">&quot;hielen3.tools.calc&quot;</span>},
 
                     <span class="n">operands</span>={<span class="s">&quot;S0&quot;</span>:<span class="n">self</span>.<span class="n">parameters</span>[<span class="s">&quot;pluviometer&quot;</span>].<span class="n">uuid</span>},
@@ -2919,13 +2975,17 @@ validation errors.</p>
 
                     <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
 
-                    <span class="n">mu</span>=<span class="s">&quot;m&quot;</span>,
+                    <span class="n">mu</span>=<span class="s">&quot;m.s.l.m.&quot;</span>,
+
+                    <span class="n">ordinal</span>=<span class="mi">0</span>,
+
+                    <span class="nb">first</span>=<span class="n">timestamp</span>,
 
                     <span class="n">modules</span>={<span class="s">&quot;calc&quot;</span>:<span class="s">&quot;hielen3.tools.calc&quot;</span>},
 
                     <span class="n">operands</span>={<span class="s">&quot;S0&quot;</span>:<span class="n">self</span>.<span class="n">parameters</span>[<span class="s">&quot;radar 1&quot;</span>].<span class="n">uuid</span>},
 
-                    <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;calc.poly_trans2(S0,{radar_1})&quot;</span>)
+                    <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;{h_radar_2} - calc.poly_trans2(S0,{radar_1})&quot;</span>)
 
         <span class="k">if</span> <span class="n">radar_2</span> <span class="k">is</span> <span class="nb">not</span> <span class="n">None:</span>
 
@@ -2935,13 +2995,17 @@ validation errors.</p>
 
                     <span class="nb">cache</span>=<span class="s">&#39;active&#39;</span>,
 
-                    <span class="n">mu</span>=<span class="s">&quot;m&quot;</span>,
+                    <span class="n">mu</span>=<span class="s">&quot;m.s.l.m&quot;</span>,
+
+                    <span class="n">ordinal</span>=<span class="mi">1</span>,
+
+                    <span class="nb">first</span>=<span class="n">timestamp</span>,
 
                     <span class="n">modules</span>={<span class="s">&quot;calc&quot;</span>:<span class="s">&quot;hielen3.tools.calc&quot;</span>},
 
                     <span class="n">operands</span>={<span class="s">&quot;S0&quot;</span>:<span class="n">self</span>.<span class="n">parameters</span>[<span class="s">&quot;radar 2&quot;</span>].<span class="n">uuid</span>},
 
-                    <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;calc.poly_trans2(S0,{radar_2})&quot;</span>)
+                    <span class="n">operator</span>=<span class="nb">f</span><span class="s">&quot;{h_radar_2} - calc.poly_trans2(S0,{radar_2})&quot;</span>)
 </code></pre></div>
 
 </details>
@@ -3018,6 +3082,8 @@ validation errors.</p>
     <span class="n">radar_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">radar_2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">pluviometer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">h_radar_1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">h_radar_2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3030,7 +3096,7 @@ validation errors.</p>
 4:lev1_m,
 5:lev2_m,
 6:pio1</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">config</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nb">serial</span><span class="p">,</span> <span class="n">radar_1</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">radar_2</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">pluviometer</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">config</span><span class="p">(</span><span class="k">self</span><span class="p">,</span> <span class="nb">serial</span><span class="p">,</span> <span class="n">radar_1</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">radar_2</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">pluviometer</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">h_radar_1</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="n">h_radar_2</span><span class="o">=</span><span class="k">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="ss">&quot;&quot;&quot;</span>
 
@@ -3054,17 +3120,31 @@ validation errors.</p>
 
         <span class="k">source</span><span class="o">=</span><span class="n">str</span><span class="p">(</span><span class="k">self</span><span class="p">.</span><span class="n">__module__</span><span class="p">)</span>
 
+        <span class="n">try</span><span class="p">:</span>
+
+            <span class="k">timestamp</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="ss">&quot;timestamp&quot;</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="n">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">timestamp</span> <span class="o">=</span> <span class="k">None</span>
+
         <span class="k">if</span> <span class="k">not</span> <span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">.</span><span class="n">__len__</span><span class="p">():</span>
 
             <span class="k">if</span> <span class="n">radar_1</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">radar_1</span><span class="o">=</span><span class="ss">&quot;&quot;</span>
 
             <span class="k">if</span> <span class="n">radar_2</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">radar_2</span><span class="o">=</span><span class="ss">&quot;&quot;</span>
 
+            <span class="k">if</span> <span class="n">h_radar_1</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">h_radar_1</span><span class="o">=</span><span class="mi">0</span>
+
+            <span class="k">if</span> <span class="n">h_radar_2</span> <span class="k">is</span> <span class="k">None</span><span class="p">:</span> <span class="n">h_radar_2</span><span class="o">=</span><span class="mi">0</span>
+
         <span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">.</span><span class="k">set</span><span class="p">(</span>
 
                 <span class="ss">&quot;camera&quot;</span><span class="p">,</span>
 
                 <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;inactive&#39;</span><span class="p">,</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;hls&quot;</span><span class="p">:</span> <span class="ss">&quot;hielen3.tools.hls_facility&quot;</span><span class="err">}</span><span class="p">,</span>
 
@@ -3080,6 +3160,10 @@ validation errors.</p>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;°C&#39;</span><span class="p">,</span>
 
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
+
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
                 <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;source.retrive(serials={serial!r},times=times,columns=2)&quot;</span><span class="p">)</span>
@@ -3091,6 +3175,10 @@ validation errors.</p>
                 <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;%%&#39;</span><span class="p">,</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
 
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
@@ -3104,6 +3192,10 @@ validation errors.</p>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
 
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
+
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
                 <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;source.retrive(serials={serial!r},times=times,columns=4)&quot;</span><span class="p">)</span>
@@ -3115,6 +3207,10 @@ validation errors.</p>
                 <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;mA&#39;</span><span class="p">,</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
 
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
@@ -3128,6 +3224,10 @@ validation errors.</p>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;mA&#39;</span><span class="p">,</span>
 
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
+
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
                 <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;source.retrive(serials={serial!r},times=times,columns=6)&quot;</span><span class="p">)</span>
@@ -3139,6 +3239,10 @@ validation errors.</p>
                 <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span>
 
                 <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;count&#39;</span><span class="p">,</span>
+
+                <span class="n">ordinal</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+
+                <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
 
                 <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;source&quot;</span><span class="p">:</span><span class="k">source</span><span class="err">}</span><span class="p">,</span>
 
@@ -3154,6 +3258,10 @@ validation errors.</p>
 
                     <span class="n">mu</span><span class="o">=</span><span class="s1">&#39;mm/h&#39;</span><span class="p">,</span>
 
+                    <span class="n">ordinal</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+
+                    <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
+
                     <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;calc&quot;</span><span class="p">:</span><span class="ss">&quot;hielen3.tools.calc&quot;</span><span class="err">}</span><span class="p">,</span>
 
                     <span class="n">operands</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;S0&quot;</span><span class="p">:</span><span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">[</span><span class="ss">&quot;pluviometer&quot;</span><span class="p">].</span><span class="n">uuid</span><span class="err">}</span><span class="p">,</span>
@@ -3168,13 +3276,17 @@ validation errors.</p>
 
                     <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span>
 
-                    <span class="n">mu</span><span class="o">=</span><span class="ss">&quot;m&quot;</span><span class="p">,</span>
+                    <span class="n">mu</span><span class="o">=</span><span class="ss">&quot;m.s.l.m.&quot;</span><span class="p">,</span>
+
+                    <span class="n">ordinal</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+                    <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
 
                     <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;calc&quot;</span><span class="p">:</span><span class="ss">&quot;hielen3.tools.calc&quot;</span><span class="err">}</span><span class="p">,</span>
 
                     <span class="n">operands</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;S0&quot;</span><span class="p">:</span><span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">[</span><span class="ss">&quot;radar 1&quot;</span><span class="p">].</span><span class="n">uuid</span><span class="err">}</span><span class="p">,</span>
 
-                    <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;calc.poly_trans2(S0,{radar_1})&quot;</span><span class="p">)</span>
+                    <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{h_radar_2} - calc.poly_trans2(S0,{radar_1})&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">radar_2</span> <span class="k">is</span> <span class="k">not</span> <span class="k">None</span><span class="p">:</span>
 
@@ -3184,13 +3296,17 @@ validation errors.</p>
 
                     <span class="k">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">,</span>
 
-                    <span class="n">mu</span><span class="o">=</span><span class="ss">&quot;m&quot;</span><span class="p">,</span>
+                    <span class="n">mu</span><span class="o">=</span><span class="ss">&quot;m.s.l.m&quot;</span><span class="p">,</span>
+
+                    <span class="n">ordinal</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+
+                    <span class="k">first</span><span class="o">=</span><span class="k">timestamp</span><span class="p">,</span>
 
                     <span class="n">modules</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;calc&quot;</span><span class="p">:</span><span class="ss">&quot;hielen3.tools.calc&quot;</span><span class="err">}</span><span class="p">,</span>
 
                     <span class="n">operands</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;S0&quot;</span><span class="p">:</span><span class="k">self</span><span class="p">.</span><span class="k">parameters</span><span class="p">[</span><span class="ss">&quot;radar 2&quot;</span><span class="p">].</span><span class="n">uuid</span><span class="err">}</span><span class="p">,</span>
 
-                    <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;calc.poly_trans2(S0,{radar_2})&quot;</span><span class="p">)</span>
+                    <span class="k">operator</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;{h_radar_2} - calc.poly_trans2(S0,{radar_2})&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
