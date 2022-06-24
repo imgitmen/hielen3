@@ -101,10 +101,10 @@ def mult(left, right):
     return left * right
 
 
-def filter(b,window=50,center=True,min_periods=1):
+def filter(b,sigma=3,window=50,center=True,min_periods=1):
     d = abs(b - b.rolling(window=window, center=center, min_periods=min_periods).apply(mean))
     stdv = abs(b.rolling(window=window, center=center, min_periods=min_periods).apply(std))
-    return b[d < 3 * stdv]
+    return b[d < sigma * stdv]
 
 
 def threshold(S0, limit=0, how='<', action='clean'):

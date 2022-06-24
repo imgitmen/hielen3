@@ -115,7 +115,7 @@ class Feature(HFeature):
                     mu="Δ mm/m",
                     modules={"calc":"hielen3.tools.calc"},
                     operands={"S0":source_series, "T0":temp_series},
-                    operator=f"calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction})",
+                    operator=f"calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction}, 2, 20)",
                     first=start_time
                     )
 
