@@ -2042,7 +2042,7 @@
 
                     <span class="n">operands</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;S0&quot;</span><span class="p">:</span><span class="n">source_series</span><span class="p">,</span> <span class="s2">&quot;T0&quot;</span><span class="p">:</span><span class="n">temp_series</span><span class="p">},</span>
 
-                    <span class="n">operator</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction})&quot;</span><span class="p">,</span>
+                    <span class="n">operator</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction}, 2, 20)&quot;</span><span class="p">,</span>
 
                     <span class="n">first</span><span class="o">=</span><span class="n">start_time</span>
 
@@ -3039,7 +3039,7 @@ validation errors.</p>
 
 <span class="s1">                    operands={&quot;S0&quot;:source_series, &quot;T0&quot;:temp_series},</span>
 
-<span class="s1">                    operator=f&quot;calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction})&quot;,</span>
+<span class="s1">                    operator=f&quot;calc.filter(calc.poly_trans2(S0,{coefficients})*1000 + T0 * {termal_correction}, 2, 20)&quot;,</span>
 
 <span class="s1">                    first=start_time</span>
 

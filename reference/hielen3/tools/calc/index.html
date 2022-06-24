@@ -1802,13 +1802,13 @@
 
     <span class="k">return</span> <span class="n">left</span> <span class="o">*</span> <span class="n">right</span>
 
-<span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="n">min_periods</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
 
     <span class="n">stdv</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="n">min_periods</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">std</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">d</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">stdv</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">d</span> <span class="o">&lt;</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">stdv</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;clean&#39;</span><span class="p">):</span>
 
@@ -1919,19 +1919,20 @@
 <h3 id="filter">filter</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">filter</span><span class="p">(</span>
     <span class="n">b</span><span class="p">,</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
     <span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
     <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span>
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">center</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span> <span class="n">filter</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">center</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="n">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="k">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="n">min_periods</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
 
     <span class="n">stdv</span> <span class="o">=</span> <span class="k">abs</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="n">min_periods</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">std</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">d</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">stdv</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">d</span> <span class="o">&lt;</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">stdv</span><span class="p">]</span>
 </code></pre></div>
 
 </details>
