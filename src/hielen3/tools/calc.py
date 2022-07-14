@@ -101,7 +101,7 @@ def mult(left, right):
     return left * right
 
 
-def filter(b,sigma=3,window=50,center=True,min_periods=1):
+def filter(b,sigma=3,window=50,center=False,min_periods=1):
     d = abs(b - b.rolling(window=window, center=center, min_periods=min_periods).apply(mean))
     stdv = abs(b.rolling(window=window, center=center, min_periods=min_periods).apply(std))
     return b[d < sigma * stdv]

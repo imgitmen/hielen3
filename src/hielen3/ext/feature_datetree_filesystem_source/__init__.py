@@ -98,7 +98,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     folders=func_loggers().set_index('name')
 
-    df=DataFrame()
+    df=DataFrame(dtype='object')
 
     if isinstance(serials, (list,set,tuple)):
         serials=list(folders.index[
@@ -140,7 +140,14 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
 
     for serial,paths in sertime.groupby('serial'):
+
+        print (paths)
+
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)
+
+        print ("eccoci")
+
+
         u['serial']=serial
         u=u.set_index(['serial','times'])
         df=concat([df,u])
@@ -152,6 +159,8 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
         columns=[columns]
 
     columns=list(columns)
+
+    columns=[ c for c in columns if c in df.columns ]
 
     df=df[columns].sort_index().loc[(serials, times), :]
 
