@@ -852,11 +852,73 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-7" type="checkbox" id="nav-5-1-11-7">
     
     <label class="md-nav__link" for="nav-5-1-11-7">
+      Feature Logger Boviar
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Feature Logger Boviar" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-1-11-7">
+        <span class="md-nav__icon md-icon"></span>
+        Feature Logger Boviar
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../feature_logger_boviar/helper/" title="Helper" class="md-nav__link">
+      Helper
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../feature_logger_boviar/" title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../feature_logger_boviar/logger/" title="Logger" class="md-nav__link">
+      Logger
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-8" type="checkbox" id="nav-5-1-11-8">
+    
+    <label class="md-nav__link" for="nav-5-1-11-8">
       Feature Logger Gestecno
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-7">
+      <label class="md-nav__title" for="nav-5-1-11-8">
         <span class="md-nav__icon md-icon"></span>
         Feature Logger Gestecno
       </label>
@@ -911,14 +973,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-8" type="checkbox" id="nav-5-1-11-8">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-9" type="checkbox" id="nav-5-1-11-9">
     
-    <label class="md-nav__link" for="nav-5-1-11-8">
+    <label class="md-nav__link" for="nav-5-1-11-9">
       Feature Logger Omnialog Temp
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Logger Omnialog Temp" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-8">
+      <label class="md-nav__title" for="nav-5-1-11-9">
         <span class="md-nav__icon md-icon"></span>
         Feature Logger Omnialog Temp
       </label>
@@ -973,14 +1035,14 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-9" type="checkbox" id="nav-5-1-11-9">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-10" type="checkbox" id="nav-5-1-11-10">
     
-    <label class="md-nav__link" for="nav-5-1-11-9">
+    <label class="md-nav__link" for="nav-5-1-11-10">
       Feature Rfilogger
       <span class="md-nav__icon md-icon"></span>
     </label>
     <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-9">
+      <label class="md-nav__title" for="nav-5-1-11-10">
         <span class="md-nav__icon md-icon"></span>
         Feature Rfilogger
       </label>
@@ -1506,7 +1568,7 @@
 
     <span class="n">folders</span><span class="o">=</span><span class="n">func_loggers</span><span class="p">()</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
 
-    <span class="n">df</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">df</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">serials</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">)):</span>
 
@@ -1564,7 +1626,11 @@
 
     <span class="k">for</span> <span class="n">serial</span><span class="p">,</span><span class="n">paths</span> <span class="ow">in</span> <span class="n">sertime</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">):</span>
 
+        <span class="k">print</span> <span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+
         <span class="n">u</span><span class="o">=</span><span class="n">concat</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">glob</span><span class="p">)</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func_extract</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="k">print</span> <span class="p">(</span><span class="s2">&quot;eccoci&quot;</span><span class="p">)</span>
 
         <span class="n">u</span><span class="p">[</span><span class="s1">&#39;serial&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">serial</span>
 
@@ -1581,6 +1647,8 @@
         <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span>
 
     <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
 
     <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">serials</span><span class="p">,</span> <span class="n">times</span><span class="p">),</span> <span class="p">:]</span>
 
