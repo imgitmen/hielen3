@@ -1,5 +1,16 @@
 CHANGELOG
 =========
+
+## **v3.2.5**
+- definito srumento generico con configurazione multipli canali
+
+
+## **v3.2.4**
+## **5 Giugno 2020**
+- inserito management soglie (sigolo valore) multiple e range apertura grafici
+
+
+
 ## **v3.2.3**
 ## **24 Maggio 2022**
 - rivisto l'output di query con uscita json secondo le specifiche di dygraph per il frontend:

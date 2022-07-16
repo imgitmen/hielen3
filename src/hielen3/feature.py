@@ -8,6 +8,8 @@ from hielen3.series import HSeries
 from marshmallow import fields 
 from numpy import datetime64, isnat
 from pandas import DataFrame
+from MySQLdb._exceptions import ProgrammingError
+
 
 import traceback
 
@@ -85,8 +87,20 @@ class HFeature(ABC):
     def update(uuid,**kwargs):
         return HFeature.__featureFactory__(uuid=uuid, **kwargs)
 
+    def retrive_label(label):
+
+        feats=db['features'][:]
+
+        uuid=feats[feats['label']==label]['uuid'].squeeze()
+
+        if isinstance(uuid,str):
+            return HFeature.__featureFactory__(uuid=uuid)
+        else:
+            raise KeyError(f'Single instance of {label!r} not found.')
+
     def drop(uuid):
         HFeature.retrive(uuid).delete()
+
     
     def __featureFactory__(uuid=None,ftype=None,**kwargs):
         

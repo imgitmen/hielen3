@@ -65,7 +65,20 @@ class HSeries:
         db['datacache'].pop(key=(self.uuid, times))
 
 
-    def setup(uuid=None,operator=None,modules=None,cache=None,mu=None,datatype=None,operands=None, capability='data', first=None):
+    def setup(
+            uuid=None,
+            operator=None,
+            modules=None,
+            cache=None,
+            mu=None,
+            datatype=None,
+            operands=None,
+            capability='data',
+            first=None,
+            valid_range=None,
+            view_range=None,
+            thresholds=None,
+            ):
 
         def _managed_capabilities_(capability):
             return capability in ['data','map','cloud','stream']
@@ -98,7 +111,29 @@ class HSeries:
 
         if first is not None:
             setups['first'] = first
+
+        if valid_range is not None:
+            try:
+                setups['valid_range_min']=valid_range[0]
+            except Exception as e:
+                pass
         
+            try:
+                setups['valid_range_max']=valid_range[1]
+            except Exception as e:
+                pass
+
+        if valid_range is not None:
+            try:
+                setups['view_range_min']=valid_range[0]
+            except Exception as e:
+                pass
+        
+            try:
+                setups['view_range_max']=valid_range[1]
+            except Exception as e:
+                pass
+
         db["series"][uuid]=setups
         
         #TODO fare il check di coerenza tra operandi e operatore
@@ -119,6 +154,12 @@ class HSeries:
                         w['operand']=w['operand'].uuid
 
                 db["series_operands"][(uuid,k)]=w
+
+        #TODO GESTIRE LE THRESHOLDS: togliere id e mettere primary key (series,label,ttype)
+        # 
+        # if thresholds is not None and isinstance(thresholds, list):
+        #    for t in thresholds:
+        #    db["thresholds"][uuid]=t
 
         return HSeries(uuid)
 

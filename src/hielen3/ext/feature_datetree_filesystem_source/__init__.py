@@ -140,14 +140,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
 
     for serial,paths in sertime.groupby('serial'):
-
-        print (paths)
-
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)
-
-        print ("eccoci")
-
-
         u['serial']=serial
         u=u.set_index(['serial','times'])
         df=concat([df,u])
