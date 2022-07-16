@@ -125,12 +125,12 @@ class HSeries:
 
         if view_range is not None:
             try:
-                setups['view_range_min']=valid_range[0]
+                setups['view_range_min']=view_range[0]
             except Exception as e:
                 pass
         
             try:
-                setups['view_range_max']=valid_range[1]
+                setups['view_range_max']=view_range[1]
             except Exception as e:
                 pass
 
