@@ -69,7 +69,7 @@ class Feature(HFeature):
         if source_label is not None and source_parameter is not None:
             try:
                 source_series = HFeature.retrive_label(source_label).parameters[source_parameter]
-            except exception as e:
+            except Exception as e:
                 print (e)
                 pass
 
@@ -111,7 +111,11 @@ class Feature(HFeature):
             if zero_time is not None:
                 df=self.parameters[param_name].data()
                 iloc_idx = df.index.get_indexer([zero_time], method='nearest')
-                ZERO = df.iloc[iloc_idx].squeeze()
+                try:
+                    ZERO = df.iloc[iloc_idx].squeeze()
+                except Exception as e:
+                    ZERO=0
+
                 config["operator"] += f" - {ZERO}"
                 self.parameters.set(**config)
 

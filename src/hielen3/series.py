@@ -123,7 +123,7 @@ class HSeries:
             except Exception as e:
                 pass
 
-        if valid_range is not None:
+        if view_range is not None:
             try:
                 setups['view_range_min']=valid_range[0]
             except Exception as e:
