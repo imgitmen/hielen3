@@ -3,22 +3,19 @@
 import hug
 import falcon
 import json
-import tempfile
-from pathlib import Path
 from marshmallow import Schema, fields
 from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen3 import db
 from hielen3.series import HSeries
-from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter, uuid
+from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter
 from hielen3.geje import GeoJSONSchema
 
 data_out_handler = hug_output_format_conten_type(
-    [hug.output_format.json, hug.output_format.text,hug.output_format.file]
+    [hug.output_format.json, hug.output_format.text]
 )
 CSV = "text/plain; charset=utf-8"
 JSON = "application/json; charset=utf-8"
-XLSX = "file/dynamic"
 
 
 class DataMapSchema(Schema):
@@ -43,7 +40,6 @@ def tabular_data(
 ):
 
     series = {}
-    out = ResponseFormatter()
 
     for query in datamap:
 
@@ -53,7 +49,7 @@ def tabular_data(
             ss=db['series'][query.pop('series')]
             ss=list(ss[ss['capability']==capability]['uuid'].values)
         except KeyError as e:
-            out.status=falcon.HTTP_NOT_FOUND
+            out = ResponseFormatter(status=falcon.HTTP_NOT_FOUND)
             out.message = str(e) + " not found"
             response = out.format(response=response, request=request)
             return
@@ -64,7 +60,7 @@ def tabular_data(
 
             series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
            
-    df = DataFrame()
+    out = DataFrame()
 
     for param, sers in series.items():
 
@@ -83,22 +79,16 @@ def tabular_data(
         except Exception as e:
             ser.name=param
 
-        df = df.join(ser, how="outer")
+        out = out.join(ser, how="outer")
 
-    df.index.name = "timestamp"
+    out.index.name = "timestamp"
 
     requested = data_out_handler.requested(request).content_type
     
     if requested == CSV:
-        return hug.types.text(df.to_csv(sep=';',date_format="%Y-%m-%d %H:%M:%S"))
+        return hug.types.text(out.to_csv(sep=';',date_format="%Y-%m-%d %H:%M:%S"))
     if requested == JSON:
-        return hug.types.json(df.to_json(orient="table"))
-    if requested == XLSX:
-        filepath = Path(
-                tempfile.gettempdir(), f"{uuid()}.xlsx"
-                )
-        df.to_excel(filepath)
-        return filepath
+        return hug.types.json(out.to_json(orient="table"))
 
 
 @hug.get("/{capability}/{feature}/", output=data_out_handler)
