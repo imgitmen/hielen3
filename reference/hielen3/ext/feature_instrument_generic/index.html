@@ -2758,11 +2758,11 @@ validation errors.</p>
 
 <span class="s1">            if self.label[0] in (&quot;T&quot;, &quot;F&quot;):</span>
 
-<span class="s1">                operator=f&quot;calc.poly_trans2({coefficents})&quot;</span>
+<span class="s1">                operator=f&quot;calc.poly_trans2(S0,{coefficients})&quot;</span>
 
-<span class="s1">            elif self.label[0] == &quot;C&quot;:</span>
+<span class="s1">            elif self.label[0] == &quot;I&quot;:</span>
 
-<span class="s1">                operator=f&quot;calc.filter(calc.slope(calc.poly_trans2(S0,{coefficients}),radius=1000), 2, 10)&quot;</span>
+<span class="s1">                operator=f&quot;calc.filter(calc.slope(calc.poly_trans2(S0,{coefficients}),radius=1000), 3, 10)&quot;</span>
 
 <span class="s1">            else:</span>
 
