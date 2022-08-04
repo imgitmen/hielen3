@@ -652,6 +652,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../reference/hielen3/api/query_old/" title="Query Old" class="md-nav__link">
+      Query Old
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../reference/hielen3/api/queue/" title="Queue" class="md-nav__link">
       Queue
     </a>
@@ -1483,13 +1495,13 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>capability</strong>: Basic text / string value</li>
-<li><strong>datamap</strong>: JSON Schema [{<strong>series</strong>: [str|bytes], <strong>times</strong>: , <strong>timeref</strong>: str|bytes, <strong>geometry</strong>: [], <strong>refresh</strong>: bool}]</li>
+<li><strong>datamap</strong>: JSON Schema [{<strong>timeref</strong>: str|bytes, <strong>times</strong>: , <strong>series</strong>: [str|bytes], <strong>geometry</strong>: [], <strong>refresh</strong>: bool}]</li>
 <li><strong>content_type</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8</li>
+<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
 </ul>
 <p><em>usage</em>:</p>
 <h3 id="get-querycapabilityfeature"><strong>GET    <em>/query/{capability}/{feature}/</em></strong></h3>
@@ -1507,8 +1519,8 @@
 </ul>
 <p><em>result</em>:</p>
 <ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8</li>
+<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
 </ul>
 <p><em>usage</em>:</p>
 <h3 id="get-querycapabilityfeaturepar"><strong>GET    <em>/query/{capability}/{feature}/{par}</em></strong></h3>
@@ -1526,8 +1538,8 @@
 </ul>
 <p><em>result</em>:</p>
 <ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8</li>
+<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
 </ul>
 <p><em>usage</em>:</p>
                 

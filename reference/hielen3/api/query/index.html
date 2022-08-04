@@ -819,6 +819,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../query_old/" title="Query Old" class="md-nav__link">
+      Query Old
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../queue/" title="Queue" class="md-nav__link">
       Queue
     </a>
@@ -2078,7 +2090,27 @@
 268
 269
 270
-271</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2087,6 +2119,10 @@
 <span class="kn">import</span> <span class="nn">falcon</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">tempfile</span>
+
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
 
@@ -2098,19 +2134,21 @@
 
 <span class="kn">from</span> <span class="nn">hielen3.series</span> <span class="kn">import</span> <span class="n">HSeries</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">hug_output_format_conten_type</span><span class="p">,</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">Selection</span><span class="p">,</span> <span class="n">ResponseFormatter</span>
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">hug_output_format_conten_type</span><span class="p">,</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">Selection</span><span class="p">,</span> <span class="n">ResponseFormatter</span><span class="p">,</span> <span class="n">uuid</span>
 
 <span class="kn">from</span> <span class="nn">hielen3.geje</span> <span class="kn">import</span> <span class="n">GeoJSONSchema</span>
 
 <span class="n">data_out_handler</span> <span class="o">=</span> <span class="n">hug_output_format_conten_type</span><span class="p">(</span>
 
-    <span class="p">[</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">json</span><span class="p">,</span> <span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">text</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">json</span><span class="p">,</span> <span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">text</span><span class="p">,</span><span class="n">hug</span><span class="o">.</span><span class="n">output_format</span><span class="o">.</span><span class="n">file</span><span class="p">]</span>
 
 <span class="p">)</span>
 
 <span class="n">CSV</span> <span class="o">=</span> <span class="s2">&quot;text/plain; charset=utf-8&quot;</span>
 
 <span class="n">JSON</span> <span class="o">=</span> <span class="s2">&quot;application/json; charset=utf-8&quot;</span>
+
+<span class="n">XLSX</span> <span class="o">=</span> <span class="s2">&quot;file/dynamic&quot;</span>
 
 <span class="k">class</span> <span class="nc">DataMapSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
 
@@ -2148,6 +2186,8 @@
 
     <span class="n">series</span> <span class="o">=</span> <span class="p">{}</span>
 
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">()</span>
+
     <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">datamap</span><span class="p">:</span>
 
         <span class="c1">#ss = query.pop(&#39;series&#39;)</span>
@@ -2160,7 +2200,7 @@
 
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
             <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; not found&quot;</span>
 
@@ -2176,7 +2216,7 @@
 
             <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">capability</span> <span class="p">)</span><span class="o">.</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="p">)</span>
 
-    <span class="n">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
 
     <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">sers</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
@@ -2206,19 +2246,31 @@
 
             <span class="n">ser</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span>
 
-        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
 
-    <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
 
     <span class="n">requested</span> <span class="o">=</span> <span class="n">data_out_handler</span><span class="o">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">content_type</span>
 
     <span class="k">if</span> <span class="n">requested</span> <span class="o">==</span> <span class="n">CSV</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">requested</span> <span class="o">==</span> <span class="n">JSON</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;table&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">hug</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;table&quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">requested</span> <span class="o">==</span> <span class="n">XLSX</span><span class="p">:</span>
+
+        <span class="n">filepath</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+
+                <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">(),</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">uuid</span><span class="p">()</span><span class="si">}</span><span class="s2">.xlsx&quot;</span>
+
+                <span class="p">)</span>
+
+        <span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">filepath</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{capability}</span><span class="s2">/</span><span class="si">{feature}</span><span class="s2">/&quot;</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">data_out_handler</span><span class="p">)</span>
 
@@ -2359,6 +2411,9 @@
 <div class="codehilite"><pre><span></span><code><span class="n">JSON</span>
 </code></pre></div>
 
+<div class="codehilite"><pre><span></span><code><span class="n">XLSX</span>
+</code></pre></div>
+
 <div class="codehilite"><pre><span></span><code><span class="n">db</span>
 </code></pre></div>
 
@@ -2374,7 +2429,7 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<p>Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text</p>
+<p>Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</p>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="n">def</span> <span class="n">output_type</span><span class="p">(</span><span class="k">data</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
 
         <span class="k">handler</span> <span class="o">=</span> <span class="n">requested_output_type</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -2388,7 +2443,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f424c14fd30</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ff8a658ad60</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2416,6 +2471,8 @@
 
 <span class="w">    </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">()</span><span class="w"></span>
+
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">query</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">datamap</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">#ss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">query</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;series&#39;</span><span class="p">)</span><span class="w"></span>
@@ -2428,7 +2485,7 @@
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="ss">&quot; not found&quot;</span><span class="w"></span>
 
@@ -2444,7 +2501,7 @@
 
 <span class="w">            </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">orient</span><span class="o">=</span><span class="n">capability</span><span class="w"> </span><span class="p">).</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
+<span class="w">    </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">param</span><span class="p">,</span><span class="w"> </span><span class="n">sers</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
@@ -2474,19 +2531,31 @@
 
 <span class="w">            </span><span class="n">ser</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">    </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="n">df</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">requested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_out_handler</span><span class="p">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">content_type</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">CSV</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="nc">text</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">date_format</span><span class="o">=</span><span class="ss">&quot;%Y-%m-%d %H:%M:%S&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="nc">text</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="n">date_format</span><span class="o">=</span><span class="ss">&quot;%Y-%m-%d %H:%M:%S&quot;</span><span class="p">))</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">JSON</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;table&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">hug</span><span class="p">.</span><span class="n">types</span><span class="p">.</span><span class="n">json</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;table&quot;</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">requested</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">XLSX</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">filepath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Path</span><span class="p">(</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">tempfile</span><span class="p">.</span><span class="n">gettempdir</span><span class="p">(),</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{uuid()}.xlsx&quot;</span><span class="w"></span>
+
+<span class="w">                </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">df</span><span class="p">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">filepath</span><span class="w"></span>
 </code></pre></div>
 
 </details>
