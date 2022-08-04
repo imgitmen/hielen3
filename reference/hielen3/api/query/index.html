@@ -2110,7 +2110,11 @@
 288
 289
 290
-291</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+291
+292
+293
+294
+295</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2249,6 +2253,10 @@
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
 
     <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
+
+    <span class="k">if</span> <span class="n">request</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">df</span>
 
     <span class="n">requested</span> <span class="o">=</span> <span class="n">data_out_handler</span><span class="o">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">)</span><span class="o">.</span><span class="n">content_type</span>
 
@@ -2443,7 +2451,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7ff8a658ad60</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7effb80ded60</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2534,6 +2542,10 @@
 <span class="w">        </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">df</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">df</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">requested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_out_handler</span><span class="p">.</span><span class="n">requested</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">content_type</span><span class="w"></span>
 
