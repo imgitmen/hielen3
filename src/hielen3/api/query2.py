@@ -3,19 +3,22 @@
 import hug
 import falcon
 import json
+import tempfile
+from pathlib import Path
 from marshmallow import Schema, fields
 from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen3 import db
 from hielen3.series import HSeries
-from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter
+from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter, uuid
 from hielen3.geje import GeoJSONSchema
 
 data_out_handler = hug_output_format_conten_type(
-    [hug.output_format.json, hug.output_format.text]
+    [hug.output_format.json, hug.output_format.text,hug.output_format.file]
 )
 CSV = "text/plain; charset=utf-8"
 JSON = "application/json; charset=utf-8"
+XLSX = "file/dynamic"
 
 
 class DataMapSchema(Schema):
@@ -94,7 +97,13 @@ def tabular_data(
         df = df.replace({nan:None})
         out.data = { series:data.to_records().tolist() for series,data in df.groupby('S',axis=1) }
         response = out.format(response=response, request=request)
-        return 
+        return
+    if requested == XLSX:
+        filepath = Path(
+                tempfile.gettempdir(), f"{uuid()}.xlsx"
+                )
+        df.to_excel(filepath)
+        return filepath
 
 
 @hug.get("/{capability}/{feature}/", output=data_out_handler)
