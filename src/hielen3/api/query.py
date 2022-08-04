@@ -87,6 +87,9 @@ def tabular_data(
 
     df.index.name = "timestamp"
 
+    if request is None:
+        return df
+
     requested = data_out_handler.requested(request).content_type
     
     if requested == CSV:
