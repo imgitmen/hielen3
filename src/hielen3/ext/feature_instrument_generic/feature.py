@@ -83,8 +83,8 @@ class Feature(HFeature):
             if self.label[0] in ("T", "F"):
                 operator=f"calc.poly_trans2(S0,{coefficients})"
 
-            elif self.label[0] == "C":
-                operator=f"calc.filter(calc.slope(calc.poly_trans2(S0,{coefficients}),radius=1000), 2, 10)"
+            elif self.label[0] == "I":
+                operator=f"calc.filter(calc.slope(calc.poly_trans2(S0,{coefficients}),radius=1000), 3, 10)"
 
             else:
                 operator=None
