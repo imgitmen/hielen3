@@ -32,18 +32,6 @@ class StringTime(fields.DateTime):
     def _serialize(self, value, attr, obj, **kwargs):
         return _agoodtime(value)
 
-class Feature(HFeature):
- 
-    '''
-    Default Feature
-    '''
- 
-    def setup(self,*args,**kwargs):
-        pass
- 
-    def config(self,*args,**kwargs):
-        pass
-
 
 class HFeature(ABC):
 
