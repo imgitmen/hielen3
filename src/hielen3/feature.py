@@ -366,3 +366,16 @@ class HFeature(ABC):
 
     """
 
+class Feature(HFeature):
+ 
+    '''
+    Default Feature
+    '''
+ 
+    def setup(self,*args,**kwargs):
+        pass
+ 
+    def config(self,*args,**kwargs):
+        pass
+
+
