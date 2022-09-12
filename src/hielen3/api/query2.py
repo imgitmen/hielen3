@@ -102,6 +102,9 @@ def tabular_data(
         response = out.format(response=response, request=request)
         return
     if requested == XLSX:
+        h=db['features_parameters_headers'][list(df.columns)]
+        df=df.T.join(h).set_index(['feature','parameter','series']).T
+        df.index.name='timestamp'
         filepath = Path(
                 tempfile.gettempdir(), f"{uuid()}.xlsx"
                 )
