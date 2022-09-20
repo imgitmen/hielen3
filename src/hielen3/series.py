@@ -199,6 +199,8 @@ class HSeries:
         except Exception as e:
             pass
 
+        firstreqstart=times.start
+
         out = Series([],name=self.uuid,dtype='float64')
 
         if cache in ("active","data"):
@@ -225,7 +227,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                #raise e
+                raise e
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
@@ -244,16 +246,29 @@ class HSeries:
 
             out = concat([out,gen]).sort_index()
 
-            idx = unique(out.index.values, return_index=True)[1]
-            out = out.iloc[idx]
-            out.index.name = "timestamp"
-
             if cache in ("active","data","refresh"):
                 db["datacache"][self.uuid]=out
 
         except Exception as e:
-            #raise e
             pass
+
+        if cache in ("active","data") and not out.empty:
+
+            lasttotry=str(out.index[0])
+            times=slice(firstreqstart, lasttotry, times.step)
+
+            preout = self.data(times=times,cache="none",geometry=geometry, **kwargs)
+
+            if cache in ("active","data","refresh"):
+                db["datacache"][self.uuid]=preout
+
+            if preout.__len__():
+                out = concat([preout,out]).sort_index()
+
+
+        idx = unique(out.index.values, return_index=True)[1]
+        out = out.iloc[idx]
+        out.index.name = "timestamp"
 
         return out
 

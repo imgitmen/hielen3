@@ -174,7 +174,7 @@ class Feature(HFeature):
             self.parameters.set(
                     'level 2',
                     cache='active',
-                    mu="m.s.l.m",
+                    mu="m.s.l.m.",
                     ordinal=1,
                     first=timestamp,
                     modules={"calc":"hielen3.tools.calc"}, 
