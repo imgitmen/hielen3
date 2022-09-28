@@ -82,10 +82,10 @@ class HFeature(ABC):
         return HFeature.__featureFactory__(ftype=ftype,**kwargs)
 
     def retrive(uuid):
-        return HFeature.__featureFactory__(uuid=uuid)
-
-    def update(uuid,**kwargs):
-        return HFeature.__featureFactory__(uuid=uuid, **kwargs)
+        try:
+            return HFeature.__featureFactory__(uuid=uuid)
+        except KeyError as e:
+            return HFeature.retrive_label(uuid)
 
     def retrive_label(label):
 
@@ -97,6 +97,23 @@ class HFeature(ABC):
             return HFeature.__featureFactory__(uuid=uuid)
         else:
             raise KeyError(f'Single instance of {label!r} not found.')
+
+    def update(uuid,**kwargs):
+        try:
+            return HFeature.__featureFactory__(uuid=uuid, **kwargs)
+        except KeyError as e:
+            return HFeature.update_label(uuid,**kwargs)
+
+    def update_label(uuid,**kwargs):
+        feats=db['features'][:]
+
+        uuid=feats[feats['label']==label]['uuid'].squeeze()
+
+        if isinstance(uuid,str):
+            return HFeature.__featureFactory__(uuid=uuid, **kwargs)
+        else:
+            raise KeyError(f'Single instance of {label!r} not found.')
+
 
     def drop(uuid):
         HFeature.retrive(uuid).delete()

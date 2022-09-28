@@ -33,7 +33,7 @@ def logger_serials( folders={} ):
         folders=DataFrame(folders)
         folders=folders.set_index('type')
 
-        folders=folders['path'].apply( lambda x: str(Path(conf['incomepath'] , x , "*")) ).apply(glob).explode().apply(Path)
+        folders=folders['path'].apply( lambda x: str(Path(conf['incomepath'] , x , "*")) ).apply(glob).explode().dropna().apply(Path)
 
         folders=folders[
                 folders.apply(Path.is_dir)
@@ -58,6 +58,7 @@ def retriver( func_loggers  ):
 
 
 def retrive(serials=None,times=None, columns=None, func_extract=None, func_loggers=None, **kwargs ):
+
 
     def __default_extract__(*args,**kwargs):
         return DataFrame()
@@ -96,6 +97,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     dates=slice(datestart,stop)
 
+
     folders=func_loggers().set_index('name')
 
     df=DataFrame(dtype='object')
@@ -133,17 +135,19 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     except Exception as e:
         pass
 
+
     try:
         sertime=sertime.loc[(serials,dates), :]
     except KeyError as e:
         return df
-
 
     for serial,paths in sertime.groupby('serial'):
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)
         u['serial']=serial
         u=u.set_index(['serial','times'])
         df=concat([df,u])
+
+    # print (df) #DEBUG
 
     if columns is None:
         columns = list(df.columns)

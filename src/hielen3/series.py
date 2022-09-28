@@ -7,6 +7,8 @@ from numpy import nan, unique, round
 from importlib import import_module
 from hielen3 import db
 from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, dataframe2jsonizabledict
+from uuid import UUID
+import json
 import traceback
 
 def _threadpool(f):
@@ -227,7 +229,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                raise e
+                raise e #DEBUG
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
@@ -246,10 +248,13 @@ class HSeries:
 
             out = concat([out,gen]).sort_index()
 
+            out.index.name = "timestamp"
+
             if cache in ("active","data","refresh"):
                 db["datacache"][self.uuid]=out
 
         except Exception as e:
+            #raise e #DEBUG
             pass
 
         if cache in ("active","data") and not out.empty:
@@ -258,6 +263,8 @@ class HSeries:
             times=slice(firstreqstart, lasttotry, times.step)
 
             preout = self.data(times=times,cache="none",geometry=geometry, **kwargs)
+
+            preout.index.name = "timestamp"
 
             if cache in ("active","data","refresh"):
                 db["datacache"][self.uuid]=preout
@@ -443,19 +450,27 @@ class HSeries:
                     trying to extract a series                              
                     """             
                     try:
+                        UUID(value["operand"])
                         self.operands[key]=HSeries(value["operand"],self.orient)
                         continue
                     except Exception as e:
                         pass
 
+                    try:
+                        self.operands[key] = json.loads(value["operand"])
+                        continue
+                    except Exception as e:
+                        pass
+
                     """
-                        giving up. It should be a scalar.
+                        giving up. Load it "as is".
                         return it
                     """
-                    self.operands[key] = value
+                    self.operands[key] = value["operand"]
 
             except AttributeError as e:
                 pass
+
 
 
 
@@ -474,8 +489,10 @@ class HSeries:
 
             ## ATTENZIONE A locals: Implementation Dipendent!!!! ###
             locals().update(operands)
-           
-            #print (self.operator)
+
+            # print (operands) #DEBUG
+
+            # print (self.operator, locals() ) #DEBUG
             
             return eval(self.operator)
 
