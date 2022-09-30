@@ -145,23 +145,22 @@ class HSeries:
         
             for k,w in operands.items():
 
+
                 if not isinstance(w,(list,tuple,dict)):
                     w=[w]
 
                 if isinstance(w,(list,tuple)):
                     wl=min(table_operands.values.__len__(),w.__len__())
                     w=dict(zip(table_operands.values[:wl],w[:wl]))
-
+                    
                     if isinstance(w['operand'],HSeries):
                         w['operand']=w['operand'].uuid
 
                 db["series_operands"][(uuid,k)]=w
 
-        #TODO GESTIRE LE THRESHOLDS: togliere id e mettere primary key (series,label,ttype)
-        # 
-        # if thresholds is not None and isinstance(thresholds, list):
-        #    for t in thresholds:
-        #    db["thresholds"][uuid]=t
+        if thresholds is not None and isinstance(thresholds, list):
+            for t in thresholds:
+                db["series_thresholds"][uuid]=t
 
         return HSeries(uuid)
 

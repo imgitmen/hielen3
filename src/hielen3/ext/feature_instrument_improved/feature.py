@@ -35,17 +35,19 @@ class Feature(HFeature):
             param_name,
             cache=None,
             operands=None,
+            operator=None,
             modules=None,
             coefficients=None,
             timestamp=None,
             start_time=None,
             zero_time=None,
             ordinal=None,
-            unit=None,
+            mu=None,
             valid_range=None,
             view_range=None,
             thresholds=None
             ):
+
 
         try:
             series=self.parameters[param_name]
@@ -60,40 +62,45 @@ class Feature(HFeature):
         new_opz={}
 
         if operands is not None:
-            for k,w in operands:
 
-                wtype=w["type"]
-                winfo=w["info"]
-                feat=self
+            for k,w in operands.items():
 
-                ## MI ASPETTO QUESTO:
-                """
-                {
-                    "type": "value" |  "series_uuid" | "feature_param"
-                    "info": "uuid" | {"feature":"feature_uuid_name_null","param":"param_name"} | value 
-                }
+                if isinstance(w,dict):
+                    try:
 
-                """
+                        feat=w['feature']
 
-                ## RESOLVING feature_param serie and set winfo with that
-                if wtype ==  "feature_param" :
-                    if winfo["feature"] is not None:
-                        feat = HFeature.retrive(winfo["feature"])
-                    winfo=feat.parameters[winfo[param]]
+                        if feat == 'self': 
 
-                new_opz[k] = winfo
+                            feat = self
+                        else:
+                            try:
+                                feat = HFeature.retrive(feat)
+                            except Exception as e:
+                                raise ValueError (f'error retriving {w}: {feat}')
+
+                        try:
+                            w=feat.parameters[w["param"]]
+                        except Exception as e:
+                            raise ValueError (f'error retriving {feat}.{param}')
+
+                    except KeyError as e:
+                        pass
+
+                new_opz[k] = w
+
 
         opz.update(new_opz)
 
         opz["Z"] = 0
 
-        if coefficients is None:
-            try 
+        if coefficients is not None:
+            try:
                 coefficients=opz["COEFS"]
             except KeyError as e:
                 coefficients=[]
 
-        opz["COEFS"] = coefficients
+        opz["COEFS"] = json.dumps(coefficients)
 
         if start_time is None:
             if zero_time is None:
@@ -102,14 +109,14 @@ class Feature(HFeature):
                 start_time=zero_time
 
         if operator is not None:
-            operator= f"operator - Z"
+            operator= f"{operator} - Z"
 
 
         config=dict(
                 param=param_name,
                 ordinal=ordinal,
                 cache=cache,
-                mu=unit,
+                mu=mu,
                 modules=modules,
                 operands=opz,
                 operator=operator,
@@ -119,17 +126,22 @@ class Feature(HFeature):
                 thresholds=thresholds
                 )
 
-            self.parameters.set(**config)
+        self.parameters.set(**config)
 
-            # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
-            if zero_time is not None:
-                df=self.parameters[param_name].data()
+        # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
+        if zero_time is not None:
+            df=self.parameters[param_name].data()
+
+            if zero_time == 'first':
+                iloc_idx = 0
+            else:
                 iloc_idx = df.index.get_indexer([zero_time], method='nearest')
-                try:
-                    config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
-                    self.parameters.set(**config)
-                except Exception as e:
-                    pass
+
+            try:
+                config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
+                self.parameters.set(**config)
+            except Exception as e:
+                pass
 
 
     def config(self, multi_channel_info_json=None, timestamp=None,  **kwargs): 

@@ -1,18 +1,25 @@
 CHANGELOG
 =========
+## **v3.2.9**
+### 30 Settembre 2022
+- sistemate threshold canale (chiave uuid,label,tipo(UPPER,LOWER))
+- definto json di configurazione generale dei canali come collezione di oggetti
+- rilassato il concetto di opernado di una serie permettendo valori arbitrari e non solo uuid di serie (viene riconoesciuto il formato uuid e caricata la serie)
+- implementati gli sghembi
+
 
 ## **v3.2.5**
 - definito srumento generico con configurazione multipli canali
 
 
 ## **v3.2.4**
-## **5 Giugno 2020**
+### **5 Giugno 2022**
 - inserito management soglie (sigolo valore) multiple e range apertura grafici
 
 
 
 ## **v3.2.3**
-## **24 Maggio 2022**
+### **24 Maggio 2022**
 - rivisto l'output di query con uscita json secondo le specifiche di dygraph per il frontend:
 
 
@@ -31,14 +38,14 @@ CHANGELOG
     }
 
 ## **v3.2.2**
-## **18 Maggio 2022**
+### **18 Maggio 2022**
 - introdotto concetto di ordinal dei parametri associati alle feature:
 modificato hielen3.Feature, hielen3.ext.feature_instrument_piezometer
 modificato database: aggiunta colonna ordinal alla tabella feature_parameter e modificata la vista v_features_parameter per ordinare i parametri
 
 
 ## **v3.2.1**
-## **17 Maggio 2022**
+### **17 Maggio 2022**
 - feature piezometer
 - feature shapearray
 
