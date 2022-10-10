@@ -2912,7 +2912,9 @@
 <span class="normal">914</span>
 <span class="normal">915</span>
 <span class="normal">916</span>
-<span class="normal">917</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">917</span>
+<span class="normal">918</span>
+<span class="normal">919</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3332,7 +3334,9 @@
 
         <span class="n">d</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
-        <span class="n">lastevent</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+        <span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">lastevent</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 
         <span class="c1">#d[&#39;feature&#39;]=self.feature</span>
 
@@ -3346,9 +3350,9 @@
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()))</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()))</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -3364,7 +3368,7 @@
 
         <span class="c1">#    self.attribute_update()</span>
 
-        <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;series&#39;</span><span class="p">,</span><span class="s1">&#39;timestamp&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">d</span>
 
     <span class="nd">@_threadpool</span>
 
@@ -4235,7 +4239,9 @@
 
 <span class="w">        </span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]=</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="nf">str</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">lastevent</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">lastevent</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">#d</span><span class="o">[</span><span class="n">&#39;feature&#39;</span><span class="o">]=</span><span class="n">self</span><span class="p">.</span><span class="n">feature</span><span class="w"></span>
 
@@ -4249,9 +4255,9 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -4267,7 +4273,7 @@
 
 <span class="w">        </span><span class="err">#</span><span class="w">    </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;series&#39;,&#39;timestamp&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
 
 <span class="w">    </span><span class="nv">@_threadpool</span><span class="w"></span>
 
@@ -4871,7 +4877,9 @@
 
 <span class="w">        </span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]=</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="nf">str</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">lastevent</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span><span class="w"></span>
+<span class="w">        </span><span class="n">d</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">lastevent</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">#d</span><span class="o">[</span><span class="n">&#39;feature&#39;</span><span class="o">]=</span><span class="n">self</span><span class="p">.</span><span class="n">feature</span><span class="w"></span>
 
@@ -4885,9 +4893,9 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last_event&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">d</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()))</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -4903,7 +4911,7 @@
 
 <span class="w">        </span><span class="err">#</span><span class="w">    </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&#39;series&#39;,&#39;timestamp&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">d</span><span class="w"></span>
 </code></pre></div>
 
 </details>
