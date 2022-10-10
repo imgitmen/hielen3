@@ -1,7 +1,4 @@
 
-
-
-
 <!doctype html>
 <html lang="en" class="no-js">
   <head>
@@ -11,8 +8,9 @@
       
       
       
-      <link rel="shortcut icon" href="../art/hielen.svg">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.14">
+      
+      <link rel="icon" href="../art/hielen.svg">
+      <meta name="generator" content="mkdocs-1.2.4, mkdocs-material-7.3.0">
     
     
       
@@ -20,28 +18,32 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.d3202873.min.css">
-      
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ff0a5ce4.min.css">
-      
+      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
       
         
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
         
-        <meta name="theme-color" content="#546d78">
+          
+          
+          <meta name="theme-color" content="#546d78">
+        
       
     
     
     
       
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
       
     
     
     
     
       
+
+
     
     
   </head>
@@ -50,8 +52,12 @@
     
     
     
+    
+    
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -68,47 +74,57 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="hielen3" class="md-header-nav__button md-logo" aria-label="hielen3">
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="hielen3" class="md-header__button md-logo" aria-label="hielen3" data-md-component="logo">
       
   <img src="../art/hielen.svg" alt="logo">
 
     </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             hielen3
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               Changelog
             
           </span>
         </div>
-      
+      </div>
     </div>
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
       
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -124,12 +140,12 @@
 </div>
     
     
-      <div class="md-header-nav__source">
+      <div class="md-header__source">
         
-<a href="https://github.com/imgitmen/hielen3/" title="Go to repository" class="md-source">
+<a href="https://github.com/imgitmen/hielen3/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     hielen3
@@ -138,25 +154,30 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
+      
         
-      
-      
+          
         
       
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="hielen3" class="md-nav__button md-logo" aria-label="hielen3">
+    <a href=".." title="hielen3" class="md-nav__button md-logo" aria-label="hielen3" data-md-component="logo">
       
   <img src="../art/hielen.svg" alt="logo">
 
@@ -166,10 +187,10 @@
   
     <div class="md-nav__source">
       
-<a href="https://github.com/imgitmen/hielen3/" title="Go to repository" class="md-source">
+<a href="https://github.com/imgitmen/hielen3/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     hielen3
@@ -183,12 +204,15 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
-      Home
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
 
     
       
@@ -196,26 +220,30 @@
       
 
   
-
-
-  <li class="md-nav__item md-nav__item--active">
+  
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
       
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Changelog
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Changelog
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" title="Changelog" class="md-nav__link md-nav__link--active">
-      Changelog
-    </a>
-    
+      </a>
       
+        
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -225,7 +253,27 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v330" class="md-nav__link">
+    v3.3.0
+  </a>
+  
+    <nav class="md-nav" aria-label="v3.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10-ottobre-2022" class="md-nav__link">
+    10 Ottobre 2022
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v329" class="md-nav__link">
@@ -815,1238 +863,1487 @@
     </ul>
   
 </nav>
-    
-  </li>
+      
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../BACKLOG/" title="Backlog" class="md-nav__link">
-      Backlog
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      API Reference
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="API Reference" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        <span class="md-nav__icon md-icon"></span>
-        API Reference
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API%20Reference/prototypes/" title="Prototypes" class="md-nav__link">
-      Prototypes
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API%20Reference/actionschemata/" title="ActionSchemata" class="md-nav__link">
-      ActionSchemata
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API%20Reference/features/" title="Features" class="md-nav__link">
-      Features
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API%20Reference/actions/" title="Actions" class="md-nav__link">
-      Actions
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API Reference/parameters.md" title="Parameters" class="md-nav__link">
-      Parameters
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../docs/API%20Reference/query/" title="Query" class="md-nav__link">
-      Query
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BACKLOG/" class="md-nav__link">
+        Backlog
+      </a>
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item md-nav__item--nested">
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API%20Reference/prototypes/" class="md-nav__link">
+        Prototypes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API%20Reference/actionschemata/" class="md-nav__link">
+        ActionSchemata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API%20Reference/features/" class="md-nav__link">
+        Features
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API%20Reference/actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API Reference/parameters.md" class="md-nav__link">
+        Parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docs/API%20Reference/query/" class="md-nav__link">
+        Query
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
     
-    <label class="md-nav__link" for="nav-5">
-      Reference
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Reference" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        <span class="md-nav__icon md-icon"></span>
-        Reference
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
+      
+      
+      
 
-
-  <li class="md-nav__item md-nav__item--nested">
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1">
-      Hielen3
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Hielen3" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-1">
-        <span class="md-nav__icon md-icon"></span>
-        Hielen3
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1" type="checkbox" id="__nav_5_1" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1">
+          Hielen3
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Hielen3" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_1">
+          <span class="md-nav__icon md-icon"></span>
+          Hielen3
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/cloudmanager/" class="md-nav__link">
+        Cloudmanager
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/cloudmanager/" title="Cloudmanager" class="md-nav__link">
-      Cloudmanager
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/datalink/" class="md-nav__link">
+        Datalink
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/datalink/" title="Datalink" class="md-nav__link">
-      Datalink
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/mapmanager/" class="md-nav__link">
+        Mapmanager
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/mapmanager/" title="Mapmanager" class="md-nav__link">
-      Mapmanager
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/serializaction/" class="md-nav__link">
+        Serializaction
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/serializaction/" title="Serializaction" class="md-nav__link">
-      Serializaction
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/series/" class="md-nav__link">
+        Series
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/series/" title="Series" class="md-nav__link">
-      Series
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/sourcestorage/" class="md-nav__link">
+        Sourcestorage
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/sourcestorage/" title="Sourcestorage" class="md-nav__link">
-      Sourcestorage
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/utils/" class="md-nav__link">
+        Utils
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/utils/" title="Utils" class="md-nav__link">
-      Utils
-    </a>
-  </li>
-
-        
+            
           
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-10" type="checkbox" id="nav-5-1-10">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_10" type="checkbox" id="__nav_5_1_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_10">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_10">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/actions/" class="md-nav__link">
+        Actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/actionschemata/" class="md-nav__link">
+        Actionschemata
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/features/" class="md-nav__link">
+        Features
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/glob/" class="md-nav__link">
+        Glob
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/hls/" class="md-nav__link">
+        Hls
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/prototypes/" class="md-nav__link">
+        Prototypes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/query/" class="md-nav__link">
+        Query
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/query2/" class="md-nav__link">
+        Query2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/query_old/" class="md-nav__link">
+        Query Old
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/api/queue/" class="md-nav__link">
+        Queue
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-10">
-      API
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="API" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-1-10">
-        <span class="md-nav__icon md-icon"></span>
-        API
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11" type="checkbox" id="__nav_5_1_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11">
+          Ext
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Ext" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_11">
+          <span class="md-nav__icon md-icon"></span>
+          Ext
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_datetree_filesystem_source/" class="md-nav__link">
+        Feature Datetree Filesystem Source
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_hot_spot/" class="md-nav__link">
+        Feature Hot Spot
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument/" class="md-nav__link">
+        Feature Instrument
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/actions/" title="Actions" class="md-nav__link">
-      Actions
-    </a>
-  </li>
-
-        
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_shapearray/" class="md-nav__link">
+        Feature Instrument Shapearray
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
           
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/actionschemata/" title="Actionschemata" class="md-nav__link">
-      Actionschemata
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/features/" title="Features" class="md-nav__link">
-      Features
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/glob/" title="Glob" class="md-nav__link">
-      Glob
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/hls/" title="Hls" class="md-nav__link">
-      Hls
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/prototypes/" title="Prototypes" class="md-nav__link">
-      Prototypes
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/query/" title="Query" class="md-nav__link">
-      Query
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/query2/" title="Query2" class="md-nav__link">
-      Query2
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/query_old/" title="Query Old" class="md-nav__link">
-      Query Old
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/api/queue/" title="Queue" class="md-nav__link">
-      Queue
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11" type="checkbox" id="nav-5-1-11">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_6" type="checkbox" id="__nav_5_1_11_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_6">
+          Feature Instrument Clinometer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Instrument Clinometer" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_6">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Instrument Clinometer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_clinometer/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_clinometer/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-11">
-      Ext
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Ext" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-1-11">
-        <span class="md-nav__icon md-icon"></span>
-        Ext
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_7" type="checkbox" id="__nav_5_1_11_7" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_7">
+          Feature Instrument Generic
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Instrument Generic" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_7">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Instrument Generic
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_generic/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_datetree_filesystem_source/" title="Feature Datetree Filesystem Source" class="md-nav__link">
-      Feature Datetree Filesystem Source
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_generic/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_hot_spot/" title="Feature Hot Spot" class="md-nav__link">
-      Feature Hot Spot
-    </a>
-  </li>
-
-        
+            
           
-          
-          
+        </ul>
+      </nav>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument/" title="Feature Instrument" class="md-nav__link">
-      Feature Instrument
-    </a>
-  </li>
-
-        
+            
           
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_shapearray/" title="Feature Instrument Shapearray" class="md-nav__link">
-      Feature Instrument Shapearray
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-6" type="checkbox" id="nav-5-1-11-6">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_8" type="checkbox" id="__nav_5_1_11_8" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_8">
+          Feature Instrument Improved
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Instrument Improved" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_8">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Instrument Improved
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_improved/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_improved/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-11-6">
-      Feature Instrument Clinometer
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Instrument Clinometer" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-6">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Instrument Clinometer
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_9" type="checkbox" id="__nav_5_1_11_9" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_9">
+          Feature Instrument Piezometer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Instrument Piezometer" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_9">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Instrument Piezometer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_piezometer/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_instrument_piezometer/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
           
+        </ul>
+      </nav>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_clinometer/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
-
-        
+            
           
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_clinometer/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-7" type="checkbox" id="nav-5-1-11-7">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_10" type="checkbox" id="__nav_5_1_11_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_10">
+          Feature Logger Boviar
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Boviar" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_10">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Boviar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_boviar/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_boviar/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_boviar/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-11-7">
-      Feature Instrument Generic
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Instrument Generic" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-7">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Instrument Generic
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_11" type="checkbox" id="__nav_5_1_11_11" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_11">
+          Feature Logger Gestecno
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_11">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Gestecno
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_gestecno/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_gestecno/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_gestecno/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_generic/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
-
-        
+            
           
+        </ul>
+      </nav>
+    </li>
+  
+
+            
           
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_generic/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-8" type="checkbox" id="nav-5-1-11-8">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_12" type="checkbox" id="__nav_5_1_11_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_12">
+          Feature Logger Omnialog Temp
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Omnialog Temp" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_12">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Omnialog Temp
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-11-8">
-      Feature Instrument Improved
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Instrument Improved" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-8">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Instrument Improved
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_11_13" type="checkbox" id="__nav_5_1_11_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_11_13">
+          Feature Rfilogger
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_11_13">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Rfilogger
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_rfilogger/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/ext/feature_rfilogger/rfilogger/" class="md-nav__link">
+        Rfilogger
+      </a>
+    </li>
+  
+
+            
           
+        </ul>
+      </nav>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_improved/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
-
-        
+            
           
+        </ul>
+      </nav>
+    </li>
+  
+
+            
           
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_improved/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
+            
+              
+  
+  
+  
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-9" type="checkbox" id="nav-5-1-11-9">
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12" type="checkbox" id="__nav_5_1_12" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_12">
+          Geje
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Geje" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_12">
+          <span class="md-nav__icon md-icon"></span>
+          Geje
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/feature_collection/" class="md-nav__link">
+        Feature Collection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/geojson/" class="md-nav__link">
+        Geojson
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/geometry/" class="md-nav__link">
+        Geometry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/geometry_collection/" class="md-nav__link">
+        Geometry Collection
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/line_string/" class="md-nav__link">
+        Line String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/multi_line_string/" class="md-nav__link">
+        Multi Line String
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/multi_point/" class="md-nav__link">
+        Multi Point
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/multi_polygon/" class="md-nav__link">
+        Multi Polygon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/object_type/" class="md-nav__link">
+        Object Type
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/point/" class="md-nav__link">
+        Point
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/polygon/" class="md-nav__link">
+        Polygon
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/geje/property/" class="md-nav__link">
+        Property
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
     
-    <label class="md-nav__link" for="nav-5-1-11-9">
-      Feature Instrument Piezometer
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Instrument Piezometer" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-9">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Instrument Piezometer
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_piezometer/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_instrument_piezometer/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-10" type="checkbox" id="nav-5-1-11-10">
-    
-    <label class="md-nav__link" for="nav-5-1-11-10">
-      Feature Logger Boviar
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Logger Boviar" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-10">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Logger Boviar
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_boviar/helper/" title="Helper" class="md-nav__link">
-      Helper
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_boviar/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_boviar/logger/" title="Logger" class="md-nav__link">
-      Logger
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-11" type="checkbox" id="nav-5-1-11-11">
-    
-    <label class="md-nav__link" for="nav-5-1-11-11">
-      Feature Logger Gestecno
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Logger Gestecno" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-11">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Logger Gestecno
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_gestecno/helper/" title="Helper" class="md-nav__link">
-      Helper
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_gestecno/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_gestecno/logger/" title="Logger" class="md-nav__link">
-      Logger
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-12" type="checkbox" id="nav-5-1-11-12">
-    
-    <label class="md-nav__link" for="nav-5-1-11-12">
-      Feature Logger Omnialog Temp
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Logger Omnialog Temp" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-12">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Logger Omnialog Temp
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/helper/" title="Helper" class="md-nav__link">
-      Helper
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_logger_omnialog_temp/logger/" title="Logger" class="md-nav__link">
-      Logger
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-11-13" type="checkbox" id="nav-5-1-11-13">
-    
-    <label class="md-nav__link" for="nav-5-1-11-13">
-      Feature Rfilogger
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-1-11-13">
-        <span class="md-nav__icon md-icon"></span>
-        Feature Rfilogger
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_rfilogger/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/ext/feature_rfilogger/rfilogger/" title="Rfilogger" class="md-nav__link">
-      Rfilogger
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-12" type="checkbox" id="nav-5-1-12">
-    
-    <label class="md-nav__link" for="nav-5-1-12">
-      Geje
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Geje" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-1-12">
-        <span class="md-nav__icon md-icon"></span>
-        Geje
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/feature/" title="Feature" class="md-nav__link">
-      Feature
-    </a>
-  </li>
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_13" type="checkbox" id="__nav_5_1_13" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_13">
+          Tools
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tools" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_1_13">
+          <span class="md-nav__icon md-icon"></span>
+          Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/tools/calc/" class="md-nav__link">
+        Calc
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/tools/hls_facility/" class="md-nav__link">
+        Hls Facility
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/tools/hls_facility_good/" class="md-nav__link">
+        Hls Facility Good
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/tools/hls_facility_old/" class="md-nav__link">
+        Hls Facility Old
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/hielen3/tools/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
 
-        
+            
           
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/feature_collection/" title="Feature Collection" class="md-nav__link">
-      Feature Collection
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/geojson/" title="Geojson" class="md-nav__link">
-      Geojson
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/geometry/" title="Geometry" class="md-nav__link">
-      Geometry
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/geometry_collection/" title="Geometry Collection" class="md-nav__link">
-      Geometry Collection
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/line_string/" title="Line String" class="md-nav__link">
-      Line String
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/multi_line_string/" title="Multi Line String" class="md-nav__link">
-      Multi Line String
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/multi_point/" title="Multi Point" class="md-nav__link">
-      Multi Point
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/multi_polygon/" title="Multi Polygon" class="md-nav__link">
-      Multi Polygon
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/object_type/" title="Object Type" class="md-nav__link">
-      Object Type
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/point/" title="Point" class="md-nav__link">
-      Point
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/polygon/" title="Polygon" class="md-nav__link">
-      Polygon
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/geje/property/" title="Property" class="md-nav__link">
-      Property
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5-1-13" type="checkbox" id="nav-5-1-13">
-    
-    <label class="md-nav__link" for="nav-5-1-13">
-      Tools
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Tools" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-1-13">
-        <span class="md-nav__icon md-icon"></span>
-        Tools
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/tools/calc/" title="Calc" class="md-nav__link">
-      Calc
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/tools/hls_facility/" title="Hls Facility" class="md-nav__link">
-      Hls Facility
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/tools/hls_facility_good/" title="Hls Facility Good" class="md-nav__link">
-      Hls Facility Good
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/tools/hls_facility_old/" title="Hls Facility Old" class="md-nav__link">
-      Hls Facility Old
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../reference/hielen3/tools/" title="Index" class="md-nav__link">
-      Index
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
+        </ul>
+      </nav>
+    </li>
+  
 
     
   </ul>
@@ -2056,11 +2353,13 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -2070,7 +2369,27 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v330" class="md-nav__link">
+    v3.3.0
+  </a>
+  
+    <nav class="md-nav" aria-label="v3.3.0">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10-ottobre-2022" class="md-nav__link">
+    10 Ottobre 2022
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#v329" class="md-nav__link">
@@ -2665,25 +2984,28 @@
               </div>
             
           
-          <div class="md-content">
+          <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/imgitmen/hielen3/edit/master/CHANGELOG.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/imgitmen/hielen3/edit/main/CHANGELOG.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                  
-                
-                
                 <h1 id="changelog">CHANGELOG</h1>
+<h2 id="v330"><strong>v3.3.0</strong></h2>
+<h3 id="10-ottobre-2022">10 Ottobre 2022</h3>
+<ul>
+<li>inserita la tabella eventi</li>
+<li>impelmentato check per canale</li>
+</ul>
 <h2 id="v329"><strong>v3.2.9</strong></h2>
 <h3 id="30-settembre-2022">30 Settembre 2022</h3>
 <ul>
 <li>sistemate threshold canale (chiave uuid,label,tipo(UPPER,LOWER))</li>
 <li>definto json di configurazione generale dei canali come collezione di oggetti</li>
-<li>rilassato il concetto di opernado di una serie permettendo valori arbitrari e non solo uuid di serie (viene riconoesciuto il formato uuid e caricata la serie)</li>
+<li>rilassato il concetto di operando di una serie permettendo valori arbitrari e non solo uuid di serie (viene riconoesciuto il formato uuid e caricata la serie)</li>
 <li>implementati gli sghembi</li>
 </ul>
 <h2 id="v325"><strong>v3.2.5</strong></h2>
@@ -2765,45 +3087,45 @@ modificato database: aggiunta colonna ordinal alla tabella feature_parameter e m
 <p><em>Come funziona ColorMap</em>:</p>
 <p>Incontrando il campo definito come "ColorMap" all'interno di una risposta di <code>actionschemata</code>, il front-end aprirà l'interfaccia di scelta dei colori.
 Il risultato dell'interazione dovrà essere sintetizzato in un json da fronire come parametro all'azione corrispondente. Il json dovrà essere nella forma di un array di lunghezza variabile di COPPIE (valore,colore):</p>
-<div class="codehilite"><pre><span></span><code><span class="err">[</span>
-<span class="err">    [</span>
-<span class="err">        valore,</span>
-<span class="err">        colore</span>
-<span class="err">    ],</span>
-<span class="err">    [</span>
-<span class="err">        valore,</span>
-<span class="err">        colore,</span>
-<span class="err">    ]</span>
-<span class="err">    ...</span>
-<span class="err">]</span>
+<div class="codehilite"><pre><span></span><code>[
+    [
+        valore,
+        colore
+    ],
+    [
+        valore,
+        colore,
+    ]
+    ...
+]
 </code></pre></div>
 
 <p>dove:</p>
 <p><code>valore</code> è un numero di qualsiasi genere con punto decimale</p>
 <p><code>colore</code> è una stringa di colore hex</p>
 <p>esempio:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">[</span>
-<span class="err">    [</span>
-<span class="err">        -0.25,</span>
-<span class="err">        &#39;#FFFF00&#39;</span>
-<span class="err">    ],</span>
-<span class="err">    [</span>
-<span class="err">        -0.125,</span>
-<span class="err">        &#39;#00FF00&#39;</span>
-<span class="err">    ],</span>
-<span class="err">    [</span>
-<span class="err">        0,</span>
-<span class="err">        &#39;#0000FF&#39;</span>
-<span class="err">    ],</span>
-<span class="err">    [</span>
-<span class="err">        0.5,</span>
-<span class="err">        &#39;#FF00FF&#39;</span>
-<span class="err">    ],</span>
-<span class="err">    [</span>
-<span class="err">        1,</span>
-<span class="err">        &#39;#AEBD00&#39;</span>
-<span class="err">    ],</span>
-<span class="err">                                            ]</span>
+<div class="codehilite"><pre><span></span><code>[
+    [
+        -0.25,
+        &#39;#FFFF00&#39;
+    ],
+    [
+        -0.125,
+        &#39;#00FF00&#39;
+    ],
+    [
+        0,
+        &#39;#0000FF&#39;
+    ],
+    [
+        0.5,
+        &#39;#FF00FF&#39;
+    ],
+    [
+        1,
+        &#39;#AEBD00&#39;
+    ],
+                                            ]
 </code></pre></div>
 
 <p>Un array del genere verrebbe inteso in questo modo:</p>
@@ -2815,45 +3137,45 @@ Il risultato dell'interazione dovrà essere sintetizzato in un json da fronire c
 <p>[1.0,inf) : <img alt="#AEBD00" src="https://via.placeholder.com/15/aebd00/000000?text=+" /></p>
 <p>L'informazione sulla colormap può essere associata ad ongi singola serire dati e può essere fornita in front-end su richiesta: allo scopo L'API <code>features</code> è stata modificata in modo da fornire la colormap insieme con i parametri delle features specificando l'opzione info=parameters,...</p>
 <p><a href="https://development.imgback.com/api/hielen2/features/esempio4?info=parameters">esempio (vedi chiamata)</a>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    ...,</span>
-<span class="err">    &quot;parameters&quot;: [</span>
-<span class="err">        {</span>
-<span class="err">            &quot;series&quot;: &quot;2b6c9efb4e83f64e757ce862f8b6c2e0&quot;,</span>
-<span class="err">            &quot;param&quot;: &quot;East-West_Displacement&quot;,</span>
-<span class="err">            &quot;unit&quot;: &quot;mm&quot;,</span>
-<span class="err">            &quot;cmap&quot;: [</span>
-<span class="err">                [</span>
-<span class="err">                    -0.25,</span>
-<span class="err">                    &quot;#FFFF00&quot;,</span>
-<span class="err">                    0</span>
-<span class="err">                ],</span>
-<span class="err">                [</span>
-<span class="err">                    -0.125,</span>
-<span class="err">                    &quot;#00FF00&quot;,</span>
-<span class="err">                    10</span>
-<span class="err">                ],</span>
-<span class="err">                [</span>
-<span class="err">                    0,</span>
-<span class="err">                    &quot;#0000FF&quot;,</span>
-<span class="err">                    20</span>
-<span class="err">                ],</span>
-<span class="err">                [</span>
-<span class="err">                    0.5,</span>
-<span class="err">                    &quot;#FF00FF&quot;,</span>
-<span class="err">                    60</span>
-<span class="err">                ],</span>
-<span class="err">                [</span>
-<span class="err">                    1,</span>
-<span class="err">                    &quot;#AEBD00&quot;,</span>
-<span class="err">                    100</span>
-<span class="err">                ]</span>
-<span class="err">            ]</span>
-<span class="err">        },</span>
-<span class="err">        ...</span>
-<span class="err">    ],</span>
-<span class="err">    ...</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code>{
+    ...,
+    &quot;parameters&quot;: [
+        {
+            &quot;series&quot;: &quot;2b6c9efb4e83f64e757ce862f8b6c2e0&quot;,
+            &quot;param&quot;: &quot;East-West_Displacement&quot;,
+            &quot;unit&quot;: &quot;mm&quot;,
+            &quot;cmap&quot;: [
+                [
+                    -0.25,
+                    &quot;#FFFF00&quot;,
+                    0
+                ],
+                [
+                    -0.125,
+                    &quot;#00FF00&quot;,
+                    10
+                ],
+                [
+                    0,
+                    &quot;#0000FF&quot;,
+                    20
+                ],
+                [
+                    0.5,
+                    &quot;#FF00FF&quot;,
+                    60
+                ],
+                [
+                    1,
+                    &quot;#AEBD00&quot;,
+                    100
+                ]
+            ]
+        },
+        ...
+    ],
+    ...
+}
 </code></pre></div>
 
 <p>dove ogni <code>cmap</code> è un array ordinato di triplette utile alla creazione della relativa colorbar. Ogni tipletta fornisce questa infromazione:</p>
@@ -2933,20 +3255,20 @@ GET <code>/query/cloud/</code> (futura)</p>
 <ul>
 <li>
 <p>Introdotti gli slice temporali come estenzione di marshmallow.field mappati sulla classe slice di python:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">Provides</span> <span class="n">python</span> <span class="k">object</span> <span class="n">which</span> <span class="n">performs</span> <span class="n">selection</span> <span class="k">on</span> <span class="n">narry</span><span class="p">.</span> <span class="n">It</span> <span class="n">axcept</span> <span class="n">a</span> <span class="n">three</span> <span class="n">filed</span>
-<span class="n">string</span> <span class="n">separated</span> <span class="k">by</span> <span class="ss">&quot;:&quot;</span><span class="p">.</span>
+<div class="codehilite"><pre><span></span><code>Provides python object which performs selection on narry. It axcept a three filed
+string separated by &quot;:&quot;.
 
-<span class="ss">&quot;:&quot;</span> <span class="n">presence</span> <span class="k">is</span> <span class="n">managed</span> <span class="k">as</span><span class="p">:</span>
+&quot;:&quot; presence is managed as:
 
-<span class="ss">&quot;start:stop:step&quot;</span>
+&quot;start:stop:step&quot;
 
-<span class="n">ie</span><span class="p">.:</span>
+ie.:
 
-    <span class="ss">&quot;start:stop&quot;</span> <span class="o">-</span> <span class="n">extracts</span> <span class="k">from</span> <span class="k">start</span> <span class="k">to</span> <span class="n">stop</span>
+    &quot;start:stop&quot; - extracts from start to stop
 
-    <span class="ss">&quot;start:&quot;</span> <span class="o">-</span> <span class="n">extracts</span> <span class="k">from</span> <span class="k">start</span> <span class="k">to</span> <span class="k">max</span>
+    &quot;start:&quot; - extracts from start to max
 
-    <span class="ss">&quot;start&quot;</span> <span class="o">-</span> <span class="k">extract</span> <span class="n">exactly</span> <span class="k">start</span>
+    &quot;start&quot; - extract exactly start
 </code></pre></div>
 
 </li>
@@ -3035,17 +3357,17 @@ GET <code>/query/cloud/</code> (futura)</p>
 <ul>
 <li>
 <p><strong>GET /parametes</strong>: lo schema di ritorno è il seguente (semplicemente <em>"param"</em> al posto di <em>"name"</em>):</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{    ...,</span>
-<span class="err">     &quot;data&quot;: {</span>
-<span class="err">        &quot;ARCCE01&quot;: [</span>
-<span class="err">            {</span>
-<span class="err">                &quot;series&quot;: &quot;ARCCE01_Rotazione_X&quot;,</span>
-<span class="err">                &quot;param&quot;: &quot;Rotazione X&quot;,</span>
-<span class="err">                &quot;unit&quot;: &quot;mm/m&quot;},</span>
-<span class="err">               .....</span>
-<span class="err">            }</span>
-<span class="err">        ]</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code>{    ...,
+     &quot;data&quot;: {
+        &quot;ARCCE01&quot;: [
+            {
+                &quot;series&quot;: &quot;ARCCE01_Rotazione_X&quot;,
+                &quot;param&quot;: &quot;Rotazione X&quot;,
+                &quot;unit&quot;: &quot;mm/m&quot;},
+               .....
+            }
+        ]
+}
 </code></pre></div>
 
 </li>
@@ -3061,61 +3383,61 @@ GET <code>/query/cloud/</code> (futura)</p>
 </li>
 </ul>
 <p>ritorna:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">[ { &quot;timestamp&quot;:....,&quot;value&quot;:.... }, { &quot;timestamp&quot;:...., &quot;value&quot;:.... }, .... ]</span>
+<div class="codehilite"><pre><span></span><code>[ { &quot;timestamp&quot;:....,&quot;value&quot;:.... }, { &quot;timestamp&quot;:...., &quot;value&quot;:.... }, .... ]
 </code></pre></div>
 
 <p>esempio:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">GET</span> <span class="p">..</span><span class="o">/</span><span class="n">actions</span><span class="o">/</span><span class="n">featurecode</span><span class="o">/</span><span class="n">config</span>
+<div class="codehilite"><pre><span></span><code>GET ../actions/featurecode/config
 
 
-<span class="err">{</span>
-    <span class="ss">&quot;meta&quot;</span><span class="p">:</span> <span class="err">{</span>
-        <span class="ss">&quot;response&quot;</span><span class="p">:</span> <span class="ss">&quot;ok&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;message&quot;</span><span class="p">:</span> <span class="ss">&quot;&quot;</span><span class="p">,</span>
-        <span class="ss">&quot;data_type&quot;</span><span class="p">:</span> <span class="ss">&quot;GET /actions/ciaociaociao4/config&quot;</span>
-    <span class="err">}</span><span class="p">,</span>
-    <span class="ss">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="p">[</span>
-            <span class="err">{</span>
-                <span class="ss">&quot;timestamp&quot;</span><span class="p">:</span> <span class="ss">&quot;2020-12-30 01:00:05&quot;</span><span class="p">,</span>
-                <span class="ss">&quot;value&quot;</span><span class="p">:</span> <span class="err">{</span>
-                    <span class="ss">&quot;master_image&quot;</span><span class="p">:</span> <span class="ss">&quot;TIFF image data, little-endian, direntries=14, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;step_size&quot;</span><span class="p">:</span> <span class="ss">&quot;35&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;window_size_change&quot;</span><span class="p">:</span> <span class="ss">&quot;10&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;transform&quot;</span><span class="p">:</span> <span class="p">[</span>
-                        <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">464947</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span>
-                        <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="o">-</span><span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">7977067</span><span class="p">.</span><span class="mi">5</span>
-                    <span class="p">],</span>
-                    <span class="ss">&quot;cache&quot;</span><span class="p">:</span> <span class="ss">&quot;20201230010005&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;crs&quot;</span><span class="p">:</span> <span class="k">null</span>
-                <span class="err">}</span>
-            <span class="err">}</span><span class="p">,</span>
-            <span class="err">{</span>
-                <span class="ss">&quot;timestamp&quot;</span><span class="p">:</span> <span class="ss">&quot;2020-12-30 01:00:07&quot;</span><span class="p">,</span>
-                <span class="ss">&quot;value&quot;</span><span class="p">:</span> <span class="err">{</span>
-                    <span class="ss">&quot;master_image&quot;</span><span class="p">:</span> <span class="ss">&quot;TIFF image data, little-endian, direntries=16, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;timestamp&quot;</span><span class="p">:</span> <span class="ss">&quot;2020-12-30 01:00:07&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;step_size&quot;</span><span class="p">:</span> <span class="ss">&quot;35&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;window_size_change&quot;</span><span class="p">:</span> <span class="ss">&quot;10&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;transform&quot;</span><span class="p">:</span> <span class="p">[</span>
-                        <span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">464947</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span>
-                        <span class="mi">0</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="o">-</span><span class="mi">15</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span>
-                        <span class="mi">7977067</span><span class="p">.</span><span class="mi">5</span>
-                    <span class="p">],</span>
-                    <span class="ss">&quot;cache&quot;</span><span class="p">:</span> <span class="ss">&quot;20201230010007&quot;</span><span class="p">,</span>
-                    <span class="ss">&quot;crs&quot;</span><span class="p">:</span> <span class="ss">&quot;EPSG:32622&quot;</span>
-                <span class="err">}</span>
-            <span class="err">}</span>
-        <span class="p">]</span>
-    <span class="p">]</span>
-<span class="err">}</span>
+{
+    &quot;meta&quot;: {
+        &quot;response&quot;: &quot;ok&quot;,
+        &quot;message&quot;: &quot;&quot;,
+        &quot;data_type&quot;: &quot;GET /actions/ciaociaociao4/config&quot;
+    },
+    &quot;data&quot;: [
+        [
+            {
+                &quot;timestamp&quot;: &quot;2020-12-30 01:00:05&quot;,
+                &quot;value&quot;: {
+                    &quot;master_image&quot;: &quot;TIFF image data, little-endian, direntries=14, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545&quot;,
+                    &quot;step_size&quot;: &quot;35&quot;,
+                    &quot;window_size_change&quot;: &quot;10&quot;,
+                    &quot;transform&quot;: [
+                        15.0,
+                        0.0,
+                        464947.5,
+                        0.0,
+                        -15.0,
+                        7977067.5
+                    ],
+                    &quot;cache&quot;: &quot;20201230010005&quot;,
+                    &quot;crs&quot;: null
+                }
+            },
+            {
+                &quot;timestamp&quot;: &quot;2020-12-30 01:00:07&quot;,
+                &quot;value&quot;: {
+                    &quot;master_image&quot;: &quot;TIFF image data, little-endian, direntries=16, height=1842, bps=16, compression=none, PhotometricIntepretation=BlackIsZero, width=3545&quot;,
+                    &quot;timestamp&quot;: &quot;2020-12-30 01:00:07&quot;,
+                    &quot;step_size&quot;: &quot;35&quot;,
+                    &quot;window_size_change&quot;: &quot;10&quot;,
+                    &quot;transform&quot;: [
+                        15.0,
+                        0.0,
+                        464947.5,
+                        0.0,
+                        -15.0,
+                        7977067.5
+                    ],
+                    &quot;cache&quot;: &quot;20201230010007&quot;,
+                    &quot;crs&quot;: &quot;EPSG:32622&quot;
+                }
+            }
+        ]
+    ]
+}
 </code></pre></div>
 
 <h3 id="15-gennaio-2021"><strong>15 Gennaio 2021</strong></h3>
@@ -3126,8 +3448,8 @@ GET <code>/query/cloud/</code> (futura)</p>
 <p>Implementati i metodi e le classi per la gestione agnostica delle azioni ed il recupero degli schemi: <code>getActionSchema</code>, <code>moduleAction</code>, <code>HielenSource.execAction</code>, <code>HielenSource.getActionValues</code></p>
 <p>Implementata la gestione dell'ambiente di cache dedicato alle singole istanze di HielenSource: <code>HielenSource.makeCachePath</code>, <code>HielenSource.getRelativePath</code></p>
 <p>Definita la classe primitiva per i modelli di schema per le azioni che impone la definizione della marcatura temporale:</p>
-<div class="codehilite"><pre><span></span><code><span class="err"> class ActionSchema(Schema):</span>
-<span class="err">    timestamp = fields.Str(required=True, allow_none=False)</span>
+<div class="codehilite"><pre><span></span><code> <span class="k">class</span> <span class="n">ActionSchema</span>(<span class="n">Schema</span>):
+    <span class="n">timestamp</span> = <span class="n">fields</span>.<span class="nb">Str</span>(<span class="k">required</span>=<span class="nb">True</span>, <span class="n">allow_none</span>=<span class="nb">False</span>)
 </code></pre></div>
 
 </li>
@@ -3176,33 +3498,33 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 <li>Implementata <strong>working</strong> POST <code>/actions/{feature}/{form}</code> tramite content-type/multipart dinamico definito dal prototipo: L'api è collegata ai moduli reali delle tipologie definiti come templates, con la funzionalità minima di salvare i parametri in ingresso. I moduli sono in fase di sviluppo e man mano che vengono implementati le funzionalità aumenteranno. </li>
 <li>Implementato Loading dinamico dei moduli di elaborazione definiti come estensioni di <code>hielen2.datalink.HielenSource</code></li>
 <li>Implementata <strong>working</strong> GET <code>/actions/{feature}[/{form}]</code>: Per ogni form richiesta, risponde con tutti i parametri definiti nel relativo prototipo, riempiti con i valori definiti tramite la POST della stessa api. I valori non precedentemente forniti vengono impostati a null</li>
-<li>Riveduta e corretta GET <code>prototypes/{prototype}/forms[/form]</code>: <strong>ATTENZIONE</strong> adesso risponde con TUTTI i campi dentro il dizionario "args" e comunica i campi obbligatori attraverso l'array "mandatory". Questa struttura è più versatile in quanto, una volta definito il set completo degli argomenti, è possibile definire un numero arbitrario di sottoinsiemi predicativi non necessariamente distiniti: Oltre al sottoinsieme "mandatory" si potrebbe, ad esempio, definire un sottoinsieme di immutabili. Qui sotto una struttura di esempio:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;data&quot;: {</span>
-<span class="err">        &quot;args&quot;: {</span>
-<span class="err">            &quot;epsg&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;master_image&quot;: &quot;file&quot;,</span>
-<span class="err">            &quot;negative_pixel_y_size&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;pixel_x_size&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;rotation_about_the_x_axis&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;rotation_about_the_y_axis&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;step_size&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;window_size_change&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;world_file&quot;: &quot;file&quot;,</span>
-<span class="err">            &quot;x_coordinate_of_upper_left_pixel_center&quot;: &quot;string&quot;,</span>
-<span class="err">            &quot;y_coordinate_of_upper_left_pixel_center&quot;: &quot;string&quot;</span>
-<span class="err">        },</span>
-<span class="err">        &quot;mandatory&quot;: [</span>
-<span class="err">            &quot;master_image&quot;,</span>
-<span class="err">            &quot;step_size&quot;,</span>
-<span class="err">            &quot;window_size_change&quot;</span>
-<span class="err">        ]</span>
-<span class="err">    },</span>
-<span class="err">    &quot;meta&quot;: {</span>
-<span class="err">        &quot;data_type&quot;: &quot;GET /prototypes/PhotoMonitoring/forms/config&quot;,</span>
-<span class="err">        &quot;message&quot;: &quot;&quot;,</span>
-<span class="err">        &quot;response&quot;: &quot;ok&quot;</span>
-<span class="err">    }</span>
-<span class="err">}</span>
+<li>Riveduta e corretta GET <code>prototypes/{prototype}/forms[/form]</code>: <strong>ATTENZIONE</strong> adesso risponde con TUTTI i campi dentro il dizionario "args" e comunica i campi obbligatori attraverso l'array "mandatory". Questa struttura è più versatile in quanto, una volta definito il set completo degli argomenti, è possibile definire un numero arbitrario di sottoinsiemi predicativi non necessariamente distiniti: Oltre al sottoinsieme "mandatory" si potrebbe, ad esempio, definire un sottoinsieme di immutabili. Qui sotto una struttura di esempio:<div class="codehilite"><pre><span></span><code>{
+    &quot;data&quot;: {
+        &quot;args&quot;: {
+            &quot;epsg&quot;: &quot;string&quot;,
+            &quot;master_image&quot;: &quot;file&quot;,
+            &quot;negative_pixel_y_size&quot;: &quot;string&quot;,
+            &quot;pixel_x_size&quot;: &quot;string&quot;,
+            &quot;rotation_about_the_x_axis&quot;: &quot;string&quot;,
+            &quot;rotation_about_the_y_axis&quot;: &quot;string&quot;,
+            &quot;step_size&quot;: &quot;string&quot;,
+            &quot;window_size_change&quot;: &quot;string&quot;,
+            &quot;world_file&quot;: &quot;file&quot;,
+            &quot;x_coordinate_of_upper_left_pixel_center&quot;: &quot;string&quot;,
+            &quot;y_coordinate_of_upper_left_pixel_center&quot;: &quot;string&quot;
+        },
+        &quot;mandatory&quot;: [
+            &quot;master_image&quot;,
+            &quot;step_size&quot;,
+            &quot;window_size_change&quot;
+        ]
+    },
+    &quot;meta&quot;: {
+        &quot;data_type&quot;: &quot;GET /prototypes/PhotoMonitoring/forms/config&quot;,
+        &quot;message&quot;: &quot;&quot;,
+        &quot;response&quot;: &quot;ok&quot;
+    }
+}
 </code></pre></div>
 
 </li>
@@ -3215,11 +3537,11 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 </ul>
 <h3 id="2-dicembre-2020"><strong>2 Dicembre 2020</strong></h3>
 <ul>
-<li>Struttura definitiva delle features:<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;properties&quot;:&quot;...&quot;</span>
-<span class="err">    &quot;parameters&quot;:&quot;...&quot;</span>
-<span class="err">    &quot;geometry&quot;:&quot;...&quot;</span>
-<span class="err">}</span>
+<li>Struttura definitiva delle features:<div class="codehilite"><pre><span></span><code>{
+    &quot;properties&quot;:&quot;...&quot;
+    &quot;parameters&quot;:&quot;...&quot;
+    &quot;geometry&quot;:&quot;...&quot;
+}
 </code></pre></div>
 
 </li>
@@ -3252,17 +3574,17 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 <ul>
 <li>
 <p>per coerenza rivisti i parametri di POST <code>/feature</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="c">uid:&lt;string&gt;</span>
-<span class="c">prototype:&lt;string&gt;</span>
-<span class="c">properties:&lt;json schema Properties&gt;</span>
-<span class="c">geometry:&lt;json schema GeoJson&gt;</span>
+<div class="codehilite"><pre><span></span><code>uid:&lt;string&gt;
+prototype:&lt;string&gt;
+properties:&lt;json schema Properties&gt;
+geometry:&lt;json schema GeoJson&gt;
 </code></pre></div>
 
 </li>
 <li>
 <p>analogo discorso per  PUT <code>/feature/{uid}</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="c">properties:&lt;json schema Properties&gt;</span>
-<span class="c">geometry:&lt;json schema GeoJson&gt;</span>
+<div class="codehilite"><pre><span></span><code>properties:&lt;json schema Properties&gt;
+geometry:&lt;json schema GeoJson&gt;
 </code></pre></div>
 
 </li>
@@ -3285,43 +3607,43 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 <li>rinominazione POST <code>/elements</code> -&gt; POST <code>/features</code>.</li>
 <li>
 <p>rinominazione GET <code>/elements</code> -&gt; GET <code>/parameters</code> e modifica uscita in questo schema:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-    <span class="o">&lt;</span><span class="n">feature1_UID</span><span class="o">&gt;</span><span class="p">:[</span>
-        <span class="err">{</span>
-            <span class="ss">&quot;series&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_param1_series_UID</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;param&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_param1_name</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;um&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_param1_measurement_unit</span><span class="o">&gt;</span>
-        <span class="err">}</span><span class="p">,</span>
+<div class="codehilite"><pre><span></span><code>{
+    &lt;feature1_UID&gt;:[
+        {
+            &quot;series&quot;:&lt;feature1_param1_series_UID&gt;,
+            &quot;param&quot;:&lt;feature1_param1_name&gt;,
+            &quot;um&quot;:&lt;feature1_param1_measurement_unit&gt;
+        },
 
-        <span class="p">...</span>
+        ...
 
-        <span class="err">{</span>
-            <span class="ss">&quot;series&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_paramN_series_UID</span><span class="p">,</span>
-            <span class="ss">&quot;param&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_paramN_name</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;um&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">feature1_paramN_meaurement_unit</span><span class="o">&gt;</span>
+        {
+            &quot;series&quot;:&lt;feature1_paramN_series_UID,
+            &quot;param&quot;:&lt;feature1_paramN_name&gt;,
+            &quot;um&quot;:&lt;feature1_paramN_meaurement_unit&gt;
 
-        <span class="err">}</span>
-    <span class="p">],</span>
+        }
+    ],
 
-    <span class="p">...</span>
+    ...
 
-    <span class="o">&lt;</span><span class="n">featureX_UID</span><span class="o">&gt;</span><span class="p">:[</span>
-        <span class="err">{</span>
-            <span class="ss">&quot;series&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_param1_series_UID</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;param&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_param1_name</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;um&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_param1_measurement_unit</span><span class="o">&gt;</span>
-        <span class="err">}</span><span class="p">,</span>
+    &lt;featureX_UID&gt;:[
+        {
+            &quot;series&quot;:&lt;featureX_param1_series_UID&gt;,
+            &quot;param&quot;:&lt;featureX_param1_name&gt;,
+            &quot;um&quot;:&lt;featureX_param1_measurement_unit&gt;
+        },
 
-        <span class="p">...</span>
+        ...
 
-        <span class="err">{</span>
-            <span class="ss">&quot;series&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_paramM_series_UID</span><span class="p">,</span>
-            <span class="ss">&quot;param&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_paramM_name</span><span class="o">&gt;</span><span class="p">,</span>
-            <span class="ss">&quot;um&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="n">featureX_paramM_meaurement_unit</span><span class="o">&gt;</span>
+        {
+            &quot;series&quot;:&lt;featureX_paramM_series_UID,
+            &quot;param&quot;:&lt;featureX_paramM_name&gt;,
+            &quot;um&quot;:&lt;featureX_paramM_meaurement_unit&gt;
 
-        <span class="err">}</span>
-    <span class="p">]</span>
-<span class="err">}</span>
+        }
+    ]
+}
 </code></pre></div>
 
 </li>
@@ -3336,39 +3658,39 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 <p>nota 3: <strong><em>"date"</em></strong> diventa <strong><em>"timestamp"</em></strong></p>
 <p>nota 3: dalle properties vengono elminate <strong><em>"z"</em></strong> e <strong><em>"mslm"</em></strong>.</p>
 <p>nota 4: <strong><em>"state"</em></strong> viene mantenuto ma per ora è inutilizzato</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-    <span class="ss">&quot;features&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="err">{</span>
-            <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;Feature&quot;</span><span class="p">,</span>
-            <span class="ss">&quot;properties&quot;</span><span class="p">:</span> <span class="err">{</span>
-                <span class="ss">&quot;uid&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                <span class="ss">&quot;label&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                <span class="ss">&quot;context&quot;</span><span class="p">:...,</span>
-                <span class="ss">&quot;date&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                <span class="ss">&quot;style&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                <span class="ss">&quot;state&quot;</span><span class="p">:</span> <span class="p">...</span>
-            <span class="err">}</span><span class="p">,</span>
-            <span class="ss">&quot;geometry&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">GeoJson</span> <span class="n">Validable</span><span class="o">&gt;</span>
-        <span class="err">}</span><span class="p">,</span>
+<div class="codehilite"><pre><span></span><code>{
+    &quot;features&quot;: [
+        {
+            &quot;type&quot;: &quot;Feature&quot;,
+            &quot;properties&quot;: {
+                &quot;uid&quot;: ...,
+                &quot;label&quot;: ...,
+                &quot;context&quot;:...,
+                &quot;date&quot;: ...,
+                &quot;type&quot;: ...,
+                &quot;style&quot;: ...,
+                &quot;state&quot;: ...
+            },
+            &quot;geometry&quot;: &lt;GeoJson Validable&gt;
+        },
 
-        <span class="p">...</span>
+        ...
 
-        <span class="err">{</span>
-            <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="ss">&quot;Feature&quot;</span><span class="p">,</span>
-            <span class="ss">&quot;properties&quot;</span><span class="p">:</span> <span class="err">{</span>
-                    <span class="ss">&quot;uid&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;label&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;context&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;date&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;type&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;style&quot;</span><span class="p">:</span> <span class="p">...,</span>
-                    <span class="ss">&quot;state&quot;</span><span class="p">:</span> <span class="p">...</span>
-                <span class="err">}</span><span class="p">,</span>
-            <span class="ss">&quot;geometry&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">GeoJson</span> <span class="n">Validable</span><span class="o">&gt;</span>
-        <span class="err">}</span>
-    <span class="p">]</span>
-<span class="err">}</span>
+        {
+            &quot;type&quot;: &quot;Feature&quot;,
+            &quot;properties&quot;: {
+                    &quot;uid&quot;: ...,
+                    &quot;label&quot;: ...,
+                    &quot;context&quot;: ...,
+                    &quot;date&quot;: ...,
+                    &quot;type&quot;: ...,
+                    &quot;style&quot;: ...,
+                    &quot;state&quot;: ...
+                },
+            &quot;geometry&quot;: &lt;GeoJson Validable&gt;
+        }
+    ]
+}
 </code></pre></div>
 
 </li>
@@ -3395,16 +3717,16 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 <li>Implementate le api <strong>POST</strong> <code>../elements</code> e <strong>DELETE</strong> <code>../elements</code></li>
 <li>
 <p>L'uscita per tutte le api element (e per tutte le api con risposta json in generale), seguirà questo schema:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;meta&quot;: {</span>
-<span class="err">        &quot;data_type&quot;: &quot;DELETE /elements/ciao&quot;,</span>
-<span class="err">        &quot;response&quot;: &quot;ok&quot;</span>
-<span class="err">        &quot;message&quot;: &quot;&quot;,</span>
-<span class="err">    },</span>
-<span class="err">    &quot;data&quot;:{</span>
-<span class="err">        ...</span>
-<span class="err">    }</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code>{
+    &quot;meta&quot;: {
+        &quot;data_type&quot;: &quot;DELETE /elements/ciao&quot;,
+        &quot;response&quot;: &quot;ok&quot;
+        &quot;message&quot;: &quot;&quot;,
+    },
+    &quot;data&quot;:{
+        ...
+    }
+}
 </code></pre></div>
 
 </li>
@@ -3413,11 +3735,11 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 </li>
 <li>
 <p>L'api <code>/elements</code> cambia la sua risposta e per ogni parametro nella lista <em>parameters</em> degli elementi viene agiunto il codice della serie di riferimento che può essere fornito senza modifiche a <code>/data</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    &quot;series&quot;:&lt;seriescode&gt;,</span>
-<span class="err">    &quot;name&quot;:&lt;seriesname&gt;,</span>
-<span class="err">    &quot;um&quot;:&lt;seriesunit&gt;</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code>{
+    &quot;series&quot;:&lt;seriescode&gt;,
+    &quot;name&quot;:&lt;seriesname&gt;,
+    &quot;um&quot;:&lt;seriesunit&gt;
+}
 </code></pre></div>
 
 </li>
@@ -3445,6 +3767,7 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
             </article>
           </div>
         </div>
+        
       </main>
       
         
@@ -3502,19 +3825,13 @@ Nella classe vengono definiti i tipi dei campi (<code>marshmallow.fields</code> 
 </footer>
       
     </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
     
-      <script src="../assets/javascripts/vendor.2d1db4bd.min.js"></script>
-      <script src="../assets/javascripts/bundle.6627ddf3.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-      
-      <script>
-        app = initialize({
-          base: "..",
-          features: [],
-          search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
+    
+      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
       
     
   </body>
