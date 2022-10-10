@@ -141,13 +141,17 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     except KeyError as e:
         return df
 
+
     for serial,paths in sertime.groupby('serial'):
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)
         u['serial']=serial
         u=u.set_index(['serial','times'])
         df=concat([df,u])
 
-    # print (df) #DEBUG
+    #print (df) #DEBUG
+
+    if df.empty:
+        return df
 
     if columns is None:
         columns = list(df.columns)
@@ -168,7 +172,6 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
         pass
 
     return df
-
 
 
 __all__ = ["retriver", "loggers" ]

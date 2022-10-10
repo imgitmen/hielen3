@@ -1,10 +1,15 @@
 CHANGELOG
 =========
+## **v3.3.0**
+### 10 Ottobre 2022
+- inserita la tabella eventi
+- impelmentato check per canale
+
 ## **v3.2.9**
 ### 30 Settembre 2022
 - sistemate threshold canale (chiave uuid,label,tipo(UPPER,LOWER))
 - definto json di configurazione generale dei canali come collezione di oggetti
-- rilassato il concetto di opernado di una serie permettendo valori arbitrari e non solo uuid di serie (viene riconoesciuto il formato uuid e caricata la serie)
+- rilassato il concetto di operando di una serie permettendo valori arbitrari e non solo uuid di serie (viene riconoesciuto il formato uuid e caricata la serie)
 - implementati gli sghembi
 
 

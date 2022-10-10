@@ -172,8 +172,8 @@ class HFeature(ABC):
 
     class __ParamManager__():
 
-        def __init__(self, uuid):
-            self.uuid=uuid
+        def __init__(self, feature):
+            self.feature=feature
             self.parameters=None
 
         def set(self,param,ordinal=None,**setups):
@@ -202,8 +202,10 @@ class HFeature(ABC):
 
         def __demand__(self):
             try:
-                p=db['features_parameters'][self.uuid]['series'].droplevel(['feature'])
-                self.parameters=p.apply(HSeries).to_dict()
+                p=db['features_parameters'][self.feature.uuid]['series'].droplevel('feature').to_frame()
+                p.columns=['uuid']
+                self.parameters=p.apply(lambda x: HSeries(**x) ,axis=1).to_dict()
+
             except KeyError as e:
                 self.parameters = {}
 
@@ -228,13 +230,13 @@ class HFeature(ABC):
             if isinstance(series,HSeries):
                 series=series.uuid
 
-            db['features_parameters'][(self.uuid,param)]={"series":series,"ordinal":ordinal}
+            db['features_parameters'][(self.feature.uuid,param)]={"series":series,"ordinal":ordinal}
             self.__demand__()
 
 
         def pop(self,param):
             try:
-                out=db['features_parameters'].pop((self.uuid,param))
+                out=db['features_parameters'].pop((self.feature.uuid,param))
                 self.__demand__()
                 return out
             except KeyError:
@@ -255,7 +257,7 @@ class HFeature(ABC):
                 raise ValueError(feature)
 
         self.__dict__.update(feature)
-        self.parameters=HFeature.__ParamManager__(self.uuid)
+        self.parameters=HFeature.__ParamManager__(self)
         self.__geometry=None
         self.__deleted__=False
         self.__actions_schemata__=None

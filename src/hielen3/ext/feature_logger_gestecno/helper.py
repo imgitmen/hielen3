@@ -33,7 +33,7 @@ def retrive(path):
                 a = a[a[0].apply(lambda x: match('^\d{4}-\d{2}',x)).notna()]
 
         except UnicodeDecodeError as e:
-            a=read_csv(path,skiprows=3,parse_dates=[0], sep=";", header=None, encoding='latin1')
+            a=read_csv(path,skiprows=3,parse_dates=[0], dayfirst=True, sep=";", header=None, encoding='latin1')
 
         a.columns = [ 'times', *a.columns[1:] ]
     

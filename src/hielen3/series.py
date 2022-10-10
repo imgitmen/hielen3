@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # coding=utf-8
-from pandas import DataFrame, Series, concat, DatetimeIndex 
+from pandas import DataFrame, Series, concat, DatetimeIndex, Index 
 from concurrent.futures import ThreadPoolExecutor
 from functools import wraps
-from numpy import nan, unique, round
+from numpy import nan, unique, round, inf
 from importlib import import_module
 from hielen3 import db
 from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, dataframe2jsonizabledict
 from uuid import UUID
+import re
 import json
 import traceback
 
@@ -29,8 +30,27 @@ class HSeries:
         if self.__loaded__:
             return
 
-        series_info = dataframe2jsonizabledict(db["series"][self.uuid])
+        try:
+            ser=re.split("\s*>\s*", self.uuid)
+            
+            if ser.__len__() == 2:
+                try:
+                    feat=db['features'][ser[0]]
+                except Exception as e:
+                    feats=db['features'][:]
+                    feat=feats[ feats['label'] == ser[0] ]
 
+                fuuid,fname=feat[['uuid','label']].squeeze()
+                
+                self.feature=fname
+                self.uuid=db['features_parameters'][fuuid,ser[1]]['series'].squeeze()
+                self.parameter=ser[1]
+
+        except Exception as e:
+            raise KeyError (f"Series {self.uuid} not found.")
+
+        series_info=db["series"][self.uuid]
+        series_info = dataframe2jsonizabledict(series_info)
         self.__dict__.update(series_info)
 
         try:
@@ -41,6 +61,20 @@ class HSeries:
         series_info['operands']={ w.pop('label'): w for w in operands.values() }
 
         self.generator = HSeries._Generator(**series_info, orient=self.orient)
+
+        try:
+            t=db['series_thresholds'][self.uuid]
+            t=t[['value','color']].reset_index().drop('series',axis=1).set_index('value').sort_index()
+
+            #t=t[['value','color']].reset_index().drop('series',axis=1).to_dict(orient='records')
+
+            self.thresholds=t
+        except Exception as e:
+            self.thresholds=DataFrame([],
+                    columns=['ttype','label','columns'],
+                    index=Index([],name='value'),
+                    dtype='object')
+
 
         self.__loaded__=True
 
@@ -58,13 +92,30 @@ class HSeries:
             raise ValueError
 
         self.uuid=uuid
-        self.orient= orient or 'data'
+        self.orient = orient or 'data'
+
+        self.feature = None
+        self.param = None
+
         self.__loaded__=False
         if not delayed:
             self.__delayed_load__()
 
     def clean_cache(self,times=None):
-        db['datacache'].pop(key=(self.uuid, times))
+        
+        try:
+            db['datacache'].pop(key=(self.uuid, times))
+        except KeyError as e:
+            pass
+
+        try:
+            db['events'].pop(key=(self.uuid,times))
+        except KeyError as e:
+            pass
+
+        self.attribute_update('last',None)
+        self.attribute_update('last_event',None)
+        self.attribute_update('status',None)
 
 
     def setup(
@@ -163,6 +214,136 @@ class HSeries:
                 db["series_thresholds"][uuid]=t
 
         return HSeries(uuid)
+    
+
+    def attribute_update(self, attribute=None, value=None):
+
+        if attribute is None:
+            return
+
+        db["series"][self.uuid]={attribute:value}
+
+        if self.__loaded__:
+            self.__loaded__ = False
+            self.__delayed_load__()
+
+    def check(self, times=None, cache=None, geometry=None, **kwargs):
+
+        if cache == 'new':
+            times=slice(self.last_event,None,None)
+            querycache=None
+        else:
+            querycache=cache
+
+        aa=self.thresholds
+
+        if aa.empty:
+            return DataFrame([],columns=[self.uuid,'value','ttype','label','color'],index=Index([],name='timestamp'))
+    
+        if aa['ttype'].iloc[0] == 'LOWER':
+            aa=concat([aa,DataFrame([[None,'LOWER',None]], index=Index([-inf],name='value'), columns=['label','ttype','color'])]).sort_index()
+        
+        
+        if aa['ttype'].iloc[-1] == 'UPPER':
+            aa=concat([aa,DataFrame([[None,'UPPER',None]], index=Index([inf],name='value'), columns=['label','ttype','color'])]).sort_index()
+
+        aa=aa.reset_index()
+
+        bb=aa['value'].copy()
+
+        aa.loc[aa['ttype']=='LOWER',['value','label','color']] = aa.loc[aa['ttype']=='LOWER',['value','label','color']].shift(-1)
+        aa.loc[aa['ttype']=='UPPER',['value','label','color']] = aa.loc[aa['ttype']=='UPPER',['value','label','color']].shift(1)
+        aa['limit']=bb
+        aa=aa[aa['value'].notna()]
+        aa.index.name='idt'
+        aa=aa.reset_index()
+
+        d=self.data(times=times,cache=querycache,geometry=geometry, **kwargs)
+
+        try:
+            d=d.to_frame()
+        except Exception as e:
+            pass
+
+        v=d.columns[0]
+
+        for i in aa.index:
+            d.loc[d[v].between(
+                min(aa.loc[i,'value'],aa.loc[i,'limit']),
+                max(aa.loc[i,'value'],aa.loc[i,'limit']),
+                inclusive='neither'
+                ),'value']=aa.loc[i,'idt']
+    
+     
+        aa=aa.set_index('idt')
+
+        d=d.reset_index().set_index('value').sort_index()
+
+        d=d.join(aa,how='left').set_index('timestamp').sort_index()[[v,'value','ttype','label','color']]
+
+        d.columns=["reading_value","threshold_value","ttype","label","color"]
+
+        d['series']=v
+
+
+        d=d.reset_index()
+
+        def fillth(**kwargs):
+            db["events"][{'series':kwargs['series']}]=kwargs
+
+        d=d.replace(nan,"#")
+
+        d['end'] = d['timestamp'].copy()
+
+        d['timestamp']=d[~(d["label"] == d['label'].shift(1)) | ~(d["ttype"] == d['ttype'].shift(1)) ]['end']
+
+        d['timestamp'] = d['timestamp'].pad()
+
+
+        d=d.set_index('timestamp')
+
+        d['count']=d['label'].groupby('timestamp').count()
+
+        d=d.reset_index()
+
+
+        d=d[~(d["label"] == d['label'].shift(-1)) | ~(d["ttype"] == d['ttype'].shift(-1)) ]
+
+        d['timestamp']=d['timestamp'].apply(str)
+
+        lastevent=str(d.tail(1)['timestamp'].squeeze())
+
+
+
+        #d['feature']=self.feature
+        #d['parameter']=self.param
+        #d['unit']=self.mu
+
+        if cache=='new':
+
+            d.apply(lambda x: fillth(**x),axis=1)
+            try:
+                self.attribute_update('last_event',str(d.tail(1)['timestamp'].squeeze()))
+                self.attribute_update('status',str(d.tail(1)['label'].squeeze()))
+            except Exception as e:
+                print ("WARNING SET LAST EVENT ", e)
+                pass
+
+        
+
+
+
+        #oldstatus=self.status
+
+        #if not newstatus == oldstatus:
+        #    pass
+        #    self.attribute_update()
+
+
+
+        return d.set_index(['series','timestamp'])
+
+
 
 
     @_threadpool
@@ -171,7 +352,7 @@ class HSeries:
 
 
     def data(self, times=None, timeref=None, cache=None, geometry=None, **kwargs):
-
+    
         if self.capability != 'data':
             raise ValueError( f"{self.uuid} has not 'data' capability" )
 
@@ -186,17 +367,27 @@ class HSeries:
             except Exception as e:
                 cache="no"
 
-        """
-        if refresh is not None and refresh and cache in ("active","data"):
-            cache = "refresh"
-        """
 
         if times is None:
             times=slice(None)
 
+        justnew=False
+
         try:
-            timefrom = max(isot2ut(self.first), isot2ut(times.start))
+            if cache == 'new':
+                justnew=True
+                timefrom = isot2ut(self.last)
+                try:
+                    cache=self.cache
+                    assert cache in ("active","data")
+                except Exception as e:
+                    cache="no"
+            else:
+                timefrom = max(isot2ut(self.first), isot2ut(times.start))
+
             times=slice(ut2isot(timefrom), times.stop, times.step )
+
+
         except Exception as e:
             pass
 
@@ -228,7 +419,7 @@ class HSeries:
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
-                raise e #DEBUG
+                #raise e #DEBUG
                 gen = DataFrame([],columns=[self.uuid],dtype='float64')
 
             try:
@@ -252,11 +443,13 @@ class HSeries:
             if cache in ("active","data","refresh"):
                 db["datacache"][self.uuid]=out
 
+
         except Exception as e:
             #raise e #DEBUG
             pass
 
-        if cache in ("active","data") and not out.empty:
+        if cache in ("active","data") and not out.empty and not justnew:
+
 
             lasttotry=str(out.index[0])
             times=slice(firstreqstart, lasttotry, times.step)
@@ -271,10 +464,14 @@ class HSeries:
             if preout.__len__():
                 out = concat([preout,out]).sort_index()
 
-
         idx = unique(out.index.values, return_index=True)[1]
         out = out.iloc[idx]
         out.index.name = "timestamp"
+
+        if not out.empty:
+
+            self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
+
 
         return out
 
@@ -490,8 +687,9 @@ class HSeries:
             locals().update(operands)
 
             # print (operands) #DEBUG
+            #print (self.operator, locals() ) #DEBUG
 
-            # print (self.operator, locals() ) #DEBUG
-            
+
             return eval(self.operator)
+
 

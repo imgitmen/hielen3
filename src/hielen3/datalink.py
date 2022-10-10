@@ -672,6 +672,8 @@ class MariadbTable(Mariadb):
             except Exception as e:
                 pass
 
+            #print (value[k])
+
             if self.columnstypes[k] in Mariadb.geotypes:
                 value[k]=f"ST_GeomFromGeoJSON({value[k]!r})"
 
