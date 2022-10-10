@@ -311,7 +311,9 @@ class HSeries:
 
         d['timestamp']=d['timestamp'].apply(str)
 
-        lastevent=str(d.tail(1)['timestamp'].squeeze())
+        d=d.tail(1)
+
+        lastevent=str(d['timestamp'].squeeze())
 
 
 
@@ -323,14 +325,13 @@ class HSeries:
 
             d.apply(lambda x: fillth(**x),axis=1)
             try:
-                self.attribute_update('last_event',str(d.tail(1)['timestamp'].squeeze()))
-                self.attribute_update('status',str(d.tail(1)['label'].squeeze()))
+                self.attribute_update('last_event',str(d['timestamp'].squeeze()))
+                self.attribute_update('status',str(d['label'].squeeze()))
             except Exception as e:
                 print ("WARNING SET LAST EVENT ", e)
                 pass
 
         
-
 
 
         #oldstatus=self.status
@@ -340,8 +341,7 @@ class HSeries:
         #    self.attribute_update()
 
 
-
-        return d.set_index(['series','timestamp'])
+        return d
 
 
 
