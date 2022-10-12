@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **v3.3.1**
+### 12 Ottobre 2022 ###
+- inserimento dell'entry "query" in hielen3.db
+
+
 ## **v3.3.0**
 ### 10 Ottobre 2022
 - inserita la tabella eventi

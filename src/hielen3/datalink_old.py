@@ -12,7 +12,6 @@ from pathlib import Path
 from hashlib import md5
 from shutil import rmtree
 from json import loads, dumps
-from numbers import Number
 import os
 import re
 
@@ -424,61 +423,59 @@ class Mariadb(DB):
         return getengine(**self.conn)
 
 
-    def __init__(self, connection, table=None, askey=None):
+    def __init__(self, connection, table, askey=None):
         self.conn = connection
+        table=table.split(".")
+        self.schema=table[0]
+        self.table=table[1]
 
-        if table is not None:
-            table=table.split(".")
-            self.schema=table[0]
-            self.table=table[1]
-
-            keysquery=f'''
-                select 
-                    COLUMN_NAME
-                from
-                    information_schema.key_column_usage
-                where
-                    TABLE_SCHEMA = {self.schema!r} and 
-                    TABLE_NAME = {self.table!r} and 
-                    CONSTRAINT_NAME = 'PRIMARY'
-                order by
-                    ORDINAL_POSITION
-                '''
-
-            columnquery=f'''
-                select
-                    COLUMN_NAME,
-                    COLUMN_TYPE
-                from
-                    information_schema.columns
-                where 
-                    TABLE_SCHEMA = {self.schema!r} and 
-                    TABLE_NAME = {self.table!r} 
-                order by
-                    ORDINAL_POSITION
+        keysquery=f'''
+            select 
+                COLUMN_NAME
+            from
+                information_schema.key_column_usage
+            where
+                TABLE_SCHEMA = {self.schema!r} and 
+                TABLE_NAME = {self.table!r} and 
+                CONSTRAINT_NAME = 'PRIMARY'
+            order by
+                ORDINAL_POSITION
             '''
 
-            e=self.engine
-            with e.connect() as connection:
-                self.columnstypes = dict(connection.execute(columnquery).all())
-                self.keys = [ l[0] for l in connection.execute(keysquery).all() ]
-            e.dispose()
+        columnquery=f'''
+            select
+                COLUMN_NAME,
+                COLUMN_TYPE
+            from
+                information_schema.columns
+            where 
+                TABLE_SCHEMA = {self.schema!r} and 
+                TABLE_NAME = {self.table!r} 
+            order by
+                ORDINAL_POSITION
+        '''
 
-            self.columns = list(self.columnstypes.keys())
-            self.selectfields= [
-                w in 
-                Mariadb.geotypes and f"ifnull(st_asgeojson({k}),'null') as {k!r}" or k
-                for k,w in
-                self.columnstypes.items()
-                ]
+        e=self.engine
+        with e.connect() as connection:
+            self.columnstypes = dict(connection.execute(columnquery).all())
+            self.keys = [ l[0] for l in connection.execute(keysquery).all() ]
+        e.dispose()
 
-            if askey is not None:
-                if not isinstance(askey,(tuple,list)):
-                    askey=[askey]
+        self.columns = list(self.columnstypes.keys())
+        self.selectfields= [
+            w in 
+            Mariadb.geotypes and f"ifnull(st_asgeojson({k}),'null') as {k!r}" or k
+            for k,w in
+            self.columnstypes.items()
+            ]
 
-                self.keys.extend([ k for k in askey if k not in self.keys and k in self.columns ])
+        if askey is not None:
+            if not isinstance(askey,(tuple,list)):
+                askey=[askey]
 
-            self.values = [ k for k in self.columns if k not in self.keys  ]
+            self.keys.extend([ k for k in askey if k not in self.keys and k in self.columns ])
+
+        self.values = [ k for k in self.columns if k not in self.keys  ]
 
 
     def save(self):
@@ -495,30 +492,6 @@ class Mariadb(DB):
     @abstractmethod
     def pop(self, key):
         pass
-
-class MariadbQuery(Mariadb):
-    def __init__(self,connection):
-        super().__init__(connection)
-
-    def __getitem__(self, stat):
-
-        e=self.engine
-        with e.begin() as connection:
-            connection.execute('start transaction')
-            out = read_sql(
-                    stat,
-                    connection,
-                    coerce_float=True,
-                    )
-        e.dispose()
-
-        return out.copy()
-
-    def __setitem__(self, key, value):
-        pass
-
-    def pop(self, stat):
-        return self.__getitem__(stat)
 
 
 class MariadbTable(Mariadb):
@@ -699,7 +672,7 @@ class MariadbTable(Mariadb):
             except Exception as e:
                 pass
 
-            #print (value[k])
+            #print (value[])
 
             if self.columnstypes[k] in Mariadb.geotypes:
                 value[k]=f"ST_GeomFromGeoJSON({value[k]!r})"
@@ -743,12 +716,17 @@ class MariadbTable(Mariadb):
 class MariadbHielenGeo(MariadbTable):
 
     def __man_na_coords__(xy,z):
+        if xy is None and z is None:
+            return None
 
-        if not isinstance(xy,(list,set,tuple)):
+        if xy is None:
             xy=[0,0]
 
-        return Point([ isinstance(a,Number) and a or 0 for a in [*xy,z]])
-            
+        if z is None:
+            z=0
+
+        return Point([*xy,z])
+
     def __init__(self,connection,table,geo_col='geometry',elev_col=None,askey=None):
         super().__init__(connection,table,askey)
 
@@ -773,19 +751,13 @@ class MariadbHielenGeo(MariadbTable):
     def __getitem__(self, key=None, delete=False):
         frame=super().__getitem__(key, delete)
 
+
         if self.elev_col is not None:
             #SET an x,y,z geojson
             #TODO Attenzione funziona solo con PUNTI!
-
-            xy=frame[self.geo_col].apply(Series,dtype="object")['coordinates']
-
-            """
             xy=frame[self.geo_col].to_frame().apply(lambda x: 
                     x['geometry'],result_type='expand',axis=1)['coordinates']
-            """
-
             managed=concat([xy,frame[self.elev_col].replace(nan,0)],axis=1)
-            
             frame[self.geo_col]=managed.apply(lambda x: 
                     MariadbHielenGeo.__man_na_coords__(x['coordinates'], x[self.elev_col]), axis=1)
             frame=frame.drop(self.elev_col,axis=1)
@@ -907,7 +879,6 @@ class MariadbHielenCache(Mariadb):
             if not out.empty and delete:
                 stat = f'DELETE FROM {self.table} WHERE {sqlcond}'
                 connection.execute(stat)
-                e.dispose()
                 return out.copy()
 
         e.dispose()

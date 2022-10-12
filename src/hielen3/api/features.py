@@ -251,9 +251,8 @@ RESPONSE CODES:
     """
 
     try:
+            
         feafra=db['features_info'][uids,cntxt][good_info]
-
-
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
 

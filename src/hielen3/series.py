@@ -227,7 +227,7 @@ class HSeries:
             self.__loaded__ = False
             self.__delayed_load__()
 
-    def check(self, times=None, cache=None, geometry=None, **kwargs):
+    def check(self, cache=None, times=None, geometry=None, **kwargs):
 
         if cache == 'new':
             times=slice(self.last_event,None,None)
@@ -238,7 +238,11 @@ class HSeries:
         aa=self.thresholds
 
         if aa.empty:
-            return DataFrame([],columns=[self.uuid,'value','ttype','label','color'],index=Index([],name='timestamp'))
+
+            d=DataFrame(
+                    [[self.uuid,self.last,'#','#','#','#','#','#','#']],
+                    columns=['series','timestamp','reading_value','threshold_value','ttype','label','color','end','count'])
+            return d.set_index(['series','timestamp'])
     
         if aa['ttype'].iloc[0] == 'LOWER':
             aa=concat([aa,DataFrame([[None,'LOWER',None]], index=Index([-inf],name='value'), columns=['label','ttype','color'])]).sort_index()
@@ -285,11 +289,7 @@ class HSeries:
 
         d['series']=v
 
-
         d=d.reset_index()
-
-        def fillth(**kwargs):
-            db["events"][{'series':kwargs['series']}]=kwargs
 
         d=d.replace(nan,"#")
 
@@ -311,28 +311,30 @@ class HSeries:
 
         d['timestamp']=d['timestamp'].apply(str)
 
-        d=d.tail(1)
 
-        lastevent=str(d['timestamp'].squeeze())
-
-
+        """
+        if lastevent:
+            d=d.tail(1)
+        """
 
         #d['feature']=self.feature
         #d['parameter']=self.param
         #d['unit']=self.mu
 
-        if cache=='new':
+        def fillth(**kwargs):
+            db["events"][{'series':kwargs['series']}]=kwargs
+       
+        d.apply(lambda x: fillth(**x),axis=1)
 
-            d.apply(lambda x: fillth(**x),axis=1)
+        newlast=str(d.tail(1)['timestamp'].squeeze())
+
+        if isot2ut(self.last_event) < isot2ut(newlast):
             try:
-                self.attribute_update('last_event',str(d['timestamp'].squeeze()))
-                self.attribute_update('status',str(d['label'].squeeze()))
+                self.attribute_update('last_event',str(d.tail(1)['timestamp'].squeeze()))
+                self.attribute_update('status',str(d.tail(1)['label'].squeeze()))
             except Exception as e:
                 print ("WARNING SET LAST EVENT ", e)
                 pass
-
-        
-
 
         #oldstatus=self.status
 
@@ -341,7 +343,8 @@ class HSeries:
         #    self.attribute_update()
 
 
-        return d
+
+        return d.set_index(['series','timestamp'])
 
 
 
