@@ -1,0 +1,8 @@
+install https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+https://mariadb.org/
+
+pip intall -U uuid pathlib MySQL mappyfile boto3 falcon geojson hug marshmallow matplotlib numpy pandas sqlalchemy filelock pycognito requests streaming_form_data
+
+pip install --force-reinstall git+ssh://git@github.com/imgitmen/hielen3.git
+

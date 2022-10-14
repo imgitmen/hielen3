@@ -1,0 +1,38 @@
+uuid **
+pathlib **
+functools ** #
+datetime ** #
+hashlib ** #
+importlib ** #
+MySQL *
+mappyfile *
+boto3 *
+falcon *
+geojson *
+hug *
+marshmallow *
+matplotlib *
+numpy *
+pandas * 
+sqlalchemy *
+concurrent
+filelock *
+pycognito *
+requests *
+streaming_form_data *
+shutil
+tempfile
+threading
+time
+traceback
+urllib
+warnings
+abc
+collections
+glob
+json
+numbers
+os
+random
+re
+# https://visualstudio.microsoft.com/visual-cpp-build-tools/
