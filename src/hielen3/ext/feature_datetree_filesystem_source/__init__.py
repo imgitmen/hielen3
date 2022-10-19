@@ -141,6 +141,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     except KeyError as e:
         return df
 
+    print (sertime)
 
     for serial,paths in sertime.groupby('serial'):
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)

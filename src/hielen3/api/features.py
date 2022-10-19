@@ -144,6 +144,8 @@ RESPONSE CODES:
 
 @hug.get("/")
 def features_info(uids=None, cntxt=None, info=["geometry","capabilities"], request=None, response=None):
+
+    print ("STOCASTICO")
     """
 DESCRIZIONE:
 
