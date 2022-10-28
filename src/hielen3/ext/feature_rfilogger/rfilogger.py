@@ -39,8 +39,8 @@ class ConfigSchema(ActionSchema):
                 2:["pluviometer", "Pluviometer polynomial coefficients", False, None],
                 3:["h_radar_1", "Quote over sea level of the radar 1", False, None],
                 4:["h_radar_2", "Quote over sea level of the radar 2", False, None],
-                5:["h_min_span_1", "Quote over the sea level of the minimum free span", False, None]
-                6:["h_min_span_2", "Quote over the sea levle of the minimum free span", False, None]
+                5:["h_min_span_1", "Quote over the sea level of the minimum free span", False, None],
+                6:["h_min_span_2", "Quote over the sea level of the minimum free span", False, None]
                 }
             }
 
