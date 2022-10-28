@@ -33,7 +33,7 @@ class ConfigSchema(ActionSchema):
                 "Logger info": {
                 0:["serial", "Logger serial number", False, logger_serials()]
                 },
-            "Instruments info":{
+            "Instruments info": {
                 0:["radar_1", "Radar 1 polynomial coefficients", False, None],
                 1:["radar_2", "Radar 2 polynomial coefficients", False, None],
                 2:["pluviometer", "Pluviometer polynomial coefficients", False, None],

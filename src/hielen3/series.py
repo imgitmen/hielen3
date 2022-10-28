@@ -271,6 +271,9 @@ class HSeries:
 
         v=d.columns[0]
 
+        # TODO capire neither or both
+        # TODO separare UPPER e LOWER
+
         for i in aa.index:
             d.loc[d[v].between(
                 min(aa.loc[i,'value'],aa.loc[i,'limit']),
