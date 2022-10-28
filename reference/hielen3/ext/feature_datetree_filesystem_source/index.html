@@ -2040,6 +2040,8 @@
 
         <span class="k">return</span> <span class="n">df</span>
 
+    <span class="nb">print</span> <span class="p">(</span><span class="n">sertime</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">serial</span><span class="p">,</span><span class="n">paths</span> <span class="ow">in</span> <span class="n">sertime</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">):</span>
 
         <span class="n">u</span><span class="o">=</span><span class="n">concat</span><span class="p">(</span><span class="n">paths</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">glob</span><span class="p">)</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">func_extract</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
