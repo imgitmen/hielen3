@@ -222,8 +222,13 @@ class Feature(HFeature):
 
 def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', func=None, **kwargs ):
 
-    folder=Path(conf['incomepath']) / folder
 
+    f=Path(conf['incomepath']) / folder
+
+    if not f.is_dir():
+        f=Path(conf['incomepath']) / 'incomes'
+
+    folder = f
 
     def __extract_gestecno__(path):
         a=DataFrame([],dtype='float64')
