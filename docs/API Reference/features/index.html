@@ -1875,7 +1875,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>prototype</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>
@@ -1932,6 +1932,75 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>Recupero delle informazioni delle features.</strong></p>
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>uids</strong>: Lista "comma separated" degli id delle features da recuperare. Nel caso in cui non venisse fornito alcun valore, verrebbe fornita in output l'intera lista delle features presenti nel sistema.</p>
+</li>
+<li>
+<p><strong>cntxt</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
+</li>
+<li>
+<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Le classi di informazione disponibili sono:</p>
+<ul>
+<li><em>capabilities</em>: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
+<li><em>parameters</em>: parametri (timeseries) associati alla feature, interrogabili tramite <a href="../query/#get">GET query</a></li>
+<li><em>timeline</em>: eventuale timeline globale dei parametri della feature</li>
+</ul>
+</li>
+</ul>
+<p>ESEMPIO:</p>
+<div class="codehilite"><pre><span></span><code>    GET features?cntxt=619d00137303c&amp;info=parameters,capabilities
+</code></pre></div>
+
+<p>OUTPUT:</p>
+<p>All'interno del campo <code>data</code> del json di risposta standard viene restituito un oggetto "chiave, valore" json che é interpretabile come GeoJson estraendo la lista dei values.
+L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quindi un struttura di questo tipo:</p>
+<div class="codehilite"><pre><span></span><code>&quot;features&quot;: {
+    &quot;1285beb4&quot;: {
+        &quot;type&quot;: &quot;Feature&quot;,
+            &quot;properties&quot;: {
+            &quot;uid&quot;: &quot;1285beb4&quot;,
+            &quot;classification&quot;: &quot;Source&quot;,
+            &quot;context&quot;: &quot;619d00137303c&quot;,
+            &quot;description&quot;: null,
+            &quot;label&quot;: &quot;CAM1&quot;,
+            &quot;location&quot;: null,
+            &quot;status&quot;: &quot;0&quot;,
+            &quot;style&quot;: &quot;9cecce36&quot;,
+            &quot;timestamp&quot;: &quot;2021-11-10 00:00:00&quot;,
+            &quot;type&quot;: &quot;PhotoMonitoring&quot;,
+            &quot;inmap&quot;: null
+            },
+            &quot;parameters&quot;: [
+            {
+                &quot;series&quot;: &quot;06578ff5509871eef7e62f8d2bc175de&quot;,
+                        &quot;param&quot;: &quot;Displacement&quot;,
+                        &quot;unit&quot;: &quot;mm&quot;,
+                },
+                {
+                        &quot;series&quot;: &quot;2388b145eed5036e78afff43114cf7f7&quot;,
+                        &quot;param&quot;: &quot;Correlation_Coefficient&quot;,
+                        &quot;unit&quot;: &quot;number&quot;,
+                },
+            ],
+            &quot;timeline&quot;: [
+              &quot;2021-11-04T15:11:45&quot;
+            ],
+            &quot;capabilities&quot;: [
+            &quot;map&quot;
+        ]
+        },
+}
+</code></pre></div>
+
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>200 OK</em>: Nel caso vengano trovate features corrispondenti ai criteri di ricerca</li>
+<li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri di ricerca</li>
+</ul>
 <h3 id="get-featuresuid"><strong>GET    <em>/features/{uid}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
@@ -1975,7 +2044,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>uid</strong>: Basic text / string value</li>
-<li><strong>properties</strong>: JSON Schema {<strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes, <strong>description</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>status</strong>: str|bytes}</li>
+<li><strong>properties</strong>: JSON Schema {<strong>description</strong>: str|bytes, <strong>style</strong>: str|bytes, <strong>location</strong>: str|bytes, <strong>context</strong>: str|bytes, <strong>status</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>timestamp</strong>: str|bytes}</li>
 <li><strong>geometry</strong>: JSON Schema {}</li>
 </ul>
 <p><em>result</em>:</p>

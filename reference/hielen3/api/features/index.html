@@ -2760,9 +2760,7 @@
 <span class="normal">566</span>
 <span class="normal">567</span>
 <span class="normal">568</span>
-<span class="normal">569</span>
-<span class="normal">570</span>
-<span class="normal">571</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">569</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2979,8 +2977,6 @@
 <span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">features_info</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">info</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">,</span><span class="s2">&quot;capabilities&quot;</span><span class="p">],</span> <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;STOCASTICO&quot;</span><span class="p">)</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 
@@ -3344,8 +3340,8 @@
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f67b829a550</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f67b829a970</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0e6af51550</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0e6af51970</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -3666,11 +3662,78 @@
 <span class="p">)</span>
 </code></pre></div>
 
+<p>DESCRIZIONE:</p>
+<p><strong>Recupero delle informazioni delle features.</strong></p>
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>uids</strong>: Lista "comma separated" degli id delle features da recuperare. Nel caso in cui non venisse fornito alcun valore, verrebbe fornita in output l'intera lista delle features presenti nel sistema.</p>
+</li>
+<li>
+<p><strong>cntxt</strong>: Lista "comma separated" dei gruppi di features da recuperare. Se presente agisce da filtro rispetto al risultato elaborato in base al parametro <em>"uids"</em> </p>
+</li>
+<li>
+<p><strong>info</strong>: Lista "comma separated" delle informazioni relative ad ogni feature da includere nella risposta. In generale dei sottoalberi Json. Le classi di informazione disponibili sono:</p>
+<ul>
+<li><em>capabilities</em>: tipi di interrogazioni eseguibili sulla feature: elenco comprendente una, nessuna o più voci tra queste: <em>data</em>, <em>map</em>, <em>cloud</em>. Vedi <a href="../query/#get">GET query</a></li>
+<li><em>parameters</em>: parametri (timeseries) associati alla feature, interrogabili tramite <a href="../query/#get">GET query</a></li>
+<li><em>timeline</em>: eventuale timeline globale dei parametri della feature</li>
+</ul>
+</li>
+</ul>
+<p>ESEMPIO:</p>
+<div class="codehilite"><pre><span></span><code>    GET features?cntxt=619d00137303c&amp;info=parameters,capabilities
+</code></pre></div>
+
+<p>OUTPUT:</p>
+<p>All'interno del campo <code>data</code> del json di risposta standard viene restituito un oggetto "chiave, valore" json che é interpretabile come GeoJson estraendo la lista dei values.
+L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quindi un struttura di questo tipo:</p>
+<div class="codehilite"><pre><span></span><code>    &quot;features&quot;: {
+            &quot;1285beb4&quot;: {
+                    &quot;type&quot;: &quot;Feature&quot;,
+                    &quot;properties&quot;: {
+                        &quot;uid&quot;: &quot;1285beb4&quot;,
+                        &quot;classification&quot;: &quot;Source&quot;,
+                        &quot;context&quot;: &quot;619d00137303c&quot;,
+                        &quot;description&quot;: null,
+                        &quot;label&quot;: &quot;CAM1&quot;,
+                        &quot;location&quot;: null,
+                        &quot;status&quot;: &quot;0&quot;,
+                        &quot;style&quot;: &quot;9cecce36&quot;,
+                        &quot;timestamp&quot;: &quot;2021-11-10 00:00:00&quot;,
+                        &quot;type&quot;: &quot;PhotoMonitoring&quot;,
+                        &quot;inmap&quot;: null
+                    },
+                    &quot;parameters&quot;: [
+                            {
+                                    &quot;series&quot;: &quot;06578ff5509871eef7e62f8d2bc175de&quot;,
+                                    &quot;param&quot;: &quot;Displacement&quot;,
+                                    &quot;unit&quot;: &quot;mm&quot;,
+                            },
+                            {
+                                    &quot;series&quot;: &quot;2388b145eed5036e78afff43114cf7f7&quot;,
+                                    &quot;param&quot;: &quot;Correlation_Coefficient&quot;,
+                                    &quot;unit&quot;: &quot;number&quot;,
+                            },
+                    ],
+                    &quot;timeline&quot;: [
+                      &quot;2021-11-04T15:11:45&quot;
+                    ],
+                    &quot;capabilities&quot;: [
+                            &quot;map&quot;
+                    ]
+            },
+    }
+</code></pre></div>
+
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>200 OK</em>: Nel caso vengano trovate features corrispondenti ai criteri di ricerca</li>
+<li><em>404 Not Found</em>: Nel caso in cui nessuna feature risponda ai criteri di ricerca</li>
+</ul>
 <details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="n">hug</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">features_info</span><span class="p">(</span><span class="n">uids</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">cntxt</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">info</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;geometry&quot;</span><span class="p">,</span><span class="s">&quot;capabilities&quot;</span><span class="p">],</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="o">=</span><span class="n">None</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
-
-<span class="w">    </span><span class="n">print</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;STOCASTICO&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="s">&quot;&quot;&quot;</span>
 
@@ -3929,8 +3992,8 @@
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f67b829a910</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f67b829abb0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0e6af51910</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0e6af51bb0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
