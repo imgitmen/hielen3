@@ -234,7 +234,7 @@ class HSeries:
             try:
                 assert self.cache not in ('old')
                 querycache=None
-            except excpetion as e:
+            except Exception as e:
                 querycache='active'
         else:
             querycache=cache
