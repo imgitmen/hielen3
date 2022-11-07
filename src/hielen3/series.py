@@ -401,7 +401,7 @@ class HSeries:
 
         out = Series([],name=self.uuid,dtype='float64')
 
-        if cache in ("active","data"):
+        if cache in ("active","data","old"):
             try:
                 out = db["datacache"][self.uuid,times]
             except KeyError as e:
@@ -422,6 +422,7 @@ class HSeries:
         try:
 
             try:
+                assert not cache == 'old'
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
@@ -455,7 +456,6 @@ class HSeries:
             pass
 
         if cache in ("active","data") and not out.empty and not justnew:
-
 
             lasttotry=str(out.index[0])
             times=slice(firstreqstart, lasttotry, times.step)
