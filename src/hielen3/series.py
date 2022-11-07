@@ -231,7 +231,11 @@ class HSeries:
 
         if cache == 'new':
             times=slice(self.last_event,None,None)
-            querycache=None
+            try:
+                assert self.cache not in ('old')
+                querycache=None
+            except excpetion as e:
+                querycache='active'
         else:
             querycache=cache
 
