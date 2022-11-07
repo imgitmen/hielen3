@@ -1860,7 +1860,9 @@
                 <h1 id="module-hielen3extfeature_datetree_filesystem_source">Module hielen3.ext.feature_datetree_filesystem_source</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="c1"># coding=utf-8</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="c1"># coding=utf-8</span>
 
 <span class="vm">__name__</span> <span class="o">=</span> <span class="s2">&quot;Feature_datetree_filesystem_source&quot;</span>
 
@@ -2040,7 +2042,7 @@
 
         <span class="k">return</span> <span class="n">df</span>
 
-    <span class="nb">print</span> <span class="p">(</span><span class="n">sertime</span><span class="p">)</span>
+    <span class="c1">#print (sertime) #DEBUG</span>
 
     <span class="k">for</span> <span class="n">serial</span><span class="p">,</span><span class="n">paths</span> <span class="ow">in</span> <span class="n">sertime</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;serial&#39;</span><span class="p">):</span>
 
@@ -2095,7 +2097,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">loggers</span><span class="ss">(</span><span class="w"> </span><span class="nv">folders</span><span class="w"> </span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">loggers</span><span class="ss">(</span><span class="w"> </span><span class="nv">folders</span><span class="w"> </span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">inner</span><span class="ss">()</span>:<span class="w"></span>
 
@@ -2111,7 +2115,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">retriver</span><span class="ss">(</span><span class="w"> </span><span class="nv">func_loggers</span><span class="w">  </span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">retriver</span><span class="ss">(</span><span class="w"> </span><span class="nv">func_loggers</span><span class="w">  </span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">wrap</span><span class="ss">(</span><span class="w"> </span><span class="nv">func_extract</span><span class="w"> </span><span class="ss">)</span>:<span class="w"></span>
 

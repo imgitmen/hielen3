@@ -2082,7 +2082,9 @@
                 <h1 id="module-hielen3gejegeometry_collection">Module hielen3.geje.geometry_collection</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">marshmallow.fields</span> <span class="kn">import</span> <span class="p">(</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">marshmallow.fields</span> <span class="kn">import</span> <span class="p">(</span>
 
     <span class="n">Nested</span><span class="p">,</span>
 
@@ -2142,14 +2144,14 @@
 <h3 id="geometrycollectionschema">GeometryCollectionSchema</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeometryCollectionSchema</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">exclude</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
-    <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">context</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">load_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
-    <span class="n">dump_only</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
-    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">only</span><span class="p">:</span> <span class="s1">&#39;types.StrSequenceOrSet | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">exclude</span><span class="p">:</span> <span class="s1">&#39;types.StrSequenceOrSet&#39;</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="s1">&#39;dict | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">load_only</span><span class="p">:</span> <span class="s1">&#39;types.StrSequenceOrSet&#39;</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">dump_only</span><span class="p">:</span> <span class="s1">&#39;types.StrSequenceOrSet&#39;</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="s1">&#39;bool | types.StrSequenceOrSet&#39;</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2288,7 +2290,9 @@
     <code>marshmallow.decorators.pre_load</code> and <code>marshmallow.decorators.post_dump</code>.
     <code>__accessor__</code> and <code>__error_handler__</code> are deprecated. Implement the
     <code>handle_error</code> and <code>get_attribute</code> methods instead. | None |</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">GeometryCollectionSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">GeometryCollectionSchema</span><span class="p">(</span><span class="n">BaseSchema</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Str</span><span class="p">(</span><span class="w"></span>
 
@@ -2346,10 +2350,10 @@
 <h4 id="static-methods">Static methods</h4>
 <h4 id="from_dict">from_dict</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
-    <span class="n">fields</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">marshmallow</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Field</span><span class="p">,</span> <span class="nb">type</span><span class="p">]],</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="s1">&#39;dict[str, ma_fields.Field | type]&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;GeneratedSchema&#39;</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span> <span class="o">=</span> <span class="s1">&#39;GeneratedSchema&#39;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;type&#39;</span>
 </code></pre></div>
 
 <p>Generate a <code>Schema</code> class given a dictionary of fields.</p>
@@ -2394,13 +2398,15 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tbody>
 </table>
 <p>.. versionadded:: 3.0.0 | None |</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    <span class="nd">@classmethod</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    <span class="nd">@classmethod</span>
 
     <span class="k">def</span> <span class="nf">from_dict</span><span class="p">(</span>
 
         <span class="bp">cls</span><span class="p">,</span>
 
-        <span class="n">fields</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="n">ma_fields</span><span class="o">.</span><span class="n">Field</span><span class="p">,</span> <span class="nb">type</span><span class="p">]],</span>
+        <span class="n">fields</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ma_fields</span><span class="o">.</span><span class="n">Field</span> <span class="o">|</span> <span class="nb">type</span><span class="p">],</span>
 
         <span class="o">*</span><span class="p">,</span>
 
@@ -2457,9 +2463,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="dump">dump</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dump</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2539,7 +2545,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dump</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="kt">bool</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dump</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Serialize an object to native Python data types according to this</span>
 
@@ -2600,9 +2608,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="dumps">dumps</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -2674,11 +2682,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dumps</span><span class="p">(</span><span class="w"></span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="kt">bool</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="w"></span>
-
-<span class="w">    </span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dumps</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Same as :meth:`dump`, except return a JSON-encoded string.</span>
 
@@ -2711,9 +2717,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="get_attribute">get_attribute</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_attribute</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">default</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
+    <span class="n">attr</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
+    <span class="n">default</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2721,7 +2727,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 <p>.. versionadded:: 2.0.0</p>
 <p>.. versionchanged:: 3.0.0a1
     Changed position of <code>obj</code> and <code>attr</code>.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get_attribute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get_attribute</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Defines how to pull values from an object to serialize.</span>
 
@@ -2740,10 +2748,10 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="handle_error">handle_error</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">handle_error</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">error</span><span class="p">:</span> <span class="n">marshmallow</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">error</span><span class="p">:</span> <span class="s1">&#39;ValidationError&#39;</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool&#39;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -2794,7 +2802,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 </table>
 <p>.. versionchanged:: 3.0.0rc9
     Receives <code>many</code> and <code>partial</code> (on deserialization) as keyword arguments. | None |</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">handle_error</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">handle_error</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">error</span><span class="o">:</span><span class="w"> </span><span class="n">ValidationError</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="w"></span>
 
@@ -2825,11 +2835,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="load">load</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]],</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;typing.Mapping[str, typing.Any] | typing.Iterable[typing.Mapping[str, typing.Any]]&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="s1">&#39;bool | types.StrSequenceOrSet | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -2942,25 +2952,27 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">load</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">load</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">typing</span><span class="p">.</span><span class="n">Iterable</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]]</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="n">Iterable</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]]</span><span class="w"></span>
 
-<span class="w">        </span><span class="err">]</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="p">),</span><span class="w"></span>
 
 <span class="w">        </span><span class="o">*</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="kt">bool</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">partial</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="err">[</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="k">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="err">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">partial</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="no">unknown</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">str</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="no">unknown</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">    </span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
@@ -3011,11 +3023,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="loads">loads</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">loads</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">json_data</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">json_data</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">unknown</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="s1">&#39;bool | types.StrSequenceOrSet | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">unknown</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -3129,7 +3141,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">loads</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">loads</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
 
@@ -3137,11 +3151,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="o">*</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="kt">bool</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">partial</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="k">Union</span><span class="err">[</span><span class="kt">bool</span><span class="p">,</span><span class="w"> </span><span class="k">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="err">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">partial</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="no">unknown</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">str</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="no">unknown</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">        </span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span><span class="w"></span>
 
@@ -3192,14 +3206,16 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="on_bind_field">on_bind_field</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">on_bind_field</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">field_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">field_obj</span><span class="p">:</span> <span class="n">marshmallow</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">Field</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+    <span class="n">field_name</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
+    <span class="n">field_obj</span><span class="p">:</span> <span class="s1">&#39;ma_fields.Field&#39;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;None&#39;</span>
 </code></pre></div>
 
 <p>Hook to modify a field when it is bound to the <code>Schema</code>.</p>
 <p>No-op by default.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">on_bind_field</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">field_name</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">field_obj</span><span class="o">:</span><span class="w"> </span><span class="n">ma_fields</span><span class="p">.</span><span class="n">Field</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">None</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">on_bind_field</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">field_name</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">field_obj</span><span class="o">:</span><span class="w"> </span><span class="n">ma_fields</span><span class="p">.</span><span class="n">Field</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">None</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Hook to modify a field when it is bound to the `Schema`.</span>
 
@@ -3214,11 +3230,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 <h4 id="validate">validate</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]],</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;typing.Mapping[str, typing.Any] | typing.Iterable[typing.Mapping[str, typing.Any]]&#39;</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">many</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partial</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>
+    <span class="n">many</span><span class="p">:</span> <span class="s1">&#39;bool | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partial</span><span class="p">:</span> <span class="s1">&#39;bool | types.StrSequenceOrSet | None&#39;</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;dict[str, list[str]]&#39;</span>
 </code></pre></div>
 
 <p>Validate <code>data</code> against the schema, returning a dictionary of</p>
@@ -3297,59 +3313,61 @@ be referred to by name in <code>Nested</code> fields.</p>
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">validate</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">validate</span><span class="p">(</span><span class="w"></span>
 
-<span class="w">        </span><span class="bp">self</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">data</span><span class="p">:</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span><span class="w"></span>
+<span class="w">            </span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">typing</span><span class="o">.</span><span class="n">Iterable</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]],</span><span class="w"></span>
+<span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="n">Iterable</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]]</span><span class="w"></span>
 
-<span class="w">        </span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="p">),</span><span class="w"></span>
 
 <span class="w">        </span><span class="o">*</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">many</span><span class="p">:</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb nb-Type">bool</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">many</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">partial</span><span class="p">:</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Union</span><span class="p">[</span><span class="nb nb-Type">bool</span><span class="p">,</span><span class="w"> </span><span class="n">types</span><span class="o">.</span><span class="n">StrSequenceOrSet</span><span class="p">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">partial</span><span class="o">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">types</span><span class="p">.</span><span class="n">StrSequenceOrSet</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span><span class="w"></span>
+<span class="w">    </span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">dict</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="k">list</span><span class="err">[</span><span class="n">str</span><span class="err">]]</span><span class="o">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate `data` against the schema, returning a dictionary of</span>
+<span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Validate `data` against the schema, returning a dictionary of</span>
 
-<span class="sd">        validation errors.</span>
+<span class="s2">        validation errors.</span>
 
-<span class="sd">        :param data: The data to validate.</span>
+<span class="s2">        :param data: The data to validate.</span>
 
-<span class="sd">        :param many: Whether to validate `data` as a collection. If `None`, the</span>
+<span class="s2">        :param many: Whether to validate `data` as a collection. If `None`, the</span>
 
-<span class="sd">            value for `self.many` is used.</span>
+<span class="s2">            value for `self.many` is used.</span>
 
-<span class="sd">        :param partial: Whether to ignore missing fields and not require</span>
+<span class="s2">        :param partial: Whether to ignore missing fields and not require</span>
 
-<span class="sd">            any fields declared. Propagates down to ``Nested`` fields as well. If</span>
+<span class="s2">            any fields declared. Propagates down to ``Nested`` fields as well. If</span>
 
-<span class="sd">            its value is an iterable, only missing fields listed in that iterable</span>
+<span class="s2">            its value is an iterable, only missing fields listed in that iterable</span>
 
-<span class="sd">            will be ignored. Use dot delimiters to specify nested fields.</span>
+<span class="s2">            will be ignored. Use dot delimiters to specify nested fields.</span>
 
-<span class="sd">        :return: A dictionary of validation errors.</span>
+<span class="s2">        :return: A dictionary of validation errors.</span>
 
-<span class="sd">        .. versionadded:: 1.1.0</span>
+<span class="s2">        .. versionadded:: 1.1.0</span>
 
-<span class="sd">        &quot;&quot;&quot;</span><span class="w"></span>
+<span class="s2">        </span><span class="se">&quot;&quot;</span><span class="s2">&quot;</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">try</span><span class="o">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="bp">self</span><span class="o">.</span><span class="n">_do_load</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span><span class="w"> </span><span class="n">partial</span><span class="o">=</span><span class="n">partial</span><span class="p">,</span><span class="w"> </span><span class="n">postprocess</span><span class="o">=</span><span class="n">False</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">_do_load</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="n">many</span><span class="o">=</span><span class="n">many</span><span class="p">,</span><span class="w"> </span><span class="k">partial</span><span class="o">=</span><span class="k">partial</span><span class="p">,</span><span class="w"> </span><span class="n">postprocess</span><span class="o">=</span><span class="no">False</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">except</span><span class="w"> </span><span class="n">ValidationError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">exc</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">except</span><span class="w"> </span><span class="n">ValidationError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">exc</span><span class="o">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span><span class="w"> </span><span class="n">exc</span><span class="o">.</span><span class="n">messages</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="nf">cast</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">Dict</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">List</span><span class="err">[</span><span class="n">str</span><span class="err">]]</span><span class="p">,</span><span class="w"> </span><span class="n">exc</span><span class="p">.</span><span class="n">messages</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">{}</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="err">{}</span><span class="w"></span>
 </code></pre></div>
 
 </details>

@@ -1916,7 +1916,9 @@
                 <h1 id="module-hielen3toolscalc">Module hielen3.tools.calc</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
 <span class="normal">  4</span>
@@ -2356,7 +2358,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">wrap_align</span><span class="p">(</span><span class="nf">left</span><span class="p">,</span><span class="w"> </span><span class="nf">right</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">wrap_align</span><span class="p">(</span><span class="nf">left</span><span class="p">,</span><span class="w"> </span><span class="nf">right</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -2404,7 +2408,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">filter</span><span class="ss">(</span><span class="nv">b</span>,<span class="nv">sigma</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">window</span><span class="o">=</span><span class="mi">50</span>,<span class="nv">center</span><span class="o">=</span><span class="nv">False</span>,<span class="nv">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">filter</span><span class="ss">(</span><span class="nv">b</span>,<span class="nv">sigma</span><span class="o">=</span><span class="mi">3</span>,<span class="nv">window</span><span class="o">=</span><span class="mi">50</span>,<span class="nv">center</span><span class="o">=</span><span class="nv">False</span>,<span class="nv">min_periods</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">abs</span><span class="ss">(</span><span class="nv">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">b</span>.<span class="nv">rolling</span><span class="ss">(</span><span class="nv">window</span><span class="o">=</span><span class="nv">window</span>,<span class="w"> </span><span class="nv">center</span><span class="o">=</span><span class="nv">center</span>,<span class="w"> </span><span class="nv">min_periods</span><span class="o">=</span><span class="nv">min_periods</span><span class="ss">)</span>.<span class="nv">apply</span><span class="ss">(</span><span class="nv">mean</span><span class="ss">))</span><span class="w"></span>
 
@@ -2421,7 +2427,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">instant_velocity</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span><span class="n">time_unit_denom</span><span class="o">=</span><span class="s1">&#39;hours&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">instant_velocity</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span><span class="n">time_unit_denom</span><span class="o">=</span><span class="s1">&#39;hours&#39;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="w"> </span><span class="n">time_unit_denom</span><span class="p">,</span><span class="w"> </span><span class="n">Timedelta</span><span class="w"> </span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2444,7 +2452,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">poly_trans</span><span class="ss">(</span><span class="nv">S0</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">poly_trans</span><span class="ss">(</span><span class="nv">S0</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">_parse</span><span class="ss">(</span><span class="nv">k</span>,<span class="w"> </span><span class="nv">w</span><span class="ss">)</span>:<span class="w"></span>
 
@@ -2466,7 +2476,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">slope</span><span class="ss">(</span><span class="nv">S0</span>,<span class="w"> </span><span class="nv">unit</span><span class="o">=</span><span class="s2">&quot;°&quot;</span>,<span class="w"> </span><span class="nv">radius</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">slope</span><span class="ss">(</span><span class="nv">S0</span>,<span class="w"> </span><span class="nv">unit</span><span class="o">=</span><span class="s2">&quot;°&quot;</span>,<span class="w"> </span><span class="nv">radius</span><span class="o">=</span><span class="mi">1</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;°&quot;</span>:<span class="w"></span>
 
@@ -2489,7 +2501,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">sub</span><span class="ss">(</span><span class="nv">left</span>,<span class="w"> </span><span class="nv">right</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">sub</span><span class="ss">(</span><span class="nv">left</span>,<span class="w"> </span><span class="nv">right</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">add</span><span class="ss">(</span><span class="nv">left</span>,<span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nv">right</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>

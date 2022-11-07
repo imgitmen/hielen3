@@ -2008,7 +2008,9 @@
                 <h1 id="module-hielen3cloudmanager">Module hielen3.cloudmanager</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
 <span class="normal">  4</span>
@@ -2262,7 +2264,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Cloudmanager</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Cloudmanager</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">feature</span><span class="p">,</span><span class="n">basepath</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -2320,7 +2324,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">geturl</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
 
@@ -2335,7 +2341,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">PotreeCM</span>(<span class="n">Cloudmanager</span>):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">PotreeCM</span>(<span class="n">Cloudmanager</span>):
 
     <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>,*<span class="nb">args</span>,**<span class="n">kwargs</span>):
 
@@ -2414,7 +2422,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">geturl</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">subpath</span>,<span class="nv">cloud</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">geturl</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">subpath</span>,<span class="nv">cloud</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">cloud</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:<span class="w"></span>
 
@@ -2475,7 +2485,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">makePotree</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">lazfile</span>,<span class="nv">cloudname</span>,<span class="w"> </span><span class="nv">subpath</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">makePotree</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">lazfile</span>,<span class="nv">cloudname</span>,<span class="w"> </span><span class="nv">subpath</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">targhetpath</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">cloudcache</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="ss">(</span><span class="w"> </span><span class="nv">subpath</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="ss">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nv">cloudname</span><span class="w"></span>
 

@@ -1874,7 +1874,9 @@
                 <h1 id="module-hielen3apiactions">Module hielen3.api.actions</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
 <span class="normal">  4</span>
@@ -3213,7 +3215,9 @@
 <li><em>501 Not Implemented'</em>: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti i moduli di gestione</li>
 </ul>
 <p>E' stato implementato il meccanismo minimo di gestione che prevede il salvataggio delle info fornite che possono essere fornite tali e quali in uscita (vedi metodo GET dell'api). Questo meccanismo permette di svluppare i moduli a partire da un template con risposta di default.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{feature}/{action}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parse_body</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{feature}/{action}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parse_body</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="w"></span>
 
 <span class="nv">@hug</span><span class="p">.</span><span class="n">default_input_format</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="ss">&quot;multipart/form-data&quot;</span><span class="p">)</span><span class="w"></span>
 
@@ -3474,7 +3478,9 @@
 <li><em>501 Not Implemented'</em>: Nel caso la tipologia non fornisse ancora l'iplementazione di uno o tutti i moduli di gestione</li>
 </ul>
 <p>E' stato implementato il meccanismo minimo di gestione che prevede il salvataggio delle info fornite che possono essere fornite tali e quali in uscita (vedi metodo GET dell'api). Questo meccanismo permette di svluppare i moduli a partire da un template con risposta di default.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="err">@</span><span class="n">hug</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/{feature}/{action}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parse_body</span><span class="o">=</span><span class="n">False</span><span class="p">)</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="err">@</span><span class="n">hug</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/{feature}/{action}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">parse_body</span><span class="o">=</span><span class="n">False</span><span class="p">)</span><span class="w"></span>
 
 <span class="err">@</span><span class="n">hug</span><span class="o">.</span><span class="n">default_input_format</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;multipart/form-data&quot;</span><span class="p">)</span><span class="w"></span>
 

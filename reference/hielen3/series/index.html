@@ -2010,7 +2010,9 @@
                 <h1 id="module-hielen3series">Module hielen3.series</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
 <span class="normal">  4</span>
@@ -2944,7 +2946,21 @@
 <span class="normal">932</span>
 <span class="normal">933</span>
 <span class="normal">934</span>
-<span class="normal">935</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">935</span>
+<span class="normal">936</span>
+<span class="normal">937</span>
+<span class="normal">938</span>
+<span class="normal">939</span>
+<span class="normal">940</span>
+<span class="normal">941</span>
+<span class="normal">942</span>
+<span class="normal">943</span>
+<span class="normal">944</span>
+<span class="normal">945</span>
+<span class="normal">946</span>
+<span class="normal">947</span>
+<span class="normal">948</span>
+<span class="normal">949</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3270,7 +3286,15 @@
 
             <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_event</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
-            <span class="n">querycache</span><span class="o">=</span><span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
+
+                <span class="n">querycache</span><span class="o">=</span><span class="kc">None</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span>
 
         <span class="k">else</span><span class="p">:</span>
 
@@ -3438,7 +3462,7 @@
 
                 <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span>
 
-                <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">)</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -3462,7 +3486,7 @@
 
                     <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span>
 
-                    <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+                    <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">)</span>
 
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -3482,7 +3506,7 @@
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([],</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">):</span>
 
             <span class="k">try</span><span class="p">:</span>
 
@@ -3513,6 +3537,10 @@
         <span class="k">try</span><span class="p">:</span>
 
             <span class="k">try</span><span class="p">:</span>
+
+                <span class="k">assert</span> <span class="ow">not</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;old&#39;</span>
+
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache</span>
 
                 <span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
@@ -3564,7 +3592,9 @@
 
             <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">firstreqstart</span><span class="p">,</span> <span class="n">lasttotry</span><span class="p">,</span> <span class="n">times</span><span class="o">.</span><span class="n">step</span><span class="p">)</span>
 
-            <span class="n">preout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+
+            <span class="n">preout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
             <span class="n">preout</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;timestamp&quot;</span>
 
@@ -3901,7 +3931,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">HSeries</span><span class="p">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nl">HSeries</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__repr__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -4191,7 +4223,15 @@
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_event</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
@@ -4359,7 +4399,7 @@
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -4383,7 +4423,7 @@
 
 <span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -4403,7 +4443,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -4434,6 +4474,10 @@
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;old&#39;</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
@@ -4485,7 +4529,9 @@
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">firstreqstart</span><span class="p">,</span><span class="w"> </span><span class="n">lasttotry</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">preout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;none&quot;</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;none&quot;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">preout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">preout</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
@@ -4813,7 +4859,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">attribute_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">attribute</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="n">None</span><span class="p">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">attribute_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">attribute</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="o">=</span><span class="n">None</span><span class="p">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
 
@@ -4839,13 +4887,23 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;new&#39;</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_event</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
@@ -5000,7 +5058,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def clean_cache(self,times=None):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def clean_cache(self,times=None):
 
         try:
 
@@ -5037,7 +5097,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">cloud</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">cloud</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;cloud&#39;</span><span class="err">:</span><span class="w"></span>
 
@@ -5120,7 +5182,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;data&#39;</span><span class="err">:</span><span class="w"></span>
 
@@ -5136,7 +5200,7 @@
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -5160,7 +5224,7 @@
 
 <span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -5180,7 +5244,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
@@ -5211,6 +5275,10 @@
 <span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;old&#39;</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">_generate</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
@@ -5262,7 +5330,9 @@
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">firstreqstart</span><span class="p">,</span><span class="w"> </span><span class="n">lasttotry</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">preout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;none&quot;</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;none&quot;</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">preout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">preout</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;timestamp&quot;</span><span class="w"></span>
 
@@ -5299,7 +5369,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">map</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">refresh</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;map&#39;</span><span class="err">:</span><span class="w"></span>
 
@@ -5394,7 +5466,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
@@ -5547,7 +5621,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">stream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">timeref</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s1">&#39;stream&#39;</span><span class="p">:</span><span class="w"></span>
 
@@ -5606,7 +5682,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@_threadpool</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@_threadpool</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">thvalues</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 

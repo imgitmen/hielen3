@@ -2846,7 +2846,9 @@
                 <h1 id="module-hielen3datalink">Module hielen3.datalink</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">   1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">   1</span>
 <span class="normal">   2</span>
 <span class="normal">   3</span>
 <span class="normal">   4</span>
@@ -5677,7 +5679,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">dbinit</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">dbinit</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="err">{}</span><span class="w"></span>
 
@@ -5698,7 +5702,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">CsvCache</span><span class="p">():</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">CsvCache</span><span class="p">():</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">cachepath</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">lock_timeout_seconds</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span><span class="w"></span>
 
@@ -5898,7 +5904,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">drop</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">drop</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">try</span>:<span class="w"></span>
 
@@ -5931,7 +5939,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force_reload</span><span class="o">=</span><span class="n">False</span><span class="p">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">force_reload</span><span class="o">=</span><span class="n">False</span><span class="p">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="bp">self</span><span class="o">.</span><span class="n">__chk_and_reload_cache</span><span class="p">(</span><span class="n">force</span><span class="o">=</span><span class="n">force_reload</span><span class="p">)</span><span class="w"></span>
 
@@ -5945,7 +5955,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nt">def</span><span class="w"> </span><span class="nt">save</span><span class="o">(</span><span class="nt">self</span><span class="o">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nt">def</span><span class="w"> </span><span class="nt">save</span><span class="o">(</span><span class="nt">self</span><span class="o">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="nt">try</span><span class="o">:</span><span class="w"></span>
 
@@ -5981,7 +5993,9 @@
 </code></pre></div>
 
 <p>Needs to lock for writing json-database</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="n">Series</span><span class="p">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="n">Series</span><span class="p">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -6031,7 +6045,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">DB</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">DB</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
@@ -6077,7 +6093,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -6093,7 +6111,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">JsonDB</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">JsonDB</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">connection</span><span class="p">,</span><span class="w"> </span><span class="k">schema</span><span class="p">,</span><span class="w"> </span><span class="n">lock_timeout_seconds</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -6365,7 +6385,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__write_jsondb</span><span class="ss">(</span><span class="nv">key</span>,<span class="w"> </span><span class="nv">None</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -6377,7 +6399,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         try:
 
@@ -6413,7 +6437,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Mariadb</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">Mariadb</span><span class="p">(</span><span class="n">DB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">geotypes</span><span class="o">=</span><span class="p">(</span><span class="w"></span>
 
@@ -6593,7 +6619,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -6607,7 +6635,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         pass
 </code></pre></div>
@@ -6620,7 +6650,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbHielenCache</span><span class="p">(</span><span class="n">Mariadb</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbHielenCache</span><span class="p">(</span><span class="n">Mariadb</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">,</span><span class="nc">table</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -6873,7 +6905,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">delete</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -6885,7 +6919,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         pass
 </code></pre></div>
@@ -6901,7 +6937,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbHielenGeo</span><span class="p">(</span><span class="n">MariadbTable</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbHielenGeo</span><span class="p">(</span><span class="n">MariadbTable</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__man_na_coords__</span><span class="p">(</span><span class="n">xy</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -7005,7 +7043,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">delete</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -7017,7 +7057,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         pass
 </code></pre></div>
@@ -7029,7 +7071,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">MariadbQuery</span>(<span class="n">Mariadb</span>):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">MariadbQuery</span>(<span class="n">Mariadb</span>):
 
     <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>,<span class="n">connection</span>):
 
@@ -7090,7 +7134,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">stat</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">stat</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">stat</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -7102,7 +7148,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         pass
 </code></pre></div>
@@ -7116,7 +7164,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbTable</span><span class="p">(</span><span class="n">Mariadb</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MariadbTable</span><span class="p">(</span><span class="n">Mariadb</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">,</span><span class="nc">table</span><span class="p">,</span><span class="n">askey</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -7449,7 +7499,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">delete</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -7461,7 +7513,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         pass
 </code></pre></div>
@@ -7474,7 +7528,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">fsHielenCache</span><span class="p">(</span><span class="n">JsonDB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">fsHielenCache</span><span class="p">(</span><span class="n">JsonDB</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="p">,</span><span class="n">lock_timeout_seconds</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -7579,7 +7635,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="w"> </span><span class="nv">key</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__write_jsondb</span><span class="ss">(</span><span class="nv">key</span>,<span class="w"> </span><span class="nv">None</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -7591,7 +7649,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def save(self):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def save(self):
 
         try:
 
@@ -7627,7 +7687,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,</span><span class="n">Series</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -7658,7 +7720,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">seriescode</span>():
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">seriescode</span>():
 
     <span class="n">def</span> <span class="n">__init__</span>(<span class="nb">self</span>,*<span class="nb">args</span>,**<span class="n">kwargs</span>):
 

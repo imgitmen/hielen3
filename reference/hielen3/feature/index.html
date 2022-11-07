@@ -2288,7 +2288,9 @@
                 <h1 id="module-hielen3feature">Module hielen3.feature</h1>
 <p>None</p>
 <p>None</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
 <span class="normal">  2</span>
 <span class="normal">  3</span>
 <span class="normal">  4</span>
@@ -3426,7 +3428,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">HFeature</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">HFeature</span><span class="p">(</span><span class="n">ABC</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
@@ -3973,7 +3977,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">actions_schemata</span><span class="ss">(</span><span class="nv">ftype</span><span class="o">=</span><span class="nv">None</span>,<span class="nv">actions</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">actions_schemata</span><span class="ss">(</span><span class="nv">ftype</span><span class="o">=</span><span class="nv">None</span>,<span class="nv">actions</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">ftype</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:<span class="w"></span>
 
@@ -4002,7 +4008,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">cleanCache</span><span class="ss">(</span><span class="nv">self</span>,<span class="nb">params</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">cleanCache</span><span class="ss">(</span><span class="nv">self</span>,<span class="nb">params</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">self</span>.<span class="nv">__test_del__</span><span class="ss">()</span><span class="w"></span>
 
@@ -4025,7 +4033,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -4040,7 +4050,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">create</span><span class="ss">(</span><span class="nv">ftype</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">create</span><span class="ss">(</span><span class="nv">ftype</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">ftype</span><span class="o">=</span><span class="nv">ftype</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span><span class="w"></span>
 </code></pre></div>
@@ -4052,7 +4064,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">delete</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">delete</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">self</span>.<span class="nv">__test_del__</span><span class="ss">()</span><span class="w"></span>
 
@@ -4084,7 +4098,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code>    def drop(uuid):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>    def drop(uuid):
 
         HFeature.retrive(uuid).delete()
 </code></pre></div>
@@ -4098,7 +4114,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span><span class="w"></span>
 
 <span class="w">        </span><span class="bp">self</span><span class="o">.</span><span class="n">__test_del__</span><span class="p">()</span><span class="w"></span>
 
@@ -4124,7 +4142,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
@@ -4136,7 +4156,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive</span><span class="ss">(</span><span class="nv">uuid</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive</span><span class="ss">(</span><span class="nv">uuid</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">try</span>:<span class="w"></span>
 
@@ -4154,7 +4176,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">label</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">label</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">feats</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features&#39;</span>][:]<span class="w"></span>
 
@@ -4178,7 +4202,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">@abstractmethod</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -4193,7 +4219,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">truncate_params</span><span class="ss">(</span><span class="nv">self</span>,<span class="nb">params</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">truncate_params</span><span class="ss">(</span><span class="nv">self</span>,<span class="nb">params</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">try</span>:<span class="w"></span>
 
@@ -4216,7 +4244,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">try</span>:<span class="w"></span>
 
@@ -4235,7 +4265,9 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update_label</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update_label</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:<span class="w"></span>
 
 <span class="w">        </span><span class="nv">feats</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features&#39;</span>][:]<span class="w"></span>
 
@@ -4253,7 +4285,7 @@
 </details>
 <h3 id="stringtime">StringTime</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StringTime</span><span class="p">(</span>
-    <span class="nb">format</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -4301,7 +4333,9 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">StringTime</span>(<span class="n">fields</span>.<span class="nb">DateTime</span>):
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">StringTime</span>(<span class="n">fields</span>.<span class="nb">DateTime</span>):
 
     <span class="n">def</span> <span class="n">_deserialize</span>(<span class="nb">self</span>, <span class="nb">value</span>, <span class="n">attr</span>, <span class="n">data</span>, **<span class="n">kwargs</span>):
 
@@ -4363,9 +4397,9 @@
 <h4 id="deserialize">deserialize</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">attr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">value</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
+    <span class="n">attr</span><span class="p">:</span> <span class="s1">&#39;str | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="s1">&#39;typing.Mapping[str, typing.Any] | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -4427,15 +4461,17 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">deserialize</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">deserialize</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">value</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">attr</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">str</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="n">attr</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="k">data</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="n">Mapping</span><span class="err">[</span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">        </span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span><span class="w"></span>
 
@@ -4484,14 +4520,16 @@
 <h4 id="fail">fail</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fail</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p>Helper method that raises a <code>ValidationError</code> with an error message</p>
 <p>from <code>self.error_messages</code>.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">fail</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">fail</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Helper method that raises a `ValidationError` with an error message</span>
 
@@ -4512,6 +4550,8 @@
 <span class="w">            </span><span class="p">),</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">RemovedInMarshmallow4Warning</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">        </span><span class="p">)</span><span class="w"></span>
 
@@ -4567,7 +4607,9 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get_value</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">accessor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">missing_</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">get_value</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">accessor</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="o">=</span><span class="n">missing_</span><span class="p">)</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Return the value for a given key from an object.</span>
 
@@ -4592,14 +4634,16 @@
 <h4 id="make_error">make_error</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">make_error</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">key</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">marshmallow</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ValidationError&#39;</span>
 </code></pre></div>
 
 <p>Helper method to make a <code>ValidationError</code> with an error message</p>
 <p>from <code>self.error_messages</code>.</p>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">make_error</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ValidationError</span><span class="o">:</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">make_error</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">:</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ValidationError</span><span class="o">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span><span class="s2">Helper method to make a `ValidationError` with an error message</span>
 
@@ -4636,9 +4680,9 @@
 <h4 id="serialize">serialize</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
-    <span class="n">accessor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">attr</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="s1">&#39;typing.Any&#39;</span><span class="p">,</span>
+    <span class="n">accessor</span><span class="p">:</span> <span class="s1">&#39;typing.Callable[[typing.Any, str, typing.Any], typing.Any] | None&#39;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
@@ -4682,7 +4726,9 @@
 </tr>
 </tbody>
 </table>
-<details class="example"><summary>View Source</summary><div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">serialize</span><span class="p">(</span><span class="w"></span>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">serialize</span><span class="p">(</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">,</span><span class="w"></span>
 
@@ -4690,11 +4736,9 @@
 
 <span class="w">        </span><span class="n">obj</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">accessor</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Optional</span><span class="err">[</span><span class="w"></span>
+<span class="w">        </span><span class="n">accessor</span><span class="o">:</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="n">Callable</span><span class="err">[[</span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">typing</span><span class="p">.</span><span class="n">Callable</span><span class="err">[[</span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="p">,</span><span class="w"> </span><span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="p">,</span><span class="w"> </span><span class="n">typing</span><span class="p">.</span><span class="k">Any</span><span class="err">]</span><span class="w"></span>
-
-<span class="w">        </span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">,</span><span class="w"></span>
 
 <span class="w">        </span><span class="o">**</span><span class="n">kwargs</span><span class="p">,</span><span class="w"></span>
 
