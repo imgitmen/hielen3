@@ -369,7 +369,7 @@ class HSeries:
         if cache is None:
             try:
                 cache=self.cache
-                assert cache in ("active","data")
+                assert cache in ("active","data","old")
             except Exception as e:
                 cache="no"
 
@@ -385,7 +385,7 @@ class HSeries:
                 timefrom = isot2ut(self.last)
                 try:
                     cache=self.cache
-                    assert cache in ("active","data")
+                    assert cache in ("active","data","old")
                 except Exception as e:
                     cache="no"
             else:
