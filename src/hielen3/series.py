@@ -427,6 +427,7 @@ class HSeries:
 
             try:
                 assert not cache == 'old'
+                kwargs['cache'] = cache
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception()
             except Exception as e:
@@ -464,7 +465,8 @@ class HSeries:
             lasttotry=str(out.index[0])
             times=slice(firstreqstart, lasttotry, times.step)
 
-            preout = self.data(times=times,cache="none",geometry=geometry, **kwargs)
+            kwargs['cache'] = "none"
+            preout = self.data(times=times,geometry=geometry, **kwargs)
 
             preout.index.name = "timestamp"
 
