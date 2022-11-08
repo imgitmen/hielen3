@@ -2950,17 +2950,7 @@
 <span class="normal">936</span>
 <span class="normal">937</span>
 <span class="normal">938</span>
-<span class="normal">939</span>
-<span class="normal">940</span>
-<span class="normal">941</span>
-<span class="normal">942</span>
-<span class="normal">943</span>
-<span class="normal">944</span>
-<span class="normal">945</span>
-<span class="normal">946</span>
-<span class="normal">947</span>
-<span class="normal">948</span>
-<span class="normal">949</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">939</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3282,23 +3272,13 @@
 
     <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
+        <span class="n">querycache</span><span class="o">=</span><span class="n">cache</span>
+
         <span class="k">if</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;new&#39;</span><span class="p">:</span>
 
             <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last_event</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
-            <span class="k">try</span><span class="p">:</span>
-
-                <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span>
-
-                <span class="n">querycache</span><span class="o">=</span><span class="kc">None</span>
-
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span>
-
-        <span class="k">else</span><span class="p">:</span>
-
-            <span class="n">querycache</span><span class="o">=</span><span class="n">cache</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">==</span><span class="s1">&#39;old&#39;</span><span class="p">:</span> <span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span>
 
         <span class="n">aa</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">thresholds</span>
 
@@ -3484,9 +3464,9 @@
 
                 <span class="k">try</span><span class="p">:</span>
 
-                    <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span>
+                    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">)</span>
 
-                    <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">)</span>
+                    <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;active&quot;</span>
 
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -4219,23 +4199,13 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">querycache</span><span class="o">=</span><span class="n">cache</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;new&#39;</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_event</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">querycache</span><span class="o">=</span><span class="n">cache</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="o">==</span><span class="s1">&#39;old&#39;</span><span class="err">:</span><span class="w"> </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">aa</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">thresholds</span><span class="w"></span>
 
@@ -4421,9 +4391,9 @@
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
+<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;active&quot;</span><span class="w"></span>
 
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
@@ -4891,23 +4861,13 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">check</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">cache</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
+<span class="w">        </span><span class="n">querycache</span><span class="o">=</span><span class="n">cache</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;new&#39;</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">last_event</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;old&#39;</span><span class="p">)</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="k">None</span><span class="w"></span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="n">querycache</span><span class="o">=</span><span class="n">cache</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="o">==</span><span class="s1">&#39;old&#39;</span><span class="err">:</span><span class="w"> </span><span class="n">querycache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">aa</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">thresholds</span><span class="w"></span>
 
@@ -5222,9 +5182,9 @@
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"></span>
+<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                    </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;active&quot;</span><span class="w"></span>
 
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
 
