@@ -229,15 +229,11 @@ class HSeries:
 
     def check(self, cache=None, times=None, geometry=None, **kwargs):
 
+        querycache=cache
+
         if cache == 'new':
             times=slice(self.last_event,None,None)
-            try:
-                assert self.cache not in ('old')
-                querycache=None
-            except Exception as e:
-                querycache='active'
-        else:
-            querycache=cache
+            if self.cache=='old': querycache='active'
 
         aa=self.thresholds
 
@@ -388,8 +384,8 @@ class HSeries:
                 justnew=True
                 timefrom = isot2ut(self.last)
                 try:
-                    cache=self.cache
-                    assert cache in ("active","data","old")
+                    assert self.cache in ("active","data","old")
+                    cache="active"
                 except Exception as e:
                     cache="no"
             else:
