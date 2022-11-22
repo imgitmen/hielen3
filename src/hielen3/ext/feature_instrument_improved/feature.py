@@ -14,7 +14,7 @@ class ConfigSchema(ActionSchema):
 
         return {
             "Channels Info": {
-                0:["multi_channel_info_json", "Every things it needs", False, None],
+                0:["multi_channel_info_json", "Everything it needs", False, None],
                 },
 
             }
@@ -48,6 +48,27 @@ class Feature(HFeature):
             thresholds=None
             ):
 
+
+        """
+        { 
+            "param_name" : "Est"|"Nord"|"Quota",
+            "cache" : "old",
+            "operands" : FILE_CHANNEL_SERIES,
+            "operator" : None,
+            "modules"  : {},
+            "coefficients" : [0,1000],
+            "timestamp" : "ttt",
+            "start_time" : None,
+            "zero_time" : first,
+            "ordinal" : 0 | 1 | 2,
+            "mu" | "Δ mm",
+            "valid_range : None,
+            view_range : [-10,10],
+            thresholds : None
+        }
+
+
+        """
 
         try:
             series=self.parameters[param_name]
@@ -94,13 +115,17 @@ class Feature(HFeature):
 
         opz["Z"] = 0
 
-        if coefficients is not None:
+        if coefficients is None:
             try:
                 coefficients=opz["COEFS"]
             except KeyError as e:
                 coefficients=[]
 
         opz["COEFS"] = json.dumps(coefficients)
+
+        modules.update( {"calc":"hielen3.tools.calc"} )
+
+        operator=f"calc.poly_trans2({operator},*COEFS)"
 
         if start_time is None:
             if zero_time is None:
@@ -126,11 +151,12 @@ class Feature(HFeature):
                 thresholds=thresholds
                 )
 
+
         self.parameters.set(**config)
 
         # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
         if zero_time is not None:
-            df=self.parameters[param_name].data()
+            df=self.parameters[param_name].data(cache='active')
 
             if zero_time == 'first':
                 iloc_idx = 0
@@ -152,5 +178,6 @@ class Feature(HFeature):
             raise e
 
         for info in infos:
+
             self.__channel_config__(timestamp=timestamp,**info)
 

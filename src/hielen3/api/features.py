@@ -256,6 +256,7 @@ RESPONSE CODES:
         feafra=db['features_info'][uids,cntxt][good_info]
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
+        feafra=feafra[feafra['intent'] != 'HIDDEN']
 
         #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)

@@ -140,6 +140,11 @@ class HFeature(ABC):
             kwargs["ftype"]=ftype
             uuid=newuuid()
 
+        try:
+            uuid=uuid.uuid
+        except Exception as e:
+            pass
+
         if kwargs.__len__():
             try:
                 if not kwargs['context']:
@@ -164,8 +169,10 @@ class HFeature(ABC):
 
         out = HFeature.modules(feature['ftype']).squeeze().Feature(feature)
 
-        if tosetup:
+        if tosetup: ## SETUP AND RELOAD
             out.setup()
+            feature=db['features'][uuid].to_dict(orient='records')[0]
+            out = HFeature.modules(feature['ftype']).squeeze().Feature(feature)
 
         return out
 

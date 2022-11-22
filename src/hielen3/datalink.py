@@ -500,7 +500,7 @@ class MariadbQuery(Mariadb):
     def __init__(self,connection):
         super().__init__(connection)
 
-    def __getitem__(self, stat):
+    def __getitem__(self, stat=None):
 
         e=self.engine
         with e.begin() as connection:
@@ -511,6 +511,14 @@ class MariadbQuery(Mariadb):
                     coerce_float=True,
                     )
         e.dispose()
+
+        for c in out.columns:
+            try:
+                out[c] = out[c].apply(loads)
+                if out[c].dtype == 'datetime64[ns]':
+                    out[c]=out[c].apply(str)
+            except Exception as e:
+                pass
 
         return out.copy()
 
@@ -524,6 +532,48 @@ class MariadbQuery(Mariadb):
 class MariadbTable(Mariadb):
     def __init__(self,connection,table,askey=None):
         super().__init__(connection,table,askey)
+
+    def query(self,sqlcond=None):
+
+        stat=f'SELECT {",".join(self.selectfields)} FROM {self.table}'
+
+        if sqlcond is not None and sqlcond.__len__() > 0:
+            stat=f'{stat} WHERE {sqlcond}'
+
+        e=self.engine
+        with e.begin() as connection:
+            connection.execute('start transaction')
+            out = read_sql(
+                    stat,
+                    connection,
+                    coerce_float=True,
+                    index_col=self.keys
+                    )
+        e.dispose()
+
+        if out.empty:
+            raise KeyError(sqlcond)
+
+        try:
+            out=out.to_frame()
+        except Exception as e:
+            pass
+
+        for c in out.columns:
+            try:
+                out[c] = out[c].apply(loads)
+                if out[c].dtype == 'datetime64[ns]':
+                    out[c]=out[c].apply(str)
+            except Exception as e:
+                pass
+
+        ind=out.index.copy()
+
+        out = out.reset_index()
+
+        out.index=ind
+
+        return out.copy()
 
     def __getitem__(self, key=None, delete=False):
 
@@ -742,13 +792,6 @@ class MariadbTable(Mariadb):
 
 class MariadbHielenGeo(MariadbTable):
 
-    def __man_na_coords__(xy,z):
-
-        if not isinstance(xy,(list,set,tuple)):
-            xy=[0,0]
-
-        return Point([ isinstance(a,Number) and a or 0 for a in [*xy,z]])
-            
     def __init__(self,connection,table,geo_col='geometry',elev_col=None,askey=None):
         super().__init__(connection,table,askey)
 
@@ -769,20 +812,32 @@ class MariadbHielenGeo(MariadbTable):
         self.elev_col=elev_col
 
 
+    def __man_na_coords__(xy,z):
 
-    def __getitem__(self, key=None, delete=False):
-        frame=super().__getitem__(key, delete)
+        if not isinstance(xy,(list,set,tuple)):
+            xy=[0,0]
 
-        if self.elev_col is not None:
-            #SET an x,y,z geojson
-            #TODO Attenzione funziona solo con PUNTI!
+        return Point([ isinstance(a,Number) and a or 0 for a in [*xy,z]])
+            
 
-            xy=frame[self.geo_col].apply(Series,dtype="object")['coordinates']
+    def __manage_geo_col__(self,frame=None):
+
+        if frame is not None and self.elev_col is not None:
+
+
+            print (self.geo_col)
+
+
+            xy=frame[self.geo_col].apply(Series,dtype="object")#['coordinates']
+
+            print (xy.columns)
 
             """
             xy=frame[self.geo_col].to_frame().apply(lambda x: 
                     x['geometry'],result_type='expand',axis=1)['coordinates']
             """
+
+            xy=xy['coordinates']
 
             managed=concat([xy,frame[self.elev_col].replace(nan,0)],axis=1)
             
@@ -792,6 +847,17 @@ class MariadbHielenGeo(MariadbTable):
 
         return frame
 
+
+
+    def query(self,sqlcond=None):
+        frame=super().query(sqlcond)
+        print (frame.columns)
+        return self.__manage_geo_col__(frame)
+
+    def __getitem__(self, key=None, delete=False):
+        frame=super().__getitem__(key,delete)
+        print (frame.columns)
+        return self.__manage_geo_col__(frame)
 
     def __setitem__(self, key=None, value=None):
 

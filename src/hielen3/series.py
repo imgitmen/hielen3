@@ -399,7 +399,7 @@ class HSeries:
 
         firstreqstart=times.start
 
-        out = Series([],name=self.uuid,dtype='float64')
+        out = Series([],name=self.uuid,dtype='object')
 
         if cache in ("active","data","old"):
             try:
@@ -422,13 +422,16 @@ class HSeries:
         try:
 
             try:
-                assert not cache == 'old'
+                if cache == 'old':
+                    raise Exception('request for old, skip generation')
+
                 kwargs['cache'] = cache
                 gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
-                if gen.empty: raise Exception()
+                if gen.empty: raise Exception("void")
             except Exception as e:
-                #raise e #DEBUG
-                gen = DataFrame([],columns=[self.uuid],dtype='float64')
+                print ("WARN series GENERATE: ", e)
+                #raise e ##DEBUG
+                gen = DataFrame([],columns=[self.uuid],dtype='object')
 
             try:
                 gen = gen[gen.columns[0]]
@@ -453,6 +456,7 @@ class HSeries:
 
 
         except Exception as e:
+            print ("WARN series GLOBAL: ", e)
             #raise e #DEBUG
             pass
 
@@ -534,7 +538,7 @@ class HSeries:
                         db["datacache"][self.uid]=out 
 
             except Exception as e:
-                out = Series()
+                out = Series([],dtype='object')
 
         out.index.name = "timestamp"
 
@@ -584,7 +588,7 @@ class HSeries:
                         db["datacache"][self.uid]=out 
 
             except Exception as e:
-                out = Series()
+                out = Series([],dtype='object')
 
         out.index.name = "timestamp"
 
@@ -637,7 +641,7 @@ class HSeries:
 
             self.modules = {}
 
-            self.operator=operator or "Series([])"
+            self.operator=operator or "Series([],dtype='object')"
 
             if not modules is None:
                 for k, m in modules.items():
