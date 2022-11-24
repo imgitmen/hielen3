@@ -23,11 +23,11 @@ def fands_status(uids=None, cntxt=None, request=None, response=None):
 
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='records',squeeze=False)
 
-        out.data = { "features":feafra }
+        out.data = feafra
         feafra=None
 
     except KeyError as e:
-        out.data = { "features":[] }
+        out.data = []
         out.message = e.args
 
     response = out.format(response=response, request=request)
