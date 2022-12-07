@@ -388,7 +388,8 @@ class HSeries:
                 except Exception as e:
                     cache="no"
             else:
-                timefrom = max(isot2ut(self.first), isot2ut(times.start))
+                tocheck = min(isot2ut(self.last), isot2ut(times.start))
+                timefrom = max(isot2ut(self.first), tocheck)
 
             times=slice(ut2isot(timefrom), times.stop, times.step )
 
