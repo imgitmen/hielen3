@@ -3033,7 +3033,9 @@
 <span class="normal">944</span>
 <span class="normal">945</span>
 <span class="normal">946</span>
-<span class="normal">947</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">947</span>
+<span class="normal">948</span>
+<span class="normal">949</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3559,7 +3561,9 @@
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+                <span class="n">tocheck</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+
+                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">),</span> <span class="n">tocheck</span><span class="p">)</span>
 
             <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom</span><span class="p">),</span> <span class="n">times</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">times</span><span class="o">.</span><span class="n">step</span> <span class="p">)</span>
 
@@ -4497,7 +4501,9 @@
 
 <span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="n">tocheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">),</span><span class="w"> </span><span class="n">tocheck</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">stop</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
@@ -5294,7 +5300,9 @@
 
 <span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="n">tocheck</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">),</span><span class="w"> </span><span class="n">tocheck</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">stop</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
