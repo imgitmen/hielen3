@@ -1,5 +1,12 @@
 CHANGELOG
 =========
+## **v3.3.5**
+### 12 Gennaio 2023 ###
+- introdotta la serie datadiagram per le elaborazioni valore valore
+
+
+
+
 ## **v3.3.1**
 ### 12 Ottobre 2022 ###
 - inserimento dell'entry "query" in hielen3.db

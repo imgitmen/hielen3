@@ -3,9 +3,9 @@
 from pandas import DataFrame, Series, concat, DatetimeIndex, Index 
 from concurrent.futures import ThreadPoolExecutor
 from functools import wraps
-from numpy import nan, unique, round, inf
+from numpy import nan, unique, round, inf, datetime64, timedelta64
 from importlib import import_module
-from hielen3 import db
+from hielen3 import db, conf
 from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, dataframe2jsonizabledict
 from uuid import UUID
 import re
@@ -109,13 +109,11 @@ class HSeries:
             pass
 
         try:
-            db['events'].pop(key=(self.uuid,times))
+            db['events'].pop(key=(self.uuid, times))
         except KeyError as e:
             pass
 
         self.attribute_update('last',None)
-        self.attribute_update('last_event',None)
-        self.attribute_update('status',None)
 
 
     def setup(
@@ -227,21 +225,28 @@ class HSeries:
             self.__loaded__ = False
             self.__delayed_load__()
 
-    def check(self, cache=None, times=None, geometry=None, **kwargs):
+    def check(self, geometry=None, **kwargs):
 
-        querycache=cache
+        try:
+            last_event=db['status'][{'series':self.uuid}].iloc[0]
+            last_event_time = str(last_event['last_time'])
+        except KeyError as e:
+            last_event = None
+            last_event_time = None
 
-        if cache == 'new':
-            times=slice(self.last_event,None,None)
-            if self.cache=='old': querycache='active'
+        
+        times=slice(last_event_time,None,None)
+        cache='active'
 
+
+        # BUILDING THE REFERENCE DATAFRAME (aa)
         aa=self.thresholds
 
         if aa.empty:
 
             d=DataFrame(
-                    [[self.uuid,self.last,'#','#','#','#','#','#','#']],
-                    columns=['series','timestamp','reading_value','threshold_value','ttype','label','color','end','count'])
+                    [[self.uuid,self.last,'#','#','#','#','#','#','#',0]],
+                    columns=['series','timestamp','reading_value','threshold_value','ttype','label','color','end','count','latency'])
             return d.set_index(['series','timestamp'])
     
         if aa['ttype'].iloc[0] == 'LOWER':
@@ -262,7 +267,11 @@ class HSeries:
         aa.index.name='idt'
         aa=aa.reset_index()
 
-        d=self.data(times=times,cache=querycache,geometry=geometry, **kwargs)
+        # REFEERENCE DATAFRAME DONE
+
+        # EXTRACTING THE DATA
+        d=self.data(times=times,cache=cache,geometry=geometry, **kwargs)
+        # DATA ESCTRACTION DONE
 
         try:
             d=d.to_frame()
@@ -274,6 +283,7 @@ class HSeries:
         # TODO capire neither or both
         # TODO separare UPPER e LOWER
 
+        # MATCHING FOR OVERCOMES (each i in aa, thresholds, over d, data)
         for i in aa.index:
             d.loc[d[v].between(
                 min(aa.loc[i,'value'],aa.loc[i,'limit']),
@@ -298,10 +308,9 @@ class HSeries:
 
         d['end'] = d['timestamp'].copy()
 
-        d['timestamp']=d[~(d["label"] == d['label'].shift(1)) | ~(d["ttype"] == d['ttype'].shift(1)) ]['end']
+        d['timestamp']=d[~(d["label"] == d["label"].shift(1)) | ~(d["ttype"] == d["ttype"].shift(1)) ]['end']
 
         d['timestamp'] = d['timestamp'].pad()
-
 
         d=d.set_index('timestamp')
 
@@ -309,43 +318,33 @@ class HSeries:
 
         d=d.reset_index()
 
-
         d=d[~(d["label"] == d['label'].shift(-1)) | ~(d["ttype"] == d['ttype'].shift(-1)) ]
 
-        d['timestamp']=d['timestamp'].apply(str)
+        reftime = datetime64('now') + timedelta64(conf['server_time_offset'], 'h')
 
+        d['latency']=(reftime-d['end']).astype('timedelta64[m]')
 
-        """
-        if lastevent:
-            d=d.tail(1)
-        """
+        d['timestamp']=d['timestamp'].astype(str)
+        d['end'] = d['end'].astype(str)
+        d['latency']=d['latency'].astype(int)
 
-        #d['feature']=self.feature
-        #d['parameter']=self.param
-        #d['unit']=self.mu
+        if not d.empty and last_event is not None:
+            d.loc[d.index[0],'count'] = (d.iloc[0]['count'] - 1 + last_event['count']).squeeze()
+            d.loc[d.index[0],'timestamp'] = str(last_event['start_time'])
+
+            if d.__len__() > 1:
+                if last_event['latency'] is not None:
+                    d.loc[d.index[0],'latency'] = last_event['latency']
+
 
         def fillth(**kwargs):
             db["events"][{'series':kwargs['series']}]=kwargs
-       
+      
         d.apply(lambda x: fillth(**x),axis=1)
-
-        newlast=str(d.tail(1)['timestamp'].squeeze())
-
-        if isot2ut(self.last_event) < isot2ut(newlast):
-            try:
-                self.attribute_update('last_event',str(d.tail(1)['timestamp'].squeeze()))
-                self.attribute_update('status',str(d.tail(1)['label'].squeeze()))
-            except Exception as e:
-                print ("WARNING SET LAST EVENT ", e)
-                pass
-
-        #oldstatus=self.status
 
         #if not newstatus == oldstatus:
         #    pass
         #    self.attribute_update()
-
-
 
         return d.set_index(['series','timestamp'])
 
@@ -389,7 +388,8 @@ class HSeries:
                 except Exception as e:
                     cache="no"
             else:
-                timefrom = max(isot2ut(self.first), isot2ut(times.start))
+                tocheck = min(isot2ut(self.last), isot2ut(times.start))
+                timefrom = max(isot2ut(self.first), tocheck)
 
             times=slice(ut2isot(timefrom), times.stop, times.step )
 

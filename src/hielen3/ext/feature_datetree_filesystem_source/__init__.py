@@ -41,7 +41,10 @@ def logger_serials( folders={} ):
                         lambda x: { "path":x['path'].parent, "name":x['path'].name},axis=1,result_type='expand'
                         )
 
-        return folders.sort_values(by='name')
+        if not folders.empty:
+            folders=folders.sort_values(by='name')
+
+        return folders
 
 
 
@@ -97,10 +100,12 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     dates=slice(datestart,stop)
 
-
-    folders=func_loggers().set_index('name')
-
     df=DataFrame(dtype='object')
+
+    try:
+        folders=func_loggers().set_index('name')
+    except KeyError as e:
+        return df
 
     if isinstance(serials, (list,set,tuple)):
         serials=list(folders.index[

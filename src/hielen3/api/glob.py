@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, status2
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status
 import falcon
 
 """
@@ -58,9 +58,4 @@ def dataman():
 def dataman():
     """ Data manager """
     return [status]
-
-@hug.extend_api("/status2")
-def dataman():
-    """ Data manager """
-    return [status2]
 

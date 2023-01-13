@@ -86,7 +86,7 @@ class Feature(HFeature):
             self.parameters.set(
                     param=info['channel'],
                     ordinal=info['column'],
-                    cache='active',
+                    cache=info['cache'],
                     mu=info['mu'],
                     modules={"source":source},
                     operands={ "SER": serial, "COL":info["column"] },

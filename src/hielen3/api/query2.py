@@ -62,7 +62,7 @@ def tabular_data(
             if p not in series.keys():
                 series[p] = []
 
-            series[p].append( HSeries(p, orient=capability ).thvalues(**query,**kwargs) )
+            series[p].append( HSeries(p).thvalues(**query,**kwargs) )
            
     df = DataFrame()
 
@@ -74,14 +74,21 @@ def tabular_data(
             if ser is None:
                 ser = s
             else:
+                ser = concat([ser,s]).sort_index()
+                ser = ser[~ser.index.duplicated()]
+
+                """
                 ser = ser.append(s).sort_index()
                 idx = unique(ser.index.values, return_index=True)[1]
                 ser = ser.iloc[idx]
+                """
 
+        """
         try:
             ser.columns = [ "_".join([param,a]) for a in ser.columns]
         except Exception as e:
             ser.name=param
+        """
 
         df = df.join(ser, how="outer")
 

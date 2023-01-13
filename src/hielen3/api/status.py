@@ -19,7 +19,7 @@ def fands_status(uids=None, cntxt=None, request=None, response=None):
 
     try:
             
-        feafra=db['status_old'][uids,cntxt]
+        feafra=db['status'][uids,cntxt]
 
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='records',squeeze=False)
 

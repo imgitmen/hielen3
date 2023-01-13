@@ -824,13 +824,8 @@ class MariadbHielenGeo(MariadbTable):
 
         if frame is not None and self.elev_col is not None:
 
-
-            print (self.geo_col)
-
-
             xy=frame[self.geo_col].apply(Series,dtype="object")#['coordinates']
 
-            print (xy.columns)
 
             """
             xy=frame[self.geo_col].to_frame().apply(lambda x: 
@@ -851,13 +846,19 @@ class MariadbHielenGeo(MariadbTable):
 
     def query(self,sqlcond=None):
         frame=super().query(sqlcond)
-        print (frame.columns)
-        return self.__manage_geo_col__(frame)
+        try:
+            frame=self.__manage_geo_col__(frame)
+        except Exception as e:
+            pass
+        return frame
 
     def __getitem__(self, key=None, delete=False):
         frame=super().__getitem__(key,delete)
-        print (frame.columns)
-        return self.__manage_geo_col__(frame)
+        try:
+            frame=self.__manage_geo_col__(frame)
+        except Exception as e:
+            pass
+        return frame
 
     def __setitem__(self, key=None, value=None):
 
@@ -1014,13 +1015,12 @@ class MariadbHielenCache(Mariadb):
         if key["timestamp"] is not None:
             value=value[key["timestamp"]]
     
-        if value.empty:
-            return
-
-        if value is not None:
+        if value is not None and not value.empty:
             value=value.stack()
             value.name='value'
             value=value.reset_index()
+            if value.empty:
+                return
             value=value[['series','timestamp','value']]
             stat=re.sub(",\($","",re.sub("^","(",value.to_csv(header=None,index=None,quoting=1,lineterminator="),(")))
             stat=f"INSERT INTO {self.table} (series,timestamp,value) VALUES "+stat+" ON DUPLICATE KEY UPDATE value = VALUES(value)"

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-from pandas import DataFrame, Series, concat, DatetimeIndex, Index 
+from pandas import DataFrame, Series, concat, DatetimeIndex, Index, MultiIndex 
 from concurrent.futures import ThreadPoolExecutor
 from functools import wraps
 from numpy import nan, unique, round, inf, datetime64, timedelta64
@@ -18,7 +18,6 @@ def _threadpool(f):
         return ThreadPoolExecutor().submit(f, *args, **kwargs)
 
     return wrap
-
 
 class HSeries:
 
@@ -52,15 +51,42 @@ class HSeries:
         series_info=db["series"][self.uuid]
         series_info = dataframe2jsonizabledict(series_info)
         self.__dict__.update(series_info)
+        self.__dict__.pop('modules')
+        self.__dict__.pop('operator')
 
         try:
-            operands=db["series_operands"][self.uuid].to_dict(orient='index')
+            operands=db["series_operands"][self.uuid]['operand'].\
+                    reset_index().\
+                    set_index('label')['operand'].\
+                    to_dict()
         except Exception as e:
             operands={}
 
-        series_info['operands']={ w.pop('label'): w for w in operands.values() }
 
-        self.generator = HSeries._Generator(**series_info, orient=self.orient)
+        try:
+            groupmap=db['series_groups'][self.uuid]['ordinal'].\
+                    apply(lambda x: f"__GROUPMAP__{str(x).zfill(3)}__").\
+                    reset_index().\
+                    set_index('ordinal')['element'].\
+                    sort_index().\
+                    to_dict()
+            self.activeuuids=list(groupmap.values())
+            self.capability = 'datadiagram'
+            series_info['group'] = self.uuid
+
+        except Exception as e:
+            groupmap=None
+            self.activeuuids=[self.uuid]
+
+        series_info['operands']=operands
+        series_info['groupmap']=groupmap
+
+        self.generator = HSeries.__Generator__(**series_info)
+
+        try:
+            self.ingroup=db['series_groups'][{"element":self.uuid}]['groupseries'].to_list()
+        except Exception as e:
+            self.ingroup=None
 
         try:
             t=db['series_thresholds'][self.uuid]
@@ -86,13 +112,12 @@ class HSeries:
         return self.__getattribute__(item)
             
 
-    def __init__(self, uuid, orient=None, delayed=True):
+    def __init__(self, uuid, delayed=True):
 
         if uuid is None:
             raise ValueError
 
         self.uuid=uuid
-        self.orient = orient or 'data'
 
         self.feature = None
         self.param = None
@@ -129,10 +154,12 @@ class HSeries:
             valid_range=None,
             view_range=None,
             thresholds=None,
+            groupmap=None,
+            orient='H'
             ):
 
         def _managed_capabilities_(capability):
-            return capability in ['data','map','cloud','stream']
+            return capability in ['data','stream','group']
 
         uuid=uuid or getuuid()
 
@@ -162,6 +189,9 @@ class HSeries:
 
         if first is not None:
             setups['first'] = first
+
+        if orient is not None:
+            setups['orient'] = orient
 
         if valid_range is not None:
             try:
@@ -194,36 +224,80 @@ class HSeries:
         
             for k,w in operands.items():
 
-
-                if not isinstance(w,(list,tuple,dict)):
+                if not isinstance(w,(list,tuple,set,dict)):
                     w=[w]
 
-                if isinstance(w,(list,tuple)):
+                if isinstance(w,(list,tuple,set)):
                     wl=min(table_operands.values.__len__(),w.__len__())
                     w=dict(zip(table_operands.values[:wl],w[:wl]))
                     
                     if isinstance(w['operand'],HSeries):
                         w['operand']=w['operand'].uuid
 
-                db["series_operands"][(uuid,k)]=w
+                table_operands[(uuid,k)]=w
 
-        if thresholds is not None and isinstance(thresholds, list):
+
+        if groupmap is not None:
+
+            try:
+                if not isinstance(groupmap,(list,tuple,set)):
+                    raise Exception (f"not a vaild list")
+            
+                for i in range(0,groupmap.__len__()):
+                    v=groupman[i]
+                    if not isinstance(v,dict):
+                        raise Exception (f"{v} has not a valid format")
+
+                    el=v.pop('element')
+
+                    try:
+                        el=HSeries(el,delayed=False).uuid
+                    except Excpetion as e:
+                        pass
+
+                    try:
+                        v['ordinal']
+                    except Exception as e:
+                        v['ordinal'] = i
+
+                    try:
+                        v['label']
+                    except Exception as e:
+                        v['label'] = str(i)
+
+                    db["series_groups"][(uuid,el)]=v
+
+                db["series"][uuid]={"capability":'datadiagram'}
+
+            except Exception as e:
+                raise Exception (f"groupmap CONF for {uuid}: {e}")
+
+        if thresholds is not None and isinstance(thresholds, (list,tuple,set)):
             for t in thresholds:
                 db["series_thresholds"][uuid]=t
 
         return HSeries(uuid)
     
 
+    #TODO update thresholds
     def attribute_update(self, attribute=None, value=None):
 
         if attribute is None:
             return
 
-        db["series"][self.uuid]={attribute:value}
+        if attribute == 'thresholds':
+            if not isinstance(value,(list,set,tuple)):
+                value=[value]
+                for t in value:
+                    db["series_thresholds"][self.uuid]=t
+        else:
+            db["series"][self.uuid]={attribute:value}
 
         if self.__loaded__:
             self.__loaded__ = False
             self.__delayed_load__()
+
+
 
     def check(self, geometry=None, **kwargs):
 
@@ -271,7 +345,7 @@ class HSeries:
 
         # EXTRACTING THE DATA
         d=self.data(times=times,cache=cache,geometry=geometry, **kwargs)
-        # DATA ESCTRACTION DONE
+        # DATA ESTRACTION DONE
 
         try:
             d=d.to_frame()
@@ -342,12 +416,7 @@ class HSeries:
       
         d.apply(lambda x: fillth(**x),axis=1)
 
-        #if not newstatus == oldstatus:
-        #    pass
-        #    self.attribute_update()
-
         return d.set_index(['series','timestamp'])
-
 
 
 
@@ -356,12 +425,21 @@ class HSeries:
         return self.__getattr__(self.capability)(**kwargs)
 
 
-    def data(self, times=None, timeref=None, cache=None, geometry=None, **kwargs):
-    
-        if self.capability != 'data':
-            raise ValueError( f"{self.uuid} has not 'data' capability" )
+    def datadiagram(self,**kwargs):
+        return self.data(**kwargs)
+
+
+    def data(self, times=None, timeref=None, cache=None, group=None, geometry=None, **kwargs):
 
         self.__delayed_load__()
+
+        if self.capability not in ['data','datadiagram']:
+            raise ValueError( f"{self.uuid} has not 'data' capability" )
+
+        if self.ingroup is None or group in self.ingroup:
+            cangenerate = True
+        else:
+            cangenerate = False
 
         timeref=agoodtime(timeref)
 
@@ -399,16 +477,14 @@ class HSeries:
 
         firstreqstart=times.start
 
-        out = Series([],name=self.uuid,dtype='object')
+        #TODO inserire i nomi dei label
+        out = DataFrame([],columns=self.activeuuids,dtype='object')
 
         if cache in ("active","data","old"):
             try:
-                out = db["datacache"][self.uuid,times]
+                out = db["datacache"][self.activeuuids,times]
             except KeyError as e:
                 pass
-
-            if isinstance(out,DataFrame):
-                out=out[out.columns[0]]
 
             if not out.empty:
                 cachestop = out.index.max()
@@ -422,42 +498,50 @@ class HSeries:
         try:
 
             try:
-                if cache == 'old':
+                if cache == 'old' or not cangenerate:
                     raise Exception('request for old, skip generation')
 
                 kwargs['cache'] = cache
-                gen = self.generator._generate(times=times,timeref=timeref,geometry=geometry,**kwargs)
+                gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 if gen.empty: raise Exception("void")
             except Exception as e:
-                print ("WARN series GENERATE: ", e)
-                #raise e ##DEBUG
-                gen = DataFrame([],columns=[self.uuid],dtype='object')
+                # print ("WARN series GENERATE: ", e)
+                # raise e ##DEBUG
+                gen = DataFrame([],columns=self.activeuuids,dtype='object')
+
 
             try:
-                gen = gen[gen.columns[0]]
+                gen = gen.to_frame()
             except AttributeError as e:
                 pass
 
-            gen.name=self.uuid
+            #gen.name=self.uuid
 
             try:
-                gen = round(gen,4) 
+                gen = gen.round(4) 
+            except Exception as e:
+                pass
+
+            try:
+                gen.columns=self.activeuuids
             except Exception as e:
                 pass
 
             gen.index=DatetimeIndex(gen.index)
 
             out = concat([out,gen]).sort_index()
-
             out.index.name = "timestamp"
 
-            if cache in ("active","data","refresh"):
-                db["datacache"][self.uuid]=out
+            out=out[self.activeuuids]
+        
+            if cache in ("active","data","refresh") and cangenerate:
+                for u in gen.columns:
+                    db["datacache"][u]=out[u]
 
 
         except Exception as e:
-            print ("WARN series GLOBAL: ", e)
-            #raise e #DEBUG
+            # print ("WARN series GLOBAL: ", e)
+            # raise e #DEBUG
             pass
 
         if cache in ("active","data") and not out.empty and not justnew:
@@ -466,134 +550,35 @@ class HSeries:
             times=slice(firstreqstart, lasttotry, times.step)
 
             kwargs['cache'] = "none"
-            preout = self.data(times=times,geometry=geometry, **kwargs)
+            preout = self.data(times=times,geometry=geometry, group=group, **kwargs)
 
             preout.index.name = "timestamp"
 
-            if cache in ("active","data","refresh"):
-                db["datacache"][self.uuid]=preout
+            try:
+                preout.columns=self.activeuuids
+            except Exception as e:
+                pass
+
+            if cache in ("active","data","refresh") and cangenerate:
+                for u in preout.columns:
+                    db["datacache"][u]=preout[u]
 
             if preout.__len__():
                 out = concat([preout,out]).sort_index()
 
-        idx = unique(out.index.values, return_index=True)[1]
-        out = out.iloc[idx]
+        out = out[~out.index.duplicated()]
         out.index.name = "timestamp"
 
         if not out.empty:
 
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
 
-
         return out
 
 
-    def map(self, times=None, timeref=None, geometry=None, refresh=None, **kwargs):
+    ## WARNING Omesso Map
 
-        if self.capability != 'map':
-            raise ValueError( f"{self.uuid} has not 'map' capability" )
-
-        try:
-            cache=self.cache
-        except Exception as e:
-            cache="no"
-
-        if cache is None or cache not in ("active","map"):
-            cache = "no"
-
-        if refresh is not None and refresh and cache in ("active","map"):
-            cache = "refresh"
-
-        timeref=agoodtime(timeref)
-
-        if timeref is not None:
-            cache = "no"
-
-        try:
-            
-            if cache in ("refresh","no"):
-                raise KeyError
-
-            out = db["datacache"][self.uid][times]
-
-            if out.empty:
-                raise KeyError
-
-
-        except KeyError as e:
-
-            try:
-                out = self.generator._generate(times=times,timeref=timeref,**kwargs)
-                try:
-                    out = out[out.columns[0]]
-                except AttributeError as e:
-                    pass
-
-                if cache not in ("no"):
-                    try:
-                        db["datacache"][self.uid]=None
-                    except KeyError as e:
-                        pass
-                    finally:
-                        db["datacache"][self.uid]=out 
-
-            except Exception as e:
-                out = Series([],dtype='object')
-
-        out.index.name = "timestamp"
-
-        return out
-
-
-    def cloud(self, times=None, timeref=None, geometry=None, refresh=None, **kwargs):
-
-        if self.capability != 'cloud':
-            raise ValueError( f"{self.uuid} has not 'cloud' capability" )
-
-        try:
-            cache=self.cache
-        except Exception as e:
-            cache="no"
-
-        if cache is None or cache not in ("active","cloud"):
-            cache = "no"
-
-        if refresh is not None and refresh and cache in ("active","cloud"):
-            cache = "refresh"
-
-        try:
-            if cache in ("refresh","no"):
-                raise KeyError
-
-            out = db["datacache"][self.uid][times]
-
-            if out.empty:
-                raise KeyError
-
-        except KeyError:
-
-            try:
-                out = self.generator._generate(times=times,**kwargs)
-                try:
-                    out = out[out.columns[0]]
-                except AttributeError as e:
-                    pass
-
-                if cache not in ("no"):
-                    try:
-                        db["datacache"][self.uid]=None
-                    except KeyError as e:
-                        pass
-                    finally:
-                        db["datacache"][self.uid]=out 
-
-            except Exception as e:
-                out = Series([],dtype='object')
-
-        out.index.name = "timestamp"
-
-        return out
-    
+    ## WARINIG Omesso Cloud
 
     def stream(self, times=None, timeref=None, cache=None, geometry=None, **kwargs):
 
@@ -609,10 +594,11 @@ class HSeries:
         try:
 
             try:
-                out=self.generator._generate(**kwargs)
+                out=self.generator.__generate__(**kwargs)
                 gen = Series([out['queue']],index=[out['timestamp']])
             except Exception as e:
-                raise e
+                print ("WARN series GENERATE: ",e)
+                #raise e
                 gen = Series([],dtype='object')
 
             gen.name='queue'
@@ -634,12 +620,64 @@ class HSeries:
 #        return out.to_frame()
 
 
-    class _Generator:
-        def __init__(self, modules=None, operator=None, operands=None, orient=None, **kwargs ):
 
-            self.orient=orient or "data"
+    #TOLGO ORIENT
+    class __Generator__:
+
+        def __load_operand__(value=None):
+
+            #OPERANDS RESOLUTION:
+            try:
+                UUID(value)
+                return HSeries(value)
+            except Exception as e:
+                pass
+
+            """
+                trying to load json string, if "value" is it
+            """
+            try:
+                return json.loads(value)
+            except Exception as e:
+                pass
+
+            return value
+
+            '''
+            """
+                Trying to get values from a dict, if "out" is it
+            """
+            try:
+                values=out.values()
+            except AttributeError as e:
+                values=out
+
+            """
+                Trying to load suboperands from a list if "values" is it
+            """
+            try:
+                assert not isinstance(values,str)
+                values=[ __Generator__.__load_operand__(a,orient) for a in values ]
+            except Exception as e:
+                pass
+
+            """
+                Trying zip a dict, if "out" is it
+            """
+            try:
+                out=dict(zip(out.keys(),values)
+            except AttributeError as e:
+                out = values
+
+            return out
+            '''
+
+
+        def __init__(self, modules=None, operator=None, operands=None, group=None, groupmap=None, **kwargs ):
 
             self.modules = {}
+
+            self.group=group
 
             self.operator=operator or "Series([],dtype='object')"
 
@@ -648,60 +686,61 @@ class HSeries:
                     self.operator = self.operator.replace(k, f"self.modules[{k!r}]")
                     self.modules[k] = import_module(m)
 
-            self.operands = {}
-            
-            #OPERANDS RESOLUTION:
-            try: 
-                for key, value in operands.items():
 
-                    """             
-                    trying to extract a series                              
-                    """             
-                    try:
-                        UUID(value["operand"])
-                        self.operands[key]=HSeries(value["operand"],self.orient)
-                        continue
-                    except Exception as e:
-                        pass
+            self.operands={
+                    k:HSeries.__Generator__.__load_operand__(w) for
+                    k,w in operands.items()
+                    }
 
-                    try:
-                        self.operands[key] = json.loads(value["operand"])
-                        continue
-                    except Exception as e:
-                        pass
-
-                    """
-                        giving up. Load it "as is".
-                        return it
-                    """
-                    self.operands[key] = value["operand"]
-
-            except AttributeError as e:
-                pass
+            if groupmap is not None:
+                self.groupmap={
+                        k:HSeries.__Generator__.__load_operand__(w) for
+                        k,w in groupmap.items()
+                        }
+            else:
+                self.groupmap = None
+                    
 
 
-
-
-        def _generate(self, **kwargs):
+        def __generate__(self, **kwargs):
 
             operands = kwargs
 
             operands.update(
                 {k: w for k, w in self.operands.items() if not isinstance(w, HSeries)}
             )
+
+            operands['group'] = self.group
+
+            if self.groupmap is not None:
+                groupmap = { k: w.thvalues(**kwargs) for k, w in self.groupmap.items() if isinstance(w, HSeries) }
+
+                groupmap = { k:w.result() for k,w in groupmap.items() }
         
+                groupmap = concat(groupmap,axis=1)
+
+                groupmap.columns = groupmap.columns.droplevel(0)
+
+#                groupmap.columns = groupmap.columns.map(lambda x: int(x.split('_')[2]))
+
+                operands['__GROUPMAP__'] = groupmap
+
+
             runners = { k: w.thvalues(**kwargs) for k, w in self.operands.items()  if isinstance(w, HSeries) }
 
             operands.update({k: w.result() for k, w in runners.items()})
             #operands.update( { k:w.data(**kwargs) for k,w in self.operands.items() if isinstance(w,HSeries) } )
 
-            ## ATTENZIONE A locals: Implementation Dipendent!!!! ###
+            ## ATTENZIONE A locals: Implementation Dependant!!!! ###
             locals().update(operands)
 
             # print (operands) #DEBUG
-            #print (self.operator, locals() ) #DEBUG
+            # print (self.operator, locals() ) #DEBUG
 
 
-            return eval(self.operator)
+            out= eval(self.operator)
+
+
+            return out
 
 

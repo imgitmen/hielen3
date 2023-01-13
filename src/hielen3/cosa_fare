@@ -1,0 +1,122 @@
+
+{
+  "meta": {
+    "response": "ok",
+    "message": "",
+    "data_type": "GET /api/hielen/features/8ea4d099-088d-48ab-926c-5b6164182778"
+  },
+  "data": {
+    "features": {
+      "8ea4d099-088d-48ab-926c-5b6164182778": {
+        "type": "Feature",
+        "parameters": [
+          {
+            "label": "DD sasasa",
+            "param": "Scostamento integrale asse perpendicolare",
+            "unit": "mm",
+            "series": "378acf3b-4348-43d4-88bf-8174d2703e3e",
+            "cmap": null,
+            "capability": "group",
+            "orient":"H",
+            "group":[
+                [
+                    "label":"1.2",
+                    "series":"afadf"
+                ],
+                ...
+            ],
+            "valueRange": [
+              -5,
+              5
+            ],
+            "thresholds": [
+              {
+                "label": "Warning",
+                "value": 5,
+                "color": "#FFA500"
+              },
+              {
+                "label": "Warning",
+                "value": -5,
+                "color": "#FFA500"
+              },
+              {
+                "label": "#Warning",
+                "value": 3.5,
+                "color": "#ffff0000"
+              },
+              {
+                "label": "#Warning",
+                "value": -3.5,
+                "color": "#ffff0000"
+              }
+            ]
+          },
+          {
+            "label": "CE01_asse parallelo",
+            "param": "asse parallelo",
+            "unit": "Δ mm/m",
+            "series": "c28104c4-aaec-4fe0-beef-9403c7e89e2a",
+            "cmap": null,
+            "capability": "data",
+            "valueRange": [
+              -5,
+              5
+            ],
+            "thresholds": [
+              {
+                "label": "Warning",
+                "value": 5,
+                "color": "#FFA500"
+              },
+              {
+                "label": "Warning",
+                "value": -5,
+                "color": "#FFA500"
+              },
+              {
+                "label": "#Warning",
+                "value": 3.5,
+                "color": "#ffff0000"
+              },
+              {
+                "label": "#Warning",
+                "value": -3.5,
+                "color": "#ffff0000"
+              }
+            ]
+          },
+          {
+            "label": "CE01_temperatura",
+            "param": "temperatura",
+            "unit": "°C",
+            "series": "9328b0f5-70eb-4732-a9ea-8480bafe833c",
+            "cmap": null,
+            "capability": "data",
+            "valueRange": [
+              -20,
+              80
+            ],
+            "thresholds": null
+          }
+        ],
+        "properties": {
+          "uid": "8ea4d099-088d-48ab-926c-5b6164182778",
+          "type": "clinometer",
+          "classification": null,
+          "context": "62ac43c643870",
+          "description": null,
+          "label": "CE01",
+          "location": null,
+          "status": "0",
+          "style": "dd7094e1",
+          "timestamp": "2022-06-17 17:06:57",
+          "inmap": null
+        },
+        "capabilities": [
+          "data"
+        ]
+      }
+    }
+  }
+}
