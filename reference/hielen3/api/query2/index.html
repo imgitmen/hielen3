@@ -948,20 +948,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../status2/" class="md-nav__link">
-        Status2
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -2537,7 +2523,19 @@
 <span class="normal">308</span>
 <span class="normal">309</span>
 <span class="normal">310</span>
-<span class="normal">311</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2641,7 +2639,7 @@
 
                 <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-            <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">capability</span> <span class="p">)</span><span class="o">.</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="p">)</span>
+            <span class="n">series</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="p">)</span>
 
     <span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">()</span>
 
@@ -2659,19 +2657,31 @@
 
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span><span class="n">ser</span><span class="p">,</span><span class="n">s</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
-                <span class="n">idx</span> <span class="o">=</span> <span class="n">unique</span><span class="p">(</span><span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">return_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="p">[</span><span class="o">~</span><span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
 
-                <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+                <span class="sd">&quot;&quot;&quot;</span>
 
-        <span class="k">try</span><span class="p">:</span>
+<span class="sd">                ser = ser.append(s).sort_index()</span>
 
-            <span class="n">ser</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;_&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">param</span><span class="p">,</span><span class="n">a</span><span class="p">])</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ser</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+<span class="sd">                idx = unique(ser.index.values, return_index=True)[1]</span>
 
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="sd">                ser = ser.iloc[idx]</span>
 
-            <span class="n">ser</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span>
+<span class="sd">                &quot;&quot;&quot;</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        try:</span>
+
+<span class="sd">            ser.columns = [ &quot;_&quot;.join([param,a]) for a in ser.columns]</span>
+
+<span class="sd">        except Exception as e:</span>
+
+<span class="sd">            ser.name=param</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
 
@@ -2892,7 +2902,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0a5007be20</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f3fcac91d60</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2950,7 +2960,7 @@
 
 <span class="w">                </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">orient</span><span class="o">=</span><span class="n">capability</span><span class="w"> </span><span class="p">).</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">series</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">p</span><span class="p">).</span><span class="n">thvalues</span><span class="p">(</span><span class="o">**</span><span class="n">query</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">()</span><span class="w"></span>
 
@@ -2968,19 +2978,31 @@
 
 <span class="w">            </span><span class="k">else</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
+<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="o">[</span><span class="n">ser,s</span><span class="o">]</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">unique</span><span class="p">(</span><span class="n">ser</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="k">values</span><span class="p">,</span><span class="w"> </span><span class="n">return_index</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="o">[</span><span class="n">~ser.index.duplicated()</span><span class="o">]</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="w"></span>
+<span class="w">                </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+<span class="ss">                ser = ser.append(s).sort_index()</span>
 
-<span class="w">            </span><span class="n">ser</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> &quot;_&quot;.join([param,a</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">columns</span><span class="err">]</span><span class="w"></span>
+<span class="ss">                idx = unique(ser.index.values, return_index=True)[1]</span>
 
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+<span class="ss">                ser = ser.iloc[idx]</span>
 
-<span class="w">            </span><span class="n">ser</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="n">param</span><span class="w"></span>
+<span class="ss">                &quot;&quot;&quot;</span><span class="w"></span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        try:</span>
+
+<span class="ss">            ser.columns = [ &quot;</span><span class="n">_</span><span class="ss">&quot;.join([param,a]) for a in ser.columns]</span>
+
+<span class="ss">        except Exception as e:</span>
+
+<span class="ss">            ser.name=param</span>
+
+<span class="ss">        &quot;&quot;&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span><span class="w"></span>
 

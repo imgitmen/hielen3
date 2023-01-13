@@ -1309,20 +1309,6 @@
 
             
           
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../api/status2/" class="md-nav__link">
-        Status2
-      </a>
-    </li>
-  
-
-            
-          
         </ul>
       </nav>
     </li>
@@ -4451,7 +4437,15 @@
 <span class="normal">1498</span>
 <span class="normal">1499</span>
 <span class="normal">1500</span>
-<span class="normal">1501</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1501</span>
+<span class="normal">1502</span>
+<span class="normal">1503</span>
+<span class="normal">1504</span>
+<span class="normal">1505</span>
+<span class="normal">1506</span>
+<span class="normal">1507</span>
+<span class="normal">1508</span>
+<span class="normal">1509</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5669,11 +5663,7 @@
 
         <span class="k">if</span> <span class="n">frame</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">elev_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="nb">print</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geo_col</span><span class="p">)</span>
-
             <span class="n">xy</span><span class="o">=</span><span class="n">frame</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">geo_col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span><span class="c1">#[&#39;coordinates&#39;]</span>
-
-            <span class="nb">print</span> <span class="p">(</span><span class="n">xy</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
             <span class="sd">&quot;&quot;&quot;</span>
 
@@ -5699,17 +5689,29 @@
 
         <span class="n">frame</span><span class="o">=</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">sqlcond</span><span class="p">)</span>
 
-        <span class="nb">print</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">frame</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="n">frame</span><span class="o">=</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="p">)</span>
 
-        <span class="nb">print</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">frame</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -5923,17 +5925,17 @@
 
             <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]]</span>
 
-        <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-
-            <span class="k">return</span>
-
-        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
             <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
 
             <span class="n">value</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;value&#39;</span>
 
             <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+                <span class="k">return</span>
 
             <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">[[</span><span class="s1">&#39;series&#39;</span><span class="p">,</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="p">]]</span>
 
@@ -7137,17 +7139,17 @@
 
 <span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="o">[</span><span class="n">key[&quot;timestamp&quot;</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">return</span><span class="w"></span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">stack</span><span class="p">()</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">value</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="o">[</span><span class="n">[&#39;series&#39;,&#39;timestamp&#39;,&#39;value&#39;</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
 
@@ -7264,11 +7266,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">elev_col</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">geo_col</span><span class="p">)</span><span class="w"></span>
-
 <span class="w">            </span><span class="n">xy</span><span class="o">=</span><span class="n">frame</span><span class="o">[</span><span class="n">self.geo_col</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="ss">&quot;object&quot;</span><span class="p">)</span><span class="err">#</span><span class="o">[</span><span class="n">&#39;coordinates&#39;</span><span class="o">]</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">xy</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="ss">&quot;&quot;&quot;</span>
 
@@ -7294,17 +7292,29 @@
 
 <span class="w">        </span><span class="n">frame</span><span class="o">=</span><span class="n">super</span><span class="p">().</span><span class="n">query</span><span class="p">(</span><span class="n">sqlcond</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">frame</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">frame</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">delete</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">frame</span><span class="o">=</span><span class="n">super</span><span class="p">().</span><span class="n">__getitem__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">delete</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">frame</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">__manage_geo_col__</span><span class="p">(</span><span class="n">frame</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">frame</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">key</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span><span class="w"></span>
 
@@ -7367,9 +7377,15 @@
 
 <span class="w">        </span><span class="nv">frame</span><span class="o">=</span><span class="nv">super</span><span class="ss">()</span>.<span class="nv">query</span><span class="ss">(</span><span class="nv">sqlcond</span><span class="ss">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="nv">print</span><span class="w"> </span><span class="ss">(</span><span class="nv">frame</span>.<span class="nv">columns</span><span class="ss">)</span><span class="w"></span>
+<span class="w">        </span><span class="nv">try</span>:<span class="w"></span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__manage_geo_col__</span><span class="ss">(</span><span class="nv">frame</span><span class="ss">)</span><span class="w"></span>
+<span class="w">            </span><span class="nv">frame</span><span class="o">=</span><span class="nv">self</span>.<span class="nv">__manage_geo_col__</span><span class="ss">(</span><span class="nv">frame</span><span class="ss">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">Exception</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:<span class="w"></span>
+
+<span class="w">            </span><span class="nv">pass</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">frame</span><span class="w"></span>
 </code></pre></div>
 
 </details>
