@@ -1285,6 +1285,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#selfparamerror" class="md-nav__link">
+    SelfParamError
+  </a>
+  
+    <nav class="md-nav" aria-label="SelfParamError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_2" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with_traceback" class="md-nav__link">
+    with_traceback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2356,6 +2397,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#selfparamerror" class="md-nav__link">
+    SelfParamError
+  </a>
+  
+    <nav class="md-nav" aria-label="SelfParamError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ancestors-in-mro_2" class="md-nav__link">
+    Ancestors (in MRO)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_1" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_2" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with_traceback" class="md-nav__link">
+    with_traceback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2413,6 +2495,10 @@
 
     <span class="n">multi_channel_info_json</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+<span class="k">class</span> <span class="nc">SelfParamError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+    <span class="k">pass</span>
+
 <span class="k">class</span> <span class="nc">Feature</span><span class="p">(</span><span class="n">HFeature</span><span class="p">):</span>
 
     <span class="sd">&#39;&#39;&#39;</span>
@@ -2455,9 +2541,15 @@
 
             <span class="n">view_range</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
-            <span class="n">thresholds</span><span class="o">=</span><span class="kc">None</span>
+            <span class="n">thresholds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+            <span class="n">groupmap</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+            <span class="n">orient</span><span class="o">=</span><span class="kc">None</span>
 
             <span class="p">):</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="n">param_name</span><span class="p">)</span>
 
         <span class="sd">&quot;&quot;&quot;</span>
 
@@ -2513,6 +2605,10 @@
 
         <span class="n">new_opz</span><span class="o">=</span><span class="p">{}</span>
 
+        <span class="k">if</span> <span class="n">modules</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">modules</span><span class="o">=</span><span class="p">{}</span>
+
         <span class="k">if</span> <span class="n">operands</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -2543,7 +2639,7 @@
 
                         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error retriving </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                            <span class="k">raise</span> <span class="n">SelfParamError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;error retriving </span><span class="si">{</span><span class="n">feat</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="n">w</span><span class="p">[</span><span class="s2">&quot;param&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
                     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -2553,37 +2649,45 @@
 
         <span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span>
 
-        <span class="n">opz</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;GROUPMAP:&quot;</span><span class="p">,</span><span class="n">groupmap</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">coefficients</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">groupmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="k">try</span><span class="p">:</span>
+            <span class="n">opz</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-                <span class="n">coefficients</span><span class="o">=</span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">coefficients</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
 
-                <span class="n">coefficients</span><span class="o">=</span><span class="p">[]</span>
+                    <span class="n">coefficients</span><span class="o">=</span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span>
 
-        <span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span> <span class="p">)</span>
+                    <span class="n">coefficients</span><span class="o">=</span><span class="p">[]</span>
 
-        <span class="n">operator</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;calc.poly_trans2(</span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s2">,*COEFS)&quot;</span>
+            <span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">start_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span> <span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">zero_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">operator</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;calc.poly_trans2(</span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s2">,*COEFS)&quot;</span>
 
-                <span class="n">start_time</span><span class="o">=</span><span class="n">timestamp</span>
+            <span class="k">if</span> <span class="n">start_time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">zero_time</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">zero_time</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]:</span>
 
-                <span class="n">start_time</span><span class="o">=</span><span class="n">zero_time</span>
+                    <span class="n">start_time</span><span class="o">=</span><span class="n">timestamp</span>
 
-        <span class="k">if</span> <span class="n">operator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">else</span><span class="p">:</span>
 
-            <span class="n">operator</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s2"> - Z&quot;</span>
+                    <span class="n">start_time</span><span class="o">=</span><span class="n">zero_time</span>
+
+            <span class="k">if</span> <span class="n">zero_time</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]:</span>
+
+                <span class="n">zero_time</span> <span class="o">=</span> <span class="n">start_time</span>
+
+            <span class="k">if</span> <span class="n">operator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+                <span class="n">operator</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s2"> - Z&quot;</span>
 
         <span class="n">config</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
 
@@ -2607,7 +2711,11 @@
 
                 <span class="n">view_range</span><span class="o">=</span><span class="n">view_range</span><span class="p">,</span>
 
-                <span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span>
+                <span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span><span class="p">,</span>
+
+                <span class="n">groupmap</span><span class="o">=</span><span class="n">groupmap</span><span class="p">,</span>
+
+                <span class="n">orient</span><span class="o">=</span><span class="n">orient</span>
 
                 <span class="p">)</span>
 
@@ -2619,13 +2727,9 @@
 
             <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">zero_time</span> <span class="o">==</span> <span class="s1">&#39;first&#39;</span><span class="p">:</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
 
-                <span class="n">iloc_idx</span> <span class="o">=</span> <span class="mi">0</span>
-
-            <span class="k">else</span><span class="p">:</span>
-
-                <span class="n">iloc_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">zero_time</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+            <span class="n">iloc_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">zero_time</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 
             <span class="k">try</span><span class="p">:</span>
 
@@ -2635,7 +2739,7 @@
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARN configuring param </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multi_channel_info_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">timestamp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
@@ -2647,9 +2751,39 @@
 
             <span class="k">raise</span> <span class="n">e</span>
 
-        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">:</span>
+        <span class="n">retryinfoslen</span> <span class="o">=</span> <span class="mi">0</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+
+            <span class="c1"># Needed to configure self referenced parameters if the dependant</span>
+
+            <span class="c1"># parameter comes before the dependency in the info array</span>
+
+            <span class="n">retryinfos</span><span class="o">=</span><span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">infos</span><span class="p">:</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="n">SelfParamError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="n">retryinfos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">retryinfos</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+                <span class="k">return</span>
+
+            <span class="k">if</span> <span class="n">retryinfos</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">retryinfos</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="n">retryinfoslen</span><span class="p">:</span>
+
+                <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;self parameters reference broken </span><span class="si">{</span><span class="n">retryinfos</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span>
+
+            <span class="n">retryinfoslen</span> <span class="o">=</span> <span class="n">retryinfos</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+
+            <span class="n">info</span> <span class="o">=</span> <span class="n">retryinfos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 </code></pre></div>
 
 </details>
@@ -3792,9 +3926,15 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">view_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span><span class="w"></span>
+<span class="w">            </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">groupmap</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">orient</span><span class="o">=</span><span class="n">None</span><span class="w"></span>
 
 <span class="w">            </span><span class="p">):</span><span class="w"></span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="n">param_name</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
@@ -3850,6 +3990,10 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="n">new_opz</span><span class="o">=</span><span class="p">{}</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">modules</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">modules</span><span class="o">=</span><span class="p">{}</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">operands</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">():</span><span class="w"></span>
@@ -3880,7 +4024,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">                        </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;error retriving {feat}.{param}&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">                            </span><span class="n">raise</span><span class="w"> </span><span class="n">SelfParamError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;error retriving {feat}.{w[&quot;param&quot;]}&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">                    </span><span class="n">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
 
@@ -3890,37 +4034,45 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;GROUPMAP:&quot;</span><span class="p">,</span><span class="n">groupmap</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">groupmap</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">coefficients</span><span class="o">=</span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">coefficients</span><span class="o">=</span><span class="p">[]</span><span class="w"></span>
+<span class="w">                    </span><span class="n">coefficients</span><span class="o">=</span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="w">                    </span><span class="n">coefficients</span><span class="o">=</span><span class="p">[]</span><span class="w"></span>
 
-<span class="w">        </span><span class="n">operator</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;calc.poly_trans2({operator},*COEFS)&quot;</span><span class="w"></span>
+<span class="w">            </span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">operator</span><span class="o">=</span><span class="n">f</span><span class="s2">&quot;calc.poly_trans2({operator},*COEFS)&quot;</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">start_time</span><span class="o">=</span><span class="n">timestamp</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">else</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]:</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">start_time</span><span class="o">=</span><span class="n">zero_time</span><span class="w"></span>
+<span class="w">                    </span><span class="n">start_time</span><span class="o">=</span><span class="n">timestamp</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+<span class="w">                </span><span class="k">else</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">            </span><span class="n">operator</span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="s2">&quot;{operator} - Z&quot;</span><span class="w"></span>
+<span class="w">                    </span><span class="n">start_time</span><span class="o">=</span><span class="n">zero_time</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;first&#39;</span><span class="p">]:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">zero_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">start_time</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">operator</span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="s2">&quot;{operator} - Z&quot;</span><span class="w"></span>
 
 <span class="w">        </span><span class="n">config</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span><span class="w"></span>
 
@@ -3944,7 +4096,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">                </span><span class="n">view_range</span><span class="o">=</span><span class="n">view_range</span><span class="p">,</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span><span class="w"></span>
+<span class="w">                </span><span class="n">thresholds</span><span class="o">=</span><span class="n">thresholds</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">groupmap</span><span class="o">=</span><span class="n">groupmap</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="w"></span>
 
 <span class="w">                </span><span class="p">)</span><span class="w"></span>
 
@@ -3956,13 +4112,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;first&#39;</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">iloc_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
-
-<span class="w">            </span><span class="k">else</span><span class="p">:</span><span class="w"></span>
-
-<span class="w">                </span><span class="n">iloc_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">zero_time</span><span class="p">],</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="n">iloc_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">zero_time</span><span class="p">],</span><span class="w"> </span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
 
@@ -3972,7 +4124,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
 
-<span class="w">                </span><span class="k">pass</span><span class="w"></span>
+<span class="w">                </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;WARN configuring param {param_name}:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"></span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">multi_channel_info_json</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w"> </span><span class="n">timestamp</span><span class="o">=</span><span class="n">None</span><span class="p">,</span><span class="w">  </span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span><span class="w"></span>
 
@@ -3984,9 +4136,39 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">retryinfoslen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
 
-<span class="w">            </span><span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="n">True</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1"># Needed to configure self referenced parameters if the dependant</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1"># parameter comes before the dependency in the info array</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">retryinfos</span><span class="o">=</span><span class="p">[]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">except</span><span class="w"> </span><span class="n">SelfParamError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">retryinfoslen</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="s2">&quot;self parameters reference broken {retryinfos}&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">retryinfoslen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -4081,9 +4263,39 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="n">retryinfoslen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"></span>
 
-<span class="w">            </span><span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="n">True</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1"># Needed to configure self referenced parameters if the dependant</span><span class="w"></span>
+
+<span class="w">            </span><span class="c1"># parameter comes before the dependency in the info array</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">retryinfos</span><span class="o">=</span><span class="p">[]</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">try</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="bp">self</span><span class="o">.</span><span class="n">__channel_config__</span><span class="p">(</span><span class="n">timestamp</span><span class="o">=</span><span class="n">timestamp</span><span class="p">,</span><span class="o">**</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">except</span><span class="w"> </span><span class="n">SelfParamError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">retryinfoslen</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="s2">&quot;self parameters reference broken {retryinfos}&quot;</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">retryinfoslen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">retryinfos</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="w"></span>
 </code></pre></div>
 
 </details>
@@ -4324,6 +4536,41 @@ be referred to by name in <code>Nested</code> fields.</p>
 </code></pre></div>
 
 </details>
+<h3 id="selfparamerror">SelfParamError</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SelfParamError</span><span class="p">(</span>
+    <span class="o">/</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="n">SelfParamError</span>(<span class="nb">Exception</span>):
+
+    <span class="nb">pass</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="ancestors-in-mro_2">Ancestors (in MRO)</h4>
+<ul>
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+<h4 id="class-variables_1">Class variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">args</span>
+</code></pre></div>
+
+<h4 id="methods_2">Methods</h4>
+<h4 id="with_traceback">with_traceback</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">with_traceback</span><span class="p">(</span>
+    <span class="o">...</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Exception.with_traceback(tb) --</p>
+<p>set self.<strong>traceback</strong> to tb and return self.</p>
                 
               
               
