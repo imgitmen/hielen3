@@ -21,6 +21,8 @@ class ConfigSchema(ActionSchema):
 
     multi_channel_info_json = fields.String(required=False, allow_none=True)
 
+class SelfParamError(Exception):
+    pass
 
 class Feature(HFeature):
     '''
@@ -45,9 +47,12 @@ class Feature(HFeature):
             mu=None,
             valid_range=None,
             view_range=None,
-            thresholds=None
+            thresholds=None,
+            groupmap=None,
+            orient=None
             ):
 
+        print (param_name)
 
         """
         { 
@@ -82,6 +87,9 @@ class Feature(HFeature):
 
         new_opz={}
 
+        if modules is None:
+            modules={}
+
         if operands is not None:
 
             for k,w in operands.items():
@@ -102,8 +110,9 @@ class Feature(HFeature):
 
                         try:
                             w=feat.parameters[w["param"]]
+
                         except Exception as e:
-                            raise ValueError (f'error retriving {feat}.{param}')
+                            raise SelfParamError(f'error retriving {feat}.{w["param"]}')
 
                     except KeyError as e:
                         pass
@@ -113,28 +122,34 @@ class Feature(HFeature):
 
         opz.update(new_opz)
 
-        opz["Z"] = 0
+        print ("GROUPMAP:",groupmap)
 
-        if coefficients is None:
-            try:
-                coefficients=opz["COEFS"]
-            except KeyError as e:
-                coefficients=[]
+        if groupmap is None:
+            opz["Z"] = 0
 
-        opz["COEFS"] = json.dumps(coefficients)
+            if coefficients is None:
+                try:
+                    coefficients=opz["COEFS"]
+                except KeyError as e:
+                    coefficients=[]
 
-        modules.update( {"calc":"hielen3.tools.calc"} )
+            opz["COEFS"] = json.dumps(coefficients)
 
-        operator=f"calc.poly_trans2({operator},*COEFS)"
+            modules.update( {"calc":"hielen3.tools.calc"} )
 
-        if start_time is None:
-            if zero_time is None:
-                start_time=timestamp
-            else:
-                start_time=zero_time
+            operator=f"calc.poly_trans2({operator},*COEFS)"
 
-        if operator is not None:
-            operator= f"{operator} - Z"
+            if start_time is None:
+                if zero_time is None or zero_time in ['first']:
+                    start_time=timestamp
+                else:
+                    start_time=zero_time
+
+            if zero_time in ['first']:
+                zero_time = start_time
+
+            if operator is not None:
+                operator= f"{operator} - Z"
 
 
         config=dict(
@@ -148,7 +163,9 @@ class Feature(HFeature):
                 first=start_time,
                 valid_range=valid_range,
                 view_range=view_range,
-                thresholds=thresholds
+                thresholds=thresholds,
+                groupmap=groupmap,
+                orient=orient
                 )
 
 
@@ -157,17 +174,15 @@ class Feature(HFeature):
         # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
         if zero_time is not None:
             df=self.parameters[param_name].data(cache='active')
+            df=df[df[df.columns[0]].notna()]
 
-            if zero_time == 'first':
-                iloc_idx = 0
-            else:
-                iloc_idx = df.index.get_indexer([zero_time], method='nearest')
+            iloc_idx = df.index.get_indexer([zero_time], method='nearest')
 
             try:
                 config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
                 self.parameters.set(**config)
             except Exception as e:
-                pass
+                print (f"WARN configuring param {param_name}:", e)
 
 
     def config(self, multi_channel_info_json=None, timestamp=None,  **kwargs): 
@@ -177,7 +192,32 @@ class Feature(HFeature):
         except Exception as e:
             raise e
 
-        for info in infos:
 
-            self.__channel_config__(timestamp=timestamp,**info)
+        retryinfoslen = 0
+
+        print (self.label,self.uuid)
+
+        while True:
+            # Needed to configure self referenced parameters if the dependant
+            # parameter comes before the dependency in the info array
+            retryinfos=[]
+
+            for info in infos:
+                try:
+                    self.__channel_config__(timestamp=timestamp,**info)
+                except SelfParamError as e:
+                    retryinfos.append(info)
+
+            if retryinfos.__len__() == 0:
+                return
+
+            if retryinfos.__len__() > 0 and retryinfos.__len__() == retryinfoslen:
+                raise ValueError ( f"self parameters reference broken {retryinfos}" )
+
+            retryinfoslen = retryinfos.__len__()
+
+            info = retryinfos.copy()
+
+
+
 

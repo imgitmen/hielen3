@@ -187,6 +187,7 @@ class HSeries:
         if capability is not None and _managed_capabilities_(capability):
             setups['capability'] = capability
 
+        print ("Start_time:",first)
         if first is not None:
             setups['first'] = first
 
@@ -220,6 +221,8 @@ class HSeries:
         #TODO fare il check di coerenza tra operandi e operatore
         if operands is not None and isinstance(operands,dict):
 
+            print (operands)
+
             table_operands=db["series_operands"]
         
             for k,w in operands.items():
@@ -230,9 +233,13 @@ class HSeries:
                 if isinstance(w,(list,tuple,set)):
                     wl=min(table_operands.values.__len__(),w.__len__())
                     w=dict(zip(table_operands.values[:wl],w[:wl]))
-                    
-                    if isinstance(w['operand'],HSeries):
-                        w['operand']=w['operand'].uuid
+                   
+                    try:
+                        if isinstance(w['operand'],HSeries):
+                            w['operand']=w['operand'].uuid
+                    except Exception as e:
+                        print (w,uuid)
+                        raise (e)
 
                 table_operands[(uuid,k)]=w
 
@@ -244,7 +251,7 @@ class HSeries:
                     raise Exception (f"not a vaild list")
             
                 for i in range(0,groupmap.__len__()):
-                    v=groupman[i]
+                    v=groupmap[i]
                     if not isinstance(v,dict):
                         raise Exception (f"{v} has not a valid format")
 
@@ -252,8 +259,8 @@ class HSeries:
 
                     try:
                         el=HSeries(el,delayed=False).uuid
-                    except Excpetion as e:
-                        pass
+                    except Exception as e:
+                        raise e
 
                     try:
                         v['ordinal']

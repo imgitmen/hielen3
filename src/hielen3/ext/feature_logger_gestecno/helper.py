@@ -38,7 +38,7 @@ def retrive(path):
         a.columns = [ 'times', *a.columns[1:] ]
     
     except Exception as e:
-        print("WARN : ", path)
+        #print("WARN : ", path)
         #raise e #DEBUG
         pass
 

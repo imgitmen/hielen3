@@ -1,10 +1,17 @@
 CHANGELOG
 =========
-## **v3.3.5**
-### 12 Gennaio 2023 ###
+
+## **v3.3.9**
+### 15 Gennaio 2022 ###
+- gestione della configurazione ed elaborazione della serie valore valore
+
+## **v3.3.8**
+### 12 Dicembre 2022 ###
 - introdotta la serie datadiagram per le elaborazioni valore valore
 
-
+## **v3.3.5**
+### 12 Novembre 2022 ###
+- modifche minori
 
 
 ## **v3.3.1**
