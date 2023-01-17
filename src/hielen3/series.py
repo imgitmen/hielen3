@@ -559,12 +559,18 @@ class HSeries:
             kwargs['cache'] = "none"
             preout = self.data(times=times,geometry=geometry, group=group, **kwargs)
 
+            try:
+                preout=preout.to_frame()
+            except Exception as e:
+                pass
+
             preout.index.name = "timestamp"
 
             try:
                 preout.columns=self.activeuuids
             except Exception as e:
                 pass
+
 
             if cache in ("active","data","refresh") and cangenerate:
                 for u in preout.columns:
