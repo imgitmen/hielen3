@@ -587,7 +587,7 @@ class HSeries:
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
 
         try:
-            if out.colums.__len__() < 2:
+            if out.columns.__len__() < 2:
                 out=out.iloc[:,0]
         except Exception as e:
             pass
