@@ -580,6 +580,12 @@ class HSeries:
 
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
 
+        try:
+            if out.colums.__len__() < 2:
+                out=out.iloc[:,0]
+        except Exception as e:
+            pass
+
         return out
 
 
@@ -708,7 +714,6 @@ class HSeries:
                 self.groupmap = None
                     
 
-
         def __generate__(self, **kwargs):
 
             operands = kwargs
@@ -741,8 +746,8 @@ class HSeries:
             ## ATTENZIONE A locals: Implementation Dependant!!!! ###
             locals().update(operands)
 
-            # print (operands) #DEBUG
-            # print (self.operator, locals() ) #DEBUG
+            #print (operands) #DEBUG
+            #print (self.operator, locals() ) #DEBUG
 
 
             out= eval(self.operator)
