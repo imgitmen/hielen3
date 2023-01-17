@@ -3091,7 +3091,17 @@
 <span class="normal">1030</span>
 <span class="normal">1031</span>
 <span class="normal">1032</span>
-<span class="normal">1033</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1033</span>
+<span class="normal">1034</span>
+<span class="normal">1035</span>
+<span class="normal">1036</span>
+<span class="normal">1037</span>
+<span class="normal">1038</span>
+<span class="normal">1039</span>
+<span class="normal">1040</span>
+<span class="normal">1041</span>
+<span class="normal">1042</span>
+<span class="normal">1043</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3899,6 +3909,16 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>  <span class="n">ut2isot</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))))</span>
 
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">colums</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+
+                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
         <span class="k">return</span> <span class="n">out</span>
 
     <span class="c1">## WARNING Omesso Map</span>
@@ -4117,9 +4137,9 @@
 
             <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
 
-            <span class="c1"># print (operands) #DEBUG</span>
+            <span class="c1">#print (operands) #DEBUG</span>
 
-            <span class="c1"># print (self.operator, locals() ) #DEBUG</span>
+            <span class="c1">#print (self.operator, locals() ) #DEBUG</span>
 
             <span class="n">out</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span>
 
@@ -4922,6 +4942,16 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span><span class="w"></span>
 
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">colums</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">:,0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 
 <span class="w">    </span><span class="err">##</span><span class="w"> </span><span class="n">WARNING</span><span class="w"> </span><span class="n">Omesso</span><span class="w"> </span><span class="k">Map</span><span class="w"></span>
@@ -5140,9 +5170,9 @@
 
 <span class="w">            </span><span class="n">locals</span><span class="p">().</span><span class="k">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span><span class="w"></span>
+<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span><span class="w"></span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span><span class="w"></span>
+<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span><span class="w"></span>
 
 <span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="w"> </span><span class="n">eval</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span><span class="w"></span>
 
@@ -5600,6 +5630,16 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">colums</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"></span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">:,0</span><span class="o">]</span><span class="w"></span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="w"></span>
 </code></pre></div>
