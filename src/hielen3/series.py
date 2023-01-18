@@ -551,7 +551,7 @@ class HSeries:
             # raise e #DEBUG
             pass
 
-        if cache in ("active","data") and not out.empty and not justnew:
+        if cache in ("active","data","refresh") and not out.empty and not justnew:
 
             lasttotry=str(out.index[0])
             times=slice(firstreqstart, lasttotry, times.step)
@@ -572,7 +572,7 @@ class HSeries:
                 pass
 
 
-            if cache in ("active","data","refresh") and cangenerate:
+            if cangenerate:
                 for u in preout.columns:
                     db["datacache"][u]=preout[u]
 
@@ -583,7 +583,6 @@ class HSeries:
         out.index.name = "timestamp"
 
         if not out.empty:
-
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
 
         try:
@@ -736,10 +735,11 @@ class HSeries:
                 groupmap = { k:w.result() for k,w in groupmap.items() }
         
                 groupmap = concat(groupmap,axis=1)
-
-                groupmap.columns = groupmap.columns.droplevel(0)
-
-#                groupmap.columns = groupmap.columns.map(lambda x: int(x.split('_')[2]))
+                
+                try:
+                    groupmap.columns = groupmap.columns.droplevel(0)
+                except Exception as e:
+                    pass
 
                 operands['__GROUPMAP__'] = groupmap
 
