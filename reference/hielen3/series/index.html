@@ -3109,7 +3109,11 @@
 <span class="normal">1048</span>
 <span class="normal">1049</span>
 <span class="normal">1050</span>
-<span class="normal">1051</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1051</span>
+<span class="normal">1052</span>
+<span class="normal">1053</span>
+<span class="normal">1054</span>
+<span class="normal">1055</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3879,7 +3883,7 @@
 
             <span class="k">pass</span>
 
-        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">justnew</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">justnew</span><span class="p">:</span>
 
             <span class="n">lasttotry</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
@@ -3907,7 +3911,7 @@
 
                 <span class="k">pass</span>
 
-            <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cangenerate</span><span class="p">:</span>
 
                 <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">preout</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
 
@@ -4137,9 +4141,13 @@
 
                 <span class="n">groupmap</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-                <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
 
-<span class="c1">#                groupmap.columns = groupmap.columns.map(lambda x: int(x.split(&#39;_&#39;)[2]))</span>
+                    <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
 
                 <span class="n">operands</span><span class="p">[</span><span class="s1">&#39;__GROUPMAP__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupmap</span>
 
@@ -4920,7 +4928,7 @@
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">justnew</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">justnew</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">lasttotry</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
@@ -4948,7 +4956,7 @@
 
 <span class="w">                </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">preout</span><span class="p">.</span><span class="nl">columns</span><span class="p">:</span><span class="w"></span>
 
@@ -5178,9 +5186,13 @@
 
 <span class="w">                </span><span class="n">groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="w"></span>
 
-<span class="w">                </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="k">try</span><span class="err">:</span><span class="w"></span>
 
-<span class="err">#</span><span class="w">                </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="k">map</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span><span class="o">[</span><span class="n">2</span><span class="o">]</span><span class="p">))</span><span class="w"></span>
+<span class="w">                    </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">droplevel</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"></span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span><span class="w"></span>
+
+<span class="w">                    </span><span class="n">pass</span><span class="w"></span>
 
 <span class="w">                </span><span class="n">operands</span><span class="o">[</span><span class="n">&#39;__GROUPMAP__&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span><span class="w"></span>
 
@@ -5617,7 +5629,7 @@
 
 <span class="w">            </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">justnew</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">justnew</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">            </span><span class="n">lasttotry</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span><span class="w"></span>
 
@@ -5645,7 +5657,7 @@
 
 <span class="w">                </span><span class="n">pass</span><span class="w"></span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span><span class="w"></span>
 
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">preout</span><span class="p">.</span><span class="nl">columns</span><span class="p">:</span><span class="w"></span>
 
