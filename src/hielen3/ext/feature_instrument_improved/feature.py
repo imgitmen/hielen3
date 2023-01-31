@@ -174,6 +174,12 @@ class Feature(HFeature):
         # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
         if zero_time is not None:
             df=self.parameters[param_name].data(cache='active')
+
+            try:
+                df=df.to_frame()
+            except Exception as e:
+                pass
+
             df=df[df[df.columns[0]].notna()]
 
             iloc_idx = df.index.get_indexer([zero_time], method='nearest')

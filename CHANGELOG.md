@@ -1,8 +1,13 @@
 CHANGELOG
 =========
+## **v3.3.10**
+### 31 Gennaio 2023 ###
+- rivisto il filtro valid_range applicato automaticamente a tutte le serie gestito anche per datadiagram
+- sistemato il clean cache per datadiagram
+
 
 ## **v3.3.9**
-### 15 Gennaio 2022 ###
+### 15 Gennaio 2023 ###
 - gestione della configurazione ed elaborazione della serie valore valore
 
 ## **v3.3.8**

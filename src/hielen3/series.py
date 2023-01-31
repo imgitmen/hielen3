@@ -127,14 +127,16 @@ class HSeries:
             self.__delayed_load__()
 
     def clean_cache(self,times=None):
-        
+       
+        to_clean=list(set([self.uuid,*self.activeuuids]))
+
         try:
-            db['datacache'].pop(key=(self.uuid, times))
+            db['datacache'].pop(key=(to_clean, times))
         except KeyError as e:
             pass
 
         try:
-            db['events'].pop(key=(self.uuid, times))
+            db['events'].pop(key=(to_clean, times))
         except KeyError as e:
             pass
 
@@ -513,7 +515,7 @@ class HSeries:
                 if gen.empty: raise Exception("void")
             except Exception as e:
                 # print ("WARN series GENERATE: ", e)
-                # raise e ##DEBUG
+                #raise e ##DEBUG
                 gen = DataFrame([],columns=self.activeuuids,dtype='object')
 
 
@@ -540,7 +542,17 @@ class HSeries:
             out.index.name = "timestamp"
 
             out=out[self.activeuuids]
-        
+
+
+
+            if self.valid_range_min is not None:
+               out=out.mask(out<self.valid_range_min,nan)
+
+            if self.valid_range_max is not None:
+                out=out.mask(out>self.valid_range_max,nan)
+
+            out=out[out.notna().all(axis=1)]
+
             if cache in ("active","data","refresh") and cangenerate:
                 for u in gen.columns:
                     db["datacache"][u]=out[u]
