@@ -2729,6 +2729,14 @@
 
             <span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
 
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
+
             <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
 
             <span class="n">iloc_idx</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_indexer</span><span class="p">([</span><span class="n">zero_time</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
@@ -3900,6 +3908,14 @@ be referred to by name in <code>Nested</code> fields.</p>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">try</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+<span class="w">            </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="k">pass</span>
 
 <span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
 
