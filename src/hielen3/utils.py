@@ -187,7 +187,10 @@ class Selection(fields.String):
            
             if value.__len__() == 1:
                 return slice(value[0],value[0])
-               
+            
+            if value.__len__() > 2:
+                value[2] = int(value[2])
+
             return slice(*value[0:3])
             #return value[0:3]
         except Exception as e:
