@@ -2763,7 +2763,11 @@
 <span class="normal">424</span>
 <span class="normal">425</span>
 <span class="normal">426</span>
-<span class="normal">427</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3030,6 +3034,10 @@
             <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
 
                 <span class="k">return</span> <span class="nb">slice</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+
+                <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
             <span class="k">return</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
@@ -3847,6 +3855,10 @@ is raised</p>
 <span class="w">            </span><span class="nt">if</span><span class="w"> </span><span class="nt">value</span><span class="p">.</span><span class="nc">__len__</span><span class="o">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nt">1</span><span class="o">:</span>
 
 <span class="w">                </span><span class="nt">return</span><span class="w"> </span><span class="nt">slice</span><span class="o">(</span><span class="nt">value</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="o">,</span><span class="nt">value</span><span class="cp">[</span><span class="mi">0</span><span class="cp">]</span><span class="o">)</span>
+
+<span class="w">            </span><span class="nt">if</span><span class="w"> </span><span class="nt">value</span><span class="p">.</span><span class="nc">__len__</span><span class="o">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nt">2</span><span class="o">:</span>
+
+<span class="w">                </span><span class="nt">value</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">int</span><span class="o">(</span><span class="nt">value</span><span class="cp">[</span><span class="mi">2</span><span class="cp">]</span><span class="o">)</span>
 
 <span class="w">            </span><span class="nt">return</span><span class="w"> </span><span class="nt">slice</span><span class="o">(*</span><span class="nt">value</span><span class="cp">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="cp">]</span><span class="o">)</span>
 
