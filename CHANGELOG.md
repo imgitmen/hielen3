@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **v3.3.11**
+### 16 Febbraio 2023 ###
+- migliorato instrument imporved, inserito offset iniziale
+- nucleo di batch per tipologie spefcifiche
+
+
 ## **v3.3.10**
 ### 31 Gennaio 2023 ###
 - rivisto il filtro valid_range applicato automaticamente a tutte le serie gestito anche per datadiagram

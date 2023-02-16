@@ -43,6 +43,7 @@ class Feature(HFeature):
             timestamp=None,
             start_time=None,
             zero_time=None,
+            start_offset=None,
             ordinal=None,
             mu=None,
             valid_range=None,
@@ -126,18 +127,19 @@ class Feature(HFeature):
 
         if groupmap is None:
             opz["Z"] = 0
+            opz["OFFSET"] = 0
 
             if coefficients is None:
                 try:
                     coefficients=opz["COEFS"]
                 except KeyError as e:
-                    coefficients=[]
+                    coefficients = None
 
-            opz["COEFS"] = json.dumps(coefficients)
+            if coefficients is not None:
+                opz["COEFS"] = json.dumps(coefficients)
+                modules.update( {"calc":"hielen3.tools.calc"} )
+                operator=f"calc.poly_trans2({operator},*COEFS)"
 
-            modules.update( {"calc":"hielen3.tools.calc"} )
-
-            operator=f"calc.poly_trans2({operator},*COEFS)"
 
             if start_time is None:
                 if zero_time is None or zero_time in ['first']:
@@ -149,7 +151,7 @@ class Feature(HFeature):
                 zero_time = start_time
 
             if operator is not None:
-                operator= f"{operator} - Z"
+                operator= f"{operator} - Z + OFFSET"
 
 
         config=dict(
@@ -186,6 +188,18 @@ class Feature(HFeature):
 
             try:
                 config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
+            except Exception as e:
+                print (f"WARN configuring ZERO for param {param_name}:", e)
+
+        if start_offset is not None:
+            try:
+                config['operands']['OFFSET'] = start_offset
+            except Exception as e:
+                print (f"WARN configuring OFFSET for param {param_name}:", e)
+
+        
+        if start_offset is not None or zero_time is not None:
+            try:
                 self.parameters.set(**config)
             except Exception as e:
                 print (f"WARN configuring param {param_name}:", e)
