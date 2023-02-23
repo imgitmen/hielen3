@@ -170,6 +170,8 @@ class HSeries:
 
         setups={}
 
+        print (operator)
+
         #TODO gestire le diverse tipologie di dato
         if datatype is not None and datatype in ['numeric']:
             setups['datatable']='geoframe.log'
@@ -241,7 +243,7 @@ class HSeries:
                             w['operand']=w['operand'].uuid
                     except Exception as e:
                         print (w,uuid)
-                        raise (e)
+                        #raise (e)
 
                 table_operands[(uuid,k)]=w
 
@@ -709,7 +711,10 @@ class HSeries:
 
             self.group=group
 
-            self.operator=operator or "Series([],dtype='object')"
+            if operator is None or operator in "__VOID__":
+                operator="Series([],dtype='object')"
+
+            self.operator=operator
 
             if not modules is None:
                 for k, m in modules.items():

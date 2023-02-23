@@ -53,7 +53,8 @@ class Feature(HFeature):
             orient=None
             ):
 
-        print (param_name)
+
+        print (f"\n{param_name}")
 
         """
         { 
@@ -135,7 +136,12 @@ class Feature(HFeature):
                 except KeyError as e:
                     coefficients = None
 
-            if coefficients is not None:
+            try:
+                assert coefficients.__len__() > 0
+            except Exception as e:
+                coefficients = None
+    
+            if coefficients is not None and operator is not None:
                 opz["COEFS"] = json.dumps(coefficients)
                 modules.update( {"calc":"hielen3.tools.calc"} )
                 operator=f"calc.poly_trans2({operator},*COEFS)"
@@ -150,9 +156,10 @@ class Feature(HFeature):
             if zero_time in ['first']:
                 zero_time = start_time
 
-            if operator is not None:
+            if operator is not None and operator not in "__VOID__":
                 operator= f"{operator} - Z + OFFSET"
 
+        print ("OPERATOR", operator)
 
         config=dict(
                 param=param_name,
@@ -215,7 +222,7 @@ class Feature(HFeature):
 
         retryinfoslen = 0
 
-        print (self.label,self.uuid)
+        print (f"\n\n{self.label}",self.uuid,"\n","---------------------")
 
         while True:
             # Needed to configure self referenced parameters if the dependant

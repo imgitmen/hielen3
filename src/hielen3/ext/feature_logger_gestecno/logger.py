@@ -82,7 +82,18 @@ class Feature(HFeature):
         except Exception as e:
             raise e
 
-        for info in infos:
+
+        for info_new in infos:
+
+            info=dict(
+                    cache='old',
+                    valid_range=None,
+                    view_range=None,
+                    thresholds=None
+                    )
+
+            info.update(info_new)
+
             self.parameters.set(
                     param=info['channel'],
                     ordinal=info['column'],
@@ -92,8 +103,8 @@ class Feature(HFeature):
                     operands={ "SER": serial, "COL":info["column"] },
                     operator=f"source.retrive(serials=SER,times=times,columns=COL)",
                     valid_range=info['valid_range'],
-                    view_range=None,
-                    thresholds=None
+                    view_range=info['view_range'],
+                    thresholds=info['thresholds']
                     )
 
 
