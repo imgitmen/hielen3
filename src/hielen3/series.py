@@ -514,6 +514,7 @@ class HSeries:
 
                 kwargs['cache'] = cache
                 gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
+                gen = gen.replace(',','.', regex=True).astype(float)
                 if gen.empty: raise Exception("void")
             except Exception as e:
                 # print ("WARN series GENERATE: ", e)
