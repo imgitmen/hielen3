@@ -3405,7 +3405,21 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info_new</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">info</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span>
+
+<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">valid_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span>
+
+<span class="w">                    </span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">info_new</span><span class="p">)</span>
 
 <span class="w">            </span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
 
@@ -3425,9 +3439,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">                    </span><span class="n">valid_range</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;valid_range&#39;</span><span class="p">],</span>
 
-<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;view_range&#39;</span><span class="p">],</span>
 
-<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span>
+<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>
 
 <span class="w">                    </span><span class="p">)</span>
 
@@ -3632,7 +3646,21 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
 
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">info_new</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">infos</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">info</span><span class="o">=</span><span class="n">dict</span><span class="p">(</span>
+
+<span class="w">                    </span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">valid_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+
+<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span>
+
+<span class="w">                    </span><span class="p">)</span>
+
+<span class="w">            </span><span class="n">info</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">info_new</span><span class="p">)</span>
 
 <span class="w">            </span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
 
@@ -3652,9 +3680,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">                    </span><span class="n">valid_range</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;valid_range&#39;</span><span class="p">],</span>
 
-<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">None</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">view_range</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;view_range&#39;</span><span class="p">],</span>
 
-<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">None</span>
+<span class="w">                    </span><span class="n">thresholds</span><span class="o">=</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span>
 
 <span class="w">                    </span><span class="p">)</span>
 

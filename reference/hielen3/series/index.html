@@ -3127,7 +3127,13 @@
 <span class="normal">1064</span>
 <span class="normal">1065</span>
 <span class="normal">1066</span>
-<span class="normal">1067</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1067</span>
+<span class="normal">1068</span>
+<span class="normal">1069</span>
+<span class="normal">1070</span>
+<span class="normal">1071</span>
+<span class="normal">1072</span>
+<span class="normal">1073</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3379,6 +3385,8 @@
 
         <span class="n">setups</span><span class="o">=</span><span class="p">{}</span>
 
+        <span class="nb">print</span> <span class="p">(</span><span class="n">operator</span><span class="p">)</span>
+
         <span class="c1">#TODO gestire le diverse tipologie di dato</span>
 
         <span class="k">if</span> <span class="n">datatype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">datatype</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;numeric&#39;</span><span class="p">]:</span>
@@ -3483,7 +3491,7 @@
 
                         <span class="nb">print</span> <span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">uuid</span><span class="p">)</span>
 
-                        <span class="k">raise</span> <span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                        <span class="c1">#raise (e)</span>
 
                 <span class="n">table_operands</span><span class="p">[(</span><span class="n">uuid</span><span class="p">,</span><span class="n">k</span><span class="p">)]</span><span class="o">=</span><span class="n">w</span>
 
@@ -4115,7 +4123,11 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">=</span><span class="n">group</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">=</span><span class="n">operator</span> <span class="ow">or</span> <span class="s2">&quot;Series([],dtype=&#39;object&#39;)&quot;</span>
+            <span class="k">if</span> <span class="n">operator</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">operator</span> <span class="ow">in</span> <span class="s2">&quot;__VOID__&quot;</span><span class="p">:</span>
+
+                <span class="n">operator</span><span class="o">=</span><span class="s2">&quot;Series([],dtype=&#39;object&#39;)&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="o">=</span><span class="n">operator</span>
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">modules</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -4436,6 +4448,8 @@
 
 <span class="w">        </span><span class="n">setups</span><span class="o">=</span><span class="err">{}</span>
 
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">#TODO</span><span class="w"> </span><span class="n">gestire</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">diverse</span><span class="w"> </span><span class="n">tipologie</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">dato</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;numeric&#39;</span><span class="o">]</span><span class="err">:</span>
@@ -4540,7 +4554,7 @@
 
 <span class="w">                        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">uuid</span><span class="p">)</span>
 
-<span class="w">                        </span><span class="n">raise</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">#raise</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
 <span class="w">                </span><span class="n">table_operands</span><span class="o">[</span><span class="n">(uuid,k)</span><span class="o">]=</span><span class="n">w</span>
 
@@ -5172,7 +5186,11 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="k">group</span><span class="o">=</span><span class="k">group</span>
 
-<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="o">=</span><span class="n">operator</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ss">&quot;Series([],dtype=&#39;object&#39;)&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="ss">&quot;__VOID__&quot;</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">operator</span><span class="o">=</span><span class="ss">&quot;Series([],dtype=&#39;object&#39;)&quot;</span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="o">=</span><span class="n">operator</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">modules</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -5819,6 +5837,8 @@
 
 <span class="w">        </span><span class="n">setups</span><span class="o">=</span><span class="err">{}</span>
 
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operator</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">#TODO</span><span class="w"> </span><span class="n">gestire</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">diverse</span><span class="w"> </span><span class="n">tipologie</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">dato</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;numeric&#39;</span><span class="o">]</span><span class="err">:</span>
@@ -5923,7 +5943,7 @@
 
 <span class="w">                        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">uuid</span><span class="p">)</span>
 
-<span class="w">                        </span><span class="n">raise</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">#raise</span><span class="w"> </span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
 <span class="w">                </span><span class="n">table_operands</span><span class="o">[</span><span class="n">(uuid,k)</span><span class="o">]=</span><span class="n">w</span>
 
