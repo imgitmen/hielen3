@@ -141,7 +141,7 @@ class Feature(HFeature):
             except Exception as e:
                 coefficients = None
     
-            if coefficients is not None and operator is not None:
+            if coefficients is not None and operator is not None and operator not in ("__ALIAS__"):
                 opz["COEFS"] = json.dumps(coefficients)
                 modules.update( {"calc":"hielen3.tools.calc"} )
                 operator=f"calc.poly_trans2({operator},*COEFS)"
@@ -156,7 +156,7 @@ class Feature(HFeature):
             if zero_time in ['first']:
                 zero_time = start_time
 
-            if operator is not None and operator not in "__VOID__":
+            if operator is not None and operator not in ("__VOID__","__ALIAS__"):
                 operator= f"{operator} - Z + OFFSET"
 
         print ("OPERATOR", operator)

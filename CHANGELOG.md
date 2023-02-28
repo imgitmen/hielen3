@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **v3.3.12**
+### 28 Febbraio 2023 ###
+- inserito "__ALIAS__" per agganciare serie dati a parmaetri diversi
+
+
 ## **v3.3.11**
 ### 16 Febbraio 2023 ###
 - migliorato instrument imporved, inserito offset iniziale

@@ -184,46 +184,22 @@ class HFeature(ABC):
             self.parameters=None
 
         def set(self,param,ordinal=None,**setups):
-            """
-
-            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro)
-            CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata
-            CASO 3) La serie non esiste e deve essere configurata
-
-            """
-
-            ser=None
-            alias=True
-            
-            if self.parameters is None:
-                self.__demand__()
 
             try:
-                # TEST CASO 1
-                assert setups['operator'] == '__ALIAS__'
+                if self.parameters is None:
+                    self.__demand__()
+
+                ser=self[param]
+
+            except KeyError as e:
+                ser=None
+
+            try:
+                ser.clean_cache()
             except Exception as e:
-                alias=False
+                pass
 
-            if alias:
-                ser=HSeries(setups['operands']['__ALIAS__'], delayed=False)
-            else:
-                try:
-                    # TEST CASO 2 
-                    ser=self[param]
-                except Exception as e:
-                    pass
-
-                try:
-                    # SE E' GIA ASSOCIATA ALLA FEATURE CANCELLO CACHE
-                    ser.clean_cache()
-                except AttributeError as e:
-                    pass
-           
-                # RICONFIURO SERIE ( CASI 2 e 3 )
-                ser=HSeries.setup(uuid=ser,**setups)
-
-            # QUI ser è completamnte definito
-            self[param]={"series":ser, "ordinal":ordinal}
+            self[param]={"series":HSeries.setup(uuid=ser,**setups), "ordinal":ordinal}
 
         def __len__(self):
 
