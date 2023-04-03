@@ -170,8 +170,6 @@ class HSeries:
 
         setups={}
 
-        print (operator)
-
         #TODO gestire le diverse tipologie di dato
         if datatype is not None and datatype in ['numeric']:
             setups['datatable']='geoframe.log'
@@ -518,7 +516,7 @@ class HSeries:
                 if gen.empty: raise Exception("void")
             except Exception as e:
                 # print ("WARN series GENERATE: ", e)
-                #raise e ##DEBUG
+                # raise e ##DEBUG
                 gen = DataFrame([],columns=self.activeuuids,dtype='object')
 
 

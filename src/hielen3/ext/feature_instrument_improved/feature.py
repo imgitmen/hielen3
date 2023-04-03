@@ -142,6 +142,11 @@ class Feature(HFeature):
                 coefficients = None
     
             if coefficients is not None and operator is not None and operator not in ("__ALIAS__"):
+    
+
+                print ("AAAAAAAAAAA", operator, "AAAAAAAAAAAAAAAAAAAA")
+
+
                 opz["COEFS"] = json.dumps(coefficients)
                 modules.update( {"calc":"hielen3.tools.calc"} )
                 operator=f"calc.poly_trans2({operator},*COEFS)"
