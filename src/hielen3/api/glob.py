@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine
 import falcon
 
 """
@@ -58,4 +58,9 @@ def dataman():
 def dataman():
     """ Data manager """
     return [status]
+
+@hug.extend_api("/awskineresources")
+def dataman():
+    """ api per aws kinemetrics """
+    return [awskine]
 
