@@ -23,11 +23,15 @@ def features_info(uids=None, request=None, response=None):
     try:
             
         feafra=db['awskine'][uids]
+        
+        print ("AAAAAAAAAAAAAAAAA\n", feafra)
+
         feafra=dataframe2jsonizabledict(feafra,orient='index',squeeze=False)
 
-        out.data = { "resources":feafra }
-        feafra=None
+        print ("BBBBBBBBBBBBBBBBB\n", feafra)
 
+        out.data = { "resources":feafra }
+        
     except KeyError as e:
         out.data = { "resources":[] }
         #out.status = falcon.HTTP_NOT_FOUND

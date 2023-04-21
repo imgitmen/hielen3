@@ -165,8 +165,10 @@ class HSeries:
 
         uuid=uuid or getuuid()
 
-        if isinstance(uuid,HSeries):
+        try:
             uuid = uuid.uuid
+        except Exception as e:
+            pass
 
         setups={}
 
@@ -661,6 +663,11 @@ class HSeries:
             try:
                 UUID(value)
                 return HSeries(value)
+            except Exception as e:
+                pass
+
+            try:
+                value=value.removeprefix('#')
             except Exception as e:
                 pass
 

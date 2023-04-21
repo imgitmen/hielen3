@@ -749,7 +749,7 @@ class MariadbTable(Mariadb):
             except Exception as e:
                 pass
 
-            #print (value[k])
+            # print (f"{value[k]!r}",value[k].__class__) ## DEBUG
 
             if self.columnstypes[k] in Mariadb.geotypes:
                 value[k]=f"ST_GeomFromGeoJSON({value[k]!r})"

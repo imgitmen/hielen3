@@ -136,8 +136,14 @@ meccanismo permette di svluppare i moduli a partire da un template con risposta 
 
     # Trying to manage income feature request and its prototype configuration
     try:
+
+
+        print ("A", feature)
+
         featobj = HFeature.retrive(feature)
+        print ("B", feature)
     except KeyError as e:
+        print ("C", feature)
         traceback.print_exc()
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"feature '{feature}' does not exists or it is misconfigured: {e}"

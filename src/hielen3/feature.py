@@ -81,6 +81,7 @@ class HFeature(ABC):
     def create(ftype,**kwargs):
         return HFeature.__featureFactory__(ftype=ftype,**kwargs)
 
+
     def retrive(uuid):
         try:
             return HFeature.__featureFactory__(uuid=uuid)
@@ -156,6 +157,7 @@ class HFeature(ABC):
 
         if geometry:
             db['features_geometry'][uuid]={"geometry":geometry}
+
 
         feature=db['features'][uuid].to_dict(orient='records')[0]
 
@@ -258,8 +260,10 @@ class HFeature(ABC):
             except Exception as e:
                 pass
 
-            if isinstance(series,HSeries):
+            try:
                 series=series.uuid
+            except Exception as e:
+                pass
 
             db['features_parameters'][(self.feature.uuid,param)]={"series":series,"ordinal":ordinal}
             self.__demand__()
