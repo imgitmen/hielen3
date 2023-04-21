@@ -191,6 +191,8 @@ def retrive(serials=None, columns=None, gateway=None, key=None, wsdl=None, times
 
     key=str(key)
 
+    if key.startswith("#"): key=key[1:]
+
     if wsdl is None:
         wsdl='http://www.winecap.it/winecapws.wsdl'
 
