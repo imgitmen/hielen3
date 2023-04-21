@@ -2915,6 +2915,8 @@
 
     <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span> <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
     <span class="k">if</span> <span class="n">wsdl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="n">wsdl</span><span class="o">=</span><span class="s1">&#39;http://www.winecap.it/winecapws.wsdl&#39;</span>
@@ -3006,6 +3008,8 @@
 <span class="w">    </span><span class="nv">out</span><span class="o">=</span><span class="nv">DataFrame</span><span class="ss">()</span>
 
 <span class="w">    </span><span class="nv">key</span><span class="o">=</span><span class="nv">str</span><span class="ss">(</span><span class="nv">key</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">key</span>.<span class="nv">startswith</span><span class="ss">(</span><span class="s2">&quot;#&quot;</span><span class="ss">)</span>:<span class="w"> </span><span class="nv">key</span><span class="o">=</span><span class="nv">key</span>[<span class="mi">1</span>:]
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">wsdl</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:
 
