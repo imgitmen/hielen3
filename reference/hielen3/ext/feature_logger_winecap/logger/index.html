@@ -2925,6 +2925,8 @@
 
     <span class="k">while</span> <span class="n">ahead</span><span class="p">:</span>
 
+        <span class="nb">print</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">gateway</span><span class="p">,</span><span class="n">serials</span><span class="p">,</span><span class="n">columns</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
+
         <span class="n">u</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">serialize_object</span><span class="p">(</span><span class="n">gch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">gateway</span><span class="p">,</span><span class="n">serials</span><span class="p">,</span><span class="n">columns</span><span class="p">,</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">)))</span>
 
         <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span> <span class="n">ahead</span> <span class="o">=</span> <span class="kc">False</span>
@@ -2935,7 +2937,7 @@
 
             <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span>
 
-            <span class="n">timefrom</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
 
             <span class="n">out</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span><span class="n">out</span><span class="p">,</span><span class="n">u</span><span class="p">])</span>
 
@@ -3015,6 +3017,8 @@
 
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nv">ahead</span>:
 
+<span class="w">        </span><span class="nv">print</span><span class="w"> </span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">gateway</span>,<span class="nv">serials</span>,<span class="nv">columns</span>,<span class="nv">start</span>,<span class="nv">stop</span><span class="ss">)</span>
+
 <span class="w">        </span><span class="nv">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">DataFrame</span><span class="ss">(</span><span class="nv">serialize_object</span><span class="ss">(</span><span class="nv">gch</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">gateway</span>,<span class="nv">serials</span>,<span class="nv">columns</span>,<span class="nv">start</span>,<span class="nv">stop</span><span class="ss">)))</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">u</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1024</span>:<span class="w"> </span><span class="nv">ahead</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">False</span>
@@ -3025,7 +3029,7 @@
 
 <span class="w">            </span><span class="nv">u</span>.<span class="nv">index</span>.<span class="nv">names</span><span class="o">=</span>[<span class="s1">&#39;timestamp&#39;</span>]
 
-<span class="w">            </span><span class="nv">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">u</span>.<span class="nv">index</span>.<span class="nv">max</span><span class="ss">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="nv">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">u</span>.<span class="nv">index</span>.<span class="nv">max</span><span class="ss">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
 
 <span class="w">            </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">concat</span><span class="ss">(</span>[<span class="nv">out</span>,<span class="nv">u</span>]<span class="ss">)</span>
 
