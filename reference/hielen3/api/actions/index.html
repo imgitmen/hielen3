@@ -1514,12 +1514,87 @@
       
       
         <label class="md-nav__link" for="__nav_5_1_14_14">
+          Feature Logger Winecap
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Winecap" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_14_14">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Winecap
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ext/feature_logger_winecap/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ext/feature_logger_winecap/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ext/feature_logger_winecap/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_14_15" type="checkbox" id="__nav_5_1_14_15" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_14_15">
           Feature Rfilogger
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_14_14">
+        <label class="md-nav__title" for="__nav_5_1_14_15">
           <span class="md-nav__icon md-icon"></span>
           Feature Rfilogger
         </label>
@@ -1569,18 +1644,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_14_15" type="checkbox" id="__nav_5_1_14_15" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_14_16" type="checkbox" id="__nav_5_1_14_16" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_1_14_15">
+        <label class="md-nav__link" for="__nav_5_1_14_16">
           Feature Spotted Files Source
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Spotted Files Source" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_14_15">
+        <label class="md-nav__title" for="__nav_5_1_14_16">
           <span class="md-nav__icon md-icon"></span>
           Feature Spotted Files Source
         </label>
@@ -2708,7 +2783,13 @@
 <span class="normal">650</span>
 <span class="normal">651</span>
 <span class="normal">652</span>
-<span class="normal">653</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">653</span>
+<span class="normal">654</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -2926,9 +3007,15 @@
 
     <span class="k">try</span><span class="p">:</span>
 
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>
+
         <span class="n">featobj</span> <span class="o">=</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">retrive</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>
+
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>
 
         <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
 
@@ -3447,9 +3534,15 @@
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;A&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">featobj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">retrive</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;B&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span>
+
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;C&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">traceback</span><span class="p">.</span><span class="n">print_exc</span><span class="p">()</span>
 
