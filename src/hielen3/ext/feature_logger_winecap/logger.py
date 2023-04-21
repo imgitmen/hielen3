@@ -198,6 +198,8 @@ def retrive(serials=None, columns=None, gateway=None, key=None, wsdl=None, times
     gch=client.service.getChannelHistory
 
     while ahead:
+
+        print (key,gateway,serials,columns,start,stop)
               
         u = DataFrame(serialize_object(gch(key,gateway,serials,columns,start,stop)))
               
@@ -206,7 +208,7 @@ def retrive(serials=None, columns=None, gateway=None, key=None, wsdl=None, times
         if u.__len__() > 0:
             u = u.set_index(['timeStamp'])['value']
             u.index.names=['timestamp']
-            timefrom = u.index.max() + 1
+            start = u.index.max() + 1
             out = concat([out,u])
     
     out = out.sort_index()
