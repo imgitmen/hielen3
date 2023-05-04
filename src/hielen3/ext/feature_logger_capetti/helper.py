@@ -21,7 +21,7 @@ def retrive(path):
 
     try:
 
-        a=read_csv(path, sep='\t', skiprows=3,header=None,parse_dates=[0],index_col=[0]).iloc[:,4::3]
+        a=read_csv(path, sep='\t', skiprows=3,header=None,index_col=[0]).iloc[:,4::3]
         a=a[~isin(a.index,"LOCAL TIME")]
         a.index=to_datetime(a.index)
         a=a.astype('float')
