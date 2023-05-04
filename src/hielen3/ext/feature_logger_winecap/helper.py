@@ -29,7 +29,7 @@ def retrive(path):
     
     except Exception as e:
         #print("WARN : ", path)
-        raise e #DEBUG
+        #raise e #DEBUG
         pass
 
     return a
