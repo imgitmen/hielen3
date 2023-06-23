@@ -3161,7 +3161,33 @@
 <span class="normal">614</span>
 <span class="normal">615</span>
 <span class="normal">616</span>
-<span class="normal">617</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">617</span>
+<span class="normal">618</span>
+<span class="normal">619</span>
+<span class="normal">620</span>
+<span class="normal">621</span>
+<span class="normal">622</span>
+<span class="normal">623</span>
+<span class="normal">624</span>
+<span class="normal">625</span>
+<span class="normal">626</span>
+<span class="normal">627</span>
+<span class="normal">628</span>
+<span class="normal">629</span>
+<span class="normal">630</span>
+<span class="normal">631</span>
+<span class="normal">632</span>
+<span class="normal">633</span>
+<span class="normal">634</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3429,7 +3455,7 @@
 
 <span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 
-<span class="sd">            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro)</span>
+<span class="sd">            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro - invece sì)</span>
 
 <span class="sd">            CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata</span>
 
@@ -3459,6 +3485,32 @@
 
                 <span class="n">ser</span><span class="o">=</span><span class="n">HSeries</span><span class="p">(</span><span class="n">setups</span><span class="p">[</span><span class="s1">&#39;operands&#39;</span><span class="p">][</span><span class="s1">&#39;__ALIAS__&#39;</span><span class="p">],</span> <span class="n">delayed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
+                <span class="c1">#NON DEVE ESSERE RICONFIGURATO IL MODELLO DI CALCOLO</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">setups</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;operator&#39;</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">setups</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;operands&#39;</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">setups</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;modules&#39;</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
+
             <span class="k">else</span><span class="p">:</span>
 
                 <span class="k">try</span><span class="p">:</span>
@@ -3481,9 +3533,9 @@
 
                     <span class="k">pass</span>
 
-                <span class="c1"># RICONFIURO SERIE ( CASI 2 e 3 )</span>
+            <span class="c1"># RICONFIURO SERIE</span>
 
-                <span class="n">ser</span><span class="o">=</span><span class="n">HSeries</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span>
+            <span class="n">ser</span><span class="o">=</span><span class="n">HSeries</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">ser</span><span class="p">,</span><span class="o">**</span><span class="n">setups</span><span class="p">)</span>
 
             <span class="c1"># QUI ser è completamnte definito</span>
 
@@ -4017,7 +4069,7 @@
 
 <span class="w">            </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="ss">            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro)</span>
+<span class="ss">            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro - invece sì)</span>
 
 <span class="ss">            CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata</span>
 
@@ -4047,6 +4099,32 @@
 
 <span class="w">                </span><span class="n">ser</span><span class="o">=</span><span class="n">HSeries</span><span class="p">(</span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;operands&#39;</span><span class="o">][</span><span class="n">&#39;__ALIAS__&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">delayed</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
 
+<span class="w">                </span><span class="n">#NON</span><span class="w"> </span><span class="n">DEVE</span><span class="w"> </span><span class="n">ESSERE</span><span class="w"> </span><span class="n">RICONFIGURATO</span><span class="w"> </span><span class="n">IL</span><span class="w"> </span><span class="n">MODELLO</span><span class="w"> </span><span class="n">DI</span><span class="w"> </span><span class="n">CALCOLO</span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">setups</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;operator&#39;</span><span class="p">)</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">setups</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;operands&#39;</span><span class="p">)</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">setups</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;modules&#39;</span><span class="p">)</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
+
 <span class="w">            </span><span class="k">else</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span>
@@ -4069,9 +4147,9 @@
 
 <span class="s1">                    pass</span>
 
-<span class="s1">                # RICONFIURO SERIE ( CASI 2 e 3 )</span>
+<span class="s1">            # RICONFIURO SERIE</span>
 
-<span class="s1">                ser=HSeries.setup(uuid=ser,**setups)</span>
+<span class="s1">            ser=HSeries.setup(uuid=ser,**setups)</span>
 
 <span class="s1">            # QUI ser è completamnte definito</span>
 

@@ -2873,8 +2873,6 @@
 
             <span class="k">if</span> <span class="n">coefficients</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">operator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">operator</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;__ALIAS__&quot;</span><span class="p">):</span>
 
-                <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;AAAAAAAAAAA&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="s2">&quot;AAAAAAAAAAAAAAAAAAAA&quot;</span><span class="p">)</span>
-
                 <span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
 
                 <span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span> <span class="p">)</span>
@@ -2930,6 +2928,16 @@
                 <span class="n">orient</span><span class="o">=</span><span class="n">orient</span>
 
                 <span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;------------------------------------&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
 
@@ -4089,8 +4097,6 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;__ALIAS__&quot;</span><span class="p">):</span>
 
-<span class="w">                </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;AAAAAAAAAAA&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;AAAAAAAAAAAAAAAAAAAA&quot;</span><span class="p">)</span>
-
 <span class="w">                </span><span class="n">opz</span><span class="p">[</span><span class="s2">&quot;COEFS&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
 
 <span class="w">                </span><span class="n">modules</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;calc&quot;</span><span class="p">:</span><span class="s2">&quot;hielen3.tools.calc&quot;</span><span class="p">}</span><span class="w"> </span><span class="p">)</span>
@@ -4146,6 +4152,16 @@ be referred to by name in <code>Nested</code> fields.</p>
 <span class="w">                </span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span>
 
 <span class="w">                </span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;------------------------------------&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">**</span><span class="n">config</span><span class="p">)</span>
 
