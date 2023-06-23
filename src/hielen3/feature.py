@@ -188,7 +188,7 @@ class HFeature(ABC):
         def set(self,param,ordinal=None,**setups):
             """
 
-            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro)
+            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro - invece sì)
             CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata
             CASO 3) La serie non esiste e deve essere configurata
 
@@ -208,6 +208,21 @@ class HFeature(ABC):
 
             if alias:
                 ser=HSeries(setups['operands']['__ALIAS__'], delayed=False)
+                #NON DEVE ESSERE RICONFIGURATO IL MODELLO DI CALCOLO
+                try:
+                    setups.pop('operator')
+                except Exception as e:
+                    pass
+
+                try:
+                    setups.pop('operands')
+                except Exception as e:
+                    pass
+
+                try:
+                    setups.pop('modules')
+                except Exception as e:
+                    pass
             else:
                 try:
                     # TEST CASO 2 
@@ -221,8 +236,8 @@ class HFeature(ABC):
                 except AttributeError as e:
                     pass
            
-                # RICONFIURO SERIE ( CASI 2 e 3 )
-                ser=HSeries.setup(uuid=ser,**setups)
+            # RICONFIURO SERIE
+            ser=HSeries.setup(uuid=ser,**setups)
 
             # QUI ser è completamnte definito
             self[param]={"series":ser, "ordinal":ordinal}

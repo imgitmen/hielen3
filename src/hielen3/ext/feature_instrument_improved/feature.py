@@ -144,8 +144,6 @@ class Feature(HFeature):
             if coefficients is not None and operator is not None and operator not in ("__ALIAS__"):
     
 
-                print ("AAAAAAAAAAA", operator, "AAAAAAAAAAAAAAAAAAAA")
-
 
                 opz["COEFS"] = json.dumps(coefficients)
                 modules.update( {"calc":"hielen3.tools.calc"} )
@@ -181,6 +179,14 @@ class Feature(HFeature):
                 groupmap=groupmap,
                 orient=orient
                 )
+
+
+        print ("")
+        print (config)
+        print ("")
+        print ("------------------------------------")
+        print ("")
+
 
 
         self.parameters.set(**config)
