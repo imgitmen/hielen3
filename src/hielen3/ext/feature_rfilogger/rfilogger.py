@@ -131,7 +131,9 @@ class Feature(HFeature):
             thresholds=[threshold_sp,*thresholds]
 
         threshold_ob = [{"label":"Obstruction","ttype":"LOWER","value":0,"color":"#FF0000"}]
-        
+        buffer_ob = h_min_span_1*0.001
+        view_range_ob = [0-buffer_ob,h_min_span_1+buffer_ob]
+     
 
         self.parameters.set(
                 "camera",
@@ -226,6 +228,7 @@ class Feature(HFeature):
                 ordinal=1,
                 thresholds=threshold_ob,
                 first=timestamp,
+                view_range=view_range_ob,
                 modules={"calc":"hielen3.tools.calc"}, 
                 operands={"S0":self.parameters["level 1"].uuid},
                 operator=f"{h_min_span_1} - S0")
@@ -251,6 +254,7 @@ class Feature(HFeature):
                 ordinal=2,
                 first=timestamp,
                 thresholds=threshold_ob,
+                view_range=view_range_ob,
                 modules={"calc":"hielen3.tools.calc"}, 
                 operands={"S0":self.parameters["level 2"].uuid},
                 operator=f"{h_min_span_2}-S0")
