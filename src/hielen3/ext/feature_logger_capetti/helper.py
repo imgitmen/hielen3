@@ -23,7 +23,7 @@ def retrive(path):
 
         a=read_csv(path, sep='\t', skiprows=3,header=None,index_col=[0]).iloc[:,4::3]
         a=a[~isin(a.index,"LOCAL TIME")]
-        a.index=to_datetime(a.index)
+        a.index=to_datetime(a.index,forma='ISO8601')
         a=a.astype('float')
 
         a.index.name='times'
@@ -35,6 +35,7 @@ def retrive(path):
     except Exception as e:
         #print("WARN : ", path)
         #raise e #DEBUG
+        a=DataFrame([],dtype='float64')
         pass
 
     return a

@@ -40,7 +40,10 @@ class ConfigSchema(ActionSchema):
                 3:["h_radar_1", "Quote over sea level of the radar 1", False, None],
                 4:["h_radar_2", "Quote over sea level of the radar 2", False, None],
                 5:["h_min_span_1", "Quote over the sea level of the minimum free span", False, None],
-                6:["h_min_span_2", "Quote over the sea level of the minimum free span", False, None]
+                6:["h_min_span_2", "Quote over the sea level of the minimum free span", False, None],
+                7:["h_riverbed", "Quote over the sea level of the riverbed", False, None],
+                8:["h_threshold_al", "Alert quote level", False, None],
+                9:["h_threshold_wa", "Warning quote level", False, None]
                 }
             }
 
@@ -52,6 +55,9 @@ class ConfigSchema(ActionSchema):
     h_radar_2 = fields.Number(required=True, allow_none=True)
     h_min_span_1 = fields.Number(required=True, allow_none=True)
     h_min_span_2 = fields.Number(required=True, allow_none=True)
+    h_riverbed= fields.Number(required=True, allow_none=True)
+    h_threshold_al = fields.Number(required=True, allow_none=True)
+    h_threshold_wa = fields.Number(required=True, allow_none=True)
 
 
 
@@ -73,6 +79,9 @@ class Feature(HFeature):
             h_radar_2=None,
             h_min_span_1=None,
             h_min_span_2=None,
+            h_riverbed=None,
+            h_threshold_al=None,
+            h_threshold_wa=None,
             **kwargs):
 
         """
@@ -101,6 +110,28 @@ class Feature(HFeature):
             if h_min_span_1 is None: h_min_span_1=0
             if h_min_span_2 is None: h_min_span_2=0
 
+        if not h_riverbed is None:
+            buffer=(h_radar_1-h_riverbed)*0.01
+            view_range=[h_riverbed-buffer,h_radar_1+buffer]
+        else:
+            view_range=None
+
+        thresholds=[{"label":"Sensor Height","ttype":"UPPER","value":h_radar_1,"color":"#505050"}]
+
+        if h_threshold_al is not None:
+            threshold_al = {"label":"Alert","ttype":"UPPER","value":h_threshold_al,"color":"#FF0000"}
+            thresholds=[threshold_al,*thresholds]
+
+        if h_threshold_wa is not None:
+            threshold_wa = {"label":"Warning","ttype":"UPPER","value":h_threshold_wa,"color":"#FFA500"}
+            thresholds=[threshold_wa,*thresholds]
+
+        if h_min_span_1 is not None: 
+            threshold_sp = {"label":"Minimal Span Height","ttype":"UPPER","value":h_min_span_1,"color":"#000000"}
+            thresholds=[threshold_sp,*thresholds]
+
+        threshold_ob = [{"label":"Obstruction","ttype":"LOWER","value":0,"color":"#FF0000"}]
+        
 
         self.parameters.set(
                 "camera",
@@ -114,7 +145,7 @@ class Feature(HFeature):
                 "temperature",
                 cache='active',
                 mu='°C',
-                ordinal=8,
+                ordinal=9,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=2)")
@@ -123,7 +154,7 @@ class Feature(HFeature):
                 "humidity",
                 cache='active',
                 mu='%%',
-                ordinal=9,
+                ordinal=10,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=3)")
@@ -132,7 +163,7 @@ class Feature(HFeature):
                 "battery",
                 cache='active',
                 mu='V',
-                ordinal=10,
+                ordinal=11,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=4)")
@@ -141,7 +172,7 @@ class Feature(HFeature):
                 "radar 1",
                 cache='active',
                 mu='mA',
-                ordinal=5,
+                ordinal=6,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=5)")
@@ -150,7 +181,7 @@ class Feature(HFeature):
                 "radar 2",
                 cache='active',
                 mu='mA',
-                ordinal=6,
+                ordinal=7,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=6)")
@@ -159,7 +190,7 @@ class Feature(HFeature):
                 "pluviometer",
                 cache='active',
                 mu='count',
-                ordinal=7,
+                ordinal=8,
                 first=timestamp,
                 modules={"source":source},
                 operator=f"source.retrive(serials={serial!r},times=times,columns=7)")
@@ -169,7 +200,7 @@ class Feature(HFeature):
                 'rain',
                 cache='active',
                 mu='mm/h',
-                ordinal=4,
+                ordinal=5,
                 first=timestamp,
                 modules={"calc":"hielen3.tools.calc"}, 
                 operands={"S0":self.parameters["pluviometer"].uuid},
@@ -182,6 +213,8 @@ class Feature(HFeature):
                 mu="m.s.l.m.",
                 ordinal=3,
                 first=timestamp,
+                view_range=view_range,
+                thresholds=thresholds,
                 modules={"calc":"hielen3.tools.calc"}, 
                 operands={"S0":self.parameters["radar 1"].uuid},
                 operator=f"{h_radar_1} - calc.poly_trans2(S0,{radar_1})")
@@ -191,9 +224,10 @@ class Feature(HFeature):
                 cache='active',
                 mu="m",
                 ordinal=1,
+                thresholds=threshold_ob,
                 first=timestamp,
                 modules={"calc":"hielen3.tools.calc"}, 
-                operands={"S0":self.parameters["radar 1"].uuid},
+                operands={"S0":self.parameters["level 1"].uuid},
                 operator=f"{h_min_span_1} - S0")
 
 
@@ -202,8 +236,10 @@ class Feature(HFeature):
                 'level 2',
                 cache='active',
                 mu="m.s.l.m.",
-                ordinal=1,
+                ordinal=4,
                 first=timestamp,
+                view_range=view_range,
+                thresholds=thresholds,
                 modules={"calc":"hielen3.tools.calc"}, 
                 operands={"S0":self.parameters["radar 2"].uuid},
                 operator=f"{h_radar_2} - calc.poly_trans2(S0,{radar_2})")
@@ -214,8 +250,9 @@ class Feature(HFeature):
                 mu="m",
                 ordinal=2,
                 first=timestamp,
+                thresholds=threshold_ob,
                 modules={"calc":"hielen3.tools.calc"}, 
-                operands={"S0":self.parameters["radar 2"].uuid},
+                operands={"S0":self.parameters["level 2"].uuid},
                 operator=f"{h_min_span_2}-S0")
 
 

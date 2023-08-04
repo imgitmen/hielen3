@@ -78,6 +78,12 @@ def aligned(func):
 
     return wrap_align
 
+@aligned
+def reference(s_main,s_ref):
+
+    pass
+
+
 
 @aligned
 def add(left, right):

@@ -290,7 +290,7 @@ class HSeries:
         return HSeries(uuid)
     
 
-    #TODO update thresholds
+
     def attribute_update(self, attribute=None, value=None):
 
         if attribute is None:
@@ -301,6 +301,10 @@ class HSeries:
                 value=[value]
                 for t in value:
                     db["series_thresholds"][self.uuid]=t
+
+        if attribute == 'reference':
+            pass
+
         else:
             db["series"][self.uuid]={attribute:value}
 
@@ -395,7 +399,7 @@ class HSeries:
 
         d['timestamp']=d[~(d["label"] == d["label"].shift(1)) | ~(d["ttype"] == d["ttype"].shift(1)) ]['end']
 
-        d['timestamp'] = d['timestamp'].pad()
+        d['timestamp'] = d['timestamp'].ffill()
 
         d=d.set_index('timestamp')
 
@@ -407,7 +411,7 @@ class HSeries:
 
         reftime = datetime64('now') + timedelta64(conf['server_time_offset'], 'h')
 
-        d['latency']=(reftime-d['end']).astype('timedelta64[m]')
+        d['latency']=(reftime-d['end']).astype('timedelta64[s]')
 
         d['timestamp']=d['timestamp'].astype(str)
         d['end'] = d['end'].astype(str)
