@@ -131,8 +131,8 @@ class Feature(HFeature):
             thresholds=[threshold_sp,*thresholds]
 
         threshold_ob = [{"label":"Obstruction","ttype":"LOWER","value":0,"color":"#FF0000"}]
-        buffer_ob = h_min_span_1*0.001
-        view_range_ob = [0-buffer_ob,h_min_span_1+buffer_ob]
+        buffer_ob = (h_min_span_1-h_riverbed)*0.001
+        view_range_ob = [0-buffer_ob,(h_min_span_1-h_riverbed)+buffer_ob]
      
 
         self.parameters.set(
