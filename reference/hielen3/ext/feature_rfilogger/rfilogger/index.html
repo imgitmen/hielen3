@@ -2829,9 +2829,9 @@
 
         <span class="n">threshold_ob</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Obstruction&quot;</span><span class="p">,</span><span class="s2">&quot;ttype&quot;</span><span class="p">:</span><span class="s2">&quot;LOWER&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">}]</span>
 
-        <span class="n">buffer_ob</span> <span class="o">=</span> <span class="n">h_min_span_1</span><span class="o">*</span><span class="mf">0.001</span>
+        <span class="n">buffer_ob</span> <span class="o">=</span> <span class="p">(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span>
 
-        <span class="n">view_range_ob</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,</span><span class="n">h_min_span_1</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
+        <span class="n">view_range_ob</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
 
@@ -4491,9 +4491,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="n">threshold_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Obstruction&quot;</span><span class="p">,</span><span class="s2">&quot;ttype&quot;</span><span class="p">:</span><span class="s2">&quot;LOWER&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">}]</span>
 
-<span class="w">        </span><span class="n">buffer_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h_min_span_1</span><span class="o">*</span><span class="mf">0.001</span>
+<span class="w">        </span><span class="n">buffer_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span>
 
-<span class="w">        </span><span class="n">view_range_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,</span><span class="n">h_min_span_1</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
+<span class="w">        </span><span class="n">view_range_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
 
 <span class="w">        </span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
 
@@ -4921,9 +4921,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="n">threshold_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Obstruction&quot;</span><span class="p">,</span><span class="s2">&quot;ttype&quot;</span><span class="p">:</span><span class="s2">&quot;LOWER&quot;</span><span class="p">,</span><span class="s2">&quot;value&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;#FF0000&quot;</span><span class="p">}]</span>
 
-<span class="w">        </span><span class="n">buffer_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">h_min_span_1</span><span class="o">*</span><span class="mf">0.001</span>
+<span class="w">        </span><span class="n">buffer_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span>
 
-<span class="w">        </span><span class="n">view_range_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,</span><span class="n">h_min_span_1</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
+<span class="w">        </span><span class="n">view_range_ob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="n">buffer_ob</span><span class="p">,(</span><span class="n">h_min_span_1</span><span class="o">-</span><span class="n">h_riverbed</span><span class="p">)</span><span class="o">+</span><span class="n">buffer_ob</span><span class="p">]</span>
 
 <span class="w">        </span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
 
