@@ -112,7 +112,7 @@ class HSeries:
         return self.__getattribute__(item)
             
 
-    def __init__(self, uuid, delayed=True):
+    def __init__(self, uuid, delayed=True, **kwargs):
 
         if uuid is None:
             raise ValueError
