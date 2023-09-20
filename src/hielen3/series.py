@@ -161,7 +161,7 @@ class HSeries:
             ):
 
         def _managed_capabilities_(capability):
-            return capability in ['data','stream','group']
+            return capability in ['data','stream','group','datadiagram']
 
         uuid=uuid or getuuid()
 

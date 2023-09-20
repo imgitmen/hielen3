@@ -180,6 +180,19 @@ def retrive(serials=None, columns=None, gateway=None, key=None, wsdl=None, times
         stop = int(time())
 
 
+    host='https://main.api.move-services.it'
+    api='api/v3'
+    gatway_id='641975b673fe125848cfce69'
+    bearer_key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MTk3NTc0NTRjOThkNzAwMjViMmNiNyIsInJvbGUiOiJsb3JhIiwiaWF0IjoxNjc5MzkwMDY5fQ.9QqWG97fCdwVxtuQWo2WhTt0Div28LqN-4gv32AnJks'
+
+
+    EUI='C0EE40000101F1D6'
+    TYPE='accelerations'
+
+    endpoint=f'{host}/{api}/sensors/{EUI}/measurements/{TYPE}?firstDate={start}&lastDate={stop}&page=0&sort=%2Bdate'
+
+
+
     if isinstance(start,(str,datetime)):
         start=int(datetime.fromisoformat(str(start)).timestamp())
 
@@ -189,29 +202,31 @@ def retrive(serials=None, columns=None, gateway=None, key=None, wsdl=None, times
     ahead=True
     out=DataFrame()
 
-    key=str(key)
-
-    if key.startswith("#"): key=key[1:]
-
-    if wsdl is None:
-        wsdl='http://www.winecap.it/winecapws.wsdl'
-
-    client=Client(wsdl=wsdl)
-    gch=client.service.getChannelHistory
-
     while ahead:
 
-        print (key,gateway,serials,columns,start,stop)
-              
-        u = DataFrame(serialize_object(gch(key,gateway,serials,columns,start,stop)))
-              
-        if u.__len__() < 1024: ahead = False
+        start="....."
+        stop=datetime64(stop) + timedelta64(30,'D')
+
+        response = requests.get(
+                endpoint,
+                headers = {
+                    'accept': 'application/json',
+                    'Authorization': 'Bearer '+bearer_key
+                    })
+
+
+        u= DataFrame(json.loads(response.content)['values'])[['date','acceleration']].set_index('date')['acceleration'].apply(Series)
+
+        inner_ahead=True
+        if u.__len__() < 50: ahead = False
               
         if u.__len__() > 0:
+            ## VALUTARE I PARAMETRI SUCESSIVI
             u = u.set_index(['timeStamp'])['value']
             u.index.names=['timestamp']
             start = u.index.max() + 1
             out = concat([out,u])
+            ##
     
     out = out.sort_index()
     out.columns = [f"{serials}_{columns}"]
