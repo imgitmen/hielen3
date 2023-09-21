@@ -41,10 +41,17 @@ class HFeature(ABC):
 
 
     def modules(ftype=None):
-        return db['features_type'][ftype]['module'].apply(import_module)
+        r = db['features_type'][ftype]['module'].apply(import_module)
+
+        print (r)
+
+        return (r)
 
 
     def __schemata__(mod,actions=None):
+
+
+        print (mod)
 
         s=DataFrame(mod.__all__)
         s.columns=['names']
