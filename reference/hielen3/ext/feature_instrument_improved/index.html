@@ -4120,7 +4120,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </code></pre></div>
 
 </details>

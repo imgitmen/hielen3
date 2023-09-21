@@ -3234,7 +3234,13 @@
 <span class="normal">640</span>
 <span class="normal">641</span>
 <span class="normal">642</span>
-<span class="normal">643</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3294,9 +3300,15 @@
 
     <span class="k">def</span> <span class="nf">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-        <span class="k">return</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_type&#39;</span><span class="p">][</span><span class="n">ftype</span><span class="p">][</span><span class="s1">&#39;module&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_type&#39;</span><span class="p">][</span><span class="n">ftype</span><span class="p">][</span><span class="s1">&#39;module&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__schemata__</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="n">mod</span><span class="p">)</span>
 
         <span class="n">s</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__all__</span><span class="p">)</span>
 
@@ -3908,9 +3920,15 @@
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__schemata__</span><span class="p">(</span><span class="k">mod</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="k">mod</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">s</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="k">mod</span><span class="p">.</span><span class="n">__all__</span><span class="p">)</span>
 
@@ -4700,7 +4718,11 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">modules</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+<span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
