@@ -4,6 +4,7 @@ from hielen3.feature import HFeature
 from hielen3.serializaction import ActionSchema, PolyCoeff, StringTime
 from hielen3.ext.feature_instrument import ConfigSchema, Feature
 from marshmallow import fields
+from numpy import datetime64
 
 import json
 import traceback
@@ -142,8 +143,6 @@ class Feature(HFeature):
                 coefficients = None
     
             if coefficients is not None and operator is not None and operator not in ("__ALIAS__"):
-    
-
 
                 opz["COEFS"] = json.dumps(coefficients)
                 modules.update( {"calc":"hielen3.tools.calc"} )
@@ -151,13 +150,16 @@ class Feature(HFeature):
 
 
             if start_time is None:
-                if zero_time is None or zero_time in ['first']:
+                if zero_time is None or "first" in zero_time:
                     start_time=timestamp
                 else:
                     start_time=zero_time
 
-            if zero_time in ['first']:
+            if zero_time is None or "first" in zero_time:
                 zero_time = start_time
+
+
+            zero_time = datetime64(zero_time)
 
             if operator is not None and operator not in ("__VOID__","__ALIAS__"):
                 operator= f"{operator} - Z + OFFSET"
@@ -200,9 +202,18 @@ class Feature(HFeature):
             except Exception as e:
                 pass
 
+            
+
             df=df[df[df.columns[0]].notna()]
 
+
+            print ( "AAAA\n\n", zero_time, "\n\nAAAA" )
+
+
+
             iloc_idx = df.index.get_indexer([zero_time], method='nearest')
+
+
 
             try:
                 config['operands']['Z'] = df.iloc[iloc_idx].squeeze()

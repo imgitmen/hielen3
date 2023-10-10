@@ -191,7 +191,7 @@ class HSeries:
         if capability is not None and _managed_capabilities_(capability):
             setups['capability'] = capability
 
-        print ("Start_time:",first)
+        # print ("Start_time:",first)
         if first is not None:
             setups['first'] = first
 
@@ -225,7 +225,7 @@ class HSeries:
         #TODO fare il check di coerenza tra operandi e operatore
         if operands is not None and isinstance(operands,dict):
 
-            print (operands)
+            # print (operands)
 
             table_operands=db["series_operands"]
         
@@ -517,6 +517,7 @@ class HSeries:
                     raise Exception('request for old, skip generation')
 
                 kwargs['cache'] = cache
+
                 gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 gen = gen.replace(',','.', regex=True).astype(float)
                 if gen.empty: raise Exception("void")
@@ -634,8 +635,9 @@ class HSeries:
                 out=self.generator.__generate__(**kwargs)
                 gen = Series([out['queue']],index=[out['timestamp']])
             except Exception as e:
-                print ("WARN series GENERATE: ",e)
-                #raise e
+                # print ("WARN series GENERATE: ",e)
+                # raise e
+
                 gen = Series([],dtype='object')
 
             gen.name='queue'
@@ -750,6 +752,21 @@ class HSeries:
 
             operands = kwargs
 
+            times=kwargs['times']
+
+            try:
+                start=re.sub('\+.*$','',str(times.start))
+            except Exception as e:
+                start=None
+
+            try:
+                stop=re.sub('\+.*$','',str(times.stop))
+            except Exception as e:
+                stop = None
+
+            kwargs.update({"times":slice(start,stop,times.step)})
+
+        
             operands.update(
                 {k: w for k, w in self.operands.items() if not isinstance(w, HSeries)}
             )
@@ -779,8 +796,8 @@ class HSeries:
             ## ATTENZIONE A locals: Implementation Dependant!!!! ###
             locals().update(operands)
 
-            #print (operands) #DEBUG
-            #print (self.operator, locals() ) #DEBUG
+            # print (operands) #DEBUG
+            # print (self.operator, locals() ) #DEBUG
 
 
             out= eval(self.operator)
