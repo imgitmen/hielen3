@@ -111,7 +111,7 @@ class Feature(HFeature):
 
 
 
-def retrive(serials=None,times=None,columns=None):
+def retrive(serials=None,times=None,columns=None,**kwargs):
 
     loggerpath=Path(conf['incomepath'], 'move', serials, 'last_load.csv' )
 
