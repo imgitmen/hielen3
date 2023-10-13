@@ -2980,7 +2980,7 @@
 
                     <span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
     <span class="n">loggerpath</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;incomepath&#39;</span><span class="p">],</span> <span class="s1">&#39;move&#39;</span><span class="p">,</span> <span class="n">serials</span><span class="p">,</span> <span class="s1">&#39;last_load.csv&#39;</span> <span class="p">)</span>
 
@@ -3007,13 +3007,14 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span>
     <span class="n">serials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">    </span><span class="n">loggerpath</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;move&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">serials</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;last_load.csv&#39;</span><span class="w"> </span><span class="p">)</span>
 
