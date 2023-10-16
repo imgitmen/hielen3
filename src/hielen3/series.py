@@ -752,6 +752,7 @@ class HSeries:
 
             operands = kwargs
 
+            '''
             times=kwargs['times']
 
             try:
@@ -765,7 +766,7 @@ class HSeries:
                 stop = None
 
             kwargs.update({"times":slice(start,stop,times.step)})
-
+            '''
         
             operands.update(
                 {k: w for k, w in self.operands.items() if not isinstance(w, HSeries)}
