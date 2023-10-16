@@ -3542,7 +3542,11 @@
 <span class="normal">1104</span>
 <span class="normal">1105</span>
 <span class="normal">1106</span>
-<span class="normal">1107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1107</span>
+<span class="normal">1108</span>
+<span class="normal">1109</span>
+<span class="normal">1110</span>
+<span class="normal">1111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4586,25 +4590,29 @@
 
             <span class="n">operands</span> <span class="o">=</span> <span class="n">kwargs</span>
 
-            <span class="n">times</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">]</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 
-            <span class="k">try</span><span class="p">:</span>
+<span class="sd">            times=kwargs[&#39;times&#39;]</span>
 
-                <span class="n">start</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\+.*$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+<span class="sd">            try:</span>
 
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="sd">                start=re.sub(&#39;\+.*$&#39;,&#39;&#39;,str(times.start))</span>
 
-                <span class="n">start</span><span class="o">=</span><span class="kc">None</span>
+<span class="sd">            except Exception as e:</span>
 
-            <span class="k">try</span><span class="p">:</span>
+<span class="sd">                start=None</span>
 
-                <span class="n">stop</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\+.*$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">stop</span><span class="p">))</span>
+<span class="sd">            try:</span>
 
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="sd">                stop=re.sub(&#39;\+.*$&#39;,&#39;&#39;,str(times.stop))</span>
 
-                <span class="n">stop</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="sd">            except Exception as e:</span>
 
-            <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;times&quot;</span><span class="p">:</span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">times</span><span class="o">.</span><span class="n">step</span><span class="p">)})</span>
+<span class="sd">                stop = None</span>
+
+<span class="sd">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
 
             <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
 
@@ -5684,25 +5692,29 @@
 
 <span class="w">            </span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kwargs</span>
 
-<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;times&#39;</span><span class="o">]</span>
+<span class="w">            </span><span class="s1">&#39;&#39;&#39;</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="s1">            times=kwargs[&#39;</span><span class="n">times</span><span class="s1">&#39;]</span>
 
-<span class="w">                </span><span class="k">start</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\+.*$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span>
+<span class="s1">            try:</span>
 
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="s1">                start=re.sub(&#39;</span><span class="err">\</span><span class="o">+</span><span class="p">.</span><span class="o">*</span><span class="err">$</span><span class="s1">&#39;,&#39;&#39;,str(times.start))</span>
 
-<span class="w">                </span><span class="k">start</span><span class="o">=</span><span class="k">None</span>
+<span class="s1">            except Exception as e:</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="s1">                start=None</span>
 
-<span class="w">                </span><span class="n">stop</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\+.*$&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nf">str</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="n">stop</span><span class="p">))</span>
+<span class="s1">            try:</span>
 
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="s1">                stop=re.sub(&#39;</span><span class="err">\</span><span class="o">+</span><span class="p">.</span><span class="o">*</span><span class="err">$</span><span class="s1">&#39;,&#39;&#39;,str(times.stop))</span>
 
-<span class="w">                </span><span class="n">stop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
+<span class="s1">            except Exception as e:</span>
 
-<span class="w">            </span><span class="n">kwargs</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;times&quot;</span><span class="err">:</span><span class="n">slice</span><span class="p">(</span><span class="k">start</span><span class="p">,</span><span class="n">stop</span><span class="p">,</span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="p">)</span><span class="err">}</span><span class="p">)</span>
+<span class="s1">                stop = None</span>
+
+<span class="s1">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
+
+<span class="s1">            &#39;&#39;&#39;</span>
 
 <span class="w">            </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span>
 
