@@ -3546,7 +3546,9 @@
 <span class="normal">1108</span>
 <span class="normal">1109</span>
 <span class="normal">1110</span>
-<span class="normal">1111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1111</span>
+<span class="normal">1112</span>
+<span class="normal">1113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4628,7 +4630,9 @@
 
                 <span class="n">groupmap</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
 
-                <span class="n">groupmap</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1">#groupmap = concat(groupmap,axis=1)</span>
+
+                <span class="n">groupmap</span><span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
                 <span class="k">try</span><span class="p">:</span>
 
@@ -5730,7 +5734,9 @@
 
 <span class="w">                </span><span class="n">groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="err">}</span>
 
-<span class="w">                </span><span class="n">groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="n">#groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">groupmap</span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">).</span><span class="n">unstack</span><span class="p">().</span><span class="n">T</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span>
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span>
 
