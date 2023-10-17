@@ -779,7 +779,9 @@ class HSeries:
 
                 groupmap = { k:w.result() for k,w in groupmap.items() }
         
-                groupmap = concat(groupmap,axis=1)
+                #groupmap = concat(groupmap,axis=1)
+
+                groupmap= concat(groupmap).unstack().T.sort_index()
                 
                 try:
                     groupmap.columns = groupmap.columns.droplevel(0)
