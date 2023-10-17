@@ -781,12 +781,19 @@ class HSeries:
         
                 #groupmap = concat(groupmap,axis=1)
 
+                cols=list(groupmap.keys())
+
                 groupmap= concat(groupmap).unstack().T.sort_index()
                 
                 try:
                     groupmap.columns = groupmap.columns.droplevel(0)
                 except Exception as e:
                     pass
+
+                for c in cols:
+                    if c not in groupmap.columns:
+                        groupmap[c] = None
+
 
                 operands['__GROUPMAP__'] = groupmap
 
