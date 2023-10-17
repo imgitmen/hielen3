@@ -3548,7 +3548,15 @@
 <span class="normal">1110</span>
 <span class="normal">1111</span>
 <span class="normal">1112</span>
-<span class="normal">1113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1113</span>
+<span class="normal">1114</span>
+<span class="normal">1115</span>
+<span class="normal">1116</span>
+<span class="normal">1117</span>
+<span class="normal">1118</span>
+<span class="normal">1119</span>
+<span class="normal">1120</span>
+<span class="normal">1121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4632,6 +4640,8 @@
 
                 <span class="c1">#groupmap = concat(groupmap,axis=1)</span>
 
+                <span class="n">cols</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">groupmap</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
                 <span class="n">groupmap</span><span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
                 <span class="k">try</span><span class="p">:</span>
@@ -4641,6 +4651,12 @@
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                     <span class="k">pass</span>
+
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+
+                    <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+
+                        <span class="n">groupmap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
                 <span class="n">operands</span><span class="p">[</span><span class="s1">&#39;__GROUPMAP__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupmap</span>
 
@@ -5736,6 +5752,8 @@
 
 <span class="w">                </span><span class="n">#groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="w">                </span><span class="n">cols</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">groupmap</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+
 <span class="w">                </span><span class="n">groupmap</span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">).</span><span class="n">unstack</span><span class="p">().</span><span class="n">T</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span>
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span>
@@ -5745,6 +5763,12 @@
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">cols</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="nl">columns</span><span class="p">:</span>
+
+<span class="w">                        </span><span class="n">groupmap</span><span class="o">[</span><span class="n">c</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
 <span class="w">                </span><span class="n">operands</span><span class="o">[</span><span class="n">&#39;__GROUPMAP__&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span>
 
