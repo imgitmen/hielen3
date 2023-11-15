@@ -1757,12 +1757,87 @@
       
       
         <label class="md-nav__link" for="__nav_5_1_12_17">
+          Feature Logger Smartbrik4 0
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Smartbrik4 0" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_12_17">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Smartbrik4 0
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ext/feature_logger_smartbrik4_0/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ext/feature_logger_smartbrik4_0/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ext/feature_logger_smartbrik4_0/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_18" type="checkbox" id="__nav_5_1_12_18" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_12_18">
           Feature Logger Winecap
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Logger Winecap" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_17">
+        <label class="md-nav__title" for="__nav_5_1_12_18">
           <span class="md-nav__icon md-icon"></span>
           Feature Logger Winecap
         </label>
@@ -1826,18 +1901,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_18" type="checkbox" id="__nav_5_1_12_18" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_19" type="checkbox" id="__nav_5_1_12_19" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_1_12_18">
+        <label class="md-nav__link" for="__nav_5_1_12_19">
           Feature Rfilogger
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_18">
+        <label class="md-nav__title" for="__nav_5_1_12_19">
           <span class="md-nav__icon md-icon"></span>
           Feature Rfilogger
         </label>
@@ -1887,18 +1962,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_19" type="checkbox" id="__nav_5_1_12_19" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_20" type="checkbox" id="__nav_5_1_12_20" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_1_12_19">
+        <label class="md-nav__link" for="__nav_5_1_12_20">
           Feature Spotted Files Source
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Spotted Files Source" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_19">
+        <label class="md-nav__title" for="__nav_5_1_12_20">
           <span class="md-nav__icon md-icon"></span>
           Feature Spotted Files Source
         </label>
@@ -4330,7 +4405,7 @@
 
                 <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 
             <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
 
@@ -5442,7 +5517,7 @@
 
 <span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().all(axis=1)</span><span class="o">]</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().any(axis=1)</span><span class="o">]</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
@@ -6207,7 +6282,7 @@
 
 <span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().all(axis=1)</span><span class="o">]</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().any(axis=1)</span><span class="o">]</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
