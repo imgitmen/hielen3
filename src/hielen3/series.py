@@ -559,7 +559,7 @@ class HSeries:
             if self.valid_range_max is not None:
                 out=out.mask(out>self.valid_range_max,nan)
 
-            out=out[out.notna().all(axis=1)]
+            out=out[out.notna().any(axis=1)]
 
             if cache in ("active","data","refresh") and cangenerate:
                 for u in gen.columns:
