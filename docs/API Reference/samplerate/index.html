@@ -13,7 +13,7 @@
     
     
       
-        <title>Queue - hielen3</title>
+        <title>Samplerate - hielen3</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#queue" class="md-skip">
+        <a href="#samplerate" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Queue
+              Samplerate
             
           </span>
         </div>
@@ -2287,8 +2287,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-queuequeue" class="md-nav__link">
-    GET    /queue/{queue}
+  <a href="#get-samplerate" class="md-nav__link">
+    GET    /samplerate/
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-sampleratefeature" class="md-nav__link">
+    GET    /samplerate/{feature}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-sampleratefeature" class="md-nav__link">
+    POST   /samplerate/{feature}
   </a>
   
 </li>
@@ -2307,18 +2321,43 @@
                 
                   
 
-  <a href="https://github.com/imgitmen/hielen3/edit/main/docs/API Reference/queue.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/imgitmen/hielen3/edit/main/docs/API Reference/samplerate.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="queue">Queue</h1>
-<h3 id="get-queuequeue"><strong>GET    <em>/queue/{queue}</em></strong></h3>
+<h1 id="samplerate">Samplerate</h1>
+<h3 id="get-samplerate"><strong>GET    <em>/samplerate/</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>queue</strong>: Basic text / string value</li>
+<li><strong>features</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<h3 id="get-sampleratefeature"><strong>GET    <em>/samplerate/{feature}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>feature</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<h3 id="post-sampleratefeature"><strong>POST   <em>/samplerate/{feature}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>feature</strong>: Basic text / string value</li>
+<li><strong>newrate</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
