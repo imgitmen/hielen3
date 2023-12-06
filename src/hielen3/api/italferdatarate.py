@@ -71,14 +71,14 @@ def chtime(feature,newrate,request=None, response=None):
     stat = f"REPLACE into feature_rfiponti_timerate VALUES ({feature!r},{newrate})"
 
     try:
-        e=db['query'].engine
-        with e.begin() as conn:
+        en=db['query'].engine
+        with en.begin() as conn:
             conn.execute('start transaction')
             conn.execute(stat)
-        e.dispose()
+        en.dispose()
     except Exception as e:
         out.status = falcon.HTTP_NOT_FOUND
-        out.message = f"something gone wrong"
+        out.message = f"something gone wrong {e}"
         return
 
     return gettimer(feature=feature,request=request,response=response)
