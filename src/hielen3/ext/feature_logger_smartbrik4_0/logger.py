@@ -124,7 +124,6 @@ def retrive(serials=None,times=None,columns=None,**kwargs):
     if not isinstance(times, slice):
         times = slice (None,None,None)
 
-    print (data)
     return data[times][columns]
 
 

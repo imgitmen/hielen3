@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine, italferdatarate
 import falcon
 
 """
@@ -63,4 +63,9 @@ def dataman():
 def dataman():
     """ api per aws kinemetrics """
     return [awskine]
+ 
+@hug.extend_api("/samplerate")
+def dataman():
+    """ api per cambiare il samplerate """
+    return [italferdatarate]
 
