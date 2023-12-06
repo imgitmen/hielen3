@@ -2655,21 +2655,21 @@
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">e</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">engine</span>
+        <span class="n">en</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;query&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">engine</span>
 
-        <span class="k">with</span> <span class="n">e</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">en</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
 
             <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;start transaction&#39;</span><span class="p">)</span>
 
             <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
 
-        <span class="n">e</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+        <span class="n">en</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;something gone wrong&quot;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;something gone wrong </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
 
         <span class="k">return</span>
 
@@ -2749,21 +2749,21 @@
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="n">e</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;query&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">engine</span>
+<span class="w">        </span><span class="n">en</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;query&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">engine</span>
 
-<span class="w">        </span><span class="k">with</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="k">begin</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">conn</span><span class="p">:</span>
+<span class="w">        </span><span class="k">with</span><span class="w"> </span><span class="n">en</span><span class="p">.</span><span class="k">begin</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">conn</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">conn</span><span class="p">.</span><span class="k">execute</span><span class="p">(</span><span class="s1">&#39;start transaction&#39;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="n">conn</span><span class="p">.</span><span class="k">execute</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
 
-<span class="w">        </span><span class="n">e</span><span class="p">.</span><span class="n">dispose</span><span class="p">()</span>
+<span class="w">        </span><span class="n">en</span><span class="p">.</span><span class="n">dispose</span><span class="p">()</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;something gone wrong&quot;</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;something gone wrong {e}&quot;</span>
 
 <span class="w">        </span><span class="k">return</span>
 
