@@ -9,6 +9,16 @@ from hielen3 import db, conf
 
 def changerate(serial,time):
 
+    if time is None:
+        time = 0
+
+    time = int(time)
+
+    if time < 1:
+        raise Exception ("new rate under minute")
+
+
+    time=time*60
     c=Cognito(**conf["aws"]["pool"])
     c.authenticate(conf["aws"]["pwd"])
     headers={"Authorization":c.id_token}
@@ -63,10 +73,12 @@ def chtime(feature,newrate,request=None, response=None):
 
     try:
         res=changerate(serial,newrate)
+        print (res.__dict__)
     except Exception as e:
         out.status = falcon.HTTP_NOT_FOUND
-        out.message = f"something gone wrong"
-        return
+        out.message = f"something gone wrong: {e}"
+        out.format(request=request,response=response) 
+        return 
 
     stat = f"REPLACE into feature_rfiponti_timerate VALUES ({feature!r},{newrate})"
 
@@ -79,7 +91,8 @@ def chtime(feature,newrate,request=None, response=None):
     except Exception as e:
         out.status = falcon.HTTP_NOT_FOUND
         out.message = f"something gone wrong {e}"
-        return
+        out.format(request=request,response=response) 
+        return out
 
     return gettimer(feature=feature,request=request,response=response)
 
