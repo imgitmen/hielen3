@@ -447,6 +447,8 @@ class HSeries:
     def data(self, times=None, timeref=None, cache=None, group=None, geometry=None, **kwargs):
 
         self.__delayed_load__()
+        
+        entertimes=times
 
         if self.capability not in ['data','datadiagram']:
             raise ValueError( f"{self.uuid} has not 'data' capability" )
@@ -467,7 +469,7 @@ class HSeries:
 
 
         if times is None:
-            times=slice(None)
+            times=slice(None,None,None)
 
         justnew=False
 
@@ -554,7 +556,7 @@ class HSeries:
 
 
             if self.valid_range_min is not None:
-               out=out.mask(out<self.valid_range_min,nan)
+                out=out.mask(out<self.valid_range_min,nan)
 
             if self.valid_range_max is not None:
                 out=out.mask(out>self.valid_range_max,nan)
@@ -604,6 +606,7 @@ class HSeries:
 
         if not out.empty:
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
+            out=out.loc[entertimes]
 
         try:
             if out.columns.__len__() < 2:
