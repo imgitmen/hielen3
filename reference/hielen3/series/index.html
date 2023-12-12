@@ -3659,7 +3659,11 @@
 <span class="normal">1118</span>
 <span class="normal">1119</span>
 <span class="normal">1120</span>
-<span class="normal">1121</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1121</span>
+<span class="normal">1122</span>
+<span class="normal">1123</span>
+<span class="normal">1124</span>
+<span class="normal">1125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4275,6 +4279,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+        <span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;datadiagram&#39;</span><span class="p">]:</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;data&#39; capability&quot;</span> <span class="p">)</span>
@@ -4303,7 +4309,7 @@
 
         <span class="k">if</span> <span class="n">times</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
         <span class="n">justnew</span><span class="o">=</span><span class="kc">False</span>
 
@@ -4427,7 +4433,7 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-               <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -4494,6 +4500,8 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>  <span class="n">ut2isot</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))))</span>
+
+            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">entertimes</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -5387,6 +5395,8 @@
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+<span class="w">        </span><span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;datadiagram&#39;</span><span class="o">]</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span>
@@ -5415,7 +5425,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">)</span>
+<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">justnew</span><span class="o">=</span><span class="k">False</span>
 
@@ -5539,7 +5549,7 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">               </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -5606,6 +5616,8 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -6152,6 +6164,8 @@
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+<span class="w">        </span><span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;datadiagram&#39;</span><span class="o">]</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span>
@@ -6180,7 +6194,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">)</span>
+<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">justnew</span><span class="o">=</span><span class="k">False</span>
 
@@ -6304,7 +6318,7 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">               </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -6371,6 +6385,8 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
