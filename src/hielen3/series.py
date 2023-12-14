@@ -606,7 +606,10 @@ class HSeries:
 
         if not out.empty:
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
-            out=out.loc[entertimes]
+            try:
+                out=out.loc[entertimes]
+            except Exception as e:
+                pass
 
         try:
             if out.columns.__len__() < 2:
