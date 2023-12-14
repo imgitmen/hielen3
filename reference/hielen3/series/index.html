@@ -3663,7 +3663,13 @@
 <span class="normal">1122</span>
 <span class="normal">1123</span>
 <span class="normal">1124</span>
-<span class="normal">1125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1125</span>
+<span class="normal">1126</span>
+<span class="normal">1127</span>
+<span class="normal">1128</span>
+<span class="normal">1129</span>
+<span class="normal">1130</span>
+<span class="normal">1131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4501,7 +4507,13 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>  <span class="n">ut2isot</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))))</span>
 
-            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">entertimes</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">entertimes</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -5617,7 +5629,13 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -6386,7 +6404,13 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
