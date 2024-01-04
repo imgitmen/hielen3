@@ -2151,6 +2151,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="rfilogger_good/" class="md-nav__link">
+        Rfilogger Good
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2942,6 +2956,7 @@
 <h2 id="sub-modules">Sub-modules</h2>
 <ul>
 <li><a href="rfilogger/">hielen3.ext.feature_rfilogger.rfilogger</a></li>
+<li><a href="rfilogger_good/">hielen3.ext.feature_rfilogger.rfilogger_good</a></li>
 </ul>
 <h2 id="functions">Functions</h2>
 <h3 id="retrive">retrive</h3>
@@ -3017,6 +3032,16 @@
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
+<span class="w">        </span><span class="n">orig_start</span><span class="o">=</span><span class="k">start</span>
+
+<span class="w">        </span><span class="k">start</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="k">start</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">))</span>
+
+<span class="w">    </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">orig_start</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
 <span class="w">        </span><span class="n">datestart</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="nc">datetime</span><span class="p">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="k">start</span><span class="p">).</span><span class="nc">date</span><span class="p">())</span>
 
 <span class="w">    </span><span class="k">else</span><span class="err">:</span>
@@ -3025,7 +3050,11 @@
 
 <span class="w">    </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">start</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">orig_times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">orig_start</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
+
 <span class="w">    </span><span class="n">dates</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">datestart</span><span class="p">,</span><span class="n">stop</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">times</span><span class="p">,</span><span class="ss">&quot;\n&quot;</span><span class="p">,</span><span class="n">orig_times</span><span class="p">,</span><span class="ss">&quot;\n&quot;</span><span class="p">,</span><span class="n">dates</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">paths</span><span class="o">=</span><span class="n">Series</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{folder}/*/*/*/*&#39;</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="k">Path</span><span class="p">)</span>
 
@@ -3104,6 +3133,26 @@
 <span class="w">    </span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">[</span><span class="n">columns</span><span class="o">]</span><span class="p">.</span><span class="n">sort_index</span><span class="p">().</span><span class="n">loc</span><span class="o">[</span><span class="n">(serials, times), :</span><span class="o">]</span>
+
+<span class="w">    </span><span class="err">##</span><span class="w"> </span><span class="n">FILTRO</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="mi">2</span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">[</span><span class="n">5</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="k">filter</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">5</span><span class="o">]</span><span class="p">,</span><span class="k">window</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">pass</span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calc</span><span class="p">.</span><span class="k">filter</span><span class="p">(</span><span class="n">df</span><span class="o">[</span><span class="n">6</span><span class="o">]</span><span class="p">,</span><span class="k">window</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">pass</span>
+
+<span class="w">    </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">(serials,orig_times), :</span><span class="o">]</span>
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 

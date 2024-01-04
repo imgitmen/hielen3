@@ -1960,6 +1960,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ext/feature_rfilogger/rfilogger_good/" class="md-nav__link">
+        Rfilogger Good
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -3623,7 +3637,53 @@
 <span class="normal">1082</span>
 <span class="normal">1083</span>
 <span class="normal">1084</span>
-<span class="normal">1085</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1085</span>
+<span class="normal">1086</span>
+<span class="normal">1087</span>
+<span class="normal">1088</span>
+<span class="normal">1089</span>
+<span class="normal">1090</span>
+<span class="normal">1091</span>
+<span class="normal">1092</span>
+<span class="normal">1093</span>
+<span class="normal">1094</span>
+<span class="normal">1095</span>
+<span class="normal">1096</span>
+<span class="normal">1097</span>
+<span class="normal">1098</span>
+<span class="normal">1099</span>
+<span class="normal">1100</span>
+<span class="normal">1101</span>
+<span class="normal">1102</span>
+<span class="normal">1103</span>
+<span class="normal">1104</span>
+<span class="normal">1105</span>
+<span class="normal">1106</span>
+<span class="normal">1107</span>
+<span class="normal">1108</span>
+<span class="normal">1109</span>
+<span class="normal">1110</span>
+<span class="normal">1111</span>
+<span class="normal">1112</span>
+<span class="normal">1113</span>
+<span class="normal">1114</span>
+<span class="normal">1115</span>
+<span class="normal">1116</span>
+<span class="normal">1117</span>
+<span class="normal">1118</span>
+<span class="normal">1119</span>
+<span class="normal">1120</span>
+<span class="normal">1121</span>
+<span class="normal">1122</span>
+<span class="normal">1123</span>
+<span class="normal">1124</span>
+<span class="normal">1125</span>
+<span class="normal">1126</span>
+<span class="normal">1127</span>
+<span class="normal">1128</span>
+<span class="normal">1129</span>
+<span class="normal">1130</span>
+<span class="normal">1131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3791,7 +3851,7 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getattribute__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">delayed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">delayed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">uuid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -3865,7 +3925,7 @@
 
         <span class="k">def</span> <span class="nf">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">):</span>
 
-            <span class="k">return</span> <span class="n">capability</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">capability</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;stream&#39;</span><span class="p">,</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="s1">&#39;datadiagram&#39;</span><span class="p">]</span>
 
         <span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span> <span class="ow">or</span> <span class="n">getuuid</span><span class="p">()</span>
 
@@ -3905,7 +3965,7 @@
 
             <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;capability&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">capability</span>
 
-        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Start_time:&quot;</span><span class="p">,</span><span class="n">first</span><span class="p">)</span>
+        <span class="c1"># print (&quot;Start_time:&quot;,first)</span>
 
         <span class="k">if</span> <span class="n">first</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -3957,7 +4017,7 @@
 
         <span class="k">if</span> <span class="n">operands</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">operands</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
 
-            <span class="nb">print</span> <span class="p">(</span><span class="n">operands</span><span class="p">)</span>
+            <span class="c1"># print (operands)</span>
 
             <span class="n">table_operands</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_operands&quot;</span><span class="p">]</span>
 
@@ -4045,8 +4105,6 @@
 
         <span class="k">return</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
 
-    <span class="c1">#TODO update thresholds</span>
-
     <span class="k">def</span> <span class="nf">attribute_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">attribute</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -4062,6 +4120,10 @@
                 <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
 
                     <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_thresholds&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">t</span>
+
+        <span class="k">if</span> <span class="n">attribute</span> <span class="o">==</span> <span class="s1">&#39;reference&#39;</span><span class="p">:</span>
+
+            <span class="k">pass</span>
 
         <span class="k">else</span><span class="p">:</span>
 
@@ -4237,6 +4299,8 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+        <span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capability</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">,</span><span class="s1">&#39;datadiagram&#39;</span><span class="p">]:</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;data&#39; capability&quot;</span> <span class="p">)</span>
@@ -4265,7 +4329,7 @@
 
         <span class="k">if</span> <span class="n">times</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
         <span class="n">justnew</span><span class="o">=</span><span class="kc">False</span>
 
@@ -4389,13 +4453,13 @@
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-               <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
                 <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">out</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="n">out</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 
             <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
 
@@ -4457,6 +4521,14 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span> <span class="s1">&#39;last&#39;</span><span class="p">,</span>  <span class="n">ut2isot</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))))</span>
 
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">entertimes</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
+
         <span class="k">try</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
@@ -4495,9 +4567,9 @@
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+                <span class="c1"># print (&quot;WARN series GENERATE: &quot;,e)</span>
 
-                <span class="c1">#raise e</span>
+                <span class="c1"># raise e</span>
 
                 <span class="n">gen</span> <span class="o">=</span> <span class="n">Series</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
 
@@ -4665,6 +4737,30 @@
 
             <span class="n">operands</span> <span class="o">=</span> <span class="n">kwargs</span>
 
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">            times=kwargs[&#39;times&#39;]</span>
+
+<span class="sd">            try:</span>
+
+<span class="sd">                start=re.sub(&#39;\+.*$&#39;,&#39;&#39;,str(times.start))</span>
+
+<span class="sd">            except Exception as e:</span>
+
+<span class="sd">                start=None</span>
+
+<span class="sd">            try:</span>
+
+<span class="sd">                stop=re.sub(&#39;\+.*$&#39;,&#39;&#39;,str(times.stop))</span>
+
+<span class="sd">            except Exception as e:</span>
+
+<span class="sd">                stop = None</span>
+
+<span class="sd">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
+
+<span class="sd">            &#39;&#39;&#39;</span>
+
             <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
 
                 <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">HSeries</span><span class="p">)}</span>
@@ -4679,7 +4775,11 @@
 
                 <span class="n">groupmap</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="n">w</span><span class="o">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
 
-                <span class="n">groupmap</span> <span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="c1">#groupmap = concat(groupmap,axis=1)</span>
+
+                <span class="n">cols</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">groupmap</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+                <span class="n">groupmap</span><span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
 
                 <span class="k">try</span><span class="p">:</span>
 
@@ -4688,6 +4788,12 @@
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                     <span class="k">pass</span>
+
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">:</span>
+
+                    <span class="k">if</span> <span class="n">c</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">groupmap</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+
+                        <span class="n">groupmap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
                 <span class="n">operands</span><span class="p">[</span><span class="s1">&#39;__GROUPMAP__&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">groupmap</span>
 
@@ -4701,9 +4807,9 @@
 
             <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
 
-            <span class="c1">#print (operands) #DEBUG</span>
+            <span class="c1"># print (operands) #DEBUG</span>
 
-            <span class="c1">#print (self.operator, locals() ) #DEBUG</span>
+            <span class="c1"># print (self.operator, locals() ) #DEBUG</span>
 
             <span class="n">out</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span>
 
@@ -4728,7 +4834,8 @@
 <h3 id="hseries">HSeries</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">HSeries</span><span class="p">(</span>
     <span class="n">uuid</span><span class="p">,</span>
-    <span class="n">delayed</span><span class="o">=</span><span class="kc">True</span>
+    <span class="n">delayed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -4866,7 +4973,7 @@
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getattribute__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">delayed</span><span class="o">=</span><span class="k">True</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="n">delayed</span><span class="o">=</span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">uuid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -4940,7 +5047,7 @@
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;stream&#39;,&#39;group&#39;</span><span class="o">]</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;stream&#39;,&#39;group&#39;,&#39;datadiagram&#39;</span><span class="o">]</span>
 
 <span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">getuuid</span><span class="p">()</span>
 
@@ -4980,7 +5087,7 @@
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span>
 
-<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;Start_time:&quot;</span><span class="p">,</span><span class="k">first</span><span class="p">)</span>
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;Start_time:&quot;</span><span class="p">,</span><span class="k">first</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -5032,7 +5139,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">operands</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">operands</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
 
 <span class="w">            </span><span class="n">table_operands</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_operands&quot;</span><span class="o">]</span>
 
@@ -5120,8 +5227,6 @@
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">#TODO</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">thresholds</span>
-
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">attribute_update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">attribute</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
@@ -5137,6 +5242,10 @@
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
 
 <span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;reference&#39;</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span>
 
@@ -5312,6 +5421,8 @@
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+<span class="w">        </span><span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;datadiagram&#39;</span><span class="o">]</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span>
@@ -5340,7 +5451,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">)</span>
+<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">justnew</span><span class="o">=</span><span class="k">False</span>
 
@@ -5464,13 +5575,13 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">               </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().all(axis=1)</span><span class="o">]</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().any(axis=1)</span><span class="o">]</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
@@ -5532,6 +5643,14 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
 
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">pass</span>
+
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span>
@@ -5570,9 +5689,9 @@
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">                </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">                </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span>
+<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
 
@@ -5740,6 +5859,30 @@
 
 <span class="w">            </span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kwargs</span>
 
+<span class="w">            </span><span class="s1">&#39;&#39;&#39;</span>
+
+<span class="s1">            times=kwargs[&#39;</span><span class="n">times</span><span class="s1">&#39;]</span>
+
+<span class="s1">            try:</span>
+
+<span class="s1">                start=re.sub(&#39;</span><span class="err">\</span><span class="o">+</span><span class="p">.</span><span class="o">*</span><span class="err">$</span><span class="s1">&#39;,&#39;&#39;,str(times.start))</span>
+
+<span class="s1">            except Exception as e:</span>
+
+<span class="s1">                start=None</span>
+
+<span class="s1">            try:</span>
+
+<span class="s1">                stop=re.sub(&#39;</span><span class="err">\</span><span class="o">+</span><span class="p">.</span><span class="o">*</span><span class="err">$</span><span class="s1">&#39;,&#39;&#39;,str(times.stop))</span>
+
+<span class="s1">            except Exception as e:</span>
+
+<span class="s1">                stop = None</span>
+
+<span class="s1">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
+
+<span class="s1">            &#39;&#39;&#39;</span>
+
 <span class="w">            </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span>
 
 <span class="w">                </span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">HSeries</span><span class="p">)</span><span class="err">}</span>
@@ -5754,7 +5897,11 @@
 
 <span class="w">                </span><span class="n">groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">result</span><span class="p">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="err">}</span>
 
-<span class="w">                </span><span class="n">groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">                </span><span class="n">#groupmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">cols</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">groupmap</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="w">                </span><span class="n">groupmap</span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="n">groupmap</span><span class="p">).</span><span class="n">unstack</span><span class="p">().</span><span class="n">T</span><span class="p">.</span><span class="n">sort_index</span><span class="p">()</span>
 
 <span class="w">                </span><span class="k">try</span><span class="err">:</span>
 
@@ -5763,6 +5910,12 @@
 <span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">cols</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">groupmap</span><span class="p">.</span><span class="nl">columns</span><span class="p">:</span>
+
+<span class="w">                        </span><span class="n">groupmap</span><span class="o">[</span><span class="n">c</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
 <span class="w">                </span><span class="n">operands</span><span class="o">[</span><span class="n">&#39;__GROUPMAP__&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupmap</span>
 
@@ -5776,9 +5929,9 @@
 
 <span class="w">            </span><span class="n">locals</span><span class="p">().</span><span class="k">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
 
-<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
 
-<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
 
 <span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="w"> </span><span class="n">eval</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span>
 
@@ -5813,6 +5966,10 @@
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
 
 <span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;reference&#39;</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span>
 
@@ -6039,6 +6196,8 @@
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+<span class="w">        </span><span class="n">entertimes</span><span class="o">=</span><span class="n">times</span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">capability</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;datadiagram&#39;</span><span class="o">]</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span>
@@ -6067,7 +6226,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">)</span>
+<span class="w">            </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">justnew</span><span class="o">=</span><span class="k">False</span>
 
@@ -6191,13 +6350,13 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">               </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="k">out</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().all(axis=1)</span><span class="o">]</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">out.notna().any(axis=1)</span><span class="o">]</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
@@ -6258,6 +6417,14 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="w"> </span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="w">  </span><span class="n">ut2isot</span><span class="p">(</span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)))))</span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">entertimes</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -6343,7 +6510,7 @@
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">_managed_capabilities_</span><span class="p">(</span><span class="n">capability</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;stream&#39;,&#39;group&#39;</span><span class="o">]</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;data&#39;,&#39;stream&#39;,&#39;group&#39;,&#39;datadiagram&#39;</span><span class="o">]</span>
 
 <span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">getuuid</span><span class="p">()</span>
 
@@ -6383,7 +6550,7 @@
 
 <span class="w">            </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;capability&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">capability</span>
 
-<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;Start_time:&quot;</span><span class="p">,</span><span class="k">first</span><span class="p">)</span>
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;Start_time:&quot;</span><span class="p">,</span><span class="k">first</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -6435,7 +6602,7 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">operands</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">operands</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
 
 <span class="w">            </span><span class="n">table_operands</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_operands&quot;</span><span class="o">]</span>
 
@@ -6560,9 +6727,9 @@
 
 <span class="w">            </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
 
-<span class="w">                </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+<span class="w">                </span><span class="c1"># print (&quot;WARN series GENERATE: &quot;,e)</span>
 
-<span class="w">                </span><span class="c1">#raise e</span>
+<span class="w">                </span><span class="c1"># raise e</span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Series</span><span class="p">([],</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
 
