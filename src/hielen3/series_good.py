@@ -112,7 +112,7 @@ class HSeries:
         return self.__getattribute__(item)
             
 
-    def __init__(self, uuid, delayed=True):
+    def __init__(self, uuid, delayed=True, **kwargs):
 
         if uuid is None:
             raise ValueError
@@ -161,7 +161,7 @@ class HSeries:
             ):
 
         def _managed_capabilities_(capability):
-            return capability in ['data','stream','group']
+            return capability in ['data','stream','group','datadiagram']
 
         uuid=uuid or getuuid()
 
@@ -191,7 +191,7 @@ class HSeries:
         if capability is not None and _managed_capabilities_(capability):
             setups['capability'] = capability
 
-        print ("Start_time:",first)
+        # print ("Start_time:",first)
         if first is not None:
             setups['first'] = first
 
@@ -225,7 +225,7 @@ class HSeries:
         #TODO fare il check di coerenza tra operandi e operatore
         if operands is not None and isinstance(operands,dict):
 
-            print (operands)
+            # print (operands)
 
             table_operands=db["series_operands"]
         
@@ -290,7 +290,7 @@ class HSeries:
         return HSeries(uuid)
     
 
-    #TODO update thresholds
+
     def attribute_update(self, attribute=None, value=None):
 
         if attribute is None:
@@ -301,6 +301,10 @@ class HSeries:
                 value=[value]
                 for t in value:
                     db["series_thresholds"][self.uuid]=t
+
+        if attribute == 'reference':
+            pass
+
         else:
             db["series"][self.uuid]={attribute:value}
 
@@ -443,6 +447,8 @@ class HSeries:
     def data(self, times=None, timeref=None, cache=None, group=None, geometry=None, **kwargs):
 
         self.__delayed_load__()
+        
+        entertimes=times
 
         if self.capability not in ['data','datadiagram']:
             raise ValueError( f"{self.uuid} has not 'data' capability" )
@@ -463,7 +469,7 @@ class HSeries:
 
 
         if times is None:
-            times=slice(None)
+            times=slice(None,None,None)
 
         justnew=False
 
@@ -513,6 +519,7 @@ class HSeries:
                     raise Exception('request for old, skip generation')
 
                 kwargs['cache'] = cache
+
                 gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
                 gen = gen.replace(',','.', regex=True).astype(float)
                 if gen.empty: raise Exception("void")
@@ -549,12 +556,12 @@ class HSeries:
 
 
             if self.valid_range_min is not None:
-               out=out.mask(out<self.valid_range_min,nan)
+                out=out.mask(out<self.valid_range_min,nan)
 
             if self.valid_range_max is not None:
                 out=out.mask(out>self.valid_range_max,nan)
 
-            out=out[out.notna().all(axis=1)]
+            out=out[out.notna().any(axis=1)]
 
             if cache in ("active","data","refresh") and cangenerate:
                 for u in gen.columns:
@@ -599,6 +606,10 @@ class HSeries:
 
         if not out.empty:
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
+            try:
+                out=out.loc[entertimes]
+            except Exception as e:
+                pass
 
         try:
             if out.columns.__len__() < 2:
@@ -630,8 +641,9 @@ class HSeries:
                 out=self.generator.__generate__(**kwargs)
                 gen = Series([out['queue']],index=[out['timestamp']])
             except Exception as e:
-                print ("WARN series GENERATE: ",e)
-                #raise e
+                # print ("WARN series GENERATE: ",e)
+                # raise e
+
                 gen = Series([],dtype='object')
 
             gen.name='queue'
@@ -746,6 +758,22 @@ class HSeries:
 
             operands = kwargs
 
+            '''
+            times=kwargs['times']
+
+            try:
+                start=re.sub('\+.*$','',str(times.start))
+            except Exception as e:
+                start=None
+
+            try:
+                stop=re.sub('\+.*$','',str(times.stop))
+            except Exception as e:
+                stop = None
+
+            kwargs.update({"times":slice(start,stop,times.step)})
+            '''
+        
             operands.update(
                 {k: w for k, w in self.operands.items() if not isinstance(w, HSeries)}
             )
@@ -757,12 +785,21 @@ class HSeries:
 
                 groupmap = { k:w.result() for k,w in groupmap.items() }
         
-                groupmap = concat(groupmap,axis=1)
+                #groupmap = concat(groupmap,axis=1)
+
+                cols=list(groupmap.keys())
+
+                groupmap= concat(groupmap).unstack().T.sort_index()
                 
                 try:
                     groupmap.columns = groupmap.columns.droplevel(0)
                 except Exception as e:
                     pass
+
+                for c in cols:
+                    if c not in groupmap.columns:
+                        groupmap[c] = None
+
 
                 operands['__GROUPMAP__'] = groupmap
 
@@ -775,8 +812,8 @@ class HSeries:
             ## ATTENZIONE A locals: Implementation Dependant!!!! ###
             locals().update(operands)
 
-            #print (operands) #DEBUG
-            #print (self.operator, locals() ) #DEBUG
+            # print (operands) #DEBUG
+            # print (self.operator, locals() ) #DEBUG
 
 
             out= eval(self.operator)

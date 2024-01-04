@@ -3,7 +3,6 @@
 from hielen3 import conf
 from hielen3.feature import HFeature
 from hielen3.series import HSeries
-from hielen3.tools import calc
 from hielen3.serializaction import ActionSchema, FTPPath, PolyCoeff, LoggerHeader
 from marshmallow import fields
 #from pandas import read_csv, DatetimeIndex, Series, DataFrame
@@ -14,9 +13,6 @@ from glob import glob
 from pathlib import Path
 from pandas import Series, DataFrame, read_csv, concat
 from datetime import datetime
-from numpy import datetime64, timedelta64
-
-
 
 def logger_serials(folder='gestecno_rfi/data'):
 
@@ -311,25 +307,13 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
     stop=times.stop
 
     if start is not None:
-        orig_start=start
-        start=str(datetime64(start) - timedelta64(1,'D'))
-    else:
-        orig_start=None
-
-
-    if start is not None:
         datestart=str(datetime.fromisoformat(start).date())
     else:
         datestart=None
 
     times=slice(start,stop)
 
-    orig_times=slice(orig_start,stop)
-
     dates=slice(datestart,stop)
-
-
-    #print (times,"\n",orig_times,"\n",dates)
 
     paths=Series(glob(f'{folder}/*/*/*/*'),dtype='object').apply(Path)
 
@@ -380,20 +364,6 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
     columns = list(columns)
 
     df=df[columns].sort_index().loc[(serials, times), :]
-
-
-    ## FILTRO LEVEL 1, LEVEL 2
-    try:
-        df[5] = calc.filter(df[5],window=15)
-    except Exception as e:
-        pass
-
-    try:
-        df[6] = calc.filter(df[6],window=15)
-    except Exception as e:
-        pass
-
-    df=df.loc[(serials,orig_times), :]
 
     try:
         if serials.__len__() == 1:
