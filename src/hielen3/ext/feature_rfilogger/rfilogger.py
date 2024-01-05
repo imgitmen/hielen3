@@ -381,25 +381,18 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
 
     df=df[columns].sort_index().loc[(serials, times), :]
 
-
-    ## FILTRO LEVEL 1, LEVEL 2
-    try:
-        df[5] = calc.filter(df[5],window=15)
-    except Exception as e:
-        pass
-
-    try:
-        df[6] = calc.filter(df[6],window=15)
-    except Exception as e:
-        pass
-
-    df=df.loc[(serials,orig_times), :]
+    df=df.loc[(serials,times), :]
 
     try:
         if serials.__len__() == 1:
-            df = df.droplevel('serial',axis=0)
+            df = df.droplevel('serial',axis=0).squeeze()
+            ## FILTRO LEVEL 1, LEVEL 2
+            if 5 in columns or 6 in columns:
+                df = calc.filter(df,window=12)[orig_times]
+            df=df.to_frame()
     except Exception as e:
         pass
 
     return df
+
 
