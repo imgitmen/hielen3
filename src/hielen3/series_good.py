@@ -140,7 +140,12 @@ class HSeries:
         except KeyError as e:
             pass
 
-        self.attribute_update('last',None)
+        try:
+            last=str(db['datacache'][to_clean].index[-1])
+        except Exception as e:
+            last=None
+
+        self.attribute_update('last',last)
 
 
     def setup(
@@ -496,6 +501,9 @@ class HSeries:
 
         #TODO inserire i nomi dei label
         out = DataFrame([],columns=self.activeuuids,dtype='object')
+
+        if cache in ("refresh"):
+            self.clean_cache(times)
 
         if cache in ("active","data","old"):
             try:

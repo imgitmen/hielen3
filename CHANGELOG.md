@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **v3.3.21**
+### 19 Gennaio 2024 ###
+- unificazione delle tabelle di log inserite tutte in hielen.json in base alla commessa
+
+
 ## **v3.3.12**
 ### 28 Febbraio 2023 ###
 - inserito "__ALIAS__" per agganciare serie dati a parmaetri diversi

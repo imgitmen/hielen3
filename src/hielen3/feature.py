@@ -203,7 +203,14 @@ class HFeature(ABC):
 
             ser=None
             alias=True
-            
+
+            #####
+
+            # QUI INSERIRE LA SCELTA DELLA TABELLA IN FASE DI SET
+
+            #####
+
+
             if self.parameters is None:
                 self.__demand__()
 

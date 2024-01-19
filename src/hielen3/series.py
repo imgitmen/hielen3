@@ -49,7 +49,18 @@ class HSeries:
             raise KeyError (f"Series {self.uuid} not found.")
 
         series_info=db["series"][self.uuid]
+        
+
         series_info = dataframe2jsonizabledict(series_info)
+
+        if series_info['datatable'] is None or series_info['datatable'] == '':
+            series_info['datatable'] = 'datacache'
+
+        try:
+            db[series_info['datatable']]
+        except Exception as e:
+            series_info['datatable'] = 'datacache'
+
         self.__dict__.update(series_info)
         self.__dict__.pop('modules')
         self.__dict__.pop('operator')
@@ -131,7 +142,7 @@ class HSeries:
         to_clean=list(set([self.uuid,*self.activeuuids]))
 
         try:
-            db['datacache'].pop(key=(to_clean, times))
+            db[self.datatable].pop(key=(to_clean, times))
         except KeyError as e:
             pass
 
@@ -141,7 +152,7 @@ class HSeries:
             pass
 
         try:
-            last=str(db['datacache'][to_clean].index[-1])
+            last=str(db[self.datatable][to_clean].index[-1])
         except Exception as e:
             last=None
 
@@ -153,6 +164,7 @@ class HSeries:
             operator=None,
             modules=None,
             cache=None,
+            datatable=None,
             mu=None,
             datatype=None,
             operands=None,
@@ -177,9 +189,23 @@ class HSeries:
 
         setups={}
 
+        """
         #TODO gestire le diverse tipologie di dato
         if datatype is not None and datatype in ['numeric']:
             setups['datatable']='geoframe.log'
+        """
+
+        if datatable is None:
+            datatable = 'datacache'
+
+        try:
+            db[datatable]
+        except Exception as e:
+            raise e
+            pass
+
+        setups['datatable'] = datatable
+
 
         if modules is not None and isinstance(modules,dict):
             setups['modules']=modules
@@ -507,7 +533,7 @@ class HSeries:
 
         if cache in ("active","data","old"):
             try:
-                out = db["datacache"][self.activeuuids,times]
+                out = db[self.datatable][self.activeuuids,times]
             except KeyError as e:
                 pass
 
@@ -573,7 +599,7 @@ class HSeries:
 
             if cache in ("active","data","refresh") and cangenerate:
                 for u in gen.columns:
-                    db["datacache"][u]=out[u]
+                    db[self.datatable][u]=out[u]
 
 
         except Exception as e:
@@ -604,7 +630,7 @@ class HSeries:
 
             if cangenerate:
                 for u in preout.columns:
-                    db["datacache"][u]=preout[u]
+                    db[self.datatable][u]=preout[u]
 
             if preout.__len__():
                 out = concat([preout,out]).sort_index()
