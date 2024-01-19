@@ -3683,7 +3683,19 @@
 <span class="normal">1128</span>
 <span class="normal">1129</span>
 <span class="normal">1130</span>
-<span class="normal">1131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1131</span>
+<span class="normal">1132</span>
+<span class="normal">1133</span>
+<span class="normal">1134</span>
+<span class="normal">1135</span>
+<span class="normal">1136</span>
+<span class="normal">1137</span>
+<span class="normal">1138</span>
+<span class="normal">1139</span>
+<span class="normal">1140</span>
+<span class="normal">1141</span>
+<span class="normal">1142</span>
+<span class="normal">1143</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3889,7 +3901,15 @@
 
             <span class="k">pass</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">last</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;datacache&#39;</span><span class="p">][</span><span class="n">to_clean</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">last</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="n">last</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
 
@@ -4368,6 +4388,10 @@
         <span class="c1">#TODO inserire i nomi dei label</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;refresh&quot;</span><span class="p">):</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">clean_cache</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">):</span>
 
@@ -5011,7 +5035,15 @@
 
 <span class="w">            </span><span class="n">pass</span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">last</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">][</span><span class="n">to_clean</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="k">last</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="k">last</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">setup</span><span class="p">(</span>
 
@@ -5490,6 +5522,10 @@
 <span class="w">        </span><span class="n">#TODO</span><span class="w"> </span><span class="n">inserire</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">nomi</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">label</span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">clean_cache</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="err">:</span>
 
@@ -6154,27 +6190,35 @@
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code>    def clean_cache(self,times=None):
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">clean_cache</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
-        to_clean=list(set([self.uuid,*self.activeuuids]))
+<span class="w">        </span><span class="n">to_clean</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">set</span><span class="p">(</span><span class="o">[</span><span class="n">self.uuid,*self.activeuuids</span><span class="o">]</span><span class="p">))</span>
 
-        try:
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-            db[&#39;datacache&#39;].pop(key=(to_clean, times))
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="k">key</span><span class="o">=</span><span class="p">(</span><span class="n">to_clean</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">))</span>
 
-        except KeyError as e:
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-            pass
+<span class="w">            </span><span class="n">pass</span>
 
-        try:
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-            db[&#39;events&#39;].pop(key=(to_clean, times))
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;events&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="k">key</span><span class="o">=</span><span class="p">(</span><span class="n">to_clean</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">))</span>
 
-        except KeyError as e:
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-            pass
+<span class="w">            </span><span class="n">pass</span>
 
-        self.attribute_update(&#39;last&#39;,None)
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">last</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;datacache&#39;</span><span class="o">][</span><span class="n">to_clean</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="k">last</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">attribute_update</span><span class="p">(</span><span class="s1">&#39;last&#39;</span><span class="p">,</span><span class="k">last</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -6265,6 +6309,10 @@
 <span class="w">        </span><span class="n">#TODO</span><span class="w"> </span><span class="n">inserire</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">nomi</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">label</span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">clean_cache</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span><span class="err">:</span>
 
