@@ -208,6 +208,15 @@ class HFeature(ABC):
 
             # QUI INSERIRE LA SCELTA DELLA TABELLA IN FASE DI SET
 
+            try:
+                setups['datatable']
+            except Exception as e:
+                try:
+                    db[self.feature.context]
+                    setups['datatable'] = self.feature.context
+                except Exception as e:
+                    pass
+
             #####
 
 
