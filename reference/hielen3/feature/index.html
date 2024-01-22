@@ -3499,7 +3499,23 @@
 <span class="normal">652</span>
 <span class="normal">653</span>
 <span class="normal">654</span>
-<span class="normal">655</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">655</span>
+<span class="normal">656</span>
+<span class="normal">657</span>
+<span class="normal">658</span>
+<span class="normal">659</span>
+<span class="normal">660</span>
+<span class="normal">661</span>
+<span class="normal">662</span>
+<span class="normal">663</span>
+<span class="normal">664</span>
+<span class="normal">665</span>
+<span class="normal">666</span>
+<span class="normal">667</span>
+<span class="normal">668</span>
+<span class="normal">669</span>
+<span class="normal">670</span>
+<span class="normal">671</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3788,6 +3804,22 @@
             <span class="c1">#####</span>
 
             <span class="c1"># QUI INSERIRE LA SCELTA DELLA TABELLA IN FASE DI SET</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;datatable&#39;</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">context</span><span class="p">]</span>
+
+                    <span class="n">setups</span><span class="p">[</span><span class="s1">&#39;datatable&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">context</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
 
             <span class="c1">#####</span>
 
@@ -4414,6 +4446,22 @@
 <span class="w">            </span><span class="err">#####</span>
 
 <span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">QUI</span><span class="w"> </span><span class="n">INSERIRE</span><span class="w"> </span><span class="n">LA</span><span class="w"> </span><span class="n">SCELTA</span><span class="w"> </span><span class="n">DELLA</span><span class="w"> </span><span class="n">TABELLA</span><span class="w"> </span><span class="ow">IN</span><span class="w"> </span><span class="n">FASE</span><span class="w"> </span><span class="n">DI</span><span class="w"> </span><span class="k">SET</span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;datatable&#39;</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">self.feature.context</span><span class="o">]</span>
+
+<span class="w">                    </span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;datatable&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">feature</span><span class="p">.</span><span class="n">context</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
 
 <span class="w">            </span><span class="err">#####</span>
 
