@@ -38,7 +38,7 @@ def logger_serials( folders={} ):
         folders=folders[
                 folders.apply(Path.is_dir)
                 ].to_frame().apply(
-                        lambda x: { "path":x['path'].parent, "name":x['path'].name},axis=1,result_type='expand'
+                        lambda x: { "path":x['path'].parent, "name":str(x['path'].name)},axis=1,result_type='expand'
                         )
 
         if not folders.empty:
@@ -79,8 +79,10 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     if serials is None:
         serials = slice(None,None)
 
-    if isinstance(serials,str):
-          serials=[serials]
+    if not isinstance(serials, (list,set,tuple)):
+        serials=[serials]
+
+    serials=list(map(str,serials))
 
     if isinstance(times,datetime):
         times=str(times)
@@ -108,13 +110,14 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
         return df
 
     if isinstance(serials, (list,set,tuple)):
+
         serials=list(folders.index[
                 folders.index.isin(serials)
                 ].drop_duplicates())
 
         if not serials.__len__():
             return df
- 
+
 
     paths=folders.loc[serials].reset_index().apply(lambda x: str( x['path'] / x['name'] / "*" / "*" / "*" ), axis=1).apply(glob).explode().apply(Path)
 
