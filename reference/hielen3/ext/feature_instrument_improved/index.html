@@ -4132,7 +4132,9 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">cache</span><span class="o">=</span><span class="s1">&#39;active&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="c1">#df=self.parameters[param_name].data(cache=&#39;active&#39;)</span>
+
+<span class="w">            </span><span class="n">df</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">zero_time</span><span class="p">,</span><span class="n">None</span><span class="p">))</span>
 
 <span class="w">            </span><span class="n">try</span><span class="p">:</span>
 
