@@ -195,8 +195,8 @@ class Feature(HFeature):
 
         # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
         if zero_time is not None:
-            df=self.parameters[param_name].data(cache='active')
-
+            #df=self.parameters[param_name].data(cache='active')
+            df=self.parameters[param_name].generator.__generate__(times=slice(zero_time,None))
             try:
                 df=df.to_frame()
             except Exception as e:
