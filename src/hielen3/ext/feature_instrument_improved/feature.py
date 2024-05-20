@@ -155,11 +155,9 @@ class Feature(HFeature):
                 else:
                     start_time=zero_time
 
-            if zero_time is None or "first" in zero_time:
-                zero_time = start_time
+            if zero_time is not None and "first" in zero_time:
+                zero_time = datetime64(start_time)
 
-
-            zero_time = datetime64(zero_time)
 
             if operator is not None and operator not in ("__VOID__","__ALIAS__"):
                 operator= f"{operator} - Z + OFFSET"
@@ -193,10 +191,12 @@ class Feature(HFeature):
 
         self.parameters.set(**config)
 
+        print ( "AAAA\n\nZERO TIME: ", zero_time, "\n\nAAAA" )
+
         # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
         if zero_time is not None:
             #df=self.parameters[param_name].data(cache='active')
-            df=self.parameters[param_name].generator.__generate__(times=slice(zero_time,None))
+            df=self.parameters[param_name].generator.__generate__(times=slice(zero_time,None), cache='refresh')
             try:
                 df=df.to_frame()
             except Exception as e:
@@ -207,12 +207,7 @@ class Feature(HFeature):
             df=df[df[df.columns[0]].notna()]
 
 
-            print ( "AAAA\n\n", zero_time, "\n\nAAAA" )
-
-
-
             iloc_idx = df.index.get_indexer([zero_time], method='nearest')
-
 
 
             try:

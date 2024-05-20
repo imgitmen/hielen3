@@ -5,10 +5,8 @@ from hielen3.feature import HFeature
 from hielen3.serializaction import ActionSchema
 from marshmallow import fields
 from pathlib import Path 
-from pandas import read_csv, DatetimeIndex, Series
-#from .helper import func_loggers, retrive
+from .helper import func_loggers, retrive
 import json
-import re
 import traceback
 
 class ConfigSchema(ActionSchema):
@@ -111,22 +109,21 @@ class Feature(HFeature):
 
 
 
-def retrive(serials=None,times=None,columns=None,**kwargs):
 
-    loggerpath=Path(conf['incomepath'], 'smartbrik4_0', str(serials), 'data.csv' )
+        """
+        self.parameters.set(
+            "current_1",
+            cache='active',
+            mu='mA',
+            modules={"source":source},
+            operator=f"source.retrive(serials={serial!r},times=times,columns=5)")
 
-    data=read_csv( loggerpath )
-
-    data=data[data['ts'] > 0].copy()
-
-    data['ts']=data['ts'].astype('datetime64[ms]')
-
-    data=data.set_index(['ts','appId'])['data'].sort_index().unstack('appId')
-
-    if not isinstance(times, slice):
-        times = slice (None,None,None)
-
-    return data[times][columns]
-
+        self.parameters.set(
+            "current_2",
+            cache='active',
+            mu='mA',
+            modules={"source":source},
+            operator=f"source.retrive(serials={serial!r},times=times,columns=6)")
+        """
 
 
