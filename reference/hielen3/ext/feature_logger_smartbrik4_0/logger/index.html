@@ -2112,12 +2112,87 @@
       
       
         <label class="md-nav__link" for="__nav_5_1_12_19">
+          Feature Logger Systemanywere
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Feature Logger Systemanywere" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_1_12_19">
+          <span class="md-nav__icon md-icon"></span>
+          Feature Logger Systemanywere
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../feature_logger_systemanywere/helper/" class="md-nav__link">
+        Helper
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../feature_logger_systemanywere/" class="md-nav__link">
+        Index
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../feature_logger_systemanywere/logger/" class="md-nav__link">
+        Logger
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_20" type="checkbox" id="__nav_5_1_12_20" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5_1_12_20">
           Feature Logger Winecap
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Logger Winecap" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_19">
+        <label class="md-nav__title" for="__nav_5_1_12_20">
           <span class="md-nav__icon md-icon"></span>
           Feature Logger Winecap
         </label>
@@ -2181,18 +2256,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_20" type="checkbox" id="__nav_5_1_12_20" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_21" type="checkbox" id="__nav_5_1_12_21" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_1_12_20">
+        <label class="md-nav__link" for="__nav_5_1_12_21">
           Feature Rfilogger
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Rfilogger" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_20">
+        <label class="md-nav__title" for="__nav_5_1_12_21">
           <span class="md-nav__icon md-icon"></span>
           Feature Rfilogger
         </label>
@@ -2256,18 +2331,18 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_21" type="checkbox" id="__nav_5_1_12_21" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_1_12_22" type="checkbox" id="__nav_5_1_12_22" >
       
       
       
       
-        <label class="md-nav__link" for="__nav_5_1_12_21">
+        <label class="md-nav__link" for="__nav_5_1_12_22">
           Feature Spotted Files Source
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <nav class="md-nav" aria-label="Feature Spotted Files Source" data-md-level="4">
-        <label class="md-nav__title" for="__nav_5_1_12_21">
+        <label class="md-nav__title" for="__nav_5_1_12_22">
           <span class="md-nav__icon md-icon"></span>
           Feature Spotted Files Source
         </label>
@@ -3178,6 +3253,8 @@
 
     <span class="n">data</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span> <span class="n">loggerpath</span> <span class="p">)</span>
 
+    <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
     <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;ts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ms]&#39;</span><span class="p">)</span>
 
     <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;ts&#39;</span><span class="p">,</span><span class="s1">&#39;appId&#39;</span><span class="p">])[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="s1">&#39;appId&#39;</span><span class="p">)</span>
@@ -3211,6 +3288,8 @@
 <span class="w">    </span><span class="n">loggerpath</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;smartbrik4_0&#39;</span><span class="p">,</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">serials</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;data.csv&#39;</span><span class="w"> </span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">data</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="w"> </span><span class="n">loggerpath</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">data</span><span class="o">=</span><span class="k">data</span><span class="o">[</span><span class="n">data[&#39;ts&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="err">]</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="w">    </span><span class="k">data</span><span class="o">[</span><span class="n">&#39;ts&#39;</span><span class="o">]=</span><span class="k">data</span><span class="o">[</span><span class="n">&#39;ts&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ms]&#39;</span><span class="p">)</span>
 
@@ -4731,7 +4810,7 @@ be referred to by name in <code>Nested</code> fields.</p>
         
         
           
-          <a href="../../feature_logger_winecap/helper/" class="md-footer__link md-footer__link--next" aria-label="Next: Helper" rel="next">
+          <a href="../../feature_logger_systemanywere/helper/" class="md-footer__link md-footer__link--next" aria-label="Next: Helper" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
