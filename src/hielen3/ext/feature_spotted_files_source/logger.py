@@ -21,12 +21,12 @@ class ConfigSchema(ActionSchema):
 
         return {
                 "file info": {
-                    0:["source_file", "source file under incomes MANUAL", False, None],
+                    0:["serial", "source file under incomes MANUAL (called 'serial' for compatibilities)", False, None],
                     1:["header", "source file header if needed", False, ""]
                 }
             }
 
-    source_file_or_path = fields.String(required=False, allow_none=False)
+    serial = fields.String(required=False, allow_none=False)
     header = fields.String(required=False, allow_none=True)
 
 
@@ -37,9 +37,10 @@ class Feature(HFeature):
     '''
 
     def setup(self,**kwargs):
-        self.update(intent="HIDDEN")
+        #self.update(intent="HIDDEN")
+        pass
     
-    def config(self, timestamp, path, header=None,**kwargs):
+    def config(self, timestamp, serial, header=None,**kwargs):
 
         """
         header=
@@ -82,7 +83,12 @@ class Feature(HFeature):
         except Exception as e:
             raise e
 
-        path= str(Path(conf['incomepath']) / "manuali" / path )
+        #### NOTA!!!!!!!!!!!!
+        """
+        serial è il percorso path del file. Chiamato serial per compatibilità
+        """
+
+        path= str(Path(conf['incomepath']) / "manuali" / serial )
 
         for info in infos:
 
