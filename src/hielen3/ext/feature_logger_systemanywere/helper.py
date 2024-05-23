@@ -6,7 +6,7 @@ from pandas import read_csv, DataFrame
 folders=[
             {
                 'type':'systemanywere',
-                'path':'systemanywere'
+                'path':'systemanywere/PiazzaPia'
             } 
         ]
 
