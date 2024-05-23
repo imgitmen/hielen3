@@ -18,7 +18,7 @@ def retrive(path):
     a=DataFrame([],dtype='float64')
 
     try:
-        a=read_csv(path,skiprows=2,parse_dates=[0],header=None)
+        a=read_csv(path,parse_dates=[0])
         a.columns = [ 'times', *a.columns[1:] ]
     except Exception as e:
         #print("WARN : ", path)
