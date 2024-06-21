@@ -62,7 +62,6 @@ def retriver( func_loggers  ):
 
 def retrive(serials=None,times=None, columns=None, func_extract=None, func_loggers=None, **kwargs ):
 
-
     def __default_extract__(*args,**kwargs):
         return DataFrame()
 
@@ -107,6 +106,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     try:
         folders=func_loggers().set_index('name')
     except KeyError as e:
+        print (e)
         return df
 
     if isinstance(serials, (list,set,tuple)):
@@ -118,6 +118,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
         if not serials.__len__():
             return df
 
+    
 
     paths=folders.loc[serials].reset_index().apply(lambda x: str( x['path'] / x['name'] / "*" / "*" / "*" ), axis=1).apply(glob).explode().apply(Path)
 
@@ -151,6 +152,7 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     #print (sertime) #DEBUG
 
+
     for serial,paths in sertime.groupby('serial'):
         u=concat(paths['path'].apply(glob).explode().apply(func_extract).values)
         u['serial']=serial
@@ -159,11 +161,14 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     #print (df) #DEBUG
 
+    
     if df.empty:
         return df
 
+
     if columns is None:
         columns = list(df.columns)
+
 
     if not isinstance(columns,(list,tuple,set)):
         columns=[columns]
@@ -173,6 +178,11 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
     columns=[ c for c in columns if c in df.columns ]
 
     df=df[columns].sort_index().loc[(serials, times), :]
+
+    try:
+        df=df.groupby(['serial','times']).first()
+    except Exception as e:
+        print (e)
 
     try:
         if serials.__len__() == 1:
