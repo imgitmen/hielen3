@@ -520,6 +520,7 @@ class HSeries:
             times=slice(ut2isot(timefrom), times.stop, times.step )
 
 
+
         except Exception as e:
             pass
 
@@ -849,9 +850,8 @@ class HSeries:
             # print (operands) #DEBUG
             # print (self.operator, locals() ) #DEBUG
 
-
+            
             out= eval(self.operator)
-
 
             return out
 

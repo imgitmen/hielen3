@@ -947,7 +947,7 @@ class MariadbHielenCache(Mariadb):
         key=MariadbHielenCache.__parsekey__(key,self.keys)
 
 
-        print (key)
+        #print (key)
 
         sercond=MariadbHielenCache.__setsqlcond__(key["series"],"series")
         timecond=MariadbHielenCache.__setsqlcond__(key["timestamp"],"timestamp")
@@ -1213,7 +1213,7 @@ class MongodbHielenCache():
         if key["timestamp"] is not None:
             value=value.loc[key["timestamp"]]
     
-        print (value)
+        #print (value)
         value=value.reset_index()
 
         value['DATE'] = value['timestamp'].apply(lambda x: (datetime64(x.date()) - datetime64('1970-01-01')).astype('timedelta64[s]').astype(int))
