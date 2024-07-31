@@ -1050,6 +1050,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/thresholds/" class="md-nav__link">
+        Thresholds
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -3573,7 +3587,9 @@
 <span class="normal">428</span>
 <span class="normal">429</span>
 <span class="normal">430</span>
-<span class="normal">431</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3952,6 +3968,8 @@
         <span class="k">else</span><span class="p">:</span>
 
             <span class="n">fixed_value</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="c1">#DEBUG print (self, fixed_value)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">schema</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fixed_value</span><span class="p">)</span>
 
@@ -4455,6 +4473,8 @@ is raised</p>
 <span class="w">        </span><span class="k">else</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">fixed_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span>
+
+<span class="w">        </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="n">fixed_value</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="k">schema</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">fixed_value</span><span class="p">)</span>
 </code></pre></div>

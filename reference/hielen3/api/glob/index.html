@@ -873,6 +873,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../thresholds/" class="md-nav__link">
+        Thresholds
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -2897,13 +2911,21 @@
 <span class="normal">108</span>
 <span class="normal">109</span>
 <span class="normal">110</span>
-<span class="normal">111</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
 <span class="kn">import</span> <span class="nn">hug</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">query2</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">actionschemata</span><span class="p">,</span> <span class="n">hls</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">awskine</span><span class="p">,</span> <span class="n">italferdatarate</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">prototypes</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">query2</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">actionschemata</span><span class="p">,</span> <span class="n">hls</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">awskine</span><span class="p">,</span> <span class="n">italferdatarate</span><span class="p">,</span> <span class="n">thresholds</span>
 
 <span class="kn">import</span> <span class="nn">falcon</span>
 
@@ -3008,6 +3030,14 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare il samplerate &quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">italferdatarate</span><span class="p">]</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/thresholds&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dataman</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">thresholds</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -3037,16 +3067,16 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<p>api per cambiare il samplerate </p>
+<p>api per cambiare thresholds </p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/samplerate&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/thresholds&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare il samplerate &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">italferdatarate</span><span class="o">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">thresholds</span><span class="o">]</span>
 </code></pre></div>
 
 </details>

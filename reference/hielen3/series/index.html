@@ -912,6 +912,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/thresholds/" class="md-nav__link">
+        Thresholds
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -4043,7 +4057,15 @@
 <span class="normal">1174</span>
 <span class="normal">1175</span>
 <span class="normal">1176</span>
-<span class="normal">1177</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1177</span>
+<span class="normal">1178</span>
+<span class="normal">1179</span>
+<span class="normal">1180</span>
+<span class="normal">1181</span>
+<span class="normal">1182</span>
+<span class="normal">1183</span>
+<span class="normal">1184</span>
+<span class="normal">1185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4519,9 +4541,17 @@
 
                 <span class="n">value</span><span class="o">=</span><span class="p">[</span><span class="n">value</span><span class="p">]</span>
 
-                <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
 
-                    <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_thresholds&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">t</span>
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">t</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^##&quot;</span><span class="p">,</span><span class="s2">&quot;#&quot;</span><span class="p">,</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^&quot;</span><span class="p">,</span><span class="s2">&quot;#&quot;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]))</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="k">pass</span>
+
+                <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_thresholds&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">t</span>
 
         <span class="k">if</span> <span class="n">attribute</span> <span class="o">==</span> <span class="s1">&#39;reference&#39;</span><span class="p">:</span>
 
@@ -5687,9 +5717,17 @@
 
 <span class="w">                </span><span class="k">value</span><span class="o">=[</span><span class="n">value</span><span class="o">]</span>
 
-<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
 
-<span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">t</span><span class="o">[</span><span class="n">&#39;color&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="ss">&quot;^##&quot;</span><span class="p">,</span><span class="ss">&quot;#&quot;</span><span class="p">,</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="ss">&quot;^&quot;</span><span class="p">,</span><span class="ss">&quot;#&quot;</span><span class="p">,</span><span class="n">t</span><span class="o">[</span><span class="n">&#39;color&#39;</span><span class="o">]</span><span class="p">))</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;reference&#39;</span><span class="err">:</span>
 
@@ -6415,9 +6453,17 @@
 
 <span class="w">                </span><span class="k">value</span><span class="o">=[</span><span class="n">value</span><span class="o">]</span>
 
-<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">value</span><span class="err">:</span>
 
-<span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">t</span><span class="o">[</span><span class="n">&#39;color&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="ss">&quot;^##&quot;</span><span class="p">,</span><span class="ss">&quot;#&quot;</span><span class="p">,</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="ss">&quot;^&quot;</span><span class="p">,</span><span class="ss">&quot;#&quot;</span><span class="p">,</span><span class="n">t</span><span class="o">[</span><span class="n">&#39;color&#39;</span><span class="o">]</span><span class="p">))</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">pass</span>
+
+<span class="w">                </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_thresholds&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]=</span><span class="n">t</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;reference&#39;</span><span class="err">:</span>
 
