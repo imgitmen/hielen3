@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine, italferdatarate
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine, italferdatarate, thresholds
 import falcon
 
 """
@@ -68,4 +68,11 @@ def dataman():
 def dataman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
+
+@hug.extend_api("/thresholds")
+def dataman():
+    """ api per cambiare thresholds """
+    return [thresholds]
+
+
 

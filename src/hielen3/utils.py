@@ -257,6 +257,7 @@ class JsonValidable:
         else:
             fixed_value = value
 
+        #DEBUG print (self, fixed_value)
         return self.schema.loads(fixed_value)
 
 

@@ -328,10 +328,17 @@ class HSeries:
             return
 
         if attribute == 'thresholds':
+
             if not isinstance(value,(list,set,tuple)):
                 value=[value]
-                for t in value:
-                    db["series_thresholds"][self.uuid]=t
+            
+            for t in value:
+                try:
+                    t['color'] = re.sub("^##","#",re.sub("^","#",t['color']))
+                except Exception as e:
+                    pass
+
+                db["series_thresholds"][self.uuid]=t
 
         if attribute == 'reference':
             pass

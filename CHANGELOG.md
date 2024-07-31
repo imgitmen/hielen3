@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **v3.3.23**
+### 31 luglio 2024 ###
+- aggiunta api thresholds
+
+
 ## **v3.3.21**
 ### 19 Gennaio 2024 ###
 - unificazione delle tabelle di log inserite tutte in hielen.json in base alla commessa
