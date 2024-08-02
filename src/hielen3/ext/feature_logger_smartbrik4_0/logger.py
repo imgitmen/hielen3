@@ -120,6 +120,8 @@ def retrive(serials=None,times=None,columns=None,**kwargs):
     data=data[data['ts'] > 0].copy()
 
     data['ts']=data['ts'].astype('datetime64[ms]')
+    
+    data['appId']=data.apply(lambda x: x["appId"]+"_"+x["sensorType"], axis=1)
 
     data=data.set_index(['ts','appId'])['data'].sort_index().unstack('appId')
 
