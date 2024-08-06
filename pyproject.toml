@@ -32,7 +32,7 @@ Backlog = "BACKLOG.md"
     "Actions" = "docs/API Reference/actions.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "Parameters" = "docs/API Reference/parameters.md"
+    "Thresholds" = "docs/API Reference/thresholds.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
     "Query" = "docs/API Reference/query.md"
