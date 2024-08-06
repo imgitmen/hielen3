@@ -333,6 +333,9 @@ class HSeries:
                 value=[value]
             
             for t in value:
+
+                print (t)
+
                 try:
                     t['color'] = re.sub("^##","#",re.sub("^","#",t['color']))
                 except Exception as e:
