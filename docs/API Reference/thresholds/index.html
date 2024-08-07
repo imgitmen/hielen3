@@ -383,6 +383,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#get-thresholdsseries" class="md-nav__link">
+    GET    /thresholds/{series}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholds" class="md-nav__link">
+    GET    /thresholds
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholdsserieslabels" class="md-nav__link">
+    GET    /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2692,6 +2713,27 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#get-thresholdsseries" class="md-nav__link">
+    GET    /thresholds/{series}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholds" class="md-nav__link">
+    GET    /thresholds
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholdsserieslabels" class="md-nav__link">
+    GET    /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2718,7 +2760,7 @@
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
-<li><strong>thresholds</strong>: JSON Schema [{<strong>recipients</strong>: str|bytes, <strong>ttype</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>value</strong>: , <strong>color</strong>: str|bytes}]</li>
+<li><strong>thresholds</strong>: JSON Schema [{<strong>color</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>recipients</strong>: str|bytes, <strong>ttype</strong>: str|bytes, <strong>value</strong>: }]</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2751,7 +2793,7 @@
 <p>RESPONSE CODES:</p>
 <ul>
 <li><em>404 Not Found</em>: Nel caso in cui le serie richieste non esistano.</li>
-<li><em>201 Created</em>: Nel caso in cui la feature venga creata correttamente.</li>
+<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
 </ul>
 <h3 id="post-thresholdsseries"><strong>POST   <em>/thresholds/{series}</em></strong></h3>
 <hr />
@@ -2759,6 +2801,45 @@
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
 <li><strong>thresholds</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<h3 id="get-thresholdsseries"><strong>GET    <em>/thresholds/{series}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<h3 id="get-thresholds"><strong>GET    <em>/thresholds</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<h3 id="get-thresholdsserieslabels"><strong>GET    <em>/thresholds/{series}/{labels}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
