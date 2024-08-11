@@ -1,7 +1,13 @@
 CHANGELOG
 =========
+## **V3.3.24**
+### 11 Agosto 2024 ###
+- completati protocolli GET, POST, DELETE per l'api thresholds
+- modificato datalink. Risolto il problema dell'inserimento per cui in alcuni casi l'associazione colonna valore non era corretta
+
+
 ## **v3.3.23**
-### 31 luglio 2024 ###
+### 31 Luglio 2024 ###
 - aggiunta api thresholds
 
 

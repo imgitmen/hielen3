@@ -2,12 +2,12 @@
 # coding=utf-8
 
 from sqlalchemy import create_engine
-from pandas import DataFrame, Series, read_json, NaT, read_csv, read_sql, concat
+from pandas import DataFrame, Series, read_json, NaT, read_csv, read_sql, concat, DatetimeIndex, Timestamp
 from abc import ABC, abstractmethod
 from geojson import Point, loads
 from hielen3.utils import loadjsonfile, savejsonfile, newinstanceof, hashfile
 from filelock import Timeout, FileLock
-from numpy import nan
+from numpy import nan, datetime64
 from pathlib import Path
 from hashlib import md5
 from shutil import rmtree
@@ -15,7 +15,8 @@ from json import loads, dumps
 from numbers import Number
 import os
 import re
-
+from crudLib import mongofuncs as mf
+from uuid import UUID
 
 def dbinit(conf):
 
@@ -749,7 +750,7 @@ class MariadbTable(Mariadb):
             except Exception as e:
                 pass
 
-            # print (f"{value[k]!r}",value[k].__class__) ## DEBUG
+            # print (f"{value[k]!r}",value[k].__class__)
 
             if self.columnstypes[k] in Mariadb.geotypes:
                 value[k]=f"ST_GeomFromGeoJSON({value[k]!r})"
@@ -758,7 +759,9 @@ class MariadbTable(Mariadb):
                 value[k] = "NULL"
             else:
                 value[k]=f"{value[k]!r}"
-        
+       
+        print (value)
+
         if value.__len__():
             columns=','.join([*self.keys,*list(value.keys())])
             values=[*list(key.values()),*list(value.values())]
@@ -772,6 +775,9 @@ class MariadbTable(Mariadb):
 
 #        stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}".replace("None","NULL")i
         stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}"
+
+        print ()
+
 
         e=self.engine
         with e.begin() as connection:
@@ -944,7 +950,10 @@ class MariadbHielenCache(Mariadb):
         """
 
         key=MariadbHielenCache.__parsekey__(key,self.keys)
-        
+
+
+        #print (key)
+
         sercond=MariadbHielenCache.__setsqlcond__(key["series"],"series")
         timecond=MariadbHielenCache.__setsqlcond__(key["timestamp"],"timestamp")
 
@@ -1033,3 +1042,193 @@ class MariadbHielenCache(Mariadb):
         return self.__getitem__(key,delete=True)
 
 
+
+class MongodbHielenCache():
+
+    defcon={
+            "uri":"mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/",
+            "db":"MongoTest",
+            "col":"Peschiera"
+            }
+
+
+    def __init__(self,connection=None,table=None):
+        if connection is None:
+            connection = MongodbHielenCache.defcon
+
+        self.uri = connection["uri"]
+        self.db = connection["db"]
+        self.col = connection["col"]
+        self.keys = ['timestamp','series']
+
+    def __parsekey__(key,keysnames:list):
+
+        out = { k:None for k in keysnames }
+
+        if isinstance(key,dict):
+            out.update(key)
+
+        if not isinstance(key,(list,slice,tuple)) and key is not None:
+            key=[key]
+
+        if isinstance(key,(list,slice)):
+            out["series"]=key
+
+        if isinstance(key,tuple):
+            key=list(key)
+            if not isinstance(key[0],(list,slice)) and key[0] is not None:
+                key[0]=[key[0]]
+                
+            out["series"]=key[0]
+
+            if not isinstance(key[1],(list,slice)) and key[1] is not None:
+                key[1]=[key[1]]
+                
+            out["timestamp"]=key[1]
+
+        return out
+
+
+    """
+    def __setsqlcond__(key,column):
+
+        sqlcond=None
+
+        if isinstance(key,str):
+            key=[key]
+
+        if isinstance(key,list):
+            key=filter(None,key)
+            sqlcond = key[0]
+
+        if isinstance(key,slice):
+
+            wstart=None
+            con=""
+            wstop=None
+           
+            if key.start is not None:
+                try:
+                    wstart= Datetime64(key.start).astype(long)
+                except Exception as e:
+                    pass
+
+             if key.stop is not None:
+                try:
+                    wstop= Datetime64(key.stop).astype(long)
+                except Exception as e:
+                    pass
+            
+        return sqlcond
+    """
+
+    def __getitem__(self,key,delete=False):
+        """
+        WARNING: In case of slice selection with a not None step parmeter
+        the deletion process, if requested, not minds the step for row selection
+        and all the deleted row will be returned in output.
+        """
+
+        # TODO: manage this function!
+        key=MongodbHielenCache.__parsekey__(key,self.keys)
+    
+        timestart=None
+        timestop=None
+        series = None
+
+
+        try:
+            timestart = int(datetime64(key['timestamp'].start).astype('datetime64[ns]').astype(int))
+            if timestart < 0:
+                timestart=None
+        except Exception as e:
+            pass
+
+        try:
+            timestop = int(datetime64(key['timestamp'].stop).astype('datetime64[ns]').astype(int))
+            if timestop < 0:
+                timestop=None
+        except Exception as e:
+            pass
+
+        try:
+            series = UUID(key['series'][0])
+        except Exception as e:
+            raise KeyError(key)
+
+
+        out=mf.fetch(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
+  
+    
+
+        if out.empty:
+            raise KeyError(key)
+            
+        dt1=int(out['Timestamp'].iloc[0])
+        dt2=int(out['Timestamp'].iloc[-1])
+
+        out.index=DatetimeIndex(out['Timestamp'].apply(Timestamp.fromtimestamp))
+
+        out=out.drop('Timestamp',axis=1)
+
+        out.columns.names=['series']
+        out.index.name='timestamp'
+
+
+        #print (series,dt1,dt2)
+
+
+        if delete:
+            mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)
+
+        out=out.squeeze().apply(loads).apply(Series)
+        out.columns=['x','y','z']
+
+        return out.copy()
+
+
+
+    def __setitem__(self,key,value):
+
+        if value is not None and not isinstance(value,(Series,DataFrame)):
+            raise ValueError("pandas.Series or pandas.DataFrame required")
+
+        # TODO: Manage it!
+        key=MongodbHielenCache.__parsekey__(key,self.keys)
+
+        try:
+            value = value.to_frame()
+            value.columns.name='series'
+        except Exception as e:
+            pass
+
+        value.columns=map(str,value.columns)
+
+        # TODO: check for it!
+        if key["series"] is not None:
+            if isinstance(key["series"],slice):
+                value=value.T[key["series"]].T
+            else:
+                value=value[key["series"]]
+
+
+        series=UUID(key["series"][0])
+
+
+        if key["timestamp"] is not None:
+            value=value.loc[key["timestamp"]]
+    
+        #print (value)
+        value=value.reset_index()
+
+        value['DATE'] = value['timestamp'].apply(lambda x: (datetime64(x.date()) - datetime64('1970-01-01')).astype('timedelta64[s]').astype(int))
+        value['TIME'] = value.apply(lambda x: x['timestamp'].timestamp() - x['DATE'], axis=1)
+        value=value.drop('timestamp',axis=1)
+        value.columns=['val','DATE','TIME']
+
+
+        mf.insertUpdate(self.uri, self.db, self.col, value, series)
+
+    
+    def pop(self,key):
+        return self.__getitem__(key,delete=True)
