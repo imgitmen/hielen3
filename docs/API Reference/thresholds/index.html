@@ -370,6 +370,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#get-thresholds" class="md-nav__link">
+    GET    /thresholds/
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#post-thresholds" class="md-nav__link">
     POST   /thresholds/
   </a>
@@ -377,8 +384,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#post-thresholdsseries" class="md-nav__link">
-    POST   /thresholds/{series}
+  <a href="#delete-thresholds" class="md-nav__link">
+    DELETE /thresholds/
   </a>
   
 </li>
@@ -391,8 +398,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-thresholds" class="md-nav__link">
-    GET    /thresholds
+  <a href="#post-thresholdsseries" class="md-nav__link">
+    POST   /thresholds/{series}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsseries" class="md-nav__link">
+    DELETE /thresholds/{series}
   </a>
   
 </li>
@@ -400,6 +414,41 @@
         <li class="md-nav__item">
   <a href="#get-thresholdsserieslabels" class="md-nav__link">
     GET    /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-thresholdsserieslabels" class="md-nav__link">
+    POST   /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsserieslabels" class="md-nav__link">
+    DELETE /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholdsserieslabelsttype" class="md-nav__link">
+    GET    /thresholds/{series}/{labels}/{ttype}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-thresholdsserieslabelsttype" class="md-nav__link">
+    POST   /thresholds/{series}/{labels}/{ttype}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsserieslabelsttype" class="md-nav__link">
+    DELETE /thresholds/{series}/{labels}/{ttype}
   </a>
   
 </li>
@@ -2700,6 +2749,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#get-thresholds" class="md-nav__link">
+    GET    /thresholds/
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#post-thresholds" class="md-nav__link">
     POST   /thresholds/
   </a>
@@ -2707,8 +2763,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#post-thresholdsseries" class="md-nav__link">
-    POST   /thresholds/{series}
+  <a href="#delete-thresholds" class="md-nav__link">
+    DELETE /thresholds/
   </a>
   
 </li>
@@ -2721,8 +2777,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-thresholds" class="md-nav__link">
-    GET    /thresholds
+  <a href="#post-thresholdsseries" class="md-nav__link">
+    POST   /thresholds/{series}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsseries" class="md-nav__link">
+    DELETE /thresholds/{series}
   </a>
   
 </li>
@@ -2730,6 +2793,41 @@
         <li class="md-nav__item">
   <a href="#get-thresholdsserieslabels" class="md-nav__link">
     GET    /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-thresholdsserieslabels" class="md-nav__link">
+    POST   /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsserieslabels" class="md-nav__link">
+    DELETE /thresholds/{series}/{labels}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-thresholdsserieslabelsttype" class="md-nav__link">
+    GET    /thresholds/{series}/{labels}/{ttype}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#post-thresholdsserieslabelsttype" class="md-nav__link">
+    POST   /thresholds/{series}/{labels}/{ttype}
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#delete-thresholdsserieslabelsttype" class="md-nav__link">
+    DELETE /thresholds/{series}/{labels}/{ttype}
   </a>
   
 </li>
@@ -2755,12 +2853,13 @@
 
 
 <h1 id="thresholds">Thresholds</h1>
-<h3 id="post-thresholds"><strong>POST   <em>/thresholds/</em></strong></h3>
+<h3 id="get-thresholds"><strong>GET    <em>/thresholds/</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
-<li><strong>thresholds</strong>: JSON Schema [{<strong>color</strong>: str|bytes, <strong>label</strong>: str|bytes, <strong>recipients</strong>: str|bytes, <strong>ttype</strong>: str|bytes, <strong>value</strong>: }]</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2769,7 +2868,75 @@
 </ul>
 <p><em>usage</em>:</p>
 <p>DESCRIZIONE:</p>
-<p><strong>Modifica delle soglie.</strong></p>
+<p><strong>Interrogazione valori di Soglia associati alle serie dati.</strong></p>
+<p>la struttura logica di associazione delle soglie segue questo schema gerarchico:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">series</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="o">--</span><span class="n">n</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="o">--</span><span class="k">enum</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ttype</span>
+
+<span class="n">dove</span>
+<span class="o">-</span><span class="w"> </span><span class="n">_series_</span><span class="w"> </span><span class="err">è</span><span class="w"> </span><span class="n">una</span><span class="w"> </span><span class="n">serie</span><span class="w"> </span><span class="n">dati</span><span class="w"> </span><span class="n">specifica</span><span class="o">.</span>
+<span class="o">-</span><span class="w"> </span><span class="n">_label_</span><span class="w"> </span><span class="err">è</span><span class="w"> </span><span class="n">un</span><span class="s1">&#39;etichetta arbitraria, che a livello applicativo identifica</span>
+<span class="w">  </span><span class="n">la</span><span class="w"> </span><span class="n">soglia</span><span class="w"> </span><span class="p">(</span><span class="n">es</span><span class="o">.</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Alert&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Alarm&#39;</span><span class="w"> </span><span class="n">etc</span><span class="o">.</span><span class="p">)</span><span class="o">.</span>
+<span class="o">-</span><span class="w"> </span><span class="n">_ttype_</span><span class="w"> </span><span class="err">è</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;UPPER&#39;</span><span class="p">,</span><span class="s1">&#39;LOWER&#39;</span><span class="p">,</span><span class="s1">&#39;BAND&#39;</span><span class="p">)</span><span class="w"> </span><span class="n">che</span><span class="w"> </span><span class="n">definisce</span><span class="w"> </span><span class="n">rispettivamente</span>
+<span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">soglia</span><span class="w"> </span><span class="err">è</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">limite</span><span class="w"> </span><span class="n">superiore</span><span class="p">,</span><span class="w"> </span><span class="n">inferiore</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">simmetricamente</span><span class="p">,</span><span class="w"> </span><span class="n">entrambi</span>
+</code></pre></div>
+
+<p>la tupla (series,label,ttype) identifica la chiave univoca della soglia</p>
+<p>a questa tupla vengono associate queste informazioni:</p>
+<div class="codehilite"><pre><span></span><code>- _value_ il valore numerico della soglia
+- _color_ il colore da assegnare alla soglia (Hex), info per livello 
+  applicativo
+- _recipients_ lista csv di contatti associati alla soglia, 
+  info per livello applicativo
+</code></pre></div>
+
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>series</strong>: array di uuid delle serie per cui recuperare le info </p>
+</li>
+<li>
+<p><strong>labels</strong>: array di labels per cui recuperare le info:</p>
+</li>
+<li>
+<p><strong>ttype</strong>: array di valori ttype validi</p>
+</li>
+</ul>
+<p>OUTPUT:</p>
+<p>Se vengono trovate lifo corrispondenti ai criteri di interrogazione, viene restituito
+all'interno del campo <code>data</code> del json di risposta standard una struttura con questo formato:</p>
+<div class="codehilite"><pre><span></span><code>    [
+        {
+            &quot;series&quot;:&quot;...&quot;,
+            &quot;label&quot;:&quot;...&quot;,
+            &quot;ttype&quot;:&quot;...&quot;,
+            &quot;value&quot;:...,
+            &quot;color&quot;:...,
+            &quot;recipients:&quot;...&quot;
+        },
+        ...
+    ]
+</code></pre></div>
+
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui l'interrogazione non produca risultati.</li>
+<li><em>200 OK</em>: Nel caso in cui l'interrogazione vada a buon fine.</li>
+</ul>
+<h3 id="post-thresholds"><strong>POST   <em>/thresholds/</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>thresholds</strong>: JSON Schema [{<strong>label</strong>: str|bytes, <strong>color</strong>: str|bytes, <strong>ttype</strong>: str|bytes, <strong>value</strong>: , <strong>recipients</strong>: str|bytes}]</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>Modifica delle soglie. utilizza una struttura json in ingresso</strong></p>
 <p>PARAMETRI:</p>
 <ul>
 <li>
@@ -2795,12 +2962,13 @@
 <li><em>404 Not Found</em>: Nel caso in cui le serie richieste non esistano.</li>
 <li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
 </ul>
-<h3 id="post-thresholdsseries"><strong>POST   <em>/thresholds/{series}</em></strong></h3>
+<h3 id="delete-thresholds"><strong>DELETE <em>/thresholds/</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
-<li><strong>thresholds</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2808,12 +2976,29 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>Eliminazione delle soglie. Utilizza variabili esplicite in input</strong></p>
+<p>PARAMETRI:</p>
+<ul>
+<li><strong>series</strong>: array di uuid delle serie per cui modificare le soglie </li>
+<li><strong>label</strong>: array tipologie di soglia ('Alarm','Alert',...)</li>
+<li><strong>ttype</strong>: array di valori dell'enum Superiore ( 'UPPER' ), inferiore ( 'LOWER' )</li>
+</ul>
+<p>OUTPUT:</p>
+<p>Se le soglie selezionate vengono eleiminate correttamente la loro struttura viene restituita
+all'interno del campo <code>data</code> del json di risposta standard</p>
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui le serie richieste non esistano.</li>
+<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
+</ul>
 <h3 id="get-thresholdsseries"><strong>GET    <em>/thresholds/{series}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
 <li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2821,12 +3006,30 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
-<h3 id="get-thresholds"><strong>GET    <em>/thresholds</em></strong></h3>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di GET /thresholds</strong></p>
+<h3 id="post-thresholdsseries"><strong>POST   <em>/thresholds/{series}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>thresholds</strong>: JSON Schema [{<strong>label</strong>: str|bytes, <strong>color</strong>: str|bytes, <strong>ttype</strong>: str|bytes, <strong>value</strong>: , <strong>recipients</strong>: str|bytes}]</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di POST /thresholds</strong></p>
+<h3 id="delete-thresholdsseries"><strong>DELETE <em>/thresholds/{series}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
 <li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2834,12 +3037,15 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di DELETE /thresholds</strong></p>
 <h3 id="get-thresholdsserieslabels"><strong>GET    <em>/thresholds/{series}/{labels}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
 <li><strong>series</strong>: Basic text / string value</li>
 <li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
@@ -2847,6 +3053,114 @@
 <li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di GET /thresholds</strong></p>
+<h3 id="post-thresholdsserieslabels"><strong>POST   <em>/thresholds/{series}/{labels}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
+<li><strong>value</strong>: Basic text / string value</li>
+<li><strong>color</strong>: Basic text / string value</li>
+<li><strong>recipients</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>Modifica delle soglie. Utilizza variabili esplicite in input</strong></p>
+<p>PARAMETRI:</p>
+<ul>
+<li>
+<p><strong>series</strong>: array di uuid delle serie per cui modificare le soglie </p>
+</li>
+<li>
+<p><strong>label</strong>: tipologia di soglia ('Alarm','Alert',...)</p>
+</li>
+<li><strong>ttype</strong>: tipo: Superiore ( 'UPPER' ), inferiore ( 'LOWER' )</li>
+<li><strong>value</strong>: valore della soglia</li>
+<li><strong>color</strong>: colore della soglia</li>
+<li><strong>recipients</strong>: stringa csv intesa come elenco di contatti</li>
+</ul>
+<p>OUTPUT:</p>
+<p>Se la soglia viene creata/modificata correttamente la sua struttura viene restituita all'interno del campo <code>data</code> del json di risposta standard</p>
+<p>RESPONSE CODES:</p>
+<ul>
+<li><em>404 Not Found</em>: Nel caso in cui le serie richieste non esistano.</li>
+<li><em>200 OK</em>: Nel caso in cui la feature venga creata correttamente.</li>
+</ul>
+<h3 id="delete-thresholdsserieslabels"><strong>DELETE <em>/thresholds/{series}/{labels}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di DELETE /thresholds</strong></p>
+<h3 id="get-thresholdsserieslabelsttype"><strong>GET    <em>/thresholds/{series}/{labels}/{ttype}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di GET /thresholds</strong></p>
+<h3 id="post-thresholdsserieslabelsttype"><strong>POST   <em>/thresholds/{series}/{labels}/{ttype}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
+<li><strong>value</strong>: Basic text / string value</li>
+<li><strong>color</strong>: Basic text / string value</li>
+<li><strong>recipients</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di POST /thresholds/{labels}</strong></p>
+<h3 id="delete-thresholdsserieslabelsttype"><strong>DELETE <em>/thresholds/{series}/{labels}/{ttype}</em></strong></h3>
+<hr />
+<p><em>params</em>:</p>
+<ul>
+<li><strong>series</strong>: Basic text / string value</li>
+<li><strong>labels</strong>: Basic text / string value</li>
+<li><strong>ttype</strong>: Basic text / string value</li>
+</ul>
+<p><em>result</em>:</p>
+<ul>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
+</ul>
+<p><em>usage</em>:</p>
+<p>DESCRIZIONE:</p>
+<p><strong>ALIAS di DELETE /thresholds</strong></p>
 
 
 

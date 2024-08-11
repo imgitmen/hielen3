@@ -963,6 +963,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mongodbhielencache" class="md-nav__link">
+    MongodbHielenCache
+  </a>
+  
+    <nav class="md-nav" aria-label="MongodbHielenCache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_5" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_8" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_7" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fshielencache" class="md-nav__link">
     fsHielenCache
   </a>
@@ -978,14 +1012,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods_8" class="md-nav__link">
+  <a href="#methods_9" class="md-nav__link">
     Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pop_7" class="md-nav__link">
+  <a href="#pop_8" class="md-nav__link">
     pop
   </a>
   
@@ -3677,6 +3711,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mongodbhielencache" class="md-nav__link">
+    MongodbHielenCache
+  </a>
+  
+    <nav class="md-nav" aria-label="MongodbHielenCache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class-variables_5" class="md-nav__link">
+    Class variables
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods_8" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_7" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fshielencache" class="md-nav__link">
     fsHielenCache
   </a>
@@ -3692,14 +3760,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods_8" class="md-nav__link">
+  <a href="#methods_9" class="md-nav__link">
     Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pop_7" class="md-nav__link">
+  <a href="#pop_8" class="md-nav__link">
     pop
   </a>
   
@@ -5267,13 +5335,273 @@
 <span class="normal">1506</span>
 <span class="normal">1507</span>
 <span class="normal">1508</span>
-<span class="normal">1509</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1509</span>
+<span class="normal">1510</span>
+<span class="normal">1511</span>
+<span class="normal">1512</span>
+<span class="normal">1513</span>
+<span class="normal">1514</span>
+<span class="normal">1515</span>
+<span class="normal">1516</span>
+<span class="normal">1517</span>
+<span class="normal">1518</span>
+<span class="normal">1519</span>
+<span class="normal">1520</span>
+<span class="normal">1521</span>
+<span class="normal">1522</span>
+<span class="normal">1523</span>
+<span class="normal">1524</span>
+<span class="normal">1525</span>
+<span class="normal">1526</span>
+<span class="normal">1527</span>
+<span class="normal">1528</span>
+<span class="normal">1529</span>
+<span class="normal">1530</span>
+<span class="normal">1531</span>
+<span class="normal">1532</span>
+<span class="normal">1533</span>
+<span class="normal">1534</span>
+<span class="normal">1535</span>
+<span class="normal">1536</span>
+<span class="normal">1537</span>
+<span class="normal">1538</span>
+<span class="normal">1539</span>
+<span class="normal">1540</span>
+<span class="normal">1541</span>
+<span class="normal">1542</span>
+<span class="normal">1543</span>
+<span class="normal">1544</span>
+<span class="normal">1545</span>
+<span class="normal">1546</span>
+<span class="normal">1547</span>
+<span class="normal">1548</span>
+<span class="normal">1549</span>
+<span class="normal">1550</span>
+<span class="normal">1551</span>
+<span class="normal">1552</span>
+<span class="normal">1553</span>
+<span class="normal">1554</span>
+<span class="normal">1555</span>
+<span class="normal">1556</span>
+<span class="normal">1557</span>
+<span class="normal">1558</span>
+<span class="normal">1559</span>
+<span class="normal">1560</span>
+<span class="normal">1561</span>
+<span class="normal">1562</span>
+<span class="normal">1563</span>
+<span class="normal">1564</span>
+<span class="normal">1565</span>
+<span class="normal">1566</span>
+<span class="normal">1567</span>
+<span class="normal">1568</span>
+<span class="normal">1569</span>
+<span class="normal">1570</span>
+<span class="normal">1571</span>
+<span class="normal">1572</span>
+<span class="normal">1573</span>
+<span class="normal">1574</span>
+<span class="normal">1575</span>
+<span class="normal">1576</span>
+<span class="normal">1577</span>
+<span class="normal">1578</span>
+<span class="normal">1579</span>
+<span class="normal">1580</span>
+<span class="normal">1581</span>
+<span class="normal">1582</span>
+<span class="normal">1583</span>
+<span class="normal">1584</span>
+<span class="normal">1585</span>
+<span class="normal">1586</span>
+<span class="normal">1587</span>
+<span class="normal">1588</span>
+<span class="normal">1589</span>
+<span class="normal">1590</span>
+<span class="normal">1591</span>
+<span class="normal">1592</span>
+<span class="normal">1593</span>
+<span class="normal">1594</span>
+<span class="normal">1595</span>
+<span class="normal">1596</span>
+<span class="normal">1597</span>
+<span class="normal">1598</span>
+<span class="normal">1599</span>
+<span class="normal">1600</span>
+<span class="normal">1601</span>
+<span class="normal">1602</span>
+<span class="normal">1603</span>
+<span class="normal">1604</span>
+<span class="normal">1605</span>
+<span class="normal">1606</span>
+<span class="normal">1607</span>
+<span class="normal">1608</span>
+<span class="normal">1609</span>
+<span class="normal">1610</span>
+<span class="normal">1611</span>
+<span class="normal">1612</span>
+<span class="normal">1613</span>
+<span class="normal">1614</span>
+<span class="normal">1615</span>
+<span class="normal">1616</span>
+<span class="normal">1617</span>
+<span class="normal">1618</span>
+<span class="normal">1619</span>
+<span class="normal">1620</span>
+<span class="normal">1621</span>
+<span class="normal">1622</span>
+<span class="normal">1623</span>
+<span class="normal">1624</span>
+<span class="normal">1625</span>
+<span class="normal">1626</span>
+<span class="normal">1627</span>
+<span class="normal">1628</span>
+<span class="normal">1629</span>
+<span class="normal">1630</span>
+<span class="normal">1631</span>
+<span class="normal">1632</span>
+<span class="normal">1633</span>
+<span class="normal">1634</span>
+<span class="normal">1635</span>
+<span class="normal">1636</span>
+<span class="normal">1637</span>
+<span class="normal">1638</span>
+<span class="normal">1639</span>
+<span class="normal">1640</span>
+<span class="normal">1641</span>
+<span class="normal">1642</span>
+<span class="normal">1643</span>
+<span class="normal">1644</span>
+<span class="normal">1645</span>
+<span class="normal">1646</span>
+<span class="normal">1647</span>
+<span class="normal">1648</span>
+<span class="normal">1649</span>
+<span class="normal">1650</span>
+<span class="normal">1651</span>
+<span class="normal">1652</span>
+<span class="normal">1653</span>
+<span class="normal">1654</span>
+<span class="normal">1655</span>
+<span class="normal">1656</span>
+<span class="normal">1657</span>
+<span class="normal">1658</span>
+<span class="normal">1659</span>
+<span class="normal">1660</span>
+<span class="normal">1661</span>
+<span class="normal">1662</span>
+<span class="normal">1663</span>
+<span class="normal">1664</span>
+<span class="normal">1665</span>
+<span class="normal">1666</span>
+<span class="normal">1667</span>
+<span class="normal">1668</span>
+<span class="normal">1669</span>
+<span class="normal">1670</span>
+<span class="normal">1671</span>
+<span class="normal">1672</span>
+<span class="normal">1673</span>
+<span class="normal">1674</span>
+<span class="normal">1675</span>
+<span class="normal">1676</span>
+<span class="normal">1677</span>
+<span class="normal">1678</span>
+<span class="normal">1679</span>
+<span class="normal">1680</span>
+<span class="normal">1681</span>
+<span class="normal">1682</span>
+<span class="normal">1683</span>
+<span class="normal">1684</span>
+<span class="normal">1685</span>
+<span class="normal">1686</span>
+<span class="normal">1687</span>
+<span class="normal">1688</span>
+<span class="normal">1689</span>
+<span class="normal">1690</span>
+<span class="normal">1691</span>
+<span class="normal">1692</span>
+<span class="normal">1693</span>
+<span class="normal">1694</span>
+<span class="normal">1695</span>
+<span class="normal">1696</span>
+<span class="normal">1697</span>
+<span class="normal">1698</span>
+<span class="normal">1699</span>
+<span class="normal">1700</span>
+<span class="normal">1701</span>
+<span class="normal">1702</span>
+<span class="normal">1703</span>
+<span class="normal">1704</span>
+<span class="normal">1705</span>
+<span class="normal">1706</span>
+<span class="normal">1707</span>
+<span class="normal">1708</span>
+<span class="normal">1709</span>
+<span class="normal">1710</span>
+<span class="normal">1711</span>
+<span class="normal">1712</span>
+<span class="normal">1713</span>
+<span class="normal">1714</span>
+<span class="normal">1715</span>
+<span class="normal">1716</span>
+<span class="normal">1717</span>
+<span class="normal">1718</span>
+<span class="normal">1719</span>
+<span class="normal">1720</span>
+<span class="normal">1721</span>
+<span class="normal">1722</span>
+<span class="normal">1723</span>
+<span class="normal">1724</span>
+<span class="normal">1725</span>
+<span class="normal">1726</span>
+<span class="normal">1727</span>
+<span class="normal">1728</span>
+<span class="normal">1729</span>
+<span class="normal">1730</span>
+<span class="normal">1731</span>
+<span class="normal">1732</span>
+<span class="normal">1733</span>
+<span class="normal">1734</span>
+<span class="normal">1735</span>
+<span class="normal">1736</span>
+<span class="normal">1737</span>
+<span class="normal">1738</span>
+<span class="normal">1739</span>
+<span class="normal">1740</span>
+<span class="normal">1741</span>
+<span class="normal">1742</span>
+<span class="normal">1743</span>
+<span class="normal">1744</span>
+<span class="normal">1745</span>
+<span class="normal">1746</span>
+<span class="normal">1747</span>
+<span class="normal">1748</span>
+<span class="normal">1749</span>
+<span class="normal">1750</span>
+<span class="normal">1751</span>
+<span class="normal">1752</span>
+<span class="normal">1753</span>
+<span class="normal">1754</span>
+<span class="normal">1755</span>
+<span class="normal">1756</span>
+<span class="normal">1757</span>
+<span class="normal">1758</span>
+<span class="normal">1759</span>
+<span class="normal">1760</span>
+<span class="normal">1761</span>
+<span class="normal">1762</span>
+<span class="normal">1763</span>
+<span class="normal">1764</span>
+<span class="normal">1765</span>
+<span class="normal">1766</span>
+<span class="normal">1767</span>
+<span class="normal">1768</span>
+<span class="normal">1769</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">create_engine</span>
 
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span><span class="p">,</span> <span class="n">read_json</span><span class="p">,</span> <span class="n">NaT</span><span class="p">,</span> <span class="n">read_csv</span><span class="p">,</span> <span class="n">read_sql</span><span class="p">,</span> <span class="n">concat</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span><span class="p">,</span> <span class="n">read_json</span><span class="p">,</span> <span class="n">NaT</span><span class="p">,</span> <span class="n">read_csv</span><span class="p">,</span> <span class="n">read_sql</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">DatetimeIndex</span><span class="p">,</span> <span class="n">Timestamp</span>
 
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
@@ -5283,7 +5611,7 @@
 
 <span class="kn">from</span> <span class="nn">filelock</span> <span class="kn">import</span> <span class="n">Timeout</span><span class="p">,</span> <span class="n">FileLock</span>
 
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span><span class="p">,</span> <span class="n">datetime64</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
@@ -5298,6 +5626,10 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">crudLib</span> <span class="kn">import</span> <span class="n">mongofuncs</span> <span class="k">as</span> <span class="n">mf</span>
+
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 
 <span class="k">def</span> <span class="nf">dbinit</span><span class="p">(</span><span class="n">conf</span><span class="p">):</span>
 
@@ -6393,7 +6725,7 @@
 
                 <span class="k">pass</span>
 
-            <span class="c1"># print (f&quot;{value[k]!r}&quot;,value[k].__class__) ## DEBUG</span>
+            <span class="c1"># print (f&quot;{value[k]!r}&quot;,value[k].__class__)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnstypes</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="ow">in</span> <span class="n">Mariadb</span><span class="o">.</span><span class="n">geotypes</span><span class="p">:</span>
 
@@ -6406,6 +6738,8 @@
             <span class="k">else</span><span class="p">:</span>
 
                 <span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="si">!r}</span><span class="s2">&quot;</span>
+
+        <span class="nb">print</span> <span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
 
@@ -6428,6 +6762,8 @@
 <span class="c1">#        stat=f&quot;INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}&quot;.replace(&quot;None&quot;,&quot;NULL&quot;)i</span>
 
         <span class="n">stat</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">) VALUES (</span><span class="si">{</span><span class="n">vvv</span><span class="si">}</span><span class="s2">) ON DUPLICATE KEY UPDATE </span><span class="si">{</span><span class="n">updates</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="nb">print</span> <span class="p">()</span>
 
         <span class="n">e</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span>
 
@@ -6643,6 +6979,8 @@
 
         <span class="n">key</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="o">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
 
+        <span class="c1">#print (key)</span>
+
         <span class="n">sercond</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="o">.</span><span class="n">__setsqlcond__</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">],</span><span class="s2">&quot;series&quot;</span><span class="p">)</span>
 
         <span class="n">timecond</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="o">.</span><span class="n">__setsqlcond__</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">],</span><span class="s2">&quot;timestamp&quot;</span><span class="p">)</span>
@@ -6772,6 +7110,256 @@
                 <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">stat</span><span class="p">)</span>
 
             <span class="n">e</span><span class="o">.</span><span class="n">dispose</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MongodbHielenCache</span><span class="p">():</span>
+
+    <span class="n">defcon</span><span class="o">=</span><span class="p">{</span>
+
+            <span class="s2">&quot;uri&quot;</span><span class="p">:</span><span class="s2">&quot;mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;db&quot;</span><span class="p">:</span><span class="s2">&quot;MongoTest&quot;</span><span class="p">,</span>
+
+            <span class="s2">&quot;col&quot;</span><span class="p">:</span><span class="s2">&quot;Peschiera&quot;</span>
+
+            <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">table</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">connection</span> <span class="o">=</span> <span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">defcon</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;uri&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;db&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">keysnames</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
+
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keysnames</span> <span class="p">}</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
+
+            <span class="n">out</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">key</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">)):</span>
+
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">tuple</span><span class="p">):</span>
+
+            <span class="n">key</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+                <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+                <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    def __setsqlcond__(key,column):</span>
+
+<span class="sd">        sqlcond=None</span>
+
+<span class="sd">        if isinstance(key,str):</span>
+
+<span class="sd">            key=[key]</span>
+
+<span class="sd">        if isinstance(key,list):</span>
+
+<span class="sd">            key=filter(None,key)</span>
+
+<span class="sd">            sqlcond = key[0]</span>
+
+<span class="sd">        if isinstance(key,slice):</span>
+
+<span class="sd">            wstart=None</span>
+
+<span class="sd">            con=&quot;&quot;</span>
+
+<span class="sd">            wstop=None</span>
+
+<span class="sd">            if key.start is not None:</span>
+
+<span class="sd">                try:</span>
+
+<span class="sd">                    wstart= Datetime64(key.start).astype(long)</span>
+
+<span class="sd">                except Exception as e:</span>
+
+<span class="sd">                    pass</span>
+
+<span class="sd">             if key.stop is not None:</span>
+
+<span class="sd">                try:</span>
+
+<span class="sd">                    wstop= Datetime64(key.stop).astype(long)</span>
+
+<span class="sd">                except Exception as e:</span>
+
+<span class="sd">                    pass</span>
+
+<span class="sd">        return sqlcond</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        WARNING: In case of slice selection with a not None step parmeter</span>
+
+<span class="sd">        the deletion process, if requested, not minds the step for row selection</span>
+
+<span class="sd">        and all the deleted row will be returned in output.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO: manage this function!</span>
+
+        <span class="n">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
+
+        <span class="n">timestart</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="n">timestop</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">timestart</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">timestart</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                <span class="n">timestart</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">timestop</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">timestop</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                <span class="n">timestop</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">series</span> <span class="o">=</span> <span class="n">UUID</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">mf</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span> <span class="n">timestart</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span> <span class="n">timestop</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+        <span class="n">dt1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="n">dt2</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">))</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+        <span class="c1">#print (series,dt1,dt2)</span>
+
+        <span class="k">if</span> <span class="n">delete</span><span class="p">:</span>
+
+            <span class="n">mf</span><span class="o">.</span><span class="n">deletes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span> <span class="n">time2</span> <span class="o">=</span> <span class="n">dt2</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,(</span><span class="n">Series</span><span class="p">,</span><span class="n">DataFrame</span><span class="p">)):</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pandas.Series or pandas.DataFrame required&quot;</span><span class="p">)</span>
+
+        <span class="c1"># TODO: Manage it!</span>
+
+        <span class="n">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+            <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;series&#39;</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+        <span class="c1"># TODO: check for it!</span>
+
+        <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">],</span><span class="nb">slice</span><span class="p">):</span>
+
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]]</span>
+
+        <span class="n">series</span><span class="o">=</span><span class="n">UUID</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]]</span>
+
+        <span class="c1">#print (value)</span>
+
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="n">value</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">())</span> <span class="o">-</span> <span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;1970-01-01&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;timedelta64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+        <span class="n">value</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">,</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span>
+
+        <span class="n">mf</span><span class="o">.</span><span class="n">insertUpdate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">series</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
 
@@ -7865,6 +8453,8 @@
 
 <span class="w">        </span><span class="k">key</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="p">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
 
+<span class="w">        </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">sercond</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="p">.</span><span class="n">__setsqlcond__</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;series&quot;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">timecond</span><span class="o">=</span><span class="n">MariadbHielenCache</span><span class="p">.</span><span class="n">__setsqlcond__</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;timestamp&quot;</span><span class="p">)</span>
@@ -8666,7 +9256,7 @@
 
 <span class="w">                </span><span class="n">pass</span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{value[k]!r}&quot;</span><span class="p">,</span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">.</span><span class="n">__class__</span><span class="p">)</span><span class="w"> </span><span class="err">##</span><span class="w"> </span><span class="n">DEBUG</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{value[k]!r}&quot;</span><span class="p">,</span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">.</span><span class="n">__class__</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">columnstypes</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Mariadb</span><span class="p">.</span><span class="nl">geotypes</span><span class="p">:</span>
 
@@ -8679,6 +9269,8 @@
 <span class="w">            </span><span class="k">else</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]=</span><span class="n">f</span><span class="ss">&quot;{value[k]!r}&quot;</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
 
@@ -8701,6 +9293,8 @@
 <span class="err">#</span><span class="w">        </span><span class="n">stat</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}&quot;</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;None&quot;</span><span class="p">,</span><span class="ss">&quot;NULL&quot;</span><span class="p">)</span><span class="n">i</span>
 
 <span class="w">        </span><span class="n">stat</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}&quot;</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">()</span>
 
 <span class="w">        </span><span class="n">e</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">engine</span>
 
@@ -8844,6 +9438,288 @@
 </code></pre></div>
 
 </details>
+<h3 id="mongodbhielencache">MongodbHielenCache</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MongodbHielenCache</span><span class="p">(</span>
+    <span class="n">connection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MongodbHielenCache</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">    </span><span class="n">defcon</span><span class="o">=</span><span class="err">{</span>
+
+<span class="w">            </span><span class="ss">&quot;uri&quot;</span><span class="err">:</span><span class="ss">&quot;mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/&quot;</span><span class="p">,</span>
+
+<span class="w">            </span><span class="ss">&quot;db&quot;</span><span class="err">:</span><span class="ss">&quot;MongoTest&quot;</span><span class="p">,</span>
+
+<span class="w">            </span><span class="ss">&quot;col&quot;</span><span class="err">:</span><span class="ss">&quot;Peschiera&quot;</span>
+
+<span class="w">            </span><span class="err">}</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="nc">table</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">connection</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">defcon</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;uri&quot;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;db&quot;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;col&quot;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;timestamp&#39;,&#39;series&#39;</span><span class="o">]</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="nl">keysnames</span><span class="p">:</span><span class="n">list</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="k">None</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">keysnames</span><span class="w"> </span><span class="err">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">key</span><span class="o">=[</span><span class="n">key</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]=</span><span class="k">key</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">tuple</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">key</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]=[</span><span class="n">key[0</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]=</span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]=[</span><span class="n">key[1</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]=</span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    def __setsqlcond__(key,column):</span>
+
+<span class="ss">        sqlcond=None</span>
+
+<span class="ss">        if isinstance(key,str):</span>
+
+<span class="ss">            key=[key]</span>
+
+<span class="ss">        if isinstance(key,list):</span>
+
+<span class="ss">            key=filter(None,key)</span>
+
+<span class="ss">            sqlcond = key[0]</span>
+
+<span class="ss">        if isinstance(key,slice):</span>
+
+<span class="ss">            wstart=None</span>
+
+<span class="ss">            con=&quot;&quot;</span>
+
+<span class="ss">            wstop=None</span>
+
+<span class="ss">            if key.start is not None:</span>
+
+<span class="ss">                try:</span>
+
+<span class="ss">                    wstart= Datetime64(key.start).astype(long)</span>
+
+<span class="ss">                except Exception as e:</span>
+
+<span class="ss">                    pass</span>
+
+<span class="ss">             if key.stop is not None:</span>
+
+<span class="ss">                try:</span>
+
+<span class="ss">                    wstop= Datetime64(key.stop).astype(long)</span>
+
+<span class="ss">                except Exception as e:</span>
+
+<span class="ss">                    pass</span>
+
+<span class="ss">        return sqlcond</span>
+
+<span class="ss">    &quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">delete</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        WARNING: In case of slice selection with a not None step parmeter</span>
+
+<span class="ss">        the deletion process, if requested, not minds the step for row selection</span>
+
+<span class="ss">        and all the deleted row will be returned in output.</span>
+
+<span class="ss">        &quot;&quot;&quot;</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">manage</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">function</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">timestart</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">timestop</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">timestart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">start</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timestart</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">timestart</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">timestop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">stop</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timestop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">timestop</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">mf</span><span class="p">.</span><span class="k">fetch</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="w"> </span><span class="n">timestart</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="o">=</span><span class="w"> </span><span class="n">timestop</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">dt1</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">dt2</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="nc">Timestamp</span><span class="p">.</span><span class="n">fromtimestamp</span><span class="p">))</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="k">names</span><span class="o">=[</span><span class="n">&#39;series&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+<span class="w">        </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">dt1</span><span class="p">,</span><span class="n">dt2</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">delete</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt2</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">squeeze</span><span class="p">().</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;x&#39;,&#39;y&#39;,&#39;z&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,(</span><span class="n">Series</span><span class="p">,</span><span class="n">DataFrame</span><span class="p">))</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="ss">&quot;pandas.Series or pandas.DataFrame required&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">Manage</span><span class="w"> </span><span class="n">it</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+<span class="w">            </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;series&#39;</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="k">map</span><span class="p">(</span><span class="nf">str</span><span class="p">,</span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">it</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="p">,</span><span class="n">slice</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">T</span><span class="o">[</span><span class="n">key[&quot;series&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">T</span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="o">[</span><span class="n">key[&quot;series&quot;</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">        </span><span class="n">series</span><span class="o">=</span><span class="n">UUID</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">key[&quot;timestamp&quot;</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">        </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;DATE&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nc">date</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;1970-01-01&#39;</span><span class="p">)).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;timedelta64[s]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;TIME&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="nc">timestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">&#39;DATE&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;val&#39;,&#39;DATE&#39;,&#39;TIME&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">mf</span><span class="p">.</span><span class="n">insertUpdate</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">delete</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="class-variables_5">Class variables</h4>
+<div class="codehilite"><pre><span></span><code><span class="n">defcon</span>
+</code></pre></div>
+
+<h4 id="methods_8">Methods</h4>
+<h4 id="pop_7">pop</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">key</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">key</span><span class="ss">)</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">delete</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
 <h3 id="fshielencache">fsHielenCache</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">fsHielenCache</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">,</span>
@@ -8952,8 +9828,8 @@
 <li>hielen3.datalink_bkp.DB</li>
 <li>abc.ABC</li>
 </ul>
-<h4 id="methods_8">Methods</h4>
-<h4 id="pop_7">pop</h4>
+<h4 id="methods_9">Methods</h4>
+<h4 id="pop_8">pop</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span>
