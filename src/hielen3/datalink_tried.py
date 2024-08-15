@@ -735,11 +735,12 @@ class MariadbTable(Mariadb):
             key={k:f"{w!r}" for k,w in key.items() if k in self.keys}
 
             if key.__len__() != self.keys.__len__():
-                raise ValueError('table key not full qualified')
+                raise ValueError('table key not fully qualified')
 
         value = { k:w for k,w in value.items() if k in self.values }
 
         return (key,value)
+
 
     def __exec_set_kw__(self, key, value):
 
@@ -760,23 +761,20 @@ class MariadbTable(Mariadb):
             else:
                 value[k]=f"{value[k]!r}"
        
-        print (value)
 
         if value.__len__():
-            columns=','.join([list(*key.keys()),*list(value.keys())])
-            values=[*list(key.values()),*list(value.values())]
-            updates=", ".join(map(lambda x: f"{x}=VALUE({x})",value.keys()))
+            v_dict={**key,**value}
+            columns=",".join(v_dict.keys())
+            vvv=",".join(v_dict.values())
+            updates=", ".join(map(lambda x: f"{x}=VALUE({x})",self.values))
         else:
             columns=','.join(key.keys())
             values=list(key.values())
+            vvv=",".join(values)
             updates=f"{self.values[0]}={self.values[0]}"
 
-        vvv=",".join(values)
 
-#        stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}".replace("None","NULL")i
         stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}"
-
-        print ()
 
 
         e=self.engine
