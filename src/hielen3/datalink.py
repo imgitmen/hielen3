@@ -763,7 +763,7 @@ class MariadbTable(Mariadb):
         print (value)
 
         if value.__len__():
-            columns=','.join([list(*key.keys()),*list(value.keys())])
+            columns=','.join([*list(key.keys()),*list(value.keys())])
             values=[*list(key.values()),*list(value.values())]
             updates=", ".join(map(lambda x: f"{x}=VALUE({x})",value.keys()))
         else:
