@@ -761,13 +761,18 @@ class MariadbTable(Mariadb):
             else:
                 value[k]=f"{value[k]!r}"
        
-        
-        v_dict={**key,**value}
 
-        columns=",".join(v_dict.keys())
-        vvv=",".join(v_dict.values())
+        if value.__len__():
+            v_dict={**key,**value}
+            columns=",".join(v_dict.keys())
+            vvv=",".join(v_dict.values())
+            updates=", ".join(map(lambda x: f"{x}=VALUE({x})",self.values))
+        else:
+            columns=','.join(key.keys())
+            values=list(key.values())
+            vvv=",".join(values)
+            updates=f"{self.values[0]}={self.values[0]}"
 
-        updates=", ".join(map(lambda x: f"{x}=VALUE({x})",self.values))
 
         stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}"
 
