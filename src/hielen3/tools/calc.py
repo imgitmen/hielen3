@@ -78,10 +78,23 @@ def aligned(func):
 
     return wrap_align
 
-@aligned
+
 def reference(s_main,s_ref):
 
-    pass
+    try:
+        t=s_main.index[0]
+    except Exception as e:
+        t=None
+
+    try:
+        s_main,s_ref=s_main.align(s_ref,method='ffill',copy=True)
+        s_ref=s_ref.fillna(0)
+    except Exception as e:
+        pass
+
+    result=(s_main-s_ref)[t:].dropna()
+
+    return result
 
 
 
