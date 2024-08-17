@@ -3049,7 +3049,25 @@
 <span class="normal">218</span>
 <span class="normal">219</span>
 <span class="normal">220</span>
-<span class="normal">221</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3167,11 +3185,29 @@
 
     <span class="k">return</span> <span class="n">wrap_align</span>
 
-<span class="nd">@aligned</span>
-
 <span class="k">def</span> <span class="nf">reference</span><span class="p">(</span><span class="n">s_main</span><span class="p">,</span><span class="n">s_ref</span><span class="p">):</span>
 
-    <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="n">s_main</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">t</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">s_main</span><span class="p">,</span><span class="n">s_ref</span><span class="o">=</span><span class="n">s_main</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">s_ref</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">,</span><span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">s_ref</span><span class="o">=</span><span class="n">s_ref</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">pass</span>
+
+    <span class="n">result</span><span class="o">=</span><span class="p">(</span><span class="n">s_main</span><span class="o">-</span><span class="n">s_ref</span><span class="p">)[</span><span class="n">t</span><span class="p">:]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">result</span>
 
 <span class="nd">@aligned</span>
 
