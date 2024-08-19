@@ -501,13 +501,16 @@ class HSeries:
 
         timeref=agoodtime(timeref)
 
-        if cache is None:
+        if cache is None or self.cache in ("static"):
             try:
                 cache=self.cache
-                assert cache in ("active","data","old")
+                assert cache in ("active","data","old","static")
             except Exception as e:
                 cache="no"
-
+            
+        if cache in ("static"):
+            cache = "old"
+            times = None
 
         if times is None:
             times=slice(None,None,None)
