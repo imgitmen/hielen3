@@ -760,7 +760,7 @@ class MariadbTable(Mariadb):
             else:
                 value[k]=f"{value[k]!r}"
        
-        print (value)
+        #print (value)
 
         if value.__len__():
             columns=','.join([*list(key.keys()),*list(value.keys())])
