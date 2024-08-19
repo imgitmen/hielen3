@@ -4095,7 +4095,13 @@
 <span class="normal">1184</span>
 <span class="normal">1185</span>
 <span class="normal">1186</span>
-<span class="normal">1187</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1187</span>
+<span class="normal">1188</span>
+<span class="normal">1189</span>
+<span class="normal">1190</span>
+<span class="normal">1191</span>
+<span class="normal">1192</span>
+<span class="normal">1193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4779,17 +4785,23 @@
 
         <span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">):</span>
 
             <span class="k">try</span><span class="p">:</span>
 
                 <span class="n">cache</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cache</span>
 
-                <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">)</span>
+                <span class="k">assert</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;old&quot;</span><span class="p">,</span><span class="s2">&quot;static&quot;</span><span class="p">)</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="n">cache</span><span class="o">=</span><span class="s2">&quot;no&quot;</span>
+
+        <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">):</span>
+
+            <span class="n">cache</span> <span class="o">=</span> <span class="s2">&quot;old&quot;</span>
+
+            <span class="n">times</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="k">if</span> <span class="n">times</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -5957,17 +5969,23 @@
 
 <span class="w">        </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;static&quot;</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span>
 
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">,</span><span class="ss">&quot;static&quot;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;no&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;static&quot;</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;old&quot;</span>
+
+<span class="w">            </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
@@ -6754,17 +6772,23 @@
 
 <span class="w">        </span><span class="n">timeref</span><span class="o">=</span><span class="n">agoodtime</span><span class="p">(</span><span class="n">timeref</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;static&quot;</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">cache</span>
 
-<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">assert</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;old&quot;</span><span class="p">,</span><span class="ss">&quot;static&quot;</span><span class="p">)</span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">cache</span><span class="o">=</span><span class="ss">&quot;no&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;static&quot;</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;old&quot;</span>
+
+<span class="w">            </span><span class="n">times</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
