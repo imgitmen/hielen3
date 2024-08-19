@@ -652,7 +652,7 @@ class HSeries:
         out = out[~out.index.duplicated()]
         out.index.name = "timestamp"
 
-        if not out.empty:
+        if not out.empty and not self.cache in ("static"):
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
             try:
                 out=out.loc[entertimes]
