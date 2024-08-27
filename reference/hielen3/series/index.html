@@ -4101,7 +4101,9 @@
 <span class="normal">1190</span>
 <span class="normal">1191</span>
 <span class="normal">1192</span>
-<span class="normal">1193</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1193</span>
+<span class="normal">1194</span>
+<span class="normal">1195</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4856,6 +4858,8 @@
                 <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datatable</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">times</span><span class="p">]</span>
 
             <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="c1">#DEBUG raise e</span>
 
                 <span class="k">pass</span>
 
@@ -6041,6 +6045,8 @@
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
+<span class="w">                </span><span class="n">#DEBUG</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
+
 <span class="w">                </span><span class="n">pass</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
@@ -6843,6 +6849,8 @@
 <span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">self.datatable</span><span class="o">][</span><span class="n">self.activeuuids,times</span><span class="o">]</span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">#DEBUG</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
 
 <span class="w">                </span><span class="n">pass</span>
 

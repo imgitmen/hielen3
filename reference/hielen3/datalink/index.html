@@ -957,13 +957,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#class-variables_5" class="md-nav__link">
-    Class variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#methods_8" class="md-nav__link">
     Methods
   </a>
@@ -3747,13 +3740,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#class-variables_5" class="md-nav__link">
-    Class variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#methods_8" class="md-nav__link">
     Methods
   </a>
@@ -5611,19 +5597,7 @@
 <span class="normal">1754</span>
 <span class="normal">1755</span>
 <span class="normal">1756</span>
-<span class="normal">1757</span>
-<span class="normal">1758</span>
-<span class="normal">1759</span>
-<span class="normal">1760</span>
-<span class="normal">1761</span>
-<span class="normal">1762</span>
-<span class="normal">1763</span>
-<span class="normal">1764</span>
-<span class="normal">1765</span>
-<span class="normal">1766</span>
-<span class="normal">1767</span>
-<span class="normal">1768</span>
-<span class="normal">1769</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1757</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -6791,8 +6765,6 @@
 
         <span class="n">stat</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">columns</span><span class="si">}</span><span class="s2">) VALUES (</span><span class="si">{</span><span class="n">vvv</span><span class="si">}</span><span class="s2">) ON DUPLICATE KEY UPDATE </span><span class="si">{</span><span class="n">updates</span><span class="si">}</span><span class="s2">&quot;</span>
 
-        <span class="nb">print</span> <span class="p">()</span>
-
         <span class="n">e</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span>
 
         <span class="k">with</span> <span class="n">e</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
@@ -7145,27 +7117,13 @@
 
 <span class="k">class</span> <span class="nc">MongodbHielenCache</span><span class="p">():</span>
 
-    <span class="n">defcon</span><span class="o">=</span><span class="p">{</span>
-
-            <span class="s2">&quot;uri&quot;</span><span class="p">:</span><span class="s2">&quot;mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/&quot;</span><span class="p">,</span>
-
-            <span class="s2">&quot;db&quot;</span><span class="p">:</span><span class="s2">&quot;MongoTest&quot;</span><span class="p">,</span>
-
-            <span class="s2">&quot;col&quot;</span><span class="p">:</span><span class="s2">&quot;Peschiera&quot;</span>
-
-            <span class="p">}</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">table</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-            <span class="n">connection</span> <span class="o">=</span> <span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">defcon</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;uri&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{dialect}</span><span class="s2">://</span><span class="si">{usr}</span><span class="s2">:</span><span class="si">{pwd}</span><span class="s2">@</span><span class="si">{host}</span><span class="s2">:</span><span class="si">{port}</span><span class="s2">/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">connection</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;db&quot;</span><span class="p">]</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;col&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">table</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
 
@@ -7323,17 +7281,21 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
 
-        <span class="c1">#print (series,dt1,dt2)</span>
-
         <span class="k">if</span> <span class="n">delete</span><span class="p">:</span>
 
             <span class="n">mf</span><span class="o">.</span><span class="n">deletes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span> <span class="n">time2</span> <span class="o">=</span> <span class="n">dt2</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 
@@ -9322,8 +9284,6 @@
 
 <span class="w">        </span><span class="n">stat</span><span class="o">=</span><span class="n">f</span><span class="ss">&quot;INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}&quot;</span>
 
-<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">()</span>
-
 <span class="w">        </span><span class="n">e</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">engine</span>
 
 <span class="w">        </span><span class="k">with</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="k">begin</span><span class="p">()</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">connection</span><span class="err">:</span>
@@ -9477,27 +9437,13 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MongodbHielenCache</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">    </span><span class="n">defcon</span><span class="o">=</span><span class="err">{</span>
-
-<span class="w">            </span><span class="ss">&quot;uri&quot;</span><span class="err">:</span><span class="ss">&quot;mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/&quot;</span><span class="p">,</span>
-
-<span class="w">            </span><span class="ss">&quot;db&quot;</span><span class="err">:</span><span class="ss">&quot;MongoTest&quot;</span><span class="p">,</span>
-
-<span class="w">            </span><span class="ss">&quot;col&quot;</span><span class="err">:</span><span class="ss">&quot;Peschiera&quot;</span>
-
-<span class="w">            </span><span class="err">}</span>
-
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="nc">table</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">connection</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
-
-<span class="w">            </span><span class="k">connection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">defcon</span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;uri&quot;</span><span class="o">]</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;{dialect}://{usr}:{pwd}@{host}:{port}/&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="o">**</span><span class="k">connection</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;db&quot;</span><span class="o">]</span>
 
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;col&quot;</span><span class="o">]</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">table</span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;timestamp&#39;,&#39;series&#39;</span><span class="o">]</span>
 
@@ -9655,17 +9601,21 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
 
-<span class="w">        </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">dt1</span><span class="p">,</span><span class="n">dt2</span><span class="p">)</span>
-
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">delete</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt2</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">squeeze</span><span class="p">().</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;x&#39;,&#39;y&#39;,&#39;z&#39;</span><span class="o">]</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">squeeze</span><span class="p">().</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;x&#39;,&#39;y&#39;,&#39;z&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">sort_index</span><span class="p">().</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span>
 
@@ -9728,10 +9678,6 @@
 
 </details>
 <hr />
-<h4 id="class-variables_5">Class variables</h4>
-<div class="codehilite"><pre><span></span><code><span class="n">defcon</span>
-</code></pre></div>
-
 <h4 id="methods_8">Methods</h4>
 <h4 id="pop_7">pop</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
