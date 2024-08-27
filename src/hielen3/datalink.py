@@ -776,8 +776,6 @@ class MariadbTable(Mariadb):
 #        stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}".replace("None","NULL")i
         stat=f"INSERT INTO {self.table} ({columns}) VALUES ({vvv}) ON DUPLICATE KEY UPDATE {updates}"
 
-        print ()
-
 
         e=self.engine
         with e.begin() as connection:
@@ -1045,20 +1043,11 @@ class MariadbHielenCache(Mariadb):
 
 class MongodbHielenCache():
 
-    defcon={
-            "uri":"mongodb+srv://nivetha:prova@cluster0.cbz69qk.mongodb.net/",
-            "db":"MongoTest",
-            "col":"Peschiera"
-            }
-
-
     def __init__(self,connection=None,table=None):
-        if connection is None:
-            connection = MongodbHielenCache.defcon
 
-        self.uri = connection["uri"]
+        self.uri = "{dialect}://{usr}:{pwd}@{host}:{port}/".format(**connection) 
         self.db = connection["db"]
-        self.col = connection["col"]
+        self.col = table
         self.keys = ['timestamp','series']
 
     def __parsekey__(key,keysnames:list):
@@ -1175,16 +1164,19 @@ class MongodbHielenCache():
         out.index.name='timestamp'
 
 
-        #print (series,dt1,dt2)
 
 
         if delete:
             mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)
 
-        out=out.squeeze().apply(loads).apply(Series)
-        out.columns=['x','y','z']
+        try:
+            out=out.squeeze().apply(loads).apply(Series)
+            out.columns=['x','y','z']
 
-        return out.copy()
+        except Exception as e:
+            pass
+
+        return out.sort_index().copy()
 
 
 

@@ -549,6 +549,7 @@ class HSeries:
             try:
                 out = db[self.datatable][self.activeuuids,times]
             except KeyError as e:
+                #DEBUG raise e
                 pass
 
             if not out.empty:
