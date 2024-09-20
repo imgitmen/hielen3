@@ -130,7 +130,7 @@ def oblivion(S0,mask=None):
 
     if mask is None: return S0
 
-    return S0[S0.align(filtro)[1].isna()]
+    return S0[S0.align(mask)[1].isna()]
 
 
 
