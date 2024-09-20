@@ -3067,7 +3067,13 @@
 <span class="normal">236</span>
 <span class="normal">237</span>
 <span class="normal">238</span>
-<span class="normal">239</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3248,6 +3254,12 @@
     <span class="n">stdv</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">,</span> <span class="n">min_periods</span><span class="o">=</span><span class="n">min_periods</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">std</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">b</span><span class="p">[</span><span class="n">d</span> <span class="o">&lt;</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">stdv</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">oblivion</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span><span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">return</span> <span class="n">S0</span>
+
+    <span class="k">return</span> <span class="n">S0</span><span class="p">[</span><span class="n">S0</span><span class="o">.</span><span class="n">align</span><span class="p">(</span><span class="n">filtro</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
 
 <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="n">S0</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;clean&#39;</span><span class="p">):</span>
 
