@@ -126,6 +126,15 @@ def filter(b,sigma=3,window=50,center=False,min_periods=1):
     return b[d < sigma * stdv]
 
 
+def oblivion(S0,mask=None):
+
+    if mask is None: return S0
+
+    return S0[S0.align(filtro)[1].isna()]
+
+
+
+
 def threshold(S0, limit=0, how='<', action='clean'):
     """
     action: ['clean','drop','signal']
@@ -161,6 +170,7 @@ def instant_velocity(S0,time_unit_denom='hours'):
 
 
     return (S0/seconds*time_unit_denom).replace(nan,0)
+
 
 def int_or_str(value):
     try:

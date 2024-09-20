@@ -1,9 +1,14 @@
 CHANGELOG
 =========
+## **V3.3.25**
+### 20 Settembre 2024 ###
+- introdotti i concetti di "Serie di riferimento" e "filtro" e inserite apposite funzioni nel modulo tools/calc
+
+
 ## **V3.3.24**
 ### 11 Agosto 2024 ###
 - completati protocolli GET, POST, DELETE per l'api thresholds
-- modificato datalink. Risolto il problema dell'inserimento per cui in alcuni casi l'associazione colonna valore non era corretta
+- modificato datalink. Risolto il problema dell'inserimento in mysql per cui in alcuni casi l'associazione colonna/valore non era corretta
 
 
 ## **v3.3.23**
