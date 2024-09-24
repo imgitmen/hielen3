@@ -10,7 +10,6 @@ from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, datafram
 from uuid import UUID
 import re
 import json
-import traceback
 
 def _threadpool(f):
     @wraps(f)

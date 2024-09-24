@@ -8,10 +8,6 @@ from hielen3.series import HSeries
 from marshmallow import fields 
 from numpy import datetime64, isnat
 from pandas import DataFrame
-from MySQLdb._exceptions import ProgrammingError
-
-
-import traceback
 
 def _agoodtime(t):
 
@@ -258,6 +254,8 @@ class HFeature(ABC):
                     ser.clean_cache()
                 except AttributeError as e:
                     pass
+                
+            
            
             # RICONFIURO SERIE
             ser=HSeries.setup(uuid=ser,**setups)
