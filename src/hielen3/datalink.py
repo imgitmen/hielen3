@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from sqlalchemy import create_engine
+from sqlalchemy import text 
 from pandas import DataFrame, Series, read_json, NaT, read_csv, read_sql, concat, DatetimeIndex, Timestamp
 from abc import ABC, abstractmethod
 from geojson import Point, loads
@@ -458,11 +459,13 @@ class Mariadb(DB):
                 order by
                     ORDINAL_POSITION
             '''
+            
 
             e=self.engine
+ 
             with e.connect() as connection:
-                self.columnstypes = dict(connection.execute(columnquery).all())
-                self.keys = [ l[0] for l in connection.execute(keysquery).all() ]
+                self.columnstypes = dict(connection.execute(text(columnquery)).all())
+                self.keys = [ l[0] for l in connection.execute(text(keysquery)).all() ]
             e.dispose()
 
             self.columns = list(self.columnstypes.keys())
@@ -505,7 +508,7 @@ class MariadbQuery(Mariadb):
 
         e=self.engine
         with e.begin() as connection:
-            connection.execute('start transaction')
+            connection.execute(text('start transaction'))
             out = read_sql(
                     stat,
                     connection,
@@ -543,7 +546,7 @@ class MariadbTable(Mariadb):
 
         e=self.engine
         with e.begin() as connection:
-            connection.execute('start transaction')
+            connection.execute(text('start transaction'))
             out = read_sql(
                     stat,
                     connection,
@@ -664,7 +667,7 @@ class MariadbTable(Mariadb):
         with e.begin() as connection:
 
             stat=f'SELECT {",".join(self.selectfields)} FROM {self.table} WHERE {sqlcond} FOR UPDATE'
-            connection.execute('start transaction')
+            connection.execute(text('start transaction'))
             out = read_sql(
                     stat,
                     connection,
@@ -674,7 +677,7 @@ class MariadbTable(Mariadb):
 
             if not out.empty and delete:
                 stat = f'DELETE FROM {self.table} WHERE {sqlcond}'
-                connection.execute(stat)
+                connection.execute(text(stat))
 
         e.dispose()
 
@@ -779,7 +782,7 @@ class MariadbTable(Mariadb):
 
         e=self.engine
         with e.begin() as connection:
-            connection.execute(stat)
+            connection.execute(text(stat))
         e.dispose()
 
 
@@ -970,7 +973,7 @@ class MariadbHielenCache(Mariadb):
         e=self.engine
         with e.begin() as connection:
             stat=f"SELECT * FROM {self.table} WHERE {sqlcond} FOR UPDATE"
-            connection.execute('start transaction')
+            connection.execute(text('start transaction'))
             out = read_sql(
                     stat,
                     connection,
@@ -980,7 +983,7 @@ class MariadbHielenCache(Mariadb):
 
             if not out.empty and delete:
                 stat = f'DELETE FROM {self.table} WHERE {sqlcond}'
-                connection.execute(stat)
+                connection.execute(text(stat))
                 e.dispose()
                 return out.copy()
 
@@ -1033,7 +1036,7 @@ class MariadbHielenCache(Mariadb):
             stat=f"INSERT INTO {self.table} (series,timestamp,value) VALUES "+stat+" ON DUPLICATE KEY UPDATE value = VALUES(value)"
             e=self.engine
             with e.begin() as connection:
-                connection.execute(stat)
+                connection.execute(text(stat))
             e.dispose()
 
     def pop(self,key):
@@ -1131,20 +1134,30 @@ class MongodbHielenCache():
             if timestart < 0:
                 timestart=None
         except Exception as e:
+            #raise e #DEBUG
             pass
+
+        #PORCATA
+        timestart=None
 
         try:
             timestop = int(datetime64(key['timestamp'].stop).astype('datetime64[ns]').astype(int))
             if timestop < 0:
                 timestop=None
         except Exception as e:
+            #raise e #DEBUG
             pass
+
+        #PORCATA
+        timestop=None
 
         try:
             series = UUID(key['series'][0])
         except Exception as e:
             raise KeyError(key)
 
+
+        print (series,timestart, timestop)
 
         out=mf.fetch(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
   
@@ -1161,6 +1174,9 @@ class MongodbHielenCache():
         out=out.drop('Timestamp',axis=1)
 
         out.columns.names=['series']
+
+        out.columns=map(str,out.columns)
+
         out.index.name='timestamp'
 
 

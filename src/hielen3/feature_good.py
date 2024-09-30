@@ -192,32 +192,18 @@ class HFeature(ABC):
             self.feature=feature
             self.parameters=None
 
-        def set(self,param,ordinal=None,series_uuid=None,**setups):
+        def set(self,param,ordinal=None,**setups):
             """
 
-            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro - invece sì): OK
-            CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata e NON viene IMPOSTO un id; OK
-            CASO 3) Una serie esiste è già associata alla feature con lo stesso label parametro e VIENE IMPOSTO un id; FAIL
-            CASO 4) La serie non esiste e deve essere configurata ma viene GENERATO un id: OK
-            CASO 5) La serie non esiste e deve essere configurata ma viene IMPOSTO un id: OK
+            CASO 1) La serie esiste e ma non è associata alla feature (ALIAS in questo caso non riconfiguro - invece sì)
+            CASO 2) La serie esiste è già associata alla feature e deve essere riconfigurata
+            CASO 3) La serie non esiste e deve essere configurata
 
             """
-            """
-            1) Esiste già associazione
-            1.1) uuid in input == uuid presente: OK
-                - riconfiguro la serie
-            1.2) uuid in input != uuid presente: FAIL
-                - alzo l'errore
-            2) Non esiste associazione: OK
-                - creo oggetto HSeries con uuid in input
-            """
 
-
-            # A questo punto ser_uuid può essere None o un uuid testuale
+            ser=None
             alias=True
-            managed_series = series_uuid
 
-            clean_cache = series_uuid is None
             #####
 
             # QUI INSERIRE LA SCELTA DELLA TABELLA IN FASE DI SET
@@ -244,7 +230,7 @@ class HFeature(ABC):
                 alias=False
 
             if alias:
-                managed_series=HSeries(setups['operands']['__ALIAS__'], delayed=False)
+                ser=HSeries(setups['operands']['__ALIAS__'], delayed=False)
                 #NON DEVE ESSERE RICONFIGURATO IL MODELLO DI CALCOLO
                 try:
                     setups.pop('operator')
@@ -261,37 +247,23 @@ class HFeature(ABC):
                 except Exception as e:
                     pass
             else:
-
                 try:
-                    existing_series=self[param] 
-                    assert series_uuid is None or series_uuid == existing_series.uuid
-                    managed_series=existing_series
-                except AssertionError as e:
-                    raise(Exception( f"parameter {param} exists for {self.feature.label} and the linked series has different uuid"  ))
-                except KeyError as e:
+                    # TEST CASO 2 
+                    ser=self[param]
+                except Exception as e:
                     pass
-
-                """
-                managed_series può assumere questi valori:
-                    1) None, nel caso sia stato fornito series_uuid nullo e non esiste già l'associazione feature/parameter richiesta
-                    2) series_uuid nel caso questo sia stato fornito e non esiste l'associazione feature/parameter 
-                    3) existing_series (HSeries) nel caso sia stato fornito series_uuid nullo o uguale a quello della serie specificata dall'associazione
-                       feature/parameter già esistente
-
-                """
-
-                managed_series=HSeries.setup(uuid=managed_series,**setups)
 
                 try:
                     # SE E' GIA ASSOCIATA ALLA FEATURE CANCELLO CACHE
-                    if clean_cache: managed_series.clean_cache()
+                    ser.clean_cache()
                 except AttributeError as e:
                     pass
            
             # RICONFIURO SERIE
+            ser=HSeries.setup(uuid=ser,**setups)
 
             # QUI ser è completamnte definito
-            self[param]={"series":managed_series, "ordinal":ordinal}
+            self[param]={"series":ser, "ordinal":ordinal}
 
         def __len__(self):
 

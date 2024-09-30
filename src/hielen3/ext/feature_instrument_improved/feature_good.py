@@ -36,8 +36,6 @@ class Feature(HFeature):
     def __channel_config__(
             self, 
             param_name,
-            series_uuid=None,
-            datatable=None,
             cache=None,
             operands=None,
             operator=None,
@@ -144,41 +142,31 @@ class Feature(HFeature):
             except Exception as e:
                 coefficients = None
     
-            print ("uno :", start_time)
+            if coefficients is not None and operator is not None and operator not in ("__ALIAS__"):
+
+                opz["COEFS"] = json.dumps(coefficients)
+                modules.update( {"calc":"hielen3.tools.calc"} )
+                operator=f"calc.poly_trans2({operator},*COEFS)"
 
 
-            if operator not in ("__VOID__","__ALIAS__"):
+            if start_time is None:
+                if zero_time is None or "first" in zero_time:
+                    start_time=timestamp
+                else:
+                    start_time=zero_time
 
-                if coefficients is not None and operator is not None: 
-
-                    opz["COEFS"] = json.dumps(coefficients)
-                    modules.update( {"calc":"hielen3.tools.calc"} )
-                    operator=f"calc.poly_trans2({operator},*COEFS)"
-
-
-                if start_time is None:
-                    if zero_time is None or "first" in zero_time:
-                        start_time=timestamp
-                    else:
-                        start_time=zero_time
-
-                if zero_time is not None and "first" in zero_time:
-                    zero_time = datetime64(start_time)
+            if zero_time is not None and "first" in zero_time:
+                zero_time = datetime64(start_time)
 
 
-                if operator is not None: # and operator not in ("__VOID__","__ALIAS__"):
-                    operator= f"{operator} - Z + OFFSET"
-
-
-            print ("due :", start_time)
+            if operator is not None and operator not in ("__VOID__","__ALIAS__"):
+                operator= f"{operator} - Z + OFFSET"
 
         print ("OPERATOR", operator)
 
         config=dict(
                 param=param_name,
                 ordinal=ordinal,
-                series_uuid=series_uuid,
-                datatable=datatable,
                 cache=cache,
                 mu=mu,
                 modules=modules,
@@ -203,43 +191,42 @@ class Feature(HFeature):
 
         self.parameters.set(**config)
 
+        print ( "AAAA\n\nZERO TIME: ", zero_time, "\n\nAAAA" )
 
-        if operator not in ("__VOID__","__ALIAS__"):
-            print ( "AAAA\n\nZERO TIME: ", zero_time, "\n\nAAAA" )
-
-            # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
-            if zero_time is not None:
-                #df=self.parameters[param_name].data(cache='active')
-                df=self.parameters[param_name].generator.__generate__(times=slice(zero_time,None), cache='refresh')
-                try:
-                    df=df.to_frame()
-                except Exception as e:
-                    pass
-
-
-                df=df[df[df.columns[0]].notna()]
-
-
-                iloc_idx = df.index.get_indexer([zero_time], method='nearest')
-
-
-                try:
-                    config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
-                except Exception as e:
-                    print (f"WARN configuring ZERO for param {param_name}:", e)
-
-            if start_offset is not None:
-                try:
-                    config['operands']['OFFSET'] = start_offset
-                except Exception as e:
-                    print (f"WARN configuring OFFSET for param {param_name}:", e)
+        # ATTENZIONE QUESTA E' UNA FEATURE COMUNE A TUTTE LE SERIE DATI IN DELTA
+        if zero_time is not None:
+            #df=self.parameters[param_name].data(cache='active')
+            df=self.parameters[param_name].generator.__generate__(times=slice(zero_time,None), cache='refresh')
+            try:
+                df=df.to_frame()
+            except Exception as e:
+                pass
 
             
-            if start_offset is not None or zero_time is not None:
-                try:
-                    self.parameters.set(**config)
-                except Exception as e:
-                    print (f"WARN configuring param {param_name}:", e)
+
+            df=df[df[df.columns[0]].notna()]
+
+
+            iloc_idx = df.index.get_indexer([zero_time], method='nearest')
+
+
+            try:
+                config['operands']['Z'] = df.iloc[iloc_idx].squeeze()
+            except Exception as e:
+                print (f"WARN configuring ZERO for param {param_name}:", e)
+
+        if start_offset is not None:
+            try:
+                config['operands']['OFFSET'] = start_offset
+            except Exception as e:
+                print (f"WARN configuring OFFSET for param {param_name}:", e)
+
+        
+        if start_offset is not None or zero_time is not None:
+            try:
+                self.parameters.set(**config)
+            except Exception as e:
+                print (f"WARN configuring param {param_name}:", e)
 
 
     def config(self, multi_channel_info_json=None, timestamp=None,  **kwargs): 

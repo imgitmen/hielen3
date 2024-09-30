@@ -549,7 +549,7 @@ class HSeries:
             try:
                 out = db[self.datatable][self.activeuuids,times]
             except KeyError as e:
-                #DEBUG raise e
+                #raise e #DEBUG
                 pass
 
             if not out.empty:
@@ -596,12 +596,14 @@ class HSeries:
                 pass
 
             gen.index=DatetimeIndex(gen.index)
+    
+            
+            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()
 
-            out = concat([out,gen]).sort_index()
+
             out.index.name = "timestamp"
 
             out=out[self.activeuuids]
-
 
 
             if self.valid_range_min is not None:
@@ -619,7 +621,7 @@ class HSeries:
 
         except Exception as e:
             # print ("WARN series GLOBAL: ", e)
-            # raise e #DEBUG
+            raise e #DEBUG
             pass
 
         if cache in ("active","data","refresh") and not out.empty and not justnew:
