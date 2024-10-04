@@ -621,7 +621,7 @@ class HSeries:
 
         except Exception as e:
             # print ("WARN series GLOBAL: ", e)
-            raise e #DEBUG
+            # raise e #DEBUG
             pass
 
         if cache in ("active","data","refresh") and not out.empty and not justnew:

@@ -1048,7 +1048,13 @@ class MongodbHielenCache():
 
     def __init__(self,connection=None,table=None):
 
-        self.uri = "{dialect}://{usr}:{pwd}@{host}:{port}/".format(**connection) 
+        port=connection.pop('port')
+
+        self.uri = "{dialect}://{usr}:{pwd}@{host}/".format(**connection)
+
+        if port is not None:
+            self.uri = "{uri}:{port}".format(uri=self.uri,port=port)
+
         self.db = connection["db"]
         self.col = table
         self.keys = ['timestamp','series']
@@ -1226,16 +1232,17 @@ class MongodbHielenCache():
         if key["timestamp"] is not None:
             value=value.loc[key["timestamp"]]
     
-        #print (value)
-        value=value.reset_index()
+        if not value.empty:
+            #print (value)
+            value=value.reset_index()
 
-        value['DATE'] = value['timestamp'].apply(lambda x: (datetime64(x.date()) - datetime64('1970-01-01')).astype('timedelta64[s]').astype(int))
-        value['TIME'] = value.apply(lambda x: x['timestamp'].timestamp() - x['DATE'], axis=1)
-        value=value.drop('timestamp',axis=1)
-        value.columns=['val','DATE','TIME']
+            value['DATE'] = value['timestamp'].apply(lambda x: (datetime64(x.date()) - datetime64('1970-01-01')).astype('timedelta64[s]').astype(int))
 
+            value['TIME'] = value.apply(lambda x: x['timestamp'].timestamp() - x['DATE'], axis=1)
+            value=value.drop('timestamp',axis=1)
+            value.columns=['val','DATE','TIME']
 
-        mf.insertUpdate(self.uri, self.db, self.col, value, series)
+            mf.insertUpdate(self.uri, self.db, self.col, value, series)
 
     
     def pop(self,key):
