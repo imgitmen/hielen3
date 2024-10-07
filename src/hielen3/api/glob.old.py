@@ -1,20 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
+from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine, italferdatarate, thresholds, thresholds_v2
 import falcon
-from . import prototypes
-from . import  query
-from . import  query2
-from . import  features
-from . import  actions
-from . import  actionschemata
-from . import  hls
-from . import  queue
-from . import  status
-from . import  awskine
-from . import  italferdatarate
-from . import  thresholds
-from . import  thresholds_v2
 
 """
 @hug.not_found()
@@ -62,34 +50,34 @@ def dataman():
     return [query]
 
 @hug.extend_api("/query2")
-def dataman2():
+def dataman():
     """ Data manager """
     return [query2]
 
 @hug.extend_api("/status")
-def statman():
+def dataman():
     """ Data manager """
     return [status]
 
-@hug.extend_api("/thresholds")
-def threshman():
-    """ api per cambiare thresholds """
-    return [thresholds]
-
-@hug.extend_api("/thresholds_v2")
-def threshman2():
-    """ api per cambiare thresholds """
-    return [thresholds_v2]
-
 @hug.extend_api("/awskineresources")
-def kineresman():
+def dataman():
     """ api per aws kinemetrics """
     return [awskine]
  
 @hug.extend_api("/samplerate")
-def sampleman():
+def dataman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
+
+@hug.extend_api("/thresholds")
+def dataman():
+    """ api per cambiare thresholds """
+    return [thresholds]
+
+@hug.extend_api("/thresholds2")
+def dataman():
+    """ api per cambiare thresholds """
+    return [thresholds_v2]
 
 
 

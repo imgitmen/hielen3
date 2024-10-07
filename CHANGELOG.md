@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.3.26** ##
+### 7 Ottobre 2024 ###
+- Potenziato la ricerca delle thresholds inserendo come campi (cntxt, series,feature,parameter,label,ttype) ognuno di essi come array. Modificato l'output inserendo tutte le info utilizzate per la ricerca
+
+CHANGELOG
+=========
 ## **V3.3.25**
 ### 20 Settembre 2024 ###
 - introdotti i concetti di "Serie di riferimento" e "filtro" e inserite apposite funzioni nel modulo tools/calc
