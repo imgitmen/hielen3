@@ -122,7 +122,7 @@ RESPONSE CODES:
 
 
     key = {
-            "contexts":cntxt,
+            "context":cntxt,
             "series":series,
             "feature":feature,
             "parameter":parameter,
@@ -130,7 +130,7 @@ RESPONSE CODES:
             "ttype":ttype,
             }
     
-    # print (key) #DEBUG
+    print (key) #DEBUG
 
     try:
         #tdf=db['series_thresholds_info'][key].replace(nan,None)

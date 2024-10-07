@@ -35,5 +35,8 @@ Backlog = "BACKLOG.md"
     "Thresholds" = "docs/API Reference/thresholds.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
+    "Thresholds_v2" = "docs/API Reference/thresholds_v2.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
     "Query" = "docs/API Reference/query.md"
 
