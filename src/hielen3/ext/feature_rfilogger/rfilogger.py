@@ -268,12 +268,22 @@ class Feature(HFeature):
 def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', func=None, **kwargs ):
 
 
-    f=Path(conf['incomepath']) / folder
+    #test su numood
+    incomepath=Path(conf['incomepath']) / "test"
+
+    #ambiente italferr
+    if not incomepath.is_dir():
+        incomepath=Path(conf['incomepath'])
+
+    f=incomepath / folder
+
 
     if not f.is_dir():
-        f=Path(conf['incomepath']) #/ 'incomes'
+        #f=Path(conf['incomepath']) / 'incomes'
+        f=incomepath
 
     folder = f
+
 
     def __extract_gestecno__(path):
         a=DataFrame([],dtype='float64')
