@@ -3801,11 +3801,23 @@
 
 <span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;gestecno_rfi/data&#39;</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span> <span class="p">):</span>
 
-    <span class="n">f</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;incomepath&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">folder</span>
+    <span class="c1">#test su numood</span>
+
+    <span class="n">incomepath</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;incomepath&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="s2">&quot;test&quot;</span>
+
+    <span class="c1">#ambiente italferr</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">incomepath</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+
+        <span class="n">incomepath</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;incomepath&#39;</span><span class="p">])</span>
+
+    <span class="n">f</span><span class="o">=</span><span class="n">incomepath</span> <span class="o">/</span> <span class="n">folder</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
 
-        <span class="n">f</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">conf</span><span class="p">[</span><span class="s1">&#39;incomepath&#39;</span><span class="p">])</span> <span class="c1">#/ &#39;incomes&#39;</span>
+        <span class="c1">#f=Path(conf[&#39;incomepath&#39;]) / &#39;incomes&#39;</span>
+
+        <span class="n">f</span><span class="o">=</span><span class="n">incomepath</span>
 
     <span class="n">folder</span> <span class="o">=</span> <span class="n">f</span>
 
@@ -4025,11 +4037,23 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">retrive</span><span class="p">(</span><span class="n">serials</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">columns</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">folder</span><span class="o">=</span><span class="s1">&#39;gestecno_rfi/data&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">func</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="w"> </span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">    </span><span class="n">f</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">folder</span>
+<span class="w">    </span><span class="n">#test</span><span class="w"> </span><span class="n">su</span><span class="w"> </span><span class="n">numood</span>
+
+<span class="w">    </span><span class="n">incomepath</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="ss">&quot;test&quot;</span>
+
+<span class="w">    </span><span class="n">#ambiente</span><span class="w"> </span><span class="n">italferr</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">incomepath</span><span class="p">.</span><span class="n">is_dir</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">incomepath</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">f</span><span class="o">=</span><span class="n">incomepath</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">folder</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">is_dir</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">        </span><span class="n">f</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="err">#</span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;incomes&#39;</span>
+<span class="w">        </span><span class="n">#f</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;incomes&#39;</span>
+
+<span class="w">        </span><span class="n">f</span><span class="o">=</span><span class="n">incomepath</span>
 
 <span class="w">    </span><span class="n">folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span>
 
