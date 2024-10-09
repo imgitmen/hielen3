@@ -271,7 +271,7 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
     f=Path(conf['incomepath']) / folder
 
     if not f.is_dir():
-        f=Path(conf['incomepath']) / 'incomes'
+        f=Path(conf['incomepath']) #/ 'incomes'
 
     folder = f
 
@@ -331,7 +331,7 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
 
     #print (times,"\n",orig_times,"\n",dates)
 
-    paths=Series(glob(f'{folder}/*/*/*/*'),dtype='object').apply(Path)
+    paths=Series(glob(f'{folder}/*/*/*/*/*'),dtype='object').apply(Path)
 
     sertime=DataFrame(
                 paths.apply( lambda x: 
