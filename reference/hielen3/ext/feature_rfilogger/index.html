@@ -3390,7 +3390,7 @@
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">is_dir</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">        </span><span class="n">f</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;incomes&#39;</span>
+<span class="w">        </span><span class="n">f</span><span class="o">=</span><span class="k">Path</span><span class="p">(</span><span class="n">conf</span><span class="o">[</span><span class="n">&#39;incomepath&#39;</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="err">#</span><span class="o">/</span><span class="w"> </span><span class="s1">&#39;incomes&#39;</span>
 
 <span class="w">    </span><span class="n">folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span>
 
@@ -3468,7 +3468,7 @@
 
 <span class="w">    </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="n">times</span><span class="p">,</span><span class="ss">&quot;\n&quot;</span><span class="p">,</span><span class="n">orig_times</span><span class="p">,</span><span class="ss">&quot;\n&quot;</span><span class="p">,</span><span class="n">dates</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">paths</span><span class="o">=</span><span class="n">Series</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{folder}/*/*/*/*&#39;</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="k">Path</span><span class="p">)</span>
+<span class="w">    </span><span class="n">paths</span><span class="o">=</span><span class="n">Series</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{folder}/*/*/*/*/*&#39;</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="k">Path</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">sertime</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span>
 
