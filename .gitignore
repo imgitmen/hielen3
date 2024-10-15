@@ -10,3 +10,5 @@ vault*
 docs*
 testing*
 ATTENZIONE
+.venv
+.vscode
