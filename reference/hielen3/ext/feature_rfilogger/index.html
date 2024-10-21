@@ -3406,6 +3406,12 @@
 
 <span class="w">    </span><span class="n">folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span>
 
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    rewritten for compatibilitiy with latin1 encoding</span>
+
+<span class="ss">    &quot;&quot;&quot;</span>
+
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__extract_gestecno__</span><span class="p">(</span><span class="k">path</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="n">a</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
@@ -3420,13 +3426,45 @@
 
 <span class="w">                </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="o">[</span><span class="n">a[0</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="k">match</span><span class="p">(</span><span class="s1">&#39;^\d{4}-\d{2}&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)).</span><span class="n">notna</span><span class="p">()</span><span class="err">]</span>
 
-<span class="w">            </span><span class="n">a</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> &#39;times&#39;, *a.columns[1:</span><span class="o">]</span><span class="w"> </span><span class="err">]</span>
+<span class="w">        </span><span class="ow">except</span><span class="w">  </span><span class="n">UnicodeDecodeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">a</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="k">path</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">parse_dates</span><span class="o">=[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="ss">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="w"> </span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;latin1&#39;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">pass</span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">a</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> &#39;times&#39;, *a.columns[1:</span><span class="o">]</span><span class="w"> </span><span class="err">]</span>
+
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    def __extract_gestecno__(path):</span>
+
+<span class="ss">        a=DataFrame([],dtype=&#39;float64&#39;)</span>
+
+<span class="ss">        try:</span>
+
+<span class="ss">            a=read_csv(path,skiprows=2,parse_dates=True,header=None)</span>
+
+<span class="ss">            if a.empty:</span>
+
+<span class="ss">                a = read_csv(path,parse_dates=True,header=None)</span>
+
+<span class="ss">                a = a[a[0].apply(lambda x: match(&#39;^\d{4}-\d{2}&#39;,x)).notna()]</span>
+
+<span class="ss">            a.columns = [ &#39;times&#39;, *a.columns[1:] ]</span>
+
+<span class="ss">        except Exception as e:</span>
+
+<span class="ss">            pass</span>
+
+<span class="ss">        return a</span>
+
+<span class="ss">    &quot;&quot;&quot;</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">func</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
