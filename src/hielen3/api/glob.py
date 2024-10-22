@@ -74,7 +74,7 @@ def statman():
 @hug.extend_api("/thresholds")
 def threshman():
     """ api per cambiare thresholds """
-    return [thresholds]
+    return [thresholds_v2]
 
 @hug.extend_api("/thresholds_v2")
 def threshman2():

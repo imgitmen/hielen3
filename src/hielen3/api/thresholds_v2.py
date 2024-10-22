@@ -4,7 +4,7 @@ import hug
 import falcon
 import json
 from hielen3 import db
-from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict
+from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict, clean_input
 from hielen3.feature import HFeature,HSeries
 from pandas import Series
 from numpy import nan
@@ -19,23 +19,7 @@ class ThresholdSchema(Schema):
     color = fields.Str(required=False)
     recipients = fields.Str(required=False)
 
-# TODO da mettere in utils
-
-def clean_input(inp):
-
-    if isinstance(inp,str): inp=inp.split(",")
-    
-    if not isinstance(inp,(list,set,tuple)) and inp is not None:
-        inp=[inp]
-
-    if not inp is None: inp = [ a for a in inp if a is not None and a.__len__()]
-    if not inp is None and not inp.__len__(): inp = None
-    
-    return inp
-
-
 # GET
-
 
 @hug.get("/")
 def retrive_thresholds(

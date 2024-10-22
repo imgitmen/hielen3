@@ -40,3 +40,30 @@ def chiusura(key=None, level=None):
     
     return key
         
+def parents(key=None, level=None):
+    
+    key=clean_input(key)
+
+    if key is None:
+        key = []  
+    
+    oldkey=[]
+
+    while key.__len__() > oldkey.__len__() and (level is None or level):
+        oldkey=key.copy()
+        try:
+            newkey=db['context_context'][{"descendant":key}]['ancestor']
+            #fltr=newkey['homogeneous'].astype(bool)
+            #newkey=list(newkey[fltr]["descendant"])
+        except KeyError as e:
+            newkey=oldkey
+
+        key=set([*key,*newkey])
+
+        if level is not None: level -= 1
+
+    key = list(db["context"][key].index)
+    
+    return key
+ 
+
