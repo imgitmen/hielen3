@@ -16,7 +16,7 @@ from json import loads, dumps
 from numbers import Number
 import os
 import re
-from crudLib import mongofuncs as mf
+#from crudLib import mongofuncs as mf
 from uuid import UUID
 
 def dbinit(conf):
@@ -1043,7 +1043,7 @@ class MariadbHielenCache(Mariadb):
         return self.__getitem__(key,delete=True)
 
 
-
+'''
 class MongodbHielenCache():
 
     def __init__(self,connection=None,table=None):
@@ -1247,3 +1247,4 @@ class MongodbHielenCache():
     
     def pop(self,key):
         return self.__getitem__(key,delete=True)
+'''
