@@ -2,12 +2,12 @@
 # coding=utf-8
 
 import json
-import md5
 from datetime import datetime
 from re import split
 from re import sub
 from re import findall
 from time import mktime
+from hashlib import md5
 from importlib import import_module
 from falcon import HTTPNotAcceptable
 from falcon import HTTP_OK
