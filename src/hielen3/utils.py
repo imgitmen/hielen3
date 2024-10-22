@@ -13,7 +13,6 @@ from falcon import HTTPNotAcceptable
 from falcon import HTTP_OK
 from falcon import Response
 from falcon import Request 
-from falcon import hashlib
 from marshmallow import Schema
 from marshmallow import fields
 from numpy import datetime64

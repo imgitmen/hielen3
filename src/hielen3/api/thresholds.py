@@ -4,7 +4,7 @@ import hug
 import falcon
 import json
 from hielen3 import db
-from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict, cleaninput
+from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict
 from hielen3.feature import HFeature,HSeries
 from pandas import Series
 from marshmallow import Schema, fields
