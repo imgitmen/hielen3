@@ -186,7 +186,7 @@ def get_descendants_endpoint(
     cntxt,
     descendant,
     dtype=None,
-    label=None
+    label=None,
     request=None,
     response=None,
     **kwargs
