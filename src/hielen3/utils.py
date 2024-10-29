@@ -24,14 +24,14 @@ from pandas import DataFrame
 def uuid():
     return str(uuid4())
 
-def clean_input(inp):
+def clean_input(inp, trim_none = True ):
  
     if isinstance(inp,str): inp=inp.split(",")
  
     if not isinstance(inp,(list,set,tuple)) and inp is not None:
         inp=[inp]
  
-    if not inp is None: inp = [ a for a in inp if a is not None and a.__len__()]
+    if not inp is None: inp = [ a for a in inp if not trim_none or (a is not None and (not isinstance(a,str) or a.__len__())) ]
     if not inp is None and not inp.__len__(): inp = None
  
     return inp

@@ -4,6 +4,9 @@ import hug
 import falcon
 from hielen3 import db
 from hielen3.utils import ResponseFormatter
+from hielen3.utils import clean_input
+from hielen3.contextmanager import lineages
+from hielen3.contextmanager import ancestors
 
 #GET
 
@@ -27,6 +30,8 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
+    cntxt=clean_input(cntxt)
+
     try:
         out.data=db["context"][cntxt].to_dict(orient="records")
     except KeyError as e:
@@ -34,7 +39,7 @@ RESPONSE CODES:
         out.status = falcon.HTTP_NOT_FOUND
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 
@@ -76,11 +81,13 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
 
+    cntxt=clean_input(cntxt)
+
     try:
         db["context"][cntxt]={"label":label,"description":description}
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 
@@ -106,6 +113,8 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
+    cntxt=clean_input(cntxt)
+
     try:
         out.data=db["context"].pop(cntxt).to_dict(orient="records")
     except KeyError as e:
@@ -113,7 +122,7 @@ RESPONSE CODES:
         out.status = falcon.HTTP_NOT_FOUND
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 
@@ -167,14 +176,21 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
+    cntxt=clean_input(cntxt)
+
+    descendant = clean_input(descendant)
+
     try:
-        out.data=db["context"][cntxt].to_dict(orient="records")
-    except KeyError as e:
-        out.message = str(e)
-        out.status = falcon.HTTP_NOT_FOUND
+
+        out.data=[ c for c in lineage(cntxt) if descendant is None or c in descendant  ]
+    
+    except ValueError as e:
+        out.message = "Context is None: "+str(e)
+!       out.status = falcon.HTTP_CONFLICT
+
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 
@@ -212,6 +228,7 @@ RESPONSE CODES:
 def create_descendants_param(
     cntxt,
     descendant,
+    homogeneous=None,
     dtype=None,
     label=None,
     request=None,
@@ -231,11 +248,52 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
 
+    cntxt=clean_input(cntxt)
+    
+    descendant = clean_input(descendant)
+    dtype = clean_input(dtype,trim_none=False)
+    label = clean_input(label,trim_none=False)
+    homogeneous = clean_input(homogeneous,trim_none=False)
+    
     try:
-        db["context"][cntxt]={"label":label,"description":description}
+        if cntxt is None:
+            raise Exception ( "cntxt required" )
+        if cntxt.__len__() > 1:
+            raise Exception ( "cntxt must be exactly one" )
+        if descendant is None:
+            raise Exception ( "descendant required" )
+
+        if dtype is not None and dtype.__len__() > 1 and dtype.__len__() != descendant.__len__():
+            raise ValueError ("dtype length invalid")
+
+        if label is not None and label.__len__() > 1 and label.__len__() != descendant.__len__():
+            raise ValueError ("label length invalid")
+
+        if homogeneous is not None and homogeneous.__len__() > 1 and homogeneous.__len__() != descendant.__len__():
+            raise ValueError ("homogeneous length invalid")
+
+        if dtype is not None and dtype.__len__() == 1:
+            v = dtype[0]
+            dtype=[ v for a in descendant ]
+    
+
+        if label is not None and label.__len__() == 1:
+            v = label[0]
+            label=[ v for a in descendant ]
+   
+
+        if homogeneous is not None and homogeneous.__len__() == 1:
+            v = homogeneous[0]
+            homogeneous=[ v for a in descendant ]
+
+        homogeneous=map( lambda x: int(x is None) or x, homogeneous)
+
+        for i in descendants:
+            db["context_context"][{"ancestor":cntxt,"descendant":descendant[i]}]={"label":label[i],"homogeneous":homogeneous[i],"klass":dtype[i]}
+
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 
@@ -296,7 +354,7 @@ RESPONSE CODES:
         out.status = falcon.HTTP_NOT_FOUND
     except Exception as e:
         out.message = str(e)
-        out.status = falcon.HTTP_INTERNAL_SERVER_ERROR
+        out.status = falcon.HTTP_CONFLICT
 
     response = out.format(response=response, request=request)
 

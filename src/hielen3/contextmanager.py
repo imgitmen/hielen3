@@ -1,25 +1,13 @@
 # coding: utf-8
 from hielen3 import db
+from hielen3.utils import clean_input        
         
-def clean_input(inp):
- 
-    if isinstance(inp,str): inp=inp.split(",")
- 
-    if not isinstance(inp,(list,set,tuple)) and inp is not None:
-        inp=[inp]
- 
-    if not inp is None: inp = [ a for a in inp if a is not None and a.__len__()]
-    if not inp is None and not inp.__len__(): inp = None
- 
-    return inp
-    
-        
-def chiusura(key=None, level=None):
+def lineages(key=None, level=None):
     
     key=clean_input(key)
 
     if key is None:
-        key = []  
+        raise ValueError ("key must not be None")  
     
     oldkey=[]
 
@@ -40,12 +28,12 @@ def chiusura(key=None, level=None):
     
     return key
         
-def parents(key=None, level=None):
+def ancestors(key=None, level=None):
     
     key=clean_input(key)
 
     if key is None:
-        key = []  
+        raise ValueError ("key must not be None")  
     
     oldkey=[]
 
