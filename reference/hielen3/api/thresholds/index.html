@@ -720,6 +720,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../contexts/" class="md-nav__link">
+        Contexts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../features/" class="md-nav__link">
         Features
       </a>
@@ -1132,20 +1146,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../thresholds_v2/" class="md-nav__link">
-        Thresholds V2
-      </a>
     </li>
   
 
@@ -3965,7 +3965,9 @@
 <span class="normal">704</span>
 <span class="normal">705</span>
 <span class="normal">706</span>
-<span class="normal">707</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3977,11 +3979,13 @@
 
 <span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">hasher</span><span class="p">,</span> <span class="n">ResponseFormatter</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">dataframe2jsonizabledict</span>
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">JsonValidable</span><span class="p">,</span> <span class="n">hasher</span><span class="p">,</span> <span class="n">ResponseFormatter</span><span class="p">,</span> <span class="n">uuid</span><span class="p">,</span> <span class="n">dataframe2jsonizabledict</span><span class="p">,</span> <span class="n">clean_input</span>
 
 <span class="kn">from</span> <span class="nn">hielen3.feature</span> <span class="kn">import</span> <span class="n">HFeature</span><span class="p">,</span><span class="n">HSeries</span>
 
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">fields</span>
 
@@ -4007,9 +4011,15 @@
 
     <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4059,7 +4069,7 @@
 
 <span class="sd">- **series**: array di uuid delle serie per cui recuperare le info</span>
 
-<span class="sd">- **labels**: array di labels per cui recuperare le info:</span>
+<span class="sd">- **label**: array di labels per cui recuperare le info:</span>
 
 <span class="sd">- **ttype**: array di valori ttype validi</span>
 
@@ -4075,6 +4085,10 @@
 
 <span class="sd">                &quot;series&quot;:&quot;...&quot;,</span>
 
+<span class="sd">                &quot;feature&quot;:&quot;...&quot;,</span>
+
+<span class="sd">                &quot;parameter&quot;:&quot;...&quot;,</span>
+
 <span class="sd">                &quot;label&quot;:&quot;...&quot;,</span>
 
 <span class="sd">                &quot;ttype&quot;:&quot;...&quot;,</span>
@@ -4083,7 +4097,9 @@
 
 <span class="sd">                &quot;color&quot;:...,</span>
 
-<span class="sd">                &quot;recipients:&quot;...&quot;</span>
+<span class="sd">                &quot;recipients:&quot;...&quot;,</span>
+
+<span class="sd">                &quot;context&quot;:&quot;...&quot;</span>
 
 <span class="sd">            },</span>
 
@@ -4101,41 +4117,41 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">series</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
 
-        <span class="n">series</span><span class="o">=</span><span class="p">[</span><span class="n">series</span><span class="p">]</span>
+    <span class="n">feature</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">series</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">series</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">series</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">label</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">ttype</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">ttype</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="p">{</span>
 
-        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">labels</span><span class="p">]</span>
+            <span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">,</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
+            <span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">series</span><span class="p">,</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">labels</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">labels</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">,</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="s2">&quot;parameter&quot;</span><span class="p">:</span><span class="n">parameter</span><span class="p">,</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span>
 
-        <span class="n">ttype</span><span class="o">=</span><span class="p">[</span><span class="n">ttype</span><span class="p">]</span>
+            <span class="s2">&quot;ttype&quot;</span><span class="p">:</span><span class="n">ttype</span><span class="p">,</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">ttype</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ttype</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
+            <span class="p">}</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ttype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">ttype</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="c1">#DEBUG print ({&quot;series&quot;:series,&quot;labels&quot;:labels})</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="c1">#DEBUG</span>
 
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds&#39;</span><span class="p">][{</span><span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">series</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">labels</span><span class="p">,</span><span class="s2">&quot;ttype&quot;</span><span class="p">:</span><span class="n">ttype</span><span class="p">}]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+        <span class="c1">#tdf=db[&#39;series_thresholds_info&#39;][key].replace(nan,None)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds_info&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">nan</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -4161,9 +4177,15 @@
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4181,17 +4203,23 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">retive_s_l_thresholds</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4209,15 +4237,15 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">retive_s_l_t_thresholds2</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="p">,</span>
 
@@ -4237,7 +4265,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># POST</span>
 
@@ -4357,13 +4385,13 @@
 
     <span class="k">return</span> <span class="n">create_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">thresholds</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">create_s_l_thresholds</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="p">,</span>
 
@@ -4415,13 +4443,13 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">labels</span><span class="p">]</span>
+        <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">label</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">label</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
@@ -4439,7 +4467,7 @@
 
     <span class="n">thresholds</span><span class="o">=</span><span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">label</span><span class="p">:</span>
 
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ttype</span><span class="p">:</span>
 
@@ -4449,13 +4477,13 @@
 
     <span class="k">return</span> <span class="n">create_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">thresholds</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">create_s_l_t_thresholds</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="p">,</span>
 
@@ -4477,11 +4505,11 @@
 
 <span class="sd">DESCRIZIONE:</span>
 
-<span class="sd">**ALIAS di POST /thresholds/{labels}**</span>
+<span class="sd">**ALIAS di POST /thresholds/{label}**</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">create_s_l_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">recipients</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">create_s_l_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">recipients</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
 
 <span class="c1"># DELETE</span>
 
@@ -4491,7 +4519,7 @@
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4533,35 +4561,11 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">series</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">series</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">label</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 
-        <span class="n">series</span><span class="o">=</span><span class="p">[</span><span class="n">series</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">series</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">series</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">series</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">labels</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-        <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">labels</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">labels</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">labels</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">labels</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span> <span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">set</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-        <span class="n">ttype</span><span class="o">=</span><span class="p">[</span><span class="n">ttype</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">ttype</span> <span class="o">=</span> <span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">ttype</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()]</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">ttype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">ttype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span> <span class="n">ttype</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">ttype</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">ttype</span><span class="p">)</span>
 
     <span class="c1">#DEBUG print ({&quot;series&quot;:series,&quot;labels&quot;:labels})</span>
 
@@ -4569,7 +4573,7 @@
 
         <span class="k">if</span> <span class="n">series</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;series not provided&quot;</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">series</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">labels</span><span class="p">})</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;series&quot;</span><span class="p">:</span><span class="n">series</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">})</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -4595,7 +4599,7 @@
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4615,15 +4619,15 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">delete_s_l_thresholds</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -4643,15 +4647,15 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{labels}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{series}</span><span class="s2">/</span><span class="si">{label}</span><span class="s2">/</span><span class="si">{ttype}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">delete_s_l_t_thresholds</span><span class="p">(</span>
 
     <span class="n">series</span><span class="p">,</span>
 
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
 
     <span class="n">ttype</span><span class="p">,</span>
 
@@ -4671,7 +4675,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -4679,11 +4683,14 @@
 <div class="codehilite"><pre><span></span><code><span class="n">db</span>
 </code></pre></div>
 
+<div class="codehilite"><pre><span></span><code><span class="n">nan</span>
+</code></pre></div>
+
 <h2 id="functions">Functions</h2>
 <h3 id="create_s_l_t_thresholds">create_s_l_t_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_s_l_t_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="p">,</span>
     <span class="n">value</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4695,16 +4702,16 @@
 </code></pre></div>
 
 <p>DESCRIZIONE:</p>
-<p><strong>ALIAS di POST /thresholds/{labels}</strong></p>
+<p><strong>ALIAS di POST /thresholds/{label}</strong></p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{series}/{labels}/{ttype}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{series}/{label}/{ttype}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">create_s_l_t_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="p">,</span>
 
@@ -4726,18 +4733,18 @@
 
 <span class="ss">DESCRIZIONE:</span>
 
-<span class="ss">**ALIAS di POST /thresholds/{labels}**</span>
+<span class="ss">**ALIAS di POST /thresholds/{label}**</span>
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">create_s_l_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="k">value</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">recipients</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">create_s_l_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="k">value</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="n">recipients</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="create_s_l_thresholds">create_s_l_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_s_l_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="p">,</span>
     <span class="n">value</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4772,13 +4779,13 @@
 </ul>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="err">@</span><span class="n">hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/{series}/{labels}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="err">@</span><span class="n">hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/{series}/{label}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">create_s_l_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="p">,</span>
 
@@ -4830,13 +4837,13 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">set</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">label</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">set</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
-<span class="w">        </span><span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">labels</span><span class="p">]</span>
+<span class="w">        </span><span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="n">__len__</span><span class="p">()]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">label</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">a</span><span class="o">.</span><span class="n">__len__</span><span class="p">()]</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span><span class="w"> </span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
 
@@ -4854,7 +4861,7 @@
 
 <span class="w">    </span><span class="n">thresholds</span><span class="o">=</span><span class="p">[]</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">labels</span><span class="p">:</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">label</span><span class="p">:</span>
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">ttype</span><span class="p">:</span>
 
@@ -4869,7 +4876,7 @@
 <h3 id="create_s_thresholds">create_s_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_s_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x740124074dc0</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74e5f40c19f0</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -4911,7 +4918,7 @@
 <h3 id="create_thresholds">create_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x740124074b20</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74e5f40c1750</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -5042,7 +5049,7 @@
 <h3 id="delete_s_l_t_thresholds">delete_s_l_t_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_s_l_t_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -5054,13 +5061,13 @@
 <p><strong>ALIAS di DELETE /thresholds</strong></p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{series}/{labels}/{ttype}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{series}/{label}/{ttype}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">delete_s_l_t_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="p">,</span>
 
@@ -5080,14 +5087,14 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="delete_s_l_thresholds">delete_s_l_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_s_l_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -5099,13 +5106,13 @@
 <p><strong>ALIAS di DELETE /thresholds</strong></p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{series}/{labels}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{series}/{label}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">delete_s_l_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5125,14 +5132,14 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="delete_s_thresholds">delete_s_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_s_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -5150,7 +5157,7 @@
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5170,14 +5177,14 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="delete_thresholds">delete_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -5203,13 +5210,13 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 </ul>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug.delete</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">delete_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5219,91 +5226,67 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 
 <span class="w">    </span><span class="o">**</span><span class="n">kwargs</span>
 
-<span class="p">)</span><span class="err">:</span>
+<span class="p">)</span><span class="o">:</span>
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="s2">&quot;</span><span class="se">&quot;&quot;</span>
 
-<span class="ss">DESCRIZIONE:</span>
+<span class="s2">DESCRIZIONE:</span>
 
-<span class="ss">**Eliminazione delle soglie. Utilizza variabili esplicite in input**</span>
+<span class="s2">**Eliminazione delle soglie. Utilizza variabili esplicite in input**</span>
 
-<span class="ss">PARAMETRI:</span>
+<span class="s2">PARAMETRI:</span>
 
-<span class="ss">- **series**: array di uuid delle serie per cui modificare le soglie</span>
+<span class="s2">- **series**: array di uuid delle serie per cui modificare le soglie</span>
 
-<span class="ss">- **label**: array tipologie di soglia (&#39;Alarm&#39;,&#39;Alert&#39;,...)</span>
+<span class="s2">- **label**: array tipologie di soglia (&#39;Alarm&#39;,&#39;Alert&#39;,...)</span>
 
-<span class="ss">- **ttype**: array di valori dell&#39;enum Superiore ( &#39;UPPER&#39; ), inferiore ( &#39;LOWER&#39; )</span>
+<span class="s2">- **ttype**: array di valori dell&#39;enum Superiore ( &#39;UPPER&#39; ), inferiore ( &#39;LOWER&#39; )</span>
 
-<span class="ss">OUTPUT:</span>
+<span class="s2">OUTPUT:</span>
 
-<span class="ss">Se le soglie selezionate vengono eleiminate correttamente la loro struttura viene restituita</span>
+<span class="s2">Se le soglie selezionate vengono eleiminate correttamente la loro struttura viene restituita</span>
 
-<span class="ss">all&#39;interno del campo `data` del json di risposta standard</span>
+<span class="s2">all&#39;interno del campo `data` del json di risposta standard</span>
 
-<span class="ss">RESPONSE CODES:</span>
+<span class="s2">RESPONSE CODES:</span>
 
-<span class="ss">- _404 Not Found_: Nel caso in cui le serie richieste non esistano.</span>
+<span class="s2">- _404 Not Found_: Nel caso in cui le serie richieste non esistano.</span>
 
-<span class="ss">- _200 OK_: Nel caso in cui la feature venga creata correttamente.</span>
+<span class="s2">- _200 OK_: Nel caso in cui la feature venga creata correttamente.</span>
 
-<span class="ss">&quot;&quot;&quot;</span>
+<span class="se">&quot;&quot;</span><span class="s2">&quot;</span>
 
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="k">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span><span class="w"> </span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">series</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">series</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="k">set</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
 
-<span class="w">        </span><span class="n">series</span><span class="o">=[</span><span class="n">series</span><span class="o">]</span>
+<span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">ttype</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> a for a in series if a is not None and a.__len__()</span><span class="o">]</span>
+<span class="w">    </span><span class="c1">#DEBUG print ({&quot;series&quot;:series,&quot;labels&quot;:labels})</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">series</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
+<span class="w">    </span><span class="n">try</span><span class="o">:</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span><span class="w"> </span><span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="o">:</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">Exception</span><span class="p">(</span><span class="s2">&quot;series not provided&quot;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="k">set</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="err">[</span><span class="s1">&#39;series_thresholds&#39;</span><span class="err">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">{</span><span class="s2">&quot;series&quot;</span><span class="o">:</span><span class="n">series</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="o">:</span><span class="n">label</span><span class="err">}</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="n">labels</span><span class="o">=[</span><span class="n">labels</span><span class="o">]</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> a for a in labels if a is not None and a.__len__()</span><span class="o">]</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">labels</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span><span class="w"> </span><span class="n">labels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span><span class="w"> </span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">ttype</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="k">set</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
-
-<span class="w">        </span><span class="n">ttype</span><span class="o">=[</span><span class="n">ttype</span><span class="o">]</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n"> a for a in ttype if a is not None and a.__len__()</span><span class="o">]</span>
-
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">ttype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span><span class="w"> </span><span class="n">ttype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
-
-<span class="w">    </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;series&quot;</span><span class="err">:</span><span class="n">series</span><span class="p">,</span><span class="ss">&quot;labels&quot;</span><span class="err">:</span><span class="n">labels</span><span class="err">}</span><span class="p">)</span>
-
-<span class="w">    </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">series</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="ss">&quot;series not provided&quot;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;series_thresholds&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;series&quot;</span><span class="err">:</span><span class="n">series</span><span class="p">,</span><span class="ss">&quot;label&quot;</span><span class="err">:</span><span class="n">labels</span><span class="err">}</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="o">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">args</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span>
 
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">    </span><span class="k">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="o">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">args</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">        </span><span class="n">pass</span>
 
-<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+<span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="k">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span>
 </code></pre></div>
@@ -5312,7 +5295,7 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 <h3 id="retive_s_l_t_thresholds2">retive_s_l_t_thresholds2</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retive_s_l_t_thresholds2</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -5324,13 +5307,13 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 <p><strong>ALIAS di GET /thresholds</strong></p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{series}/{labels}/{ttype}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{series}/{label}/{ttype}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">retive_s_l_t_thresholds2</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="p">,</span>
 
@@ -5350,15 +5333,18 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="retive_s_l_thresholds">retive_s_l_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retive_s_l_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">label</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -5369,15 +5355,21 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 <p><strong>ALIAS di GET /thresholds</strong></p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{series}/{labels}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="ss">&quot;/{series}/{label}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">retive_s_l_thresholds</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">parameter</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5395,15 +5387,18 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="retive_s_thresholds">retive_s_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retive_s_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -5420,9 +5415,15 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 
 <span class="w">    </span><span class="n">series</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">parameter</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5440,15 +5441,18 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">retrive_thresholds</span><span class="p">(</span><span class="n">series</span><span class="o">=</span><span class="n">series</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">ttype</span><span class="o">=</span><span class="n">ttype</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h3 id="retrive_thresholds">retrive_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retrive_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">ttype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">cntxt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -5483,7 +5487,7 @@ all'interno del campo <code>data</code> del json di risposta standard</p>
 <p><strong>series</strong>: array di uuid delle serie per cui recuperare le info </p>
 </li>
 <li>
-<p><strong>labels</strong>: array di labels per cui recuperare le info:</p>
+<p><strong>label</strong>: array di labels per cui recuperare le info:</p>
 </li>
 <li>
 <p><strong>ttype</strong>: array di valori ttype validi</p>
@@ -5495,11 +5499,14 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 <div class="codehilite"><pre><span></span><code>    [
         {
             &quot;series&quot;:&quot;...&quot;,
+            &quot;feature&quot;:&quot;...&quot;,
+            &quot;parameter&quot;:&quot;...&quot;,
             &quot;label&quot;:&quot;...&quot;,
             &quot;ttype&quot;:&quot;...&quot;,
             &quot;value&quot;:...,
             &quot;color&quot;:...,
-            &quot;recipients:&quot;...&quot;
+            &quot;recipients:&quot;...&quot;,
+            &quot;context&quot;:&quot;...&quot;
         },
         ...
     ]
@@ -5518,9 +5525,15 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="w">    </span><span class="n">series</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">labels</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">ttype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">feature</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="k">parameter</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -5570,7 +5583,7 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="ss">- **series**: array di uuid delle serie per cui recuperare le info</span>
 
-<span class="ss">- **labels**: array di labels per cui recuperare le info:</span>
+<span class="ss">- **label**: array di labels per cui recuperare le info:</span>
 
 <span class="ss">- **ttype**: array di valori ttype validi</span>
 
@@ -5586,6 +5599,10 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="ss">                &quot;</span><span class="n">series</span><span class="ss">&quot;:&quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
 
+<span class="ss">                &quot;</span><span class="n">feature</span><span class="ss">&quot;:&quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
+
+<span class="ss">                &quot;</span><span class="k">parameter</span><span class="ss">&quot;:&quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
+
 <span class="ss">                &quot;</span><span class="n">label</span><span class="ss">&quot;:&quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
 
 <span class="ss">                &quot;</span><span class="n">ttype</span><span class="ss">&quot;:&quot;</span><span class="p">...</span><span class="ss">&quot;,</span>
@@ -5594,7 +5611,9 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="ss">                &quot;</span><span class="n">color</span><span class="ss">&quot;:...,</span>
 
-<span class="ss">                &quot;</span><span class="nl">recipients</span><span class="p">:</span><span class="ss">&quot;...&quot;</span>
+<span class="ss">                &quot;</span><span class="nl">recipients</span><span class="p">:</span><span class="ss">&quot;...&quot;</span><span class="p">,</span>
+
+<span class="w">                </span><span class="ss">&quot;context&quot;</span><span class="err">:</span><span class="ss">&quot;...&quot;</span>
 
 <span class="w">            </span><span class="err">}</span><span class="p">,</span>
 
@@ -5612,41 +5631,41 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="ss">    out = ResponseFormatter(status=falcon.HTTP_OK)</span>
 
-<span class="ss">    if isinstance(series,str): series=series.split(&quot;</span><span class="p">,</span><span class="ss">&quot;)</span>
+<span class="ss">    cntxt=clean_input(cntxt)</span>
 
-<span class="ss">    if not isinstance(series,(list,set,tuple)) and series is not None:</span>
+<span class="ss">    series=clean_input(series)</span>
 
-<span class="ss">        series=[series]</span>
+<span class="ss">    feature=clean_input(feature)</span>
 
-<span class="ss">    if not series is None: series = [ a for a in series if a is not None and a.__len__()]</span>
+<span class="ss">    parameter=clean_input(parameter)</span>
 
-<span class="ss">    if not series is None and not series.__len__(): series = None</span>
+<span class="ss">    label=clean_input(label)</span>
 
-<span class="ss">    if isinstance(labels,str): labels=labels.split(&quot;</span><span class="p">,</span><span class="ss">&quot;)</span>
+<span class="ss">    ttype=clean_input(ttype)</span>
 
-<span class="ss">    if not isinstance(labels,(list,set,tuple)) and labels is not None:</span>
+<span class="ss">    key = {</span>
 
-<span class="ss">        labels=[labels]</span>
+<span class="ss">            &quot;</span><span class="n">context</span><span class="ss">&quot;:cntxt,</span>
 
-<span class="ss">    if not labels is None: labels = [ a for a in labels if a is not None and a.__len__()]</span>
+<span class="ss">            &quot;</span><span class="n">series</span><span class="ss">&quot;:series,</span>
 
-<span class="ss">    if not labels is None and not labels.__len__(): labels = None</span>
+<span class="ss">            &quot;</span><span class="n">feature</span><span class="ss">&quot;:feature,</span>
 
-<span class="ss">    if isinstance(ttype,str): ttype=ttype.split(&quot;</span><span class="p">,</span><span class="ss">&quot;)</span>
+<span class="ss">            &quot;</span><span class="k">parameter</span><span class="ss">&quot;:parameter,</span>
 
-<span class="ss">    if not isinstance(ttype,(list,set,tuple)) and ttype is not None:</span>
+<span class="ss">            &quot;</span><span class="n">label</span><span class="ss">&quot;:label,</span>
 
-<span class="ss">        ttype=[ttype]</span>
+<span class="ss">            &quot;</span><span class="n">ttype</span><span class="ss">&quot;:ttype,</span>
 
-<span class="ss">    if not ttype is None: ttype = [ a for a in ttype if a is not None and a.__len__()]</span>
+<span class="ss">            }</span>
 
-<span class="ss">    if not ttype is None and not ttype.__len__(): ttype = None</span>
-
-<span class="ss">    #DEBUG print ({&quot;</span><span class="n">series</span><span class="ss">&quot;:series,&quot;</span><span class="n">labels</span><span class="ss">&quot;:labels})</span>
+<span class="ss">    print (key) #DEBUG</span>
 
 <span class="ss">    try:</span>
 
-<span class="ss">        out.data=db[&#39;series_thresholds&#39;][{&quot;</span><span class="n">series</span><span class="ss">&quot;:series,&quot;</span><span class="n">label</span><span class="ss">&quot;:labels,&quot;</span><span class="n">ttype</span><span class="ss">&quot;:ttype}].to_dict(orient=&quot;</span><span class="n">records</span><span class="err">&quot;</span><span class="p">)</span>
+<span class="ss">        #tdf=db[&#39;series_thresholds_info&#39;][key].replace(nan,None)</span>
+
+<span class="ss">        out.data=db[&#39;series_thresholds_info&#39;][key].replace(nan,None).sort_index().to_dict(orient=&quot;</span><span class="n">records</span><span class="err">&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
@@ -6665,13 +6684,13 @@ be referred to by name in <code>Nested</code> fields.</p>
         
         
           
-          <a href="../thresholds_v2/" class="md-footer__link md-footer__link--next" aria-label="Next: Thresholds V2" rel="next">
+          <a href="../../ext/feature_datetree_filesystem_source/" class="md-footer__link md-footer__link--next" aria-label="Next: Feature Datetree Filesystem Source" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                Thresholds V2
+                Feature Datetree Filesystem Source
               </div>
             </div>
             <div class="md-footer__button md-icon">

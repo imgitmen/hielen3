@@ -720,6 +720,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../contexts/" class="md-nav__link">
+        Contexts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../features/" class="md-nav__link">
         Features
       </a>
@@ -778,6 +792,13 @@
           <li class="md-nav__item">
   <a href="#actiman" class="md-nav__link">
     actiman
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contextman" class="md-nav__link">
+    contextman
   </a>
   
 </li>
@@ -848,13 +869,6 @@
           <li class="md-nav__item">
   <a href="#threshman" class="md-nav__link">
     threshman
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#threshman2" class="md-nav__link">
-    threshman2
   </a>
   
 </li>
@@ -993,20 +1007,6 @@
     <li class="md-nav__item">
       <a href="../thresholds/" class="md-nav__link">
         Thresholds
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../thresholds_v2/" class="md-nav__link">
-        Thresholds V2
       </a>
     </li>
   
@@ -2879,6 +2879,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#contextman" class="md-nav__link">
+    contextman
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#dataman" class="md-nav__link">
     dataman
   </a>
@@ -2944,13 +2951,6 @@
           <li class="md-nav__item">
   <a href="#threshman" class="md-nav__link">
     threshman
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#threshman2" class="md-nav__link">
-    threshman2
   </a>
   
 </li>
@@ -3165,7 +3165,7 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">thresholds</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">thresholds_v2</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">contexts</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -3259,15 +3259,15 @@
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">thresholds_v2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">thresholds</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/thresholds_v2&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/contexts&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">threshman2</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">contextman</span><span class="p">():</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare contexts &quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">thresholds_v2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">contexts</span><span class="p">]</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/awskineresources&quot;</span><span class="p">)</span>
 
@@ -3304,6 +3304,25 @@
 <span class="w">    </span><span class="ss">&quot;&quot;&quot; Action manager &quot;&quot;&quot;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">actions</span><span class="o">]</span>
+</code></pre></div>
+
+</details>
+<h3 id="contextman">contextman</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">contextman</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+
+<p>api per cambiare contexts </p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/contexts&quot;</span><span class="p">)</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">contextman</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare contexts &quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">contexts</span><span class="o">]</span>
 </code></pre></div>
 
 </details>
@@ -3490,26 +3509,7 @@
 
 <span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">thresholds_v2</span><span class="o">]</span>
-</code></pre></div>
-
-</details>
-<h3 id="threshman2">threshman2</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">threshman2</span><span class="p">(</span>
-
-<span class="p">)</span>
-</code></pre></div>
-
-<p>api per cambiare thresholds </p>
-<details class="example">
-<summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/thresholds_v2&quot;</span><span class="p">)</span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">threshman2</span><span class="p">()</span><span class="err">:</span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare thresholds &quot;&quot;&quot;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">thresholds_v2</span><span class="o">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">thresholds</span><span class="o">]</span>
 </code></pre></div>
 
 </details>
