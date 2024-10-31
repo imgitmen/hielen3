@@ -769,8 +769,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create_context" class="md-nav__link">
-    create_context
+  <a href="#create_context_endpoint" class="md-nav__link">
+    create_context_endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_context_param" class="md-nav__link">
+    create_context_param
   </a>
   
 </li>
@@ -804,15 +811,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete_descendant_endpoint" class="md-nav__link">
-    delete_descendant_endpoint
+  <a href="#delete_descendants_endpoint" class="md-nav__link">
+    delete_descendants_endpoint
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete_descendant_param" class="md-nav__link">
-    delete_descendant_param
+  <a href="#delete_descendants_param" class="md-nav__link">
+    delete_descendants_param
   </a>
   
 </li>
@@ -2879,8 +2886,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create_context" class="md-nav__link">
-    create_context
+  <a href="#create_context_endpoint" class="md-nav__link">
+    create_context_endpoint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_context_param" class="md-nav__link">
+    create_context_param
   </a>
   
 </li>
@@ -2914,15 +2928,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete_descendant_endpoint" class="md-nav__link">
-    delete_descendant_endpoint
+  <a href="#delete_descendants_endpoint" class="md-nav__link">
+    delete_descendants_endpoint
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#delete_descendant_param" class="md-nav__link">
-    delete_descendant_param
+  <a href="#delete_descendants_param" class="md-nav__link">
+    delete_descendants_param
   </a>
   
 </li>
@@ -3445,7 +3459,159 @@
 <span class="normal">460</span>
 <span class="normal">461</span>
 <span class="normal">462</span>
-<span class="normal">463</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span>
+<span class="normal">514</span>
+<span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span>
+<span class="normal">558</span>
+<span class="normal">559</span>
+<span class="normal">560</span>
+<span class="normal">561</span>
+<span class="normal">562</span>
+<span class="normal">563</span>
+<span class="normal">564</span>
+<span class="normal">565</span>
+<span class="normal">566</span>
+<span class="normal">567</span>
+<span class="normal">568</span>
+<span class="normal">569</span>
+<span class="normal">570</span>
+<span class="normal">571</span>
+<span class="normal">572</span>
+<span class="normal">573</span>
+<span class="normal">574</span>
+<span class="normal">575</span>
+<span class="normal">576</span>
+<span class="normal">577</span>
+<span class="normal">578</span>
+<span class="normal">579</span>
+<span class="normal">580</span>
+<span class="normal">581</span>
+<span class="normal">582</span>
+<span class="normal">583</span>
+<span class="normal">584</span>
+<span class="normal">585</span>
+<span class="normal">586</span>
+<span class="normal">587</span>
+<span class="normal">588</span>
+<span class="normal">589</span>
+<span class="normal">590</span>
+<span class="normal">591</span>
+<span class="normal">592</span>
+<span class="normal">593</span>
+<span class="normal">594</span>
+<span class="normal">595</span>
+<span class="normal">596</span>
+<span class="normal">597</span>
+<span class="normal">598</span>
+<span class="normal">599</span>
+<span class="normal">600</span>
+<span class="normal">601</span>
+<span class="normal">602</span>
+<span class="normal">603</span>
+<span class="normal">604</span>
+<span class="normal">605</span>
+<span class="normal">606</span>
+<span class="normal">607</span>
+<span class="normal">608</span>
+<span class="normal">609</span>
+<span class="normal">610</span>
+<span class="normal">611</span>
+<span class="normal">612</span>
+<span class="normal">613</span>
+<span class="normal">614</span>
+<span class="normal">615</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3456,6 +3622,12 @@
 <span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span>
 
 <span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">ResponseFormatter</span>
+
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">clean_input</span>
+
+<span class="kn">from</span> <span class="nn">hielen3.contextmanager</span> <span class="kn">import</span> <span class="n">lineages</span>
+
+<span class="kn">from</span> <span class="nn">hielen3.contextmanager</span> <span class="kn">import</span> <span class="n">ancestors</span>
 
 <span class="c1">#GET</span>
 
@@ -3487,6 +3659,8 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">cntxt</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
@@ -3501,7 +3675,7 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -3527,7 +3701,7 @@
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">create_context</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">create_context_param</span><span class="p">(</span>
 
     <span class="n">cntxt</span><span class="p">,</span>
 
@@ -3557,19 +3731,71 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+    <span class="n">description</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">description</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">cntxt</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="n">description</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;cntxt required&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">description</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;description length invalid&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;label length invalid&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">v</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">description</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">cntxt</span> <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">v</span> <span class="o">=</span> <span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">label</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">cntxt</span> <span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">cntxt</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="n">description</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_context_endpoint</span><span class="p">(</span>
+
+      <span class="n">cntxt</span><span class="p">,</span>
+
+      <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+      <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+      <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+      <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+      <span class="o">**</span><span class="n">kwargs</span>
+
+<span class="p">):</span>
+
+    <span class="k">return</span> <span class="n">create_context_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
 
@@ -3599,6 +3825,8 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
@@ -3613,7 +3841,7 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -3683,21 +3911,25 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+    <span class="n">descendant</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">cntxt</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">lineages</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="ow">or</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">descendant</span>  <span class="p">]</span>
 
-    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Context is None: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -3735,17 +3967,19 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">get_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="c1"># POST DESCENDANTS LINKS</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntx}</span><span class="s2">/descendants&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/descendants&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">create_descendants_param</span><span class="p">(</span>
 
     <span class="n">cntxt</span><span class="p">,</span>
 
     <span class="n">descendant</span><span class="p">,</span>
+
+    <span class="n">homogeneous</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
     <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -3769,25 +4003,93 @@
 
 <span class="sd">RESPONSE CODES:</span>
 
+<span class="sd">CAVEAT:</span>
+
+<span class="sd">    il comportamento del gestore dei parametri in ingresso, a basso livello quello di</span>
+
+<span class="sd">    una stringa contenente virgole come un CSV, rimuovendo, però elementi vuoti:</span>
+
+<span class="sd">        es.: a,,c diventa [a,c]</span>
+
+<span class="sd">    questo comportamento affligge i parametri dtype e label (con trim_none=False nel clean_input)</span>
+
+<span class="sd">    che accetterebbero elementi null nella lista</span>
+
 <span class="sd">&quot;&quot;&quot;</span>
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+    <span class="n">descendant</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">homogeneous</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">homogeneous</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">cntxt</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="n">description</span><span class="p">}</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;cntxt required&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;cntxt must be exactly one&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">descendant</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;descendant required&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dtype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;dtype length invalid&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;label length invalid&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">homogeneous</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">homogeneous</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;homogeneous length invalid&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">v</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">dtype</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">descendant</span> <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">label</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">v</span> <span class="o">=</span> <span class="n">label</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">label</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">descendant</span> <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">homogeneous</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="n">v</span> <span class="o">=</span> <span class="n">homogeneous</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">homogeneous</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">descendant</span> <span class="p">]</span>
+
+        <span class="n">homogeneous</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x</span><span class="p">,</span> <span class="n">homogeneous</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">][{</span><span class="s2">&quot;ancestor&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;descendant&quot;</span><span class="p">:</span><span class="n">descendant</span><span class="p">[</span><span class="n">i</span><span class="p">]}]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">:</span><span class="n">homogeneous</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s2">&quot;klass&quot;</span><span class="p">:</span><span class="n">dtype</span><span class="p">[</span><span class="n">i</span><span class="p">]}</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
     <span class="k">return</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntx}</span><span class="s2">/descendants/</span><span class="si">{descendant}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/descendants/</span><span class="si">{descendant}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">create_descendants_endpoint</span><span class="p">(</span>
 
@@ -3819,19 +4121,19 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">create_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">create_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/descendants&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">delete_descendant_param</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">delete_descendants_param</span><span class="p">(</span>
 
     <span class="n">cntxt</span><span class="p">,</span>
 
-    <span class="n">descendants</span><span class="p">,</span>
+    <span class="n">descendant</span><span class="p">,</span>
 
-    <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="c1">#   dtype=None,</span>
 
-    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="c1">#   label=None,</span>
 
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -3855,9 +4157,25 @@
 
     <span class="n">out</span> <span class="o">=</span> <span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+    <span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+    <span class="n">descendant</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
     <span class="k">try</span><span class="p">:</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;cntxt required&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">cntxt</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;cntxt must be exactly one&quot;</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span> <span class="s2">&quot;descendant required&quot;</span> <span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;ancestor&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;descendant&quot;</span><span class="p">:</span><span class="n">descendant</span><span class="p">})</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -3869,7 +4187,7 @@
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -3877,15 +4195,15 @@
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/</span><span class="si">{cntxt}</span><span class="s2">/descendants/</span><span class="si">{descendant}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">delete_descendant_endpoint</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">delete_descendants_endpoint</span><span class="p">(</span>
 
     <span class="n">cntxt</span><span class="p">,</span>
 
     <span class="n">descendant</span><span class="p">,</span>
 
-    <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="c1">#    dtype=None,</span>
 
-    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="c1">#    label=None,</span>
 
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 
@@ -3907,7 +4225,7 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 
-    <span class="k">return</span> <span class="n">delete_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">delete_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -3916,8 +4234,43 @@
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>
-<h3 id="create_context">create_context</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_context</span><span class="p">(</span>
+<h3 id="create_context_endpoint">create_context_endpoint</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_context_endpoint</span><span class="p">(</span>
+    <span class="n">cntxt</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{cntxt}&quot;</span><span class="p">)</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">create_context_endpoint</span><span class="p">(</span>
+
+<span class="w">      </span><span class="n">cntxt</span><span class="p">,</span>
+
+<span class="w">      </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">      </span><span class="n">description</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">      </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">      </span><span class="n">response</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+
+<span class="w">      </span><span class="o">**</span><span class="n">kwargs</span>
+
+<span class="p">)</span><span class="err">:</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">create_context_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="create_context_param">create_context_param</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_context_param</span><span class="p">(</span>
     <span class="n">cntxt</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -3935,7 +4288,7 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/&quot;</span><span class="p">)</span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">create_context</span><span class="p">(</span>
+<span class="n">def</span><span class="w"> </span><span class="n">create_context_param</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">cntxt</span><span class="p">,</span>
 
@@ -3965,15 +4318,47 @@
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">description</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">cntxt</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;label&quot;</span><span class="err">:</span><span class="n">label</span><span class="p">,</span><span class="ss">&quot;description&quot;</span><span class="err">:</span><span class="n">description</span><span class="err">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;cntxt required&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">description</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">description</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;description length invalid&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;label length invalid&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">description</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">description</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">description</span><span class="o">=[</span><span class="n"> v for a in cntxt </span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">label</span><span class="o">=[</span><span class="n"> v for a in cntxt </span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">cntxt[i</span><span class="o">]</span><span class="err">]</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;label&quot;</span><span class="err">:</span><span class="n">label</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;description&quot;</span><span class="err">:</span><span class="n">description</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="err">}</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -3999,7 +4384,7 @@
 <p>RESPONSE CODES:</p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{cntx}/descendants/{descendant}&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{cntxt}/descendants/{descendant}&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">create_descendants_endpoint</span><span class="p">(</span>
 
@@ -4031,7 +4416,7 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">create_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">create_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -4039,6 +4424,7 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_descendants_param</span><span class="p">(</span>
     <span class="n">cntxt</span><span class="p">,</span>
     <span class="n">descendant</span><span class="p">,</span>
+    <span class="n">homogeneous</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4051,15 +4437,26 @@
 <p>PARAMETRI:</p>
 <p>OUTPUT:</p>
 <p>RESPONSE CODES:</p>
+<p>CAVEAT:</p>
+<div class="codehilite"><pre><span></span><code>il comportamento del gestore dei parametri in ingresso, a basso livello quello di
+una stringa contenente virgole come un CSV, rimuovendo, però elementi vuoti:
+    es.: a,,c diventa [a,c]
+
+questo comportamento affligge i parametri dtype e label (con trim_none=False nel clean_input)
+che accetterebbero elementi null nella lista
+</code></pre></div>
+
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{cntx}/descendants&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="ss">&quot;/{cntxt}/descendants&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">create_descendants_param</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">cntxt</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">descendant</span><span class="p">,</span>
+
+<span class="w">    </span><span class="n">homogeneous</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">dtype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -4083,19 +4480,87 @@
 
 <span class="ss">RESPONSE CODES:</span>
 
+<span class="ss">CAVEAT:</span>
+
+<span class="ss">    il comportamento del gestore dei parametri in ingresso, a basso livello quello di</span>
+
+<span class="ss">    una stringa contenente virgole come un CSV, rimuovendo, però elementi vuoti:</span>
+
+<span class="ss">        es.: a,,c diventa [a,c]</span>
+
+<span class="ss">    questo comportamento affligge i parametri dtype e label (con trim_none=False nel clean_input)</span>
+
+<span class="ss">    che accetterebbero elementi null nella lista</span>
+
 <span class="ss">&quot;&quot;&quot;</span>
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CREATED</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">descendant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">dtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">dtype</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">homogeneous</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">homogeneous</span><span class="p">,</span><span class="n">trim_none</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">cntxt</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;label&quot;</span><span class="err">:</span><span class="n">label</span><span class="p">,</span><span class="ss">&quot;description&quot;</span><span class="err">:</span><span class="n">description</span><span class="err">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;cntxt required&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;cntxt must be exactly one&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">descendant</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;descendant required&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">dtype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">dtype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;dtype length invalid&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;label length invalid&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;homogeneous length invalid&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">dtype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dtype</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">dtype</span><span class="o">=[</span><span class="n"> v for a in descendant </span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">label</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">label</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">label</span><span class="o">=[</span><span class="n"> v for a in descendant </span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">homogeneous</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">homogeneous</span><span class="o">=[</span><span class="n"> v for a in descendant </span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">homogeneous</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="w"> </span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">))</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">][</span><span class="n">{&quot;ancestor&quot;:cntxt[0</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;descendant&quot;</span><span class="err">:</span><span class="n">descendant</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="err">}]</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;label&quot;</span><span class="err">:</span><span class="n">label</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;homogeneous&quot;</span><span class="err">:</span><span class="n">homogeneous</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;klass&quot;</span><span class="err">:</span><span class="n">dtype</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="err">}</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -4191,6 +4656,8 @@
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
@@ -4205,7 +4672,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -4213,12 +4680,10 @@
 </code></pre></div>
 
 </details>
-<h3 id="delete_descendant_endpoint">delete_descendant_endpoint</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_descendant_endpoint</span><span class="p">(</span>
+<h3 id="delete_descendants_endpoint">delete_descendants_endpoint</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_descendants_endpoint</span><span class="p">(</span>
     <span class="n">cntxt</span><span class="p">,</span>
     <span class="n">descendant</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -4233,15 +4698,15 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{cntxt}/descendants/{descendant}&quot;</span><span class="p">)</span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">delete_descendant_endpoint</span><span class="p">(</span>
+<span class="n">def</span><span class="w"> </span><span class="n">delete_descendants_endpoint</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">cntxt</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">descendant</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">dtype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="err">#</span><span class="w">    </span><span class="n">dtype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="err">#</span><span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -4263,16 +4728,14 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">delete_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
-<h3 id="delete_descendant_param">delete_descendant_param</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_descendant_param</span><span class="p">(</span>
+<h3 id="delete_descendants_param">delete_descendants_param</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_descendants_param</span><span class="p">(</span>
     <span class="n">cntxt</span><span class="p">,</span>
-    <span class="n">descendants</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">descendant</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -4287,15 +4750,15 @@
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="ss">&quot;/{cntxt}/descendants&quot;</span><span class="p">)</span>
 
-<span class="n">def</span><span class="w"> </span><span class="n">delete_descendant_param</span><span class="p">(</span>
+<span class="n">def</span><span class="w"> </span><span class="n">delete_descendants_param</span><span class="p">(</span>
 
 <span class="w">    </span><span class="n">cntxt</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">descendants</span><span class="p">,</span>
+<span class="w">    </span><span class="n">descendant</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">dtype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="err">#</span><span class="w">   </span><span class="n">dtype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
-<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
+<span class="err">#</span><span class="w">   </span><span class="n">label</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
 <span class="w">    </span><span class="n">request</span><span class="o">=</span><span class="k">None</span><span class="p">,</span>
 
@@ -4319,9 +4782,25 @@
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">descendant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;cntxt required&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">cntxt</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;cntxt must be exactly one&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;descendant required&quot;</span><span class="w"> </span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;ancestor&quot;</span><span class="err">:</span><span class="n">cntxt</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;descendant&quot;</span><span class="err">:</span><span class="n">descendant</span><span class="err">}</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
@@ -4333,7 +4812,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -4413,6 +4892,8 @@
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">cntxt</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
@@ -4427,7 +4908,7 @@
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -4485,7 +4966,7 @@
 
 <span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_descendant_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">get_descendants_param</span><span class="p">(</span><span class="n">cntxt</span><span class="o">=</span><span class="n">cntxt</span><span class="p">,</span><span class="n">descendant</span><span class="o">=</span><span class="n">descendant</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">,</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -4541,21 +5022,25 @@
 
 <span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ResponseFormatter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_OK</span><span class="p">)</span>
 
+<span class="w">    </span><span class="n">cntxt</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">descendant</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clean_input</span><span class="p">(</span><span class="n">descendant</span><span class="p">)</span>
+
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">cntxt</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=[</span><span class="n"> c for c in lineages(cntxt) if not descendant.__len__() or c in descendant  </span><span class="o">]</span>
 
-<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;Context is None: &quot;</span><span class="o">+</span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_INTERNAL_SERVER_ERROR</span>
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
