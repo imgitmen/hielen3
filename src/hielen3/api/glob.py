@@ -14,7 +14,7 @@ from . import  status
 from . import  awskine
 from . import  italferdatarate
 from . import  thresholds
-#from . import  contexts
+from . import  contexts
 
 """
 @hug.not_found()
@@ -76,12 +76,10 @@ def threshman():
     """ api per cambiare thresholds """
     return [thresholds]
 
-'''
 @hug.extend_api("/contexts")
 def contextman():
     """ api per cambiare contexts """
     return [contexts]
-'''
 
 @hug.extend_api("/awskineresources")
 def kineresman():
