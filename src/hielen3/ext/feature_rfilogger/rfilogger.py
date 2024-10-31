@@ -284,7 +284,30 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
 
     folder = f
 
+    """
+    rewritten for compatibilitiy with latin1 encoding 
 
+    """
+
+    def __extract_gestecno__(path):
+        a=DataFrame([],dtype='float64')
+        try:
+            a=read_csv(path,skiprows=2,parse_dates=True,header=None)
+            if a.empty:
+                a = read_csv(path,parse_dates=True,header=None)
+                a = a[a[0].apply(lambda x: match('^\d{4}-\d{2}',x)).notna()]
+
+        except  UnicodeDecodeError as e:
+            a=read_csv(path,skiprows=2,parse_dates=[0], sep=",", header=None, encoding='latin1')
+        except Exception as e:
+            pass
+
+        if not a.empty:
+            a.columns = [ 'times', *a.columns[1:] ]
+
+        return a
+
+    """
     def __extract_gestecno__(path):
         a=DataFrame([],dtype='float64')
         try:
@@ -299,6 +322,7 @@ def retrive(serials=None,times=None, columns=None, folder='gestecno_rfi/data', f
             pass
 
         return a
+    """
 
 
     if func is None:

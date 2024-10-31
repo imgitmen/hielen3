@@ -4,9 +4,10 @@ import hug
 import falcon
 import json
 from hielen3 import db
-from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict
+from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict, clean_input
 from hielen3.feature import HFeature,HSeries
 from pandas import Series
+from numpy import nan
 from marshmallow import Schema, fields
 import traceback
 
@@ -18,15 +19,16 @@ class ThresholdSchema(Schema):
     color = fields.Str(required=False)
     recipients = fields.Str(required=False)
 
-
 # GET
-
 
 @hug.get("/")
 def retrive_thresholds(
     series=None,
-    labels=None,
+    label=None,
     ttype=None,
+    feature=None,
+    parameter=None,
+    cntxt=None,
     request=None,
     response=None,
     **kwargs
@@ -62,7 +64,7 @@ PARAMETRI:
 
 - **series**: array di uuid delle serie per cui recuperare le info 
 
-- **labels**: array di labels per cui recuperare le info:
+- **label**: array di labels per cui recuperare le info:
 
 - **ttype**: array di valori ttype validi
 
@@ -75,11 +77,14 @@ all'interno del campo `data` del json di risposta standard una struttura con que
         [
             {
                 "series":"...",
+                "feature":"...",
+                "parameter":"...",
                 "label":"...",
                 "ttype":"...",
                 "value":...,
                 "color":...,
-                "recipients:"..."
+                "recipients:"...",
+                "context":"..."
             },
             ...
         ]
@@ -92,35 +97,28 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
-    if isinstance(series,str): series=series.split(",")
+    cntxt=clean_input(cntxt)
+    series=clean_input(series)
+    feature=clean_input(feature)
+    parameter=clean_input(parameter)
+    label=clean_input(label)
+    ttype=clean_input(ttype)
+
+
+    key = {
+            "context":cntxt,
+            "series":series,
+            "feature":feature,
+            "parameter":parameter,
+            "label":label,
+            "ttype":ttype,
+            }
     
-    if not isinstance(series,(list,set,tuple)) and series is not None:
-        series=[series]
-
-    if not series is None: series = [ a for a in series if a is not None and a.__len__()]
-    if not series is None and not series.__len__(): series = None
-     
-    if isinstance(labels,str): labels=labels.split(",")
-
-    if not isinstance(labels,(list,set,tuple)) and labels is not None:
-        labels=[labels]
-
-    if not labels is None: labels = [ a for a in labels if a is not None and a.__len__()]
-    if not labels is None and not labels.__len__(): labels = None
-
-    if isinstance(ttype,str): ttype=ttype.split(",")
-                                                                                                                                                                             
-    if not isinstance(ttype,(list,set,tuple)) and ttype is not None:
-        ttype=[ttype]
-               
-    if not ttype is None: ttype = [ a for a in ttype if a is not None and a.__len__()]
-    if not ttype is None and not ttype.__len__(): ttype = None
-
-
-    #DEBUG print ({"series":series,"labels":labels})
+    print (key) #DEBUG
 
     try:
-        out.data=db['series_thresholds'][{"series":series,"label":labels,"ttype":ttype}].to_dict(orient="records")
+        #tdf=db['series_thresholds_info'][key].replace(nan,None)
+        out.data=db['series_thresholds_info'][key].replace(nan,None).sort_index().to_dict(orient="records")
     except KeyError as e:
         out.message = e.args
         out.status = falcon.HTTP_NOT_FOUND
@@ -137,8 +135,11 @@ RESPONSE CODES:
 @hug.get("/{series}")
 def retive_s_thresholds(
     series,
-    labels=None,
+    label=None,
     ttype=None,
+    feature=None,
+    parameter=None,
+    cntxt=None,
     request=None,
     response=None,
     **kwargs
@@ -151,14 +152,17 @@ DESCRIZIONE:
 """
 
 
-    return retrive_thresholds(series,labels,ttype,request,response,**kwargs)
+    return retrive_thresholds(series=series,label=label,ttype=ttype,request=request,response=response,**kwargs)
 
 
-@hug.get("/{series}/{labels}")
+@hug.get("/{series}/{label}")
 def retive_s_l_thresholds(
     series,
-    labels,
+    label,
     ttype=None,
+    feature=None,
+    parameter=None,
+    cntxt=None,
     request=None,
     response=None,
     **kwargs
@@ -170,12 +174,12 @@ DESCRIZIONE:
 
 """
 
-    return retrive_thresholds(series,labels,ttype,request,response,**kwargs)
+    return retrive_thresholds(series=series,label=label,ttype=ttype,request=request,response=response,**kwargs)
 
-@hug.get("/{series}/{labels}/{ttype}")
+@hug.get("/{series}/{label}/{ttype}")
 def retive_s_l_t_thresholds2(
     series,
-    labels,
+    label,
     ttype,
     request=None,
     response=None,
@@ -188,7 +192,7 @@ DESCRIZIONE:
 
 """
 
-    return retrive_thresholds(series,labels,ttype,request,response,**kwargs)
+    return retrive_thresholds(series=series,label=label,ttype=ttype,request=request,response=response,**kwargs)
 
 
 # POST
@@ -274,10 +278,10 @@ DESCRIZIONE:
 
     return create_thresholds(series,thresholds,request,response,**kwargs)
 
-@hug.post("/{series}/{labels}")
+@hug.post("/{series}/{label}")
 def create_s_l_thresholds(
     series,
-    labels,
+    label,
     ttype,
     value,
     color=None,
@@ -312,12 +316,12 @@ RESPONSE CODES:
 - _200 OK_: Nel caso in cui la feature venga creata correttamente.
 """
 
-    if isinstance(labels,str): labels=labels.split(",")
+    if isinstance(label,str): label=label.split(",")
 
-    if not isinstance(labels,(list,set,tuple)) and labels is not None:
-        labels=[labels]
+    if not isinstance(label,(list,set,tuple)) and label is not None:
+        label=[label]
 
-    if not labels is None: labels = [ a for a in labels if a is not None and a.__len__()]
+    if not label is None: label = [ a for a in label if a is not None and a.__len__()]
     
 
     if isinstance(ttype,str): ttype=ttype.split(",")
@@ -334,7 +338,7 @@ RESPONSE CODES:
 
     thresholds=[]
 
-    for l in labels:
+    for l in label:
         for t in ttype:
             thresholds.append(dict(label=l,ttype=t,**infos))
 
@@ -343,10 +347,10 @@ RESPONSE CODES:
     return create_thresholds(series,thresholds,request,response,**kwargs)
 
 
-@hug.post("/{series}/{labels}/{ttype}")
+@hug.post("/{series}/{label}/{ttype}")
 def create_s_l_t_thresholds(
     series,
-    labels,
+    label,
     ttype,
     value,
     color=None,
@@ -358,12 +362,12 @@ def create_s_l_t_thresholds(
     """
 DESCRIZIONE:
 
-**ALIAS di POST /thresholds/{labels}**
+**ALIAS di POST /thresholds/{label}**
 
 """
 
 
-    return create_s_l_thresholds(series,labels,ttype,value,color,recipients,request,response)
+    return create_s_l_thresholds(series,label,ttype,value,color,recipients,request,response)
 
 
 # DELETE
@@ -371,7 +375,7 @@ DESCRIZIONE:
 @hug.delete("/")                                         
 def delete_thresholds(                                            
     series,                                                            
-    labels=None,                                                            
+    label=None,                                                            
     ttype=None,
     request=None,                                                      
     response=None,
@@ -403,36 +407,17 @@ RESPONSE CODES:
 
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
-    if isinstance(series,str): series=series.split(",")
-    
-    if not isinstance(series,(list,set,tuple)) and series is not None:
-        series=[series]
 
-    if not series is None: series = [ a for a in series if a is not None and a.__len__()]
-    if not series is None and not series.__len__(): series = None
-     
-    if isinstance(labels,str): labels=labels.split(",")
-
-    if not isinstance(labels,(list,set,tuple)) and labels is not None:
-        labels=[labels]
-
-    if not labels is None: labels = [ a for a in labels if a is not None and a.__len__()]
-    if not labels is None and not labels.__len__(): labels = None
-
-    if isinstance(ttype,str): ttype=ttype.split(",")
-                                                                                                                                                                             
-    if not isinstance(ttype,(list,set,tuple)) and ttype is not None:
-        ttype=[ttype]
-               
-    if not ttype is None: ttype = [ a for a in ttype if a is not None and a.__len__()]
-    if not ttype is None and not ttype.__len__(): ttype = None
+    series=clean_input(series)
+    label=clean_input(label)
+    ttype=clean_input(ttype)
 
 
     #DEBUG print ({"series":series,"labels":labels})
 
     try:
         if series is None: raise Exception("series not provided") 
-        out.data=db['series_thresholds'].pop({"series":series,"label":labels}).to_dict(orient="records")
+        out.data=db['series_thresholds'].pop({"series":series,"label":label}).to_dict(orient="records")
     except KeyError as e:
         out.message = e.args
         out.status = falcon.HTTP_NOT_FOUND
@@ -449,7 +434,7 @@ RESPONSE CODES:
 @hug.delete("/{series}")
 def delete_s_thresholds(
     series,      
-    labels=None,
+    label=None,
     ttype=None,
     request=None,
     response=None,
@@ -462,13 +447,13 @@ DESCRIZIONE:
 
 """
 
-    return delete_thresholds(series,labels,ttype,request,response,**kwargs)
+    return delete_thresholds(series,label,ttype,request,response,**kwargs)
                  
  
-@hug.delete("/{series}/{labels}")
+@hug.delete("/{series}/{label}")
 def delete_s_l_thresholds(
     series,
-    labels,
+    label,
     ttype=None,
     request=None,
     response=None,
@@ -481,12 +466,12 @@ DESCRIZIONE:
 
 """
 
-    return delete_thresholds(series,labels,ttype,request,response,**kwargs)
+    return delete_thresholds(series,label,ttype,request,response,**kwargs)
 
-@hug.delete("/{series}/{labels}/{ttype}")
+@hug.delete("/{series}/{label}/{ttype}")
 def delete_s_l_t_thresholds(
     series,
-    labels,
+    label,
     ttype,
     request=None,
     response=None,
@@ -499,4 +484,4 @@ DESCRIZIONE:
 
 """
 
-    return delete_thresholds(series,labels,ttype,request,response,**kwargs)
+    return delete_thresholds(series,label,ttype,request,response,**kwargs)

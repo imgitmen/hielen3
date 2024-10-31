@@ -1,15 +1,22 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from datetime import datetime
-from re import split, sub, findall
-from time import mktime
 import json
-from importlib import import_module
-from falcon import HTTPNotAcceptable, HTTP_OK, Response, Request 
+from datetime import datetime
+from re import split
+from re import sub
+from re import findall
+from time import mktime
 from hashlib import md5
-from marshmallow import Schema, fields
-from numpy import datetime64, isnat
+from importlib import import_module
+from falcon import HTTPNotAcceptable
+from falcon import HTTP_OK
+from falcon import Response
+from falcon import Request 
+from marshmallow import Schema
+from marshmallow import fields
+from numpy import datetime64
+from numpy import isnat
 from collections.abc import Iterable
 from uuid import uuid4
 from pandas import DataFrame
@@ -17,6 +24,18 @@ from pandas import DataFrame
 def uuid():
     return str(uuid4())
 
+def clean_input(inp, trim_none = True ):
+ 
+    if isinstance(inp,str): inp=inp.split(",")
+ 
+    if not isinstance(inp,(list,set,tuple)) and inp is not None:
+        inp=[inp]
+ 
+    if not inp is None: inp = [ a for a in inp if not trim_none or (a is not None and (not isinstance(a,str) or a.__len__())) ]
+    if not inp is None and not inp.__len__(): inp = None
+ 
+    return inp
+    
 def dataframe2jsonizabledict(df:DataFrame,orient='records',squeeze=True):
     try:
         out=df.assign(**df.select_dtypes(['datetime64']).astype(str)).to_dict(orient=orient)
@@ -295,4 +314,4 @@ class ResponseFormatter():
 
         return response
 
-
+        
