@@ -1449,6 +1449,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/thresholds_old/" class="md-nav__link">
+        Thresholds Old
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -5643,7 +5657,9 @@
 <span class="normal">1784</span>
 <span class="normal">1785</span>
 <span class="normal">1786</span>
-<span class="normal">1787</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1787</span>
+<span class="normal">1788</span>
+<span class="normal">1789</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -6625,7 +6641,9 @@
 
                         <span class="n">condarr</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">clausule</span><span class="p">[</span><span class="n">cond</span><span class="p">]))</span>
 
-                        <span class="n">clausulearr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cond</span><span class="si">}</span><span class="s1"> in (</span><span class="si">{</span><span class="n">condarr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">condarr</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+                            <span class="n">clausulearr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cond</span><span class="si">}</span><span class="s1"> in (</span><span class="si">{</span><span class="n">condarr</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 
                     <span class="k">else</span><span class="p">:</span>
 
@@ -6767,7 +6785,7 @@
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">dict</span><span class="p">,</span><span class="nb">tuple</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">dict</span><span class="p">,</span><span class="nb">tuple</span><span class="p">,</span><span class="nb">set</span><span class="p">)):</span>
 
                     <span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
 
@@ -9172,7 +9190,9 @@
 
 <span class="w">                        </span><span class="n">condarr</span><span class="o">=</span><span class="ss">&quot;,&quot;</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="n">f</span><span class="s1">&#39;{x!r}&#39;</span><span class="p">,</span><span class="n">clausule</span><span class="o">[</span><span class="n">cond</span><span class="o">]</span><span class="p">))</span>
 
-<span class="w">                        </span><span class="n">clausulearr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{cond} in ({condarr})&#39;</span><span class="p">)</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="n">condarr</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">                            </span><span class="n">clausulearr</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{cond} in ({condarr})&#39;</span><span class="p">)</span>
 
 <span class="w">                    </span><span class="k">else</span><span class="err">:</span>
 
@@ -9314,7 +9334,7 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">dict</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="err">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">dict</span><span class="p">,</span><span class="n">tuple</span><span class="p">,</span><span class="k">set</span><span class="p">))</span><span class="err">:</span>
 
 <span class="w">                    </span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]=</span><span class="n">dumps</span><span class="p">(</span><span class="k">value</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">)</span>
 
