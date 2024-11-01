@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.4.1** ##
+### 31 Ottobre 2024 ###
+- debuggata api thresholds, allinata con uscita di clean_input e eliminati due casi di incoerenza: post esplicito su endpoint (prende un array di series e un solo set di label,ttype,value,color), delete che non considerava ttype
+
+
 ## **V3.4.0** ##
 ### 31 Ottobre 2024 ###
 - aggiunta api context

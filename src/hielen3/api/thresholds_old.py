@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 # coding=utf-8
 import hug
 import falcon
@@ -114,7 +114,7 @@ RESPONSE CODES:
             "ttype":ttype,
             }
     
-    #print (key) #DEBUG
+    print (key) #DEBUG
 
     try:
         #tdf=db['series_thresholds_info'][key].replace(nan,None)
@@ -123,7 +123,6 @@ RESPONSE CODES:
         out.message = e.args
         out.status = falcon.HTTP_NOT_FOUND
     except Exception as e:
-        raise e
         out.message = e.args
         out.status = falcon.HTTP_CONFLICT
         pass
@@ -240,9 +239,14 @@ RESPONSE CODES:
 """
     out = ResponseFormatter(status=falcon.HTTP_OK)
 
+    if isinstance(series,str): series=series.split(",")
+    
+    if not isinstance(series,(list,set,tuple)) and series is not None:
+        series=[series]
 
-    series=clean_input(series)
-
+    if not series is None: series = [ a for a in series if a is not None and a.__len__()]
+    if not series is None and not series.__len__(): series = None
+ 
     try:
         for s in series:
             HSeries(db['series'][s]['uuid'].squeeze()).attribute_update(attribute="thresholds",value=thresholds)
@@ -301,8 +305,6 @@ PARAMETRI:
 - **color**: colore della soglia
 - **recipients**: stringa csv intesa come elenco di contatti
 
-nota: necessita che i campi "label", "ttype", "value" e "color" siano univoci
-
 OUTPUT:
 
 Se la soglia viene creata/modificata correttamente la sua struttura viene restituita all'interno del campo \
@@ -313,44 +315,36 @@ RESPONSE CODES:
 - _404 Not Found_: Nel caso in cui le serie richieste non esistano.
 - _200 OK_: Nel caso in cui la feature venga creata correttamente.
 """
-    series=clean_input(series)
-    label=clean_input(label)
-    ttype=clean_input(ttype)
-    value=clean_input(value)
-    color=clean_input(color)
-    recipients=clean_input(recipients)
 
-    try:
-        if label.__len__() != 1:
-            raise ValueError(f"label param '{label}' has cardinality != 1")
-        if ttype.__len__() != 1:
-            raise ValueError(f"ttype param '{ttype}' has cardinality != 1")
-        if value.__len__() != 1:
-            raise ValueError(f"value param '{value}' has cardinality != 1")
-        if color.__len__() > 1:
-            raise ValueError(f"color param '{color}' has cardinality > 1")
-        
-        threshold={
-                "label":label[0],
-                "ttype":ttype[0],
-                "value":value[0]
-                }
+    if isinstance(label,str): label=label.split(",")
 
-        if color.__len__():
-            threshold["color"] = color[0]
+    if not isinstance(label,(list,set,tuple)) and label is not None:
+        label=[label]
 
-        if recipients.__len__():
-            threshold["recipients"] = ",".join(recipients)
+    if not label is None: label = [ a for a in label if a is not None and a.__len__()]
+    
 
-        threshold = ThresholdSchema(many=True).loads("["+json.dumps(threshold)+"]")
+    if isinstance(ttype,str): ttype=ttype.split(",")
 
-    except ValueError as e:
-        out = ResponseFormatter(status=falcon.HTTP_CONFLICT)
-        out.message = str(e)
-        response = out.format(response=response, request=request)
-        return
+    if not isinstance(ttype,(list,set,tuple)) and ttype is not None:
+        ttype=[ttype]
+               
+    if not ttype is None: ttype = [ a for a in ttype if a is not None and a.__len__()]
 
-    return create_thresholds(series,threshold,request,response,**kwargs)
+    infos={"value":value}
+
+    if color is not None: infos["color"] = color
+    if recipients is not None: infos["recipients"] = recipients
+
+    thresholds=[]
+
+    for l in label:
+        for t in ttype:
+            thresholds.append(dict(label=l,ttype=t,**infos))
+
+    thresholds = ThresholdSchema(many=True).loads(json.dumps(thresholds))
+
+    return create_thresholds(series,thresholds,request,response,**kwargs)
 
 
 @hug.post("/{series}/{label}/{ttype}")
@@ -419,15 +413,16 @@ RESPONSE CODES:
     ttype=clean_input(ttype)
 
 
-    #print ({"series":series,"labels":label,"ttype":ttype}) #DEBUG
+    #DEBUG print ({"series":series,"labels":labels})
 
     try:
-        out.data=db['series_thresholds'].pop({"series":series,"label":label,"ttype":ttype}).to_dict(orient="records")
+        if series is None: raise Exception("series not provided") 
+        out.data=db['series_thresholds'].pop({"series":series,"label":label}).to_dict(orient="records")
     except KeyError as e:
-        out.message = f"series {series} not provided " + str(e)
+        out.message = e.args
         out.status = falcon.HTTP_NOT_FOUND
     except Exception as e:
-        out.message = str(e)
+        out.message = e.args
         out.status = falcon.HTTP_CONFLICT
         pass
  
