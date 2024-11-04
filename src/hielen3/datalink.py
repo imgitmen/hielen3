@@ -646,8 +646,10 @@ class MariadbTable(Mariadb):
                             clausulearr.append(sqlcond)
 
                     elif isinstance(clausule[cond],(list,tuple,set)):
+
                         condarr=",".join(map(lambda x: f'{x!r}',clausule[cond]))
-                        clausulearr.append(f'{cond} in ({condarr})')
+                        if condarr.__len__():
+                            clausulearr.append(f'{cond} in ({condarr})')
 
                     else:
                         clausulearr.append(f'{cond}={clausule[cond]!r}')
@@ -748,7 +750,7 @@ class MariadbTable(Mariadb):
 
         for k in value.keys():
             try:
-                if isinstance(value[k],(list,dict,tuple)):
+                if isinstance(value[k],(list,dict,tuple,set)):
                     value[k]=dumps(value[k])
             except Exception as e:
                 pass

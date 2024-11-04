@@ -33,7 +33,13 @@ def clean_input(inp, trim_none = True ):
  
     if not inp is None: inp = [ a for a in inp if not trim_none or (a is not None and (not isinstance(a,str) or a.__len__())) ]
     if not inp is None and not inp.__len__(): inp = None
- 
+
+    if inp is None:
+        if trim_none:
+            inp=[]
+        else:
+            inp=[None]
+
     return inp
     
 def dataframe2jsonizabledict(df:DataFrame,orient='records',squeeze=True):

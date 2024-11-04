@@ -1,11 +1,26 @@
 CHANGELOG
 =========
+## **V3.4.1** ##
+### 31 Ottobre 2024 ###
+- debuggata api thresholds, allinata con uscita di clean_input e eliminati due casi di incoerenza: post esplicito su endpoint (prende un array di series e un solo set di label,ttype,value,color), delete che non considerava ttype
+
+
+## **V3.4.0** ##
+### 31 Ottobre 2024 ###
+- aggiunta api context
+- spostato metodo clean_input in utils
+
+
+## **V3.3.27** ##
+### 12 Ottobre 2024 ###
+- Modifiche minori per italferr. Versione impropria
+
+
 ## **V3.3.26** ##
 ### 7 Ottobre 2024 ###
 - Potenziato la ricerca delle thresholds inserendo come campi (cntxt, series,feature,parameter,label,ttype) ognuno di essi come array. Modificato l'output inserendo tutte le info utilizzate per la ricerca
 
-CHANGELOG
-=========
+
 ## **V3.3.25**
 ### 20 Settembre 2024 ###
 - introdotti i concetti di "Serie di riferimento" e "filtro" e inserite apposite funzioni nel modulo tools/calc
