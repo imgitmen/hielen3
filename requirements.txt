@@ -1,0 +1,14 @@
+boto3 >= 1.35.54
+crudLib @ git+https://github.com/imgitmen/hielen_mongodb_connector.git
+falcon >= 2.0.0
+filelock >= 3.16.1
+geojson >= 3.1.0
+hug >= 2.6.1
+mappyfile >= 1.0.2
+marshmallow >= 3.22.0
+matplotlib >= 3.9.2
+pandas >= 2.2.2
+requests >= 2.32.3
+sqlalchemy >= 2.0.35
+waitress >= 3.0.1
+zeep >= 4.2.1
