@@ -38,5 +38,8 @@ Backlog = "BACKLOG.md"
     "Contexts" = "docs/API Reference/contexts.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
+    "ContextsRoots" = "docs/API Reference/contextsroots.md"
+
+    [[tool.portray.mkdocs.nav."API Reference"]]
     "Query" = "docs/API Reference/query.md"
 
