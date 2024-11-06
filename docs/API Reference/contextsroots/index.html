@@ -13,7 +13,7 @@
     
     
       
-        <title>Query2 - hielen3</title>
+        <title>Contextsroots - hielen3</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#query2" class="md-skip">
+        <a href="#contextsroots" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Query2
+              Contextsroots
             
           </span>
         </div>
@@ -2755,22 +2755,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#get-query2capability" class="md-nav__link">
-    GET    /query2/{capability}
+  <a href="#get-contextsroots" class="md-nav__link">
+    GET    /contextsroots/
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#get-query2capabilityfeature" class="md-nav__link">
-    GET    /query2/{capability}/{feature}/
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-query2capabilityfeaturepar" class="md-nav__link">
-    GET    /query2/{capability}/{feature}/{par}
+  <a href="#get-contextsrootscntxt" class="md-nav__link">
+    GET    /contextsroots/{cntxt}
   </a>
   
 </li>
@@ -2789,63 +2782,39 @@
                 
                   
 
-  <a href="https://github.com/imgitmen/hielen3/edit/main/docs/API Reference/query2.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/imgitmen/hielen3/edit/main/docs/API Reference/contextsroots.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="query2">Query2</h1>
-<h3 id="get-query2capability"><strong>GET    <em>/query2/{capability}</em></strong></h3>
+<h1 id="contextsroots">Contextsroots</h1>
+<h3 id="get-contextsroots"><strong>GET    <em>/contextsroots/</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>capability</strong>: Basic text / string value</li>
-<li><strong>datamap</strong>: JSON Schema [{<strong>times</strong>: , <strong>timeref</strong>: str|bytes, <strong>series</strong>: [str|bytes], <strong>geometry</strong>: [], <strong>refresh</strong>: bool}]</li>
-<li><strong>content_type</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
-<h3 id="get-query2capabilityfeature"><strong>GET    <em>/query2/{capability}/{feature}/</em></strong></h3>
+<p>DESCRIZIONE:</p>
+<p>PARAMETRI:</p>
+<p>OUTPUT:</p>
+<p>RESPONSE CODES:</p>
+<h3 id="get-contextsrootscntxt"><strong>GET    <em>/contextsroots/{cntxt}</em></strong></h3>
 <hr />
 <p><em>params</em>:</p>
 <ul>
-<li><strong>capability</strong>: Basic text / string value</li>
-<li><strong>feature</strong>: Basic text / string value</li>
-<li><strong>par</strong>: Basic text / string value</li>
-<li><strong>times</strong>: Basic text / string value</li>
-<li><strong>timeref</strong>: Basic text / string value</li>
-<li><strong>refresh</strong>: Basic text / string value</li>
-<li><strong>geometry</strong>: Basic text / string value</li>
-<li><strong>content_type</strong>: Basic text / string value</li>
+<li><strong>cntxt</strong>: Basic text / string value</li>
 </ul>
 <p><em>result</em>:</p>
 <ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
-</ul>
-<p><em>usage</em>:</p>
-<h3 id="get-query2capabilityfeaturepar"><strong>GET    <em>/query2/{capability}/{feature}/{par}</em></strong></h3>
-<hr />
-<p><em>params</em>:</p>
-<ul>
-<li><strong>capability</strong>: Basic text / string value</li>
-<li><strong>feature</strong>: Basic text / string value</li>
-<li><strong>par</strong>: Basic text / string value</li>
-<li><strong>times</strong>: Basic text / string value</li>
-<li><strong>timeref</strong>: Basic text / string value</li>
-<li><strong>refresh</strong>: Basic text / string value</li>
-<li><strong>geometry</strong>: Basic text / string value</li>
-<li><strong>content_type</strong>: Basic text / string value</li>
-</ul>
-<p><em>result</em>:</p>
-<ul>
-<li><strong>format</strong>: Supports any of the following formats: JSON (Javascript Serialized Object Notation), Free form UTF-8 text, A dynamically retrieved file</li>
-<li><strong>content_type</strong>: application/json; charset=utf-8, text/plain; charset=utf-8, file/dynamic</li>
+<li><strong>format</strong>: JSON (Javascript Serialized Object Notation)</li>
+<li><strong>content_type</strong>: application/json; charset=utf-8</li>
 </ul>
 <p><em>usage</em>:</p>
 

@@ -734,6 +734,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../contextsroots/" class="md-nav__link">
+        Contextsroots
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../features/" class="md-nav__link">
         Features
       </a>
@@ -3147,7 +3161,17 @@
 <span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span>
-<span class="normal">151</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3157,29 +3181,31 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">prototypes</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">query</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">query</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">query2</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">query2</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">features</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">features</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">actions</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">actions</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">actionschemata</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">actionschemata</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">hls</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">hls</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">queue</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">queue</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">status</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">status</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">awskine</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">awskine</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">italferdatarate</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">italferdatarate</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">thresholds</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">thresholds</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span>  <span class="n">contexts</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contexts</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contextsroots</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -3283,6 +3309,14 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">contexts</span><span class="p">]</span>
 
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/contextsroots&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">contextman</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">contextsroots</span><span class="p">]</span>
+
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/awskineresources&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">kineresman</span><span class="p">():</span>
@@ -3327,16 +3361,16 @@
 <span class="p">)</span>
 </code></pre></div>
 
-<p>api per cambiare contexts </p>
+<p>api per recuperare la root dei contexts </p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/contexts&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/contextsroots&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">contextman</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per cambiare contexts &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">contexts</span><span class="o">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">contextsroots</span><span class="o">]</span>
 </code></pre></div>
 
 </details>
