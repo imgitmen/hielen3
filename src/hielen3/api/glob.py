@@ -3,18 +3,19 @@
 import hug
 import falcon
 from . import prototypes
-from . import  query
-from . import  query2
-from . import  features
-from . import  actions
-from . import  actionschemata
-from . import  hls
-from . import  queue
-from . import  status
-from . import  awskine
-from . import  italferdatarate
-from . import  thresholds
-from . import  contexts
+from . import query
+from . import query2
+from . import features
+from . import actions
+from . import actionschemata
+from . import hls
+from . import queue
+from . import status
+from . import awskine
+from . import italferdatarate
+from . import thresholds
+from . import contexts
+from . import contextsroots 
 
 """
 @hug.not_found()
@@ -80,6 +81,11 @@ def threshman():
 def contextman():
     """ api per cambiare contexts """
     return [contexts]
+
+@hug.extend_api("/contextsroots")
+def contextman():
+    """ api per recuperare la root dei contexts """
+    return [contextsroots]
 
 @hug.extend_api("/awskineresources")
 def kineresman():
