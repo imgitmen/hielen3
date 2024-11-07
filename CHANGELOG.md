@@ -1,12 +1,17 @@
 CHANGELOG
 =========
+## **V3.5.1** ##
+### 7 Novembre 2024 ###
+- debug api contextroot
+
+
 ## **V3.5.0** ##
 ### 6 Novembre 2024 ###
 - implementata api contextsroots
 
 
 ## **V3.4.1** ##
-### 31 Ottobre 2024 ###
+### 1 Novembre 2024 ###
 - debuggata api thresholds, allinata con uscita di clean_input e eliminati due casi di incoerenza: post esplicito su endpoint (prende un array di series e un solo set di label,ttype,value,color), delete che non considerava ttype
 
 

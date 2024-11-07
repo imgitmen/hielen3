@@ -9,10 +9,10 @@ def roots_info(contexts=None):
     
     descendants=db['context_context'][:][["homogeneous"]].reset_index('ancestor').sort_index()
 
-    result=contexts.join(descendants,how='left')
-    result=result[~result['homogeneous'].notna()]
-    result["descendants_count"]=result["ID"].apply(lambda x: lineages(x).__len__())
-    result=result.drop(["ancestor","homogeneous"],axis=1)
+    result=contexts.join(descendants['ancestor'],how='left')
+    result=result[result['ancestor'].isna()]
+    result["descendants_count"]=result["ID"].apply(lambda x: lineages(x).__len__() - 1)
+    result=result.drop(["ancestor"],axis=1)
     result.columns=["context","label","description","descendants_count"]
 
     return result
