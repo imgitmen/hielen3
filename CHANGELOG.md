@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.5.3** ##
+### 8 Novembre 2024 ###
+- enpoint family per api contexts 
+
+
 ## **V3.5.2** ##
 ### 8 Novembre 2024 ###
 - debug api contextroot (casi particolari: tabella context vuota e tablella context_context vuota)

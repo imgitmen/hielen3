@@ -7,6 +7,7 @@ from hielen3.utils import ResponseFormatter
 from hielen3.utils import clean_input
 from hielen3.contextmanager import lineages
 from hielen3.contextmanager import ancestors
+from hielen3.contextmanager import family
 
 #GET
 
@@ -471,4 +472,41 @@ RESPONSE CODES:
  
     return delete_descendants_param(cntxt=cntxt,descendant=descendant,request=request,response=response,**kwargs)
 
+
+@hug.get("/{cntxt}/family")
+def get_family_enpoint(
+     cntxt,
+    request=None,
+    response=None,
+    **kwargs
+):
+
+    """
+DESCRIZIONE:
+
+PARAMETRI:
+
+OUTPUT:
+
+RESPONSE CODES:
+
+"""
  
+    out = ResponseFormatter(status=falcon.HTTP_OK)
+
+    cntxt=clean_input(cntxt)
+
+    try:
+        out.data=family(cntxt).to_dict(orient="records")
+    except KeyError as e:
+        out.message = str(e)
+        out.status = falcon.HTTP_NOT_FOUND
+    except Exception as e:
+        out.message = str(e)
+        out.status = falcon.HTTP_CONFLICT
+
+    response = out.format(response=response, request=request)
+
+    return
+
+

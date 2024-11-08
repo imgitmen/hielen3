@@ -2,6 +2,8 @@
 from hielen3 import db
 from hielen3.utils import clean_input
 from pandas import DataFrame
+from numpy import nan
+
 
 def roots_info(contexts=None):
 
@@ -82,4 +84,25 @@ def ancestors(key=None, level=None):
     
     return key
  
+
+def family(contexts=None):
+
+    # tutto il ramo genealogico dall'elemento in input fino alla radice
+    ancestors_list=ancestors(contexts)
+    # solo le radici degli alberi precedenti
+    roots_list=list(roots_info(ancestors_list).index)
+    # tutta la discendenza dei roots 
+    lineages_list=lineages(roots_list,homo_only=False)
+
+    lineages_info=db["context"][lineages_list]
+    
+    descendants_rel=db["context_context"][lineages_list]
+    
+    descendants_rel=descendants_rel[["homogeneous","klass"]].reset_index("ancestor")
+
+    result = lineages_info.join(descendants_rel).replace(nan,None)
+    
+    result.columns = ["context","label","description","parent","homogeneous","klass"]
+
+    return result
 
