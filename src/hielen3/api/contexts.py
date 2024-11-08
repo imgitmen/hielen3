@@ -305,8 +305,18 @@ CAVEAT:
             raise ValueError ( "cntxt required" )
         if cntxt.__len__() > 1:
             raise ValueError ( "cntxt must be exactly one" )
+
         if descendant is None:
             raise ValueError ( "descendant required" )
+
+        in_contexts=[*cntxt,*descendant]
+
+        db_contexts=list(db["context"][in_contexts].index)
+        
+        invalid_contexts=[ a for a in in_contexts if a not in db_contexts ]
+
+        if invalid_contexts.__len__():
+            raise ValueError( f"contexts not found:{invalid_contexts}")
 
         if dtype.__len__() > 1 and dtype.__len__() != descendant.__len__():
             raise ValueError ("dtype length invalid")
@@ -332,11 +342,15 @@ CAVEAT:
             v = homogeneous[0]
             homogeneous=[ v for a in descendant ]
 
-
     
-        def homogenize(a):
+        def boolenize(a):
+
+            # Default: homogeneous subontext
             if a is None:
                 return 1
+
+            if a.isnumeric():
+                return a
 
             if isinstance(a,str):
                 if a.lower() in ("true","yes","y","t"):
@@ -344,15 +358,15 @@ CAVEAT:
                 if a.lower() in ("false","no","n","f"):
                     return 0
 
-            return int(bool(a))
+            raise ValueError(f"{a} is not boolean")
 
-        homogeneous=list(map( homogenize, homogeneous))
+        homogeneous=list(map( boolenize, homogeneous))
 
         for i in range(0,descendant.__len__()):
             db["context_context"][{"ancestor":cntxt[0],"descendant":descendant[i]}]={"label":label[i],"homogeneous":homogeneous[i],"klass":dtype[i]}
 
     except Exception as e:
-        raise e
+        # raise e #DEBUG
         out.message = str(e)
         out.status = falcon.HTTP_CONFLICT
 

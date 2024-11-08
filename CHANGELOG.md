@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.5.2** ##
+### 8 Novembre 2024 ###
+- debug api contextroot (casi particolari: tabella context vuota e tablella context_context vuota)
+
+
 ## **V3.5.1** ##
 ### 7 Novembre 2024 ###
 - debug api contextroot
