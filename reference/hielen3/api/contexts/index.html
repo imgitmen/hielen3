@@ -3673,7 +3673,23 @@
 <span class="normal">632</span>
 <span class="normal">633</span>
 <span class="normal">634</span>
-<span class="normal">635</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">635</span>
+<span class="normal">636</span>
+<span class="normal">637</span>
+<span class="normal">638</span>
+<span class="normal">639</span>
+<span class="normal">640</span>
+<span class="normal">641</span>
+<span class="normal">642</span>
+<span class="normal">643</span>
+<span class="normal">644</span>
+<span class="normal">645</span>
+<span class="normal">646</span>
+<span class="normal">647</span>
+<span class="normal">648</span>
+<span class="normal">649</span>
+<span class="normal">650</span>
+<span class="normal">651</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4105,6 +4121,16 @@
 
             <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span> <span class="s2">&quot;descendant required&quot;</span> <span class="p">)</span>
 
+        <span class="n">in_contexts</span><span class="o">=</span><span class="p">[</span><span class="o">*</span><span class="n">cntxt</span><span class="p">,</span><span class="o">*</span><span class="n">descendant</span><span class="p">]</span>
+
+        <span class="n">db_contexts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">in_contexts</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="n">invalid_contexts</span><span class="o">=</span><span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">in_contexts</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">db_contexts</span> <span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">invalid_contexts</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;contexts not found:</span><span class="si">{</span><span class="n">invalid_contexts</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">dtype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">dtype</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">!=</span> <span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
 
             <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;dtype length invalid&quot;</span><span class="p">)</span>
@@ -4135,11 +4161,17 @@
 
             <span class="n">homogeneous</span><span class="o">=</span><span class="p">[</span> <span class="n">v</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">descendant</span> <span class="p">]</span>
 
-        <span class="k">def</span> <span class="nf">homogenize</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">boolenize</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+
+            <span class="c1"># Default: homogeneous subontext</span>
 
             <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
                 <span class="k">return</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+
+                <span class="k">return</span> <span class="n">a</span>
 
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
 
@@ -4151,9 +4183,9 @@
 
                     <span class="k">return</span> <span class="mi">0</span>
 
-            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> is not boolean&quot;</span><span class="p">)</span>
 
-        <span class="n">homogeneous</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span> <span class="n">homogenize</span><span class="p">,</span> <span class="n">homogeneous</span><span class="p">))</span>
+        <span class="n">homogeneous</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span> <span class="n">boolenize</span><span class="p">,</span> <span class="n">homogeneous</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">descendant</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
 
@@ -4161,7 +4193,7 @@
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-        <span class="k">raise</span> <span class="n">e</span>
+        <span class="c1"># raise e #DEBUG</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
@@ -4602,6 +4634,16 @@ che accetterebbero elementi null nella lista
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="ss">&quot;descendant required&quot;</span><span class="w"> </span><span class="p">)</span>
 
+<span class="w">        </span><span class="n">in_contexts</span><span class="o">=[</span><span class="n">*cntxt,*descendant</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">db_contexts</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">in_contexts</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">invalid_contexts</span><span class="o">=[</span><span class="n"> a for a in in_contexts if a not in db_contexts </span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">invalid_contexts</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;contexts not found:{invalid_contexts}&quot;</span><span class="p">)</span>
+
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">dtype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">dtype</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;dtype length invalid&quot;</span><span class="p">)</span>
@@ -4632,11 +4674,17 @@ che accetterebbero elementi null nella lista
 
 <span class="w">            </span><span class="n">homogeneous</span><span class="o">=[</span><span class="n"> v for a in descendant </span><span class="o">]</span>
 
-<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">homogenize</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">boolenize</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">Default</span><span class="err">:</span><span class="w"> </span><span class="n">homogeneous</span><span class="w"> </span><span class="n">subontext</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="nf">isnumeric</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">a</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
 
@@ -4648,9 +4696,9 @@ che accetterebbero elementi null nella lista
 
 <span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">bool</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;{a} is not boolean&quot;</span><span class="p">)</span>
 
-<span class="w">        </span><span class="n">homogeneous</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="w"> </span><span class="n">homogenize</span><span class="p">,</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">))</span>
+<span class="w">        </span><span class="n">homogeneous</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">map</span><span class="p">(</span><span class="w"> </span><span class="n">boolenize</span><span class="p">,</span><span class="w"> </span><span class="n">homogeneous</span><span class="p">))</span>
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">descendant</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span><span class="err">:</span>
 
@@ -4658,7 +4706,7 @@ che accetterebbero elementi null nella lista
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">#DEBUG</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
