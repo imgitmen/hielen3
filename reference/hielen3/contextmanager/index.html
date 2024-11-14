@@ -3073,9 +3073,15 @@
 
     <span class="n">lineages_info</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">lineages_list</span><span class="p">]</span>
 
-    <span class="n">descendants_rel</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">][</span><span class="n">lineages_list</span><span class="p">]</span>
+    <span class="k">try</span><span class="p">:</span>
 
-    <span class="n">descendants_rel</span><span class="o">=</span><span class="n">descendants_rel</span><span class="p">[[</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">,</span><span class="s2">&quot;klass&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s2">&quot;ancestor&quot;</span><span class="p">)</span>
+        <span class="n">descendants_rel</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">][</span><span class="n">lineages_list</span><span class="p">]</span>
+
+        <span class="n">descendants_rel</span><span class="o">=</span><span class="n">descendants_rel</span><span class="p">[[</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">,</span><span class="s2">&quot;klass&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s2">&quot;ancestor&quot;</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">descendants_rel</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">,</span><span class="s2">&quot;klass&quot;</span><span class="p">])</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">lineages_info</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">descendants_rel</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kp">nan</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
@@ -3162,9 +3168,15 @@
 
 <span class="w">    </span><span class="n">lineages_info</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">lineages_list</span><span class="o">]</span>
 
-<span class="w">    </span><span class="n">descendants_rel</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">][</span><span class="n">lineages_list</span><span class="o">]</span>
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">    </span><span class="n">descendants_rel</span><span class="o">=</span><span class="n">descendants_rel</span><span class="o">[</span><span class="n">[&quot;homogeneous&quot;,&quot;klass&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="ss">&quot;ancestor&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">descendants_rel</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">][</span><span class="n">lineages_list</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">descendants_rel</span><span class="o">=</span><span class="n">descendants_rel</span><span class="o">[</span><span class="n">[&quot;homogeneous&quot;,&quot;klass&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="ss">&quot;ancestor&quot;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">descendants_rel</span><span class="o">=</span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=[</span><span class="n">&quot;parent&quot;,&quot;homogeneous&quot;,&quot;klass&quot;</span><span class="o">]</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lineages_info</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">descendants_rel</span><span class="p">).</span><span class="nf">replace</span><span class="p">(</span><span class="n">nan</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
