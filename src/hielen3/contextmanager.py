@@ -95,10 +95,12 @@ def family(contexts=None):
     lineages_list=lineages(roots_list,homo_only=False)
 
     lineages_info=db["context"][lineages_list]
-    
-    descendants_rel=db["context_context"][lineages_list]
-    
-    descendants_rel=descendants_rel[["homogeneous","klass"]].reset_index("ancestor")
+
+    try:
+        descendants_rel=db["context_context"][lineages_list]
+        descendants_rel=descendants_rel[["homogeneous","klass"]].reset_index("ancestor")
+    except KeyError as e:
+        descendants_rel=DataFrame([],columns=["parent","homogeneous","klass"])
 
     result = lineages_info.join(descendants_rel).replace(nan,None)
     
