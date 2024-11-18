@@ -201,7 +201,8 @@ class HSeries:
         try:
             db[datatable]
         except Exception as e:
-            raise e
+            # raise e
+            datatable='datacache'
             pass
 
         setups['datatable'] = datatable

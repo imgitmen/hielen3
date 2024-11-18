@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.5.6** ##
+### 18 Novembre 2024 ###
+- debug italferr problema "datatable" definito come enum sul DB. Versione TAG pr italferr (non comprende le api contexts)
+
+
 ## **V3.5.5** ##
 ### 14 Novembre 2024 ###
 - debug api contexts/{cntxt}/family 
