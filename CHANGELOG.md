@@ -1,8 +1,13 @@
 CHANGELOG
 =========
+## **V3.5.7** ##
+### 18 Novembre 2024 ###
+- ripristino api context
+
+
 ## **V3.5.6** ##
 ### 18 Novembre 2024 ###
-- debug italferr problema "datatable" definito come enum sul DB. Versione TAG pr italferr (non comprende le api contexts)
+- debug italferr problema "datatable" definito come enum sul DB. Versione TAG pr italferr (non comprende le api contexts) -- COMANDO git: pip install --force-reinstall git+https://git@github.com/imgitmen/hielen3.git@hielen_3.5.6
 
 
 ## **V3.5.5** ##
