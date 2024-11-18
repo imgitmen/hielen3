@@ -839,13 +839,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#contextman" class="md-nav__link">
-    contextman
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dataman" class="md-nav__link">
     dataman
   </a>
@@ -2935,13 +2928,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#contextman" class="md-nav__link">
-    contextman
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#dataman" class="md-nav__link">
     dataman
   </a>
@@ -3209,7 +3195,11 @@
 <span class="normal">168</span>
 <span class="normal">169</span>
 <span class="normal">170</span>
-<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3241,11 +3231,11 @@
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">thresholds</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contexts</span>
+<span class="c1">#from . import contexts</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contextsroots</span>
+<span class="c1">#from . import contextsroots</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">contextsricominciamo</span>
+<span class="c1">#from . import contextsricominciamo</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
 
@@ -3341,29 +3331,33 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">thresholds</span><span class="p">]</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/contexts&quot;</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;</span>
 
-<span class="k">def</span> <span class="nf">contextman</span><span class="p">():</span>
+<span class="sd">@hug.extend_api(&quot;/contexts&quot;)</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per cambiare contexts &quot;&quot;&quot;</span>
+<span class="sd">def contextman():</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">contexts</span><span class="p">]</span>
+<span class="sd">    &quot;&quot;&quot; api per cambiare contexts &quot;&quot;&quot;</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/contextsroots&quot;</span><span class="p">)</span>
+<span class="sd">    return [contexts]</span>
 
-<span class="k">def</span> <span class="nf">contextman</span><span class="p">():</span>
+<span class="sd">@hug.extend_api(&quot;/contextsroots&quot;)</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
+<span class="sd">def contextman():</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">contextsroots</span><span class="p">]</span>
+<span class="sd">    &quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
 
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/contextsricominciamo&quot;</span><span class="p">)</span>
+<span class="sd">    return [contextsroots]</span>
 
-<span class="k">def</span> <span class="nf">contextman</span><span class="p">():</span>
+<span class="sd">@hug.extend_api(&quot;/contextsricominciamo&quot;)</span>
 
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
+<span class="sd">def contextman():</span>
 
-    <span class="k">return</span> <span class="p">[</span><span class="n">contextsricominciamo</span><span class="p">]</span>
+<span class="sd">    &quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
+
+<span class="sd">    return [contextsricominciamo]</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/awskineresources&quot;</span><span class="p">)</span>
 
@@ -3400,25 +3394,6 @@
 <span class="w">    </span><span class="ss">&quot;&quot;&quot; Action manager &quot;&quot;&quot;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">actions</span><span class="o">]</span>
-</code></pre></div>
-
-</details>
-<h3 id="contextman">contextman</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">contextman</span><span class="p">(</span>
-
-<span class="p">)</span>
-</code></pre></div>
-
-<p>api per recuperare la root dei contexts </p>
-<details class="example">
-<summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/contextsricominciamo&quot;</span><span class="p">)</span>
-
-<span class="n">def</span><span class="w"> </span><span class="n">contextman</span><span class="p">()</span><span class="err">:</span>
-
-<span class="w">    </span><span class="ss">&quot;&quot;&quot; api per recuperare la root dei contexts &quot;&quot;&quot;</span>
-
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">contextsricominciamo</span><span class="o">]</span>
 </code></pre></div>
 
 </details>
