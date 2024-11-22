@@ -258,7 +258,7 @@ RESPONSE CODES:
         feafra=feafra.where(feafra.notnull(), None)
         #feafra=feafra[feafra['intent'] != 'HIDDEN']
 
-        feafra=feafra.join(feafra['properties'].apply(Series)['label']
+        feafra=feafra.join(feafra['properties'].apply(Series)['label'])
 
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)
 
