@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.5.8** ##
+### 22 Novembre 2024 ###
+- modificato contextmanager per gestire in ogni funzione homogeneous true/false (gestione famiglie omogenee)
+- aggiunta funzione boolenize in utils 
+
 ## **V3.5.7** ##
 ### 18 Novembre 2024 ###
 - ripristino api context

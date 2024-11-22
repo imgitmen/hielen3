@@ -1,8 +1,22 @@
 #!/usr/bin/env python
 # coding=utf-8
 import hug
-from . import prototypes, query, query2, features, actions, actionschemata, hls, queue, status, awskine, italferdatarate, thresholds, thresholds_v2
 import falcon
+from . import prototypes
+from . import query
+from . import query2
+from . import features
+from . import actions
+from . import actionschemata
+from . import hls
+from . import queue
+from . import status
+from . import awskine
+from . import italferdatarate
+from . import thresholds
+from . import contexts
+from . import contextsroots 
+from . import contextsricominciamo 
 
 """
 @hug.not_found()
@@ -50,34 +64,44 @@ def dataman():
     return [query]
 
 @hug.extend_api("/query2")
-def dataman():
+def dataman2():
     """ Data manager """
     return [query2]
 
 @hug.extend_api("/status")
-def dataman():
+def statman():
     """ Data manager """
     return [status]
 
+@hug.extend_api("/thresholds")
+def threshman():
+    """ api per cambiare thresholds """
+    return [thresholds]
+
+@hug.extend_api("/contexts")
+def contextman():
+    """ api per cambiare contexts """
+    return [contexts]
+
+@hug.extend_api("/contextsroots")
+def contextman():
+    """ api per recuperare la root dei contexts """
+    return [contextsroots]
+
+@hug.extend_api("/contextsricominciamo")
+def contextman():
+    """ api per recuperare la root dei contexts """
+    return [contextsricominciamo]
+
 @hug.extend_api("/awskineresources")
-def dataman():
+def kineresman():
     """ api per aws kinemetrics """
     return [awskine]
  
 @hug.extend_api("/samplerate")
-def dataman():
+def sampleman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
-
-@hug.extend_api("/thresholds")
-def dataman():
-    """ api per cambiare thresholds """
-    return [thresholds]
-
-@hug.extend_api("/thresholds2")
-def dataman():
-    """ api per cambiare thresholds """
-    return [thresholds_v2]
 
 
 

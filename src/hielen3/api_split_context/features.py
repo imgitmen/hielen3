@@ -4,9 +4,17 @@ import hug
 import falcon
 import json
 from hielen3 import db
-from hielen3.utils import JsonValidable, hasher, ResponseFormatter, uuid, dataframe2jsonizabledict
 from hielen3.feature import HFeature
 from hielen3.geje import GeoJSONSchema
+from hielen3.utils import JsonValidable
+from hielen3.utils import hasher
+from hielen3.utils import ResponseFormatter
+from hielen3.utils import uuid
+from hielen3.utils import dataframe2jsonizabledict
+from hielen3.utils import clean_input
+from hielen3.contextmanager import lineages
+from hielen3.contextmanager import ancestors
+from hielen3.contextmanager import family
 from pandas import Series
 from marshmallow import Schema, fields
 import traceback
@@ -226,47 +234,42 @@ RESPONSE CODES:
 
     out = ResponseFormatter()
 
-    if cntxt is not None and not isinstance(cntxt,list):
-        if cntxt == "":
-            cntxt = None
-        else:
-            cntxt = [cntxt]
-
-    if info is None:
-        info = []
-
-    if not isinstance(info,list):
-        info = [info]
-
-    info.extend(["type","properties","capabilities"])
-
-    info = Series(list(set(info)))
-
-    good_info=info[info.isin(db['features_info'].columns)]
-    bad_info=info[~info.isin(db['features_info'].columns)]
-
-    # TODO: GESTIONE DEI SUBITEMS
-    """
-    if 'map' in info:
-        info.append('subitemsfrommap')
-    """
-
     try:
-            
-        feafra=db['features_info'][uids,cntxt][good_info]
+        uids=clean_input(uids)
+        cntxt=lineages(clean_input(cntxt))
+        info=clean_input(info)
+        info.extend(["type","properties","capabilities"])
+
+        info = Series(list(set(info)))
+
+        good_info=info[info.isin(db['features_info_v2'].columns)]
+        bad_info=info[~info.isin(db['features_info_v2'].columns)]
+
+        # TODO: GESTIONE DEI SUBITEMS
+        """
+        if 'map' in info:
+            info.append('subitemsfrommap')
+        """
+
+        print (uids,cntxt)
+
+
+        feafra=db['features_info_v2'][uids,cntxt][good_info]
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
         #feafra=feafra[feafra['intent'] != 'HIDDEN']
 
-        feafra=feafra.join(feafra['properties'].apply(Series)['label']
+        feafra=feafra.join(feafra['properties'].apply(Series)['label'])#.sort_values('label')
 
+
+        #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)
 
-        out.data = { "features":feafra }
+        out.data = { "features":feafra, "count":feafra.__len__() }
         feafra=None
 
     except KeyError as e:
-        out.data = { "features":[] }
+        out.data = { "features":[], "count":0 }
         #out.status = falcon.HTTP_NOT_FOUND
         out.message = e.args
 
@@ -317,7 +320,7 @@ def update_feature(
     properties: JsonValidable(FeaturePropertiesSchema()) = {},
     geometry: JsonValidable(GeoJSONSchema()) = {},
     request=None,
-    response=None
+    response=None,
 ):
     
     """
@@ -395,5 +398,52 @@ Possibili risposte:
     response = out.format(response=response, request=request)
 
     return
+
+@hug.post("/{uid}/context")
+def change_context(
+    uid,
+    target,
+    geometry: JsonValidable(GeoJSONSchema()) = {},
+    request=None,
+    response=None):
+
+    """
+**Modifica dei contesti  delle Features**
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+
+    try:
+        uid=clean_input(uid)
+        
+        if not uid.__len__():
+            raise ValueError ("uid is void")
+    
+        if uid.__len__() > 1:
+            raise ValueError ("uid has to be exactly one")
+
+        target=clean_input(target)
+        
+        if not target.__len__():
+            raise ValueError ("target is void")
+    
+        if target.__len__() > 1:
+            raise ValueError ("target has to be exactly one")
+
+        try:
+            db["context"][target]
+        except KeyError as e:
+            raise ValueError(f"{target} does not exists")
+
+        homo_family = family(target,homo_only=True)
+
+
+
+    except Exception as e:
+        pass
+
 
 

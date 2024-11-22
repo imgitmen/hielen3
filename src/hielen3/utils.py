@@ -24,6 +24,33 @@ from pandas import DataFrame
 def uuid():
     return str(uuid4())
 
+
+def boolenize(a,nonevalue=None):
+
+    res=None
+
+    # Default: homogeneous subontext
+    if a is None:
+        res = nonevalue
+    elif isinstance(a,bool):
+        res = a
+    elif a.isnumeric():
+        res = a
+    elif isinstance(a,str):
+        if a.lower() in ("true","yes","y","t"):
+            res = 1
+        elif a.lower() in ("false","no","n","f"):
+            res = 0
+        else:
+            raise ValueError(f"{a} is not boolean")
+    else:
+        raise ValueError(f"{a} is not boolean")
+    
+    return bool(res)
+
+ 
+
+
 def clean_input(inp, trim_none = True ):
  
     if isinstance(inp,str): inp=inp.split(",")

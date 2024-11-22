@@ -5,6 +5,7 @@ import falcon
 from hielen3 import db
 from hielen3.utils import ResponseFormatter
 from hielen3.utils import clean_input
+from hielen3.utils import boolenize 
 from hielen3.contextmanager import lineages
 from hielen3.contextmanager import ancestors
 from hielen3.contextmanager import family
@@ -193,6 +194,7 @@ RESPONSE CODES:
 def get_descendants_param(
     cntxt,
     descendant=None,
+    homogeneous=None,
     dtype=None,
     label=None,
     request=None,
@@ -216,9 +218,11 @@ RESPONSE CODES:
 
     descendant = clean_input(descendant)
 
+    homogeneous = boolenize(homogeneous,nonevalue=False)
+
     try:
 
-        out.data=[ c for c in lineages(cntxt) if not descendant.__len__() or c in descendant  ]
+        out.data=[ c for c in lineages(cntxt,homo_only=homogeneous) if not descendant.__len__() or c in descendant  ]
     
     except ValueError as e:
         out.message = "Context is None: "+str(e)
@@ -237,6 +241,7 @@ RESPONSE CODES:
 def get_descendants_endpoint(
     cntxt,
     descendant,
+    homogeneous=None,
     dtype=None,
     label=None,
     request=None,
@@ -254,7 +259,7 @@ OUTPUT:
 RESPONSE CODES:
 
 """
-    return get_descendants_param(cntxt=cntxt,descendant=descendant,dtype=dtype,label=label,request=request,response=response,**kwargs)
+    return get_descendants_param(cntxt=cntxt,homogeneous=homogeneous,descendant=descendant,dtype=dtype,label=label,request=request,response=response,**kwargs)
 
 
 
@@ -344,24 +349,7 @@ CAVEAT:
             homogeneous=[ v for a in descendant ]
 
     
-        def boolenize(a):
-
-            # Default: homogeneous subontext
-            if a is None:
-                return 1
-
-            if a.isnumeric():
-                return a
-
-            if isinstance(a,str):
-                if a.lower() in ("true","yes","y","t"):
-                    return 1
-                if a.lower() in ("false","no","n","f"):
-                    return 0
-
-            raise ValueError(f"{a} is not boolean")
-
-        homogeneous=list(map( boolenize, homogeneous))
+        homogeneous=list(map( lambda x: int(boolenize(x,nonevalue=True)), homogeneous ))
 
         for i in range(0,descendant.__len__()):
             db["context_context"][{"ancestor":cntxt[0],"descendant":descendant[i]}]={"label":label[i],"homogeneous":homogeneous[i],"klass":dtype[i]}
@@ -475,7 +463,8 @@ RESPONSE CODES:
 
 @hug.get("/{cntxt}/family")
 def get_family_enpoint(
-     cntxt,
+    cntxt,
+    homogeneous=None,
     request=None,
     response=None,
     **kwargs
@@ -496,8 +485,10 @@ RESPONSE CODES:
 
     cntxt=clean_input(cntxt)
 
+    homogeneous = boolenize(homogeneous,nonevalue=False)
+
     try:
-        out.data=family(cntxt,homo_only=False).to_dict(orient="records")
+        out.data=family(cntxt,homo_only=homogeneous).to_dict(orient="records")
     except KeyError as e:
         out.message = str(e)
         out.status = falcon.HTTP_NOT_FOUND
