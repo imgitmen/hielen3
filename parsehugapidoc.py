@@ -76,10 +76,19 @@ if __name__ == "__main__":
     
     for title,struct in get_titles(parsed['documentation']['handlers']).items():
         md=get_title_md(title,struct)
-        outfile=f"{outpath}/{title}.md"
+
+        #if title 
+
+        try:
+            version=re.sub("/(v\d+)/.*","_\g<1>",re.search("/v\d+/",title).string)
+        except AttributeError as e:
+            version=""
+
+        outfile=f"{outpath}{version}/{title}.md"
+
         try:
             with open(outfile,"w") as o: o.write(md)
         except Exception as e:
             print ( e )
-            print ("ERROR with", outfile)
+            print ("ERROR with (Maybe the path does not exists?)", outfile)
 

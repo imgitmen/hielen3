@@ -41,5 +41,30 @@ Backlog = "BACKLOG.md"
     "ContextsRoots" = "docs/API Reference/contextsroots.md"
 
     [[tool.portray.mkdocs.nav."API Reference"]]
-    "Query" = "docs/API Reference/query.md"
+    "Query" = "docs/API Reference/query2.md"
+
+[[tool.portray.mkdocs.nav]]
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Prototypes" = "docs/API Reference_v2/prototypes.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "ActionSchemata" = "docs/API Reference_v2/actionschemata.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Features" = "docs/API Reference_v2/features.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Actions" = "docs/API Reference_v2/actions.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Thresholds" = "docs/API Reference_v2/thresholds.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Contexts" = "docs/API Reference_v2/contexts.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "ContextsRoots" = "docs/API Reference_v2/contextsroots.md"
+
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
+    "Query" = "docs/API Reference_v2/query2.md"
 
