@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.5.9** ##
+### 29 Novembre 2024 ###
+- fatto un casino di roba sui contesti. Un botto di endpoints disponibili sulla path v2 dell'intero glob file
+
 ## **V3.5.8** ##
 ### 22 Novembre 2024 ###
 - modificato contextmanager per gestire in ogni funzione homogeneous true/false (gestione famiglie omogenee)

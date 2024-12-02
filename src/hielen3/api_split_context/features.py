@@ -12,11 +12,16 @@ from hielen3.utils import ResponseFormatter
 from hielen3.utils import uuid
 from hielen3.utils import dataframe2jsonizabledict
 from hielen3.utils import clean_input
+from hielen3.utils import boolenize 
 from hielen3.contextmanager import lineages
-from hielen3.contextmanager import ancestors
-from hielen3.contextmanager import family
+from hielen3.contextmanager import manage_feature_context
+from hielen3.contextmanager import detouch_feature_context
+from hielen3.contextmanager import remove_feature_context_geometry
+from hielen3.contextmanager import feature_in_family
+from numpy import nan
 from pandas import Series
 from marshmallow import Schema, fields
+from sqlalchemy.exc import IntegrityError
 import traceback
 
 
@@ -115,28 +120,31 @@ RESPONSE CODES:
     out = ResponseFormatter(status=falcon.HTTP_CREATED)
 
     try:
+        try:
+            cntxt=properties.pop("context")
+        except KeyError as e:
+            cntxt=None
+
+        cntxt=clean_input(cntxt)
+    
+        if cntxt.__len__() > 1:
+            raise ValueError ("cntxt has to be exactly one")
 
         f = HFeature.create(
                 ftype=prototype,
-                geometry=geometry,
                 **properties
-                ).uuid
+                )
 
-        #TODO da delegare al plugin specifico se serve
-        """
-        feature["classification"]=feature_info.pop("classification")
-        feature["inmap"]=feature_info.pop("inmap")
-        feature_info.update({"data":None, "map":None, "cloud":None})
-        """
+        fuid=f.uuid
 
-        out.data=dataframe2jsonizabledict(db['features'][f])
+        if cntxt.__len__(): 
+            cntxt=cntxt[0]
 
-        #json.loads(db['features'][f].to_json(orient='records'))[0]
+            manage_feature_context(feature=fuid,target=cntxt,geometry=geometry)
 
-        out.data["uid"]=out.data.pop('uuid')
+        f = None
 
-        f=None
-
+        return feature_info(uid=fuid,cntxt=cntxt,request=request,response=response)
 
     except KeyError as e:
         out.message = f"prototype '{prototype}' not found."
@@ -144,6 +152,9 @@ RESPONSE CODES:
     except ValueError as e:
         out.message = e.args
         out.status = falcon.HTTP_CONFLICT
+    except IntegrityError as e:
+        out.message = e.args
+        out.status = falcon.HTTP_BAD_REQUEST
 
     response = out.format(response=response, request=request)
 
@@ -236,7 +247,7 @@ RESPONSE CODES:
 
     try:
         uids=clean_input(uids)
-        cntxt=lineages(clean_input(cntxt))
+        cntxt=lineages(clean_input(cntxt),homo_only=True)
         info=clean_input(info)
         info.extend(["type","properties","capabilities"])
 
@@ -251,9 +262,6 @@ RESPONSE CODES:
             info.append('subitemsfrommap')
         """
 
-        print (uids,cntxt)
-
-
         feafra=db['features_info_v2'][uids,cntxt][good_info]
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
@@ -264,9 +272,13 @@ RESPONSE CODES:
 
         #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)
+        #feafra=dataframe2jsonizabledict(feafra,orient='records',squeeze=False)
 
         out.data = { "features":feafra, "count":feafra.__len__() }
         feafra=None
+
+    except ValueError as e:
+        out.message =  f"some feature belong to multiple non homogeneous contexts: features: {uids} contexts: {cntxt}"
 
     except KeyError as e:
         out.data = { "features":[], "count":0 }
@@ -334,25 +346,40 @@ Possibili risposte:
 
     out = ResponseFormatter()
 
+
+    print (geometry)
+
+
     if uid is None:
         out.status = falcon.HTTP_BAD_REQUEST
         out.message = "None value not allowed"
 
     try:
+        try:
+            cntxt=properties.pop("context")
+        except KeyError as e:
+            cntxt=None
+
+        cntxt=clean_input(cntxt)
+    
+        if cntxt.__len__() > 1:
+            raise ValueError ("cntxt has to be exactly one")
 
         f = HFeature.update(
                 uuid=uid,
-                geometry=geometry,
                 **properties
-                ).uuid
+                )
 
+        fuid=f.uuid
 
-        #out.data=json.loads(db['features'][f].to_json(orient='records'))[0]
-        out.data=dataframe2jsonizabledict(db['features'][f])
+        if cntxt.__len__(): 
+            cntxt=cntxt[0]
+            manage_feature_context(feature=fuid,target=cntxt,geometry=geometry)
 
-        out.data["uid"]=out.data.pop('uuid')
+        f = None
+
+        return feature_info(uid=fuid,cntxt=cntxt,request=request,response=response)
          
-        f=None
 
     except KeyError as e:
         out.status = falcon.HTTP_NOT_FOUND
@@ -399,11 +426,76 @@ Possibili risposte:
 
     return
 
+@hug.get("/{uid}/context")
+def get_feature_contexts(
+    uid,
+    cntxt=None,
+    homogeneous=None,
+    request=None,
+    response=None):
+
+    """
+**Restituisce dei contesti  delle Features**
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui la feature richiesto non esista.
+- _200 Accepted_: In tutti gli altri casi.
+"""
+    out = ResponseFormatter()
+
+    try:
+        uid=clean_input(uid)
+        
+        if not uid.__len__():
+            raise ValueError ("uid is void")
+    
+        if uid.__len__() > 1:
+            raise ValueError ("uid has to be exactly one")
+
+        uid=uid[0]
+
+        cntxt=clean_input(cntxt)
+
+        homogeneous=boolenize(homogeneous,nonevalue=True)
+        
+        out.data=feature_in_family(feature=uid,contexts=cntxt,homo_only=homogeneous)
+
+    except Exception as e:
+        #raise e
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+
+@hug.get("/{uid}/context/{cntxt}")
+def get_feature_contexts_endpoint(
+    uid,
+    cntxt=None,
+    homogeneous=None,
+    request=None,
+    response=None):
+
+    """
+**Modifica dei contesti  delle Features**
+
+ALIAS PER GET /{uid}/context
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+
+    return get_feature_contexts(uid=uid,cntxt=cntxt,homogeneous=homogeneous,request=request,response=response)
+    
+
 @hug.post("/{uid}/context")
 def change_context(
     uid,
-    target,
-    geometry: JsonValidable(GeoJSONSchema()) = {},
+    cntxt,
+    geometry: JsonValidable(GeoJSONSchema()) = None,
     request=None,
     response=None):
 
@@ -416,6 +508,8 @@ Possibili risposte:
 - _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
+    out = ResponseFormatter()
+
     try:
         uid=clean_input(uid)
         
@@ -425,25 +519,256 @@ Possibili risposte:
         if uid.__len__() > 1:
             raise ValueError ("uid has to be exactly one")
 
-        target=clean_input(target)
+        uid=uid[0]
+
+        cntxt=clean_input(cntxt)
         
-        if not target.__len__():
-            raise ValueError ("target is void")
+        if not cntxt.__len__():
+            raise ValueError ("cntxt is void")
     
-        if target.__len__() > 1:
-            raise ValueError ("target has to be exactly one")
+        if cntxt.__len__() > 1:
+            raise ValueError ("cntxt has to be exactly one")
+
+        cntxt=cntxt[0]
 
         try:
-            db["context"][target]
+            db["context"][cntxt]
         except KeyError as e:
-            raise ValueError(f"{target} does not exists")
+            raise ValueError(f"{cntxt} does not exists")
 
-        homo_family = family(target,homo_only=True)
-
-
+        manage_feature_context(feature=uid,target=cntxt,geometry=geometry)
 
     except Exception as e:
-        pass
+        #raise e
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+    return
+
+@hug.post("/{uid}/context/{cntxt}")
+def change_context_enpoint(
+    uid,
+    cntxt,
+    geometry: JsonValidable(GeoJSONSchema()) = None,
+    request=None,
+    response=None):
+
+    """
+**Modifica dei contesti  delle Features**
+
+ALIAS PER POST /{uid}/context
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+
+    return change_context(uid=uid,cntxt=cntxt,geometry=geometry,request=request,response=response) 
+
+
+@hug.delete("/{uid}/context")
+def delete_feature_context(
+    uid,
+    cntxt,
+    request=None,
+    response=None):
+
+    """
+**Eliminazione di una feature da uno specifico contesto**
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+ 
+    out = ResponseFormatter()
+
+    try:
+        uid=clean_input(uid)
+        
+        if not uid.__len__():
+            raise ValueError ("uid is void")
+    
+        if uid.__len__() > 1:
+            raise ValueError ("uid has to be exactly one")
+
+        uid=uid[0]
+
+        cntxt=clean_input(cntxt)
+        
+        if not cntxt.__len__():
+            raise ValueError ("cntxt is void")
+    
+        if cntxt.__len__() > 1:
+            raise ValueError ("cntxt has to be exactly one")
+
+        cntxt=cntxt[0]
+
+        try:
+            db["context"][cntxt]
+        except KeyError as e:
+            raise ValueError(f"{cntxt} does not exists")
+
+        out.data=detouch_feature_context(feature=uid,context=cntxt)
+
+    except Exception as e:
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+    return
+
+@hug.delete("/{uid}/context/{cntxt}")
+def delete_feature_context_enpoint(
+    uid,
+    cntxt,
+    request=None,
+    response=None):
+
+    """
+**Eliminazione di una feature da uno specifico contesto**
+
+ALIAS PER DELETE /{uid}/context
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+
+    return delete_feature_context(uid=uid,cntxt=cntxt,request=request,response=response) 
+
+@hug.get("/{uid}/geometry")
+def get_feature_geometry(
+    uid,
+    cntxt=None,
+    request=None,
+    response=None
+        ):
+    """
+**Recupero delle geometry delle features associate ai contesti**
+
+- _404 Not Found_: Nel caso le feature richiesta non esistano nei contesti richiesti.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+    out = ResponseFormatter()
+
+    try:
+        uid=clean_input(uid)
+        
+        cntxt=clean_input(cntxt)
+
+        try:
+            fcon=db["context_feature"][{"feature":uid,"context":cntxt}]
+        except Exception as e:
+            raise ValueError(  f"feature {uid} not found in context {cntxt}" )
+
+
+        geom=db["geometry"][list(fcon["geometry"])]
+
+        fcongeo=fcon.set_index("geometry").join(geom).drop("uuid",axis=1).set_index("feature")
+        
+        out.data=fcongeo.groupby("feature").apply(lambda x: x.replace(nan,None).to_dict(orient="records")).to_dict()
+    except Exception as e:
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+    return
+
+@hug.get("/{uid}/geometry/{cntxt}")
+def get_feature_geometry_enpoint(
+    uid,
+    cntxt=None,
+    request=None,
+    response=None
+        ):
+    """
+**Recupero delle geometry delle features associate ai contesti**
+
+- _404 Not Found_: Nel caso le feature richiesta non esistano nei contesti richiesti.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+    return get_feature_geometry(uid=uid,cntxt=cntxt,request=request,response=response)
+    
+
+
+@hug.delete("/{uid}/geometry")
+def delete_feature_context_geometry(
+    uid,
+    cntxt,
+    request=None,
+    response=None):
+
+    """
+**Eliminazione della gemoetry di una feature da uno specifico contesto**
+
+- _404 Not Found_: Nel caso la feature richiesta non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+ 
+    out = ResponseFormatter()
+
+    try:
+        uid=clean_input(uid)
+        
+        if not uid.__len__():
+            raise ValueError ("uid is void")
+    
+        if uid.__len__() > 1:
+            raise ValueError ("uid has to be exactly one")
+
+        uid=uid[0]
+
+        cntxt=clean_input(cntxt)
+        
+        if not cntxt.__len__():
+            raise ValueError ("cntxt is void")
+    
+        if cntxt.__len__() > 1:
+            raise ValueError ("cntxt has to be exactly one")
+
+        cntxt=cntxt[0]
+
+        try:
+            db["context"][cntxt]
+        except KeyError as e:
+            raise ValueError(f"{cntxt} does not exists")
+
+        out.data=remove_feature_context_geometry(feature=uid,context=cntxt)
+
+    except Exception as e:
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+    return
+
+@hug.delete("/{uid}/geometry/{cntxt}")
+def delete_feature_context_geometry_enpoint(
+    uid,
+    cntxt,
+    request=None,
+    response=None):
+
+    """
+**Eliminazione di una feature da uno specifico contesto**
+
+ALIAS PER DELETE /{uid}/context
+
+Possibili risposte:
+
+- _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
+- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+"""
+
+    return delete_feature_context_geometry(uid=uid,cntxt=cntxt,request=request,response=response) 
+
 
 
 

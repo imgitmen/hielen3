@@ -17,6 +17,7 @@ from marshmallow import Schema
 from marshmallow import fields
 from numpy import datetime64
 from numpy import isnat
+from numpy import nan
 from collections.abc import Iterable
 from uuid import uuid4
 from pandas import DataFrame
@@ -292,6 +293,7 @@ class JsonValidable:
         return f"JSON Schema {fields}"
 
     def __init__(self, schema):
+
         self.schema = schema
         self.TYPE_MAPPING = {}
         for k, w in self.schema.TYPE_MAPPING.items():

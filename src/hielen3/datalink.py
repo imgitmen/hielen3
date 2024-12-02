@@ -835,16 +835,13 @@ class MariadbHielenGeo(MariadbTable):
 
             xy=frame[self.geo_col].apply(Series,dtype="object")#['coordinates']
 
-
-            """
-            xy=frame[self.geo_col].to_frame().apply(lambda x: 
-                    x['geometry'],result_type='expand',axis=1)['coordinates']
-            """
-
-            xy=xy['coordinates']
-
-            managed=concat([xy,frame[self.elev_col].replace(nan,0)],axis=1)
+            xy=xy['coordinates'].copy()
             
+            z=frame[self.elev_col].copy()
+            z[z.isna()] = 0
+
+            managed=concat([xy,z],axis=1)
+
             frame[self.geo_col]=managed.apply(lambda x: 
                     MariadbHielenGeo.__man_na_coords__(x['coordinates'], x[self.elev_col]), axis=1)
             frame=frame.drop(self.elev_col,axis=1)
@@ -871,12 +868,16 @@ class MariadbHielenGeo(MariadbTable):
 
     def __setitem__(self, key=None, value=None):
 
+
         key,value = self.__parse_set_kw__(key,value)
-    
+
         try:
             value[self.elev_col]=value[self.geo_col]['coordinates'][2]
-        except Exception as e:
+        except IndexError as e:
             pass
+        except Exception as e:
+            #raise e
+            raise ValueError(f"problems with geometry {value}")
             
         self.__exec_set_kw__(key,value)
 

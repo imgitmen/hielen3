@@ -9,6 +9,9 @@ from hielen3.utils import boolenize
 from hielen3.contextmanager import lineages
 from hielen3.contextmanager import ancestors
 from hielen3.contextmanager import family
+from hielen3.contextmanager import features_interfamily_collisions
+from hielen3.contextmanager import contexts_with_homo_parent
+from hielen3.contextmanager import roots_info
 
 #GET
 
@@ -343,13 +346,33 @@ CAVEAT:
             label=[ v for a in descendant ]
    
 
-
         if homogeneous.__len__() == 1:
             v = homogeneous[0]
             homogeneous=[ v for a in descendant ]
 
-    
+   
+
         homogeneous=list(map( lambda x: int(boolenize(x,nonevalue=True)), homogeneous ))
+
+        colliders=[]
+
+        for i in range(0,homogeneous.__len__()):
+            if homogeneous[i]:
+                colliders.append(descendant[i])
+
+
+        homoparented=contexts_with_homo_parent(colliders)
+
+        
+        if homoparented.__len__():
+            raise ValueError(f"some descendants have already an homogeneous parent: {homoparented}")
+
+
+        collisions=features_interfamily_collisions(cntxt,colliders,homo_only=True)
+
+        if collisions.__len__():
+            raise ValueError(f"some features in descendants are already present in parent family: {collisions}")
+
 
         for i in range(0,descendant.__len__()):
             db["context_context"][{"ancestor":cntxt[0],"descendant":descendant[i]}]={"label":label[i],"homogeneous":homogeneous[i],"klass":dtype[i]}
@@ -499,5 +522,49 @@ RESPONSE CODES:
     response = out.format(response=response, request=request)
 
     return
+
+
+#GET
+
+@hug.get("/{cntxt}/roots")
+def get_roots_param(
+    cntxt=None,
+    homogeneous=False,
+    request=None,
+    response=None,
+    **kwargs
+):
+
+    """
+DESCRIZIONE:
+
+PARAMETRI:
+
+OUTPUT:
+
+RESPONSE CODES:
+
+"""
+    out = ResponseFormatter(status=falcon.HTTP_OK)
+
+    cntxt=clean_input(cntxt)
+
+    homogeneous=boolenize(homogeneous,nonevalue=False)
+    
+    try:
+        out.data=roots_info(cntxt,homo_only=homogeneous).to_dict(orient="records")
+    except KeyError as e:
+        out.message = str(e)
+        out.status = falcon.HTTP_NOT_FOUND
+    except Exception as e:
+        out.message = str(e)
+        out.status = falcon.HTTP_CONFLICT
+
+    response = out.format(response=response, request=request)
+
+    return
+
+
+
 
 

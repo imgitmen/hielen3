@@ -17,6 +17,7 @@ from . import thresholds
 from . import contexts
 from . import contextsroots 
 from . import contextsricominciamo 
+from hielen3.api_split_context import glob as globsplitcontext 
 
 """
 @hug.not_found()
@@ -103,5 +104,8 @@ def sampleman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
 
-
+@hug.extend_api("/v2")
+def glob_split_contexts():
+    """ api glob v2 """
+    return [globsplitcontext]
 

@@ -115,7 +115,7 @@ class HFeature(ABC):
     def update_label(uuid,**kwargs):
         feats=db['features'][:]
 
-        uuid=feats[feats['label']==label]['uuid'].squeeze()
+        uuid=feats[feats['label']==kwargs['label']]['uuid'].squeeze()
 
         if isinstance(uuid,str):
             return HFeature.__featureFactory__(uuid=uuid, **kwargs)
