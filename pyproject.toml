@@ -44,10 +44,10 @@ Backlog = "BACKLOG.md"
     "Query" = "docs/API Reference/query2.md"
 
 [[tool.portray.mkdocs.nav]]
-    [[tool.portray.mkdocs.nav."API Reference_v2"]]
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
     "Prototypes" = "docs/API Reference/prototypes_v2.md"
 
-    [[tool.portray.mkdocs.nav."API Reference_v2"]]
+    [[tool.portray.mkdocs.nav."API Reference v2"]]
     "ActionSchemata" = "docs/API Reference/actionschemata_v2.md"
 
     [[tool.portray.mkdocs.nav."API Reference v2"]]
