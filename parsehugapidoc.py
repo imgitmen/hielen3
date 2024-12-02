@@ -11,12 +11,27 @@ def open_struct(filename):
 def get_titles(struct):
     titles={}
     for k,w in struct.items():
-        print (k)
-        title=k.split('/')[1]
+
+        try:
+            version=re.sub("/(v\d+)/.*","_\g<1>",re.search("/v\d+/",k).string)
+        except AttributeError as e:
+            version=""
+
+
+        if version.__len__():
+            title=k.split('/')[2]
+        else:
+            title=k.split('/')[1]
+
+        title=title+version
+        
+        print (title)
+
         try:
             titles[title][k]=w
         except Exception:
             titles[title]={k:w}
+
     return titles
 
 def get_prot_md(info):
@@ -73,16 +88,12 @@ if __name__ == "__main__":
         outpath=sys.argv[2]
     except Exception as e:    
         outpath='docs/API Reference'
+
     
     for title,struct in get_titles(parsed['documentation']['handlers']).items():
         md=get_title_md(title,struct)
 
-        try:
-            version=re.sub("/(v\d+)/.*","_\g<1>",re.search("/v\d+/",title).string)
-        except AttributeError as e:
-            version=""
-
-        outfile=f"{outpath}{version}/{title}.md"
+        outfile=f"{outpath}/{title}.md"
 
         print ()
         print ()
