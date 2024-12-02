@@ -77,14 +77,18 @@ if __name__ == "__main__":
     for title,struct in get_titles(parsed['documentation']['handlers']).items():
         md=get_title_md(title,struct)
 
-        #if title 
-
         try:
             version=re.sub("/(v\d+)/.*","_\g<1>",re.search("/v\d+/",title).string)
         except AttributeError as e:
             version=""
 
         outfile=f"{outpath}{version}/{title}.md"
+
+        print ()
+        print ()
+        print (outfile)
+        print ()
+        print ()
 
         try:
             with open(outfile,"w") as o: o.write(md)
