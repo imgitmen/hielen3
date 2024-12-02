@@ -5262,7 +5262,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="nv">feats</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features&#39;</span>][:]
 
-<span class="w">        </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">feats</span>[<span class="nv">feats</span>[<span class="s1">&#39;label&#39;</span>]<span class="o">==</span><span class="nv">label</span>][<span class="s1">&#39;uuid&#39;</span>].<span class="nv">squeeze</span><span class="ss">()</span>
+<span class="w">        </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">feats</span>[<span class="nv">feats</span>[<span class="s1">&#39;label&#39;</span>]<span class="o">==</span><span class="nv">kwargs</span>[<span class="s1">&#39;label&#39;</span>]][<span class="s1">&#39;uuid&#39;</span>].<span class="nv">squeeze</span><span class="ss">()</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">isinstance</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">str</span><span class="ss">)</span>:
 

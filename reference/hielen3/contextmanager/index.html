@@ -517,8 +517,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add_nodes" class="md-nav__link">
+    add_nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ancestors" class="md-nav__link">
     ancestors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context_in_family" class="md-nav__link">
+    context_in_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexts_with_homo_parent" class="md-nav__link">
+    contexts_with_homo_parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_tree" class="md-nav__link">
+    create_tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detouch_feature_context" class="md-nav__link">
+    detouch_feature_context
   </a>
   
 </li>
@@ -531,8 +566,50 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#feature_in_family" class="md-nav__link">
+    feature_in_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features_interfamily_collisions" class="md-nav__link">
+    features_interfamily_collisions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lineages" class="md-nav__link">
     lineages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage_feature_context" class="md-nav__link">
+    manage_feature_context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_family" class="md-nav__link">
+    print_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_tree" class="md-nav__link">
+    print_tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_feature_context_geometry" class="md-nav__link">
+    remove_feature_context_geometry
   </a>
   
 </li>
@@ -3141,8 +3218,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add_nodes" class="md-nav__link">
+    add_nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#ancestors" class="md-nav__link">
     ancestors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#context_in_family" class="md-nav__link">
+    context_in_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contexts_with_homo_parent" class="md-nav__link">
+    contexts_with_homo_parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create_tree" class="md-nav__link">
+    create_tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detouch_feature_context" class="md-nav__link">
+    detouch_feature_context
   </a>
   
 </li>
@@ -3155,8 +3267,50 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#feature_in_family" class="md-nav__link">
+    feature_in_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#features_interfamily_collisions" class="md-nav__link">
+    features_interfamily_collisions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lineages" class="md-nav__link">
     lineages
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage_feature_context" class="md-nav__link">
+    manage_feature_context
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_family" class="md-nav__link">
+    print_family
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#print_tree" class="md-nav__link">
+    print_tree
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove_feature_context_geometry" class="md-nav__link">
+    remove_feature_context_geometry
   </a>
   
 </li>
@@ -3202,9 +3356,15 @@
 
 <span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">clean_input</span>
 
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">uuid</span>
+
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="kp">nan</span>
+
+<span class="kn">from</span> <span class="nn">json</span> <span class="kn">import</span> <span class="kp">dumps</span>
+
+<span class="kn">from</span> <span class="nn">anytree</span> <span class="kn">import</span> <span class="n">Node</span><span class="p">,</span> <span class="n">RenderTree</span>
 
 <span class="k">def</span> <span class="nf">roots_info</span><span class="p">(</span><span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
@@ -3225,8 +3385,6 @@
         <span class="n">contexts</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">][</span><span class="n">ancestors</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)]</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-        <span class="nb">print</span> <span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">DataFrame</span><span class="p">()</span>
 
@@ -3304,7 +3462,9 @@
 
         <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">key</span>
 
@@ -3354,7 +3514,9 @@
 
         <span class="k">if</span> <span class="n">level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
 
-    <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+        <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">key</span>
 
@@ -3399,6 +3561,326 @@
         <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">roots_list</span><span class="p">,</span><span class="s2">&quot;parent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">feature_in_family</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        in caso di homo_only:     ritorna il contesto in cui sta la feature, omogeneo ai</span>
+
+<span class="sd">                                  contesti in input</span>
+
+<span class="sd">        in caso di not homo_only: ritorna tutti i contesti omogenei e non,</span>
+
+<span class="sd">                                  in cui si trova la feature che fanno parte della famiglia</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">fam</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">family</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+        <span class="n">contexts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][{</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">fam</span><span class="p">,</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">}][</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+        <span class="c1"># raise e</span>
+
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">return</span> <span class="n">contexts</span>
+
+<span class="k">def</span> <span class="nf">context_in_family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">contexts</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">fam</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">family</span><span class="p">(</span><span class="n">contexts</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+        <span class="c1"># raise e</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">fam</span>
+
+<span class="k">def</span> <span class="nf">manage_feature_context</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">popped_cont_feat</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="kp">source</span><span class="o">=</span><span class="n">feature_in_family</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="kp">source</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">            #estrarre il link context_feature</span>
+
+<span class="sd">            #modificare il context (pop)</span>
+
+<span class="sd">            #inserire la nuova assoxciazione</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
+
+            <span class="n">popped_cont_feat</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="kp">source</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">})</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="n">cont_feat</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">popped_cont_feat</span><span class="p">}</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">cont_feat</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">}</span>
+
+        <span class="n">cont_feat</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">target</span>
+
+        <span class="k">if</span> <span class="n">geometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">geometry</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">geouuid</span><span class="o">=</span><span class="n">cont_feat</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="n">geouuid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">geouuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">()</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">][</span><span class="n">geouuid</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span><span class="n">geometry</span><span class="p">}</span>
+
+            <span class="n">cont_feat</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">geouuid</span>
+
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][</span><span class="n">cont_feat</span><span class="p">]</span><span class="o">=</span><span class="n">cont_feat</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">popped_cont_feat</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][</span><span class="n">popped_cont_feat</span><span class="p">]</span><span class="o">=</span><span class="n">popped_cont_feat</span>
+
+        <span class="k">raise</span> <span class="n">e</span>
+
+<span class="k">def</span> <span class="nf">remove_feature_context_geometry</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">context</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">cont_feat</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][{</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">,</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">}]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">geo_uuid</span><span class="o">=</span><span class="n">cont_feat</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;geometry&quot;</span><span class="p">)</span>
+
+        <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][</span><span class="n">cont_feat</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">cont_feat</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">popped_geometry</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">geo_uuid</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">popped_geometry</span><span class="o">=</span><span class="p">{}</span>
+
+    <span class="k">return</span> <span class="n">popped_geometry</span>
+
+<span class="k">def</span> <span class="nf">detouch_feature_context</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">context</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">popped_cont_feat</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">,</span><span class="s2">&quot;feature&quot;</span><span class="p">:</span><span class="n">feature</span><span class="p">})</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="n">popped_cont_feat</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">popped_cont_feat</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">remove_feature_context_geometry</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">popped_cont_feat</span>
+
+<span class="k">def</span> <span class="nf">contexts_with_homo_parent</span><span class="p">(</span><span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">contexts</span><span class="o">=</span><span class="n">clean_input</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">contexts</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">dd</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">][{</span><span class="s2">&quot;descendant&quot;</span><span class="p">:</span><span class="n">contexts</span><span class="p">}]</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span> <span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">dd</span><span class="p">[</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][[</span><span class="s2">&quot;ancestor&quot;</span><span class="p">,</span><span class="s2">&quot;descendant&quot;</span><span class="p">]])</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">features_interfamily_collisions</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">colliders</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="n">colliders</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">colliders</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">context</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">family_context</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)[</span><span class="s2">&quot;context&quot;</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">family_context</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">()</span>
+
+        <span class="n">feats_family_context</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_info_v2&quot;</span><span class="p">][{</span><span class="s2">&quot;context&quot;</span><span class="p">:[</span><span class="o">*</span><span class="n">family_context</span><span class="p">]}][</span><span class="s2">&quot;feature&quot;</span><span class="p">])</span>
+
+    <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">out</span>
+
+    <span class="k">for</span> <span class="n">collider</span> <span class="ow">in</span> <span class="n">colliders</span><span class="p">:</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">family_collider</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">family</span><span class="p">(</span><span class="n">collider</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)[</span><span class="s2">&quot;context&quot;</span><span class="p">])</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">continue</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">feats_family_collider</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_info_v2&quot;</span><span class="p">][{</span><span class="s2">&quot;context&quot;</span><span class="p">:[</span><span class="o">*</span><span class="n">family_collider</span><span class="p">]}][</span><span class="s2">&quot;feature&quot;</span><span class="p">])</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">continue</span>
+
+        <span class="c1"># intersection</span>
+
+        <span class="n">collisions</span><span class="o">=</span><span class="n">feats_family_context</span> <span class="o">&amp;</span> <span class="n">feats_family_collider</span>
+
+        <span class="k">if</span> <span class="n">collisions</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+            <span class="n">out</span><span class="o">.</span><span class="kp">append</span><span class="p">(</span>
+
+                    <span class="p">{</span>
+
+                        <span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">,</span>
+
+                        <span class="s2">&quot;collider&quot;</span><span class="p">:</span><span class="n">collider</span><span class="p">,</span>
+
+                        <span class="s2">&quot;collision&quot;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">collisions</span><span class="p">)</span>
+
+                        <span class="p">}</span>
+
+                    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
+<span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="kp">roots</span><span class="p">:</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="kp">roots</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">pre</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">RenderTree</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">root</span><span class="p">]):</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pre</span><span class="si">}{</span><span class="n">node</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">add_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="kp">roots</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">child</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="n">parent</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+
+        <span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="kp">roots</span><span class="o">.</span><span class="kp">add</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">child</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+
+        <span class="n">nodes</span><span class="p">[</span><span class="n">child</span><span class="p">]</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">nodes</span><span class="p">[</span><span class="n">child</span><span class="p">]</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="n">nodes</span><span class="p">[</span><span class="n">child</span><span class="p">]</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">child</span> <span class="ow">in</span> <span class="kp">roots</span><span class="p">:</span>
+
+        <span class="kp">roots</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">create_tree</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+    <span class="n">nodes</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="kp">roots</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;df_row&#39;</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">c_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">add_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="kp">roots</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">p_key</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">c_key</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="n">print_tree</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span> <span class="kp">roots</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">print_family</span><span class="p">(</span><span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">contexts</span> <span class="o">=</span> <span class="n">clean_input</span><span class="p">(</span><span class="n">contexts</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">contexts</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">contexts</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">roots_info</span><span class="p">()[</span><span class="s2">&quot;context&quot;</span><span class="p">])</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="n">contexts</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">contexts</span><span class="p">:</span>
+
+        <span class="kp">roots</span><span class="o">=</span><span class="n">roots_info</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="kp">roots</span><span class="o">.</span><span class="kp">empty</span><span class="p">:</span>
+
+            <span class="kp">roots</span><span class="o">=</span><span class="kp">roots</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="kp">roots</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+
+                <span class="n">f</span><span class="o">=</span><span class="n">family</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="n">homo_only</span><span class="p">)</span>
+
+                <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()[[</span><span class="s2">&quot;parent&quot;</span><span class="p">,</span><span class="s2">&quot;context&quot;</span><span class="p">,</span><span class="s2">&quot;label&quot;</span><span class="p">]]</span>
+
+                <span class="n">f</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;p_key&quot;</span><span class="p">,</span><span class="s2">&quot;c_key&quot;</span><span class="p">,</span><span class="s2">&quot;val&quot;</span><span class="p">]</span>
+
+                <span class="c1">#f=f[~f[&quot;p_key&quot;].isna()]</span>
+
+                <span class="n">create_tree</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -3410,6 +3892,42 @@
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>
+<h3 id="add_nodes">add_nodes</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_nodes</span><span class="p">(</span>
+    <span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">roots</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span>
+    <span class="n">parent</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">child</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">val</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">add_nodes</span><span class="p">(</span><span class="nl">nodes</span><span class="p">:</span><span class="w"> </span><span class="n">dict</span><span class="p">,</span><span class="w"> </span><span class="nl">roots</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="p">,</span><span class="w"> </span><span class="nl">parent</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">,</span><span class="w"> </span><span class="nl">child</span><span class="p">:</span><span class="w"> </span><span class="nf">str</span><span class="p">,</span><span class="w"> </span><span class="nl">val</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">nodes</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">nodes</span><span class="o">[</span><span class="n">parent</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="o">=</span><span class="k">None</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">roots</span><span class="p">.</span><span class="k">add</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">nodes</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">nodes</span><span class="o">[</span><span class="n">child</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="n">val</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">nodes</span><span class="o">[</span><span class="n">child</span><span class="o">]</span><span class="p">.</span><span class="n">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span>
+
+<span class="w">    </span><span class="n">nodes</span><span class="o">[</span><span class="n">child</span><span class="o">]</span><span class="p">.</span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nodes</span><span class="o">[</span><span class="n">parent</span><span class="o">]</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">child</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">roots</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">roots</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
 <h3 id="ancestors">ancestors</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">ancestors</span><span class="p">(</span>
     <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -3468,9 +3986,124 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span>
 
-<span class="w">    </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">key</span>
+</code></pre></div>
+
+</details>
+<h3 id="context_in_family">context_in_family</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">context_in_family</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">,</span>
+    <span class="n">contexts</span><span class="p">,</span>
+    <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">context_in_family</span><span class="ss">(</span><span class="nv">context</span>,<span class="nv">contexts</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">fam</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">family</span><span class="ss">(</span><span class="nv">contexts</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>[<span class="s2">&quot;context&quot;</span>].<span class="nv">drop_duplicates</span><span class="ss">()</span>.<span class="nv">values</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span>:
+
+<span class="w">        </span>#<span class="w"> </span><span class="nv">raise</span><span class="w"> </span><span class="nv">e</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">False</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">context</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">fam</span>
+</code></pre></div>
+
+</details>
+<h3 id="contexts_with_homo_parent">contexts_with_homo_parent</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">contexts_with_homo_parent</span><span class="p">(</span>
+    <span class="n">contexts</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">contexts_with_homo_parent</span><span class="ss">(</span><span class="nv">contexts</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>[]
+
+<span class="w">    </span><span class="nv">contexts</span><span class="o">=</span><span class="nv">clean_input</span><span class="ss">(</span><span class="nv">contexts</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">contexts</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">dd</span><span class="o">=</span><span class="nv">db</span>[<span class="s2">&quot;context_context&quot;</span>][{<span class="s2">&quot;descendant&quot;</span>:<span class="nv">contexts</span>}]
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+
+<span class="w">    </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">list</span><span class="w"> </span><span class="ss">(</span><span class="nv">dd</span>[<span class="nv">dd</span>[<span class="s2">&quot;homogeneous&quot;</span>]<span class="o">==</span><span class="mi">1</span>][[<span class="s2">&quot;ancestor&quot;</span>,<span class="s2">&quot;descendant&quot;</span>]]<span class="ss">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+</code></pre></div>
+
+</details>
+<h3 id="create_tree">create_tree</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_tree</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">create_tree</span><span class="p">(</span><span class="n">df</span><span class="o">:</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">None</span><span class="o">:</span>
+
+<span class="w">    </span><span class="n">nodes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{}</span>
+
+<span class="w">    </span><span class="n">roots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">set</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">for</span><span class="w"> </span><span class="nf">row</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">itertuples</span><span class="p">(</span><span class="nf">index</span><span class="o">=</span><span class="kr">False</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&#39;df_row&#39;</span><span class="p">)</span><span class="o">:</span>
+
+<span class="w">        </span><span class="nf">if</span><span class="w"> </span><span class="nf">row</span><span class="p">.</span><span class="n">c_key</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="kr">not</span><span class="w"> </span><span class="n">None</span><span class="o">:</span>
+
+<span class="w">            </span><span class="n">add_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="w"> </span><span class="n">roots</span><span class="p">,</span><span class="w"> </span><span class="nf">row</span><span class="p">.</span><span class="n">p_key</span><span class="p">,</span><span class="w"> </span><span class="nf">row</span><span class="p">.</span><span class="n">c_key</span><span class="p">,</span><span class="w"> </span><span class="nf">row</span><span class="p">.</span><span class="n">val</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">print_tree</span><span class="p">(</span><span class="n">nodes</span><span class="p">,</span><span class="w"> </span><span class="n">roots</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="detouch_feature_context">detouch_feature_context</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">detouch_feature_context</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">context</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">detouch_feature_context</span><span class="ss">(</span><span class="nv">feature</span>,<span class="nv">context</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">popped_cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">db</span>[<span class="s2">&quot;context_feature&quot;</span>].<span class="nv">pop</span><span class="ss">(</span>{<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>,<span class="s2">&quot;feature&quot;</span>:<span class="nv">feature</span>}<span class="ss">)</span>.<span class="nv">to_dict</span><span class="ss">(</span><span class="nv">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="ss">)</span>[<span class="mi">0</span>]
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="nv">popped_cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>{}
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">popped_cont_feat</span>[<span class="s2">&quot;geometry&quot;</span>]<span class="o">=</span><span class="nv">remove_feature_context_geometry</span><span class="ss">(</span><span class="nv">feature</span>,<span class="nv">context</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">Exception</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="nv">pass</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">popped_cont_feat</span>
 </code></pre></div>
 
 </details>
@@ -3528,6 +4161,136 @@
 </code></pre></div>
 
 </details>
+<h3 id="feature_in_family">feature_in_family</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">feature_in_family</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>in caso di homo_only:     ritorna il contesto in cui sta la feature, omogeneo ai </p>
+<p>contesti in input
+in caso di not homo_only: ritorna tutti i contesti omogenei e non, 
+                          in cui si trova la feature che fanno parte della famiglia</p>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">feature_in_family</span><span class="ss">(</span><span class="nv">feature</span>,<span class="nv">contexts</span><span class="o">=</span><span class="nv">None</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="s2">&quot;&quot;</span><span class="err">&quot;</span>
+
+<span class="err">        in caso di homo_only:     ritorna il contesto in cui sta la feature, omogeneo ai</span>
+
+<span class="err">                                  contesti in input</span>
+
+<span class="err">        in caso di not homo_only: ritorna tutti i contesti omogenei e non,</span>
+
+<span class="err">                                  in cui si trova la feature che fanno parte della famiglia</span>
+
+<span class="w">    </span><span class="s2">&quot;&quot;</span><span class="err">&quot;</span>
+
+<span class="err">    try:</span>
+
+<span class="w">        </span><span class="nv">fam</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">family</span><span class="ss">(</span><span class="nv">contexts</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>[<span class="s2">&quot;context&quot;</span>].<span class="nv">drop_duplicates</span><span class="ss">()</span>.<span class="nv">values</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="nv">contexts</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">db</span>[<span class="s2">&quot;context_feature&quot;</span>][{<span class="s2">&quot;context&quot;</span>:<span class="nv">fam</span>,<span class="s2">&quot;feature&quot;</span>:<span class="nv">feature</span>}][<span class="s2">&quot;context&quot;</span>].<span class="nv">drop_duplicates</span><span class="ss">()</span>.<span class="nv">values</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span>:
+
+<span class="w">        </span>#<span class="w"> </span><span class="nv">raise</span><span class="w"> </span><span class="nv">e</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>[]
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">contexts</span>
+</code></pre></div>
+
+</details>
+<h3 id="features_interfamily_collisions">features_interfamily_collisions</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">features_interfamily_collisions</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">,</span>
+    <span class="n">colliders</span><span class="p">,</span>
+    <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">features_interfamily_collisions</span><span class="ss">(</span><span class="nv">context</span>,<span class="nv">colliders</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>[]
+
+<span class="w">    </span><span class="nv">context</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">clean_input</span><span class="ss">(</span><span class="nv">context</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">colliders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">clean_input</span><span class="ss">(</span><span class="nv">colliders</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">context</span>.<span class="nv">__len__</span><span class="ss">()</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+
+<span class="w">    </span><span class="nv">context</span><span class="o">=</span><span class="nv">context</span>[<span class="mi">0</span>]
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">family_context</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">family</span><span class="ss">(</span><span class="nv">context</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>[<span class="s2">&quot;context&quot;</span>]<span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">family_context</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>:
+
+<span class="w">            </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">()</span>
+
+<span class="w">        </span><span class="nv">feats_family_context</span><span class="o">=</span><span class="nv">set</span><span class="ss">(</span><span class="nv">db</span>[<span class="s2">&quot;features_info_v2&quot;</span>][{<span class="s2">&quot;context&quot;</span>:[<span class="o">*</span><span class="nv">family_context</span>]}][<span class="s2">&quot;feature&quot;</span>]<span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nv">collider</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">colliders</span>:
+
+<span class="w">        </span><span class="nv">try</span>:
+
+<span class="w">            </span><span class="nv">family_collider</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">family</span><span class="ss">(</span><span class="nv">collider</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>[<span class="s2">&quot;context&quot;</span>]<span class="ss">)</span>
+
+<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="nv">try</span>:
+
+<span class="w">            </span><span class="nv">feats_family_collider</span><span class="o">=</span><span class="nv">set</span><span class="ss">(</span><span class="nv">db</span>[<span class="s2">&quot;features_info_v2&quot;</span>][{<span class="s2">&quot;context&quot;</span>:[<span class="o">*</span><span class="nv">family_collider</span>]}][<span class="s2">&quot;feature&quot;</span>]<span class="ss">)</span>
+
+<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span>#<span class="w"> </span><span class="nv">intersection</span>
+
+<span class="w">        </span><span class="nv">collisions</span><span class="o">=</span><span class="nv">feats_family_context</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nv">feats_family_collider</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">collisions</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span>:
+
+<span class="w">            </span><span class="nv">out</span>.<span class="nv">append</span><span class="ss">(</span>
+
+<span class="w">                    </span>{
+
+<span class="w">                        </span><span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>,
+
+<span class="w">                        </span><span class="s2">&quot;collider&quot;</span>:<span class="nv">collider</span>,
+
+<span class="w">                        </span><span class="s2">&quot;collision&quot;</span>:<span class="nv">list</span><span class="ss">(</span><span class="nv">collisions</span><span class="ss">)</span>
+
+<span class="w">                        </span>}
+
+<span class="w">                    </span><span class="ss">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+</code></pre></div>
+
+</details>
 <h3 id="lineages">lineages</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">lineages</span><span class="p">(</span>
     <span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -3582,9 +4345,182 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span>
 
-<span class="w">    </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">(</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">][</span><span class="n">key</span><span class="o">]</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">key</span>
+</code></pre></div>
+
+</details>
+<h3 id="manage_feature_context">manage_feature_context</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">manage_feature_context</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">target</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">manage_feature_context</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">    </span><span class="n">popped_cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">source</span><span class="o">=</span><span class="n">feature_in_family</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">target</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">source</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">            #estrarre il link context_feature</span>
+
+<span class="ss">            #modificare il context (pop)</span>
+
+<span class="ss">            #inserire la nuova assoxciazione</span>
+
+<span class="ss">            &quot;&quot;&quot;</span>
+
+<span class="w">            </span><span class="n">popped_cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;context&quot;</span><span class="err">:</span><span class="n">source</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="ss">&quot;feature&quot;</span><span class="err">:</span><span class="n">feature</span><span class="err">}</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="o">**</span><span class="n">popped_cont_feat</span><span class="err">}</span>
+
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;feature&quot;</span><span class="err">:</span><span class="n">feature</span><span class="err">}</span>
+
+<span class="w">        </span><span class="n">cont_feat</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]=</span><span class="n">target</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">geometry</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">geometry</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">geouuid</span><span class="o">=</span><span class="n">cont_feat</span><span class="o">[</span><span class="n">&quot;geometry&quot;</span><span class="o">]</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">geouuid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">()</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">geouuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">()</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;geometry&quot;</span><span class="o">][</span><span class="n">geouuid</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;geometry&quot;</span><span class="err">:</span><span class="n">geometry</span><span class="err">}</span>
+
+<span class="w">            </span><span class="n">cont_feat</span><span class="o">[</span><span class="n">&quot;geometry&quot;</span><span class="o">]=</span><span class="n">geouuid</span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">][</span><span class="n">cont_feat</span><span class="o">]=</span><span class="n">cont_feat</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">popped_cont_feat</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">][</span><span class="n">popped_cont_feat</span><span class="o">]=</span><span class="n">popped_cont_feat</span>
+
+<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
+</code></pre></div>
+
+</details>
+<h3 id="print_family">print_family</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">print_family</span><span class="p">(</span>
+    <span class="n">contexts</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">print_family</span><span class="ss">(</span><span class="nv">contexts</span><span class="o">=</span><span class="nv">None</span>,<span class="w"> </span><span class="nv">homo_only</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="nv">contexts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">clean_input</span><span class="ss">(</span><span class="nv">contexts</span><span class="ss">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">contexts</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>:
+
+<span class="w">        </span><span class="nv">try</span>:
+
+<span class="w">            </span><span class="nv">contexts</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">roots_info</span><span class="ss">()</span>[<span class="s2">&quot;context&quot;</span>]<span class="ss">)</span>
+
+<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">Exception</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">            </span><span class="nv">contexts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>[]
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nv">context</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">contexts</span>:
+
+<span class="w">        </span><span class="nv">roots</span><span class="o">=</span><span class="nv">roots_info</span><span class="ss">(</span><span class="nv">context</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">roots</span>.<span class="nv">empty</span>:
+
+<span class="w">            </span><span class="nv">roots</span><span class="o">=</span><span class="nv">roots</span>[<span class="s2">&quot;context&quot;</span>]
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="nv">root</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">roots</span>.<span class="nv">values</span>:
+
+<span class="w">                </span><span class="nv">f</span><span class="o">=</span><span class="nv">family</span><span class="ss">(</span><span class="nv">root</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">homo_only</span><span class="ss">)</span>
+
+<span class="w">                </span><span class="nv">f</span><span class="o">=</span><span class="nv">f</span>.<span class="nv">reset_index</span><span class="ss">()</span>[[<span class="s2">&quot;parent&quot;</span>,<span class="s2">&quot;context&quot;</span>,<span class="s2">&quot;label&quot;</span>]]
+
+<span class="w">                </span><span class="nv">f</span>.<span class="nv">columns</span><span class="o">=</span>[<span class="s2">&quot;p_key&quot;</span>,<span class="s2">&quot;c_key&quot;</span>,<span class="s2">&quot;val&quot;</span>]
+
+<span class="w">                </span>#<span class="nv">f</span><span class="o">=</span><span class="nv">f</span>[<span class="o">~</span><span class="nv">f</span>[<span class="s2">&quot;p_key&quot;</span>].<span class="nv">isna</span><span class="ss">()</span>]
+
+<span class="w">                </span><span class="nv">create_tree</span><span class="ss">(</span><span class="nv">f</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="print_tree">print_tree</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">print_tree</span><span class="p">(</span>
+    <span class="n">nodes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">roots</span><span class="p">:</span> <span class="nb">set</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">print_tree</span><span class="p">(</span><span class="nl">nodes</span><span class="p">:</span><span class="w"> </span><span class="n">dict</span><span class="p">,</span><span class="w"> </span><span class="nl">roots</span><span class="p">:</span><span class="w"> </span><span class="k">set</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">roots</span><span class="p">:</span>
+
+<span class="w">        </span><span class="k">print</span><span class="p">()</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">pre</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">RenderTree</span><span class="p">(</span><span class="n">nodes</span><span class="o">[</span><span class="n">root</span><span class="o">]</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;{pre}{node.name} ({node.val})&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="remove_feature_context_geometry">remove_feature_context_geometry</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">remove_feature_context_geometry</span><span class="p">(</span>
+    <span class="n">feature</span><span class="p">,</span>
+    <span class="n">context</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">remove_feature_context_geometry</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span><span class="n">context</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">][</span><span class="n">{&quot;context&quot;:context,&quot;feature&quot;:feature}</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">geo_uuid</span><span class="o">=</span><span class="n">cont_feat</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="ss">&quot;geometry&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">][</span><span class="n">cont_feat</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;geometry&quot;</span><span class="err">:</span><span class="k">None</span><span class="err">}</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">cont_feat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span>
+
+<span class="w">    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">popped_geometry</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;geometry&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">geo_uuid</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">][</span><span class="n">&quot;geometry&quot;</span><span class="o">]</span>
+
+<span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">        </span><span class="n">popped_geometry</span><span class="o">=</span><span class="err">{}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">popped_geometry</span>
 </code></pre></div>
 
 </details>
@@ -3618,8 +4554,6 @@
 <span class="err">        contexts=db[&#39;context&#39;][ancestors(contexts,homo_only=homo_only)]</span>
 
 <span class="err">    except KeyError as e:</span>
-
-<span class="err">        print (contexts)</span>
 
 <span class="err">        return DataFrame()</span>
 

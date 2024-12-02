@@ -3754,7 +3754,7 @@
 
         <span class="c1">#tdf=db[&#39;series_thresholds_info&#39;][key].replace(nan,None)</span>
 
-        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds_info&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kp">nan</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;series_thresholds_info_v2&#39;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kp">nan</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -4532,7 +4532,7 @@
 <h3 id="create_s_thresholds">create_s_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_s_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x73aad122b730</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7e98c7d4f400</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -4574,7 +4574,7 @@
 <h3 id="create_thresholds">create_thresholds</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_thresholds</span><span class="p">(</span>
     <span class="n">series</span><span class="p">,</span>
-    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x73aad122a650</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">thresholds</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7e98c7d4f160</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
@@ -5311,7 +5311,7 @@ all'interno del campo <code>data</code> del json di risposta standard una strutt
 
 <span class="ss">        #tdf=db[&#39;series_thresholds_info&#39;][key].replace(nan,None)</span>
 
-<span class="ss">        out.data=db[&#39;series_thresholds_info&#39;][key].replace(nan,None).sort_index().to_dict(orient=&quot;</span><span class="n">records</span><span class="err">&quot;</span><span class="p">)</span>
+<span class="ss">        out.data=db[&#39;series_thresholds_info_v2&#39;][key].replace(nan,None).sort_index().to_dict(orient=&quot;</span><span class="n">records</span><span class="err">&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
