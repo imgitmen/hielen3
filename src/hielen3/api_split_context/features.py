@@ -434,11 +434,11 @@ def features_status(uid=None, cntxt=None, request=None, response=None):
 
     cntxt = clean_input(cntxt)
 
-    uids =  clean_input(uids)
+    uid =  clean_input(uid)
 
     try:
             
-        feafra=db['status_v2'][uids,cntxt].droplevel("context")
+        feafra=db['status_v2'][uid,cntxt].droplevel("context")
 
         feafra=feafra[~feafra.index.duplicated()]
 
