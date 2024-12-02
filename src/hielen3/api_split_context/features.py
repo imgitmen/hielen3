@@ -426,6 +426,37 @@ Possibili risposte:
 
     return
 
+
+@hug.get("/{uid}/status")
+def features_status(uid=None, cntxt=None, request=None, response=None):
+
+    out = ResponseFormatter()
+
+    cntxt = clean_input(cntxt)
+
+    uids =  clean_input(uids)
+
+    try:
+            
+        feafra=db['status_v2'][uids,cntxt].droplevel("context")
+
+        feafra=feafra[~feafra.index.duplicated()]
+
+        feafra=dataframe2jsonizabledict(feafra,orient='records',squeeze=False)
+
+        out.data = feafra
+
+        feafra=None
+
+    except KeyError as e:
+        out.data = []
+        out.message = e.args
+
+    response = out.format(response=response, request=request)
+
+    return
+
+
 @hug.get("/{uid}/context")
 def get_feature_contexts(
     uid,

@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.0** ##
+### 2 Dicembre 2024 ###
+- clean up contextroots e api fuori da v2
+
 ## **V3.5.9** ##
 ### 29 Novembre 2024 ###
 - fatto un casino di roba sui contesti. Un botto di endpoints disponibili sulla path v2 dell'intero glob file

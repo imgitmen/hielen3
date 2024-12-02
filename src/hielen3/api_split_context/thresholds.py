@@ -118,6 +118,11 @@ RESPONSE CODES:
 
     try:
         #tdf=db['series_thresholds_info'][key].replace(nan,None)
+
+        thre=db['series_thresholds_info_v2'][key]
+
+        
+
         out.data=db['series_thresholds_info_v2'][key].replace(nan,None).sort_index().to_dict(orient="records")
     except KeyError as e:
         out.message = e.args
