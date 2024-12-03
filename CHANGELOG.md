@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.1** ##
+### 2 Dicembre 2024 ###
+- debug della funzione dataframe2jsonizabeldict che non prendeva in considerazione oggetti del tipo NaN e NaT ( non jsonizabili ). Trasformati in None
+
 ## **V3.6.0** ##
 ### 2 Dicembre 2024 ###
 - clean up contextroots e api fuori da v2
