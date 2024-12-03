@@ -3972,7 +3972,9 @@
 <span class="normal">508</span>
 <span class="normal">509</span>
 <span class="normal">510</span>
-<span class="normal">511</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4085,6 +4087,8 @@
 <span class="k">def</span> <span class="nf">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">DataFrame</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">,</span><span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
     <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span><span class="kc">None</span><span class="p">)</span>
 
         <span class="n">out</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="o">**</span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">&#39;datetime64&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">))</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="p">)</span>
 
@@ -4620,6 +4624,8 @@
 <div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="nl">df:</span><span class="n">DataFrame</span><span class="p">,</span><span class="n">orient</span><span class="o">=</span><span class="p">&#39;</span><span class="n">records</span><span class="p">&#39;,</span><span class="n">squeeze</span><span class="o">=</span><span class="n">True</span><span class="p">)</span><span class="o">:</span>
 
 <span class="w">    </span><span class="nl">try:</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="p">.</span><span class="n">isna</span><span class="p">(),</span><span class="n">None</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">out</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="k">assign</span><span class="p">(</span><span class="o">**</span><span class="n">df</span><span class="p">.</span><span class="n">select_dtypes</span><span class="p">([&#39;</span><span class="n">datetime64</span><span class="p">&#39;]).</span><span class="n">astype</span><span class="p">(</span><span class="n">str</span><span class="p">)).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="n">orient</span><span class="p">)</span>
 
