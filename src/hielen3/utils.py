@@ -72,8 +72,6 @@ def clean_input(inp, trim_none = True ):
     
 def dataframe2jsonizabledict(df:DataFrame,orient='records',squeeze=True):
     try:
-
-
         df=df.where(~df.isna(),None)
 
         out=df.assign(**df.select_dtypes(['datetime64']).astype(str)).to_dict(orient=orient)

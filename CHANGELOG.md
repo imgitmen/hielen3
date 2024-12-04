@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.2** ##
+### 4 Dicembre 2024 ###
+- inserito parametro stats nell'api query2 per restituire solo le statistiche del frame (attualmente solo min e max temporale)  
+
 ## **V3.6.1** ##
 ### 2 Dicembre 2024 ###
 - debug della funzione dataframe2jsonizabeldict che non prendeva in considerazione oggetti del tipo NaN e NaT ( non jsonizabili ). Trasformati in None

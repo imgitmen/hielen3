@@ -4,7 +4,7 @@ import hug
 import falcon
 from . import prototypes
 from . import query
-from . import query2
+from . import query3
 from . import features
 from . import actions
 from . import actionschemata
@@ -17,6 +17,7 @@ from . import thresholds
 from . import contexts
 from . import contextsroots 
 from . import contextsricominciamo 
+from . import stats
 from hielen3.api_split_context import glob as globsplitcontext 
 
 """
@@ -67,7 +68,7 @@ def dataman():
 @hug.extend_api("/query2")
 def dataman2():
     """ Data manager """
-    return [query2]
+    return [query3]
 
 @hug.extend_api("/status")
 def statman():
@@ -103,6 +104,13 @@ def kineresman():
 def sampleman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
+
+@hug.extend_api("/stats")
+def sampleman():
+    """ api per avere statitiche su un frame di dati """
+    return [stats]
+
+
 
 @hug.extend_api("/v2")
 def glob_split_contexts():
