@@ -16,8 +16,7 @@ from . import italferdatarate
 from . import thresholds
 from . import contexts
 from . import contextsroots 
-from . import contextsricominciamo 
-from . import stats
+#from . import contextsricominciamo 
 from hielen3.api_split_context import glob as globsplitcontext 
 
 """
@@ -90,10 +89,12 @@ def contextman():
     """ api per recuperare la root dei contexts """
     return [contextsroots]
 
+'''
 @hug.extend_api("/contextsricominciamo")
 def contextman():
     """ api per recuperare la root dei contexts """
     return [contextsricominciamo]
+'''
 
 @hug.extend_api("/awskineresources")
 def kineresman():
@@ -104,12 +105,6 @@ def kineresman():
 def sampleman():
     """ api per cambiare il samplerate """
     return [italferdatarate]
-
-@hug.extend_api("/stats")
-def sampleman():
-    """ api per avere statitiche su un frame di dati """
-    return [stats]
-
 
 
 @hug.extend_api("/v2")

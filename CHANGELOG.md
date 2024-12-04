@@ -3,6 +3,7 @@ CHANGELOG
 ## **V3.6.2** ##
 ### 4 Dicembre 2024 ###
 - inserito parametro stats nell'api query2 per restituire solo le statistiche del frame (attualmente solo min e max temporale)  
+- rimossa api brutale contextsricominciamo
 
 ## **V3.6.1** ##
 ### 2 Dicembre 2024 ###
