@@ -10,7 +10,7 @@ from numpy import nan, unique
 from pandas import DataFrame, to_datetime
 from hielen3 import db
 from hielen3.series import HSeries
-from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter, uuid, dataframe2jsonizabledict
+from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter, uuid, dataframe2jsonizabledict, boolenize
 from hielen3.geje import GeoJSONSchema
 
 data_out_handler = hug_output_format_conten_type(
@@ -36,7 +36,7 @@ class DataMapSchema(Schema):
 def tabular_data(
         capability,
         datamap: JsonValidable(DataMapSchema(many=True)),
-        stats: bool = False,
+        stats=None,
         content_type=None,
         request=None,
         response=None,
@@ -46,7 +46,7 @@ def tabular_data(
     series = {}
     out = ResponseFormatter()
 
-    print (stats)
+    stats=boolenize(stats,False)
 
     for query in datamap:
 
