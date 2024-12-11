@@ -18,6 +18,7 @@ from hielen3.contextmanager import manage_feature_context
 from hielen3.contextmanager import detouch_feature_context
 from hielen3.contextmanager import remove_feature_context_geometry
 from hielen3.contextmanager import feature_in_family
+from hielen3.contextmanager import contexts_features_visibility 
 from numpy import nan
 from pandas import Series
 from marshmallow import Schema, fields
@@ -347,9 +348,6 @@ Possibili risposte:
     out = ResponseFormatter()
 
 
-    print (geometry)
-
-
     if uid is None:
         out.status = falcon.HTTP_BAD_REQUEST
         out.message = "None value not allowed"
@@ -401,7 +399,7 @@ Se la feature viene cancellata correttamente ne restituisce la struttura
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     #TODO Ottimizzare passando direttamente al db
@@ -471,7 +469,7 @@ def get_feature_contexts(
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui la feature richiesto non esista.
-- _200 Accepted_: In tutti gli altri casi.
+- _200 OK_: In tutti gli altri casi.
 """
     out = ResponseFormatter()
 
@@ -516,7 +514,7 @@ ALIAS PER GET /{uid}/context
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     return get_feature_contexts(uid=uid,cntxt=cntxt,homogeneous=homogeneous,request=request,response=response)
@@ -536,7 +534,7 @@ def change_context(
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     out = ResponseFormatter()
@@ -594,7 +592,7 @@ ALIAS PER POST /{uid}/context
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     return change_context(uid=uid,cntxt=cntxt,geometry=geometry,request=request,response=response) 
@@ -611,7 +609,7 @@ def delete_feature_context(
 **Eliminazione di una feature da uno specifico contesto**
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
  
     out = ResponseFormatter()
@@ -667,10 +665,136 @@ ALIAS PER DELETE /{uid}/context
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     return delete_feature_context(uid=uid,cntxt=cntxt,request=request,response=response) 
+
+@hug.get("/{uid}/context/{cntxt}/visibility")
+def get_feature_contexts_visibility(
+    uid=None,
+    cntxt=None,
+    orphans=None,
+    request=None,
+    response=None):
+    """
+DESCRIZIONE:
+
+**Per ogni feature restituisce i path delle famiglie omogenee limitati ai context in ingresso, intesi come radici** 
+
+PARAMETRI:
+
+- **uid**: Lista "comma separated" degli id delle features da recuperare. Nel caso in cui non \
+venisse fornito alcun valore, verrebbe fornita in output l'intera lista delle features presenti \
+nel sistema.
+
+- **cntxt**: Lista "comma separated" dei contesti radice per cui recuperare le features. Se presente agisce da \
+filtro rispetto al risultato elaborato in base al parametro _"uid"_ \
+
+- **orphans**: booleano che espande il filtro cntxt inserendo nel risultato anche le feature "orfane" \
+e limita il filtro su _"uid"_. Default = TRUE
+
+ESEMPIO:
+
+        GET features//context//visibility?orphans=False
+
+OUTPUT:
+
+All'interno del campo `data` del json di risposta standard viene restituito un oggetto \
+"chiave, valore" json che é interpretabile come Json estraendo la lista dei values.
+L'oggetto contiene tutte le features che rientrano nei criteri di ricerca associate alle proprie famiglie omogenee. \
+Quindi un struttura \
+di questo tipo:
+
+    "features": [
+      { /* PRIMA FEATURE */
+        "feature": "c29008e9-2cd2-45ca-aeec-23e4e84afcc0",
+        "label": "FA-C3S-TR1M-CE6D",
+        "contexts": [
+          [ /* PRIMA FAMIGLIA OMOGENEA DELLA PRIMA FEATURE */
+            {
+              "ID": "UUID-Roma",
+              "label": "Roma",
+              "description": null,
+              "actual": true /* CONTESTO A CUI LA FEATURE E' DIRETTAMENTE LINKATA */
+            },
+            {
+              "ID": "UUID-Latium",
+              "label": "Latium",
+              "description": null,
+              "actual": false /* VISIBILE MA ASSOCIATA AD UN CONTESTO DISCENDENTE (UUID-Roma)*/
+            }
+          ],
+          [ /* SECONDA FAMIGLIA OMOGENEA DELLA PRIMA FEATURE */
+            {
+              "ID": "UUID-Sardinia",
+              "label": "Sardinia",
+              "description": null,
+              "actual": true
+            },
+            {
+              "ID": "UUID-Italy",
+              "label": "Italy",
+              "description": null,
+              "actual": false
+            }
+          ]
+        ]
+      },
+      { /* SECONDA FEATURE */
+        "feature": "e0783e99-8361-4bed-b73f-81845a367487",
+        "label": "PO-C7N-TR1M-DAC7",
+        "contexts": [
+          [
+            {
+              "ID": "UUID-Roma",
+              "label": "Roma",
+              "description": null,
+              "actual": true
+            },
+            {
+              "ID": "UUID-Latium",
+              "label": "Latium",
+              "description": null,
+              "actual": false
+            }
+          ]
+        ]
+      }
+    ]
+            
+
+RESPONSE CODES:
+
+- _200 OK_: 
+
+"""
+
+    out = ResponseFormatter()
+
+    try:
+        uid=clean_input(uid)
+        
+        cntxt=clean_input(cntxt)
+
+        orphans = boolenize(orphans,True)
+
+        outframe=contexts_features_visibility(features=uid,contexts=cntxt,orphans=orphans).reset_index()
+
+        out.data = {
+                "count":outframe.__len__(),
+                "features":outframe.sort_values("label").to_dict(orient="records")
+                }
+
+    except Exception as e:
+        out.status = falcon.HTTP_BAD_REQUEST
+        out.message = f"errors: {e}"
+    
+    response = out.format(response=response, request=request)
+
+    return
+
+    
 
 @hug.get("/{uid}/geometry")
 def get_feature_geometry(
@@ -683,7 +807,7 @@ def get_feature_geometry(
 **Recupero delle geometry delle features associate ai contesti**
 
 - _404 Not Found_: Nel caso le feature richiesta non esistano nei contesti richiesti.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
     out = ResponseFormatter()
 
@@ -722,7 +846,7 @@ def get_feature_geometry_enpoint(
 **Recupero delle geometry delle features associate ai contesti**
 
 - _404 Not Found_: Nel caso le feature richiesta non esistano nei contesti richiesti.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
     return get_feature_geometry(uid=uid,cntxt=cntxt,request=request,response=response)
     
@@ -739,7 +863,7 @@ def delete_feature_context_geometry(
 **Eliminazione della gemoetry di una feature da uno specifico contesto**
 
 - _404 Not Found_: Nel caso la feature richiesta non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
  
     out = ResponseFormatter()
@@ -795,7 +919,7 @@ ALIAS PER DELETE /{uid}/context
 Possibili risposte:
 
 - _404 Not Found_: Nel caso in cui il prototipo richiesto non esista.
-- _200 Accepted_: Nel caso in cui la feature venga eliminata correttamente.
+- _200 OK_: Nel caso in cui la feature venga eliminata correttamente.
 """
 
     return delete_feature_context_geometry(uid=uid,cntxt=cntxt,request=request,response=response) 

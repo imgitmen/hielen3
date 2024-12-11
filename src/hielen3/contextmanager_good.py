@@ -80,17 +80,55 @@ def lineages(key=None, level=None, homo_only=True):
     return key
 
 
-def contexts_features_visibility(contexts = None, features=None, orphans = True):
+def contexts_features_visibility(contexts = None, features=None, homo_only=True):
 
-    def __expand_contexts_info__(key):
+    contexts=clean_input(contexts)
 
-        key = clean_input(key)
-        info=db["context"][key].loc[key]
-        info["actual"]=False
-        info.loc[key[0],"actual"]=True
-        info=info.to_dict(orient="records")
+    upper_limit = contexts
 
-        return info
+    features=clean_input(features)
+
+    ## Trova tutti i contesti accessibili da quelli in ingresso
+    contexts=lineages(contexts,homo_only=homo_only)
+
+    AND_clausoles=[]
+
+    if contexts.__len__():
+    
+        contexts_clsl = ','.join(map(lambda x: '"' + x + '"', contexts))
+
+        AND_clausoles.append(f"cf.context in ({contexts_clsl})")
+
+    if features.__len__():
+    
+        features_clsl = ','.join(map(lambda x: '"' + x + '"', features))
+
+        AND_clausoles.append(f"f.uuid in ({features_clsl})")
+
+    clausoles=" AND ".join(AND_clausoles)
+
+    if clausoles.__len__():
+        clausoles = f" WHERE {clausoles}"
+
+    qry=f"""
+        select 
+            f.uuid,
+            cf.context
+        from
+            feature f
+        left join 
+            context_feature cf
+        on
+            f.uuid = cf.feature
+        {clausoles}
+    """
+
+    ## Seleziona tutte le features associate ai contesti accessibili
+    features=db["query"][qry]
+
+
+    ## Seleziona l'iniseme dei contesti direttamente associati alle feature
+    contexts=list(features["context"].drop_duplicates())
 
     def __upper_ancestors_limit__(path = None,limit = None):
 
@@ -110,119 +148,37 @@ def contexts_features_visibility(contexts = None, features=None, orphans = True)
 
         return path[:top]
 
-    contexts=clean_input(contexts)
-
-    features=clean_input(features)
-
-    ## Trova tutti i contesti accessibili da quelli in ingresso
-    try:
-        contexts=lineages(contexts,homo_only=False)
-    except KeyError as e:
-        pass
-
-    upper_limit = contexts
-
-
-    AND_clausoles=[]
-
- 
-    if features.__len__():
-    
-        features_clsl = ','.join(map(lambda x: '"' + x + '"', features))
-
-        AND_clausoles.append(f"f.uuid in ({features_clsl})")
-
-   
-    if orphans:
-        orphans_clsl = "cf.context is NULL"
-    else:
-        orphans_clsl = "cf.context is not NULL"
-
-
-    if contexts.__len__():
-    
-        contexts_clsl = ','.join(map(lambda x: '"' + x + '"', contexts))
-
-        if orphans:
-
-            contexts_clsl = f"({orphans_clsl} OR cf.context in ({contexts_clsl}))"
-        else:
-
-            contexts_clsl = f"({orphans_clsl} AND cf.context in ({contexts_clsl}))"
-
-    else:
-
-        contexts_clsl = f"({orphans_clsl})"
-
-    
-
-    AND_clausoles.append(contexts_clsl)
-
-    clausoles=" AND ".join(AND_clausoles)
-
-
-    claus=""
-
-    if not orphans or contexts.__len__() or features.__len__():
-        claus = f" WHERE {clausoles}"
-
-    """
-        la query fa selezione puntuale sull'identificativo della 
-        feature unito ai contesti di appartenenza in base a questi filtri:
-
-        contexts: feature appartenenti al contesto in input + quelle orfane se orphans = true
-        features: feature comprese nell'elenco in input in AND con la condizione di orphans
-        
-        le condizioni context e features sono in AND
-
-        context e features vuoti non filtrano
-
-    """
-
-    qry=f"""
-        select 
-            f.uuid,
-            f.label,
-            cf.context
-        from
-            feature f
-        left join 
-            context_feature cf
-        on
-            f.uuid = cf.feature
-        {claus}
-    """
-
-    #print (qry)
-
-    ## Seleziona tutte le features associate ai contesti accessibili
-    features=db["query"][qry]
-
-    ## Seleziona l'iniseme dei contesti direttamente associati alle feature
-    contexts=list(features["context"].drop_duplicates())
-
     ## Costruisce i cammini da ogni contesto alla rispettiva root
     paths=ancestors_paths(contexts)
-
     ## taglia i cammini fino ai contexts in input
     paths=paths.apply(lambda x: __upper_ancestors_limit__(x,upper_limit))
     ## Espande le info dei contesti assegnando al primo il flag actual=True
-    paths=paths.apply(__expand_contexts_info__)
+    paths=paths.apply(expand_contexts_info)
     paths.name="contexts"
+
+
 
     ## Si associano i cammini alle features: se una feature appare in più cammini
     ## appare più volte nell'inidice. Per costruzione i cammini sono tutti disomogenei
     ## tra di loro
-    res = features.set_index("context").join(paths,how="left").set_index(["uuid","label"]).replace(nan,None)
-    
-    ## Si raggruppano i diversi cammini per ogni feature
-    res = res.groupby(["uuid","label"]).apply(lambda x: clean_input(list(x["contexts"]))).reset_index("label")
+    res = features.set_index("context").join(paths,how="left").set_index("uuid").replace(nan,None)
 
-    res.columns=["label","contexts"]
-    res.index.name="feature"
-    res.name="features_paths"
-    
+    ## Si raggruppano i diversi cammini per ogni feature
+    res = res.groupby("uuid").apply(lambda x: clean_input(list(x["contexts"])))
+
     return res
+
+
+
+def expand_contexts_info(key):
+
+    key = clean_input(key)
+    info=db["context"][key].loc[key]
+    info["actual"]=False
+    info.loc[key[0],"actual"]=True
+    info=info.to_dict(orient="records")
+
+    return info
 
 
 def ancestors_paths(key=None):
@@ -230,12 +186,12 @@ def ancestors_paths(key=None):
     key = clean_input(key)
     paths = Series(key)
     paths.index=paths
-    paths=paths.apply(ancestors, homo_only=True)
+    paths=paths.apply(ancestors2)
 
     return paths
 
 
-def ancestors(key=None, level=None, homo_only=True):
+def ancestors2(key=None, level=None, homo_only=True):
     
     """
         ritorna la linea di discendenza salendo dal contesto in input
@@ -285,6 +241,49 @@ def ancestors(key=None, level=None, homo_only=True):
     return out
  
 
+
+def ancestors(key=None, level=None, homo_only=True):
+    
+    """
+        ritorna la linea di discendenza salendo dal contesto in input
+        fino alla radice 
+
+
+        NOTA: per costruzione, passando un solo contesto e il 
+        parametro homo_only a true, viene restiruito il path
+        univoco e ordinato che unisce il contesto in input alla root
+
+    """
+
+    key=clean_input(key)
+
+    if key is None:
+        raise ValueError ("key must not be None")  
+    
+    oldkey=[]
+
+    while key.__len__() > oldkey.__len__() and (level is None or level >= 0):
+        oldkey=key.copy()
+        try:
+            newkey=db['context_context'][{"descendant":key}]
+            if homo_only:
+                fltr=newkey['homogeneous'].astype(bool)
+                newkey=newkey[fltr]
+            newkey=list(newkey["ancestor"])
+            #fltr=newkey['homogeneous'].astype(bool)
+            #newkey=list(newkey[fltr]["descendant"])
+        except KeyError as e:
+            newkey=oldkey
+
+        key=set([*key,*newkey])
+
+        if level is not None: level -= 1
+
+    if key.__len__():
+        key = list(db["context"][key].index)
+    
+    return key
+ 
 
 def family(contexts=None, homo_only=True):
 

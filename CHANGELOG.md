@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.3** ##
+### 11 Dicembre 2024 ###
+- inserito l'endpoint /features/{uid}/context/{cntxt}/visibility per restituire l'elenco delle features con i contesti in cui sono visibili  
+
 ## **V3.6.2** ##
 ### 4 Dicembre 2024 ###
 - inserito parametro stats nell'api query2 per restituire solo le statistiche del frame (attualmente solo min e max temporale)  
