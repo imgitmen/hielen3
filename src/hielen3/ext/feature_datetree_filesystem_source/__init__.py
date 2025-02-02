@@ -177,7 +177,21 @@ def retrive(serials=None,times=None, columns=None, func_extract=None, func_logge
 
     columns=[ c for c in columns if c in df.columns ]
 
-    df=df[columns].sort_index().loc[(serials, times), :]
+#serial times
+
+    df=df[columns].sort_index().reset_index()
+
+    df['serial']=df['serial'].astype(str)
+    df['times']=df['times'].astype(str)
+
+    df=df.set_index(['serial','times'])
+    df = df.loc[(serials, times), :]
+    df=df.reset_index()
+
+    df['times']=df['times'].astype('datetime64[ns]')
+    df=df.set_index(['serial','times'])
+
+    #df=df[columns].sort_index().loc[(serials, times), :]
 
     try:
         df=df.groupby(['serial','times']).first()

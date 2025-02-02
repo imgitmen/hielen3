@@ -199,7 +199,7 @@ def contexts_features_visibility(contexts = None, features=None, orphans = True)
     features=db["query"][qry]
 
     ## Seleziona l'iniseme dei contesti direttamente associati alle feature
-    contexts=list(features["context"].drop_duplicates())
+    contexts=list(features["context"].astype(str).drop_duplicates().replace("None",None))
 
     ## Costruisce i cammini da ogni contesto alla rispettiva root
     paths=ancestors_paths(contexts)
@@ -213,6 +213,7 @@ def contexts_features_visibility(contexts = None, features=None, orphans = True)
     ## Si associano i cammini alle features: se una feature appare in più cammini
     ## appare più volte nell'inidice. Per costruzione i cammini sono tutti disomogenei
     ## tra di loro
+    features["context"] = features["context"].astype(str).replace("None",None)
     res = features.set_index("context").join(paths,how="left").set_index(["uuid","label"]).replace(nan,None)
     
     ## Si raggruppano i diversi cammini per ogni feature

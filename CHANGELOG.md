@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.4** ##
+### 31 Gennaio 2025 ###
+- inserita feature logger_leica
+
 ## **V3.6.3** ##
 ### 11 Dicembre 2024 ###
 - inserito l'endpoint /features/{uid}/context/{cntxt}/visibility per restituire l'elenco delle features con i contesti in cui sono visibili  

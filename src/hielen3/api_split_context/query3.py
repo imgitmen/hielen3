@@ -5,12 +5,21 @@ import falcon
 import json
 import tempfile
 from pathlib import Path
-from marshmallow import Schema, fields
-from numpy import nan, unique
-from pandas import DataFrame, to_datetime
+from marshmallow import Schema
+from marshmallow import fields
+from numpy import nan
+from numpy import unique
+from pandas import DataFrame
+from pandas import to_datetime
 from hielen3 import db
 from hielen3.series import HSeries
-from hielen3.utils import hug_output_format_conten_type, JsonValidable, Selection, ResponseFormatter, uuid, dataframe2jsonizabledict, boolenize
+from hielen3.utils import hug_output_format_conten_type
+from hielen3.utils import JsonValidable
+from hielen3.utils import Selection
+from hielen3.utils import ResponseFormatter
+from hielen3.utils import uuid
+from hielen3.utils import dataframe2jsonizabledict
+from hielen3.utils import boolenize
 from hielen3.geje import GeoJSONSchema
 
 data_out_handler = hug_output_format_conten_type(
@@ -32,7 +41,7 @@ class DataMapSchema(Schema):
 
 
 ####### API DATATABLE #######
-@hug.get("/{capability}", examples="", output=data_out_handler)
+@hug.post("/{capability}", examples="", output=data_out_handler)
 def tabular_data(
         capability,
         datamap: JsonValidable(DataMapSchema(many=True)),
@@ -149,6 +158,27 @@ def tabular_data(
 
 
 
+####### API DATATABLE #######
+@hug.get("/{capability}", examples="", output=data_out_handler)
+def tabular_data_get(
+        capability,
+        datamap: JsonValidable(DataMapSchema(many=True)),
+        stats=None,
+        content_type=None,
+        request=None,
+        response=None,
+        **kwargs
+):
+
+    return tabular_data(
+        capability=capability,
+        datamap=datamap,
+        stats=stats,
+        content_type=content_type,
+        request=request,
+        response=response,
+        **kwargs
+    )
 
 @hug.get("/{capability}/{feature}/", output=data_out_handler)
 def tabular_data_el(

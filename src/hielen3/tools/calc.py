@@ -133,6 +133,8 @@ def oblivion(S0,mask=None):
     return S0[S0.align(mask)[1].isna()]
 
 
+def clean_frame(df):
+    return df[df.notna().all(axis=1)]
 
 
 def threshold(S0, limit=0, how='<', action='clean'):
