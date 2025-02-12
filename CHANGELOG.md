@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.5** ##
+### 12 Febbraio 2025 ###
+- inserito calcolo rotazioni
+
 ## **V3.6.4** ##
 ### 31 Gennaio 2025 ###
 - inserita feature logger_leica

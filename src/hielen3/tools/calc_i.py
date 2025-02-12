@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
-__name__ = "hielen3.series.calc"
+__name__ = "hielen3.series.calc_i"
 __version__ = "0.0.1"
 __author__ = "Alessandro Modesti"
 __email__ = "it@img-srl.com"
@@ -9,7 +9,7 @@ __license__ = "MIT"
 __uri__ = ""
 
 from pandas import Series, Timedelta, DataFrame
-from numpy import sin, radians, mean, std, nan
+from numpy import sin, cos, radians, mean, std, nan, radians as rad
 
 #### CUSTOM LIBRARY ####
 def poly_trans(S0, **kwargs):
@@ -54,7 +54,7 @@ def slope(S0, unit="°", radius=1):
 
 
 def aligned(func):
-    def wrap_align(left, right):
+    def wrap_align(left, right, *args, **kwargs):
         try:
             left = left.copy()
             right = right.copy()
@@ -71,10 +71,10 @@ def aligned(func):
 
             mask = left.notna()[0]
 
-            right = right.fillna(method="pad")
-            return func(left[mask], right[mask])
+            #right = right.fillna(method="pad")
+            return func(left[mask], right[mask], *args, **kwargs)
         except Exception as e:
-            return func(left,right)
+            return func(left,right, *args, **kwargs)
 
     return wrap_align
 
@@ -177,6 +177,41 @@ def int_or_str(value):
         return int(value)
     except ValueError:
         return value
+
+
+
+def rotation(func):
+    def wrap_rot(x, y, alpha=None, unit=None, *args, **kwargs):
+        if unit is None:
+            unit = "°"
+
+        if alpha is None:
+            alpha = 0
+
+        if unit == "°":
+            alpha = rad(alpha)
+
+        return func(x, y, alpha, unit, *args, **kwargs)
+
+    return wrap_rot
+
+
+
+
+@rotation
+@aligned
+def rotate_X(x=None,y=None,alpha=None,*args,**kwargs):
+    return x*cos(alpha) - y*sin(alpha)
+
+@rotation
+@aligned
+def rotate_Y(x=None,y=None,alpha=None,*args,**kwargs):
+    return x*sin(alpha) + y*cos(alpha)
+
+
+
+
+
 
 
 VERSION = tuple(map(int_or_str, __version__.split(".")))
