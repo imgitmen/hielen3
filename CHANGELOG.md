@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.6** ##
+### 18 Febbraio 2025 ###
+- inserita feature logger_wsense
+
 ## **V3.6.5** ##
 ### 12 Febbraio 2025 ###
 - inserito calcolo rotazioni
