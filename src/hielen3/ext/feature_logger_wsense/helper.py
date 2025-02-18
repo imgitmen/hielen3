@@ -19,7 +19,7 @@ def retrive(path):
     a=DataFrame([],dtype='float64')
 
     try:
-        a=read_csv(path,sep=',',parse_dates=[0],dayfirst=True)
+        a=read_csv(path,sep=',',parse_dates=[0],dayfirst=False)
         a.columns=[ 'times',*list(  range(1,a.columns.__len__())) ]
     
     except Exception as e:
