@@ -1,42 +1,56 @@
 CHANGELOG
 =========
+## **V3.6.7** ##
+### 26 Febbraio 2025 ###
+- inserita feature logger_gei
+
+
 ## **V3.6.6** ##
 ### 18 Febbraio 2025 ###
 - inserita feature logger_wsense
+
 
 ## **V3.6.5** ##
 ### 12 Febbraio 2025 ###
 - inserito calcolo rotazioni
 
+
 ## **V3.6.4** ##
 ### 31 Gennaio 2025 ###
 - inserita feature logger_leica
 
+
 ## **V3.6.3** ##
 ### 11 Dicembre 2024 ###
 - inserito l'endpoint /features/{uid}/context/{cntxt}/visibility per restituire l'elenco delle features con i contesti in cui sono visibili  
+
 
 ## **V3.6.2** ##
 ### 4 Dicembre 2024 ###
 - inserito parametro stats nell'api query2 per restituire solo le statistiche del frame (attualmente solo min e max temporale)  
 - rimossa api brutale contextsricominciamo
 
+
 ## **V3.6.1** ##
 ### 2 Dicembre 2024 ###
 - debug della funzione dataframe2jsonizabeldict che non prendeva in considerazione oggetti del tipo NaN e NaT ( non jsonizabili ). Trasformati in None
+
 
 ## **V3.6.0** ##
 ### 2 Dicembre 2024 ###
 - clean up contextroots e api fuori da v2
 
+
 ## **V3.5.9** ##
 ### 29 Novembre 2024 ###
 - fatto un casino di roba sui contesti. Un botto di endpoints disponibili sulla path v2 dell'intero glob file
+
 
 ## **V3.5.8** ##
 ### 22 Novembre 2024 ###
 - modificato contextmanager per gestire in ogni funzione homogeneous true/false (gestione famiglie omogenee)
 - aggiunta funzione boolenize in utils 
+
 
 ## **V3.5.7** ##
 ### 18 Novembre 2024 ###
