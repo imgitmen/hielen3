@@ -28,7 +28,9 @@ def retrive(path):
                         unstack().\
                         stack(0).\
                         unstack().\
-                        apply(pd.to_numeric, errors='coerce')
+                        apply(pd.to_numeric, errors='coerce').\
+                        sort_index().\
+                        reset_index()
 
         a.columns=[ 'times',*list(  range(1,a.columns.__len__())) ]
     
