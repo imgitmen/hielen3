@@ -3351,7 +3351,11 @@
 
                         <span class="n">unstack</span><span class="p">()</span><span class="o">.</span>\
 
-                        <span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+                        <span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span><span class="o">.</span>\
+
+                        <span class="n">sort_index</span><span class="p">()</span><span class="o">.</span>\
+
+                        <span class="n">reset_index</span><span class="p">()</span>
 
         <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;times&#39;</span><span class="p">,</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span>  <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))</span> <span class="p">]</span>
 
