@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from hielen3.ext.feature_datetree_filesystem_source import loggers, retriver
-from pandas import read_csv, DataFrame 
+from pandas import read_csv, DataFrame, to_numeric, Series 
 from re import sub
 
 folders=[
@@ -24,11 +24,11 @@ def retrive(path):
                 path,sep="|", header=None, parse_dates=[0], dayfirst=True, index_col=0).\
                         stack().\
                         apply(str.split, sep=";").\
-                        apply(pd.Series)[[1,2]].\
+                        apply(Series)[[1,2]].\
                         unstack().\
                         stack(0).\
                         unstack().\
-                        apply(pd.to_numeric, errors='coerce').\
+                        apply(to_numeric, errors='coerce').\
                         sort_index().\
                         reset_index()
 
