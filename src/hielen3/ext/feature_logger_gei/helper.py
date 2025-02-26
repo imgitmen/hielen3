@@ -20,7 +20,7 @@ def retrive(path):
 
     try:
         
-        a=pd.read_csv(
+        a=read_csv(
                 path,sep="|", header=None, parse_dates=[0], dayfirst=True, index_col=0).\
                         stack().\
                         apply(str.split, sep=";").\
