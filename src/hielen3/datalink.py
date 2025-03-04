@@ -824,7 +824,8 @@ class MariadbHielenGeo(MariadbTable):
     def __man_na_coords__(xy,z):
 
         if not isinstance(xy,(list,set,tuple)):
-            xy=[0,0]
+            return None
+            #xy=[0,0]
 
         return Point([ isinstance(a,Number) and a or 0 for a in [*xy,z]])
             
@@ -844,7 +845,11 @@ class MariadbHielenGeo(MariadbTable):
 
             frame[self.geo_col]=managed.apply(lambda x: 
                     MariadbHielenGeo.__man_na_coords__(x['coordinates'], x[self.elev_col]), axis=1)
+
+        try:
             frame=frame.drop(self.elev_col,axis=1)
+        except Exception as e:
+            pass
 
         return frame
 

@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.6.8** ##
+### 4 Marzo 2035 ###
+- modificato il comportamento del datalink della classe MariadbHielenGeo: Ora in fase di estrazione le features senza geometrie restituiscono SEMPRE geometry = None invece di un Punto con coordinate 0,0,0
+
+
 ## **V3.6.7** ##
 ### 26 Febbraio 2025 ###
 - inserita feature logger_gei
