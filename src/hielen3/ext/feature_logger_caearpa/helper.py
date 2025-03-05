@@ -21,12 +21,14 @@ def retrive(path):
     try:
         a=read_csv(path,sep=';',header=None)
         a=a[a[0].apply(lambda x: "DTL" in x)][0].apply(str.split, sep = '\t').apply(Series)[[0,1,2]]
+        a[0] = a[0].apply(lambda x: f"SN_{x}")
         a[1]=a[1].astype('datetime64[ns]')
         a=a.set_index([1,0]).unstack()
-        a.columns.names=["al","ser"]
+        a.columns.names=["al","serial"]
         a.columns=a.columns.droplevel("al")
-        a.index.name='times'
+        a.columns.names=[None]
         a = a.reset_index()
+        a.columns=[ 'times',*a.columns[1:]]
 
     except Exception as e:
         print("WARN : ",e, path)
