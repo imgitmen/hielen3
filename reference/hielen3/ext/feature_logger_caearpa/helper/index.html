@@ -3414,17 +3414,21 @@
 
         <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">&quot;DTL&quot;</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">split</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
 
+        <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;SN_</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
 
         <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
 
-        <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;al&quot;</span><span class="p">,</span><span class="s2">&quot;ser&quot;</span><span class="p">]</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;al&quot;</span><span class="p">,</span><span class="s2">&quot;serial&quot;</span><span class="p">]</span>
 
         <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">(</span><span class="s2">&quot;al&quot;</span><span class="p">)</span>
 
-        <span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;times&#39;</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="kc">None</span><span class="p">]</span>
 
         <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;times&#39;</span><span class="p">,</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
