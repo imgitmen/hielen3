@@ -1051,7 +1051,6 @@ class MariadbHielenCache(Mariadb):
         return self.__getitem__(key,delete=True)
 
 
-'''
 class MongodbHielenCache():
 
     def __init__(self,connection=None,table=None):
@@ -1194,8 +1193,6 @@ class MongodbHielenCache():
         out.index.name='timestamp'
 
 
-
-
         if delete:
             mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)
 
@@ -1255,4 +1252,3 @@ class MongodbHielenCache():
     
     def pop(self,key):
         return self.__getitem__(key,delete=True)
-'''
