@@ -16,7 +16,7 @@ from json import loads, dumps
 from numbers import Number
 import os
 import re
-#from crudLib import mongofuncs as mf
+from crudLib import mongofuncs as mf
 from uuid import UUID
 
 def dbinit(conf):
