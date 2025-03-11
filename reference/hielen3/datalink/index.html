@@ -1095,6 +1095,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mongodbhielencache" class="md-nav__link">
+    MongodbHielenCache
+  </a>
+  
+    <nav class="md-nav" aria-label="MongodbHielenCache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_8" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_7" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fshielencache" class="md-nav__link">
     fsHielenCache
   </a>
@@ -1110,14 +1137,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods_8" class="md-nav__link">
+  <a href="#methods_9" class="md-nav__link">
     Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pop_7" class="md-nav__link">
+  <a href="#pop_8" class="md-nav__link">
     pop
   </a>
   
@@ -4268,6 +4295,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#mongodbhielencache" class="md-nav__link">
+    MongodbHielenCache
+  </a>
+  
+    <nav class="md-nav" aria-label="MongodbHielenCache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methods_8" class="md-nav__link">
+    Methods
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop_7" class="md-nav__link">
+    pop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fshielencache" class="md-nav__link">
     fsHielenCache
   </a>
@@ -4283,14 +4337,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods_8" class="md-nav__link">
+  <a href="#methods_9" class="md-nav__link">
     Methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pop_7" class="md-nav__link">
+  <a href="#pop_8" class="md-nav__link">
     pop
   </a>
   
@@ -6144,11 +6198,7 @@
 <span class="normal">1792</span>
 <span class="normal">1793</span>
 <span class="normal">1794</span>
-<span class="normal">1795</span>
-<span class="normal">1796</span>
-<span class="normal">1797</span>
-<span class="normal">1798</span>
-<span class="normal">1799</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1795</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -7680,61 +7730,59 @@
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="k">class</span> <span class="nc">MongodbHielenCache</span><span class="p">():</span>
 
-<span class="sd">class MongodbHielenCache():</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">connection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">table</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
-<span class="sd">    def __init__(self,connection=None,table=None):</span>
+        <span class="n">port</span><span class="o">=</span><span class="n">connection</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">)</span>
 
-<span class="sd">        port=connection.pop(&#39;port&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{dialect}</span><span class="s2">://</span><span class="si">{usr}</span><span class="s2">:</span><span class="si">{pwd}</span><span class="s2">@</span><span class="si">{host}</span><span class="s2">/&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">**</span><span class="n">connection</span><span class="p">)</span>
 
-<span class="sd">        self.uri = &quot;{dialect}://{usr}:{pwd}@{host}/&quot;.format(**connection)</span>
+        <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">        if port is not None:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{uri}</span><span class="s2">:</span><span class="si">{port}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uri</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
 
-<span class="sd">            self.uri = &quot;{uri}:{port}&quot;.format(uri=self.uri,port=port)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">connection</span><span class="p">[</span><span class="s2">&quot;db&quot;</span><span class="p">]</span>
 
-<span class="sd">        self.db = connection[&quot;db&quot;]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col</span> <span class="o">=</span> <span class="n">table</span>
 
-<span class="sd">        self.col = table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
 
-<span class="sd">        self.keys = [&#39;timestamp&#39;,&#39;series&#39;]</span>
+    <span class="k">def</span> <span class="nf">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">keysnames</span><span class="p">:</span><span class="nb">list</span><span class="p">):</span>
 
-<span class="sd">    def __parsekey__(key,keysnames:list):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="kc">None</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keysnames</span> <span class="p">}</span>
 
-<span class="sd">        out = { k:None for k in keysnames }</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
 
-<span class="sd">        if isinstance(key,dict):</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="sd">            out.update(key)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">        if not isinstance(key,(list,slice,tuple)) and key is not None:</span>
+            <span class="n">key</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
-<span class="sd">            key=[key]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">)):</span>
 
-<span class="sd">        if isinstance(key,(list,slice)):</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span>
 
-<span class="sd">            out[&quot;series&quot;]=key</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="nb">tuple</span><span class="p">):</span>
 
-<span class="sd">        if isinstance(key,tuple):</span>
+            <span class="n">key</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="sd">            key=list(key)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">            if not isinstance(key[0],(list,slice)) and key[0] is not None:</span>
+                <span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 
-<span class="sd">                key[0]=[key[0]]</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="sd">            out[&quot;series&quot;]=key[0]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">],(</span><span class="nb">list</span><span class="p">,</span><span class="nb">slice</span><span class="p">))</span> <span class="ow">and</span> <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">            if not isinstance(key[1],(list,slice)) and key[1] is not None:</span>
+                <span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
 
-<span class="sd">                key[1]=[key[1]]</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">key</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-<span class="sd">            out[&quot;timestamp&quot;]=key[1]</span>
+        <span class="k">return</span> <span class="n">out</span>
 
-<span class="sd">        return out</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    def __setsqlcond__(key,column):</span>
 
@@ -7782,9 +7830,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="sd">    def __getitem__(self,key,delete=False):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        WARNING: In case of slice selection with a not None step parmeter</span>
 
@@ -7794,159 +7842,157 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-<span class="sd">        # TODO: manage this function!</span>
+        <span class="c1"># TODO: manage this function!</span>
 
-<span class="sd">        key=MongodbHielenCache.__parsekey__(key,self.keys)</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
 
-<span class="sd">        timestart=None</span>
+        <span class="n">timestart</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        timestop=None</span>
+        <span class="n">timestop</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        series = None</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="sd">        try:</span>
+        <span class="k">try</span><span class="p">:</span>
 
-<span class="sd">            timestart = int(datetime64(key[&#39;timestamp&#39;].start).astype(&#39;datetime64[ns]&#39;).astype(int))</span>
+            <span class="n">timestart</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
 
-<span class="sd">            if timestart &lt; 0:</span>
+            <span class="k">if</span> <span class="n">timestart</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 
-<span class="sd">                timestart=None</span>
+                <span class="n">timestart</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        except Exception as e:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="sd">            #raise e #DEBUG</span>
+            <span class="c1">#raise e #DEBUG</span>
 
-<span class="sd">            pass</span>
+            <span class="k">pass</span>
 
-<span class="sd">        #PORCATA</span>
+        <span class="c1">#PORCATA</span>
 
-<span class="sd">        timestart=None</span>
+        <span class="n">timestart</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        try:</span>
+        <span class="k">try</span><span class="p">:</span>
 
-<span class="sd">            timestop = int(datetime64(key[&#39;timestamp&#39;].stop).astype(&#39;datetime64[ns]&#39;).astype(int))</span>
+            <span class="n">timestop</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
 
-<span class="sd">            if timestop &lt; 0:</span>
+            <span class="k">if</span> <span class="n">timestop</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
 
-<span class="sd">                timestop=None</span>
+                <span class="n">timestop</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        except Exception as e:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="sd">            #raise e #DEBUG</span>
+            <span class="c1">#raise e #DEBUG</span>
 
-<span class="sd">            pass</span>
+            <span class="k">pass</span>
 
-<span class="sd">        #PORCATA</span>
+        <span class="c1">#PORCATA</span>
 
-<span class="sd">        timestop=None</span>
+        <span class="n">timestop</span><span class="o">=</span><span class="kc">None</span>
 
-<span class="sd">        try:</span>
+        <span class="k">try</span><span class="p">:</span>
 
-<span class="sd">            series = UUID(key[&#39;series&#39;][0])</span>
+            <span class="n">series</span> <span class="o">=</span> <span class="n">UUID</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="sd">        except Exception as e:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="sd">            raise KeyError(key)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="sd">        print (series,timestart, timestop)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">timestart</span><span class="p">,</span> <span class="n">timestop</span><span class="p">)</span>
 
-<span class="sd">        out=mf.fetch(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)</span>
+        <span class="n">out</span><span class="o">=</span><span class="n">mf</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span> <span class="n">timestart</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span> <span class="n">timestop</span><span class="p">)</span>
 
-<span class="sd">        if out.empty:</span>
+        <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
-<span class="sd">            raise KeyError(key)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-<span class="sd">        dt1=int(out[&#39;Timestamp&#39;].iloc[0])</span>
+        <span class="n">dt1</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="sd">        dt2=int(out[&#39;Timestamp&#39;].iloc[-1])</span>
+        <span class="n">dt2</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-<span class="sd">        out.index=DatetimeIndex(out[&#39;Timestamp&#39;].apply(Timestamp.fromtimestamp))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Timestamp</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">))</span>
 
-<span class="sd">        out=out.drop(&#39;Timestamp&#39;,axis=1)</span>
+        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="sd">        out.columns.names=[&#39;series&#39;]</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;series&#39;</span><span class="p">]</span>
 
-<span class="sd">        out.columns=map(str,out.columns)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="sd">        out.index.name=&#39;timestamp&#39;</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
 
-<span class="sd">        if delete:</span>
+        <span class="k">if</span> <span class="n">delete</span><span class="p">:</span>
 
-<span class="sd">            mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)</span>
+            <span class="n">mf</span><span class="o">.</span><span class="n">deletes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">series</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span> <span class="n">time2</span> <span class="o">=</span> <span class="n">dt2</span><span class="p">)</span>
 
-<span class="sd">        try:</span>
+        <span class="k">try</span><span class="p">:</span>
 
-<span class="sd">            out=out.squeeze().apply(loads).apply(Series)</span>
+            <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
 
-<span class="sd">            out.columns=[&#39;x&#39;,&#39;y&#39;,&#39;z&#39;]</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span>
 
-<span class="sd">        except Exception as e:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="sd">            pass</span>
+            <span class="k">pass</span>
 
-<span class="sd">        return out.sort_index().copy()</span>
+        <span class="k">return</span> <span class="n">out</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-<span class="sd">    def __setitem__(self,key,value):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">):</span>
 
-<span class="sd">        if value is not None and not isinstance(value,(Series,DataFrame)):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,(</span><span class="n">Series</span><span class="p">,</span><span class="n">DataFrame</span><span class="p">)):</span>
 
-<span class="sd">            raise ValueError(&quot;pandas.Series or pandas.DataFrame required&quot;)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pandas.Series or pandas.DataFrame required&quot;</span><span class="p">)</span>
 
-<span class="sd">        # TODO: Manage it!</span>
+        <span class="c1"># TODO: Manage it!</span>
 
-<span class="sd">        key=MongodbHielenCache.__parsekey__(key,self.keys)</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="o">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">)</span>
 
-<span class="sd">        try:</span>
+        <span class="k">try</span><span class="p">:</span>
 
-<span class="sd">            value = value.to_frame()</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 
-<span class="sd">            value.columns.name=&#39;series&#39;</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;series&#39;</span>
 
-<span class="sd">        except Exception as e:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-<span class="sd">            pass</span>
+            <span class="k">pass</span>
 
-<span class="sd">        value.columns=map(str,value.columns)</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="sd">        # TODO: check for it!</span>
+        <span class="c1"># TODO: check for it!</span>
 
-<span class="sd">        if key[&quot;series&quot;] is not None:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">            if isinstance(key[&quot;series&quot;],slice):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">],</span><span class="nb">slice</span><span class="p">):</span>
 
-<span class="sd">                value=value.T[key[&quot;series&quot;]].T</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span>
 
-<span class="sd">            else:</span>
+            <span class="k">else</span><span class="p">:</span>
 
-<span class="sd">                value=value[key[&quot;series&quot;]]</span>
+                <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]]</span>
 
-<span class="sd">        series=UUID(key[&quot;series&quot;][0])</span>
+        <span class="n">series</span><span class="o">=</span><span class="n">UUID</span><span class="p">(</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
-<span class="sd">        if key[&quot;timestamp&quot;] is not None:</span>
+        <span class="k">if</span> <span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-<span class="sd">            value=value.loc[key[&quot;timestamp&quot;]]</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">key</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]]</span>
 
-<span class="sd">        if not value.empty:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
-<span class="sd">            #print (value)</span>
+            <span class="c1">#print (value)</span>
 
-<span class="sd">            value=value.reset_index()</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
 
-<span class="sd">            value[&#39;DATE&#39;] = value[&#39;timestamp&#39;].apply(lambda x: (datetime64(x.date()) - datetime64(&#39;1970-01-01&#39;)).astype(&#39;timedelta64[s]&#39;).astype(int))</span>
+            <span class="n">value</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">date</span><span class="p">())</span> <span class="o">-</span> <span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;1970-01-01&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;timedelta64[s]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
 
-<span class="sd">            value[&#39;TIME&#39;] = value.apply(lambda x: x[&#39;timestamp&#39;].timestamp() - x[&#39;DATE&#39;], axis=1)</span>
+            <span class="n">value</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="sd">            value=value.drop(&#39;timestamp&#39;,axis=1)</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="sd">            value.columns=[&#39;val&#39;,&#39;DATE&#39;,&#39;TIME&#39;]</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">,</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span>
 
-<span class="sd">            mf.insertUpdate(self.uri, self.db, self.col, value, series)</span>
+            <span class="n">mf</span><span class="o">.</span><span class="n">insertUpdate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">series</span><span class="p">)</span>
 
-<span class="sd">    def pop(self,key):</span>
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">key</span><span class="p">):</span>
 
-<span class="sd">        return self.__getitem__(key,delete=True)</span>
-
-<span class="sd">&#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 
 </details>
@@ -10031,6 +10077,298 @@
 </code></pre></div>
 
 </details>
+<h3 id="mongodbhielencache">MongodbHielenCache</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MongodbHielenCache</span><span class="p">(</span>
+    <span class="n">connection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">table</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">MongodbHielenCache</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">connection</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="nc">table</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">port</span><span class="o">=</span><span class="k">connection</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;{dialect}://{usr}:{pwd}@{host}/&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="o">**</span><span class="k">connection</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">port</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;{uri}:{port}&quot;</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">uri</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">connection</span><span class="o">[</span><span class="n">&quot;db&quot;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">table</span>
+
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="n">&#39;timestamp&#39;,&#39;series&#39;</span><span class="o">]</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="nl">keysnames</span><span class="p">:</span><span class="n">list</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="k">None</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">keysnames</span><span class="w"> </span><span class="err">}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">,</span><span class="n">tuple</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">key</span><span class="o">=[</span><span class="n">key</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]=</span><span class="k">key</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">tuple</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">key</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]=[</span><span class="n">key[0</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]=</span><span class="k">key</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="p">,(</span><span class="n">list</span><span class="p">,</span><span class="n">slice</span><span class="p">))</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]=[</span><span class="n">key[1</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]=</span><span class="k">key</span><span class="o">[</span><span class="n">1</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
+
+<span class="w">    </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">    def __setsqlcond__(key,column):</span>
+
+<span class="ss">        sqlcond=None</span>
+
+<span class="ss">        if isinstance(key,str):</span>
+
+<span class="ss">            key=[key]</span>
+
+<span class="ss">        if isinstance(key,list):</span>
+
+<span class="ss">            key=filter(None,key)</span>
+
+<span class="ss">            sqlcond = key[0]</span>
+
+<span class="ss">        if isinstance(key,slice):</span>
+
+<span class="ss">            wstart=None</span>
+
+<span class="ss">            con=&quot;&quot;</span>
+
+<span class="ss">            wstop=None</span>
+
+<span class="ss">            if key.start is not None:</span>
+
+<span class="ss">                try:</span>
+
+<span class="ss">                    wstart= Datetime64(key.start).astype(long)</span>
+
+<span class="ss">                except Exception as e:</span>
+
+<span class="ss">                    pass</span>
+
+<span class="ss">             if key.stop is not None:</span>
+
+<span class="ss">                try:</span>
+
+<span class="ss">                    wstop= Datetime64(key.stop).astype(long)</span>
+
+<span class="ss">                except Exception as e:</span>
+
+<span class="ss">                    pass</span>
+
+<span class="ss">        return sqlcond</span>
+
+<span class="ss">    &quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__getitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">delete</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
+
+<span class="ss">        WARNING: In case of slice selection with a not None step parmeter</span>
+
+<span class="ss">        the deletion process, if requested, not minds the step for row selection</span>
+
+<span class="ss">        and all the deleted row will be returned in output.</span>
+
+<span class="ss">        &quot;&quot;&quot;</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">manage</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">function</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">timestart</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">timestop</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">timestart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="k">start</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timestart</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">timestart</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">#DEBUG</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="n">#PORCATA</span>
+
+<span class="w">        </span><span class="n">timestart</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">timestop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">int</span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">stop</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">timestop</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">timestop</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">#DEBUG</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="n">#PORCATA</span>
+
+<span class="w">        </span><span class="n">timestop</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">series</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UUID</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">series</span><span class="p">,</span><span class="n">timestart</span><span class="p">,</span><span class="w"> </span><span class="n">timestop</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="n">mf</span><span class="p">.</span><span class="k">fetch</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="w"> </span><span class="n">timestart</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="o">=</span><span class="w"> </span><span class="n">timestop</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="k">key</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">dt1</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">dt2</span><span class="o">=</span><span class="nc">int</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">iloc</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="k">out</span><span class="o">[</span><span class="n">&#39;Timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="nc">Timestamp</span><span class="p">.</span><span class="n">fromtimestamp</span><span class="p">))</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="s1">&#39;Timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="k">names</span><span class="o">=[</span><span class="n">&#39;series&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="k">map</span><span class="p">(</span><span class="nf">str</span><span class="p">,</span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">index</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">delete</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt2</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">squeeze</span><span class="p">().</span><span class="n">apply</span><span class="p">(</span><span class="n">loads</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;x&#39;,&#39;y&#39;,&#39;z&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">sort_index</span><span class="p">().</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__setitem__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">,</span><span class="k">value</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">value</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">value</span><span class="p">,(</span><span class="n">Series</span><span class="p">,</span><span class="n">DataFrame</span><span class="p">))</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="ss">&quot;pandas.Series or pandas.DataFrame required&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">Manage</span><span class="w"> </span><span class="n">it</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">key</span><span class="o">=</span><span class="n">MongodbHielenCache</span><span class="p">.</span><span class="n">__parsekey__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">keys</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+<span class="w">            </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;series&#39;</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="k">map</span><span class="p">(</span><span class="nf">str</span><span class="p">,</span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="k">check</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">it</span><span class="err">!</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="p">,</span><span class="n">slice</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">T</span><span class="o">[</span><span class="n">key[&quot;series&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">T</span>
+
+<span class="w">            </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="o">[</span><span class="n">key[&quot;series&quot;</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">        </span><span class="n">series</span><span class="o">=</span><span class="n">UUID</span><span class="p">(</span><span class="k">key</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">0</span><span class="o">]</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">key</span><span class="o">[</span><span class="n">&quot;timestamp&quot;</span><span class="o">]</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">key[&quot;timestamp&quot;</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;DATE&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">datetime64</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nc">date</span><span class="p">())</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;1970-01-01&#39;</span><span class="p">)).</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;timedelta64[s]&#39;</span><span class="p">).</span><span class="n">astype</span><span class="p">(</span><span class="nc">int</span><span class="p">))</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">[</span><span class="n">&#39;TIME&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">value</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">&#39;timestamp&#39;</span><span class="o">]</span><span class="p">.</span><span class="nc">timestamp</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">&#39;DATE&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">value</span><span class="o">=</span><span class="k">value</span><span class="p">.</span><span class="k">drop</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">value</span><span class="p">.</span><span class="n">columns</span><span class="o">=[</span><span class="n">&#39;val&#39;,&#39;DATE&#39;,&#39;TIME&#39;</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">mf</span><span class="p">.</span><span class="n">insertUpdate</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="k">value</span><span class="p">,</span><span class="w"> </span><span class="n">series</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">pop</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="k">key</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">__getitem__</span><span class="p">(</span><span class="k">key</span><span class="p">,</span><span class="k">delete</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<hr />
+<h4 id="methods_8">Methods</h4>
+<h4 id="pop_7">pop</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">key</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">pop</span><span class="ss">(</span><span class="nv">self</span>,<span class="nv">key</span><span class="ss">)</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">__getitem__</span><span class="ss">(</span><span class="nv">key</span>,<span class="nv">delete</span><span class="o">=</span><span class="nv">True</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
 <h3 id="fshielencache">fsHielenCache</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">fsHielenCache</span><span class="p">(</span>
     <span class="n">connection</span><span class="p">,</span>
@@ -10139,8 +10477,8 @@
 <li>hielen3.datalink.DB</li>
 <li>abc.ABC</li>
 </ul>
-<h4 id="methods_8">Methods</h4>
-<h4 id="pop_7">pop</h4>
+<h4 id="methods_9">Methods</h4>
+<h4 id="pop_8">pop</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">pop</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span>
