@@ -1,5 +1,9 @@
 CHANGELOG
 =========
+## **V3.6.10** ##
+### 13 Marzo 2035 ###
+- sistetemata api v2/status
+
 ## **V3.6.9** ##
 ### 5 Marzo 2035 ###
 - inserita feature logger_caearpa

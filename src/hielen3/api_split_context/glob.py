@@ -6,6 +6,7 @@ from . import query3
 from . import features
 from . import thresholds
 from . import contexts
+from . import status
 
 """
 @hug.not_found()
@@ -38,6 +39,11 @@ def threshman():
 def contextman():
     """ api per cambiare contexts """
     return [contexts]
+
+@hug.extend_api("/status")
+def contextman():
+    """ api per verificare lo stato delle serie """
+    return [status]
 
 
 
