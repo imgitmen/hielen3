@@ -3414,6 +3414,50 @@
 
 <span class="n">func_loggers</span><span class="o">=</span><span class="n">loggers</span><span class="p">(</span> <span class="n">folders</span> <span class="p">)</span>
 
+<span class="n">vc</span><span class="o">=</span> <span class="p">[</span>
+
+        <span class="s1">&#39;Duration-Seconds&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-X-Event-mm/s&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-X-Event-Hz&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-Y-Event-mm/s&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-Y-Event-Hz&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-Z-Event-mm/s&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-Z-Event-Hz&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Composed-Vector-PPV-mm/s&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Temperature-Celsius&#39;</span>
+
+    <span class="p">]</span>
+
+<span class="n">cvc</span><span class="o">=</span><span class="p">[</span>
+
+        <span class="s1">&#39;Duration&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-X&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-X&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-Y&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-Y&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Particle-PeakVelocity-Axis-Z&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Predominant-Frequency-Axis-Z&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Composed-Vector-PPV&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;Temperature&#39;</span>
+
+    <span class="p">]</span>
+
 <span class="nd">@retriver</span><span class="p">(</span><span class="n">func_loggers</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
@@ -3424,7 +3468,33 @@
 
         <span class="n">a</span><span class="o">=</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span><span class="n">skiprows</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-        <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;times&#39;</span><span class="p">,</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))]</span>
+        <span class="k">if</span> <span class="s2">&quot;Composed-Vector-PPV-mm/s&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Date-and-time&quot;</span><span class="p">)</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">vc</span><span class="p">]</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-Event&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-mm/s&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-Seconds&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="n">c</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;-Celsius&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">columns</span> <span class="p">]</span>
+
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="s2">&quot;Composed-Vector-PPV&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;times&quot;</span>
+
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+            <span class="n">a</span><span class="o">=</span><span class="n">a</span><span class="p">[[</span><span class="s2">&quot;times&quot;</span><span class="p">,</span><span class="o">*</span><span class="n">cvc</span><span class="p">]]</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;times&#39;</span><span class="p">,</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()))]</span>
 
         <span class="c1">#a.columns = [ &#39;times&#39;, *a.columns[1:] ]</span>
 
@@ -3441,7 +3511,13 @@
 
 </details>
 <h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">cvc</span>
+</code></pre></div>
+
 <div class="codehilite"><pre><span></span><code><span class="n">folders</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">vc</span>
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>

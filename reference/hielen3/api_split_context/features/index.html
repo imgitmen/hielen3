@@ -5592,7 +5592,7 @@
 
         <span class="c1">#feafra=feafra[feafra[&#39;intent&#39;] != &#39;HIDDEN&#39;]</span>
 
-        <span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feafra</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span><span class="c1">#.sort_values(&#39;label&#39;)</span>
+        <span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">feafra</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)[</span><span class="s1">&#39;label&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
 
         <span class="c1">#feafra=json.loads(feafra.droplevel(&quot;context&quot;).to_json(orient=&#39;index&#39;))</span>
 
@@ -6514,7 +6514,7 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">change_context</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">cntxt</span><span class="p">,</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5fc70</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f7d60</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -6610,7 +6610,7 @@
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">change_context_enpoint</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
     <span class="n">cntxt</span><span class="p">,</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5fee0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f7fd0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -6660,8 +6660,8 @@
 <h3 id="create_feature">create_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">create_feature</span><span class="p">(</span>
     <span class="n">prototype</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5f610</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5f820</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f7700</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f7910</span><span class="o">&gt;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
@@ -7507,7 +7507,7 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca. Quind
 
 <span class="w">        </span><span class="cp">#feafra=feafra[feafra[&#39;intent&#39;] != &#39;HIDDEN&#39;]</span>
 
-<span class="w">        </span><span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">feafra</span><span class="p">[</span><span class="err">&#39;</span><span class="n">properties</span><span class="err">&#39;</span><span class="p">].</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)[</span><span class="err">&#39;</span><span class="n">label</span><span class="err">&#39;</span><span class="p">])</span><span class="err">#</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="err">&#39;</span><span class="n">label</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">feafra</span><span class="o">=</span><span class="n">feafra</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">feafra</span><span class="p">[</span><span class="err">&#39;</span><span class="n">properties</span><span class="err">&#39;</span><span class="p">].</span><span class="n">apply</span><span class="p">(</span><span class="n">Series</span><span class="p">)[</span><span class="err">&#39;</span><span class="n">label</span><span class="err">&#39;</span><span class="p">]).</span><span class="n">sort_values</span><span class="p">(</span><span class="err">&#39;</span><span class="n">label</span><span class="err">&#39;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="cp">#feafra=json.loads(feafra.droplevel(&quot;context&quot;).to_json(orient=&#39;index&#39;))</span>
 
@@ -8189,8 +8189,8 @@ L'oggetto contiene tutte le features che rientrano nei criteri di ricerca associ
 <h3 id="update_feature">update_feature</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_feature</span><span class="p">(</span>
     <span class="n">uid</span><span class="p">,</span>
-    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5f8e0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
-    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7318dcf5fbe0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">properties</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f79d0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">geometry</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x74d4b37f7cd0</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{},</span>
     <span class="n">request</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">response</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">)</span>
