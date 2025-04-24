@@ -268,7 +268,7 @@ RESPONSE CODES:
         feafra=feafra.where(feafra.notnull(), None)
         #feafra=feafra[feafra['intent'] != 'HIDDEN']
 
-        feafra=feafra.join(feafra['properties'].apply(Series)['label'])#.sort_values('label')
+        feafra=feafra.join(feafra['properties'].apply(Series)['label']).sort_values('label')
 
 
         #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))

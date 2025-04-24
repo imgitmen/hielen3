@@ -1,15 +1,22 @@
 CHANGELOG
 =========
+## **V3.6.11** ##
+### 24 Aprile 2025 ###
+- modificato logger loadsensing per accettare i vibrometri
+
+
 ## **V3.6.10** ##
-### 13 Marzo 2035 ###
+### 13 Marzo 2025 ###
 - sistetemata api v2/status
 
+
 ## **V3.6.9** ##
-### 5 Marzo 2035 ###
+### 5 Marzo 2025 ###
 - inserita feature logger_caearpa
 
+
 ## **V3.6.8** ##
-### 4 Marzo 2035 ###
+### 4 Marzo 2025 ###
 - modificato il comportamento del datalink della classe MariadbHielenGeo: Ora in fase di estrazione le features senza geometrie restituiscono SEMPRE geometry = None invece di un Punto con coordinate 0,0,0
 
 
