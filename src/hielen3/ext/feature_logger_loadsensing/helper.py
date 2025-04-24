@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from hielen3.ext.feature_datetree_filesystem_source import loggers, retriver
-from pandas import read_csv, DataFrame 
+from pandas import read_csv, DataFrame, Series
 
 folders=[
         {
@@ -37,15 +37,18 @@ cvc=[
     ]
 
 
-
 @retriver(func_loggers)
 def retrive(path):
+
     a=DataFrame([],dtype='float64')
 
     try:
         a=read_csv(path,skiprows=9,parse_dates=[0])
+        a.columns=[ a.replace("Timestamp-Event","Date-and-time") for a in a.columns ]
+        
+        isvib=Series(a.columns).apply(lambda x: "Composed-Vector-PPV" in x).any()
 
-        if "Composed-Vector-PPV-mm/s" in a.columns:
+        if isvib:
             a=a.set_index("Date-and-time")
             a.columns=[ "-".join(c.split("-")[1:]) for c in a.columns ]
             a=a[vc]
@@ -60,11 +63,12 @@ def retrive(path):
         else:
             a.columns=[ 'times',*list(range(1,a.columns.__len__()))]
         #a.columns = [ 'times', *a.columns[1:] ]
-    
+
     except Exception as e:
         print("WARN : ", path)
         raise e #DEBUG
         pass
 
     return a
+
 
