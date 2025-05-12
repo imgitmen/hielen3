@@ -13,7 +13,7 @@
     
     
       
-        <title>Series - hielen3</title>
+        <title>Series Ok - hielen3</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-hielen3series" class="md-skip">
+        <a href="#module-hielen3series_ok" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Series
+              Series Ok
             
           </span>
         </div>
@@ -668,6 +668,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../series/" class="md-nav__link">
+        Series
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -680,12 +694,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Series
+          Series Ok
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Series
+        Series Ok
       </a>
       
         
@@ -803,20 +817,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../series_ok/" class="md-nav__link">
-        Series Ok
-      </a>
     </li>
   
 
@@ -3505,13 +3505,13 @@
                 
                   
 
-  <a href="https://github.com/imgitmen/hielen3/edit/main/reference/hielen3/series.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/imgitmen/hielen3/edit/main/reference/hielen3/series_ok.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="module-hielen3series">Module hielen3.series</h1>
+<h1 id="module-hielen3series_ok">Module hielen3.series_ok</h1>
 <details class="example">
 <summary>View Source</summary>
 <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">   1</span>
@@ -4710,113 +4710,31 @@
 <span class="normal">1194</span>
 <span class="normal">1195</span>
 <span class="normal">1196</span>
-<span class="normal">1197</span>
-<span class="normal">1198</span>
-<span class="normal">1199</span>
-<span class="normal">1200</span>
-<span class="normal">1201</span>
-<span class="normal">1202</span>
-<span class="normal">1203</span>
-<span class="normal">1204</span>
-<span class="normal">1205</span>
-<span class="normal">1206</span>
-<span class="normal">1207</span>
-<span class="normal">1208</span>
-<span class="normal">1209</span>
-<span class="normal">1210</span>
-<span class="normal">1211</span>
-<span class="normal">1212</span>
-<span class="normal">1213</span>
-<span class="normal">1214</span>
-<span class="normal">1215</span>
-<span class="normal">1216</span>
-<span class="normal">1217</span>
-<span class="normal">1218</span>
-<span class="normal">1219</span>
-<span class="normal">1220</span>
-<span class="normal">1221</span>
-<span class="normal">1222</span>
-<span class="normal">1223</span>
-<span class="normal">1224</span>
-<span class="normal">1225</span>
-<span class="normal">1226</span>
-<span class="normal">1227</span>
-<span class="normal">1228</span>
-<span class="normal">1229</span>
-<span class="normal">1230</span>
-<span class="normal">1231</span>
-<span class="normal">1232</span>
-<span class="normal">1233</span>
-<span class="normal">1234</span>
-<span class="normal">1235</span>
-<span class="normal">1236</span>
-<span class="normal">1237</span>
-<span class="normal">1238</span>
-<span class="normal">1239</span>
-<span class="normal">1240</span>
-<span class="normal">1241</span>
-<span class="normal">1242</span>
-<span class="normal">1243</span>
-<span class="normal">1244</span>
-<span class="normal">1245</span>
-<span class="normal">1246</span>
-<span class="normal">1247</span>
-<span class="normal">1248</span>
-<span class="normal">1249</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1197</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
+
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Series</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">DatetimeIndex</span><span class="p">,</span> <span class="n">Index</span><span class="p">,</span> <span class="n">MultiIndex</span>
+
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span><span class="p">,</span> <span class="n">unique</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">datetime64</span><span class="p">,</span> <span class="n">timedelta64</span>
+
+<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
+
+<span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">conf</span>
+
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">isot2ut</span><span class="p">,</span> <span class="n">ut2isot</span><span class="p">,</span> <span class="n">agoodtime</span><span class="p">,</span> <span class="n">uuid</span> <span class="k">as</span> <span class="n">getuuid</span><span class="p">,</span> <span class="n">dataframe2jsonizabledict</span>
+
+<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="kn">import</span> <span class="nn">traceback</span>
-
-<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
-
-<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">concat</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DatetimeIndex</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Index</span>
-
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">MultiIndex</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">unique</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="nb">round</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">datetime64</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">timedelta64</span>
-
-<span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
-
-<span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span> <span class="n">conf</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">isot2ut</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">ut2isot</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">agoodtime</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">uuid</span> <span class="k">as</span> <span class="n">getuuid</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">dataframe2jsonizabledict</span>
-
-<span class="kn">from</span> <span class="nn">hielen3.contextmanager</span> <span class="kn">import</span> <span class="n">family</span>
-
-<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
 
 <span class="k">def</span> <span class="nf">_threadpool</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
 
@@ -4839,6 +4757,34 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__loaded__</span><span class="p">:</span>
 
             <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">ser</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;\s*&gt;\s*&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">ser</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="n">feat</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">ser</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                    <span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][:]</span>
+
+                    <span class="n">feat</span><span class="o">=</span><span class="n">feats</span><span class="p">[</span> <span class="n">feats</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ser</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">]</span>
+
+                <span class="n">fuuid</span><span class="p">,</span><span class="n">fname</span><span class="o">=</span><span class="n">feat</span><span class="p">[[</span><span class="s1">&#39;uuid&#39;</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">feature</span><span class="o">=</span><span class="n">fname</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_parameters&#39;</span><span class="p">][</span><span class="n">fuuid</span><span class="p">,</span><span class="n">ser</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;series&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="o">=</span><span class="n">ser</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Series </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
 
         <span class="n">series_info</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">]</span>
 
@@ -4950,63 +4896,11 @@
 
             <span class="k">raise</span> <span class="ne">ValueError</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span>
 
-            <span class="k">try</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature</span> <span class="o">=</span> <span class="kc">None</span>
 
-                <span class="n">uuid</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
-
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="k">pass</span>
-
-                <span class="c1"># print (f&quot;NOTICE: {uuid} seems not a json, {e}&quot;) ##DEBUG</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
-
-            <span class="k">try</span><span class="p">:</span>
-
-                <span class="n">context</span><span class="o">=</span><span class="n">uuid</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span>
-
-            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="n">context</span><span class="o">=</span><span class="kc">None</span>
-
-            <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-                <span class="n">context_family</span><span class="o">=</span><span class="n">family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">context_family</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-
-                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;context </span><span class="si">{</span><span class="n">context</span><span class="si">!r}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
-
-                <span class="n">uuid</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">context_family</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">])</span>
-
-        <span class="k">try</span><span class="p">:</span>
-
-            <span class="n">uuid_frame</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;features_parameters_headers_v2&quot;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span>
-
-        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;series keys </span><span class="si">{</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> does not match anything&quot;</span><span class="p">)</span>
-
-        <span class="n">uuid</span><span class="o">=</span><span class="n">uuid_frame</span><span class="p">[</span><span class="s2">&quot;series&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">uuid</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;series keys </span><span class="si">{</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> matches more than one series. Which is ambiguos&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">instances</span><span class="o">=</span><span class="n">uuid_frame</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">&quot;context&quot;</span><span class="p">,</span><span class="s2">&quot;flabel&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">&quot;thresholds&quot;</span><span class="p">,</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span><span class="s2">&quot;series&quot;</span><span class="p">,</span><span class="s2">&quot;parameter&quot;</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-
-<span class="sd">        self.feature = None</span>
-
-<span class="sd">        self.param = None</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__loaded__</span><span class="o">=</span><span class="kc">False</span>
 
@@ -5808,6 +5702,8 @@
 
             <span class="k">try</span><span class="p">:</span>
 
+                <span class="n">UUID</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
                 <span class="k">return</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -6050,6 +5946,34 @@
 
 <span class="w">            </span><span class="k">return</span>
 
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">ser</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="ss">&quot;\s*&gt;\s*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">ser</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span>
+
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">feat</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">ser[0</span><span class="o">]</span><span class="err">]</span>
+
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">:</span><span class="o">]</span>
+
+<span class="w">                    </span><span class="n">feat</span><span class="o">=</span><span class="n">feats</span><span class="o">[</span><span class="n"> feats[&#39;label&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ser</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="err">]</span>
+
+<span class="w">                </span><span class="n">fuuid</span><span class="p">,</span><span class="n">fname</span><span class="o">=</span><span class="n">feat</span><span class="o">[</span><span class="n">[&#39;uuid&#39;,&#39;label&#39;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">feature</span><span class="o">=</span><span class="n">fname</span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_parameters&#39;</span><span class="o">][</span><span class="n">fuuid,ser[1</span><span class="o">]</span><span class="err">]</span><span class="o">[</span><span class="n">&#39;series&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+<span class="w">                </span><span class="n">self</span><span class="p">.</span><span class="k">parameter</span><span class="o">=</span><span class="n">ser</span><span class="o">[</span><span class="n">1</span><span class="o">]</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;Series {self.uuid} not found.&quot;</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">series_info</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">][</span><span class="n">self.uuid</span><span class="o">]</span>
 
 <span class="w">        </span><span class="n">series_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataframe2jsonizabledict</span><span class="p">(</span><span class="n">series_info</span><span class="p">)</span>
@@ -6160,63 +6084,11 @@
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">feature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
-<span class="w">                </span><span class="n">uuid</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
-<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;NOTICE: {uuid} seems not a json, {e}&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">##DEBUG</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
-
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">                </span><span class="n">context</span><span class="o">=</span><span class="n">uuid</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">context</span><span class="o">=</span><span class="k">None</span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
-
-<span class="w">                </span><span class="n">context_family</span><span class="o">=</span><span class="n">family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
-
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">context_family</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
-
-<span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;context {context!r} not found.&#39;</span><span class="p">)</span>
-
-<span class="w">                </span><span class="n">uuid</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]=</span><span class="n">list</span><span class="p">(</span><span class="n">context_family</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="p">)</span>
-
-<span class="w">        </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">            </span><span class="n">uuid_frame</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;features_parameters_headers_v2&quot;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]</span>
-
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;series keys {uuid} does not match anything&quot;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid_frame</span><span class="o">[</span><span class="n">&quot;series&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">uuid</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
-
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;series keys {uuid} matches more than one series. Which is ambiguos&quot;</span><span class="p">)</span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">uuid</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span>
-
-<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">instances</span><span class="o">=</span><span class="n">uuid_frame</span><span class="p">.</span><span class="n">set_index</span><span class="p">(</span><span class="o">[</span><span class="n">&quot;context&quot;,&quot;flabel&quot;</span><span class="o">]</span><span class="p">).</span><span class="k">drop</span><span class="p">(</span><span class="o">[</span><span class="n">&quot;thresholds&quot;,&quot;mu&quot;,&quot;series&quot;,&quot;parameter&quot;</span><span class="o">]</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="w">        </span><span class="ss">&quot;&quot;&quot;</span>
-
-<span class="ss">        self.feature = None</span>
-
-<span class="ss">        self.param = None</span>
-
-<span class="ss">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span>
 
 <span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">__loaded__</span><span class="o">=</span><span class="k">False</span>
 
@@ -7017,6 +6889,8 @@
 <span class="w">            </span><span class="n">#OPERANDS</span><span class="w"> </span><span class="nl">RESOLUTION</span><span class="p">:</span>
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">UUID</span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
 
 <span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="k">value</span><span class="p">)</span>
 
@@ -8136,7 +8010,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../serializaction/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Serializaction" rel="prev">
+          <a href="../series/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Series" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -8145,20 +8019,20 @@
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                Serializaction
+                Series
               </div>
             </div>
           </a>
         
         
           
-          <a href="../series_ok/" class="md-footer__link md-footer__link--next" aria-label="Next: Series Ok" rel="next">
+          <a href="../sourcestorage/" class="md-footer__link md-footer__link--next" aria-label="Next: Sourcestorage" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                Series Ok
+                Sourcestorage
               </div>
             </div>
             <div class="md-footer__button md-icon">

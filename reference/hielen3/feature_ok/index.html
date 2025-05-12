@@ -13,7 +13,7 @@
     
     
       
-        <title>Feature - hielen3</title>
+        <title>Feature Ok - hielen3</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#module-hielen3feature" class="md-skip">
+        <a href="#module-hielen3feature_ok" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Feature
+              Feature Ok
             
           </span>
         </div>
@@ -598,6 +598,20 @@
               
   
   
+  
+    <li class="md-nav__item">
+      <a href="../feature/" class="md-nav__link">
+        Feature
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
     
   
   
@@ -610,12 +624,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Feature
+          Feature Ok
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        Feature
+        Feature Ok
       </a>
       
         
@@ -659,13 +673,6 @@
           <li class="md-nav__item">
   <a href="#ancestors-in-mro" class="md-nav__link">
     Ancestors (in MRO)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#descendants" class="md-nav__link">
-    Descendants
   </a>
   
 </li>
@@ -775,6 +782,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#update_label" class="md-nav__link">
+    update_label
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -872,20 +886,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../feature_ok/" class="md-nav__link">
-        Feature Ok
-      </a>
     </li>
   
 
@@ -3565,13 +3565,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#descendants" class="md-nav__link">
-    Descendants
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#instance-variables" class="md-nav__link">
     Instance variables
   </a>
@@ -3672,6 +3665,13 @@
           <li class="md-nav__item">
   <a href="#update" class="md-nav__link">
     update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_label" class="md-nav__link">
+    update_label
   </a>
   
 </li>
@@ -3783,13 +3783,13 @@
                 
                   
 
-  <a href="https://github.com/imgitmen/hielen3/edit/main/reference/hielen3/feature.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/imgitmen/hielen3/edit/main/reference/hielen3/feature_ok.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="module-hielen3feature">Module hielen3.feature</h1>
+<h1 id="module-hielen3feature_ok">Module hielen3.feature_ok</h1>
 <details class="example">
 <summary>View Source</summary>
 <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">  1</span>
@@ -4484,35 +4484,51 @@
 <span class="normal">690</span>
 <span class="normal">691</span>
 <span class="normal">692</span>
-<span class="normal">693</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">693</span>
+<span class="normal">694</span>
+<span class="normal">695</span>
+<span class="normal">696</span>
+<span class="normal">697</span>
+<span class="normal">698</span>
+<span class="normal">699</span>
+<span class="normal">700</span>
+<span class="normal">701</span>
+<span class="normal">702</span>
+<span class="normal">703</span>
+<span class="normal">704</span>
+<span class="normal">705</span>
+<span class="normal">706</span>
+<span class="normal">707</span>
+<span class="normal">708</span>
+<span class="normal">709</span>
+<span class="normal">710</span>
+<span class="normal">711</span>
+<span class="normal">712</span>
+<span class="normal">713</span>
+<span class="normal">714</span>
+<span class="normal">715</span>
+<span class="normal">716</span>
+<span class="normal">717</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
-
-<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="kn">from</span> <span class="nn">importlib</span> <span class="kn">import</span> <span class="n">import_module</span>
 
 <span class="kn">from</span> <span class="nn">hielen3</span> <span class="kn">import</span> <span class="n">db</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.series</span> <span class="kn">import</span> <span class="n">HSeries</span>
+<span class="kn">from</span> <span class="nn">hielen3.utils</span> <span class="kn">import</span> <span class="n">uuid</span> <span class="k">as</span> <span class="n">newuuid</span>
 
-<span class="kn">from</span> <span class="nn">hielen3.contextmanager</span> <span class="kn">import</span> <span class="n">family</span>
+<span class="kn">from</span> <span class="nn">hielen3.series</span> <span class="kn">import</span> <span class="n">HSeries</span>
 
 <span class="kn">from</span> <span class="nn">marshmallow</span> <span class="kn">import</span> <span class="n">fields</span>
 
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">datetime64</span>
-
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">isnat</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">datetime64</span><span class="p">,</span> <span class="n">isnat</span>
 
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">DataFrame</span>
 
 <span class="kn">from</span> <span class="nn">MySQLdb._exceptions</span> <span class="kn">import</span> <span class="n">ProgrammingError</span>
-
-<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">uuid4</span> <span class="k">as</span> <span class="n">newuuid</span>
-
-<span class="kn">from</span> <span class="nn">uuid</span> <span class="kn">import</span> <span class="n">UUID</span>
 
 <span class="kn">import</span> <span class="nn">traceback</span>
 
@@ -4554,7 +4570,9 @@
 
         <span class="n">r</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_type&#39;</span><span class="p">][</span><span class="n">ftype</span><span class="p">][</span><span class="s1">&#39;module&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">r</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__schemata__</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -4618,7 +4636,7 @@
 
         <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="n">ftype</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -4626,51 +4644,65 @@
 
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">retrive_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">retrive_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">retrive_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">retrive_label</span><span class="p">(</span><span class="n">label</span><span class="p">):</span>
 
-        <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][:]</span>
 
-            <span class="n">context_family</span><span class="o">=</span><span class="n">family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">uuid</span><span class="o">=</span><span class="n">feats</span><span class="p">[</span><span class="n">feats</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">label</span><span class="p">][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
-            <span class="k">if</span> <span class="n">context_family</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
 
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;context </span><span class="si">{</span><span class="n">context</span><span class="si">!r}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span>
 
-            <span class="n">context</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">context_family</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single instance of </span><span class="si">{</span><span class="n">label</span><span class="si">!r}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_info_v2&#39;</span><span class="p">][{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">}][</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;label </span><span class="si">{</span><span class="n">label</span><span class="si">!r}</span><span class="s1"> and context </span><span class="si">{</span><span class="n">context</span><span class="si">!r}</span><span class="s1"> do not match any row together.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">update_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">uuid</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">update_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-            <span class="n">found_uuids</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][:]</span>
 
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Found multiple instaces for label </span><span class="si">{</span><span class="n">label</span><span class="si">!r}</span><span class="s1"> with these UUIDs </span><span class="si">{</span><span class="n">found_uuids</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="n">uuid</span><span class="o">=</span><span class="n">feats</span><span class="p">[</span><span class="n">feats</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]][</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="n">uuid</span><span class="o">=</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
 
-        <span class="k">return</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Single instance of </span><span class="si">{</span><span class="n">label</span><span class="si">!r}</span><span class="s1"> not found.&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-
-        <span class="n">uuid</span><span class="o">=</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">drop</span><span class="p">(</span><span class="n">uuid</span><span class="p">):</span>
 
         <span class="n">HFeature</span><span class="o">.</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ftype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
         <span class="n">tosetup</span><span class="o">=</span><span class="n">uuid</span> <span class="ow">is</span> <span class="kc">None</span>
+
+        <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]:</span>
+
+                <span class="n">geometry</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
 
         <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
 
@@ -4682,29 +4714,49 @@
 
             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;ftype&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ftype</span>
 
-            <span class="n">uuid</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">newuuid</span><span class="p">())</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">HFeature</span><span class="p">):</span>
-
-            <span class="n">uuid</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">uuid</span>
+            <span class="n">uuid</span><span class="o">=</span><span class="n">newuuid</span><span class="p">()</span>
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">UUID</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid</span>
 
-        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;Malformed uuid in __featureFactory__: </span><span class="si">{</span><span class="n">uuid</span><span class="si">}</span><span class="s2">&quot;</span>  <span class="p">)</span>
+            <span class="k">pass</span>
 
         <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
 
-            <span class="c1">## DA ELIMINARE UNA VOLTA DROPPATA LA COLONNA &quot;context&quot; nella tabella Features</span>
+            <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;no-context&quot;</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]:</span>
+
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;context&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;no-context&#39;</span>
 
             <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">kwargs</span>
 
+        <span class="k">if</span> <span class="n">geometry</span><span class="p">:</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_geometry&#39;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;geometry&quot;</span><span class="p">:</span><span class="n">geometry</span><span class="p">}</span>
+
         <span class="n">feature</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features&#39;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">geometry</span><span class="o">=</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_geometry&#39;</span><span class="p">][</span><span class="n">uuid</span><span class="p">]</span><span class="o">=</span><span class="n">geometry</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">HFeature</span><span class="o">.</span><span class="n">modules</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s1">&#39;ftype&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
@@ -4806,11 +4858,7 @@
 
             <span class="k">if</span> <span class="n">alias</span><span class="p">:</span>
 
-                <span class="n">managed_series</span><span class="o">=</span><span class="n">setups</span><span class="p">[</span><span class="s1">&#39;operands&#39;</span><span class="p">][</span><span class="s1">&#39;__ALIAS__&#39;</span><span class="p">]</span>
-
-                <span class="n">managed_series</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
-
-                <span class="c1">#managed_series=HSeries(setups[&#39;operands&#39;][&#39;__ALIAS__&#39;], delayed=False)</span>
+                <span class="n">managed_series</span><span class="o">=</span><span class="n">HSeries</span><span class="p">(</span><span class="n">setups</span><span class="p">[</span><span class="s1">&#39;operands&#39;</span><span class="p">][</span><span class="s1">&#39;__ALIAS__&#39;</span><span class="p">],</span> <span class="n">delayed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
                 <span class="c1">#NON DEVE ESSERE RICONFIGURATO IL MODELLO DI CALCOLO</span>
 
@@ -5210,7 +5258,9 @@
 
 <span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span>
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__schemata__</span><span class="p">(</span><span class="k">mod</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
 
@@ -5274,7 +5324,7 @@
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">ftype</span><span class="o">=</span><span class="n">ftype</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -5282,51 +5332,65 @@
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">retrive_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">retrive_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">retrive_label</span><span class="p">(</span><span class="n">label</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">retrive_label</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">        </span><span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">:</span><span class="o">]</span>
 
-<span class="w">            </span><span class="n">context_family</span><span class="o">=</span><span class="n">family</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">feats</span><span class="o">[</span><span class="n">feats[&#39;label&#39;</span><span class="o">]==</span><span class="n">label</span><span class="err">]</span><span class="o">[</span><span class="n">&#39;uuid&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">context_family</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;context {context!r} not found.&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">)</span>
 
-<span class="w">            </span><span class="n">context</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">context_family</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Single instance of {label!r} not found.&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">update</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_info_v2&#39;</span><span class="o">][</span><span class="n">{&quot;label&quot;:label,&quot;context&quot;:context}</span><span class="o">][</span><span class="n">&quot;feature&quot;</span><span class="o">]</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;label {label!r} and context {context!r} do not match any row together.&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">update_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">uuid</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">update_label</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">found_uuids</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">uuid</span><span class="p">.</span><span class="k">values</span><span class="p">)</span>
+<span class="w">        </span><span class="n">feats</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">:</span><span class="o">]</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Found multiple instaces for label {label!r} with these UUIDs {found_uuids}.&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">feats</span><span class="o">[</span><span class="n">feats[&#39;label&#39;</span><span class="o">]==</span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="err">]</span><span class="o">[</span><span class="n">&#39;uuid&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">squeeze</span><span class="p">()</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">.</span><span class="n">squeeze</span><span class="p">())</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="nf">str</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">update</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Single instance of {label!r} not found.&#39;</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">drop</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
-
-<span class="w">        </span><span class="n">uuid</span><span class="o">=</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">context</span><span class="p">)</span>
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="k">drop</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="n">HFeature</span><span class="p">.</span><span class="n">retrive</span><span class="p">(</span><span class="n">uuid</span><span class="p">).</span><span class="k">delete</span><span class="p">()</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__featureFactory__</span><span class="p">(</span><span class="n">uuid</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="n">ftype</span><span class="o">=</span><span class="k">None</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="n">tosetup</span><span class="o">=</span><span class="n">uuid</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span>
+
+<span class="w">        </span><span class="n">geometry</span><span class="o">=</span><span class="k">None</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;geometry&#39;</span><span class="o">]</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">geometry</span><span class="o">=</span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;geometry&#39;</span><span class="o">]</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="n">kwargs</span><span class="o">=</span><span class="err">{</span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">kwargs</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">columns</span><span class="err">}</span>
 
@@ -5338,29 +5402,49 @@
 
 <span class="w">            </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&quot;ftype&quot;</span><span class="o">]=</span><span class="n">ftype</span>
 
-<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="nf">str</span><span class="p">(</span><span class="n">newuuid</span><span class="p">())</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span><span class="n">HFeature</span><span class="p">)</span><span class="err">:</span>
-
-<span class="w">            </span><span class="n">uuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uuid</span><span class="p">.</span><span class="n">uuid</span>
+<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="n">newuuid</span><span class="p">()</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">UUID</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="n">uuid</span><span class="p">.</span><span class="n">uuid</span>
 
-<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">ValueError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;Malformed uuid in __featureFactory__: {uuid}&quot;</span><span class="w">  </span><span class="p">)</span>
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">kwargs</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">            </span><span class="err">##</span><span class="w"> </span><span class="n">DA</span><span class="w"> </span><span class="n">ELIMINARE</span><span class="w"> </span><span class="n">UNA</span><span class="w"> </span><span class="n">VOLTA</span><span class="w"> </span><span class="n">DROPPATA</span><span class="w"> </span><span class="n">LA</span><span class="w"> </span><span class="n">COLONNA</span><span class="w"> </span><span class="ss">&quot;context&quot;</span><span class="w"> </span><span class="n">nella</span><span class="w"> </span><span class="n">tabella</span><span class="w"> </span><span class="n">Features</span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]=</span><span class="ss">&quot;no-context&quot;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;context&#39;</span><span class="o">]</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="n">KeyError</span><span class="p">()</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="nl">KeyError</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;context&#39;</span><span class="o">]=</span><span class="s1">&#39;no-context&#39;</span>
 
 <span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">kwargs</span>
 
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nl">geometry</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_geometry&#39;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="err">{</span><span class="ss">&quot;geometry&quot;</span><span class="err">:</span><span class="n">geometry</span><span class="err">}</span>
+
 <span class="w">        </span><span class="n">feature</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features&#39;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]</span><span class="p">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">&#39;records&#39;</span><span class="p">)</span><span class="o">[</span><span class="n">0</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">geometry</span><span class="o">=</span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;geometry&#39;</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_geometry&#39;</span><span class="o">][</span><span class="n">uuid</span><span class="o">]=</span><span class="n">geometry</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HFeature</span><span class="p">.</span><span class="n">modules</span><span class="p">(</span><span class="n">feature</span><span class="o">[</span><span class="n">&#39;ftype&#39;</span><span class="o">]</span><span class="p">).</span><span class="n">squeeze</span><span class="p">().</span><span class="n">Feature</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 
@@ -5462,11 +5546,7 @@
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="k">alias</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">managed_series</span><span class="o">=</span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;operands&#39;</span><span class="o">][</span><span class="n">&#39;__ALIAS__&#39;</span><span class="o">]</span>
-
-<span class="w">                </span><span class="n">managed_series</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
-
-<span class="w">                </span><span class="n">#managed_series</span><span class="o">=</span><span class="n">HSeries</span><span class="p">(</span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;operands&#39;</span><span class="o">][</span><span class="n">&#39;__ALIAS__&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">delayed</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
+<span class="w">                </span><span class="n">managed_series</span><span class="o">=</span><span class="n">HSeries</span><span class="p">(</span><span class="n">setups</span><span class="o">[</span><span class="n">&#39;operands&#39;</span><span class="o">][</span><span class="n">&#39;__ALIAS__&#39;</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">delayed</span><span class="o">=</span><span class="k">False</span><span class="p">)</span>
 
 <span class="w">                </span><span class="n">#NON</span><span class="w"> </span><span class="n">DEVE</span><span class="w"> </span><span class="n">ESSERE</span><span class="w"> </span><span class="n">RICONFIGURATO</span><span class="w"> </span><span class="n">IL</span><span class="w"> </span><span class="n">MODELLO</span><span class="w"> </span><span class="n">DI</span><span class="w"> </span><span class="n">CALCOLO</span>
 
@@ -5841,36 +5921,6 @@
 <ul>
 <li>abc.ABC</li>
 </ul>
-<h4 id="descendants">Descendants</h4>
-<ul>
-<li>Feature_instrument.Feature</li>
-<li>Feature_instrument.Feature</li>
-<li>hielen3.ext.feature_instrument_clinometer.feature.Feature</li>
-<li>hielen3.ext.feature_instrument_generic.feature.Feature</li>
-<li>hielen3.ext.feature_instrument_improved.feature.Feature</li>
-<li>hielen3.ext.feature_instrument_improved.feature_good.Feature</li>
-<li>hielen3.ext.feature_instrument_piezometer.feature.Feature</li>
-<li>hielen3.ext.feature_logger_ackcio.logger.Feature</li>
-<li>hielen3.ext.feature_logger_boviar.logger.Feature</li>
-<li>hielen3.ext.feature_logger_caearpa.logger.Feature</li>
-<li>hielen3.ext.feature_logger_capetti.logger.Feature</li>
-<li>hielen3.ext.feature_logger_gei.logger.Feature</li>
-<li>hielen3.ext.feature_logger_gestecno.logger.Feature</li>
-<li>hielen3.ext.feature_logger_leica.logger.Feature</li>
-<li>hielen3.ext.feature_logger_loadsensing.logger.Feature</li>
-<li>hielen3.ext.feature_logger_move.logger.Feature</li>
-<li>hielen3.ext.feature_logger_move__.logger.Feature</li>
-<li>hielen3.ext.feature_logger_move__.feature_logger_move.logger.Feature</li>
-<li>hielen3.ext.feature_logger_omnialog_temp.logger.Feature</li>
-<li>hielen3.ext.feature_logger_omnigea.logger.Feature</li>
-<li>hielen3.ext.feature_logger_smartbrik4_0.logger.Feature</li>
-<li>hielen3.ext.feature_logger_systemanywere.logger.Feature</li>
-<li>hielen3.ext.feature_logger_winecap.logger.Feature</li>
-<li>hielen3.ext.feature_logger_wsense.logger.Feature</li>
-<li>hielen3.ext.feature_rfilogger.rfilogger.Feature</li>
-<li>hielen3.ext.feature_rfilogger.rfilogger_good.Feature</li>
-<li>hielen3.ext.feature_spotted_files_source.logger.Feature</li>
-</ul>
 <h4 id="instance-variables">Instance variables</h4>
 <div class="codehilite"><pre><span></span><code><span class="n">geometry</span>
 </code></pre></div>
@@ -6003,16 +6053,13 @@
 </details>
 <h4 id="drop">drop</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">drop</span><span class="p">(</span>
-    <span class="n">uuid</span><span class="p">,</span>
-    <span class="n">context</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">uuid</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code>    def drop(uuid,context=None):
-
-        uuid=retrive(uuid,context)
+<div class="codehilite"><pre><span></span><code>    def drop(uuid):
 
         HFeature.retrive(uuid).delete()
 </code></pre></div>
@@ -6060,20 +6107,21 @@
 
 <span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_type&#39;</span><span class="o">][</span><span class="n">ftype</span><span class="o">][</span><span class="n">&#39;module&#39;</span><span class="o">]</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">import_module</span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">r</span>
+<span class="w">        </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
 <h4 id="retrive">retrive</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retrive</span><span class="p">(</span>
-    <span class="n">uuid</span><span class="p">,</span>
-    <span class="n">context</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">uuid</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">context</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive</span><span class="ss">(</span><span class="nv">uuid</span><span class="ss">)</span>:
 
 <span class="w">        </span><span class="nv">try</span>:
 
@@ -6081,46 +6129,31 @@
 
 <span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
 
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">context</span><span class="ss">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">uuid</span><span class="ss">)</span>
 </code></pre></div>
 
 </details>
 <h4 id="retrive_label">retrive_label</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retrive_label</span><span class="p">(</span>
-    <span class="n">label</span><span class="p">,</span>
-    <span class="n">context</span><span class="o">=</span><span class="kc">None</span>
+    <span class="n">label</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">label</span>,<span class="nv">context</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">retrive_label</span><span class="ss">(</span><span class="nv">label</span><span class="ss">)</span>:
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">context</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">not</span><span class="w"> </span><span class="nv">None</span>:
+<span class="w">        </span><span class="nv">feats</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features&#39;</span>][:]
 
-<span class="w">            </span><span class="nv">context_family</span><span class="o">=</span><span class="nv">family</span><span class="ss">(</span><span class="nv">context</span>,<span class="nv">homo_only</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span>
+<span class="w">        </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">feats</span>[<span class="nv">feats</span>[<span class="s1">&#39;label&#39;</span>]<span class="o">==</span><span class="nv">label</span>][<span class="s1">&#39;uuid&#39;</span>].<span class="nv">squeeze</span><span class="ss">()</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nv">context_family</span>.<span class="nv">empty</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">isinstance</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">str</span><span class="ss">)</span>:
 
-<span class="w">                </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">(</span><span class="nv">f</span><span class="s1">&#39;context {context!r} not found.&#39;</span><span class="ss">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">uuid</span><span class="o">=</span><span class="nv">uuid</span><span class="ss">)</span>
 
-<span class="w">            </span><span class="nv">context</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">context_family</span>[<span class="s2">&quot;context&quot;</span>]<span class="ss">)</span>
+<span class="w">        </span><span class="k">else</span>:
 
-<span class="w">        </span><span class="nv">try</span>:
-
-<span class="w">            </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features_info_v2&#39;</span>][{<span class="s2">&quot;label&quot;</span>:<span class="nv">label</span>,<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>}][<span class="s2">&quot;feature&quot;</span>]
-
-<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
-
-<span class="w">            </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">(</span><span class="nv">f</span><span class="s1">&#39;label {label!r} and context {context!r} do not match any row together.&#39;</span><span class="ss">)</span>
-
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">uuid</span>.<span class="nv">__len__</span><span class="ss">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span>:
-
-<span class="w">            </span><span class="nv">found_uuids</span><span class="o">=</span><span class="nv">list</span><span class="ss">(</span><span class="nv">uuid</span>.<span class="nv">values</span><span class="ss">)</span>
-
-<span class="w">            </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">(</span><span class="nv">f</span><span class="s1">&#39;Found multiple instaces for label {label!r} with these UUIDs {found_uuids}.&#39;</span><span class="ss">)</span>
-
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">uuid</span><span class="o">=</span><span class="nv">uuid</span>.<span class="nv">squeeze</span><span class="ss">())</span>
+<span class="w">            </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">(</span><span class="nv">f</span><span class="s1">&#39;Single instance of {label!r} not found.&#39;</span><span class="ss">)</span>
 </code></pre></div>
 
 </details>
@@ -6170,18 +6203,46 @@
 <h4 id="update">update</h4>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update</span><span class="p">(</span>
     <span class="n">uuid</span><span class="p">,</span>
-    <span class="n">context</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">context</span><span class="o">=</span><span class="nv">None</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
 
-<span class="w">        </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">retrive</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">context</span><span class="ss">)</span>
+<span class="w">        </span><span class="nv">try</span>:
 
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">uuid</span><span class="o">=</span><span class="nv">uuid</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">uuid</span><span class="o">=</span><span class="nv">uuid</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">update_label</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="update_label">update_label</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_label</span><span class="p">(</span>
+    <span class="n">uuid</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">update_label</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
+
+<span class="w">        </span><span class="nv">feats</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features&#39;</span>][:]
+
+<span class="w">        </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">feats</span>[<span class="nv">feats</span>[<span class="s1">&#39;label&#39;</span>]<span class="o">==</span><span class="nv">kwargs</span>[<span class="s1">&#39;label&#39;</span>]][<span class="s1">&#39;uuid&#39;</span>].<span class="nv">squeeze</span><span class="ss">()</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">isinstance</span><span class="ss">(</span><span class="nv">uuid</span>,<span class="nv">str</span><span class="ss">)</span>:
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nv">HFeature</span>.<span class="nv">__featureFactory__</span><span class="ss">(</span><span class="nv">uuid</span><span class="o">=</span><span class="nv">uuid</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="k">else</span>:
+
+<span class="w">            </span><span class="nv">raise</span><span class="w"> </span><span class="nv">KeyError</span><span class="ss">(</span><span class="nv">f</span><span class="s1">&#39;Single instance of {label!r} not found.&#39;</span><span class="ss">)</span>
 </code></pre></div>
 
 </details>
@@ -6676,7 +6737,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../datalink/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Datalink" rel="prev">
+          <a href="../feature/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Feature" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -6685,20 +6746,20 @@
                 <span class="md-footer__direction">
                   Previous
                 </span>
-                Datalink
+                Feature
               </div>
             </div>
           </a>
         
         
           
-          <a href="../feature_ok/" class="md-footer__link md-footer__link--next" aria-label="Next: Feature Ok" rel="next">
+          <a href="../" class="md-footer__link md-footer__link--next" aria-label="Next: Index" rel="next">
             <div class="md-footer__title">
               <div class="md-ellipsis">
                 <span class="md-footer__direction">
                   Next
                 </span>
-                Feature Ok
+                Index
               </div>
             </div>
             <div class="md-footer__button md-icon">
