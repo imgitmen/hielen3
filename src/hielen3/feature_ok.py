@@ -1,18 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
-from abc import ABC
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from importlib import import_module
 from hielen3 import db 
+from hielen3.utils import uuid as newuuid
 from hielen3.series import HSeries
-from hielen3.contextmanager import family 
 from marshmallow import fields 
-from numpy import datetime64
-from numpy import isnat
+from numpy import datetime64, isnat
 from pandas import DataFrame
 from MySQLdb._exceptions import ProgrammingError
-from uuid import uuid4 as newuuid
-from uuid import UUID
+
 
 import traceback
 
@@ -45,10 +42,14 @@ class HFeature(ABC):
 
     def modules(ftype=None):
         r = db['features_type'][ftype]['module'].apply(import_module)
-        return r
+
+        print (r)
+
+        return (r)
 
 
     def __schemata__(mod,actions=None):
+
 
         print (mod)
 
@@ -77,7 +78,6 @@ class HFeature(ABC):
         s=s.groupby('label').apply( lambda x: dict(zip(x["names"], x["info"]))).to_dict()
         return s
 
-
     @property
     def schemata(self):
         self.__test_del__()
@@ -85,47 +85,45 @@ class HFeature(ABC):
             self.__actions_schemata__ = HFeature.actions_schemata(self.ftype)[self.ftype]
         return self.__actions_schemata__
 
-
     def create(ftype,**kwargs):
         return HFeature.__featureFactory__(ftype=ftype,**kwargs)
 
 
-    def retrive(uuid,context=None):
+    def retrive(uuid):
         try:
             return HFeature.__featureFactory__(uuid=uuid)
         except KeyError as e:
-            return HFeature.retrive_label(uuid,context)
+            return HFeature.retrive_label(uuid)
 
+    def retrive_label(label):
 
-    def retrive_label(label,context=None):
+        feats=db['features'][:]
 
-        if context is not None:
-            context_family=family(context,homo_only=False)
-            if context_family.empty:
-                raise KeyError(f'context {context!r} not found.')
+        uuid=feats[feats['label']==label]['uuid'].squeeze()
 
-            context=list(context_family["context"])
+        if isinstance(uuid,str):
+            return HFeature.__featureFactory__(uuid=uuid)
+        else:
+            raise KeyError(f'Single instance of {label!r} not found.')
 
+    def update(uuid,**kwargs):
         try:
-            uuid=db['features_info_v2'][{"label":label,"context":context}]["feature"]
+            return HFeature.__featureFactory__(uuid=uuid, **kwargs)
         except KeyError as e:
-            raise KeyError(f'label {label!r} and context {context!r} do not match any row together.')
+            return HFeature.update_label(uuid,**kwargs)
+
+    def update_label(uuid,**kwargs):
+        feats=db['features'][:]
+
+        uuid=feats[feats['label']==kwargs['label']]['uuid'].squeeze()
+
+        if isinstance(uuid,str):
+            return HFeature.__featureFactory__(uuid=uuid, **kwargs)
+        else:
+            raise KeyError(f'Single instance of {label!r} not found.')
 
 
-        if uuid.__len__() > 1:
-            found_uuids=list(uuid.values)
-            raise KeyError(f'Found multiple instaces for label {label!r} with these UUIDs {found_uuids}.')
-
-        return HFeature.__featureFactory__(uuid=uuid.squeeze())
-
-
-    def update(uuid,context=None,**kwargs):
-        uuid=retrive(uuid,context)
-        return HFeature.__featureFactory__(uuid=uuid, **kwargs)
-
-
-    def drop(uuid,context=None):
-        uuid=retrive(uuid,context)
+    def drop(uuid):
         HFeature.retrive(uuid).delete()
 
     
@@ -133,6 +131,13 @@ class HFeature(ABC):
         
         tosetup=uuid is None
 
+        geometry=None
+
+        try:
+            if kwargs['geometry']:
+                geometry=kwargs['geometry']    
+        except KeyError as e:
+            pass
 
         kwargs={k:w for k,w in kwargs.items() if k in db['features'].columns}
 
@@ -141,23 +146,35 @@ class HFeature(ABC):
                 raise ValueError("Both uuid and ftype are None")
 
             kwargs["ftype"]=ftype
-            uuid=str(newuuid())
+            uuid=newuuid()
 
-        if isinstance(uuid,HFeature):
-            uuid = uuid.uuid
-        
         try:
-            UUID(uuid)
-        except ValueError as e:
-            raise KeyError( f"Malformed uuid in __featureFactory__: {uuid}"  )
+            uuid=uuid.uuid
+        except Exception as e:
+            pass
 
         if kwargs.__len__():
-            ## DA ELIMINARE UNA VOLTA DROPPATA LA COLONNA "context" nella tabella Features
-            kwargs["context"]="no-context"
+            try:
+                if not kwargs['context']:
+                    raise KeyError()
+            except KeyError:
+                kwargs['context']='no-context'
 
             db['features'][uuid]=kwargs
 
+        if geometry:
+            db['features_geometry'][uuid]={"geometry":geometry}
+
+
         feature=db['features'][uuid].to_dict(orient='records')[0]
+
+        try:
+            geometry=kwargs['geometry']
+            db['features_geometry'][uuid]=geometry
+        except KeyError as e:
+            pass
+        except Exception as e:
+            raise ValueError(e)
 
         out = HFeature.modules(feature['ftype']).squeeze().Feature(feature)
 
@@ -169,7 +186,6 @@ class HFeature(ABC):
         return out
 
 
-   
     class __ParamManager__():
 
         def __init__(self, feature):
@@ -228,12 +244,7 @@ class HFeature(ABC):
                 alias=False
 
             if alias:
-
-                managed_series=setups['operands']['__ALIAS__']
-
-                managed_series.__delayed_load__()
-
-                #managed_series=HSeries(setups['operands']['__ALIAS__'], delayed=False)
+                managed_series=HSeries(setups['operands']['__ALIAS__'], delayed=False)
                 #NON DEVE ESSERE RICONFIGURATO IL MODELLO DI CALCOLO
                 try:
                     setups.pop('operator')

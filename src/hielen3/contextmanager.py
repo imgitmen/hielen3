@@ -7,6 +7,24 @@ from numpy import nan
 from json import dumps
 from anytree import Node, RenderTree
 
+
+def clean_contexts(contexts=None):
+
+    if contexts is None or (isinstance(contexts,(list,set,tuple)) and contexts.__len__() == 0):
+        return contexts
+
+    out = []
+
+    try:
+        out = list(db["context"][contexts]["ID"])
+    except KeyError as e:
+        pass
+
+    return out
+
+
+
+
 def roots_info(contexts=None, homo_only=True):
 
     """
@@ -16,10 +34,13 @@ def roots_info(contexts=None, homo_only=True):
 
     # filtriamo i contesti che esistono
     contexts=clean_input(contexts)
-    try:
-        contexts=db['context'][ancestors(contexts,homo_only=homo_only)]
-    except KeyError as e:
+
+    cleaned_contexts=clean_contexts(contexts)
+
+    if cleaned_contexts.__len__() == 0 and contexts.__len__() > 0:
         return DataFrame()
+
+    contexts=db['context'][ancestors(cleaned_contexts,homo_only=homo_only)]
    
     try:
         descendants=db['context_context'][:][['homogeneous']].reset_index('ancestor').sort_index()
@@ -29,7 +50,6 @@ def roots_info(contexts=None, homo_only=True):
         return contexts
 
     result=contexts.join(descendants[['ancestor','homogeneous']],how='left')
-
     
     result['roots']=result['homogeneous'].replace(nan,0)
 
@@ -250,10 +270,11 @@ def ancestors(key=None, level=None, homo_only=True):
     """
 
     key=clean_input(key)
+    key=clean_contexts(key)
 
-    if key is None:
-        raise ValueError ("key must not be None")  
-    
+    out = []
+
+    ## DEVE ESSERE UN ARRAY DI ARRAY!! RICORDATELO!!
     list_level_keys=[key]
 
     while key.__len__() and (level is None or level >= 0):
@@ -272,13 +293,12 @@ def ancestors(key=None, level=None, homo_only=True):
             list_level_keys.append(newkey)
 
         except KeyError as e:
+            # SERVE PER GESTIRE LA CHIUSURA
             newkey=[]
 
         key=newkey
 
         if level is not None: level -= 1
-
-    out = []
 
     for k in list_level_keys:
         out=[*out,*k]
@@ -294,9 +314,21 @@ def family(contexts=None, homo_only=True):
     """
 
     # tutto il ramo genealogico dall'elemento in input fino alla radice
+
+    contexts=clean_input(contexts)
     ancestors_list=ancestors(contexts,homo_only=homo_only)
+
+    # se la lista degli ancestors è vuota ma context non lo è
+    # vuol dire che sono stati passati solo contesti non validi
+    # se la lista dei contesti è invece vuota, vuol dire che vengono
+    # richieste tutte le famiglie, senza clausola where
+    if ancestors_list.__len__() == 0 and contexts.__len__() > 0:
+        return DataFrame()
+    
     # solo le radici degli alberi precedenti
     roots_list=list(roots_info(ancestors_list).index)
+
+    #roots_list=list(roots_info(contexts).index)
     # tutta la discendenza dei roots 
     lineages_list=lineages(roots_list,homo_only=homo_only)
 
@@ -490,13 +522,12 @@ def features_interfamily_collisions(context,colliders,homo_only=True):
 
     return out
 
-
+"""
 def print_tree(nodes: dict, roots: set) -> None:
     for root in roots:
         print()
         for pre, _, node in RenderTree(nodes[root]):
             print(f'{pre}{node.name} ({node.val})')
-
 
 def add_nodes(nodes: dict, roots: set, parent: str, child: str, val: int) -> None:
     if parent not in nodes:
@@ -542,4 +573,5 @@ def print_family(contexts=None, homo_only=True):
                 #f=f[~f["p_key"].isna()]
                 create_tree(f)
 
+"""
 

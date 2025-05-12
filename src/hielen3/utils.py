@@ -52,7 +52,7 @@ def boolenize(a,nonevalue=None):
  
 
 
-def clean_input(inp, trim_none = True ):
+def clean_input(inp=None, trim_none = True ):
  
     if isinstance(inp,str): inp=inp.split(",")
  

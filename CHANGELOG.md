@@ -1,5 +1,56 @@
 CHANGELOG
 =========
+## **V3.6.12** ##
+### 12 Maggio 2025 ###
+
+- modifcata la vista v_feature_v2 aggiungengo flabel e ftype tra i campi ritornati
+
+- modificata la vista v_series_header_v2 aggiungendo flabel e clabel tra i campi ritornati
+
+- modificato in config/hielen.json la definizione delle chiavi di features_info_v2 ("feature","context","label") e di features_parameters_headers_v2 ("series","feature","param","ordinal","flabel","context")
+
+- modifcato modulo hielen3.series: Nel costruttore HSeries è possibile passare all'argomento uuid un dict con queste chiavi
+    
+["series","feature","param","ordinal","flabel","context"]
+ 
+nessuna chiave è obbligatoria
+
+dove:
+*series* è l'uuid della serie se conosciuto ( si può usare direttamente l'uuid al posto del dict )
+*feature* è l'uuid di una feature a cui la series fa riferimento (se conosciuto)
+*param" è il parametro della feature che individua la series
+*ordinal* è l'ordinale associato alla feature che individua la series
+*flabel* è il label del parametro associato alla feature a cui la series fa riferimanto
+*context* è un contesto appartenete alle famiglia di contesti a cui è associata la feature di cui la series ne rappresenta un parametro
+
+es.:
+{"series":"26ba180b-2c6b-43df-874d-7b7e800a427b"} oppure solo "26ba180b-2c6b-43df-874d-7b7e800a427b"
+{"feature":"09334034-68a6-45da-91a8-8e86035111bb","ordinal":2}
+{"feature":"09334034-68a6-45da-91a8-8e86035111bb","param":"Y"}
+{"context":"67644aa916b77","flabel":"MG01","ordinal":2}
+{"context":"67644aa916b77","flabel":"MG01","param":"Y"}
+
+tutti questi casi individuano univocamente una serie. Nel caso venga passato "flabel" è opprtuno, ma non obbligatorio
+fornire anche il "context"
+
+questo dict viene passato direttamente al costruttore dell'oggetto python HSeries e si possono avere tre casi:
+
+1) la richiesta non ritorna alcun series uuid -> KeyError("Non trovato")
+2) la richiesta ritorna un solo series uuid -> ok, la serie viene recuparata
+3) la richiesta ritorna più di un series uuid -> KeyError("Ambiguo")
+
+
+- modificato modulo hielen3.feature. Nella funzione retrive e retive_label inserito l'argomento context
+
+- modifcato modulo hielen3.ext.feature_instrument_importved.helpe: per permettere la configurazione dei parametri attravereso flabel e context
+
+- modificato modulo hielen3.contextmanager: moficate le funzioni family e ascendants in modo da ritornare errore nel caso in cui vengano fornito SOLO contesti non validi (non presenti nel db) 
+
+- modificato hielen3.ext.feature_logger_loadsensing.helper per coprire il caso in cui il logger non invii la colonna della temperatura interna
+
+- modificato lo script di configurazione (non ancora nel git)
+
+
 ## **V3.6.11** ##
 ### 24 Aprile 2025 ###
 - modificato logger loadsensing per accettare i vibrometri

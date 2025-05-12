@@ -1,7 +1,8 @@
 # coding=utf-8
 
 from hielen3.feature import HFeature
-from hielen3.serializaction import ActionSchema, PolyCoeff, StringTime
+from hielen3.series import HSeries
+from hielen3.serializaction import ActionSchema
 from hielen3.ext.feature_instrument import ConfigSchema, Feature
 from marshmallow import fields
 from numpy import datetime64
@@ -95,35 +96,12 @@ class Feature(HFeature):
         if modules is None:
             modules={}
 
-        if operands is not None:
-
-            for k,w in operands.items():
-
-                if isinstance(w,dict):
-                    try:
-
-                        feat=w['feature']
-
-                        if feat == 'self': 
-
-                            feat = self
-                        else:
-                            try:
-                                feat = HFeature.retrive(feat)
-                            except Exception as e:
-                                raise ValueError (f'error retriving {w}: {feat}')
-
-                        try:
-                            w=feat.parameters[w["param"]]
-
-                        except Exception as e:
-                            raise SelfParamError(f'error retriving {feat}.{w["param"]}')
-
-                    except KeyError as e:
-                        pass
-
-                new_opz[k] = w
-
+        if operands is None:
+            operands={}
+        
+        ## SE w è in dict allora DEVO RCUPERARE UNA SERIE DATI ma in questo caso
+        ## Potrebbe generare "Not Found" o "Ambiguos" ma viene lasciato passara
+        new_opz={ k:isinstance(w,dict) and HSeries(w) or w for k,w in operands.items() }
 
         opz.update(new_opz)
 
@@ -240,6 +218,7 @@ class Feature(HFeature):
                     self.parameters.set(**config)
                 except Exception as e:
                     print (f"WARN configuring param {param_name}:", e)
+
 
 
     def config(self, multi_channel_info_json=None, timestamp=None,  **kwargs): 

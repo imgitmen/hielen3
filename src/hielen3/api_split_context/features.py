@@ -263,12 +263,13 @@ RESPONSE CODES:
             info.append('subitemsfrommap')
         """
 
-        feafra=db['features_info_v2'][uids,cntxt][good_info]
+        feafra=db['features_info_v2'][uids,cntxt][good_info].sort_index(level=["label"]).reset_index('label')
         feafra[bad_info]=None
         feafra=feafra.where(feafra.notnull(), None)
+
         #feafra=feafra[feafra['intent'] != 'HIDDEN']
 
-        feafra=feafra.join(feafra['properties'].apply(Series)['label']).sort_values('label')
+        #feafra=feafra.join(feafra['properties'].apply(Series)['label']).sort_values('label')
 
 
         #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
@@ -279,6 +280,7 @@ RESPONSE CODES:
         feafra=None
 
     except ValueError as e:
+        #raise e
         out.message =  f"some feature belong to multiple non homogeneous contexts: features: {uids} contexts: {cntxt}"
 
     except KeyError as e:

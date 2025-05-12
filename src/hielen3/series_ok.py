@@ -1,31 +1,16 @@
 #!/usr/bin/env python
 # coding=utf-8
+from pandas import DataFrame, Series, concat, DatetimeIndex, Index, MultiIndex 
+from concurrent.futures import ThreadPoolExecutor
+from functools import wraps
+from numpy import nan, unique, round, inf, datetime64, timedelta64
+from importlib import import_module
+from hielen3 import db, conf
+from hielen3.utils import isot2ut, ut2isot, agoodtime, uuid as getuuid, dataframe2jsonizabledict
+from uuid import UUID
 import re
 import json
 import traceback
-from functools import wraps
-from uuid import UUID
-from pandas import DataFrame
-from pandas import Series
-from pandas import concat
-from pandas import DatetimeIndex
-from pandas import Index
-from pandas import MultiIndex 
-from numpy import nan
-from numpy import unique
-from numpy import round
-from numpy import inf
-from numpy import datetime64
-from numpy import timedelta64
-from importlib import import_module
-from hielen3 import db, conf
-from hielen3.utils import isot2ut
-from hielen3.utils import ut2isot
-from hielen3.utils import agoodtime 
-from hielen3.utils import uuid as getuuid
-from hielen3.utils import dataframe2jsonizabledict 
-from hielen3.contextmanager import family
-from concurrent.futures import ThreadPoolExecutor
 
 def _threadpool(f):
     @wraps(f)
@@ -44,7 +29,28 @@ class HSeries:
         if self.__loaded__:
             return
 
+        try:
+            ser=re.split("\s*>\s*", self.uuid)
+            
+            if ser.__len__() == 2:
+                try:
+                    feat=db['features'][ser[0]]
+                except Exception as e:
+                    feats=db['features'][:]
+                    feat=feats[ feats['label'] == ser[0] ]
+
+                fuuid,fname=feat[['uuid','label']].squeeze()
+                
+                self.feature=fname
+                self.uuid=db['features_parameters'][fuuid,ser[1]]['series'].squeeze()
+                self.parameter=ser[1]
+
+        except Exception as e:
+            raise KeyError (f"Series {self.uuid} not found.")
+
         series_info=db["series"][self.uuid]
+        
+
         series_info = dataframe2jsonizabledict(series_info)
 
         if series_info['datatable'] is None or series_info['datatable'] == '':
@@ -122,51 +128,14 @@ class HSeries:
         if uuid is None:
             raise ValueError
 
-        if isinstance(uuid,str):
+        self.uuid=uuid
 
-            try:
-                uuid=json.loads(uuid)
-            except Exception as e:
-                pass
-                # print (f"NOTICE: {uuid} seems not a json, {e}") ##DEBUG
-
-        if isinstance(uuid,dict):
-            try:
-                context=uuid["context"]
-            except KeyError as e:
-                context=None
-
-            if context is not None:
-                context_family=family(context,homo_only=False)
-                if context_family.empty:
-                    raise KeyError(f'context {context!r} not found.')
-                uuid["context"]=list(context_family["context"])
-        try:
-            uuid_frame=db["features_parameters_headers_v2"][uuid]
-        except KeyError as e:
-            raise ValueError(f"series keys {uuid} does not match anything")
-
-        uuid=uuid_frame["series"].drop_duplicates()
-
-        if uuid.__len__() > 1:
-            raise KeyError(f"series keys {uuid} matches more than one series. Which is ambiguos")
-
-        self.uuid=str(uuid.squeeze())
-        
-        self.instances=uuid_frame.set_index(["context","flabel"]).drop(["thresholds","mu","series","parameter"],axis=1)
-
-
-        """
         self.feature = None
         self.param = None
-        """
 
         self.__loaded__=False
         if not delayed:
             self.__delayed_load__()
-
-
-
 
     def clean_cache(self,times=None):
        
@@ -756,6 +725,7 @@ class HSeries:
 
             #OPERANDS RESOLUTION:
             try:
+                UUID(value)
                 return HSeries(value)
             except Exception as e:
                 pass
@@ -764,7 +734,6 @@ class HSeries:
                 value=value.removeprefix('#')
             except Exception as e:
                 pass
-
 
             """
                 trying to load json string, if "value" is it
@@ -775,7 +744,6 @@ class HSeries:
                 pass
 
             return value
-
 
             '''
             """
