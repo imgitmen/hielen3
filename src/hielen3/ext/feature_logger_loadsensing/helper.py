@@ -73,11 +73,11 @@ def retrive(path):
             ## ALCUNI HANNO QUESTA COLONNA ALTRI NO :-(
             col_to_test="InternalTempInCelsius"
 
-            has_col_to_test=Series(a.columns).apply(lambda x: col_to_test in x).any()
+            cols=Series(a.columns)
 
-            if not has_col_to_test:
-                a[col_to_test]=None
-                a=a[[a.columns[0],col_to_test,*a.columns[1:-1]]]
+            cols=list(cols[~cols.apply(lambda x: col_to_test in x)])
+            
+            a=a[cols].copy()
 
             a.columns=[ 'times',*list(range(1,a.columns.__len__()))]
         #a.columns = [ 'times', *a.columns[1:] ]
