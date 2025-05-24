@@ -5,7 +5,7 @@ from hielen3.utils import uuid
 from pandas import DataFrame, Series
 from numpy import nan
 from json import dumps
-from anytree import Node, RenderTree
+#from anytree import Node, RenderTree
 
 
 def clean_contexts(contexts=None):

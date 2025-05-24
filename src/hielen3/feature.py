@@ -120,12 +120,12 @@ class HFeature(ABC):
 
 
     def update(uuid,context=None,**kwargs):
-        uuid=retrive(uuid,context)
+        uuid=HFeature.retrive(uuid,context)
         return HFeature.__featureFactory__(uuid=uuid, **kwargs)
 
 
     def drop(uuid,context=None):
-        uuid=retrive(uuid,context)
+        uuid=HFeature.retrive(uuid,context)
         HFeature.retrive(uuid).delete()
 
     

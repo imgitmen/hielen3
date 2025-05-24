@@ -1041,7 +1041,7 @@ class MariadbHielenCache(Mariadb):
             if value.empty:
                 return
             value=value[['series','timestamp','value']]
-            stat=re.sub(",\($","",re.sub("^","(",value.to_csv(header=None,index=None,quoting=1,lineterminator="),(")))
+            stat=re.sub(",($","",re.sub("^","(",value.to_csv(header=None,index=None,quoting=1,lineterminator="),(")))
             stat=f"INSERT INTO {self.table} (series,timestamp,value) VALUES "+stat+" ON DUPLICATE KEY UPDATE value = VALUES(value)"
             e=self.engine
             with e.begin() as connection:
