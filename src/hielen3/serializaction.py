@@ -299,7 +299,10 @@ class HSchema(Schema):
             try:
                 out.update(c().hints)
             except AttributeError as e:
-                pass
+                print ("ATTRIBUTE ERROR: " c, e)
+            except TypeError as e:
+                print ("TYPE ERROR:" c, e)
+
         return out
 
     timestamp = StringTime(required=True, allow_none=False)

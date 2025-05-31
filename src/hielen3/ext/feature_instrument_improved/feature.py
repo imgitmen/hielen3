@@ -101,7 +101,10 @@ class Feature(HFeature):
         
         ## SE w è in dict allora DEVO RCUPERARE UNA SERIE DATI ma in questo caso
         ## Potrebbe generare "Not Found" o "Ambiguos" ma viene lasciato passara
-        new_opz={ k:isinstance(w,dict) and HSeries(w) or w for k,w in operands.items() }
+        try:
+            new_opz={ k:isinstance(w,dict) and HSeries(w) or w for k,w in operands.items() }
+        except Exception as e:
+            raise SelfParamError(str(e))
 
         opz.update(new_opz)
 
