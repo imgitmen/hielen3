@@ -4068,7 +4068,13 @@
 
         <span class="c1">## Potrebbe generare &quot;Not Found&quot; o &quot;Ambiguos&quot; ma viene lasciato passara</span>
 
-        <span class="n">new_opz</span><span class="o">=</span><span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="ow">or</span> <span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">new_opz</span><span class="o">=</span><span class="p">{</span> <span class="n">k</span><span class="p">:</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">HSeries</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="ow">or</span> <span class="n">w</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">w</span> <span class="ow">in</span> <span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="n">SelfParamError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
         <span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span>
 
@@ -5284,7 +5290,13 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="c1">## Potrebbe generare &quot;Not Found&quot; o &quot;Ambiguos&quot; ma viene lasciato passara</span>
 
-<span class="w">        </span><span class="n">new_opz</span><span class="o">=</span><span class="p">{</span><span class="w"> </span><span class="n">k</span><span class="p">:</span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+<span class="w">        </span><span class="n">try</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">new_opz</span><span class="o">=</span><span class="p">{</span><span class="w"> </span><span class="n">k</span><span class="p">:</span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">HSeries</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">operands</span><span class="o">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">SelfParamError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
 <span class="w">        </span><span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span>
 

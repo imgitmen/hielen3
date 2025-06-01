@@ -5600,7 +5600,11 @@
 <span class="normal">492</span>
 <span class="normal">493</span>
 <span class="normal">494</span>
-<span class="normal">495</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -6028,7 +6032,11 @@
 
             <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;ATTRIBUTE ERROR:&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;TYPE ERROR:&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">out</span>
 
@@ -8276,7 +8284,11 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">                </span><span class="n">pass</span>
+<span class="w">                </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;ATTRIBUTE ERROR:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">TypeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;TYPE ERROR:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
 
