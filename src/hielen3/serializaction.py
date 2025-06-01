@@ -299,7 +299,7 @@ class HSchema(Schema):
             try:
                 out.update(c().hints)
             except AttributeError as e:
-                print ("ATTRIBUTE ERROR:," c, e)
+                print ("ATTRIBUTE ERROR:", c, e)
             except TypeError as e:
                 print ("TYPE ERROR:", c, e)
 
