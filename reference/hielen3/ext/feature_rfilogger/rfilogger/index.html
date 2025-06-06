@@ -6732,7 +6732,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="nv">try</span>:
 
-<span class="w">            </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features_info_v2&#39;</span>][{<span class="s2">&quot;label&quot;</span>:<span class="nv">label</span>,<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>}][<span class="s2">&quot;feature&quot;</span>]
+<span class="w">            </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features_info_v2&#39;</span>][{<span class="s2">&quot;label&quot;</span>:<span class="nv">label</span>,<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>}][<span class="s2">&quot;feature&quot;</span>].<span class="nv">drop_duplicates</span><span class="ss">()</span>
 
 <span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
 

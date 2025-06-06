@@ -4642,7 +4642,7 @@
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_info_v2&#39;</span><span class="p">][{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">}][</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span>
+            <span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s1">&#39;features_info_v2&#39;</span><span class="p">][{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span><span class="n">label</span><span class="p">,</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">context</span><span class="p">}][</span><span class="s2">&quot;feature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -5298,7 +5298,7 @@
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_info_v2&#39;</span><span class="o">][</span><span class="n">{&quot;label&quot;:label,&quot;context&quot;:context}</span><span class="o">][</span><span class="n">&quot;feature&quot;</span><span class="o">]</span>
+<span class="w">            </span><span class="n">uuid</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&#39;features_info_v2&#39;</span><span class="o">][</span><span class="n">{&quot;label&quot;:label,&quot;context&quot;:context}</span><span class="o">][</span><span class="n">&quot;feature&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
@@ -6108,7 +6108,7 @@
 
 <span class="w">        </span><span class="nv">try</span>:
 
-<span class="w">            </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features_info_v2&#39;</span>][{<span class="s2">&quot;label&quot;</span>:<span class="nv">label</span>,<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>}][<span class="s2">&quot;feature&quot;</span>]
+<span class="w">            </span><span class="nv">uuid</span><span class="o">=</span><span class="nv">db</span>[<span class="s1">&#39;features_info_v2&#39;</span>][{<span class="s2">&quot;label&quot;</span>:<span class="nv">label</span>,<span class="s2">&quot;context&quot;</span>:<span class="nv">context</span>}][<span class="s2">&quot;feature&quot;</span>].<span class="nv">drop_duplicates</span><span class="ss">()</span>
 
 <span class="w">        </span><span class="nv">except</span><span class="w"> </span><span class="nv">KeyError</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
 
