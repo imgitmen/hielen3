@@ -1144,26 +1144,22 @@ class MongodbHielenCache():
 
 
         try:
-            timestart = int(datetime64(key['timestamp'].start).astype('datetime64[ns]').astype(int))
+            timestart = int(datetime64(key['timestamp'].start).astype('datetime64[s]').astype(int))
             if timestart < 0:
                 timestart=None
         except Exception as e:
             #raise e #DEBUG
             pass
 
-        #PORCATA
-        timestart=None
 
         try:
-            timestop = int(datetime64(key['timestamp'].stop).astype('datetime64[ns]').astype(int))
+            timestop = int(datetime64(key['timestamp'].stop).astype('datetime64[s]').astype(int))
             if timestop < 0:
                 timestop=None
         except Exception as e:
             #raise e #DEBUG
             pass
 
-        #PORCATA
-        timestop=None
 
         try:
             series = UUID(key['series'][0])
@@ -1171,11 +1167,7 @@ class MongodbHielenCache():
             raise KeyError(key)
 
 
-        print (series,timestart, timestop)
-
         out=mf.fetch(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
-  
-    
 
         if out.empty:
             raise KeyError(key)

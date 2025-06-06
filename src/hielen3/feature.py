@@ -107,7 +107,7 @@ class HFeature(ABC):
             context=list(context_family["context"])
 
         try:
-            uuid=db['features_info_v2'][{"label":label,"context":context}]["feature"]
+            uuid=db['features_info_v2'][{"label":label,"context":context}]["feature"].drop_duplicates()
         except KeyError as e:
             raise KeyError(f'label {label!r} and context {context!r} do not match any row together.')
 
