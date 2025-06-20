@@ -2,7 +2,8 @@
 # coding=utf-8
 import hug
 import falcon
-from . import query3
+#from . import query3
+from . import query5
 from . import features
 from . import thresholds
 from . import contexts
@@ -28,7 +29,8 @@ def featman():
 @hug.extend_api("/query2")
 def dataman2():
     """ Data manager """
-    return [query3]
+    #return [query3]
+    return [query5]
 
 @hug.extend_api("/thresholds")
 def threshman():

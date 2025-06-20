@@ -1,5 +1,14 @@
 CHANGELOG
 =========
+## **V3.6.13** ##
+### 19 Giugno 2025 ###
+
+- Inglobate le crudLib che esponevano mongofunc per mongodb. Inserite come modulo hielen3.mongofunc2.
+- Le mongofunc2 ingobate ora permettono l'interrogazione contemporanea di n serie dati
+- modificato datalink di conseguenza
+- modificata l'api query2 in modo da accedere direttamente al DB nel caso in cui la cache richiesta non sia "old" (in pratica è sempre old). Velocizzato tutto abbomba
+
+
 ## **V3.6.12** ##
 ### 12 Maggio 2025 ###
 

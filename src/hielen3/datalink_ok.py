@@ -1128,83 +1128,6 @@ class MongodbHielenCache():
         return sqlcond
     """
 
-    def __fetch__(uri, db, col, uui, **kwargs):
-        cert = kwargs.get("cert")
-        user = kwargs.get("user")
-        pw = kwargs.get("pw")
-        client, coll = mf.connecting(uri, db, col, user, pw, cert)
-        TIme1 = kwargs.get("time1")
-        TIme2 = kwargs.get("time2")
-
-        pipe = [
-          {
-            "$match": {
-              "uuid": { "$in": uui }
-            }
-          },
-          {
-            "$addFields": {
-              "ts": { "$arrayElemAt": [ "$ts_val", 0 ] },
-              "val": { "$arrayElemAt": [ "$ts_val", 1 ] }
-            }
-          },
-          {
-            "$unwind": {
-              "path": "$ts",
-              "includeArrayIndex": "i"
-            }
-          },
-          {
-            "$addFields": {
-              "value": { "$arrayElemAt": [ "$val", "$i" ] },
-              "timestamp": { "$add": [ "$ts", "$Date" ] }
-            }
-          },
-          {
-            "$match": {
-              "$expr": {
-                "$and": [
-                  {
-                    "$or": [
-                      { "$eq": [ TIme1, None ] },
-                      { "$gte": [ "$timestamp", TIme1 ] }
-                    ]
-                  },
-                  {
-                    "$or": [
-                      { "$eq": [ TIme2, None ] },
-                      { "$lte": [ "$timestamp", TIme2 ] }
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "$project": {
-              "_id": 0,
-              "uuid": 1,
-              "timestamp": 1,
-              "value": 1
-            }
-          }
-        ]
-
-        #res = pd.DataFrame(list(coll.aggregate(pipe)))
-
-        res = DataFrame(list(coll.aggregate(pipe)))
-
-        try:
-            res["uuid"]=res["uuid"].apply(str)
-        except Exception as e:
-            raise KeyError(res)
-        
-
-        #res.rename(columns = {'value': uui, 'time':'Timestamp'},inplace = True)
-        client.close()
-        return res
-
-
     def __getitem__(self,key,delete=False):
         """
         WARNING: In case of slice selection with a not None step parmeter
@@ -1218,6 +1141,7 @@ class MongodbHielenCache():
         timestart=None
         timestop=None
         series = None
+
 
         try:
             timestart = int(datetime64(key['timestamp'].start).astype('datetime64[s]').astype(int))
@@ -1238,26 +1162,29 @@ class MongodbHielenCache():
 
 
         try:
-            #series = UUID(key['series'][0])
-
-            series = [ UUID(s) for s in key['series'] ]
+            series = UUID(key['series'][0])
         except Exception as e:
             raise KeyError(key)
 
 
-        out=MongodbHielenCache.__fetch__(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
+        out=mf.fetch(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
 
         if out.empty:
             raise KeyError(key)
+            
+        dt1=int(out['Timestamp'].iloc[0])
+        dt2=int(out['Timestamp'].iloc[-1])
 
-        dt1=out["timestamp"].iloc[0]
-        dt2=out["timestamp"].iloc[-1]
+        out.index=DatetimeIndex(out['Timestamp'].apply(Timestamp.fromtimestamp))
 
-        out["timestamp"]=out["timestamp"].astype('datetime64[s]')
-        out=out.set_index(["uuid","timestamp"])
-        out=out[~out.index.duplicated(keep='first')]["value"].unstack("uuid")
-        out.columns=map(str,out.columns)
+        out=out.drop('Timestamp',axis=1)
+
         out.columns.names=['series']
+
+        out.columns=map(str,out.columns)
+
+        out.index.name='timestamp'
+
 
         if delete:
             mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)
