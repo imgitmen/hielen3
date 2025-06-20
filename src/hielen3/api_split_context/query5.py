@@ -56,19 +56,25 @@ def capability_data_cache_old(datamap, capability):
             ss=list(ss[ss['capability']==capability]['uuid'].values)
         except KeyError as e:
             ss = None
-            pass
-            #raise e
 
         if ss is not None:
+            
             tabella=db["series"][ss]["datatable"]
-            raggruppamento=tabella.reset_index().set_index("datatable")
-            dati=raggruppamento.groupby("datatable").apply(lambda x: list(x["uuid"].values))
+           
+            if not tabella.empty:
+                raggruppamento=tabella.reset_index().set_index("datatable")
+                dati=raggruppamento.groupby("datatable").apply(lambda x: list(x["uuid"].values))
 
-            for k,w in dati.groupby("datatable"):
+                for k,w in dati.groupby("datatable"):
 
-                out=concat([out,db[k][w.squeeze(),times]])
+                    columns=w.squeeze()
+                    try:
+                        estrazione=db[k][columns,times]
+                    except KeyError as e:
+                        estrazione=DataFrame([],columns=columns)
 
-        #out=out.reindex(columns=req_series)
+                    out=concat([out,estrazione])
+
 
     out=out.apply(to_numeric,errors='coerce').round(4)
 
@@ -140,11 +146,14 @@ def tabular_data(
         try:
             df = capability_data_cache_old(datamap, capability) 
         except KeyError as e:
+            df = DataFrame()
+
+            """
             out.status=falcon.HTTP_NOT_FOUND
             out.message = str(e) + " not found"
             response = out.format(response=response, request=request)
             return
-
+            """
 
     try:
         df=df.to_frame()
@@ -181,7 +190,11 @@ def tabular_data(
         df = df.replace({nan:None})
         out.data={}
 
-        if not df.empty:
+        if df.empty:
+            for s in df.columns:
+                out.data[s] = []
+
+        else:
             grp=df.apply(lambda x: x.reset_index().values.tolist()).T.groupby("series")
             for s,g in grp:
                 out.data[s]=g.loc[s].values.tolist()
