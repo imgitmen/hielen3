@@ -8,7 +8,7 @@ __description__ = "hub for hielen calculations"
 __license__ = "MIT"
 __uri__ = ""
 
-from pandas import Series, Timedelta, DataFrame
+from pandas import Series, Timedelta, DataFrame, concat
 from numpy import sin, cos, radians, mean, std, nan, radians as rad
 
 #### CUSTOM LIBRARY ####
@@ -210,13 +210,46 @@ def rotate_Y(x=None,y=None,alpha=None,*args,**kwargs):
 
 
 
+def hist_merge(H=None,S0=None):
+   
+    if H is None or H.empty:
+        return S0
+
+    if S0 is None or S0.empty:
+        return H
 
 
+    try:
+        S0=S0.to_frame()
+    except Exception as e:
+        pass
+
+    try:
+        H=H.to_frame()
+    except Exception as e:
+        pass
+
+    S0=S0.copy()
+    H=H.copy()
+
+    H.columns=range(0,H.columns.__len__())
+    S0.columns=H.columns
+
+    S0.index.name='timestamp'
+    H.index.name='timestamp'
+
+    last=H.index[-1]
+
+    out=concat([H,S0.loc[last:]])
+
+    out=out[~out.index.duplicated(keep='first')]
+    
+    return out
 
 
 VERSION = tuple(map(int_or_str, __version__.split(".")))
 
-__all__ = ["poly_trans", "add", "sub", "slope","filter","instant_velocity"]
+__all__ = ["poly_trans", "add", "sub", "slope","filter","instant_velocity","rotate_X","rotate_Y","hist_merge"]
 
 
 

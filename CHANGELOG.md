@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.14** ##
+### 18 Luglio 2025 ###
+
+- inserita la funzione hist_merge(H,S0) che unisce la serie dati storica con quella in elaborazione. La serie dati storica non viene mai toccata e ha la priorità sull'elaborato (l'elaborato non sovrascrive lo storico e sarà sempre mostrato come risultato finale)
+
+
 ## **V3.6.13** ##
 ### 19 Giugno 2025 ###
 
