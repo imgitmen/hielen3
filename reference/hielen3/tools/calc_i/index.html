@@ -3283,6 +3283,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hist_merge" class="md-nav__link">
+    hist_merge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#instant_velocity" class="md-nav__link">
     instant_velocity
   </a>
@@ -3292,6 +3299,20 @@
           <li class="md-nav__item">
   <a href="#poly_trans" class="md-nav__link">
     poly_trans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate_x" class="md-nav__link">
+    rotate_X
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate_y" class="md-nav__link">
+    rotate_Y
   </a>
   
 </li>
@@ -3421,6 +3442,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hist_merge" class="md-nav__link">
+    hist_merge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#instant_velocity" class="md-nav__link">
     instant_velocity
   </a>
@@ -3430,6 +3458,20 @@
           <li class="md-nav__item">
   <a href="#poly_trans" class="md-nav__link">
     poly_trans
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate_x" class="md-nav__link">
+    rotate_X
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate_y" class="md-nav__link">
+    rotate_Y
   </a>
   
 </li>
@@ -3760,7 +3802,53 @@
 <span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
-<span class="normal">285</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3778,7 +3866,7 @@
 
 <span class="n">__uri__</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">Timedelta</span><span class="p">,</span> <span class="n">DataFrame</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">Timedelta</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">concat</span>
 
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">radians</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">radians</span> <span class="k">as</span> <span class="n">rad</span>
 
@@ -4040,9 +4128,55 @@
 
     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
 
+<span class="k">def</span> <span class="nf">hist_merge</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">S0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="n">H</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">H</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">S0</span>
+
+    <span class="k">if</span> <span class="n">S0</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">S0</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="n">H</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">S0</span><span class="o">=</span><span class="n">S0</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">pass</span>
+
+    <span class="k">try</span><span class="p">:</span>
+
+        <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+        <span class="k">pass</span>
+
+    <span class="n">S0</span><span class="o">=</span><span class="n">S0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">H</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">H</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="fm">__len__</span><span class="p">())</span>
+
+    <span class="n">S0</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">columns</span>
+
+    <span class="n">S0</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+    <span class="n">H</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+    <span class="n">last</span><span class="o">=</span><span class="n">H</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">concat</span><span class="p">([</span><span class="n">H</span><span class="p">,</span><span class="n">S0</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">last</span><span class="p">:]])</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="o">~</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+
 <span class="n">VERSION</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">int_or_str</span><span class="p">,</span> <span class="n">__version__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)))</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;poly_trans&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;slope&quot;</span><span class="p">,</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span><span class="s2">&quot;instant_velocity&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;poly_trans&quot;</span><span class="p">,</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;slope&quot;</span><span class="p">,</span><span class="s2">&quot;filter&quot;</span><span class="p">,</span><span class="s2">&quot;instant_velocity&quot;</span><span class="p">,</span><span class="s2">&quot;rotate_X&quot;</span><span class="p">,</span><span class="s2">&quot;rotate_Y&quot;</span><span class="p">,</span><span class="s2">&quot;hist_merge&quot;</span><span class="p">]</span>
 
 <span class="c1"># coding: utf-8</span>
 </code></pre></div></td></tr></table></div>
@@ -4120,6 +4254,63 @@
 </code></pre></div>
 
 </details>
+<h3 id="hist_merge">hist_merge</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hist_merge</span><span class="p">(</span>
+    <span class="n">H</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">S0</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">def</span><span class="w"> </span><span class="nv">hist_merge</span><span class="ss">(</span><span class="nv">H</span><span class="o">=</span><span class="nv">None</span>,<span class="nv">S0</span><span class="o">=</span><span class="nv">None</span><span class="ss">)</span>:
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">H</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">H</span>.<span class="nv">empty</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">S0</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">S0</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span><span class="w"> </span><span class="nv">or</span><span class="w"> </span><span class="nv">S0</span>.<span class="nv">empty</span>:
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">H</span>
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">S0</span><span class="o">=</span><span class="nv">S0</span>.<span class="nv">to_frame</span><span class="ss">()</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">Exception</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="nv">pass</span>
+
+<span class="w">    </span><span class="nv">try</span>:
+
+<span class="w">        </span><span class="nv">H</span><span class="o">=</span><span class="nv">H</span>.<span class="nv">to_frame</span><span class="ss">()</span>
+
+<span class="w">    </span><span class="nv">except</span><span class="w"> </span><span class="nv">Exception</span><span class="w"> </span><span class="nv">as</span><span class="w"> </span><span class="nv">e</span>:
+
+<span class="w">        </span><span class="nv">pass</span>
+
+<span class="w">    </span><span class="nv">S0</span><span class="o">=</span><span class="nv">S0</span>.<span class="nv">copy</span><span class="ss">()</span>
+
+<span class="w">    </span><span class="nv">H</span><span class="o">=</span><span class="nv">H</span>.<span class="nv">copy</span><span class="ss">()</span>
+
+<span class="w">    </span><span class="nv">H</span>.<span class="nv">columns</span><span class="o">=</span><span class="nv">range</span><span class="ss">(</span><span class="mi">0</span>,<span class="nv">H</span>.<span class="nv">columns</span>.<span class="nv">__len__</span><span class="ss">())</span>
+
+<span class="w">    </span><span class="nv">S0</span>.<span class="nv">columns</span><span class="o">=</span><span class="nv">H</span>.<span class="nv">columns</span>
+
+<span class="w">    </span><span class="nv">S0</span>.<span class="nv">index</span>.<span class="nv">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+<span class="w">    </span><span class="nv">H</span>.<span class="nv">index</span>.<span class="nv">name</span><span class="o">=</span><span class="s1">&#39;timestamp&#39;</span>
+
+<span class="w">    </span><span class="nv">last</span><span class="o">=</span><span class="nv">H</span>.<span class="nv">index</span>[<span class="o">-</span><span class="mi">1</span>]
+
+<span class="w">    </span><span class="nv">out</span><span class="o">=</span><span class="nv">concat</span><span class="ss">(</span>[<span class="nv">H</span>,<span class="nv">S0</span>.<span class="nv">loc</span>[<span class="nv">last</span>:]]<span class="ss">)</span>
+
+<span class="w">    </span><span class="nv">out</span><span class="o">=</span><span class="nv">out</span>[<span class="o">~</span><span class="nv">out</span>.<span class="nv">index</span>.<span class="nv">duplicated</span><span class="ss">(</span><span class="nv">keep</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="ss">)</span>]
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
+</code></pre></div>
+
+</details>
 <h3 id="instant_velocity">instant_velocity</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">instant_velocity</span><span class="p">(</span>
     <span class="n">S0</span><span class="p">,</span>
@@ -4165,6 +4356,68 @@
 <span class="w">    </span><span class="nv">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;+&quot;</span>.<span class="nv">join</span><span class="ss">(</span><span class="nv">_parse</span><span class="ss">(</span><span class="o">*</span><span class="nv">x</span><span class="ss">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">kwargs</span>.<span class="nv">items</span><span class="ss">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nv">x</span>[<span class="mi">0</span>][<span class="mi">0</span>]<span class="w"> </span><span class="nv">in</span><span class="w"> </span>[<span class="s2">&quot;E&quot;</span>,<span class="w"> </span><span class="s2">&quot;e&quot;</span>]<span class="ss">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">eval</span><span class="ss">(</span><span class="nv">operator</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="rotate_x">rotate_X</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rotate_X</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">wrap_rot</span><span class="ss">(</span><span class="nv">x</span>,<span class="w"> </span><span class="nv">y</span>,<span class="w"> </span><span class="nv">alpha</span><span class="o">=</span><span class="nv">None</span>,<span class="w"> </span><span class="nv">unit</span><span class="o">=</span><span class="nv">None</span>,<span class="w"> </span><span class="o">*</span><span class="nv">args</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:
+
+<span class="w">            </span><span class="nv">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;°&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">alpha</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:
+
+<span class="w">            </span><span class="nv">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;°&quot;</span>:
+
+<span class="w">            </span><span class="nv">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">rad</span><span class="ss">(</span><span class="nv">alpha</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">func</span><span class="ss">(</span><span class="nv">x</span>,<span class="w"> </span><span class="nv">y</span>,<span class="w"> </span><span class="nv">alpha</span>,<span class="w"> </span><span class="nv">unit</span>,<span class="w"> </span><span class="o">*</span><span class="nv">args</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="rotate_y">rotate_Y</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rotate_Y</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">wrap_rot</span><span class="ss">(</span><span class="nv">x</span>,<span class="w"> </span><span class="nv">y</span>,<span class="w"> </span><span class="nv">alpha</span><span class="o">=</span><span class="nv">None</span>,<span class="w"> </span><span class="nv">unit</span><span class="o">=</span><span class="nv">None</span>,<span class="w"> </span><span class="o">*</span><span class="nv">args</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:
+
+<span class="w">            </span><span class="nv">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;°&quot;</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">alpha</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">None</span>:
+
+<span class="w">            </span><span class="nv">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;°&quot;</span>:
+
+<span class="w">            </span><span class="nv">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">rad</span><span class="ss">(</span><span class="nv">alpha</span><span class="ss">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">func</span><span class="ss">(</span><span class="nv">x</span>,<span class="w"> </span><span class="nv">y</span>,<span class="w"> </span><span class="nv">alpha</span>,<span class="w"> </span><span class="nv">unit</span>,<span class="w"> </span><span class="o">*</span><span class="nv">args</span>,<span class="w"> </span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
 </code></pre></div>
 
 </details>
