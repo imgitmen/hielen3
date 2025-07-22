@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.15** ##
+### 21 Luglio 2025 ###
+
+- rimossa la implementation dependancy da series nel caricamento degli operandi
+- inserito filtro per cache "static" dalla funzione clean_cache della feature 
+
 ## **V3.6.14** ##
 ### 18 Luglio 2025 ###
 

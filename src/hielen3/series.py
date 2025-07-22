@@ -169,7 +169,10 @@ class HSeries:
 
 
     def clean_cache(self,times=None):
-       
+      
+        if self.cache == 'static':
+            return
+
         to_clean=list(set([self.uuid,*self.activeuuids]))
 
         try:
@@ -893,14 +896,10 @@ class HSeries:
             operands.update({k: w.result() for k, w in runners.items()})
             #operands.update( { k:w.data(**kwargs) for k,w in self.operands.items() if isinstance(w,HSeries) } )
 
-            ## ATTENZIONE A locals: Implementation Dependant!!!! ###
-            locals().update(operands)
-
             # print (operands) #DEBUG
-            # print (self.operator, locals() ) #DEBUG
+            # print (self.operator) #DEBUG
 
-            
-            out= eval(self.operator)
+            out= eval(self.operator, locals={"self":self,**operands})            
 
             return out
 
