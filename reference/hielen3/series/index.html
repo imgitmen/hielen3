@@ -5058,6 +5058,10 @@
 
     <span class="k">def</span> <span class="nf">clean_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;static&#39;</span><span class="p">:</span>
+
+            <span class="k">return</span>
+
         <span class="n">to_clean</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="p">,</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]))</span>
 
         <span class="k">try</span><span class="p">:</span>
@@ -6042,15 +6046,11 @@
 
             <span class="c1">#operands.update( { k:w.data(**kwargs) for k,w in self.operands.items() if isinstance(w,HSeries) } )</span>
 
-            <span class="c1">## ATTENZIONE A locals: Implementation Dependant!!!! ###</span>
-
-            <span class="nb">locals</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
-
             <span class="c1"># print (operands) #DEBUG</span>
 
-            <span class="c1"># print (self.operator, locals() ) #DEBUG</span>
+            <span class="c1"># print (self.operator) #DEBUG</span>
 
-            <span class="n">out</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">operator</span><span class="p">,</span> <span class="nb">locals</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;self&quot;</span><span class="p">:</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">operands</span><span class="p">})</span>
 
             <span class="k">return</span> <span class="n">out</span>
 </code></pre></div></td></tr></table></div>
@@ -6267,6 +6267,10 @@
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">clean_cache</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;static&#39;</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">return</span>
 
 <span class="w">        </span><span class="n">to_clean</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">set</span><span class="p">(</span><span class="o">[</span><span class="n">self.uuid,*self.activeuuids</span><span class="o">]</span><span class="p">))</span>
 
@@ -7252,15 +7256,11 @@
 
 <span class="w">            </span><span class="n">#operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="w"> </span><span class="err">{</span><span class="w"> </span><span class="nl">k</span><span class="p">:</span><span class="n">w</span><span class="p">.</span><span class="k">data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">,</span><span class="n">w</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">operands</span><span class="p">.</span><span class="n">items</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="n">HSeries</span><span class="p">)</span><span class="w"> </span><span class="err">}</span><span class="w"> </span><span class="p">)</span>
 
-<span class="w">            </span><span class="err">##</span><span class="w"> </span><span class="n">ATTENZIONE</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="nl">locals</span><span class="p">:</span><span class="w"> </span><span class="n">Implementation</span><span class="w"> </span><span class="n">Dependant</span><span class="err">!!!!</span><span class="w"> </span><span class="err">###</span>
-
-<span class="w">            </span><span class="n">locals</span><span class="p">().</span><span class="k">update</span><span class="p">(</span><span class="n">operands</span><span class="p">)</span>
-
 <span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">operands</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="p">()</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span><span class="w"> </span><span class="n">#DEBUG</span>
 
-<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="w"> </span><span class="n">eval</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">)</span>
+<span class="w">            </span><span class="k">out</span><span class="o">=</span><span class="w"> </span><span class="n">eval</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">operator</span><span class="p">,</span><span class="w"> </span><span class="n">locals</span><span class="o">=</span><span class="err">{</span><span class="ss">&quot;self&quot;</span><span class="err">:</span><span class="n">self</span><span class="p">,</span><span class="o">**</span><span class="n">operands</span><span class="err">}</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
 </code></pre></div>
@@ -7492,6 +7492,10 @@
 <details class="example">
 <summary>View Source</summary>
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">clean_cache</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">times</span><span class="o">=</span><span class="k">None</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;static&#39;</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">return</span>
 
 <span class="w">        </span><span class="n">to_clean</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="k">set</span><span class="p">(</span><span class="o">[</span><span class="n">self.uuid,*self.activeuuids</span><span class="o">]</span><span class="p">))</span>
 
