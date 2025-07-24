@@ -250,6 +250,13 @@ RESPONSE CODES:
         uids=clean_input(uids)
         cntxt=lineages(clean_input(cntxt),homo_only=True)
         info=clean_input(info)
+        
+
+        void_param_truncate=False
+        if "parameters_strict" in info:
+            info = [ a.replace("_strict","") for a in info ]
+            void_param_truncate=True
+
         info.extend(["type","properties","capabilities"])
 
         info = Series(list(set(info)))
@@ -265,16 +272,19 @@ RESPONSE CODES:
 
         feafra=db['features_info_v2'][uids,cntxt][good_info].sort_index(level=["label"]).reset_index('label')
         feafra[bad_info]=None
+        
         feafra=feafra.where(feafra.notnull(), None)
+
+        if void_param_truncate:
+
+            flt=feafra["parameters"].apply(lambda x: x[0]["label"] is not None)
+
+            feafra=feafra[flt]
+        
 
         #feafra=feafra[feafra['intent'] != 'HIDDEN']
 
-        #feafra=feafra.join(feafra['properties'].apply(Series)['label']).sort_values('label')
-
-
-        #feafra=json.loads(feafra.droplevel("context").to_json(orient='index'))
         feafra=dataframe2jsonizabledict(feafra.droplevel("context"),orient='index',squeeze=False)
-        #feafra=dataframe2jsonizabledict(feafra,orient='records',squeeze=False)
 
         out.data = { "features":feafra, "count":feafra.__len__() }
         feafra=None
@@ -288,9 +298,12 @@ RESPONSE CODES:
         #out.status = falcon.HTTP_NOT_FOUND
         out.message = e.args
 
-    response = out.format(response=response, request=request)
 
-    return
+    if request is not None:
+        response = out.format(response=response, request=request)
+        return
+
+    return out.data
 
 
 @hug.get("/{uid}")
@@ -925,7 +938,5 @@ Possibili risposte:
 """
 
     return delete_feature_context_geometry(uid=uid,cntxt=cntxt,request=request,response=response) 
-
-
 
 

@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.16** ##
+### 24 Luglio 2025 ###
+
+- inserito lo switch "parameters_strict" tre le info che possono essere richieste all'api features. Serve a restituire tutte e sole le features che hanno parametri configurati 
+
+
 ## **V3.6.15** ##
 ### 21 Luglio 2025 ###
 
