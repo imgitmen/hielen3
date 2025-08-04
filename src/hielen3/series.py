@@ -899,7 +899,7 @@ class HSeries:
             # print (operands) #DEBUG
             # print (self.operator) #DEBUG
 
-            out= eval(self.operator, locals={"self":self,**operands})            
+            out= eval(self.operator, {"self":self,**operands})            
 
             return out
 
