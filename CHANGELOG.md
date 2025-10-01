@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.17** ##
+### 01 Ottobre 2025 ###
+
+- inserito plugin per smartfox
+
+
 ## **V3.6.16** ##
 ### 24 Luglio 2025 ###
 

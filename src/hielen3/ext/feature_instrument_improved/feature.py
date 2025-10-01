@@ -124,12 +124,7 @@ class Feature(HFeature):
                 assert coefficients.__len__() > 0
             except Exception as e:
                 coefficients = None
-   
-            try:
-                coefficients=json.loads(coefficients)
-            except Exception as e:
-                pass
-
+    
             print ("uno :", start_time)
 
 
