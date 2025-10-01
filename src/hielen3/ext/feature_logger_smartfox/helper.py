@@ -8,7 +8,6 @@ folders=[
             'type':'smartfox',
             'path':'smartfox'
             }
-        {
         ]
 
 func_loggers=loggers( folders )
