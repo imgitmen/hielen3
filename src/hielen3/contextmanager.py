@@ -467,7 +467,7 @@ def contexts_with_homo_parent(contexts=None):
     except KeyError as e:
         return out
 
-    out = list (dd[dd["homogeneous"]==1][["ancestor","descendant"]])
+    out = dd[dd["homogeneous"]==1][["ancestor","descendant"]].values.tolist()
 
     return out
 

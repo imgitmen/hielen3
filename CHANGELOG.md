@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.18** ##
+### 02 Ottobre 2025 ###
+
+- risolto il bug dovuto ad un casting errato in contextmanager.contexts_with_homo_parent che in alcune versioni di python dava un risultato errato 
+
+
 ## **V3.6.17** ##
 ### 01 Ottobre 2025 ###
 
