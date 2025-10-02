@@ -4289,7 +4289,7 @@
 
         <span class="k">return</span> <span class="n">out</span>
 
-    <span class="n">out</span> <span class="o">=</span> <span class="nb">list</span> <span class="p">(</span><span class="n">dd</span><span class="p">[</span><span class="n">dd</span><span class="p">[</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][[</span><span class="s2">&quot;ancestor&quot;</span><span class="p">,</span><span class="s2">&quot;descendant&quot;</span><span class="p">]])</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">dd</span><span class="p">[</span><span class="n">dd</span><span class="p">[</span><span class="s2">&quot;homogeneous&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">][[</span><span class="s2">&quot;ancestor&quot;</span><span class="p">,</span><span class="s2">&quot;descendant&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="kp">tolist</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">out</span>
 
@@ -4838,7 +4838,7 @@ univoco e ordinato che unisce il contesto in input alla root</p>
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
 
-<span class="w">    </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">list</span><span class="w"> </span><span class="ss">(</span><span class="nv">dd</span>[<span class="nv">dd</span>[<span class="s2">&quot;homogeneous&quot;</span>]<span class="o">==</span><span class="mi">1</span>][[<span class="s2">&quot;ancestor&quot;</span>,<span class="s2">&quot;descendant&quot;</span>]]<span class="ss">)</span>
+<span class="w">    </span><span class="nv">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">dd</span>[<span class="nv">dd</span>[<span class="s2">&quot;homogeneous&quot;</span>]<span class="o">==</span><span class="mi">1</span>][[<span class="s2">&quot;ancestor&quot;</span>,<span class="s2">&quot;descendant&quot;</span>]].<span class="nv">values</span>.<span class="nv">tolist</span><span class="ss">()</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nv">out</span>
 </code></pre></div>
