@@ -369,7 +369,7 @@ CAVEAT:
             db["context_context"].pop({"ancestor":relation[0],"descendant":relation[1]})
 
         if homoparented.__len__():
-            out.message("modified relations: "+str(homoparented) )
+            out.message("modified relations: " + homoparented )
             raise ValueError(f"some descendants have already an homogeneous parent: {homoparented}")
 
 
