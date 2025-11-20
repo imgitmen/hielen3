@@ -361,10 +361,15 @@ CAVEAT:
                 colliders.append(descendant[i])
 
 
+        ## RILASSATA LA CONDIZIONE, SE SI TROVANO LINK CON PADRI OMOGENEI 
+        ## CON ALTRI CONTESTI (CE NE PUO' ESSERE SOLO UNO) VENGONO RIMOSI 
         homoparented=contexts_with_homo_parent(colliders)
 
-        
+        for relation in homoparented:
+            db["context_context"].pop({"ancestor":relation[0],"descendant":relation[1]})
+
         if homoparented.__len__():
+            out.message("modified relations: "+str(homoparented) )
             raise ValueError(f"some descendants have already an homogeneous parent: {homoparented}")
 
 

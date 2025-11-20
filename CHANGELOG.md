@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.19** ##
+### 20 Novembre 2025 ###
+
+- Rilassato in api POST context/descendants il blocco per cui se vengono trovati link a padri omogenei per i descendant in input la chiamata fallisce. Ora vengono eliminati i link esitenti per essere sostituiti con i nuovi. Questa cosa è ammissiblie perchè per costruzione ogni descendat di una famiglia omogenea ha 1 ed un solo link con un ancestor
+- Modificato il datalink per le tabelle mongodb per risolvere un bug dovuto alla presenza di "@" all'interno della password o del del nome utente utilizzati per la connessione
+
 ## **V3.6.18** ##
 ### 02 Ottobre 2025 ###
 

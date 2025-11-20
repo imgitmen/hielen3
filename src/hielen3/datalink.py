@@ -1060,8 +1060,14 @@ class MongodbHielenCache():
 
         self.uri = "{dialect}://{usr}:{pwd}@{host}/".format(**connection)
 
+        self.host = connection["host"]
+
+        self.usr=connection["usr"]
+        self.pwd=connection["pwd"]
+
         if port is not None:
             self.uri = "{uri}:{port}".format(uri=self.uri,port=port)
+            self.host = "{host}:{port}".format(host=self.host,port=port)
 
         self.db = connection["db"]
         self.col = table
@@ -1129,9 +1135,12 @@ class MongodbHielenCache():
     """
 
     def __fetch__(uri, db, col, uui, **kwargs):
+
+
         cert = kwargs.get("cert")
         user = kwargs.get("user")
         pw = kwargs.get("pw")
+        
         client, coll = mf.connecting(uri, db, col, user, pw, cert)
         TIme1 = kwargs.get("time1")
         TIme2 = kwargs.get("time2")
@@ -1245,7 +1254,9 @@ class MongodbHielenCache():
             raise KeyError(key)
 
 
-        out=MongodbHielenCache.__fetch__(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
+        #out=MongodbHielenCache.__fetch__(self.uri, self.db, self.col, series, time1= timestart, time2= timestop)
+        out=MongodbHielenCache.__fetch__(self.host, self.db, self.col, series, time1= timestart, time2= timestop, user=self.usr, pw=self.pwd)
+
 
         if out.empty:
             raise KeyError(key)
@@ -1260,7 +1271,8 @@ class MongodbHielenCache():
         out.columns.names=['series']
 
         if delete:
-            mf.deletes(self.uri, self.db, self.col, series, time1=dt1, time2 = dt2)
+            for s in series:
+                mf.deletes(self.uri, self.db, self.col, s, time1=dt1, time2 = dt2)
 
         try:
             out=out.squeeze().apply(loads).apply(Series)
@@ -1313,7 +1325,9 @@ class MongodbHielenCache():
             value=value.drop('timestamp',axis=1)
             value.columns=['val','DATE','TIME']
 
-            mf.insertUpdate(self.uri, self.db, self.col, value, series)
+
+            #mf.insertUpdate(self.uri, self.db, self.col, value, series)
+            mf.insertUpdate(self.host, self.db, self.col, value, series, user=self.usr, pw=self.pwd)
 
     
     def pop(self,key):
