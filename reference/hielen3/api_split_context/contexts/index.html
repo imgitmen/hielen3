@@ -4913,9 +4913,9 @@
 
         <span class="k">if</span> <span class="n">homoparented</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
 
-            <span class="n">out</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s2">&quot;modified relations: &quot;</span> <span class="o">+</span> <span class="n">homoparented</span> <span class="p">)</span>
+            <span class="k">pass</span>
 
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;some descendants have already an homogeneous parent: </span><span class="si">{</span><span class="n">homoparented</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1">#raise ValueError(f&quot;some descendants have already an homogeneous parent: {homoparented}&quot;)</span>
 
         <span class="n">collisions</span><span class="o">=</span><span class="n">features_interfamily_collisions</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">colliders</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -5542,9 +5542,9 @@ che accetterebbero elementi null nella lista
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">homoparented</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="p">(</span><span class="ss">&quot;modified relations: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">homoparented</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="n">pass</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;some descendants have already an homogeneous parent: {homoparented}&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">#raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;some descendants have already an homogeneous parent: {homoparented}&quot;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="n">collisions</span><span class="o">=</span><span class="n">features_interfamily_collisions</span><span class="p">(</span><span class="n">cntxt</span><span class="p">,</span><span class="n">colliders</span><span class="p">,</span><span class="n">homo_only</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
 
