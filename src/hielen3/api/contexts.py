@@ -152,10 +152,32 @@ RESPONSE CODES:
     cntxt=clean_input(cntxt)
 
     try:
+        try:
+            # Verifico che non sia padre di nessuno
+            db["context_context"][{"ancestor":cntxt}]
+            raise ValueError(f"Context {cntxt} has descendants. Can't drop.")
+        except KeyError as e:
+            pass
+        
+        try:
+            #Verifico che non abbia features associate
+            db["context_feature"][{"context":cntxt}]
+            raise ValueError(f"Context {cntxt} has features. Can't drop.")
+        except KeyError as e:                                             
+            pass                                                          
+     
+        try:
+            #Elimino le eventuali connessioni ai genitori
+            db["context_context"].pop({"descendant":cntxt})
+        except KeyError as e:
+            pass
+
         out.data=db["context"].pop(cntxt).to_dict(orient="records")
+    
     except KeyError as e:
         out.message = str(e)
         out.status = falcon.HTTP_NOT_FOUND
+
     except Exception as e:
         out.message = str(e)
         out.status = falcon.HTTP_CONFLICT
