@@ -4403,7 +4403,43 @@
 <span class="normal">780</span>
 <span class="normal">781</span>
 <span class="normal">782</span>
-<span class="normal">783</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">783</span>
+<span class="normal">784</span>
+<span class="normal">785</span>
+<span class="normal">786</span>
+<span class="normal">787</span>
+<span class="normal">788</span>
+<span class="normal">789</span>
+<span class="normal">790</span>
+<span class="normal">791</span>
+<span class="normal">792</span>
+<span class="normal">793</span>
+<span class="normal">794</span>
+<span class="normal">795</span>
+<span class="normal">796</span>
+<span class="normal">797</span>
+<span class="normal">798</span>
+<span class="normal">799</span>
+<span class="normal">800</span>
+<span class="normal">801</span>
+<span class="normal">802</span>
+<span class="normal">803</span>
+<span class="normal">804</span>
+<span class="normal">805</span>
+<span class="normal">806</span>
+<span class="normal">807</span>
+<span class="normal">808</span>
+<span class="normal">809</span>
+<span class="normal">810</span>
+<span class="normal">811</span>
+<span class="normal">812</span>
+<span class="normal">813</span>
+<span class="normal">814</span>
+<span class="normal">815</span>
+<span class="normal">816</span>
+<span class="normal">817</span>
+<span class="normal">818</span>
+<span class="normal">819</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4631,6 +4667,40 @@
 
     <span class="k">try</span><span class="p">:</span>
 
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="c1"># Verifico che non sia padre di nessuno</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">][{</span><span class="s2">&quot;ancestor&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">}]</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Context </span><span class="si">{</span><span class="n">cntxt</span><span class="si">}</span><span class="s2"> has descendants. Can&#39;t drop.&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="c1">#Verifico che non abbia features associate</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_feature&quot;</span><span class="p">][{</span><span class="s2">&quot;context&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">}]</span>
+
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Context </span><span class="si">{</span><span class="n">cntxt</span><span class="si">}</span><span class="s2"> has features. Can&#39;t drop.&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="c1">#Elimino le eventuali connessioni ai genitori</span>
+
+            <span class="n">db</span><span class="p">[</span><span class="s2">&quot;context_context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">({</span><span class="s2">&quot;descendant&quot;</span><span class="p">:</span><span class="n">cntxt</span><span class="p">})</span>
+
+        <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
         <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">&quot;records&quot;</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -4638,6 +4708,8 @@
         <span class="n">out</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
         <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">falcon</span><span class="o">.</span><span class="n">HTTP_CONFLICT</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
@@ -5662,6 +5734,40 @@ che accetterebbero elementi null nella lista
 
 <span class="w">    </span><span class="k">try</span><span class="err">:</span>
 
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">Verifico</span><span class="w"> </span><span class="n">che</span><span class="w"> </span><span class="n">non</span><span class="w"> </span><span class="n">sia</span><span class="w"> </span><span class="n">padre</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">nessuno</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">][</span><span class="n">{&quot;ancestor&quot;:cntxt}</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;Context {cntxt} has descendants. Can&#39;t drop.&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">#Verifico</span><span class="w"> </span><span class="n">che</span><span class="w"> </span><span class="n">non</span><span class="w"> </span><span class="n">abbia</span><span class="w"> </span><span class="n">features</span><span class="w"> </span><span class="n">associate</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_feature&quot;</span><span class="o">][</span><span class="n">{&quot;context&quot;:cntxt}</span><span class="o">]</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;Context {cntxt} has features. Can&#39;t drop.&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="n">#Elimino</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="n">eventuali</span><span class="w"> </span><span class="n">connessioni</span><span class="w"> </span><span class="n">ai</span><span class="w"> </span><span class="n">genitori</span>
+
+<span class="w">            </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context_context&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="err">{</span><span class="ss">&quot;descendant&quot;</span><span class="err">:</span><span class="n">cntxt</span><span class="err">}</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;context&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">pop</span><span class="p">(</span><span class="n">cntxt</span><span class="p">).</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="ss">&quot;records&quot;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
@@ -5669,6 +5775,8 @@ che accetterebbero elementi null nella lista
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span>
+
+<span class="w">        </span><span class="k">out</span><span class="p">.</span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">HTTP_CONFLICT</span>
 
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
