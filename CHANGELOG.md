@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.21** ##
+### 25 Novembre 2025 ###
+
+- Aggunto logger_codesys
+
+
 ## **V3.6.20** ##
 ### 25 Novembre 2025 ###
 
