@@ -1,5 +1,15 @@
 CHANGELOG
 =========
+## **V3.6.22** ##
+### 12 Dicembre 2025 ###
+
+- Modificata vista v_feature_v2 per mostrare i tag (nome feature di riferimento) in group_labels (datadiagrams)
+- per datadiagrams deciso che le asse delle ascisse devono essere numeri e non label
+- in api query inserita la possibilità di fare regressione logaritmica con parametro regression=log
+- quando il parametro stat è attivato ritorna oltre min e max anche conteggio righe e step migliore per decimare le righe e non sumperare 1000
+- tutte queste sono versioni alpha
+
+
 ## **V3.6.21** ##
 ### 25 Novembre 2025 ###
 

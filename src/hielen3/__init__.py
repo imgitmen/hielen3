@@ -1,7 +1,7 @@
 # coding=utf-8
 
 __name__ = 'hielen3'
-__version__ = '3.6.21'
+__version__ = '3.6.22'
 __author__ = 'Alessandro Modesti'
 __email__ = 'it@img-srl.com'
 __description__ = 'Multidimention Hierarichical Elaboration Engine'

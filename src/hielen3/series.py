@@ -130,7 +130,12 @@ class HSeries:
                 pass
                 # print (f"NOTICE: {uuid} seems not a json, {e}") ##DEBUG
 
-        if isinstance(uuid,dict):
+
+        if not isinstance(uuid,dict):
+            uuid = str(UUID(uuid))
+        else:
+            pass
+        """
             try:
                 context=uuid["context"]
             except KeyError as e:
@@ -141,6 +146,9 @@ class HSeries:
                 if context_family.empty:
                     raise KeyError(f'context {context!r} not found.')
                 uuid["context"]=list(context_family["context"])
+        """
+
+
         try:
             uuid_frame=db["features_parameters_headers_v2"][uuid]
         except KeyError as e:
