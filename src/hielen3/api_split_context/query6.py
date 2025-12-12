@@ -190,8 +190,8 @@ def tabular_data(
         response.content_type = JSON
         return
     
-    if regression = "log":
-        if capability = "datadiagram" and merged_series_uuids.__len__() == 1:
+    if regression == "log":
+        if capability == "datadiagram" and merged_series_uuids.__len__() == 1:
             df = hielen_log_reg(df,merged_series_uuids[0])
 
 
