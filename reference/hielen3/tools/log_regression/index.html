@@ -3666,7 +3666,7 @@
 
     <span class="n">df_curve</span>  <span class="o">=</span> <span class="n">df_params</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">curve_build</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x_dense</span><span class="o">=</span><span class="n">x_dense</span><span class="p">)</span>  <span class="c1"># -&gt; colonne: x_dense</span>
 
-    <span class="n">df_curve</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">x_dense</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">df_curve</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">x_dense</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">df_curve</span>
 
@@ -3749,7 +3749,7 @@ Output: Series indicizzata da x_dense con y_hat = a*ln(x)+b</p>
 
 <span class="w">    </span><span class="n">df_curve</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">df_params</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">curve_build</span><span class="p">,</span><span class="w"> </span><span class="n">axis</span><span class="o">=</span><span class="mh">1</span><span class="p">,</span><span class="w"> </span><span class="n">x_dense</span><span class="o">=</span><span class="n">x_dense</span><span class="p">)</span><span class="w">  </span><span class="p">#</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nl">colonne:</span><span class="w"> </span><span class="n">x_dense</span>
 
-<span class="w">    </span><span class="n">df_curve</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pd</span><span class="p">.</span><span class="n">Index</span><span class="p">(</span><span class="n">x_dense</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s">&quot;x&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">df_curve</span><span class="p">.</span><span class="n">columns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pd</span><span class="p">.</span><span class="n">Index</span><span class="p">(</span><span class="n">x_dense</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="n">None</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">df_curve</span>
 </code></pre></div>
