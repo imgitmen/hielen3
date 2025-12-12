@@ -1184,6 +1184,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../query6/" class="md-nav__link">
+        Query6
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../status/" class="md-nav__link">
         Status
       </a>
@@ -3432,6 +3446,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tools/log_regression/" class="md-nav__link">
+        Log Regression
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -3620,7 +3648,19 @@
 <span class="normal">76</span>
 <span class="normal">77</span>
 <span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3631,6 +3671,8 @@
 <span class="c1">#from . import query3</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">query5</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">query6</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">features</span>
 
@@ -3675,6 +3717,16 @@
     <span class="c1">#return [query3]</span>
 
     <span class="k">return</span> <span class="p">[</span><span class="n">query5</span><span class="p">]</span>
+
+<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/query3&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dataman2</span><span class="p">():</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Data manager &quot;&quot;&quot;</span>
+
+    <span class="c1">#return [query3]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">query6</span><span class="p">]</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/thresholds&quot;</span><span class="p">)</span>
 
@@ -3731,7 +3783,7 @@
 <p>Data manager </p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query2&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query3&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman2</span><span class="p">()</span><span class="err">:</span>
 
@@ -3739,7 +3791,7 @@
 
 <span class="w">    </span><span class="n">#return</span><span class="w"> </span><span class="o">[</span><span class="n">query3</span><span class="o">]</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">query5</span><span class="o">]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">query6</span><span class="o">]</span>
 </code></pre></div>
 
 </details>
