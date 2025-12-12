@@ -108,9 +108,12 @@ def tabular_data(
 
     merged_series_uuids=[]
 
-    for rq in datamap:
-        for rs in rq:
-            merged_series_uuids.append(rs)
+    try:
+        for rq in datamap:
+            for rs in rq["series"]:
+                merged_series_uuids.append(rs)
+    except Exception as e:
+        pass
 
     if cache != "old" or capability != "data": 
     

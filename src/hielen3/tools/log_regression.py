@@ -53,7 +53,7 @@ def get_log_reg_frame(df):
 
     df_params = df.apply(param_seek, axis=1)  # -> colonne: a,b,r2,n
     df_curve  = df_params.apply(curve_build, axis=1, x_dense=x_dense)  # -> colonne: x_dense
-    df_curve.columns = pd.Index(x_dense, name="x")
+    df_curve.columns = pd.Index(x_dense, name=None)
     return df_curve
 
 
