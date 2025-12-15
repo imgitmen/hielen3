@@ -609,6 +609,10 @@ class HSeries:
             try:
                 if cache == 'old' or not cangenerate:
                     raise Exception('request for old, skip generation')
+        
+
+                if cache == 'new':
+                    cache = 'active'
 
                 kwargs['cache'] = cache
 
