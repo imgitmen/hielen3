@@ -4332,7 +4332,9 @@
 <span class="normal">498</span>
 <span class="normal">499</span>
 <span class="normal">500</span>
-<span class="normal">501</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4509,6 +4511,8 @@
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
         <span class="k">pass</span>
+
+    <span class="n">merged_series_uuids</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">merged_series_uuids</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">cache</span> <span class="o">!=</span> <span class="s2">&quot;old&quot;</span> <span class="ow">or</span> <span class="n">capability</span> <span class="o">!=</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span>
 
@@ -4921,7 +4925,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7359b8992560</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x78d677666560</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">stats</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">cache</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">,</span>
@@ -4983,6 +4987,8 @@
 <span class="w">    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">        </span><span class="n">pass</span>
+
+<span class="w">    </span><span class="n">merged_series_uuids</span><span class="o">=</span><span class="k">set</span><span class="p">(</span><span class="n">merged_series_uuids</span><span class="p">)</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="ss">&quot;old&quot;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="ss">&quot;data&quot;</span><span class="err">:</span>
 

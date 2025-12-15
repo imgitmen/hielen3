@@ -4936,7 +4936,11 @@
 <span class="normal">1256</span>
 <span class="normal">1257</span>
 <span class="normal">1258</span>
-<span class="normal">1259</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1259</span>
+<span class="normal">1260</span>
+<span class="normal">1261</span>
+<span class="normal">1262</span>
+<span class="normal">1263</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5787,6 +5791,10 @@
                 <span class="k">if</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;old&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">cangenerate</span><span class="p">:</span>
 
                     <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;new&#39;</span><span class="p">:</span>
+
+                    <span class="n">cache</span> <span class="o">=</span> <span class="s1">&#39;active&#39;</span>
 
                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache</span>
 
@@ -7008,6 +7016,10 @@
 
 <span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
 
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;new&#39;</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;active&#39;</span>
+
 <span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span>
 
 <span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -7810,6 +7822,10 @@
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;old&#39;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
 <span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;new&#39;</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="n">cache</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;active&#39;</span>
 
 <span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span>
 
