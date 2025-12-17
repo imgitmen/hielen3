@@ -4940,7 +4940,15 @@
 <span class="normal">1260</span>
 <span class="normal">1261</span>
 <span class="normal">1262</span>
-<span class="normal">1263</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1263</span>
+<span class="normal">1264</span>
+<span class="normal">1265</span>
+<span class="normal">1266</span>
+<span class="normal">1267</span>
+<span class="normal">1268</span>
+<span class="normal">1269</span>
+<span class="normal">1270</span>
+<span class="normal">1271</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5457,6 +5465,14 @@
                     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                         <span class="n">v</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+
+                        <span class="n">v</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]</span>
+
+                    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                        <span class="n">v</span><span class="p">[</span><span class="s1">&#39;tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;EL_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
                     <span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_groups&quot;</span><span class="p">][(</span><span class="n">uuid</span><span class="p">,</span><span class="n">el</span><span class="p">)]</span><span class="o">=</span><span class="n">v</span>
 
@@ -6681,6 +6697,14 @@
 <span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="w">                    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;tag&#39;</span><span class="o">]</span>
+
+<span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;tag&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;EL_&quot;</span><span class="o">+</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
 <span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_groups&quot;</span><span class="o">][</span><span class="n">(uuid,el)</span><span class="o">]=</span><span class="n">v</span>
 
@@ -8227,6 +8251,14 @@
 <span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;label&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="w">                    </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;tag&#39;</span><span class="o">]</span>
+
+<span class="w">                    </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                        </span><span class="n">v</span><span class="o">[</span><span class="n">&#39;tag&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;EL_&quot;</span><span class="o">+</span><span class="nf">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
 <span class="w">                    </span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_groups&quot;</span><span class="o">][</span><span class="n">(uuid,el)</span><span class="o">]=</span><span class="n">v</span>
 
