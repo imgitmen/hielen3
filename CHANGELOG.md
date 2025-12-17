@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+## **V3.6.23** ##
+### 17 Dicembre 2025 ###
+
+- inserito il concetto di tag nei series_group
+
 ## **V3.6.22** ##
 ### 12 Dicembre 2025 ###
 

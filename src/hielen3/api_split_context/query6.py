@@ -115,7 +115,7 @@ def tabular_data(
     except Exception as e:
         pass
 
-    merged_series_uuids=set(merged_series_uuids)
+    merged_series_uuids=list(set(merged_series_uuids))
 
     if cache != "old" or capability != "data": 
     

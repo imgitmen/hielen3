@@ -350,6 +350,11 @@ class HSeries:
                     except Exception as e:
                         v['label'] = str(i)
 
+                    try:
+                        v['tag']
+                    except Exception as e:
+                        v['tag'] = "EL_"+str(i)
+
                     db["series_groups"][(uuid,el)]=v
 
                 db["series"][uuid]={"capability":'datadiagram'}
