@@ -709,9 +709,9 @@ class HSeries:
                 pass
 
         try:
-            out = out.replace(",",".",regex=True).apply(to_rumeric,errors='coerce') 
+            out = out.replace(",",".",regex=True).apply(to_numeric,errors='coerce') 
         except Exception as e:
-            raise e
+            pass
 
         try:
             out = out.round(4) 
