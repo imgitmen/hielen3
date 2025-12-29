@@ -623,7 +623,7 @@ class HSeries:
                 kwargs['cache'] = cache
 
                 gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
-                gen = gen.replace(',','.', regex=True).astype(float,errors='ignore')
+                
                 if gen.empty: raise Exception("void")
             except Exception as e:
                 # print ("WARN series GENERATE: ", e)
@@ -709,9 +709,9 @@ class HSeries:
                 pass
 
         try:
-            out = out.apply(to_rumeric,errors='coerce') 
+            out = out.replace(",",".",regex=True).apply(to_rumeric,errors='coerce') 
         except Exception as e:
-            pass
+            raise e
 
         try:
             out = out.round(4) 
