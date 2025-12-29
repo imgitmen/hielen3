@@ -637,16 +637,6 @@ class HSeries:
                 pass
 
             try:
-                gen = gen.apply(to_numeric,errors='coerce') 
-            except Exception as e:
-                pass
-
-            try:
-                gen = gen.round(4) 
-            except Exception as e:
-                pass
-
-            try:
                 gen.columns=self.activeuuids
             except Exception as e:
                 pass
@@ -717,6 +707,16 @@ class HSeries:
                 out=out.loc[entertimes]
             except Exception as e:
                 pass
+
+        try:
+            out = out.apply(to_rumeric,errors='coerce') 
+        except Exception as e:
+            pass
+
+        try:
+            out = out.round(4) 
+        except Exception as e:
+            pass
 
         try:
             if out.columns.__len__() < 2:
