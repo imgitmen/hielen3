@@ -11,6 +11,7 @@ from pandas import concat
 from pandas import DatetimeIndex
 from pandas import Index
 from pandas import MultiIndex 
+from pandas import to_numeric
 from numpy import nan
 from numpy import unique
 from numpy import round
@@ -635,7 +636,10 @@ class HSeries:
             except AttributeError as e:
                 pass
 
-            #gen.name=self.uuid
+            try:
+                gen = gen.apply(to_numeric,errors='coerce') 
+            except Exception as e:
+                pass
 
             try:
                 gen = gen.round(4) 
