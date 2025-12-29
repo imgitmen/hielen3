@@ -5848,22 +5848,6 @@
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="n">gen</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="k">pass</span>
-
-            <span class="k">try</span><span class="p">:</span>
-
-                <span class="n">gen</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="k">pass</span>
-
-            <span class="k">try</span><span class="p">:</span>
-
                 <span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span>
 
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -5955,6 +5939,22 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+            <span class="k">pass</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -7086,22 +7086,6 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
 <span class="w">                </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
@@ -7193,6 +7177,22 @@
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -7899,22 +7899,6 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
 <span class="w">                </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span>
 
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
@@ -8006,6 +7990,22 @@
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
