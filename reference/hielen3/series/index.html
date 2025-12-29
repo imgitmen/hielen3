@@ -5938,11 +5938,11 @@
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="k">raise</span> <span class="n">e</span>
+            <span class="k">pass</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -7174,11 +7174,11 @@
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">,</span><span class="ss">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">,</span><span class="ss">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -7985,11 +7985,11 @@
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">,</span><span class="ss">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">to_rumeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="ss">&quot;,&quot;</span><span class="p">,</span><span class="ss">&quot;.&quot;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="k">True</span><span class="p">).</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span>
+<span class="w">            </span><span class="n">pass</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
