@@ -1717,6 +1717,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../api_split_context/query7/" class="md-nav__link">
+        Query7
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api_split_context/status/" class="md-nav__link">
         Status
       </a>
@@ -6548,7 +6562,9 @@
 <span class="normal">1936</span>
 <span class="normal">1937</span>
 <span class="normal">1938</span>
-<span class="normal">1939</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1939</span>
+<span class="normal">1940</span>
+<span class="normal">1941</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -8412,7 +8428,9 @@
 
             <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">series</span><span class="p">:</span>
 
-                <span class="n">mf</span><span class="o">.</span><span class="n">deletes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span> <span class="n">time2</span> <span class="o">=</span> <span class="n">dt2</span><span class="p">)</span>
+                <span class="c1">#mf.deletes(self.uri, self.db, self.col, s, time1=dt1, time2 = dt2)</span>
+
+                <span class="n">mf</span><span class="o">.</span><span class="n">deletes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span> <span class="n">time2</span><span class="o">=</span><span class="n">dt2</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">usr</span><span class="p">,</span> <span class="n">pw</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pwd</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -10912,7 +10930,9 @@
 
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">series</span><span class="p">:</span>
 
-<span class="w">                </span><span class="n">mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt2</span><span class="p">)</span>
+<span class="w">                </span><span class="n">#mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">uri</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dt2</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">mf</span><span class="p">.</span><span class="n">deletes</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">host</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">db</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">time1</span><span class="o">=</span><span class="n">dt1</span><span class="p">,</span><span class="w"> </span><span class="n">time2</span><span class="o">=</span><span class="n">dt2</span><span class="p">,</span><span class="w"> </span><span class="k">user</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">usr</span><span class="p">,</span><span class="w"> </span><span class="n">pw</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">pwd</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
