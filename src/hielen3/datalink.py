@@ -1272,8 +1272,8 @@ class MongodbHielenCache():
 
         if delete:
             for s in series:
-                mf.deletes(self.uri, self.db, self.col, s, time1=dt1, time2 = dt2)
-
+                #mf.deletes(self.uri, self.db, self.col, s, time1=dt1, time2 = dt2)
+                mf.deletes(self.host, self.db, self.col, s, time1=dt1, time2=dt2, user=self.usr, pw=self.pwd)
         try:
             out=out.squeeze().apply(loads).apply(Series)
             out.columns=['x','y','z']

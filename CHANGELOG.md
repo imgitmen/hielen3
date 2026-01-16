@@ -1,5 +1,12 @@
 CHANGELOG
 =========
+## **V3.6.24** ##
+### 16 Gennaio 2026 ###
+
+- Sistemato il pop per datalink mariadb (connection string error)
+- Eliminato il bug per cui venivano estratti dati precedenti alla lettura di zro delle serie (solo in interrogazione di tipo "old")
+
+
 ## **V3.6.23** ##
 ### 17 Dicembre 2025 ###
 
