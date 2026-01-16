@@ -3684,7 +3684,11 @@
 <span class="normal"> 98</span>
 <span class="normal"> 99</span>
 <span class="normal">100</span>
-<span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3744,17 +3748,21 @@
 
     <span class="k">return</span> <span class="p">[</span><span class="n">query5</span><span class="p">]</span>
 
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">@hug.extend_api(&quot;/query3&quot;)</span>
+
+<span class="sd">def dataman2():</span>
+
+<span class="sd">    &quot;&quot;&quot; Data manager &quot;&quot;&quot;</span>
+
+<span class="sd">    #return [query3]</span>
+
+<span class="sd">    return [query6]</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/query3&quot;</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">dataman2</span><span class="p">():</span>
-
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Data manager &quot;&quot;&quot;</span>
-
-    <span class="c1">#return [query3]</span>
-
-    <span class="k">return</span> <span class="p">[</span><span class="n">query6</span><span class="p">]</span>
-
-<span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/query4&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">dataman2</span><span class="p">():</span>
 
@@ -3817,7 +3825,7 @@
 <p>Data manager </p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query4&quot;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">extend_api</span><span class="p">(</span><span class="ss">&quot;/query3&quot;</span><span class="p">)</span>
 
 <span class="n">def</span><span class="w"> </span><span class="n">dataman2</span><span class="p">()</span><span class="err">:</span>
 
