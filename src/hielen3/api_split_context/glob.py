@@ -34,13 +34,15 @@ def dataman2():
     #return [query3]
     return [query5]
 
+'''
 @hug.extend_api("/query3")
 def dataman2():
     """ Data manager """
     #return [query3]
     return [query6]
+'''
 
-@hug.extend_api("/query4")
+@hug.extend_api("/query3")
 def dataman2():
     """ Data manager """
     return [query7]
