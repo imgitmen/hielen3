@@ -32,7 +32,8 @@ def featman():
 def dataman2():
     """ Data manager """
     #return [query3]
-    return [query5]
+    #return [query5]
+    return [query7]
 
 '''
 @hug.extend_api("/query3")
