@@ -108,7 +108,7 @@ class Feature(HFeature):
 
         opz.update(new_opz)
 
-        print ("GROUPMAP:",groupmap)
+        #print ("GROUPMAP:",groupmap)
 
         if groupmap is None:
             opz["Z"] = 0
@@ -125,8 +125,6 @@ class Feature(HFeature):
             except Exception as e:
                 coefficients = None
     
-            print ("uno :", start_time)
-
 
             if operator not in ("__VOID__","__ALIAS__"):
 
@@ -150,8 +148,6 @@ class Feature(HFeature):
                 if operator is not None: # and operator not in ("__VOID__","__ALIAS__"):
                     operator= f"{operator} - Z + OFFSET"
 
-
-            print ("due :", start_time)
 
         print ("OPERATOR", operator)
 
@@ -209,11 +205,14 @@ class Feature(HFeature):
                 except Exception as e:
                     print (f"WARN configuring ZERO for param {param_name}:", e)
 
-            if start_offset is not None:
+            if start_offset is not None and start_offset:
+
                 try:
                     config['operands']['OFFSET'] = start_offset
                 except Exception as e:
                     print (f"WARN configuring OFFSET for param {param_name}:", e)
+            else:
+                start_offset = None
 
             
             if start_offset is not None or zero_time is not None:

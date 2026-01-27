@@ -1,10 +1,17 @@
 CHANGELOG
 =========
+## **V3.6.25** ##
+### 27 Gennaio 2026 ###
+
+- Sistemato il bug introdotto con il conetti di Tag che impediva la configurazione dei datadiagram
+- Sistemato il bug che effettuava la riconfiguarzione anche per serie non riferite ad una data zero
+
+
 ## **V3.6.24** ##
 ### 16 Gennaio 2026 ###
 
 - Sistemato il pop per datalink mariadb (connection string error)
-- Eliminato il bug per cui venivano estratti dati precedenti alla lettura di zro delle serie (solo in interrogazione di tipo "old")
+- Eliminato il bug per cui venivano estratti dati precedenti alla lettura di zero delle serie (solo in interrogazione di tipo "old")
 
 
 ## **V3.6.23** ##

@@ -104,7 +104,9 @@ class Feature(HFeature):
                     operator=f"source.retrive(serials=SER,times=times,columns=COL)",
                     valid_range=info['valid_range'],
                     view_range=info['view_range'],
-                    thresholds=info['thresholds']
+                    thresholds=info['thresholds'],
+                    ordinal=0,
+                    first=timestamp
                     )
 
 

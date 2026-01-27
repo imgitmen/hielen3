@@ -328,9 +328,13 @@ class HSeries:
             try:
                 if not isinstance(groupmap,(list,tuple,set)):
                     raise Exception (f"not a vaild list")
-            
+           
+                print (json.dumps(groupmap,indent=4))
+
                 for i in range(0,groupmap.__len__()):
-                    v=groupmap[i]
+                    
+                    v=groupmap[i].copy()
+
                     if not isinstance(v,dict):
                         raise Exception (f"{v} has not a valid format")
 
