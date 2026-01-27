@@ -1265,6 +1265,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../api_split_context/query8/" class="md-nav__link">
+        Query8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../api_split_context/status/" class="md-nav__link">
         Status
       </a>
@@ -4968,7 +4982,9 @@
 <span class="normal">1274</span>
 <span class="normal">1275</span>
 <span class="normal">1276</span>
-<span class="normal">1277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1277</span>
+<span class="normal">1278</span>
+<span class="normal">1279</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5454,9 +5470,11 @@
 
                     <span class="k">raise</span> <span class="ne">Exception</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;not a vaild list&quot;</span><span class="p">)</span>
 
+                <span class="nb">print</span> <span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">groupmap</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()):</span>
 
-                    <span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
                     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
 
@@ -6690,9 +6708,11 @@
 
 <span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;not a vaild list&quot;</span><span class="p">)</span>
 
+<span class="w">                </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">groupmap</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span><span class="err">:</span>
 
-<span class="w">                    </span><span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+<span class="w">                    </span><span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
 
@@ -8252,9 +8272,11 @@
 
 <span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="ss">&quot;not a vaild list&quot;</span><span class="p">)</span>
 
+<span class="w">                </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">groupmap</span><span class="p">,</span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
+
 <span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">groupmap</span><span class="p">.</span><span class="n">__len__</span><span class="p">())</span><span class="err">:</span>
 
-<span class="w">                    </span><span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+<span class="w">                    </span><span class="n">v</span><span class="o">=</span><span class="n">groupmap</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">dict</span><span class="p">)</span><span class="err">:</span>
 

@@ -1135,6 +1135,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../api_split_context/query8/" class="md-nav__link">
+        Query8
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../api_split_context/status/" class="md-nav__link">
         Status
       </a>
@@ -4256,7 +4270,7 @@
 
         <span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span>
 
-        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;GROUPMAP:&quot;</span><span class="p">,</span><span class="n">groupmap</span><span class="p">)</span>
+        <span class="c1">#print (&quot;GROUPMAP:&quot;,groupmap)</span>
 
         <span class="k">if</span> <span class="n">groupmap</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -4281,8 +4295,6 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="n">coefficients</span> <span class="o">=</span> <span class="kc">None</span>
-
-            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;uno :&quot;</span><span class="p">,</span> <span class="n">start_time</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">operator</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;__VOID__&quot;</span><span class="p">,</span><span class="s2">&quot;__ALIAS__&quot;</span><span class="p">):</span>
 
@@ -4311,8 +4323,6 @@
                 <span class="k">if</span> <span class="n">operator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># and operator not in (&quot;__VOID__&quot;,&quot;__ALIAS__&quot;):</span>
 
                     <span class="n">operator</span><span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">operator</span><span class="si">}</span><span class="s2"> - Z + OFFSET&quot;</span>
-
-            <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;due :&quot;</span><span class="p">,</span> <span class="n">start_time</span><span class="p">)</span>
 
         <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;OPERATOR&quot;</span><span class="p">,</span> <span class="n">operator</span><span class="p">)</span>
 
@@ -4394,7 +4404,7 @@
 
                     <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARN configuring ZERO for param </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">start_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">start_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">start_offset</span><span class="p">:</span>
 
                 <span class="k">try</span><span class="p">:</span>
 
@@ -4403,6 +4413,10 @@
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                     <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;WARN configuring OFFSET for param </span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">start_offset</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="k">if</span> <span class="n">start_offset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">zero_time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
@@ -5478,7 +5492,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">        </span><span class="n">opz</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_opz</span><span class="p">)</span>
 
-<span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;GROUPMAP:&quot;</span><span class="p">,</span><span class="n">groupmap</span><span class="p">)</span>
+<span class="w">        </span><span class="c1">#print (&quot;GROUPMAP:&quot;,groupmap)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">groupmap</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
@@ -5503,8 +5517,6 @@ be referred to by name in <code>Nested</code> fields.</p>
 <span class="w">            </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">coefficients</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">None</span>
-
-<span class="w">            </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;uno :&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">start_time</span><span class="p">)</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;__VOID__&quot;</span><span class="p">,</span><span class="s2">&quot;__ALIAS__&quot;</span><span class="p">):</span>
 
@@ -5533,8 +5545,6 @@ be referred to by name in <code>Nested</code> fields.</p>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">operator</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span><span class="w"> </span><span class="c1"># and operator not in (&quot;__VOID__&quot;,&quot;__ALIAS__&quot;):</span>
 
 <span class="w">                    </span><span class="n">operator</span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="s2">&quot;{operator} - Z + OFFSET&quot;</span>
-
-<span class="w">            </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;due :&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">start_time</span><span class="p">)</span>
 
 <span class="w">        </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;OPERATOR&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">operator</span><span class="p">)</span>
 
@@ -5616,7 +5626,7 @@ be referred to by name in <code>Nested</code> fields.</p>
 
 <span class="w">                    </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;WARN configuring ZERO for param {param_name}:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">start_offset</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">start_offset</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">start_offset</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">try</span><span class="p">:</span>
 
@@ -5625,6 +5635,10 @@ be referred to by name in <code>Nested</code> fields.</p>
 <span class="w">                </span><span class="n">except</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">e</span><span class="p">:</span>
 
 <span class="w">                    </span><span class="nb">print</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;WARN configuring OFFSET for param {param_name}:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+
+<span class="w">            </span><span class="k">else</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">start_offset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">None</span>
 
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">start_offset</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">zero_time</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
