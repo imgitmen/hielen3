@@ -96,7 +96,7 @@ class Feature(HFeature):
 
             self.parameters.set(
                     param=info['channel'],
-                    ordinal=info['column'],
+                    ordinal=info['ordinal'],
                     cache=info['cache'],
                     mu=info['mu'],
                     modules={"source":source},
@@ -105,7 +105,6 @@ class Feature(HFeature):
                     valid_range=info['valid_range'],
                     view_range=info['view_range'],
                     thresholds=info['thresholds'],
-                    ordinal=0,
                     first=timestamp
                     )
 
