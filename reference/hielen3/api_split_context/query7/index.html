@@ -4394,7 +4394,13 @@
 <span class="normal">532</span>
 <span class="normal">533</span>
 <span class="normal">534</span>
-<span class="normal">535</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4544,11 +4550,11 @@
 
                         <span class="k">pass</span>
 
-                <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="o">~</span><span class="n">out</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-
                 <span class="c1">#out=out[~(out.apply(lambda x: x.notna(),axis=1).any())]</span>
 
     <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="o">~</span><span class="n">out</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 
     <span class="k">return</span> <span class="n">out</span>
 
@@ -4758,11 +4764,17 @@
 
         <span class="k">else</span><span class="p">:</span>
 
-            <span class="n">grp</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;series&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">())</span>
 
-            <span class="k">for</span> <span class="n">s</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="n">grp</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 
-                <span class="n">out</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="sd">            grp=df.apply(lambda x: x.reset_index().values.tolist()).T.groupby(&quot;series&quot;)</span>
+
+<span class="sd">            for s,g in grp:</span>
+
+<span class="sd">                out.data[s]=g.loc[s].values.tolist()</span>
+
+<span class="sd">            &quot;&quot;&quot;</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
@@ -5032,11 +5044,11 @@
 
 <span class="w">                        </span><span class="n">pass</span>
 
-<span class="w">                </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">~out.isna().all(axis=1)</span><span class="o">]</span>
-
 <span class="w">                </span><span class="n">#out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">~(out.apply(lambda x: x.notna(),axis=1).any())</span><span class="o">]</span>
 
 <span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_numeric</span><span class="p">,</span><span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">).</span><span class="nf">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">~out.isna().all(axis=1)</span><span class="o">]</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
 </code></pre></div>
@@ -5045,7 +5057,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f3900da6cb0</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x70035192ada0</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">stats</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">cache</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">,</span>
@@ -5262,11 +5274,17 @@
 
 <span class="w">        </span><span class="k">else</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">grp</span><span class="o">=</span><span class="n">df</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="n">lambda</span><span class="w"> </span><span class="nl">x</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">reset_index</span><span class="p">().</span><span class="k">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()).</span><span class="n">T</span><span class="p">.</span><span class="n">groupby</span><span class="p">(</span><span class="ss">&quot;series&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">to_json</span><span class="p">())</span>
 
-<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="n">g</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">grp</span><span class="p">:</span>
+<span class="w">            </span><span class="ss">&quot;&quot;&quot;</span>
 
-<span class="w">                </span><span class="k">out</span><span class="p">.</span><span class="k">data</span><span class="o">[</span><span class="n">s</span><span class="o">]=</span><span class="n">g</span><span class="p">.</span><span class="n">loc</span><span class="o">[</span><span class="n">s</span><span class="o">]</span><span class="p">.</span><span class="k">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="ss">            grp=df.apply(lambda x: x.reset_index().values.tolist()).T.groupby(&quot;</span><span class="n">series</span><span class="ss">&quot;)</span>
+
+<span class="ss">            for s,g in grp:</span>
+
+<span class="ss">                out.data[s]=g.loc[s].values.tolist()</span>
+
+<span class="ss">            &quot;&quot;&quot;</span>
 
 <span class="w">        </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">response</span><span class="o">=</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
 
