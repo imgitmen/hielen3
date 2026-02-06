@@ -101,13 +101,11 @@ def capability_data_cache_old(datamap, capability):
                         pass
 
 
-                out=out[~out.isna().all(axis=1)]
 
                 #out=out[~(out.apply(lambda x: x.notna(),axis=1).any())]
 
-
-
     out=out.apply(to_numeric,errors='coerce').round(4)
+    out=out[~out.isna().all(axis=1)]
 
     return out
 
@@ -250,9 +248,15 @@ def tabular_data(
                 out.data[s] = []
 
         else:
+
+            out.data=json.loads(df.to_json())
+
+            """
             grp=df.apply(lambda x: x.reset_index().values.tolist()).T.groupby("series")
             for s,g in grp:
                 out.data[s]=g.loc[s].values.tolist()
+            """
+
 
         response = out.format(response=response, request=request)
         response.content_type=JSON

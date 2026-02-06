@@ -101,13 +101,12 @@ def capability_data_cache_old(datamap, capability):
                         pass
 
 
-                out=out[~out.isna().all(axis=1)]
-
                 #out=out[~(out.apply(lambda x: x.notna(),axis=1).any())]
 
 
 
     out=out.apply(to_numeric,errors='coerce').round(4)
+    out=out[~out.isna().all(axis=1)]
 
     return out
 

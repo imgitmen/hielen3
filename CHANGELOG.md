@@ -1,5 +1,12 @@
 CHANGELOG
 =========
+## **V3.6.26** ##
+### 6 Febbraio 2026 ###
+
+- Sistemato il bug per cache='new' che non teneva conto del valore self.first delle serie dati
+- Sistemato il bug in query7 che impediva la formattazione in json
+
+
 ## **V3.6.25** ##
 ### 27 Gennaio 2026 ###
 

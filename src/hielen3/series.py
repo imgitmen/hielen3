@@ -573,7 +573,15 @@ class HSeries:
         try:
             if cache == 'new':
                 justnew=True
-                timefrom = isot2ut(self.last)
+
+                if self.last is None:
+                    timefrom = isot2ut(self.first)
+                else:
+                    timefrom = isot2ut(self.last) + 1
+
+                #print (timefrom,self.last,self.first)
+
+
                 try:
                     assert self.cache in ("active","data","old")
                     cache="active"
@@ -584,10 +592,8 @@ class HSeries:
                 timefrom = max(isot2ut(self.first), tocheck)
 
             times=slice(ut2isot(timefrom), times.stop, times.step )
-
-
-
         except Exception as e:
+            print ("warning:", e)
             pass
 
         firstreqstart=times.start
@@ -619,10 +625,6 @@ class HSeries:
             try:
                 if cache == 'old' or not cangenerate:
                     raise Exception('request for old, skip generation')
-        
-
-                if cache == 'new':
-                    cache = 'active'
 
                 kwargs['cache'] = cache
 
