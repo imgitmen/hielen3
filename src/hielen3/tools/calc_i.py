@@ -275,6 +275,9 @@ def chain_integ(s,direction=None,anchor=None):
 
     s=s.cumsum(skipna=False)
 
+    if direction < 0:
+        s=s.iloc[::-1]
+
     if anchor is not None:
         anchor = int(anchor)
 
@@ -283,9 +286,6 @@ def chain_integ(s,direction=None,anchor=None):
 
     if anchor is not None and anchor > 0 and anchor <= len(s):
         s=snap_anchor(s,anchor)
-
-    if direction < 0:
-        s=s.iloc[::-1]
 
     return s
 
