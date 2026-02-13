@@ -247,9 +247,47 @@ def hist_merge(H=None,S0=None):
     return out
 
 
+def snap_anchor(s,anchor=None):
+    if anchor is None:
+        return s
+    if anchor <= 0:
+        return s
+    if anchor > len(s):
+        return s
+
+    anchor_value=s.iloc[anchor-1]
+    step= anchor_value / anchor
+    correction=s.copy()
+    correction.loc[:]=step
+    correction=correction.cumsum()
+    s=(s-correction).round(6)
+    return s
+
+
+def chain_integ(s,direction=None,anchor=None):
+    if direction is None:
+        direction = 1
+
+    if direction < 0:
+        s = s.iloc[::-1]
+
+    s=s.cumsum(skipna=False)
+
+    if anchor is not None and direction < 0:
+        anchor=len(s)-anchor
+
+    if anchor is not None and anchor > 0 and anchor <= len(s):
+        s=snap_anchor(s,anchor)
+
+    if direction < 0:
+        s=s.iloc[::-1]
+
+    return s
+
+
 VERSION = tuple(map(int_or_str, __version__.split(".")))
 
-__all__ = ["poly_trans", "add", "sub", "slope","filter","instant_velocity","rotate_X","rotate_Y","hist_merge"]
+__all__ = ["poly_trans", "add", "sub", "slope","filter","instant_velocity","rotate_X","rotate_Y","hist_merge","snap_anchor"]
 
 
 

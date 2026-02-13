@@ -1,5 +1,14 @@
 CHANGELOG
 =========
+## **V3.6.27** ##
+### 13 Febbraio 2026 ###
+
+- Sistemato il bug di datadiagram che permetteva la scrittura delle serie singole anche se in group. Ora le serie generate vengono scritte esclusivamente come frame e tutte le serie vengono inserite solo e soltanto contestualmente alla chiamata di gruppo.
+- Moficato series inserendo la fuznione unica save_data che fa tutti i controlli del caso.
+- Modificato il configuratore di HContext inserendo "operands" come campo 
+- Modificato calc_i inserendo la funzione "chain_integ" che prevede anche il parmaetro del nodo anchora per le catene
+
+
 ## **V3.6.26** ##
 ### 6 Febbraio 2026 ###
 

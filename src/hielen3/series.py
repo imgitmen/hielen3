@@ -176,6 +176,42 @@ class HSeries:
 
 
 
+    def save_data(self,df):
+
+        # Nota: i tempi vengono gestiti direttamente dal df
+
+        df.index.name='timestamp'
+        df.columns.name='series'
+
+
+        # ATTENZIONE! QUI SI DA PER SCONTATO CHE I VALORI DEL FRAME
+        # SINAO NUMERICI. IN FUTURO POTREMO PENSARE DI GENERARE COSE DIVERSE,
+        # IN QUEL CASO LE RIGHE FINO ALL'IF VANNO RIVISTE
+        try:
+            df = df.replace(",",".",regex=True)
+        except Exception as e:
+            pass
+
+        try:
+            df = df.apply(to_numeric,errors='coerce') 
+        except Exception as e:
+            pass
+
+        try:
+            df = df.round(4) 
+        except Exception as e:
+            pass
+
+
+        # Check df: Nota
+        if df.columns.to_list() == self.activeuuids:
+            db[self.datatable][self.activeuuids]=df
+
+        else:
+            raise ValueError("Malformed Frame: ", df)
+
+        return df
+
 
     def clean_cache(self,times=None):
       
@@ -547,7 +583,7 @@ class HSeries:
         if self.capability not in ['data','datadiagram']:
             raise ValueError( f"{self.uuid} has not 'data' capability" )
 
-        if self.ingroup is None or group in self.ingroup:
+        if self.ingroup is None: # or group in self.ingroup:
             cangenerate = True
         else:
             cangenerate = False
@@ -563,6 +599,11 @@ class HSeries:
             
         if cache in ("static"):
             cache = "old"
+            #TODO
+            # va differenziato l'uso di static da serie generate esternamente e serie utilizzate 
+            # ancillare come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino
+            # devono essere estratti completamente. Per questo qui viene settato il times a None
+            # side-effect: non si fanno interrogazioni temporali neanche su quelle esterne. MALE!
             times = None
 
         if times is None:
@@ -578,9 +619,6 @@ class HSeries:
                     timefrom = isot2ut(self.first)
                 else:
                     timefrom = isot2ut(self.last) + 1
-
-                #print (timefrom,self.last,self.first)
-
 
                 try:
                     assert self.cache in ("active","data","old")
@@ -598,12 +636,18 @@ class HSeries:
 
         firstreqstart=times.start
 
-        #TODO inserire i nomi dei label
         out = DataFrame([],columns=self.activeuuids,dtype='object')
 
+        # SE E' DA RINFRESCARE LA CACHE ELIMINO QUELLO CHE C'E
+        # IN QUESTO MODO ELIMINO ANCHE LE LETTURE CHE NEL NUOVO
+        # CALCOLO POTREBBERO RISULTARE NULL
         if cache in ("refresh"):
             self.clean_cache(times)
 
+
+        # QUESTA PARTE E' DEDICATA AL RECUPERO DEI DATI GIA' PRESENTI
+        # NEL DB. NOTA: a questo punto le serie con self.cache = "static"
+        # HANNO IL PARAMETRO cache SETTATO AD "old" 
         if cache in ("active","data","old"):
             try:
                 out = db[self.datatable][self.activeuuids,times]
@@ -620,10 +664,11 @@ class HSeries:
             except Exception as e:
                 pass
 
-        try:
 
+        # QUESTA PARTE E' DEDICATA AL CALCOLO DELLE NUOVE LETTURE
+        try:
             try:
-                if cache == 'old' or not cangenerate:
+                if cache == 'old': #or not cangenerate:
                     raise Exception('request for old, skip generation')
 
                 kwargs['cache'] = cache
@@ -632,7 +677,7 @@ class HSeries:
                 
                 if gen.empty: raise Exception("void")
             except Exception as e:
-                # print ("WARN series GENERATE: ", e)
+                #print ("WARN series GENERATE: ", e)
                 # raise e ##DEBUG
                 gen = DataFrame([],columns=self.activeuuids,dtype='object')
 
@@ -648,40 +693,58 @@ class HSeries:
                 pass
 
             gen.index=DatetimeIndex(gen.index)
-    
             
-            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()
-
-
-            out.index.name = "timestamp"
-
-            out=out[self.activeuuids]
-
+            gen=gen[self.activeuuids]
 
             if self.valid_range_min is not None:
-                out=out.mask(out<self.valid_range_min,nan)
+                gen=gen.mask(gen<self.valid_range_min,nan)
 
             if self.valid_range_max is not None:
-                out=out.mask(out>self.valid_range_max,nan)
+                gen=gen.mask(gen>self.valid_range_max,nan)
 
-            out=out[out.notna().any(axis=1)]
+            gen=gen[gen.notna().any(axis=1)]
 
             if cache in ("active","data","refresh") and cangenerate:
-                for u in gen.columns:
-                    db[self.datatable][u]=out[u]
 
+                gen=self.save_data(gen)
+
+            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()
 
         except Exception as e:
-            # print ("WARN series GLOBAL: ", e)
+            #print ("WARN series GLOBAL: ", e)
             # raise e #DEBUG
             pass
+
+
+        # QUESTA PARTE E' NECESSARIA PER QUESTO MOTIVO:
+        # IPOTIZZIAMO CHE I VALORI DELLA SERIE SIANO STATI PRECEDENTEMENTE GENERATI
+        # A PARTIRE DA UN CERTO TIMESTAMP "T", SUCCESSTIVO ALLA DATA DI PRIMA LETTURA "F"
+        # DICHIARATA PER LA SERIE. DUNQUE TUTTO QUELLO CHE E'CONTENUTO TRA "F" e "T"
+        # NON E' ANCORA STATO GENERATO.
+        # IN QUESTO CASO, IL PASSAGGIO PRECEDENTE RESTITUISCE SOLO LETTURE DA T IN POI.
+        # SE LA RICHIESTA ATTUALE FORINSCE UNA DATA DI PARTENZA "P" TRA "F" E "T", 
+        # ALLORA PER SODDIFARE LA CHIAMATA DEVO GENERARE TUTTO QUELLO CHE E' CONTENUTO
+        # TRA "P" E "T"
+        #
+        # SCHEMA:
+        #
+        #
+        #  F----P----T-------
+        #
+        # ATTENZIONE!
+        # TODO ANALISI.
+        # PER EVITARE CHIAMATE RICORSIVE INFINITE QUI VIENE RICHIAMATA LA STESSA
+        # FUNZIONE "data" CON CACHE = "no" CHE IMPEDISCE DI ENTRARE IN QUESTO IF CHE
+        # SEGUE. TUTTAVIA IL RISULTATO POTREBBE NON ESSERE COMPLETO PERCHE', CHIAMANDO
+        # LA FUNZIONE TRA "P" e "T" POTREI COMUNQUE RITROVARMI IN UN CASO ANALOGO
+        # MA NON NE SONO CERTO. 
 
         if cache in ("active","data","refresh") and not out.empty and not justnew:
 
             lasttotry=str(out.index[0])
             times=slice(firstreqstart, lasttotry, times.step)
 
-            kwargs['cache'] = "none"
+            kwargs['cache'] = "no"
             preout = self.data(times=times,geometry=geometry, group=group, **kwargs)
 
             try:
@@ -689,23 +752,19 @@ class HSeries:
             except Exception as e:
                 pass
 
-            preout.index.name = "timestamp"
-
             try:
                 preout.columns=self.activeuuids
             except Exception as e:
                 pass
 
-
-            if cangenerate:
-                for u in preout.columns:
-                    db[self.datatable][u]=preout[u]
-
+            if not preout.empty and cangenerate:
+                preout=self.save_data(preout)
+            
             if preout.__len__():
                 out = concat([preout,out]).sort_index()
 
+
         out = out[~out.index.duplicated()]
-        out.index.name = "timestamp"
 
         if not out.empty and not self.cache in ("static"):
             self.attribute_update( 'last',  ut2isot(max(isot2ut(self.last), isot2ut(str(out.index[-1])))))
@@ -713,16 +772,6 @@ class HSeries:
                 out=out.loc[entertimes]
             except Exception as e:
                 pass
-
-        try:
-            out = out.replace(",",".",regex=True).apply(to_numeric,errors='coerce') 
-        except Exception as e:
-            pass
-
-        try:
-            out = out.round(4) 
-        except Exception as e:
-            pass
 
         try:
             if out.columns.__len__() < 2:
