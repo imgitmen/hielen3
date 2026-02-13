@@ -255,6 +255,8 @@ def snap_anchor(s,anchor=None):
     if anchor > len(s):
         return s
 
+    anchor=int(anchor)
+    
     anchor_value=s.iloc[anchor-1]
     step= anchor_value / anchor
     correction=s.copy()
@@ -272,6 +274,9 @@ def chain_integ(s,direction=None,anchor=None):
         s = s.iloc[::-1]
 
     s=s.cumsum(skipna=False)
+
+    if anchor is not None:
+        anchor = int(anchor)
 
     if anchor is not None and direction < 0:
         anchor=len(s)-anchor
