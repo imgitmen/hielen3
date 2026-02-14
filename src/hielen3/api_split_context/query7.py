@@ -182,6 +182,13 @@ def tabular_data(
 
 
             df = df.join(ser, how="outer")
+   
+        if capability == 'datadiagram':
+            try:
+                col_ordered=db["series_groups"][{"element":df.columns.to_list()}][["element","ordinal"]].reset_index("groupseries").sort_values(["groupseries","ordinal"])["element"].to_list()
+                df=df[col_ordered]
+            except Exception as e:
+                pass
     
     else:
         try:

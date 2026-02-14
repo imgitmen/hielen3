@@ -1,5 +1,11 @@
 CHANGELOG
 =========
+## **V3.6.28** ##
+### 14 Febbraio 2026 ###
+
+- Rivista la struttura di recupero / generazione di series
+- In query7 imposto l'ordinameto delle colonne in uscita, in teoria dovrebbe essere fatto dal front end ma in pratica non è così. La cosa è uscita fuori rivedendo la struttura di series. Da indagare
+
 ## **V3.6.27** ##
 ### 13 Febbraio 2026 ###
 

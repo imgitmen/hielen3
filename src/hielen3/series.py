@@ -207,6 +207,8 @@ class HSeries:
         if df.columns.to_list() == self.activeuuids:
             db[self.datatable][self.activeuuids]=df
 
+            #print("SALVATO:",df.columns)
+    
         else:
             raise ValueError("Malformed Frame: ", df)
 
@@ -651,6 +653,7 @@ class HSeries:
         if cache in ("active","data","old"):
             try:
                 out = db[self.datatable][self.activeuuids,times]
+                # print ("ESTRATTO:", out.columns)
             except KeyError as e:
                 #raise e #DEBUG
                 pass
@@ -667,53 +670,55 @@ class HSeries:
 
         # QUESTA PARTE E' DEDICATA AL CALCOLO DELLE NUOVE LETTURE
         try:
-            try:
-                if cache == 'old': #or not cangenerate:
-                    raise Exception('request for old, skip generation')
+            if cache == 'old': #or not cangenerate:
+                raise Exception('request for old, skip generation')
 
-                kwargs['cache'] = cache
+            kwargs['cache'] = cache
 
-                gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
-                
-                if gen.empty: raise Exception("void")
-            except Exception as e:
-                #print ("WARN series GENERATE: ", e)
-                # raise e ##DEBUG
-                gen = DataFrame([],columns=self.activeuuids,dtype='object')
-
-
-            try:
-                gen = gen.to_frame()
-            except AttributeError as e:
-                pass
-
-            try:
-                gen.columns=self.activeuuids
-            except Exception as e:
-                pass
-
-            gen.index=DatetimeIndex(gen.index)
+            gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
+            #DEBUG print ("APPENA GENERATO:", gen.columns)
             
-            gen=gen[self.activeuuids]
+            if not gen.empty:
+                try:
+                    gen = gen.to_frame()
+                except AttributeError as e:
+                    pass
 
-            if self.valid_range_min is not None:
-                gen=gen.mask(gen<self.valid_range_min,nan)
+                try:
+                    gen.columns=self.activeuuids
+                except Exception as e:
+                    pass
 
-            if self.valid_range_max is not None:
-                gen=gen.mask(gen>self.valid_range_max,nan)
+                gen.index=DatetimeIndex(gen.index)
+                
+                gen=gen[self.activeuuids]
 
-            gen=gen[gen.notna().any(axis=1)]
 
-            if cache in ("active","data","refresh") and cangenerate:
+                if self.valid_range_min is not None:
+                    gen=gen.mask(gen<self.valid_range_min,nan)
 
-                gen=self.save_data(gen)
+                if self.valid_range_max is not None:
+                    gen=gen.mask(gen>self.valid_range_max,nan)
 
-            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()
+                gen=gen[gen.notna().any(axis=1)]
+
+                #DEBUG print("LAVORATO GENERATO:",gen.columns)
+
+                if cache in ("active","data","refresh") and cangenerate:
+
+                    gen=self.save_data(gen)
 
         except Exception as e:
-            #print ("WARN series GLOBAL: ", e)
-            # raise e #DEBUG
-            pass
+            # print ("WARN series GENERATE: ", e)
+            # raise e ##DEBUG
+            gen = DataFrame([],columns=self.activeuuids,dtype='object')
+
+        
+        if not gen.empty:
+            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()
+
+        #DEBUG print("GEN UNITO:", out.columns)
+
 
 
         # QUESTA PARTE E' NECESSARIA PER QUESTO MOTIVO:
@@ -752,18 +757,13 @@ class HSeries:
             except Exception as e:
                 pass
 
-            try:
-                preout.columns=self.activeuuids
-            except Exception as e:
-                pass
-
             if not preout.empty and cangenerate:
                 preout=self.save_data(preout)
             
-            if preout.__len__():
-                out = concat([preout,out]).sort_index()
+            if not preout.empty:
+                out = concat([ s for s in [preout,gen] if not s.empty ],axis=0).sort_index()
 
-
+            #DEBUG print("PREOUT UNITO:",out.columns)
         out = out[~out.index.duplicated()]
 
         if not out.empty and not self.cache in ("static"):
@@ -772,6 +772,8 @@ class HSeries:
                 out=out.loc[entertimes]
             except Exception as e:
                 pass
+
+        out=out[self.activeuuids]
 
         try:
             if out.columns.__len__() < 2:
@@ -919,7 +921,11 @@ class HSeries:
 
         def __generate__(self, **kwargs):
 
-            operands = kwargs
+            try:
+                kwargs['times']
+            except KeyError as e:
+                kwargs['times'] = slice(None,None,None)
+
 
             '''
             times=kwargs['times']
@@ -936,7 +942,9 @@ class HSeries:
 
             kwargs.update({"times":slice(start,stop,times.step)})
             '''
-        
+       
+            operands = kwargs
+
             operands.update(
                 {k: w for k, w in self.operands.items() if not isinstance(w, HSeries)}
             )
