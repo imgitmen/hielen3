@@ -4400,7 +4400,19 @@
 <span class="normal">538</span>
 <span class="normal">539</span>
 <span class="normal">540</span>
-<span class="normal">541</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span>
+<span class="normal">547</span>
+<span class="normal">548</span>
+<span class="normal">549</span>
+<span class="normal">550</span>
+<span class="normal">551</span>
+<span class="normal">552</span>
+<span class="normal">553</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -4665,6 +4677,18 @@
                     <span class="n">ser</span> <span class="o">=</span> <span class="n">ser</span><span class="p">[</span><span class="o">~</span><span class="n">ser</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
 
             <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">capability</span> <span class="o">==</span> <span class="s1">&#39;datadiagram&#39;</span><span class="p">:</span>
+
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">col_ordered</span><span class="o">=</span><span class="n">db</span><span class="p">[</span><span class="s2">&quot;series_groups&quot;</span><span class="p">][{</span><span class="s2">&quot;element&quot;</span><span class="p">:</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()}][[</span><span class="s2">&quot;element&quot;</span><span class="p">,</span><span class="s2">&quot;ordinal&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="s2">&quot;groupseries&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;groupseries&quot;</span><span class="p">,</span><span class="s2">&quot;ordinal&quot;</span><span class="p">])[</span><span class="s2">&quot;element&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+
+                <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col_ordered</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="k">pass</span>
 
     <span class="k">else</span><span class="p">:</span>
 
@@ -5057,7 +5081,7 @@
 <h3 id="tabular_data">tabular_data</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">tabular_data</span><span class="p">(</span>
     <span class="n">capability</span><span class="p">,</span>
-    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x76ae77796da0</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="n">datamap</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">hielen3</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">JsonValidable</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7a1b25f72da0</span><span class="o">&gt;</span><span class="p">,</span>
     <span class="n">stats</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">content_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">cache</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">,</span>
@@ -5175,6 +5199,18 @@
 <span class="w">                    </span><span class="n">ser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ser</span><span class="o">[</span><span class="n">~ser.index.duplicated()</span><span class="o">]</span>
 
 <span class="w">            </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="k">join</span><span class="p">(</span><span class="n">ser</span><span class="p">,</span><span class="w"> </span><span class="n">how</span><span class="o">=</span><span class="ss">&quot;outer&quot;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">capability</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;datadiagram&#39;</span><span class="err">:</span>
+
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">col_ordered</span><span class="o">=</span><span class="n">db</span><span class="o">[</span><span class="n">&quot;series_groups&quot;</span><span class="o">][</span><span class="n">{&quot;element&quot;:df.columns.to_list()}</span><span class="o">][</span><span class="n">[&quot;element&quot;,&quot;ordinal&quot;</span><span class="o">]</span><span class="err">]</span><span class="p">.</span><span class="n">reset_index</span><span class="p">(</span><span class="ss">&quot;groupseries&quot;</span><span class="p">).</span><span class="n">sort_values</span><span class="p">(</span><span class="o">[</span><span class="n">&quot;groupseries&quot;,&quot;ordinal&quot;</span><span class="o">]</span><span class="p">)</span><span class="o">[</span><span class="n">&quot;element&quot;</span><span class="o">]</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span>
+
+<span class="w">                </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">[</span><span class="n">col_ordered</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">pass</span>
 
 <span class="w">    </span><span class="k">else</span><span class="err">:</span>
 

@@ -5092,7 +5092,13 @@
 <span class="normal">1370</span>
 <span class="normal">1371</span>
 <span class="normal">1372</span>
-<span class="normal">1373</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1373</span>
+<span class="normal">1374</span>
+<span class="normal">1375</span>
+<span class="normal">1376</span>
+<span class="normal">1377</span>
+<span class="normal">1378</span>
+<span class="normal">1379</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5399,6 +5405,8 @@
         <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">:</span>
 
             <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datatable</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]</span><span class="o">=</span><span class="n">df</span>
+
+            <span class="c1">#print(&quot;SALVATO:&quot;,df.columns)</span>
 
         <span class="k">else</span><span class="p">:</span>
 
@@ -6006,6 +6014,8 @@
 
                 <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datatable</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">times</span><span class="p">]</span>
 
+                <span class="c1"># print (&quot;ESTRATTO:&quot;, out.columns)</span>
+
             <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="c1">#raise e #DEBUG</span>
@@ -6030,69 +6040,67 @@
 
         <span class="k">try</span><span class="p">:</span>
 
-            <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;old&#39;</span><span class="p">:</span> <span class="c1">#or not cangenerate:</span>
 
-                <span class="k">if</span> <span class="n">cache</span> <span class="o">==</span> <span class="s1">&#39;old&#39;</span><span class="p">:</span> <span class="c1">#or not cangenerate:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
 
-                    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache</span>
 
-                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;cache&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cache</span>
+            <span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-                <span class="n">gen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="c1">#DEBUG print (&quot;APPENA GENERATO:&quot;, gen.columns)</span>
 
-                <span class="k">if</span> <span class="n">gen</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;void&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">gen</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
 
-                <span class="c1">#print (&quot;WARN series GENERATE: &quot;, e)</span>
+                    <span class="n">gen</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
 
-                <span class="c1"># raise e ##DEBUG</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="n">gen</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+                    <span class="k">pass</span>
 
-            <span class="k">try</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
 
-                <span class="n">gen</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+                    <span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span>
 
-            <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                    <span class="k">pass</span>
 
-            <span class="k">try</span><span class="p">:</span>
+                <span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 
-                <span class="n">gen</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span>
+                <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]</span>
 
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-                <span class="k">pass</span>
+                    <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-            <span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
-            <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]</span>
+                    <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">[</span><span class="n">gen</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
 
-                <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&lt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+                <span class="c1">#DEBUG print(&quot;LAVORATO GENERATO:&quot;,gen.columns)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
 
-                <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&gt;</span><span class="bp">self</span><span class="o">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
-
-            <span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">[</span><span class="n">gen</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-
-            <span class="k">if</span> <span class="n">cache</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;active&quot;</span><span class="p">,</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;refresh&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
-
-                <span class="n">gen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
-
-            <span class="n">out</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="n">out</span><span class="p">,</span><span class="n">gen</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">empty</span> <span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                    <span class="n">gen</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
-            <span class="c1">#print (&quot;WARN series GLOBAL: &quot;, e)</span>
+            <span class="c1"># print (&quot;WARN series GENERATE: &quot;, e)</span>
 
-            <span class="c1"># raise e #DEBUG</span>
+            <span class="c1"># raise e ##DEBUG</span>
 
-            <span class="k">pass</span>
+            <span class="n">gen</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">([],</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">gen</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="n">out</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="n">out</span><span class="p">,</span><span class="n">gen</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">empty</span> <span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+        <span class="c1">#DEBUG print(&quot;GEN UNITO:&quot;, out.columns)</span>
 
         <span class="c1"># QUESTA PARTE E&#39; NECESSARIA PER QUESTO MOTIVO:</span>
 
@@ -6156,21 +6164,15 @@
 
                 <span class="k">pass</span>
 
-            <span class="k">try</span><span class="p">:</span>
-
-                <span class="n">preout</span><span class="o">.</span><span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span>
-
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-                <span class="k">pass</span>
-
             <span class="k">if</span> <span class="ow">not</span> <span class="n">preout</span><span class="o">.</span><span class="n">empty</span> <span class="ow">and</span> <span class="n">cangenerate</span><span class="p">:</span>
 
                 <span class="n">preout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">preout</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">preout</span><span class="o">.</span><span class="fm">__len__</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">preout</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
 
-                <span class="n">out</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span><span class="n">preout</span><span class="p">,</span><span class="n">out</span><span class="p">])</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">concat</span><span class="p">([</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="n">preout</span><span class="p">,</span><span class="n">gen</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">empty</span> <span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+            <span class="c1">#DEBUG print(&quot;PREOUT UNITO:&quot;,out.columns)</span>
 
         <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="o">~</span><span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()]</span>
 
@@ -6185,6 +6187,8 @@
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 
                 <span class="k">pass</span>
+
+        <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
 
@@ -6390,7 +6394,13 @@
 
         <span class="k">def</span> <span class="nf">__generate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
-            <span class="n">operands</span> <span class="o">=</span> <span class="n">kwargs</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">]</span>
+
+            <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+                <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;times&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 
@@ -6415,6 +6425,8 @@
 <span class="sd">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
 
 <span class="sd">            &#39;&#39;&#39;</span>
+
+            <span class="n">operands</span> <span class="o">=</span> <span class="n">kwargs</span>
 
             <span class="n">operands</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
 
@@ -6731,6 +6743,8 @@
 <span class="s1">        if df.columns.to_list() == self.activeuuids:</span>
 
 <span class="s1">            db[self.datatable][self.activeuuids]=df</span>
+
+<span class="s1">            #print(&quot;SALVATO:&quot;,df.columns)</span>
 
 <span class="s1">        else:</span>
 
@@ -7338,6 +7352,8 @@
 
 <span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">self.datatable</span><span class="o">][</span><span class="n">self.activeuuids,times</span><span class="o">]</span>
 
+<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;ESTRATTO:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
+
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">#raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">#DEBUG</span>
@@ -7362,69 +7378,67 @@
 
 <span class="s1">        try:</span>
 
-<span class="s1">            try:</span>
+<span class="s1">            if cache == &#39;</span><span class="k">old</span><span class="s1">&#39;: #or not cangenerate:</span>
 
-<span class="s1">                if cache == &#39;</span><span class="k">old</span><span class="s1">&#39;: #or not cangenerate:</span>
+<span class="s1">                raise Exception(&#39;</span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">old</span><span class="p">,</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="n">generation</span><span class="s1">&#39;)</span>
 
-<span class="s1">                    raise Exception(&#39;</span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">old</span><span class="p">,</span><span class="w"> </span><span class="n">skip</span><span class="w"> </span><span class="n">generation</span><span class="s1">&#39;)</span>
+<span class="s1">            kwargs[&#39;</span><span class="n">cache</span><span class="s1">&#39;] = cache</span>
 
-<span class="s1">                kwargs[&#39;</span><span class="n">cache</span><span class="s1">&#39;] = cache</span>
+<span class="s1">            gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)</span>
 
-<span class="s1">                gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)</span>
+<span class="s1">            #DEBUG print (&quot;APPENA GENERATO:&quot;, gen.columns)</span>
 
-<span class="s1">                if gen.empty: raise Exception(&quot;void&quot;)</span>
+<span class="s1">            if not gen.empty:</span>
 
-<span class="s1">            except Exception as e:</span>
+<span class="s1">                try:</span>
 
-<span class="s1">                #print (&quot;WARN series GENERATE: &quot;, e)</span>
+<span class="s1">                    gen = gen.to_frame()</span>
 
-<span class="s1">                # raise e ##DEBUG</span>
+<span class="s1">                except AttributeError as e:</span>
 
-<span class="s1">                gen = DataFrame([],columns=self.activeuuids,dtype=&#39;</span><span class="k">object</span><span class="s1">&#39;)</span>
+<span class="s1">                    pass</span>
 
-<span class="s1">            try:</span>
+<span class="s1">                try:</span>
 
-<span class="s1">                gen = gen.to_frame()</span>
+<span class="s1">                    gen.columns=self.activeuuids</span>
 
-<span class="s1">            except AttributeError as e:</span>
+<span class="s1">                except Exception as e:</span>
 
-<span class="s1">                pass</span>
+<span class="s1">                    pass</span>
 
-<span class="s1">            try:</span>
+<span class="s1">                gen.index=DatetimeIndex(gen.index)</span>
 
-<span class="s1">                gen.columns=self.activeuuids</span>
+<span class="s1">                gen=gen[self.activeuuids]</span>
 
-<span class="s1">            except Exception as e:</span>
+<span class="s1">                if self.valid_range_min is not None:</span>
 
-<span class="s1">                pass</span>
+<span class="s1">                    gen=gen.mask(gen&lt;self.valid_range_min,nan)</span>
 
-<span class="s1">            gen.index=DatetimeIndex(gen.index)</span>
+<span class="s1">                if self.valid_range_max is not None:</span>
 
-<span class="s1">            gen=gen[self.activeuuids]</span>
+<span class="s1">                    gen=gen.mask(gen&gt;self.valid_range_max,nan)</span>
 
-<span class="s1">            if self.valid_range_min is not None:</span>
+<span class="s1">                gen=gen[gen.notna().any(axis=1)]</span>
 
-<span class="s1">                gen=gen.mask(gen&lt;self.valid_range_min,nan)</span>
+<span class="s1">                #DEBUG print(&quot;LAVORATO GENERATO:&quot;,gen.columns)</span>
 
-<span class="s1">            if self.valid_range_max is not None:</span>
+<span class="s1">                if cache in (&quot;active&quot;,&quot;data&quot;,&quot;refresh&quot;) and cangenerate:</span>
 
-<span class="s1">                gen=gen.mask(gen&gt;self.valid_range_max,nan)</span>
-
-<span class="s1">            gen=gen[gen.notna().any(axis=1)]</span>
-
-<span class="s1">            if cache in (&quot;active&quot;,&quot;data&quot;,&quot;refresh&quot;) and cangenerate:</span>
-
-<span class="s1">                gen=self.save_data(gen)</span>
-
-<span class="s1">            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()</span>
+<span class="s1">                    gen=self.save_data(gen)</span>
 
 <span class="s1">        except Exception as e:</span>
 
-<span class="s1">            #print (&quot;WARN series GLOBAL: &quot;, e)</span>
+<span class="s1">            # print (&quot;WARN series GENERATE: &quot;, e)</span>
 
-<span class="s1">            # raise e #DEBUG</span>
+<span class="s1">            # raise e ##DEBUG</span>
 
-<span class="s1">            pass</span>
+<span class="s1">            gen = DataFrame([],columns=self.activeuuids,dtype=&#39;</span><span class="k">object</span><span class="s1">&#39;)</span>
+
+<span class="s1">        if not gen.empty:</span>
+
+<span class="s1">            out = concat([ s for s in [out,gen] if not s.empty ],axis=0).sort_index()</span>
+
+<span class="s1">        #DEBUG print(&quot;GEN UNITO:&quot;, out.columns)</span>
 
 <span class="s1">        # QUESTA PARTE E&#39;</span><span class="w"> </span><span class="n">NECESSARIA</span><span class="w"> </span><span class="n">PER</span><span class="w"> </span><span class="n">QUESTO</span><span class="w"> </span><span class="nl">MOTIVO</span><span class="p">:</span>
 
@@ -7488,21 +7502,15 @@
 
 <span class="w">                </span><span class="n">pass</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
-
-<span class="w">                </span><span class="n">preout</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span>
-
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">pass</span>
-
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">preout</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">preout</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">preout</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">preout</span><span class="p">.</span><span class="n">__len__</span><span class="p">()</span><span class="err">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">preout</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
 
-<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="o">[</span><span class="n">preout,out</span><span class="o">]</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="o">[</span><span class="n"> s for s in [preout,gen</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="err">]</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="w">            </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="p">(</span><span class="ss">&quot;PREOUT UNITO:&quot;</span><span class="p">,</span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">out</span><span class="o">[</span><span class="n">~out.index.duplicated()</span><span class="o">]</span>
 
@@ -7517,6 +7525,8 @@
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -7722,7 +7732,13 @@
 
 <span class="w">        </span><span class="n">def</span><span class="w"> </span><span class="n">__generate__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kwargs</span>
+<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+
+<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;times&#39;</span><span class="o">]</span>
+
+<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">KeyError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+
+<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;times&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">(</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">,</span><span class="k">None</span><span class="p">)</span>
 
 <span class="w">            </span><span class="s1">&#39;&#39;&#39;</span>
 
@@ -7747,6 +7763,8 @@
 <span class="s1">            kwargs.update({&quot;times&quot;:slice(start,stop,times.step)})</span>
 
 <span class="s1">            &#39;&#39;&#39;</span>
+
+<span class="w">            </span><span class="n">operands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kwargs</span>
 
 <span class="w">            </span><span class="n">operands</span><span class="p">.</span><span class="k">update</span><span class="p">(</span>
 
@@ -8193,6 +8211,8 @@
 
 <span class="s1">                out = db[self.datatable][self.activeuuids,times]</span>
 
+<span class="s1">                # print (&quot;ESTRATTO:&quot;, out.columns)</span>
+
 <span class="s1">            except KeyError as e:</span>
 
 <span class="s1">                #raise e #DEBUG</span>
@@ -8217,69 +8237,67 @@
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;old&#39;</span><span class="err">:</span><span class="w"> </span><span class="n">#or</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;old&#39;</span><span class="err">:</span><span class="w"> </span><span class="n">#or</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
+<span class="w">                </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
 
-<span class="w">                    </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="s1">&#39;request for old, skip generation&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span>
 
-<span class="w">                </span><span class="n">kwargs</span><span class="o">[</span><span class="n">&#39;cache&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cache</span>
+<span class="w">            </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">__generate__</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">times</span><span class="p">,</span><span class="n">timeref</span><span class="o">=</span><span class="n">timeref</span><span class="p">,</span><span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="w">            </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;APPENA GENERATO:&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="k">Exception</span><span class="p">(</span><span class="ss">&quot;void&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
 
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
 
-<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">##DEBUG</span>
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">pass</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="w">                </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span>
 
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="n">AttributeError</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">                </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">                </span><span class="n">pass</span>
+<span class="w">                    </span><span class="n">pass</span>
 
-<span class="w">            </span><span class="k">try</span><span class="err">:</span>
+<span class="w">                </span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span>
+<span class="w">                </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
 
-<span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">pass</span>
+<span class="w">                    </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="o">=</span><span class="n">DatetimeIndex</span><span class="p">(</span><span class="n">gen</span><span class="p">.</span><span class="k">index</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
 
-<span class="w">            </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
+<span class="w">                    </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">                </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">[</span><span class="n">gen.notna().any(axis=1)</span><span class="o">]</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&lt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_min</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
+<span class="w">                </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="p">(</span><span class="ss">&quot;LAVORATO GENERATO:&quot;</span><span class="p">,</span><span class="n">gen</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
 
-<span class="w">                </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="p">.</span><span class="n">mask</span><span class="p">(</span><span class="n">gen</span><span class="o">&gt;</span><span class="n">self</span><span class="p">.</span><span class="n">valid_range_max</span><span class="p">,</span><span class="n">nan</span><span class="p">)</span>
-
-<span class="w">            </span><span class="n">gen</span><span class="o">=</span><span class="n">gen</span><span class="o">[</span><span class="n">gen.notna().any(axis=1)</span><span class="o">]</span>
-
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">cache</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;active&quot;</span><span class="p">,</span><span class="ss">&quot;data&quot;</span><span class="p">,</span><span class="ss">&quot;refresh&quot;</span><span class="p">)</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="nl">cangenerate</span><span class="p">:</span>
-
-<span class="w">                </span><span class="n">gen</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
-
-<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="o">[</span><span class="n"> s for s in [out,gen</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="err">]</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="w">                    </span><span class="n">gen</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">save_data</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
 
 <span class="w">        </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
-<span class="w">            </span><span class="n">#print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;WARN series GLOBAL: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;WARN series GENERATE: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">#DEBUG</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">raise</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">##DEBUG</span>
 
-<span class="w">            </span><span class="n">pass</span>
+<span class="w">            </span><span class="n">gen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DataFrame</span><span class="p">(</span><span class="err">[]</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">gen</span><span class="p">.</span><span class="nl">empty</span><span class="p">:</span>
+
+<span class="w">            </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">concat</span><span class="p">(</span><span class="o">[</span><span class="n"> s for s in [out,gen</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="w"> </span><span class="err">]</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="w">        </span><span class="n">#DEBUG</span><span class="w"> </span><span class="k">print</span><span class="p">(</span><span class="ss">&quot;GEN UNITO:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="n">QUESTA</span><span class="w"> </span><span class="n">PARTE</span><span class="w"> </span><span class="n">E</span><span class="s1">&#39; NECESSARIA PER QUESTO MOTIVO:</span>
 
@@ -8343,21 +8361,15 @@
 
 <span class="s1">                pass</span>
 
-<span class="s1">            try:</span>
-
-<span class="s1">                preout.columns=self.activeuuids</span>
-
-<span class="s1">            except Exception as e:</span>
-
-<span class="s1">                pass</span>
-
 <span class="s1">            if not preout.empty and cangenerate:</span>
 
 <span class="s1">                preout=self.save_data(preout)</span>
 
-<span class="s1">            if preout.__len__():</span>
+<span class="s1">            if not preout.empty:</span>
 
-<span class="s1">                out = concat([preout,out]).sort_index()</span>
+<span class="s1">                out = concat([ s for s in [preout,gen] if not s.empty ],axis=0).sort_index()</span>
+
+<span class="s1">            #DEBUG print(&quot;PREOUT UNITO:&quot;,out.columns)</span>
 
 <span class="s1">        out = out[~out.index.duplicated()]</span>
 
@@ -8372,6 +8384,8 @@
 <span class="w">            </span><span class="ow">except</span><span class="w"> </span><span class="k">Exception</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nl">e</span><span class="p">:</span>
 
 <span class="w">                </span><span class="n">pass</span>
+
+<span class="w">        </span><span class="k">out</span><span class="o">=</span><span class="k">out</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
 
 <span class="w">        </span><span class="k">try</span><span class="err">:</span>
 
@@ -8454,6 +8468,8 @@
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">.</span><span class="n">to_list</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">activeuuids:</span>
 
 <span class="w">            </span><span class="n">db</span><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">datatable</span><span class="p">][</span><span class="n">self</span><span class="p">.</span><span class="n">activeuuids</span><span class="p">]</span><span class="o">=</span><span class="n">df</span>
+
+<span class="w">            </span><span class="p">#</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;SALVATO:&quot;</span><span class="p">,</span><span class="n">df</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
 <span class="w">        </span><span class="k">else</span><span class="o">:</span>
 

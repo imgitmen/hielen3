@@ -4440,10 +4440,6 @@
 
     <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">skipna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">direction</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-
-        <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
     <span class="k">if</span> <span class="n">anchor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
         <span class="n">anchor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">anchor</span><span class="p">)</span>
@@ -4455,6 +4451,10 @@
     <span class="k">if</span> <span class="n">anchor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">anchor</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">anchor</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
 
         <span class="n">s</span><span class="o">=</span><span class="n">snap_anchor</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">anchor</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">direction</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">s</span>
 
