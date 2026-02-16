@@ -262,7 +262,7 @@ def snap_anchor(s,anchor=None):
     correction=s.copy()
     correction.loc[:]=step
     correction=correction.cumsum()
-    s=(s-correction).round(6)
+    s=(s-correction)
     return s
 
 
