@@ -198,7 +198,7 @@ class HSeries:
             pass
 
         try:
-            df = df.round(4) 
+            df = df.round(4)
         except Exception as e:
             pass
 
@@ -602,8 +602,8 @@ class HSeries:
         if cache in ("static"):
             cache = "old"
             #TODO
-            # va differenziato l'uso di static da serie generate esternamente e serie utilizzate 
-            # ancillare come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino
+            # va differenziato l'uso di static da serie generate esternamente e serie 
+            # ancillari come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino
             # devono essere estratti completamente. Per questo qui viene settato il times a None
             # side-effect: non si fanno interrogazioni temporali neanche su quelle esterne. MALE!
             times = None
@@ -620,6 +620,8 @@ class HSeries:
                 if self.last is None:
                     timefrom = isot2ut(self.first)
                 else:
+                    # TODO: gestire la granularità
+                    # NOTA: viene imposta granularità di un secondo
                     timefrom = isot2ut(self.last) + 1
 
                 try:
@@ -662,7 +664,9 @@ class HSeries:
                 cachestop = out.index.max()
     
             try:
-                timefrom = max(isot2ut(cachestop), isot2ut(times.start))
+                # TODO: gestire la granularità
+                # NOTA: viene imposta granularità di un secondo
+                timefrom = max(isot2ut(cachestop)+1, isot2ut(times.start))
                 times=slice(ut2isot(timefrom), times.stop, times.step )
             except Exception as e:
                 pass
