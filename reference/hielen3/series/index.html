@@ -5098,7 +5098,15 @@
 <span class="normal">1376</span>
 <span class="normal">1377</span>
 <span class="normal">1378</span>
-<span class="normal">1379</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1379</span>
+<span class="normal">1380</span>
+<span class="normal">1381</span>
+<span class="normal">1382</span>
+<span class="normal">1383</span>
+<span class="normal">1384</span>
+<span class="normal">1385</span>
+<span class="normal">1386</span>
+<span class="normal">1387</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5934,9 +5942,9 @@
 
             <span class="c1">#TODO</span>
 
-            <span class="c1"># va differenziato l&#39;uso di static da serie generate esternamente e serie utilizzate</span>
+            <span class="c1"># va differenziato l&#39;uso di static da serie generate esternamente e serie</span>
 
-            <span class="c1"># ancillare come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino</span>
+            <span class="c1"># ancillari come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino</span>
 
             <span class="c1"># devono essere estratti completamente. Per questo qui viene settato il times a None</span>
 
@@ -5961,6 +5969,10 @@
                     <span class="n">timefrom</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">first</span><span class="p">)</span>
 
                 <span class="k">else</span><span class="p">:</span>
+
+                    <span class="c1"># TODO: gestire la granularità</span>
+
+                    <span class="c1"># NOTA: viene imposta granularità di un secondo</span>
 
                     <span class="n">timefrom</span> <span class="o">=</span> <span class="n">isot2ut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">last</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
@@ -6028,7 +6040,11 @@
 
             <span class="k">try</span><span class="p">:</span>
 
-                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">cachestop</span><span class="p">),</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
+                <span class="c1"># TODO: gestire la granularità</span>
+
+                <span class="c1"># NOTA: viene imposta granularità di un secondo</span>
+
+                <span class="n">timefrom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">cachestop</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="o">.</span><span class="n">start</span><span class="p">))</span>
 
                 <span class="n">times</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom</span><span class="p">),</span> <span class="n">times</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">times</span><span class="o">.</span><span class="n">step</span> <span class="p">)</span>
 
@@ -7272,9 +7288,9 @@
 
 <span class="s1">            #TODO</span>
 
-<span class="s1">            # va differenziato l&#39;</span><span class="n">uso</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">serie</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">esternamente</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">serie</span><span class="w"> </span><span class="n">utilizzate</span>
+<span class="s1">            # va differenziato l&#39;</span><span class="n">uso</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">serie</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">esternamente</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">serie</span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">ancillare</span><span class="w"> </span><span class="n">come</span><span class="w"> </span><span class="n">quelle</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">riferimenti</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">filtri</span><span class="p">.</span><span class="w"> </span><span class="n">Perchè</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">riferimenti</span><span class="w"> </span><span class="n">funzionino</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">ancillari</span><span class="w"> </span><span class="n">come</span><span class="w"> </span><span class="n">quelle</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">riferimenti</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">dei</span><span class="w"> </span><span class="n">filtri</span><span class="p">.</span><span class="w"> </span><span class="n">Perchè</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">riferimenti</span><span class="w"> </span><span class="n">funzionino</span>
 
 <span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">devono</span><span class="w"> </span><span class="n">essere</span><span class="w"> </span><span class="n">estratti</span><span class="w"> </span><span class="n">completamente</span><span class="p">.</span><span class="w"> </span><span class="n">Per</span><span class="w"> </span><span class="n">questo</span><span class="w"> </span><span class="n">qui</span><span class="w"> </span><span class="n">viene</span><span class="w"> </span><span class="n">settato</span><span class="w"> </span><span class="n">il</span><span class="w"> </span><span class="n">times</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">None</span>
 
@@ -7299,6 +7315,10 @@
 <span class="w">                    </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">first</span><span class="p">)</span>
 
 <span class="w">                </span><span class="k">else</span><span class="err">:</span>
+
+<span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">gestire</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">granularità</span>
+
+<span class="w">                    </span><span class="err">#</span><span class="w"> </span><span class="nl">NOTA</span><span class="p">:</span><span class="w"> </span><span class="n">viene</span><span class="w"> </span><span class="n">imposta</span><span class="w"> </span><span class="n">granularità</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">secondo</span>
 
 <span class="w">                    </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="k">last</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
 
@@ -7366,7 +7386,11 @@
 
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
-<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">cachestop</span><span class="p">),</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span>
+<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="nl">TODO</span><span class="p">:</span><span class="w"> </span><span class="n">gestire</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">granularità</span>
+
+<span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="nl">NOTA</span><span class="p">:</span><span class="w"> </span><span class="n">viene</span><span class="w"> </span><span class="n">imposta</span><span class="w"> </span><span class="n">granularità</span><span class="w"> </span><span class="n">di</span><span class="w"> </span><span class="n">un</span><span class="w"> </span><span class="n">secondo</span>
+
+<span class="w">                </span><span class="n">timefrom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">isot2ut</span><span class="p">(</span><span class="n">cachestop</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">isot2ut</span><span class="p">(</span><span class="n">times</span><span class="p">.</span><span class="k">start</span><span class="p">))</span>
 
 <span class="w">                </span><span class="n">times</span><span class="o">=</span><span class="n">slice</span><span class="p">(</span><span class="n">ut2isot</span><span class="p">(</span><span class="n">timefrom</span><span class="p">),</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">stop</span><span class="p">,</span><span class="w"> </span><span class="n">times</span><span class="p">.</span><span class="n">step</span><span class="w"> </span><span class="p">)</span>
 
@@ -8131,9 +8155,9 @@
 
 <span class="w">            </span><span class="n">#TODO</span>
 
-<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">va</span><span class="w"> </span><span class="n">differenziato</span><span class="w"> </span><span class="n">l</span><span class="s1">&#39;uso di static da serie generate esternamente e serie utilizzate</span>
+<span class="w">            </span><span class="err">#</span><span class="w"> </span><span class="n">va</span><span class="w"> </span><span class="n">differenziato</span><span class="w"> </span><span class="n">l</span><span class="s1">&#39;uso di static da serie generate esternamente e serie</span>
 
-<span class="s1">            # ancillare come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino</span>
+<span class="s1">            # ancillari come quelle dei riferimenti e dei filtri. Perchè i riferimenti funzionino</span>
 
 <span class="s1">            # devono essere estratti completamente. Per questo qui viene settato il times a None</span>
 
@@ -8158,6 +8182,10 @@
 <span class="s1">                    timefrom = isot2ut(self.first)</span>
 
 <span class="s1">                else:</span>
+
+<span class="s1">                    # TODO: gestire la granularità</span>
+
+<span class="s1">                    # NOTA: viene imposta granularità di un secondo</span>
 
 <span class="s1">                    timefrom = isot2ut(self.last) + 1</span>
 
@@ -8225,7 +8253,11 @@
 
 <span class="s1">            try:</span>
 
-<span class="s1">                timefrom = max(isot2ut(cachestop), isot2ut(times.start))</span>
+<span class="s1">                # TODO: gestire la granularità</span>
+
+<span class="s1">                # NOTA: viene imposta granularità di un secondo</span>
+
+<span class="s1">                timefrom = max(isot2ut(cachestop)+1, isot2ut(times.start))</span>
 
 <span class="s1">                times=slice(ut2isot(timefrom), times.stop, times.step )</span>
 
