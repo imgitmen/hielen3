@@ -175,6 +175,17 @@ class HSeries:
             self.__delayed_load__()
 
 
+    def normalize_frame(self,df):
+        
+        missing_cols=[ a for a in self.activeuuids if a not in df.columns.to_list()]
+
+        df[missing_cols]=nan
+
+        df=df[self.activeuuids]
+
+        return df
+
+
 
     def save_data(self,df):
 
@@ -655,6 +666,7 @@ class HSeries:
         if cache in ("active","data","old"):
             try:
                 out = db[self.datatable][self.activeuuids,times]
+                out = normalize_frame(out)
                 # print ("ESTRATTO:", out.columns)
             except KeyError as e:
                 #raise e #DEBUG
@@ -680,6 +692,7 @@ class HSeries:
             kwargs['cache'] = cache
 
             gen = self.generator.__generate__(times=times,timeref=timeref,geometry=geometry,**kwargs)
+
             #DEBUG print ("APPENA GENERATO:", gen.columns)
             
             if not gen.empty:
@@ -696,7 +709,6 @@ class HSeries:
                 gen.index=DatetimeIndex(gen.index)
                 
                 gen=gen[self.activeuuids]
-
 
                 if self.valid_range_min is not None:
                     gen=gen.mask(gen<self.valid_range_min,nan)
@@ -776,6 +788,7 @@ class HSeries:
                 out=out.loc[entertimes]
             except Exception as e:
                 pass
+
 
         out=out[self.activeuuids]
 
