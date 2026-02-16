@@ -755,6 +755,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#normalize_frame" class="md-nav__link">
+    normalize_frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_data" class="md-nav__link">
     save_data
   </a>
@@ -3660,6 +3667,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#normalize_frame" class="md-nav__link">
+    normalize_frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_data" class="md-nav__link">
     save_data
   </a>
@@ -5106,7 +5120,19 @@
 <span class="normal">1384</span>
 <span class="normal">1385</span>
 <span class="normal">1386</span>
-<span class="normal">1387</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1387</span>
+<span class="normal">1388</span>
+<span class="normal">1389</span>
+<span class="normal">1390</span>
+<span class="normal">1391</span>
+<span class="normal">1392</span>
+<span class="normal">1393</span>
+<span class="normal">1394</span>
+<span class="normal">1395</span>
+<span class="normal">1396</span>
+<span class="normal">1397</span>
+<span class="normal">1398</span>
+<span class="normal">1399</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5369,6 +5395,16 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="n">delayed</span><span class="p">:</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">normalize_frame</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">df</span><span class="p">):</span>
+
+        <span class="n">missing_cols</span><span class="o">=</span><span class="p">[</span> <span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()]</span>
+
+        <span class="n">df</span><span class="p">[</span><span class="n">missing_cols</span><span class="p">]</span><span class="o">=</span><span class="n">nan</span>
+
+        <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">df</span>
 
     <span class="k">def</span> <span class="nf">save_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">df</span><span class="p">):</span>
 
@@ -6025,6 +6061,8 @@
             <span class="k">try</span><span class="p">:</span>
 
                 <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datatable</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">times</span><span class="p">]</span>
+
+                <span class="n">out</span> <span class="o">=</span> <span class="n">normalize_frame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
                 <span class="c1"># print (&quot;ESTRATTO:&quot;, out.columns)</span>
 
@@ -6716,6 +6754,16 @@
 
 <span class="w">            </span><span class="n">self</span><span class="p">.</span><span class="n">__delayed_load__</span><span class="p">()</span>
 
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">normalize_frame</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">df</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">missing_cols</span><span class="o">=[</span><span class="n"> a for a in self.activeuuids if a not in df.columns.to_list()</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">[</span><span class="n">missing_cols</span><span class="o">]=</span><span class="n">nan</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">df</span>
+
 <span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">save_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">df</span><span class="p">)</span><span class="err">:</span>
 
 <span class="w">        </span><span class="err">#</span><span class="w"> </span><span class="nl">Nota</span><span class="p">:</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">tempi</span><span class="w"> </span><span class="n">vengono</span><span class="w"> </span><span class="n">gestiti</span><span class="w"> </span><span class="n">direttamente</span><span class="w"> </span><span class="n">dal</span><span class="w"> </span><span class="n">df</span>
@@ -7371,6 +7419,8 @@
 <span class="w">            </span><span class="k">try</span><span class="err">:</span>
 
 <span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">self.datatable</span><span class="o">][</span><span class="n">self.activeuuids,times</span><span class="o">]</span>
+
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize_frame</span><span class="p">(</span><span class="k">out</span><span class="p">)</span>
 
 <span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;ESTRATTO:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
@@ -8239,6 +8289,8 @@
 
 <span class="s1">                out = db[self.datatable][self.activeuuids,times]</span>
 
+<span class="s1">                out = normalize_frame(out)</span>
+
 <span class="s1">                # print (&quot;ESTRATTO:&quot;, out.columns)</span>
 
 <span class="s1">            except KeyError as e:</span>
@@ -8445,6 +8497,27 @@
 <div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="nv">def</span><span class="w"> </span><span class="nv">datadiagram</span><span class="ss">(</span><span class="nv">self</span>,<span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>:
 
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nv">self</span>.<span class="nv">data</span><span class="ss">(</span><span class="o">**</span><span class="nv">kwargs</span><span class="ss">)</span>
+</code></pre></div>
+
+</details>
+<h4 id="normalize_frame">normalize_frame</h4>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">normalize_frame</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">df</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">normalize_frame</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="n">df</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">        </span><span class="n">missing_cols</span><span class="o">=[</span><span class="n"> a for a in self.activeuuids if a not in df.columns.to_list()</span><span class="o">]</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">[</span><span class="n">missing_cols</span><span class="o">]=</span><span class="n">nan</span>
+
+<span class="w">        </span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="o">[</span><span class="n">self.activeuuids</span><span class="o">]</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">df</span>
 </code></pre></div>
 
 </details>
