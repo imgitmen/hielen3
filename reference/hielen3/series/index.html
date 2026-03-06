@@ -1279,20 +1279,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../api_split_context/query8/" class="md-nav__link">
-        Query8
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../api_split_context/status/" class="md-nav__link">
         Status
       </a>
@@ -5132,7 +5118,9 @@
 <span class="normal">1396</span>
 <span class="normal">1397</span>
 <span class="normal">1398</span>
-<span class="normal">1399</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">1399</span>
+<span class="normal">1400</span>
+<span class="normal">1401</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -5950,7 +5938,9 @@
 
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid</span><span class="si">}</span><span class="s2"> has not &#39;data&#39; capability&quot;</span> <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ingroup</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># or group in self.ingroup:</span>
+        <span class="c1">## ORRIBILE ORRIBILE ORRIBILE PEZZA PER EVITARE LO SMINCHIAMENTO</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ingroup</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ingroup</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># or group in self.ingroup:</span>
 
             <span class="n">cangenerate</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -6062,7 +6052,7 @@
 
                 <span class="n">out</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">datatable</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">activeuuids</span><span class="p">,</span><span class="n">times</span><span class="p">]</span>
 
-                <span class="n">out</span> <span class="o">=</span> <span class="n">normalize_frame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_frame</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
 
                 <span class="c1"># print (&quot;ESTRATTO:&quot;, out.columns)</span>
 
@@ -7308,7 +7298,9 @@
 
 <span class="s1">            raise ValueError( f&quot;{self.uuid} has not &#39;</span><span class="k">data</span><span class="s1">&#39; capability&quot; )</span>
 
-<span class="s1">        if self.ingroup is None: # or group in self.ingroup:</span>
+<span class="s1">        ## ORRIBILE ORRIBILE ORRIBILE PEZZA PER EVITARE LO SMINCHIAMENTO</span>
+
+<span class="s1">        if self.ingroup is None or len(self.ingroup) &gt; 1: # or group in self.ingroup:</span>
 
 <span class="s1">            cangenerate = True</span>
 
@@ -7420,7 +7412,7 @@
 
 <span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="o">[</span><span class="n">self.datatable</span><span class="o">][</span><span class="n">self.activeuuids,times</span><span class="o">]</span>
 
-<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize_frame</span><span class="p">(</span><span class="k">out</span><span class="p">)</span>
+<span class="w">                </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">normalize_frame</span><span class="p">(</span><span class="k">out</span><span class="p">)</span>
 
 <span class="w">                </span><span class="err">#</span><span class="w"> </span><span class="k">print</span><span class="w"> </span><span class="p">(</span><span class="ss">&quot;ESTRATTO:&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">out</span><span class="p">.</span><span class="n">columns</span><span class="p">)</span>
 
@@ -8177,7 +8169,9 @@
 
 <span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">ValueError</span><span class="p">(</span><span class="w"> </span><span class="n">f</span><span class="ss">&quot;{self.uuid} has not &#39;data&#39; capability&quot;</span><span class="w"> </span><span class="p">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">ingroup</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">ingroup</span><span class="p">:</span>
+<span class="w">        </span><span class="err">##</span><span class="w"> </span><span class="n">ORRIBILE</span><span class="w"> </span><span class="n">ORRIBILE</span><span class="w"> </span><span class="n">ORRIBILE</span><span class="w"> </span><span class="n">PEZZA</span><span class="w"> </span><span class="n">PER</span><span class="w"> </span><span class="n">EVITARE</span><span class="w"> </span><span class="n">LO</span><span class="w"> </span><span class="n">SMINCHIAMENTO</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">ingroup</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">ingroup</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="nl">ingroup</span><span class="p">:</span>
 
 <span class="w">            </span><span class="n">cangenerate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span>
 
@@ -8289,7 +8283,7 @@
 
 <span class="s1">                out = db[self.datatable][self.activeuuids,times]</span>
 
-<span class="s1">                out = normalize_frame(out)</span>
+<span class="s1">                out = self.normalize_frame(out)</span>
 
 <span class="s1">                # print (&quot;ESTRATTO:&quot;, out.columns)</span>
 

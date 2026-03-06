@@ -858,6 +858,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -917,6 +924,13 @@
           <li class="md-nav__item">
   <a href="#kineresman" class="md-nav__link">
     kineresman
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not_found" class="md-nav__link">
+    not_found
   </a>
   
 </li>
@@ -1263,20 +1277,6 @@
     <li class="md-nav__item">
       <a href="../../api_split_context/query7/" class="md-nav__link">
         Query7
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../api_split_context/query8/" class="md-nav__link">
-        Query8
       </a>
     </li>
   
@@ -3598,6 +3598,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#functions" class="md-nav__link">
     Functions
   </a>
@@ -3657,6 +3664,13 @@
           <li class="md-nav__item">
   <a href="#kineresman" class="md-nav__link">
     kineresman
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#not_found" class="md-nav__link">
+    not_found
   </a>
   
 </li>
@@ -3904,11 +3918,7 @@
 <span class="normal">178</span>
 <span class="normal">179</span>
 <span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
+<span class="normal">181</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="ch">#!/usr/bin/env python</span>
 
 <span class="c1"># coding=utf-8</span>
 
@@ -3948,23 +3958,19 @@
 
 <span class="kn">from</span> <span class="nn">hielen3.api_split_context</span> <span class="kn">import</span> <span class="n">glob</span> <span class="k">as</span> <span class="n">globsplitcontext</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="nd">@hug</span><span class="o">.</span><span class="n">not_found</span><span class="p">()</span>
 
-<span class="sd">@hug.not_found()</span>
+<span class="k">def</span> <span class="nf">not_found</span><span class="p">():</span>
 
-<span class="sd">def not_found():</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="p">{</span>
 
-<span class="sd">    return {&#39;error&#39;: {</span>
+                <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="n">falcon</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">,</span>
 
-<span class="sd">                &#39;status&#39;: falcon.status.HTTP_NOT_FOUND,</span>
+                <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;URL is invalid.&#39;</span><span class="p">,</span>
 
-<span class="sd">                &#39;description&#39;: &#39;URL is invalid.&#39;,</span>
+            <span class="p">}}</span>
 
-<span class="sd">            }}</span>
-
-<span class="sd">api = hug.get(on_invalid=hug.redirect.not_found)</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">hug</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">on_invalid</span><span class="o">=</span><span class="n">hug</span><span class="o">.</span><span class="n">redirect</span><span class="o">.</span><span class="n">not_found</span><span class="p">)</span>
 
 <span class="nd">@hug</span><span class="o">.</span><span class="n">extend_api</span><span class="p">(</span><span class="s2">&quot;/hls&quot;</span><span class="p">)</span>
 
@@ -4096,6 +4102,10 @@
 </code></pre></div></td></tr></table></div>
 
 </details>
+<h2 id="variables">Variables</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">api</span>
+</code></pre></div>
+
 <h2 id="functions">Functions</h2>
 <h3 id="actiman">actiman</h3>
 <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">actiman</span><span class="p">(</span>
@@ -4243,6 +4253,28 @@
 <span class="w">    </span><span class="ss">&quot;&quot;&quot; api per aws kinemetrics &quot;&quot;&quot;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">[</span><span class="n">awskine</span><span class="o">]</span>
+</code></pre></div>
+
+</details>
+<h3 id="not_found">not_found</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">not_found</span><span class="p">(</span>
+
+<span class="p">)</span>
+</code></pre></div>
+
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code><span class="nv">@hug</span><span class="p">.</span><span class="n">not_found</span><span class="p">()</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">not_found</span><span class="p">()</span><span class="err">:</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="err">{</span><span class="s1">&#39;error&#39;</span><span class="err">:</span><span class="w"> </span><span class="err">{</span>
+
+<span class="w">                </span><span class="s1">&#39;status&#39;</span><span class="err">:</span><span class="w"> </span><span class="n">falcon</span><span class="p">.</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_NOT_FOUND</span><span class="p">,</span>
+
+<span class="w">                </span><span class="s1">&#39;description&#39;</span><span class="err">:</span><span class="w"> </span><span class="s1">&#39;URL is invalid.&#39;</span><span class="p">,</span>
+
+<span class="w">            </span><span class="err">}}</span>
 </code></pre></div>
 
 </details>
