@@ -55,5 +55,5 @@ Backlog = "BACKLOG.md"
     "Contexts" = "docs/API Reference/contexts_v2.md"
 
     [[tool.portray.mkdocs.nav."API Reference v2"]]
-    "Query" = "docs/API Reference/query2_v2.md"
+    "Query" = "docs/API Reference/query3_v2.md"
 
