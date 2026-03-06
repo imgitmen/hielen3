@@ -184,12 +184,15 @@ def tabular_data(
             df = df.join(ser, how="outer")
    
         if capability == 'datadiagram':
+
+            groupseries=[series.keys()]
+
             try:
-                col_ordered=db["series_groups"][{"element":df.columns.to_list()}][["element","ordinal"]].reset_index("groupseries").sort_values(["groupseries","ordinal"])["element"].to_list()
+                col_ordered=db["series_groups"][{"groupseries":groupseries,"element":df.columns.to_list()}][["element","ordinal"]].reset_index("groupseries").sort_values(["groupseries","ordinal"])["element"].to_list()
                 df=df[col_ordered]
             except Exception as e:
                 pass
-    
+
     else:
         try:
             df = capability_data_cache_old(datamap, capability) 

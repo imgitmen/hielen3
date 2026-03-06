@@ -19,7 +19,6 @@ from . import contextsroots
 #from . import contextsricominciamo 
 from hielen3.api_split_context import glob as globsplitcontext 
 
-"""
 @hug.not_found()
 def not_found():
 
@@ -29,7 +28,6 @@ def not_found():
             }}
 
 api = hug.get(on_invalid=hug.redirect.not_found)
-"""
 
 @hug.extend_api("/hls")
 def getstream():

@@ -596,7 +596,8 @@ class HSeries:
         if self.capability not in ['data','datadiagram']:
             raise ValueError( f"{self.uuid} has not 'data' capability" )
 
-        if self.ingroup is None: # or group in self.ingroup:
+        ## ORRIBILE ORRIBILE ORRIBILE PEZZA PER EVITARE LO SMINCHIAMENTO
+        if self.ingroup is None or len(self.ingroup) > 1: # or group in self.ingroup:
             cangenerate = True
         else:
             cangenerate = False
@@ -666,7 +667,7 @@ class HSeries:
         if cache in ("active","data","old"):
             try:
                 out = db[self.datatable][self.activeuuids,times]
-                out = normalize_frame(out)
+                out = self.normalize_frame(out)
                 # print ("ESTRATTO:", out.columns)
             except KeyError as e:
                 #raise e #DEBUG
