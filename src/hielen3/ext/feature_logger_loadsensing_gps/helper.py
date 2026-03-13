@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from hielen3.ext.feature_datetree_filesystem_source import loggers, retriver
-from pandas import read_csv, DataFrame, Series, concat
+from pandas import read_csv, DataFrame, Series, concat, to_datetime
 
 folders=[
         {
@@ -19,8 +19,9 @@ def retrive(path):
 
     try:
         if "converted" in str(path):
-            a=read_csv(path,skiprows=1,parse_dates=[0],header=None)
+            a=read_csv(path,skiprows=1,header=None)
             a.columns = [ 'times', *a.columns[1:] ]
+            a["times"]=a["times"].astype(str).str.strip()
 
     except Exception as e:
         print("WARN : ", path)
@@ -29,4 +30,5 @@ def retrive(path):
         pass
 
     return a
+
 
